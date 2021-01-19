@@ -1,0 +1,25 @@
+/*------------------------------------*\
+  #Create Section- Description Page
+\*------------------------------------*/
+
+
+.event-create__description {
+    padding: 9rem 8rem 12rem 8rem;
+    width:100% !important;
+    grid-template-columns: 1fr .8fr;
+}
+
+.tag-title{
+    padding: 0 0 .8rem 0;
+}
+@media (max-width: 1050px) { 
+    .event-create__description {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) { 
+    .event-create__description {
+        padding: 10rem 2rem 12rem 2rem;
+    }
+}

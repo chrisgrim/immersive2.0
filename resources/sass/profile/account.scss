@@ -1,0 +1,53 @@
+/* ------------------------------------*\
+  #Account Section- Index Page
+\*------------------------------------ */
+
+.account-index {
+    width: 100%;
+    margin: auto;
+    padding: 0 8rem;
+}
+
+.account-notifications_header {
+    margin: 4rem 0;
+}
+
+.account-index-content {
+    grid-template-columns: 1fr 1fr 1fr;
+    margin: 5rem 0;
+    grid-gap: 1rem;
+    grid-auto-columns: 1fr;
+    & h2 {
+        margin:2rem 0rem;
+    }
+    & h3 {
+        margin:1.5rem 0rem;
+    }
+}
+
+.account-index__element {
+    border: 1px solid #d4d4d4;
+    border-radius: 5px;
+    padding: 2rem;
+    box-shadow: 2px 3px 5px #f3f3f3;
+    height: 100%;
+    & h3 {
+        margin: 0 0 1rem;
+        font-size: 1.5rem;
+        color: #353535;
+        font-weight: 600;
+    }
+    & p {
+        font-weight: 300;
+        font-size: 1.4rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .account-index {
+        padding: 0 2rem 6rem 2rem;
+    }
+    .account-index-content {
+        grid-template-columns: 1fr;
+    }
+}

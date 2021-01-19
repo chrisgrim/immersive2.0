@@ -1,0 +1,62 @@
+.event-create-start {
+    grid-template-columns: 55% 45%;
+    -webkit-box-align: center;
+    align-items: center;
+    justify-items: center;
+    grid-gap: 0rem !important;
+}
+.start-content__nav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 0rem 8rem;
+}
+.start-content {
+    width: 100%;
+    margin: auto;
+    padding: 0rem 8rem;
+}
+.start-content__text {
+    & h2 {
+        margin:1rem 0rem;
+    }
+    & p {
+        font-size: 1.6rem;
+    }
+}
+button.event-start-button {
+    border: none;
+    background: $default-color;
+    color: white;
+    font-weight: 500;
+    padding: 1.3rem;
+    margin: 2rem 0rem;
+}
+
+
+
+#create {
+    &.start {
+    background-image: url("/storage/website-files/create-background.jpg");
+    background-size: cover;
+    height:100vh;
+        & .content {
+            padding: 7% 2% 2rem 7%;
+            width: 40%;
+            float: left;
+            & .text {
+                margin-bottom: 4rem;
+                & h2 {
+                    font-size: 3.2rem;
+                    font-weight: 400;
+                }
+            }
+        }
+        & a.cbut {
+            background: $default-color;
+            padding: 1rem;
+            border-radius: .5rem;
+            color: white;
+        }
+    }
+}

@@ -1,0 +1,78 @@
+.search {
+    & .list {
+        padding:2rem;
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;  
+        & .image{
+            display: inline-block;
+            width:100%;
+            & .image {
+                padding: 33%;
+                border-radius: 4px;
+                background-size: cover; 
+                background-repeat: no-repeat;
+                position: relative;
+                &:hover div.heart{
+                    visibility: visible;
+                    opacity: 1;
+                }
+                & .heart {
+                    position: absolute;
+                    right: 5%;
+                    top: 5%;
+                    border-radius: 50%;
+                    width: 4rem;
+                    height: 4rem;
+                    background-color:white;
+                    border: 1px solid white;
+                    box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 0px 0px, rgba(0, 0, 0, 0.04) 0px 0px 0px 0.5px;
+                    -webkit-transition-duration: 0.3s;
+                    -webkit-transition-property: -webkit-transform;
+                    transition-property: transform, visibility;
+                    -webkit-transform: translateZ(0);
+                    -ms-transform: translateZ(0);
+                    transform: translateZ(0);
+                    visibility: hidden;
+                    opacity: 0;
+                    &:hover {
+                        -webkit-transform: scale(1.07);
+                        -ms-transform: scale(1.07);
+                        transform: scale(1.07);
+                    }
+                }
+            }
+        }
+        & .info {
+            display: inline-block;
+            position: relative;
+            width:100%;
+            & .name {
+                color: #222222;
+                font-size: 1.7rem;
+                font-weight: 500;
+            }
+            & .price {
+                color: #222222;
+                font-size: 1.6rem;
+            }
+            & .loc {
+                color: #676767;
+                font-size: 1.4rem;
+                font-weight: 300;
+            }
+            & .org {
+                color: #676767;
+                font-size: 1.4rem;
+                font-weight: 300;
+            }
+        }
+    }
+}
+@media (max-width: 768px) {
+    .search {
+        & .list {
+            grid-template-columns: 1fr;
+        }
+    }
+}

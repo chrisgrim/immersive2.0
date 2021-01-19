@@ -1,0 +1,94 @@
+/*------------------------------------*\
+  #Create Section- Organizer Page
+\*------------------------------------*/
+
+
+.event-create__organizer {
+    width:100%;
+    padding: 9rem 8rem 14rem 8rem;
+}
+.event-create__organizer-container {
+    grid-template-columns: 1fr 1fr;
+}
+.event-enter-organization-image {
+    margin-top:3rem;
+}
+.add-organzation-image {
+    width: 100%;
+    margin: 0;
+    padding: 0 5%;
+}
+.add-organzation-image_loader {
+    width: 400px;
+    height: 400px;
+    background-color: #fff;
+    border-radius: 1rem;
+    margin: auto;
+    position: relative;
+    text-align: center;
+    & label {
+        height: 100%;
+        width: 100%;
+        display: inline-block;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        border-radius: .5rem;
+        border: 1px solid #d2d2d2;
+        border-radius: 50%;
+        box-shadow: 0 15px 25px -4px rgba(0,0,0,.25), 0 -10px 15px -1px hsla(0,0%,100%,.6), inset 0 3px 4px -1px hsla(0,0%,100%,.2), inset 0 0 5px 1px hsla(0,0%,100%,.8), inset 0 20px 30px 0 hsla(0,0%,100%,.2);
+    }
+}
+.add-organzation-image__card {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+    &.over {
+        opacity: 0;
+        border-radius: .5rem;
+        &:hover {
+            background: hsla(0,0%,100%,.73);
+            opacity: 1;
+            border-radius: 50%;
+        }
+    }
+}
+.add-organzation-image__dotted {
+    border: 2px dashed #dadada;
+    height: 100%;
+    position: relative;
+    border-radius: 50%;
+}
+.add-organzation-image__text {
+    position: absolute;
+    height: 10rem;
+    top: 50%;
+    margin: -3.5rem auto auto;
+    width: 100%;
+    & h4 {
+        margin-bottom: 2rem;
+    }
+}
+
+
+@media (max-width: 768px) { 
+    .event-create__organizer {
+        margin: 2rem auto 10rem auto !important;
+        padding: 2rem;
+    }
+    .event-enter-organization {
+        padding: 0;
+    }
+    .add-organzation-image_loader {
+        width:18rem;
+        height: 18rem;
+    }
+    .add-organzation-image__text h4 {
+        font-size:1rem;
+    }
+    nav.create.organizer {
+        display: none;
+    }
+}
+

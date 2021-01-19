@@ -1,0 +1,31 @@
+/*------------------------------------*\
+  #Login- 404 Page
+\*------------------------------------*/
+
+
+
+.four-container {
+    padding: 7rem;
+    text-align: center;
+}
+.four-image {
+    width: 40%;
+    margin: 5rem auto;
+}
+.three-image {
+    width: 20%;
+    margin: 3rem auto;
+}
+.four-title{ 
+    padding: 2rem;
+}
+button.four {
+    color: $default-color;
+    border: 1px solid $default-color;
+    padding: 1rem 4rem;
+    margin: 2rem;
+    &:hover {
+        background:$default-color;
+        color:white;
+    }
+}

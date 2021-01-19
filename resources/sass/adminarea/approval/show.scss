@@ -1,0 +1,81 @@
+
+/*
+#bodyArea {
+    & .approve {
+    margin-top:-7rem;
+    background: white;
+    }
+}*/
+
+.event-index-eventlist__no-image {
+    height: 19rem;
+    background: #3c6747;
+    width: 24rem;
+    border-radius: 1rem;
+}
+.approvebar {
+        width:100%;
+        background: #f3c9bc;
+        position: fixed;
+        bottom: 0;
+        height:10rem;
+        z-index: 900;
+        & .comments {
+            position: absolute;
+            left: 4%;
+            top: 0;
+            margin-top: -8%;
+            background: white;
+            border-radius: 1rem;
+            border: 1px solid black;
+            padding: 1rem;
+            width: 35rem;
+            & .validation-error {
+                color: red;
+                position: absolute;
+                top: 0;
+                margin-top: 3rem;
+            }
+            & label {
+                display: block;
+                margin-bottom: 1rem;
+            }
+            & textarea {
+                width: 100%;
+                border: 1px solid #f1f1f1;
+                font-size: 1.5rem;
+            }
+        }
+        & .buttons {
+            margin:0;
+            position: absolute;
+            right:4%;
+            top: 50%;
+            -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
+            
+        }
+    }
+
+.admin-approve-url {
+    background: #2b4cab;
+    position: absolute;
+    right: 0;
+    margin-top: -4rem;
+    padding: 1rem;
+    color: white;
+    border-radius: 5rem 0rem 0rem 5rem;
+}
+.admin-approve-similar-name {
+    background: purple;
+    position: absolute;
+    right: 0;
+    margin-top: -8rem;
+    padding: 1rem;
+    color: white;
+    border-radius: 5rem 0rem 0rem 5rem;
+}
+
+.admin-approval__space {
+    height: 20rem;
+}

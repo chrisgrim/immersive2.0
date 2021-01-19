@@ -1,0 +1,272 @@
+/*------------------------------------*\
+  #Everything Immersive- Global Layout Page
+\*------------------------------------*/
+
+html { font-size: 62.5%; font-family: 'Montserrat', sans-serif; height:100%;} 
+body { font-size: 16px; font-size: 1.6rem; line-height: 2.4rem; font-family: 'Montserrat', sans-serif; margin:0px; height:100%;color:$font-color;} /* =14px */
+p { font-size: 16px; font-size: 1.6rem; line-height: 2.4rem; font-family: 'Montserrat', sans-serif; margin:0px;color:$font-color;} /* =14px */
+h1   { font-size: 46px; font-size: 4.6rem; font-family: 'Montserrat', sans-serif; margin:0px; color:$font-color;display: inherit; transform: scale(1,1.05);} /* =24px */
+h2   { font-size: 31px; font-size: 3.1rem; font-family: 'Montserrat', sans-serif; margin:0px; color:$font-color; transform: scale(1,1.05);;margin:0;} /* =24px */
+h3   { font-size: 24px; font-size: 2.4rem; font-family: 'Montserrat', sans-serif; margin:0px; color:$font-color; transform: scale(1,1.05);;font-weight: 500;} /* =24px */
+h4   { font-size: 16px; font-size: 2.0rem; font-family: 'Montserrat', sans-serif; margin:0px; color:$font-color; transform: scale(1,1.05);;font-weight: 500;} /* =24px */
+a { text-decoration: none; color: inherit; }
+textarea { font-family: 'Montserrat', sans-serif; }
+button {cursor: pointer; font-family: 'Montserrat', sans-serif;}
+ul {margin:0;padding:0;}
+select {
+   -o-appearance: none !important;
+   -ms-appearance: none !important;
+   -webkit-appearance: none !important;
+   -moz-appearance: none !important;
+   appearance: none !important;
+}
+input { font-family: 'Montserrat', sans-serif; }
+
+
+*, *:before, *:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -ms-flex: 0 1 auto;
+}
+.noscroll {
+    overflow: hidden;
+}
+
+.top-banner {
+    background: #3bb6d2;
+    padding: .6rem;
+    text-align: center;
+    color: white;
+}
+
+
+.container {
+    width:90%;
+    margin:auto;
+}
+
+.show-text {
+    color: #008489;
+    cursor: pointer;
+    padding-left: 2rem;
+    font-size: 1.3rem;
+    font-weight: 800;
+}
+
+.bspin {
+    cursor: wait;
+}
+main {
+    display: block;
+    min-height: 100vh;
+}
+
+.grid {
+    display: grid;
+    grid-column-gap: 3rem;
+}
+
+.mobile {
+    display: none;
+}
+.desktop {
+    display: inherit;
+}
+
+.link {
+    &.remember a{
+        font-size: 1rem;
+    }
+    & a {
+    font-family: $basic-font-1;
+    color: $default-font-color;
+    text-decoration: none;
+    font-size: 1.3rem;
+    font-weight: 400;
+    transition: all .2s ease-in-out;
+        &:hover {
+            text-decoration:underline;
+        }
+    }
+}
+
+button { 
+    margin: 0px;
+    text-decoration: none;
+    border-radius: 4px;
+    padding: 1rem;
+    font-size: 1.6rem;
+    background: white;
+    border: 1px solid grey;
+}
+button.default {
+    color: $default-color;
+    border-radius: 5rem;
+    background: #fff;
+    border: 1px solid $default-color;
+    display: inline-block;
+    font-size: 1.4rem;
+    font-weight: 600;
+    &:hover {
+        background: $default-color;
+        color:white;
+    }
+}
+button.black {
+    color: white;
+    border-radius: 5rem;
+    background: black;
+    border: 1px solid white;
+    display: inline-block;
+    font-size: 1.4rem;
+    font-weight: 500;
+    &:hover {
+        background: white;
+        color:black;
+    }
+}
+
+.organizer-icon-text {
+    color: #fff;
+    padding: 1.1rem;
+    text-align: center;
+    font-weight: 800;
+}
+
+input.general {
+    padding: .8rem;
+    border-radius: .5rem;
+    border: 1px solid #969696;
+    font-size: 1.4rem;
+}
+textarea {
+    position: relative;
+    color: #484848;
+    background-color: white;
+    transition: border-color 0.2s ease 0s;
+    padding: 1.3rem 1rem;
+    border-width: 1px;
+    border-style: solid;
+    -o-border-image: initial;
+    border-image: initial;
+    border-radius: 5px;
+    border-color: #ebebeb;
+    margin: 1rem 0rem 1rem 0rem;
+    font-size: 1.4rem;
+    width: 100%;
+    &.active {
+        border-color: rgb(0, 132, 137);
+    }
+    &.error {
+        border-color: red;
+    }
+    &::placeholder {
+        color:#adadad;
+        font-size:1.4rem;
+        font-family: inherit;
+    }
+}
+.active-dot {
+    background: red;
+    height: 1rem;
+    width: 1rem;
+    position: absolute;
+    border-radius: 50%;
+    right: -.7rem;
+    top: 2.4rem;
+}
+
+.slider-button {
+    border-radius: 5rem;
+    background: white;
+}
+
+.hearted {
+    fill:#FF5A5F; 
+    fill-opacity:1;
+    stroke:#FF5A5F; 
+    height: 2.4rem; 
+    width: 2.4rem; 
+    overflow: visible;
+    stroke-width:2;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -1.2rem;
+    margin-left: -1.2rem;
+}
+.unhearted {
+    fill: none;
+    fill-opacity: 0;
+    stroke: #000;
+    height: 2.4rem; 
+    width: 2.4rem; 
+    stroke-width: 2;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -1.2rem;
+    margin-left: -1.2rem;
+}
+
+button.default-border {
+    color: $default-color;
+    border-radius: 0.4rem;
+    background: #fff;
+    border: 1px solid $default-color;
+    font-size: 1.4rem;
+    font-weight: 600;
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0rem;
+    &:hover {
+        background:$default-color;
+        color:white;
+    }
+}
+
+.clean-box {
+    width: 100%;
+    border: 1px solid #ccbebe;
+    border-radius: 1rem;
+    padding: 2rem;
+}
+.validation-error {
+    margin-top: -8px;
+    background: white;
+    margin-left: 10px;
+    z-index: 10;
+    padding: 0.5rem;
+} 
+.validation-error p {
+    margin: 0px;
+    padding: 0px 5px;
+    color: red;
+    font-size: 1.3rem;
+    line-height: 1.4rem;
+} 
+
+
+
+@media (max-width: 768px) {
+    html { font-size: 62.5%; font-family: 'Montserrat', sans-serif; height:100%;} 
+    body { font-size: 14px; font-size: 1.6rem; font-family: 'Montserrat', sans-serif; margin:0px; height:100%;} /* =14px */
+    p { font-size: 14px; font-size: 1.6rem; font-family: 'Montserrat', sans-serif; margin:0px;} /* =14px */
+    h1   { font-size: 32px; font-size: 3.2rem;color:#484848; display: inherit;} /* =24px */
+    h2   { font-size: 24px; font-size: 2.4rem;color:rgb(34, 34, 34);} /* =24px */
+    h3   { color:#484848; font-weight: 600;} /* =24px */
+    a { text-decoration: none; color: inherit; }
+    p {line-height: 2.1rem;}
+    button {cursor: pointer;}
+    .mobile { display: inherit;}
+    .desktop { display: none;}
+    .grid {grid-template-columns: 1fr;}
+    .active-dot {
+        right: 15%;
+        top: -.2rem;
+    }
+    .vue-tab-element .active-dot {
+        right: 3%;
+        top: 1rem;
+    }
+}

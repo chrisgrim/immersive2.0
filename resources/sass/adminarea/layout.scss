@@ -1,0 +1,237 @@
+/* ------------------------------------*\
+  #Admin- Layout Page
+\*------------------------------------ */
+
+#admin {
+    width: 80%;
+    margin-left: 25rem;
+    padding: 3rem 5rem;
+    & .validation-error {
+        text-align: left;
+        color: red;
+        font-size: 1.2rem;
+        margin-left: 2rem;
+        & p {
+            margin:0;
+        }
+    }
+    & .list {
+        width: 100%;
+        background: #f9f9f9;
+        border-radius: .5rem;
+        padding: 1rem;
+        margin-top: 1rem;
+        border: 1px solid #dedede;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        justify-items: center;
+        position: relative;
+        align-items: center;
+        & button.delete-circle {
+            position: absolute;
+            right: 0;
+            padding:0rem;
+            border-radius: 50%;
+            border: solid 1px red;
+            color: red;
+            height: 2rem;
+            width: 2rem;
+            top: 0;
+            margin-top: -.5rem;
+            margin-right: -1rem;
+            & p {
+                margin: 0;
+                margin-left: -1.5px;
+            }
+        }
+        & input {
+            border: none;
+            padding: 1rem 1rem 0rem 0rem;
+            border-radius: 0.3rem;
+            height: 4.3rem;
+            width: 100%;
+            border-bottom: 1px solid #cecece;
+            font-size: 1.4rem;
+            background: transparent;
+        }
+        & textarea {
+            width: 100%;
+            background: transparent;
+            border: none;
+            padding: 1rem;
+            font-size: 1.4rem;
+        }
+        & .box {
+            width: 133px;
+            height: 75px;
+            display: inline-block;
+            background-size: cover;
+            background-repeat: no-repeat;
+            border-radius: .5rem;
+            & label {
+                width: 100%;
+                height: 100%;
+                display: inline-block;
+            }
+            & .fileinput {
+                display: none;
+            }
+        }
+    }
+    & .pin .modal-backdrop {
+        margin-left: 20%;
+        background-color: rgba(218, 218, 218, 0.92);
+        & .modal {
+            min-width: 70%;
+            position: relative;
+            overflow: visible;
+            & .modal-header {
+                padding:0;
+            }
+            & .body {
+                display: grid;
+                grid-template-columns: .7fr 1fr;
+                margin: 5rem 0rem;
+                & .fileinput {
+                    display: none;
+                }
+                & label {
+                    height: 30rem;
+                    background-color: #efefef;
+                    border-radius: 1rem;
+                    padding: 1rem;
+                    position: relative;
+                    background-size: cover;
+                    background-repeat: no-repeat;
+                    & .box {
+                        border: dashed 2px #dadada;
+                        height: 100%;
+                        position: relative;
+                        & .in {
+                            margin:auto;
+                            position: absolute;
+                            height:4rem;
+                            top:50%;
+                            margin-top:-2rem;
+                            width: 100%;
+                            & .b {
+                                fill: #8e8e8e;
+                            }
+                        }
+                    }
+                }
+                & .text {
+                    & .name input {
+                        width: 100%;
+                        margin-left: 2rem;
+                        border: none;
+                        border-bottom: 1px solid #dadada;
+                        padding: 1rem 0rem;
+                        font-size: 3rem;
+                        font-weight: 600;
+                        color: #333;
+                        &::placeholder {
+                            color:#9c9c9c;
+                        }
+                    }
+                    & .desc {
+                        margin-top: 3rem;
+                        & textarea {
+                            width: 100%;
+                            margin-left: 2rem;
+                            border: none;
+                            border-bottom: 1px solid #dadada;
+                            padding: 1rem 0rem;
+                            font-size: 1.8rem;
+                            font-weight: 300;
+                            color: #333;
+                            &::placeholder {
+                                color:#9c9c9c;
+                                position: absolute;
+                                bottom:0;
+                            }
+                        }
+                    }
+                }
+            }
+            & .modal-footer {
+                position: absolute;
+                padding: 0;
+                bottom: 5%;
+                width: 50%;
+                right: 0;
+            }
+        }
+    }
+    & .pin.noimg .modal-backdrop {
+        & .body {
+            grid-template-columns: 1fr;
+        }
+        & .modal-footer {
+            position: relative;
+            width: 92%;
+            overflow: hidden;
+            padding-bottom: 4%;
+            margin: auto;
+        }
+    }
+}
+.menu__sub-menu--arrow {
+    position: absolute;
+    left: 10rem;
+    top: 1.4rem;
+    color:#b3b3b3;
+}
+
+#admin .validation-error {
+    text-align: left;
+    color: red;
+    font-size: 1.2rem;
+    margin-left: 2rem;
+    background: white;
+    border-radius: 5rem;
+    padding: 1rem;
+}
+
+#admin .list {
+    width: 100%;
+    background: #f9f9f9;
+    border-radius: .5rem;
+    padding: 1rem;
+    margin-top: 1rem;
+    border: 1px solid #dedede;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    justify-items: center;
+    position: relative;
+    align-items: center;
+}
+
+#admin .list button.delete-circle {
+    position: absolute;
+    right: 0;
+    padding: 0;
+    border-radius: 50%;
+    border: 0;
+    height: 2.5rem;
+    width: 2.5rem;
+    top: 0;
+    margin-top: -0.5rem;
+    margin-right: -1rem;
+    background: black;
+}
+
+#admin .title h1 {
+    display: inline-block;
+    vertical-align: top;
+    line-height: 6rem;
+}
+
+#admin .title .add {
+    display: inline-block;
+}
+
+#admin .title .add button {
+    padding: 0;
+    border: 0;
+}

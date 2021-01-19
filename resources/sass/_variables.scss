@@ -1,0 +1,69 @@
+
+// Body
+$body-bg: #f8fafc;
+
+// Typography
+$font-family-sans-serif: "Nunito", sans-serif;
+$font-size-base: 1.8rem;
+$line-height-base: 1.6;
+$basic-font: 'Open Sans', sans-serif;
+$basic-font-1: 'Montserrat', sans-serif;
+
+
+// Colors
+$font-color: #484848;
+$default-color: #008489; 
+$circle-color: green;
+$outside-color: #a3d4ff; 
+$line-color: #dedede;
+$nav-background: #fff;
+$footer-background: #fff;
+$default-font-color: #484848;
+$light-font-color: #b3b5bf;
+$border-color:#e5e5e5;
+
+input, textarea, button:focus {outline:0;}
+input, textarea{box-sizing:border-box} 
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+-webkit-box-shadow: 0 0 0px 1000px #ffffff inset !important;
+}
+input, select { font-size: 100% !important; }
+
+input[type="color"],
+input[type="date"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="email"],
+input[type="month"],
+input[type="number"],
+input[type="password"],
+input[type="search"],
+input[type="tel"],
+input[type="text"],
+input[type="time"],
+input[type="url"],
+input[type="week"],
+select:focus,
+textarea {
+  font-size: 16px !important;
+}
+
+.grey {
+    background: #f2f2f2;
+}
+
+.dis {
+    pointer-events:none;
+    & .pop {
+
+    }
+}
+
+

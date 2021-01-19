@@ -1,0 +1,322 @@
+/* ------------------------------------*\
+  #Nav
+\*------------------------------------ */
+
+.nav {
+    position: relative;
+    width: 100%;
+    background: 0;
+    z-index: 1001;
+    height: 7rem;
+/*    border-bottom: 0.1rem solid #ebebeb;*/
+    padding: 0 8rem;
+    max-width: 1280px;
+    margin: auto;
+}
+
+.nav.fixed {
+    position: fixed;
+    background: black;
+    border: 0;
+    padding: 0 2rem;
+    max-width: 100%;
+}
+
+.nav.absolute {
+    position: absolute;
+    border: 0;
+    max-width: 100%;
+}
+
+.nav.mobile {
+    position: absolute;
+    border:0;
+    height: 0;
+}
+
+.nav.create {
+    display: none;
+}
+
+/* ------------------------------------*\ #Logo \*------------------------------------ */
+.nav-logo {
+    display: inline-block;
+    position: relative;
+    line-height: 0rem;
+}
+
+.nav-logo p {
+    position: absolute;
+    color: red;
+    top: 0.3rem;
+    font-weight: 900;
+    left: 2.5rem;
+}
+
+p.mobile-nav-footer__text {
+    font-size: 1rem;
+    max-height: 2.4rem;
+    text-overflow: ellipsis;
+    overflow-wrap: break-word;
+    overflow: hidden;
+    line-height: 1.5rem;
+}
+
+/* ------------------------------------*\ #Search \*------------------------------------ */
+
+.nav-search {
+    position: relative;
+    display: flex;
+}
+
+.nav-search.mobile {
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    height: 8rem;
+}
+
+.nav-search__content {
+    width: 100%;
+    display: flex;
+}
+
+.nav-search__content .icon {
+    position: absolute;
+    z-index: 10;
+    align-self: center;
+    left: 1.3rem;
+}
+
+.nav-search__content .icon svg {
+    width: 1.6rem !important;
+    height: 1.6rem !important;
+    stroke: #adadad !important;
+    display: block;
+    fill: none;
+    stroke-width: 4;
+    overflow: visible;
+}
+
+.nav-search__content .icon.index {
+    position: absolute;
+    z-index: 10;
+    left: inherit;
+    align-self: center;
+    right: 0.8rem;
+    background: #ff385c;
+    padding: 1.05rem;
+    border-radius: 5rem;
+    margin-top: -0.01rem;
+}
+
+.nav-search__content .icon.index svg {
+    stroke: white !important;
+}
+
+/* ------------------------------------*\ #Menu \*------------------------------------ */
+.nav__bar {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    align-items: center;
+    height: 100%;
+}
+.nav-menu {
+    justify-self: right;
+}
+
+.mobile.active .nav-menu {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0;
+    background: #fff;
+    width: 100%;
+    z-index: 1001;
+    height: 7rem;
+    border-top: 0.1rem solid #ebebeb;
+    display: grid;
+    grid-template-columns: repeat(5, 20%);
+    -webkit-box-align: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 5%;
+}
+
+.nav-menu-item {
+    position: relative;
+    display: inline-block;
+    margin-left: 2rem;
+    min-width: 3rem;
+}
+
+.mobile .nav-menu-item {
+    margin: 0;
+    padding: 0;
+    float: inherit;
+}
+
+a.menu-link {
+    font-family: "Montserrat", sans-serif;
+    color: #484848;
+    text-decoration: none;
+    font-size: 1.35rem;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+}
+
+.nav.fixed a.menu-link {
+    color: white;
+}
+
+.nav.absolute a.menu-link {
+    color: white;
+}
+
+.nav.absolute.darkmenu a.menu-link {
+    color: black;
+}
+
+.mobile .nav-icon {
+    color: rgb(113, 113, 113);
+    height: 3rem;
+    margin-bottom: 0.2rem;
+    padding: 0.3rem;
+    margin-top: -1rem;
+}
+
+.mobile .nav-icon.active {
+    position: absolute;
+    left: 50%;
+    width: 2rem;
+    margin-left: -1.1rem;
+}
+
+/* ------------------------------------*\ #Profile Button \*------------------------------------ */
+
+.nav-dropdown {
+    width: 3.2rem;
+    height: 3.2rem;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    margin-top: -2rem;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+button.nav-dropdown--icon {
+    margin: auto;
+    padding: 0;
+    border: 0;
+    background: 0;
+}
+button.nav-dropdown--icon h2{
+    color: white;
+    font-size: 2.3rem;
+}
+
+button.nav-dropdown--icon img {
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+}
+
+.nav-dropdown__guest {
+    position: inherit;
+    width: 4rem;
+    z-index: 10;
+    left: 50%;
+    margin-left: -0.5rem;
+    margin-top: 0.24rem;
+    text-align: center;
+}
+
+.nav-dropdown__guest h2 {
+    z-index: 10;
+    color: white;
+    font-size: 2.4rem;
+    text-transform: uppercase;
+    margin: 0;
+    font-family: "Montserrat", sans-serif;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none;
+}
+
+ul.sub-dropdown {
+    list-style-type: none;
+    position: absolute;
+    min-width: 100%;
+    box-shadow: -1px 1px 5px 0 #cecece;
+    background: white;
+    top: 3.6rem;
+    right: -2rem;
+    max-height: 35rem;
+    transition: max-height 0.2s ease-in;
+    margin-top: 1.5rem;
+    font-size: 1.4rem;
+    & li a {
+        display: block;
+        padding: 1rem;
+        padding-right: 14rem;
+        text-decoration: none;
+        transition: background 0.1s;
+        white-space: nowrap;
+        background-color: white;
+        float: left;
+        width: 100%;
+        text-align: left;
+        &:hover {
+            background: $border-color;
+        }
+    }
+}
+
+.nav-backarrow {
+    display: inline-block;
+    padding: 3rem 3rem 3rem 1rem;
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) --------------------------------- */
+@media screen and (max-width: 1200px) {
+    .nav {
+        padding: 0 4rem;
+    }
+
+    .nav-search__content {
+        width: 100%;
+    }
+}
+
+@media (max-width: 767px) {
+    .nav-search__content {
+        width: 100%;
+    }
+
+    .create-bottom-nav {
+        grid-template-columns: 1fr;
+    }
+
+    .create-button__back {
+        left: 2rem;
+    }
+
+    .nav-dropdown {
+        position: absolute;
+        width: 2.7rem;
+        height: 2.7rem;
+        border-radius: 50%;
+        left: 50%;
+        margin-left: -1.35rem;
+        top: 0;
+        margin-top: -1rem;
+    }
+}

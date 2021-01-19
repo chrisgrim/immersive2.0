@@ -1,0 +1,290 @@
+/* ------------------------------------*\
+  #Create Section- Shows Page
+\*------------------------------------ */
+
+.event-create__shows {
+    width: 100%;
+    padding: 9rem 8rem 14rem 8rem;
+}
+
+.specific-show-dates, .ongoing-show-dates, .everyday-show-dates {
+    max-width: 60.2rem;
+}
+
+
+.show-type-selection {
+    width: 50rem;
+}
+
+.event-tickets__add {
+    width: 100%;
+    padding: 1rem 0;
+    max-width: 70rem;
+}
+
+.c-ticklet-button {
+    width: 100%;
+    max-width: 70rem;
+}
+
+.event-create-tab__section {
+    margin: 5rem auto;
+    width: 90%;
+    min-height: 320px;
+}
+
+.event-create__shows .vs__dropdown-option h3 {
+    margin:0;
+    font-size:1.6rem;
+}
+
+.event-create__shows .vs__dropdown-option em {
+    font-size:1.4rem;
+    color:#909090;
+}
+
+.event-create__shows .vs__dropdown-option.vs__dropdown-option--highlight em {
+    color:white;
+}
+
+section.event-enter-showdates {
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+section.ticket-section {
+    padding-bottom: 5rem;
+}
+
+.calendar .flatpickr-calendar.inline {
+    margin: inherit;
+}
+
+.field.limited__calender {
+    width: 49%;
+    display: inline-block;
+}
+
+.limited-run__calendar {
+    margin-top: 3rem;
+}
+
+.limited-run__calendar .flatpickr-calendar.inline {
+    margin: inherit;
+}
+
+.embargo-calendar {
+    margin-top: 3rem;
+}
+
+.embargo-calendar .flatpickr-calendar.inline {
+    margin: inherit;
+}
+
+.create-shows__ticket-box {
+    box-shadow: -3px 5px 5px 1px hsla(0, 0%, 91%, 0.6);
+    padding: 2rem;
+    border-radius: 5px 5px 5px 0;
+    margin-top: 15px;
+    border: 1px solid #ebebeb;
+    position: relative;
+}
+
+.create-shows__ticket-box .vs__actions{
+    display: none;
+}
+.create-shows__ticket-box .vs__dropdown-toggle {
+    height: 4.8rem;
+}
+.create-shows__ticket-box input.vs__search {
+    background: transparent;
+}
+.create-shows__ticket-box .vs--single span.vs__selected {
+    background: transparent;
+}
+.create-shows__ticket-box .vs__selected-options {
+    align-items: center;
+}
+
+.ticket-box__element {
+    grid-template-columns: 15rem auto 13rem 6rem 12rem 2rem;
+    grid-column-gap: 1rem;
+    grid-gap: 0 !important;
+}
+.ticket-box__element .field {
+    padding: 0rem 1rem 0rem 0rem;
+}
+.ticket-type-selection .multiselect__select {
+    display: none;
+}
+.ticket-type-selection .multiselect__single {
+    margin-bottom: 1.3rem;
+    margin-top: .5rem;
+}
+
+input#select-box {
+    width: 2rem;
+    height: 2rem;
+    display: inline-block;
+    margin: 1.3rem 1rem 1rem 1rem;
+}
+.ticket-box__add-button {
+    position: absolute;
+    margin-top: -1px;
+    display: inline-block;
+    z-index: 1;
+    border-top: none; 
+    & button {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #008489;
+        width: 100%;
+        padding: 1rem;
+        border: 1px solid #ebebeb;
+        border-top: none;
+        border-radius: 0 0 50px 5px;
+        box-shadow: -3px 5px 5px 1px hsla(0,0%,80.8%,.25);
+        text-align: left;
+        margin-right: 4rem;
+    }
+}
+
+.free-ticket__field {
+    position: absolute;
+    top: 1.6rem;
+    right: 0rem;
+}
+
+.week-calendar {
+    grid-template-columns: repeat(7,1fr) !important;
+    grid-column-gap:0 !important;
+    border: 1px solid #ebebeb;
+    border-radius: 5px;
+    text-align: center;
+    align-items: center;
+}
+.week-calendar__day {
+    width: 100%;
+    height: 100%;
+    line-height: 10rem;
+    &:hover {
+        background:#007c898a;
+        cursor: pointer;
+        border: 1px solid white;
+        & h4 {
+            color:white;
+            -webkit-user-select: none; /* Safari */        
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE10+/Edge */
+            user-select: none; /* Standard */
+        }
+    }
+    &.active {
+        background: $default-color;
+        border: 1px solid #e0e0e0;
+        border-radius: 5px;
+        & h4 {
+            color:white;
+        }
+        &:hover {
+            background:#007c898a;
+            cursor: pointer;
+            border: 1px solid white;
+        }
+    }
+}
+button.delete-circle {
+    border-radius: 100px;
+    padding: .7rem 1rem;
+    border: 1px solid #ebebeb;
+    background: #fff;
+    margin-right: -3.5rem;
+    margin-top: .8rem;
+    float: right;
+    font-weight: 800;
+    color: red;
+}
+
+.flatpickr-calendar.inline {
+    margin:0;
+}
+.calendar .flatpickr-calendar.inline {
+    width: 602px !important;
+}
+.calendar .flatpickr-days {
+    width: 602px !important;
+}
+.calendar.desktopshow {
+    display: inline-block;
+}
+.calendar.mobileshow {
+    display: none;
+}
+
+@media (max-width: 1050px) { 
+    .calendar.desktopshow {
+        display: none;
+    }
+    .calendar.mobileshow {
+        display: inline-block;
+    }
+    .calendar.mobileshow .flatpickr-calendar.inline {
+        width: 301px !important;
+    }
+    .calendar.mobileshow .flatpickr-rContainer {
+        width: 301px !important;
+    }
+    .ticket-box__element {
+        grid-template-columns: 1fr 1fr;
+        grid-column-gap: .2rem;
+    }
+    .ticket-box__element.labels {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+
+    section.event-enter-showtimes {
+        margin: 0;
+        margin-bottom: 7rem;
+    }
+    section.event-enter-showdates {
+        margin-bottom: 4rem;
+    }
+    .event-create-tab__section {
+        margin: 2rem auto 10rem auto;
+    }
+    .event-create__shows {
+        padding: 10rem 2rem 14rem 2rem;
+    }
+    .calendar .flatpickr-calendar.inline {
+        width: 301px !important;
+    }
+    .calendar .flatpickr-days {
+        width: 301px !important;
+    }
+    .show-type-selection {
+        width: 100%;
+    }
+    .ticket-box__element {
+        grid-template-columns: 1fr 1fr !important;
+    }
+    .week-calendar__day {
+        line-height: 6rem;
+        & h4 {
+            font-size: 1rem;
+        }
+    }
+    .field.limited__calender {
+        width: 100%;
+        display: inline-block;
+    }
+    .limited-run__calendar .flatpickr-calendar.inline {
+        margin: auto;
+    }
+    .limited-run__calendar {
+        margin-top: 0;
+        margin-bottom: 3rem;
+    }
+}

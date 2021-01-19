@@ -1,0 +1,245 @@
+/* ------------------------------------*\
+  #Event- Event Edit Page
+\*------------------------------------ */
+
+.event-edit__organizer {
+    margin-top: 7rem;
+}
+
+.organizer-card {
+    width: 77%;
+    height: 8rem;
+    position: relative;
+    grid-template-columns: 6rem auto auto;
+    -webkit-box-align: center;
+    align-items: center;
+    grid-gap: 2rem;
+    margin: auto;
+}
+
+.organizer-card__image {
+    width: 6rem;
+    height: 6rem;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    background-size: cover;
+    display: inline-block;
+    float: left;
+    border-radius: 50%;
+    margin-right: 2rem;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.organizer-card__image-icontext {
+    text-align: center;
+    margin: auto;
+    & h2 {
+        color: #fff;
+        font-size: 4rem;
+    }
+}
+
+.organizer-card__title {
+    float: left;
+    overflow-wrap: break-word;
+    font-size: 4rem;
+    font-weight: 800;
+    color: #484848;
+    margin: 0;
+    padding: 0;
+    line-height: 4.4rem;
+}
+
+.organizer-card__nav {
+    text-align: right;
+}
+
+button.edit-organizer {
+    color: #008489;
+    border-radius: 0.4rem;
+    background: #fff;
+    border: 1px solid #008489;
+    display: inline-block;
+    font-size: 1.4rem;
+    font-weight: 600;
+    padding: 0.6rem 1.5rem;
+    line-height: 2.2rem;
+    min-width: 4.8rem;
+}
+
+button.preview-organizer {
+    color: #fff;
+    border-radius: 0.4rem;
+    border-width: 0.1rem;
+    background: #008489;
+    border-color: transparent;
+    font-size: 1.4rem;
+    font-weight: 600;
+    padding: 0.6rem 1.5rem;
+    line-height: 2.2rem;
+    min-width: 4.8rem;
+}
+
+.event-edit__eventlist {
+    padding: 4rem 8rem 4rem 8rem;
+}
+
+.event-edit__eventlist--top {
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+}
+.add-new-event-card {
+    position: relative;
+}
+
+.edit-event__element {
+    display: inline-block;
+    width: 100%;
+    position: relative;
+    padding: .5rem;
+}
+
+.edit-event__buttons {
+    position: absolute;
+    top: 1rem;
+    display: none;
+    z-index: 100;
+    right: 1rem;
+}
+
+.eventlist__element.edit:hover .edit-event__buttons {
+    display: block;
+}
+
+.card.new:hover .card-image__middle.new {
+    background: $default-color;
+}
+
+.card.new:hover .card-details__content p {
+    color: white;
+}
+
+.card.new:hover .card-details__content svg.b {
+    fill: white;
+}
+
+.card-details__content.new svg.b {
+    fill: #008489;
+}
+
+.card-details {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+}
+
+.card-details__content {
+    width: 100%;
+    background: #000000c9;
+    text-align: center;
+    padding: 1rem;
+    & p {
+        color: white;
+    }
+}
+
+.card-details__content.new {
+    background: 0;
+    text-align: center;
+    & p {
+        color: black;
+    }
+}
+
+.card-without-image {
+    width: 100%;
+    background: #008489;
+    height: 19rem;
+    border-radius: 1rem;
+    position: relative;
+}
+
+.card-without-image_name {
+    padding-top: 8rem;
+    position: absolute;
+    left: 50%;
+    width: 10rem;
+    margin-left: -5rem;
+    text-align: center;
+    & h4 {
+        color:white;
+    }
+}
+
+.new-organization {
+    width: 80%;
+    margin: 4rem auto;
+}
+
+button.new-organization__add {
+    background: white;
+    display: inline-block;
+    padding: 1rem 1.4rem;
+    border-radius: 1rem;
+    color: black;
+    border: 1px solid green;
+    font-size: 2rem;
+}
+
+@media (max-width: 768px) {
+    .event-edit__organizer {
+        text-align: center;
+        margin-top:0;
+    }
+
+    .event-edit-eventlist {
+        grid-template-columns: 1fr;
+    }
+
+    .organizer-card {
+        display: inline-block;
+        height: 100%;
+        margin-top: 1rem;
+        width: 100%;
+        padding:2rem;
+    }
+    .event-edit__eventlist {
+        padding: 1rem;
+    }
+
+    .organizer-card__image {
+        display: block;
+        float: inherit;
+        margin: 1rem auto;
+    }
+
+    .organizer-card__title {
+        float: inherit;
+        display: block;
+        font-size: 2.5rem;
+        line-height: normal;
+        margin: 1rem auto;
+    }
+
+    .organizer-card__nav {
+        display: inline-block;
+    }
+
+    .organizer-card__image-icontext {
+        & h2 {
+           padding-top:.5rem;
+        }
+    }
+
+    .new-organization {
+        text-align: center;
+    }
+}

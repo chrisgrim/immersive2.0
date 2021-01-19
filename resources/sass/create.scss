@@ -1,0 +1,41 @@
+
+
+
+
+
+
+
+.organization-form .multiselect {
+  .option__desc, .option__image {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .option__image {
+    max-height: 80px;
+    margin-right: 10px;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+  }
+  .option__title {
+    font-size: 14px;
+  }
+  .option__small {
+    font-size: 12px;
+    // margin-top: 0.75rem;
+    display: block;
+  }
+}
+/*-----------------------initial create page---------------------*/
+.initial_create {
+  background-image: url("/storage/website-files/create-background.jpg");
+  background-size: cover;
+  height:94vh;
+  &-text {
+    width: 45%;
+    float: right;
+    margin-top: 10%;
+  }
+}
+

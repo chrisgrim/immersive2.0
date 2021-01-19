@@ -1,0 +1,113 @@
+#cover {
+  width: 100px;
+  position: relative;
+}
+input#checkbox {
+  margin: 0 !important;
+  width: 100%;
+  height: 4.2rem;
+  cursor: pointer;
+  opacity: 0;
+  position: relative;
+  z-index: 3;
+}
+
+#bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ffffff;
+  z-index: 0;
+  border-radius: 10rem;
+  border: 1px solid #e8e8e8;
+}
+
+#knob {
+    position: absolute;
+    top: .5rem;
+    left: .5rem;
+    width: 3.6rem;
+    height: 3.4rem;
+    background-color: #fff;
+    border-radius: 10rem;
+    transition: left 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28), margin-left 0.3s ease, width 0.3s ease, border-radius 0.3s ease;
+    box-shadow: 0px 1px 1px #7d7d7d;
+    z-index: 0;
+    border: 1px solid #b5b5b5;
+    & p {
+        font-size: 1.3rem;
+        margin: .5rem 0rem 0rem .7rem;
+        color: #7b7b7b;
+    }
+}
+#checkbox:active ~ #knob {
+  width: 66px;
+  border-radius: .5rem;
+}
+
+#checkbox:checked ~ #knob {
+  left: 58px;
+  & p {
+        font-size: 1.3rem;
+        margin: .5rem 0rem 0rem .6rem;
+    }
+}
+
+#checkbox:checked ~ #bar {
+  background-color: #008489;
+}
+
+#checkbox:checked:active ~ #knob {
+  margin-left: -32px;
+}
+
+
+/*.showmap #cover {
+    width: 7rem;
+    position: fixed;
+    top: 9.3rem;
+    right: 5rem;
+}
+.showmap.hidden #cover {
+    width: 7rem;
+    position: absolute;
+    top: -.9rem;
+    right: 2.5rem;
+}
+
+.showmap input#checkbox {
+    height: 4.95rem;
+}
+
+.showmap #knob {
+    position: absolute;
+    top: .4rem;
+    left: .5rem;
+    width: 4.5rem;
+    height: 4.5rem;
+    background-color: #ff385c;
+    border-radius: 10rem;
+    transition: left 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28), margin-left 0.3s ease, width 0.3s ease, border-radius 0.3s ease;
+    box-shadow: 0px 0px 0px;
+    z-index: 0;
+    border: 0;
+    & p {
+        font-size: 1.3rem;
+        font-weight: 800;
+        margin: 1rem 0rem 0rem .7rem;
+        color: white;
+    }
+}
+.showmap #checkbox:checked ~ #bar {
+  background-color: white;
+}
+.showmap #checkbox:checked ~ #knob {
+  left: 2.1rem;
+  & p {
+        font-size: 2.3rem;
+        margin: 1rem 0rem 0rem 1.4rem;
+        font-weight: 500;
+    }
+}*/

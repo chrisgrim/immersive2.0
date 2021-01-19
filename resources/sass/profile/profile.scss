@@ -1,0 +1,324 @@
+/* ------------------------------------*\
+  #Profile Section- User Profile Page
+\*------------------------------------ */
+
+.user-profile {
+    width: 72%;
+    margin: auto;
+    padding-top: 7rem;
+    grid-template-columns: 0.33fr 0.66fr;
+}
+
+.user-profile-image {
+    width: 11rem;
+    height: 11rem;
+    position: relative;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: center;
+    & input {
+        display: none;
+    }
+    & .error {
+        position: absolute;
+        color:red;
+    }
+}
+.user-profile-image__wrapper, .user-profile-image__wrapper img {
+    font-size: 40px;
+    background-position: center center;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover !important;
+    border-radius: 50%;
+    position: relative;
+    display: block;
+    cursor: pointer;
+    font-size: 110px;
+    -webkit-transition: width 0.5s ease-in-out;
+    transition: width 0.5s ease-in-out;
+    -webkit-transition: height 0.5s ease-in-out;
+    transition: height 0.5s ease-in-out;
+    &.imageloaded {
+        font-size: 40px;
+        background-position: center center;
+    }
+    &.imageloading {
+        background: #1b1b1bc4
+    }
+}
+.user-profile-noimage {
+
+}
+.user-profile-noimage__text {
+    text-align: center;
+    margin: auto;
+    & h2 {
+        z-index: 10;
+        color: white;
+        font-size: 8rem;
+        text-transform: uppercase;
+        margin: 0;
+        font-family: "Times New Roman", Times, serif;
+        -webkit-touch-callout: none; /* iOS Safari */
+        -webkit-user-select: none; /* Safari */
+        -khtml-user-select: none; /* Konqueror HTML */
+        -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+        user-select: none; 
+    }
+}
+.profile-wrapper {
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: absolute;
+    top: 0;
+    z-index: 10;
+}
+.user-profile-image__update-text {
+    position: absolute;
+    bottom: -2.5rem;
+    width: 6rem;
+    left: 50%;
+    margin-left: -3rem;
+}
+.user-enter-profile {
+
+}
+.profile-user-info {
+    display: inline-block;
+    color: #484848;
+    font-weight: 300;
+    margin: .4rem 0rem;
+}
+.profile-user-edit {
+    display: inline-block;
+    cursor: pointer;
+    color: #008489;
+    font-weight: 300;
+    margin-left: 1rem;
+}
+.profile-user-favorites {
+    margin: 4rem 0rem;
+    border-top: 1px solid #bbbbbb;
+    padding: 2rem 0rem;
+}
+button.verify-email {
+    color:$default-color;
+    border: 1px solid #e6e6e6;
+    padding: .5rem;
+    margin-left: 1rem;
+
+}
+
+
+
+@media (max-width: 768px) {
+    .user-profile {
+        grid-template-columns: 1fr;
+        width:100%;
+        padding:6rem 2rem 6rem 2rem;
+    }
+    .user-profile-image {
+        width: 5rem;
+        height: 5rem;
+    }
+    .user-enter-profile {
+        margin: 3rem 0rem 10rem 0rem;
+    }
+    .profile-user-name h1 {
+        font-size: 2.4rem;
+    }
+    .user-profile-image__update-text {
+        top: -2.5rem;
+        margin: 0;
+        left: 0;
+    }
+}
+
+
+
+
+
+
+
+/*.profile{
+    max-width: 72%;
+    margin: auto;
+    & .body {
+        margin-top:7rem;
+        display: grid;
+        grid-template-columns: .33fr .66fr;
+        & .left {
+            & .image {
+                width: 11rem;
+                height: 11rem;
+                position: relative;
+                &.non {
+                    border-radius: 50%;
+                    text-align: center;
+                    padding-top: .9rem;
+                }
+                & .icontext {
+                    position: absolute;
+                    width: 12rem;
+                    z-index: 10;
+                    left: 50%;
+                    margin-left: -6rem;
+                    margin-top: .9rem;
+                    text-align: center;
+                }
+                & h2 {
+                    z-index: 10;
+                    color: white;
+                    font-size: 8rem;
+                    text-transform: uppercase;
+                    margin: 0;
+                    font-family: "Times New Roman", Times, serif;
+                   
+                }
+                & img {
+                    width: 100%;
+                    border-radius: 50%;
+                }
+                & .error {
+                    position: absolute;
+                    color:red;
+                }
+                & input {
+                    display: none;
+                }
+                & .wrapper, .wrapper img {
+                    width: 100%;
+                    height: 100%;
+                    background-repeat: no-repeat;
+                    background-size: cover !important;
+                    border-radius: 50%;
+                    position: relative;
+                    display: block;
+                    cursor: pointer;
+                    background: #f77161;
+                    font-size: 110px;
+                    transition: width .5s ease-in-out;
+                    transition: height .5s ease-in-out;
+                    &.imageloaded {
+                        font-size: 40px;
+                        background-position: center center;
+                    }
+                    &.imageloading {
+                        background: #1b1b1bc4
+                    }
+                }
+                & span.text {
+                    position: absolute;
+                    bottom: -2.5rem;
+                    width: 6rem;
+                    left: 50%;
+                    margin-left: -3rem;
+                }
+                & .add-profile-image {
+                    background: #ff8c3c;
+                    border-radius: 50px;
+                    padding: 0px 10px 0px 10px;
+                    box-shadow: 1px 2px 5px 2px #9898984d;
+                    & p {
+                        margin: 0px;
+                        font-size: 30px;
+                    }
+                }
+            }
+        }
+        & .right {
+            & .name h2 {
+                font-size: 4.2rem;
+                margin-bottom: 0rem;
+            }
+            & .info {
+                margin-top: .6rem;
+                & .age {
+                    display: inline-block;
+                    color: #484848;
+                    font-weight: 300;
+                }
+                & .edit {
+                    display: inline-block;
+                    cursor: pointer;
+                    color: $default-color;
+                    font-weight: 300;
+                    margin-left: 1rem;
+                }
+                & button {
+                    background: red;
+                    display: inline-block;
+                    padding: 1rem;
+                    border-radius: .3rem;
+                    color: white;
+                    margin-left: 1rem;
+                    border:none;
+                    cursor: pointer;
+                    &:disabled,
+                        button[disabled] {
+                          border: 1px solid #999999;
+                          background-color: #cccccc;
+                          color: #666666;
+                    }
+                    &.a {
+                        background: white;
+                        color:black;
+                        cursor: auto;
+                        border:1px solid black;
+                    }
+                }
+            }
+            & .loc {
+                margin-top: 1rem;
+                color: #484848;
+                font-weight: 300;
+            }
+            & .favorites {
+                margin: 4rem 0rem;
+                border-top: 1px solid #bbbbbb;
+                padding: 2rem 0rem;
+                & #grid {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .profile {
+        & .body {
+            display: inline-block;
+            & .left {
+                & .image {
+                    width: 5rem;
+                    height: 5rem;
+                    & span.text {
+                        top: -2.5rem;
+                        margin: 0;
+                        left:0;
+                    }
+                }
+            }
+            & .right {
+                & .name {
+                    & h2 {
+                        font-size: 2.4rem;
+                    }
+                }
+                & .info {
+                    & .edit {
+                        margin: 0;
+                    }
+                }
+            }
+        }
+    }
+}
+*/

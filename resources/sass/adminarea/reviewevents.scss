@@ -1,0 +1,78 @@
+#admin {
+    & .reviewevent {
+        & .new {
+            display: grid;
+            grid-template-columns: auto auto;
+            margin: 4rem 0rem;
+            & .content {
+                padding: 4rem 4rem 0rem 4rem;
+            }
+        }
+        & .list {
+            & .image img{
+                width:10rem;
+            }
+        }
+        & img.option__image {
+            width: 10rem;
+        }
+        & .listing {
+            margin:4rem 0;
+        }
+        /*& input {
+            position: relative;
+            color: #484848;
+            background-color: white;
+            transition: border-color 0.2s ease 0s;
+            padding: 1.3rem 1rem;
+            border-width: 1px;
+            border-style: solid;
+            -o-border-image: initial;
+            border-image: initial;
+            border-radius: 5px;
+            border-color: #ebebeb;
+            margin: 0rem 0rem 1rem 0rem;
+            font-size: 1.4rem;
+            width: 100%;
+            font-family: "Montserrat", sans-serif;
+            &.active {
+                border-color: rgb(0, 132, 137);
+            }
+            &.error {
+                border-color: red;
+            }
+            &::placeholder {
+                color:#adadad;
+                font-size:1.4rem;
+                font-family: inherit;
+            }
+        }*/
+        & textarea {
+            position: relative;
+            color: #484848;
+            background-color: white;
+            transition: border-color 0.2s ease 0s;
+            padding: 1.3rem 1rem;
+            border-width: 1px;
+            border-style: solid;
+            -o-border-image: initial;
+            border-image: initial;
+            border-radius: 5px;
+            border-color: #ebebeb;
+            margin: 0rem 0rem 1rem 0rem;
+            font-size: 1.4rem;
+            width: 100%;
+            &.active {
+                border-color: rgb(0, 132, 137);
+            }
+            &.error {
+                border-color: red;
+            }
+            &::placeholder {
+                color:#adadad;
+                font-size:1.4rem;
+                font-family: inherit;
+            }
+        }
+    }
+}

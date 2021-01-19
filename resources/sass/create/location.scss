@@ -1,0 +1,52 @@
+/*------------------------------------*\
+  #Create Section- Locaton Page
+\*------------------------------------*/
+
+.event-create__location {
+    width:100% !important;
+    grid-template-columns: 1fr;
+    grid-gap:1rem !important;
+}
+.event-create__location.showmap {
+    width:100% !important;
+    grid-template-columns: 1fr 1fr;
+    grid-gap:1rem !important;
+}
+.event-create__location.remote {
+    grid-template-columns: 1fr;
+    max-width: 70rem;
+}
+.event-enter-location {
+    width: 100%;
+    padding: 9rem 8rem 14rem 8rem;
+    max-width: 70rem;
+}
+.event-show-location {
+    width: 42%;
+    position: fixed;
+}
+@media (max-width: 1050px) { 
+    .event-create__location.showmap {
+        grid-template-columns: 1fr;
+    }
+    .event-show-location {
+        width:100%;
+        position: relative;
+    }
+    .event-show-location.showmap {
+        grid-column-start: 1;
+        grid-row-start: 1;
+    }
+    .event-enter-location.showmap {
+        padding: 3rem 8rem 4rem 8rem;
+    }
+}
+
+@media (max-width: 768px) { 
+    .event-enter-location.showmap {
+        padding: 10rem 2rem 4rem 2rem;
+    }
+    .event-enter-location {
+        padding: 10rem 2rem 14rem 2rem;
+    }
+}

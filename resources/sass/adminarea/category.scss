@@ -1,0 +1,12 @@
+#admin .categories {
+    & .title h1{
+        font-size:3.2rem;
+    }
+    & .text {
+        width:100%;
+        & .field {
+            width:30%;
+            display: inline;
+        }
+    }
+}

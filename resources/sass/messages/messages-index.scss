@@ -1,0 +1,106 @@
+/* ------------------------------------*\
+  #Message- Index Page
+\*------------------------------------ */
+
+.message-index {
+    width: 100%;
+    margin: auto;
+}
+
+.message-index__element {
+    grid-template-columns: 30rem 1fr;
+    padding: 2rem 0;
+    border-bottom: 1px solid #cecece;
+    grid-gap: 1rem;
+    margin: auto;
+    width: 76%;
+    grid-column-gap: 2rem;
+}
+
+.message-index__card {
+    grid-template-columns: 7rem 1fr;
+    -webkit-box-align: start;
+    align-items: start;
+    grid-column-gap: 0;
+}
+
+.message-index__image {
+    position: relative;
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    margin: 1rem auto;
+    & img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+    }
+    & h2 {
+         z-index: 10;
+        color: white;
+        font-size: 2.7rem;
+        text-transform: uppercase;
+        margin: 0;
+        -webkit-touch-callout: none; /* iOS Safari */
+        -webkit-user-select: none; /* Safari */
+        -khtml-user-select: none; /* Konqueror HTML */
+        -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+        user-select: none; 
+    }
+}
+
+.message-index__user-noimage {
+    position: absolute;
+    width: 12rem;
+    z-index: 10;
+    left: 50%;
+    margin-left: -6.1rem;
+    margin-top: .9rem;
+    text-align: center;
+}
+
+.message-index__name {
+    padding-top: 1.3rem;
+    padding-left: 1rem;
+    & p {
+        font-size: 1.5rem;
+    }
+}
+
+.message-index__message {
+    padding-top: 1.3rem;
+    padding-left: 1rem;
+    & p {
+        font-size: 1.5rem;
+    }
+}
+
+.message-index__message.mobile {
+    padding: 0;
+}
+
+.message-index__event {
+    grid-template-columns: 7rem 1fr;
+    -webkit-box-align: start;
+    align-items: start;
+    grid-column-gap: 0;
+}
+
+.message-index__mdates {
+    margin-top: 1.23rem;
+    & p {
+        line-height: normal;
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .message-index {
+        padding: 3rem 2rem;
+    }
+
+    .message-index__element {
+        width: 100%;
+    }
+}

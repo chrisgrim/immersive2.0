@@ -1,0 +1,56 @@
+/*------------------------------------*\
+  #Create Section- Category Page
+\*------------------------------------*/
+
+.event-create__category {
+    width:100% !important;
+    grid-template-columns: 1fr;
+    grid-gap:0 !important;
+}
+.event-create__category.showcat {
+    grid-template-columns: 1fr 1fr;
+}
+
+.event-enter-category {
+    max-width: 70rem;
+    width: 100%;
+    padding: 9rem 8rem 4rem 8rem;
+    & .title {
+        margin-bottom: 2rem;
+    }
+}
+
+.event-show-category {
+    width: 100%;
+}
+
+.event-create__category input.vs__search {
+    transition: border-color 0s ease 0s;
+}
+
+.event-show-category__image {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    & img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+@media (max-width: 1050px) { 
+    .event-create__category.showcat {
+        grid-template-columns: 1fr;
+    }
+    .event-show-category__image {
+        grid-column-start: 1;
+        grid-row-start: 1;
+    }
+}
+
+@media (max-width: 768px) { 
+    .event-enter-category {
+        padding: 3rem 2rem 4rem 2rem;
+    }
+}

@@ -1,0 +1,332 @@
+/*------------------------------------*\
+  #Login- Login Page
+\*------------------------------------*/
+
+
+.login-index {
+    grid-template-columns: 40% 60%;
+    align-items: center;
+    justify-items: center;
+    grid-gap: 0 !important;
+    &.popup {
+        background: white;
+        position: relative;
+        margin: auto;
+        width: 45rem;
+        border-radius: 1em;
+        box-shadow: rgba(0, 0, 0, 0.28) 0px 8px 28px;
+    }
+}
+
+.login-popup {
+    -webkit-box-pack: center;
+    -webkit-box-align: end;
+    -webkit-box-direction: normal;
+    -webkit-box-orient: horizontal;
+    z-index: 2000;
+    position: fixed;
+    inset: 0px;
+    padding-top: 12px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: center;
+    background: #00000091
+}
+
+.login-information {
+    padding: 1rem 0 1rem 0;
+    width: 30rem;
+    margin: auto;
+}
+
+.login-information__title {
+    margin: 6rem 0rem 2rem 0rem;
+}
+.login-information__forgot-password {
+    color: #008489;
+    margin: 0rem 0rem 1rem 0rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+    cursor: pointer;
+    &:active {
+        color:white;
+    }
+}
+.login-information__showpass {
+    width: 2.2rem;
+    position: absolute;
+    right: 2.6rem;
+    top: 1.1rem;
+    & img {
+        width:100%;
+    }
+}
+
+button.login-button {
+    background: #008489;
+    color: white;
+    border: none;
+    width: 100%;
+}
+button.login-button[disabled]{
+    border: 1px solid #cacaca;
+    background-color: #f9f9f9;
+    color: #c7c7c7;
+}
+
+.inprogress {
+    cursor: progress !important;
+}
+
+.login-information__line {
+    margin: 3rem 0rem;
+    position: relative;
+    & span {
+        position: absolute;
+        background: white;
+        width: 4rem;
+        left: 50%;
+        margin-left: -2rem;
+        top: -1rem;
+        text-align: center;
+        color: #484848;
+    }
+}
+.login-information__social-login {
+    width: 100%;
+    grid-template-columns: 1fr 1fr;
+    text-align: center;
+    margin-top: 2rem;
+}
+button.social-login {
+    border: none;
+    background: none;
+    & p {
+        font-size: 1.3rem;
+        color: #008489;
+    }
+}
+.login-information__switch {
+    text-align: center;
+    margin-top: 5rem;
+    & p {
+        font-size: 1.3rem;
+    }
+}
+button.switch_login {
+    border: none;
+    background: none;
+    color: #008489;
+}
+
+.field {
+    button.save:disabled,
+    button.save[disabled]{
+        border: 1px solid #cacaca;
+        background-color: #f9f9f9;
+        color: #c7c7c7;
+    }
+}
+.login-image {
+    display: inline-block;
+    width:100%;
+    height: 100%;
+    overflow: hidden;
+    & img {
+        width:100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+.login-close-button {
+    position: absolute;
+    top: 1.2rem;
+    left: 1.2rem;
+}
+
+
+
+@media (max-width: 768px) { 
+    .login-index {
+        grid-template-columns: 1fr;
+        &.popup {
+            margin:0;
+            width:100%;
+            height: 100%;
+        }
+    }
+    .login-information {
+        width: 70%;
+        margin: 0 auto;
+    }
+    .login-image {
+        display: none;
+    }
+    .login-information__social-login {
+    grid-template-columns: 1fr 1fr !important;
+    }
+    .login-close-button {
+        top: 2.5rem;
+        left: 2rem;
+    }
+
+}
+
+
+
+
+
+
+
+
+
+/*.register {
+    & .content {
+        display: grid;
+        grid-template-columns: 40% 60%;
+        & .left {
+            position: relative;
+            .sec {
+                width: 29rem;
+                position: absolute;
+                top: 50%; left: 50%;
+                transform: translate(-50%,-50%);
+            }
+        }
+        & .right {
+            display: inline-block;
+            background: red;
+            & img {
+                width: 100%;
+            }
+        }
+    }
+}
+.register {
+    & .field {
+        position: relative;
+        & .forgot {
+            color: #008489;
+            margin: 0rem 0rem 1rem 0rem;
+            font-size: 1.2rem;
+            font-weight: 500;
+            cursor: pointer;
+            &:active {
+                color:white;
+            }
+        }
+        & .showpass {
+            width: 2.2rem;
+            position: absolute;
+            right: 2.6rem;
+            top: 1.1rem;
+            & img {
+                width:100%;
+            }
+        }
+    }
+    & h1 {
+        font-size: 6rem;
+        line-height: 1rem;
+        font-weight: 700;
+    }
+    & .submit {
+        background: $default-color;
+        width: 84%;
+        color: white;
+    }
+    & .social {
+        display: grid;
+        width: 100%;
+        grid-template-columns: 1fr 1fr;
+        text-align: center;
+        margin-top: 2rem;
+        & button {
+            border:none;
+            background: none;
+            & p {
+            font-size: 1.3rem;
+            color: $default-color;
+            }
+        }
+    }
+    & .join {
+        text-align: center;
+        margin-top: 5rem;
+        & p {
+            font-size: 1.3rem;
+        }
+        & a {
+            color: $default-color;
+        }
+    }
+    & .line {
+        margin: 3rem 0rem;
+        position: relative;
+        & span {
+            position: absolute;
+            background: white;
+            width: 4rem;
+            left: 50%;
+            margin-left: -2rem;
+            top: -1rem;
+            text-align: center;
+            color: #484848;
+        }
+    }
+}
+.field {
+    button.save:disabled,
+    button.save[disabled]{
+        border: 1px solid #cacaca;
+        background-color: #f9f9f9;
+        color: #c7c7c7;
+    }
+}
+.field button.save {
+    background: #008489;
+    color: white;
+    border: none;
+    width: 100%;
+}
+.inprogress {
+    cursor: progress !important;
+}*/
+
+
+
+
+
+/*@media (max-width: 768px) { 
+    .register {
+        & .content {
+            display: grid;
+            grid-template-columns: 1fr;
+            & .left {
+                width: 100%;
+                padding: 0rem 2rem;
+                margin-bottom: 5rem;
+                & .sec {
+                    width: 100%;
+                    position: relative;
+                    transform: translate(0%,0%);
+                    top: 0%; 
+                    left: 0%;
+                    & .social {
+                        grid-template-columns: 1fr;
+                        grid-gap: 1rem;
+                        & button {
+                            border:1px solid black;
+                        }
+                    }
+                }
+            }
+            & .right {
+                display: none;
+            }
+        }
+    }
+}*/
+

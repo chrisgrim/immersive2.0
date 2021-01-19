@@ -1,0 +1,113 @@
+/*------------------------------------*\
+  #Admin- Nav 
+\*------------------------------------*/
+
+.admin-nav {
+    position: fixed;
+    width: 25rem;
+    background: #232228;
+    height:100%;
+    z-index: 901;
+    border-right: solid #c1c1c1 1px;
+    padding: 2.5rem;
+    overflow-y: auto;
+}
+button.admin-home-icon {
+    border: solid #008489 1px;
+    border-radius: 0.3rem;
+    padding: .9rem 2rem;
+    margin-bottom: 3rem;
+    font-size: 1.5rem;
+    background: #008489;
+    color: white;
+}
+.admin-nav-title {
+    display: block;
+    margin-bottom: 1rem;
+    & h3 {
+        font-size: 1.7rem;
+        color:white;
+        margin:0;
+    }
+}
+.admin-menu {
+    & a {
+       /* margin: 1rem 1rem;*/
+        font-size: 1.5rem;
+        color: rgb(118, 118, 118);
+        font-weight: 400;
+    }
+}
+.admin-menu__item {
+    position: relative;
+}
+button.admin-menu__item {
+    border:0;
+    display: inline-block;
+    width:100%;
+    text-align: left;
+    font-size: 1.5rem;
+    color: #b3b3b3;
+    background: none;
+    margin:.4rem 0rem;
+    &:hover {
+        background:$default-color;
+        color:white;
+    }
+    &.active {
+        background:#4e4e4e;
+        color:white;
+    }
+}
+.admin-menu__notification {
+    position: absolute;
+    background: red;
+    right:0;
+    padding: .5rem 1.5rem;
+    border-radius: 100%;
+    margin-top:-.6rem;
+    & p {
+        margin: 0;
+        text-align: center;
+        font-size: 1.2rem;
+        color: white;
+    }
+}
+.admin-top-menu {
+    position: relative;
+}
+.admin-submenu {
+    position: relative;
+    width: 100%;
+    background: #3a3a3a;
+    left: 3rem;
+    overflow: hidden;
+    border-radius: 1rem;
+}
+.admin-submenu .admin-menu__item {
+    margin:0;
+}
+
+
+
+.checklist-section {
+    position: relative;
+    & .item {
+        display: inline-block;
+    }
+    & .notification {
+        position: absolute;
+        background: red;
+        padding: .5rem;
+        border-radius: 100%;
+        right: 0;
+        color: white;
+        font-size: 1rem;
+        min-width: 2.5rem;
+        & p {
+            margin: 0;
+            text-align: center;
+            font-size: 1.2rem;
+        }
+    }
+}

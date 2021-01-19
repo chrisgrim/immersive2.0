@@ -1,0 +1,223 @@
+/* ------------------------------------*\
+  #Event- Search Page
+\*------------------------------------ */
+
+.event-search {
+    position: relative;
+}
+
+.spacer--div {
+    appearance: none;
+    background: transparent;
+    border: 0;
+    display: block;
+    margin: 0;
+    outline: none;
+    width: 100%;
+    z-index: -1;
+}
+
+.event-search__container {
+    width: 100%;
+    grid-template-columns: 1fr;
+    grid-column-gap: 0;
+    display: grid;
+}
+
+ul.pagination {
+    text-align: center;
+    padding-bottom: 2rem;
+}
+
+.pagination li {
+    display: inline;
+    padding: 0.3rem;
+}
+
+.pagination li button {
+    border: 0;
+    font-weight: 500;
+    background: white;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pagination li.active button {
+    background: black;
+    color: white;
+}
+
+.pagination li button.paginate__arrows {
+    border: 0;
+    box-shadow: 0 0 0 1px transparent, 0 0 0 4px transparent, 0 2px 4px rgba(0, 0, 0, 0.18);
+    border-radius: 5rem;
+    width: inherit;
+    height: inherit;
+    &:hover {
+        background: black;
+        color: white;
+    }
+}
+
+@media (min-width: 768px) {
+    .event-search__container {
+        grid-template-columns: 84rem auto;
+    }
+}
+
+@media (max-width: 1100px) {
+    .event-search__container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* -----------------Event List------------------------------------ */
+
+.event-search-list {
+    width: 100%;
+}
+
+.event__results {
+    padding: 0 2rem;
+}
+
+.event__results--online {
+    padding: 2rem;
+}
+
+.mobile-online-events {
+    padding: 2rem;
+}
+
+.event__results--title {
+    padding: 0 0 3rem 0;
+    text-align: center;
+}
+
+.event__results--title p {
+    margin-top: 0.5rem;
+    font-size: 16px !important;
+    line-height: 24px !important;
+}
+
+/* ---------------------------------------------Horizontal Card------------------------------------ */
+a.event__horizontal-card:last-child .event__horizontal-card--element {
+    border-bottom: 0;
+}
+
+.event__horizontal-card--element {
+    display: grid;
+    grid-template-columns: 1fr;
+    margin-bottom: 2rem;
+    position: relative;
+    border-bottom: 1px solid #dadce0;
+    padding-bottom: 2rem;
+}
+
+.event__horizontal-card--lock {
+    display: block;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+.event__horizontal-card--image {
+    position: relative;
+    height: 20rem;
+}
+
+.event__horizontal-card--image img {
+    border-radius: 1rem;
+    height: 100%;
+    width: 100%;
+}
+
+.event__horizontal-card--content {
+    position: relative;
+    margin-top: 2rem;
+}
+
+.event__horizontal-card--category {
+    display: none;
+    padding: 0.5rem 0.8rem;
+    border-radius: 2rem;
+    margin: 0 1rem;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    border: 1px solid #81899a;
+}
+
+.event__horizontal-card--title {
+    margin: 1rem;
+    font-size: 1.6rem;
+    font-weight: 500;
+}
+
+.event__horizontal-card--tagline {
+    margin: 1rem;
+    font-size: 1.4rem;
+    color: #424556;
+}
+
+.event__horizontal-card--tags {
+    margin: 1rem;
+    color: #9fa6ce;
+    font-size: 1.4rem;
+}
+
+.event__horizontal-card--tags li{
+    display: inline-block;
+}
+
+.event__horizontal-card--tags span {
+    padding: 0 0.5rem;
+}
+
+.event__horizontal-card--price {
+    margin: 1rem 1rem 0 1rem;
+    font-size: 1.8rem;
+    font-weight: 800;
+    position: relative;
+}
+
+@media (min-width: 768px) {
+    .event__horizontal-card--content {
+        margin: 0;
+    }
+}
+
+/* ---------------------------------------------Desktop------------------------------------ */
+
+@media (min-width: 768px) {
+    .event-search {
+        padding-top: 7rem;
+        min-height: calc(100vh - 7rem);
+    }
+
+    .event__results--title {
+        padding: 1rem 0 3rem 0;
+        text-align: left;
+    }
+
+    .event__horizontal-card--element {
+        grid-template-columns: 29rem auto;
+    }
+
+    .event__horizontal-card--category {
+        display: inline-block;
+    }
+
+    .event__horizontal-card--price {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        text-align: right;
+    }
+}
+

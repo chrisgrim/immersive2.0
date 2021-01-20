@@ -13,8 +13,11 @@
             <item>
                 <title><![CDATA[{{ $event->name }}]]></title>
                 <link>{{Request::root()}}/events/{{ $event->slug }}</link>
-                <description><![CDATA[{!! $event->description !!}]]></description>
+                @foreach($event->shows as $show)
+                    <dates>{{$show->date}}</dates>
+                @endforeach
                 <category>{{ $event->category->name }}</category>
+                <description><![CDATA[{!! $event->description !!}]]></description>
                 <author><![CDATA[{{ $event->organizer->name  }}]]></author>
                 <guid>{{ $event->id }}</guid>
                 <pubDate>{{ $event->created_at->toRssString() }}</pubDate>

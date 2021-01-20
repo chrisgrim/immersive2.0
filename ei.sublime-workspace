@@ -523,24 +523,24 @@
 			"file": "routes/web.php",
 			"settings":
 			{
-				"buffer_size": 8275,
+				"buffer_size": 8305,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "routes/auth.php",
+			"file": "resources/views/rss/feed.blade.php",
 			"settings":
 			{
-				"buffer_size": 2675,
+				"buffer_size": 1045,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "webpack.mix.js",
+			"file": "app/Http/Controllers/Auth/PasswordResetLinkController.php",
 			"settings":
 			{
-				"buffer_size": 1141,
+				"buffer_size": 1394,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -670,22 +670,33 @@
 	"expanded_folders":
 	[
 		"/Users/chrisgrim/code/ei",
-		"/Users/chrisgrim/code/ei/app",
-		"/Users/chrisgrim/code/ei/app/Http",
-		"/Users/chrisgrim/code/ei/app/Http/Controllers",
 		"/Users/chrisgrim/code/ei/resources",
 		"/Users/chrisgrim/code/ei/resources/js",
-		"/Users/chrisgrim/code/ei/routes"
+		"/Users/chrisgrim/code/ei/resources/js/pages",
+		"/Users/chrisgrim/code/ei/resources/views",
+		"/Users/chrisgrim/code/ei/resources/views/rss"
 	],
 	"file_history":
 	[
+		"/Users/chrisgrim/code/ei/resources/js/pages/layouts/register.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/layouts/forgotPassword.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/layouts/login-pop.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/create/tickets.vue",
+		"/Users/chrisgrim/code/ei/resources/js/app.js",
+		"/Users/chrisgrim/code/ei/webpack.mix.js",
+		"/Users/chrisgrim/code/ei/routes/auth.php",
+		"/Users/chrisgrim/code/ei/app/Http/Controllers/Auth/NewPasswordController.php",
+		"/Users/chrisgrim/code/ei/resources/views/auth/register.blade.php",
+		"/Users/chrisgrim/code/ei/app/Http/Kernel.php",
+		"/Users/chrisgrim/code/ei/app/Http/Controllers/Auth/RegisteredUserController.php",
+		"/Users/chrisgrim/code/ei/app/Http/Controllers/Auth/AuthenticatedSessionController.php",
+		"/Users/chrisgrim/code/ei/resources/views/auth/login.blade.php",
+		"/Users/chrisgrim/code/ei/app/Providers/AuthServiceProvider.php",
+		"/Users/chrisgrim/code/ei/vendor/laravel/framework/src/Illuminate/Auth/AuthServiceProvider.php",
+		"/Users/chrisgrim/code/ei/vendor/laravel/breeze/stubs/routes/web.php",
 		"/Users/chrisgrim/code/ei/config/services.php",
 		"/Users/chrisgrim/code/ei/resources/js/pages/events/show/event-show-ratings.vue",
-		"/Users/chrisgrim/code/ei/app/Http/Controllers/Auth/RegisteredUserController.php",
-		"/Users/chrisgrim/code/ei/resources/js/app.js",
 		"/Users/chrisgrim/code/ei/app/Models/User.php",
-		"/Users/chrisgrim/code/ei/webpack.mix.js",
-		"/Users/chrisgrim/code/ei/app/Http/Kernel.php",
 		"/Users/chrisgrim/code/ei/app/Providers/RouteServiceProvider.php",
 		"/Users/chrisgrim/code/ei/composer.lock",
 		"/Users/chrisgrim/code/ei/package.json",
@@ -794,19 +805,7 @@
 		"/Users/chrisgrim/code/ei2/app/Http/Controllers/Create/EventController.php",
 		"/Users/chrisgrim/code/ei2/resources/js/pages/events/event-search.vue",
 		"/Users/chrisgrim/code/ei2/resources/js/pages/events/components/event-edit-item.vue",
-		"/Users/chrisgrim/code/ei2/resources/js/pages/create/advisories.vue",
-		"/Users/chrisgrim/code/ei2/resources/sass/create/organizer.scss",
-		"/Users/chrisgrim/code/ei2/resources/sass/components/tab.scss",
-		"/Users/chrisgrim/code/ei2/resources/js/pages/create/description.vue",
-		"/Users/chrisgrim/code/ei2/resources/js/pages/create/category.vue",
-		"/Users/chrisgrim/code/ei2/resources/js/pages/create/image.vue",
-		"/Users/chrisgrim/code/ei2/resources/js/pages/create/shows.vue",
-		"/Users/chrisgrim/code/ei2/resources/js/pages/create/tickets.vue",
-		"/Users/chrisgrim/code/ei2/resources/js/pages/create/components/vue-limited-run.vue",
-		"/Users/chrisgrim/code/ei2/resources/sass/create/category.scss",
-		"/Users/chrisgrim/code/ei2/resources/js/pages/events/event-edit.vue",
-		"/Users/chrisgrim/code/ei2/resources/views/events/edit.blade.php",
-		"/Users/chrisgrim/code/ei2/resources/js/pages/messages/components/modmessage-index-tab.vue"
+		"/Users/chrisgrim/code/ei2/resources/js/pages/create/advisories.vue"
 	],
 	"find":
 	{
@@ -876,6 +875,12 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"Alerts",
+			"alerts",
+			"Alerts",
+			"alerts",
+			"vue",
+			"money",
 			"login",
 			"profile",
 			"profilke",
@@ -997,13 +1002,7 @@
 			"onVerify",
 			"grav",
 			"RegisteredUserController",
-			"/register",
-			"DBUpdate",
-			"EventController",
-			"guestRate",
-			"user",
-			"onSubmit",
-			"important"
+			"/register"
 		],
 		"highlight": false,
 		"in_selection": false,
@@ -1030,15 +1029,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 8275,
+						"buffer_size": 8305,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								87,
-								87
+								7913,
+								7913
 							]
 						],
 						"settings":
@@ -1057,19 +1056,50 @@
 				},
 				{
 					"buffer": 1,
-					"file": "routes/auth.php",
+					"file": "resources/views/rss/feed.blade.php",
 					"semi_transient": true,
 					"settings":
 					{
-						"buffer_size": 2675,
+						"buffer_size": 1045,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								68,
-								7
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Laravel Blade Highlighter/blade.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "app/Http/Controllers/Auth/PasswordResetLinkController.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1394,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1140,
+								1140
 							]
 						],
 						"settings":
@@ -1081,37 +1111,6 @@
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "webpack.mix.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1141,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								892,
-								892
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 85.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
@@ -1185,6 +1184,18 @@
 		"selected_items":
 		[
 			[
+				"authser",
+				"app/Providers/AuthServiceProvider.php"
+			],
+			[
+				"authse",
+				"app/Providers/AuthServiceProvider.php"
+			],
+			[
+				"web.php",
+				"vendor/laravel/breeze/stubs/routes/web.php"
+			],
+			[
 				"service",
 				"config/services.php"
 			],
@@ -1238,10 +1249,6 @@
 			],
 			[
 				"auth se",
-				"app/Providers/AuthServiceProvider.php"
-			],
-			[
-				"authse",
 				"app/Providers/AuthServiceProvider.php"
 			],
 			[
@@ -1439,10 +1446,6 @@
 			[
 				"config/a",
 				"config/app.php"
-			],
-			[
-				"authser",
-				"app/Providers/AuthServiceProvider.php"
 			],
 			[
 				"config/",

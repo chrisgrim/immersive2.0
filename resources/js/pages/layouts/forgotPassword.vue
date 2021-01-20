@@ -22,10 +22,6 @@
 <script>
     export default {
 
-        props: {
-            message: { type:String },
-        },
-
         computed: {
 
         },

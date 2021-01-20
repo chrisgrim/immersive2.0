@@ -240,8 +240,8 @@
                 fieldType: 'password',
                 active: '',
                 serverErrors: [],
-                alerts: [],
-                disabled:false,
+                alerts: false,
+                disabled: false,
                 isLogin: this.page === 'register' ? false : true,
             }
         },
@@ -271,12 +271,8 @@
                 if (!this.user.email) { return false }
                 this.disabled = true;
                 await axios.post('/forgot-password', {email:this.user.email})
-                .then(res => {
-                    this.alerts = res.data;
-                })
-                .catch(err => {
-                    this.onErrors(err);
-                });
+                .then( res => { this.alerts = res.data })
+                .catch( err => { this.onErrors(err) });
             },
 
             closeWindow() {
@@ -286,7 +282,7 @@
 
             hideAlerts() {
                 this.disabled = false;
-                this.alerts = [];
+                this.alerts = false;
             },
 
             togglePasswordVisible() {

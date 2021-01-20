@@ -167,6 +167,23 @@ a.menu-link {
     transition: all 0.2s ease-in-out;
 }
 
+.menu-link button {
+    border: 0;
+    font-size: 1.35rem;
+    color: #484848;
+    font-weight: 500;
+    padding: 0;
+    background: 0;
+}
+
+.nav.fixed .menu-link button {
+    color:white;
+}
+
+.nav.absolute .menu-link button {
+    color: white;
+}
+
 .nav.fixed a.menu-link {
     color: white;
 }

@@ -11,6 +11,7 @@ class RssFeedController extends Controller
     {
         $events = Event::where('status', 'p')
         ->orderBy('created_at', 'desc')
+        ->with('shows')
         ->limit(50)
         ->get();
         return response()->view('rss.feed', compact('events'))->header('Content-Type', 'application/xml');

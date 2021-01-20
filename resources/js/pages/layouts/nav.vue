@@ -79,15 +79,15 @@
                             <div class="nav-menu-item">
                                 <a 
                                     class="menu-link" 
-                                    href="/register">
-                                    <div>Register</div>
+                                    @click="onSubmit('register')">
+                                    <button>Register</button>
                                 </a>
                             </div>
                             <div class="nav-menu-item">
                                 <a 
                                     class="menu-link" 
-                                    href="/login">
-                                    <div>Login</div>
+                                    @click="onSubmit('login')">
+                                    <button>Login</button>
                                 </a>
                             </div>
                         </template>
@@ -366,11 +366,17 @@
             </div>
         </nav>
         <nav v-else />
+        <div v-if="login">
+            <vueLogin 
+                @close="login = false"
+                :page="loginType"/>
+        </div>
     </div>
 </template>
 
 <script>
 
+    import vueLogin from './login-pop'
     import vueProfileButton from './profile-button.vue'
     import vueNavSearch from './nav-search.vue'
 
@@ -378,7 +384,7 @@
 
         props:['user', 'navtype'],
 
-        components: { vueProfileButton, vueNavSearch },
+        components: { vueProfileButton, vueNavSearch, vueLogin },
 
         computed: {
             fullmap() {
@@ -413,10 +419,17 @@
                 lastScrollPosition: 0,
                 mobileDevice: false,
                 page: this.navtype,
+                login: false,
+                loginType: 'register'
 			};
 		},
 
 		methods: {
+
+            onSubmit(value) {
+                this.loginType = value;
+                this.login = true;
+            },
 
             handleScroll () {
                 const currentScrollPosition = window.pageYOffset || document.documentElement.scrollTop;

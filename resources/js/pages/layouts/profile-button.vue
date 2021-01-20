@@ -76,13 +76,11 @@
 			};
 		},
 
-
 		methods: {
-			logout(){
-				axios.post('/logout').
-					then(res => {
-                        window.location.href = '/';
-					});
+			async logout(){
+				await axios.post('/logout');
+                location.reload();
+					
             }, 
 
             toggle() {

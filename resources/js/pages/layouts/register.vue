@@ -218,8 +218,7 @@
         </div>
         <PasswordForget 
             @close="hideAlerts" 
-            v-if="alerts.message" 
-            :message="alerts.message" />
+            v-if="alerts" />
     </div>
 </template>
 
@@ -262,7 +261,7 @@
                 pageHeight:0,
                 active: '',
                 serverErrors: [],
-                alerts: [],
+                alerts: false,
                 disabled: false,
                 isLogin: location.pathname == '/login' ? true : false,
                 createEvent: new URL(window.location.href).searchParams.get("create"),
@@ -293,12 +292,8 @@
                 if (!this.user.email) { return false }
                 this.disabled = true;
                 await axios.post('/forgot-password', {email:this.user.email})
-                .then(res => {
-                    this.alerts = res.data;
-                })
-                .catch(err => {
-                    this.onErrors(err);
-                });
+                .then( res => { this.alerts = res.data })
+                .catch( err => { this.onErrors(err) });
             },
 
             onToggle(arr) {
@@ -309,7 +304,7 @@
 
             hideAlerts() {
                 this.disabled = false;
-                this.alerts = [];
+                this.alerts = false;
             },
 
             handleResize() {

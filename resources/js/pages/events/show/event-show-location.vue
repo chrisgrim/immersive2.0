@@ -34,7 +34,13 @@
                                 :center="center" 
                                 :options="{ scrollWheelZoom: false, zoomControl: true }">
                                 <l-tile-layer :url="url" />
-                                <l-marker :lat-lng="center" />
+                                <l-marker :lat-lng="center">
+                                    <l-icon
+                                        :iconSize="[25, 40]"
+                                        :iconAnchor="[0,40]">
+                                        <img src="/images/vendor/leaflet/dist/marker-icon-2x.png" alt="">
+                                    </l-icon>
+                                </l-marker>
                             </l-map>
                         </div>  
                     </template>
@@ -67,12 +73,12 @@
 </template>
 
 <script>
-    import {LMap, LTileLayer, LMarker, LPopup} from 'vue2-leaflet'
+    import {LMap, LTileLayer, LMarker, LPopup, LIcon} from 'vue2-leaflet'
     export default {
 
         props: [ 'event' ],
 
-        components: { LMap, LTileLayer, LMarker, LPopup },
+        components: { LMap, LTileLayer, LMarker, LPopup, LIcon },
 
         data() {
             return {

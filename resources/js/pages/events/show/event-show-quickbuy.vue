@@ -156,7 +156,8 @@
 
         <div class="es__ticket--buy">
             <a 
-                :href="eventUrl" 
+                :href="eventUrl"
+                @click="storeClick"
                 rel="noreferrer noopener" 
                 target="_blank">
                 <button 
@@ -210,6 +211,10 @@
             showDates() {
                 this.ticketsVisible = false;
                 this.datesVisible =! this.datesVisible;
+            },
+
+            storeClick() {
+                axios.post('/track/event/click', {event: this.event.id});
             },
 
             initializeCalendarObject() { 

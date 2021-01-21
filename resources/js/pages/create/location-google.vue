@@ -151,7 +151,13 @@
                             :center="map.center" 
                             :options="{ scrollWheelZoom: false, zoomControl: true }">
                             <l-tile-layer :url="map.url" />
-                            <l-marker :lat-lng="map.center" />
+                            <l-marker :lat-lng="map.center">
+                                <l-icon
+                                    :iconSize="[25, 40]"
+                                    :iconAnchor="[0,40]">
+                                    <img src="/images/vendor/leaflet/dist/marker-icon-2x.png" alt="">
+                                </l-icon>
+                            </l-marker>
                         </l-map>
                     </div>  
                 </div>
@@ -176,7 +182,7 @@
     import googleLocationMixin from './components/google-location-mixin'
     import formValidationMixin from '../../mixins/form-validation-mixin'
     import { maxLength } from 'vuelidate/lib/validators'
-    import {LMap, LTileLayer, LMarker} from 'vue2-leaflet'
+    import {LMap, LTileLayer, LMarker, LIcon } from 'vue2-leaflet'
     import _ from 'lodash'
     import Submit  from './components/submit-buttons.vue'
 
@@ -185,7 +191,7 @@
 
         mixins: [ googleLocationMixin, formValidationMixin ],
 
-        components: { LMap, LTileLayer, LMarker, CubeSpinner, Submit },
+        components: { LMap, LTileLayer, LMarker, CubeSpinner, Submit, LIcon },
 
         computed: {
             locationPlaceholder() {

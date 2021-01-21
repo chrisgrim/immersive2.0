@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"log",
+				"login"
+			],
+			[
+				"login",
+				"loginType"
+			],
+			[
 				"set",
 				"setRatingCookie"
 			],
@@ -506,14 +514,6 @@
 			[
 				"locat",
 				"locationEvents"
-			],
-			[
-				"pric",
-				"priceOptions"
-			],
-			[
-				"hide",
-				"hideMenu"
 			]
 		]
 	},
@@ -529,18 +529,19 @@
 			}
 		},
 		{
-			"file": "resources/views/rss/feed.blade.php",
+			"file": "resources/js/app.js",
 			"settings":
 			{
-				"buffer_size": 1045,
+				"buffer_size": 10861,
+				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "app/Http/Controllers/Auth/PasswordResetLinkController.php",
+			"file": "resources/sass/app-lite.scss",
 			"settings":
 			{
-				"buffer_size": 1394,
+				"buffer_size": 659,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -670,20 +671,42 @@
 	"expanded_folders":
 	[
 		"/Users/chrisgrim/code/ei",
+		"/Users/chrisgrim/code/ei/app",
+		"/Users/chrisgrim/code/ei/app/Http",
 		"/Users/chrisgrim/code/ei/resources",
 		"/Users/chrisgrim/code/ei/resources/js",
 		"/Users/chrisgrim/code/ei/resources/js/pages",
+		"/Users/chrisgrim/code/ei/resources/js/pages/create",
+		"/Users/chrisgrim/code/ei/resources/js/pages/events",
+		"/Users/chrisgrim/code/ei/resources/js/pages/events/show",
+		"/Users/chrisgrim/code/ei/resources/sass",
+		"/Users/chrisgrim/code/ei/resources/sass/nav",
 		"/Users/chrisgrim/code/ei/resources/views",
 		"/Users/chrisgrim/code/ei/resources/views/rss"
 	],
 	"file_history":
 	[
+		"/Users/chrisgrim/code/ei/config/logging.php",
+		"/Users/chrisgrim/code/ei/resources/js/pages/create/location-google.vue",
+		"/Users/chrisgrim/code/ei/config/scout.php",
+		"/Users/chrisgrim/code/ei/resources/js/app.js",
+		"/Users/chrisgrim/code/ei/resources/sass/components/leaflet.scss",
+		"/Users/chrisgrim/code/ei/resources/js/pages/create/review-event-old.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/events/event-show-old.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/events/show/event-show-location.vue",
+		"/Users/chrisgrim/code/ei/webpack.mix.js",
+		"/Users/chrisgrim/code/ei/resources/js/pages/layouts/login-pop.vue",
+		"/Users/chrisgrim/code/ei/resources/sass/app-lite.scss",
+		"/Users/chrisgrim/code/ei/app/Http/Controllers/RssFeedController.php",
+		"/Users/chrisgrim/code/ei/resources/views/rss/feed.blade.php",
+		"/Users/chrisgrim/code/ei/resources/js/pages/layouts/profile-button.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/layouts/nav.vue",
+		"/Users/chrisgrim/code/ei/resources/sass/nav/navbar.scss",
+		"/Users/chrisgrim/code/ei/app/Http/Controllers/Auth/PasswordResetLinkController.php",
+		"/Users/chrisgrim/code/ei/.env",
 		"/Users/chrisgrim/code/ei/resources/js/pages/layouts/register.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/layouts/forgotPassword.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/layouts/login-pop.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/create/tickets.vue",
-		"/Users/chrisgrim/code/ei/resources/js/app.js",
-		"/Users/chrisgrim/code/ei/webpack.mix.js",
 		"/Users/chrisgrim/code/ei/routes/auth.php",
 		"/Users/chrisgrim/code/ei/app/Http/Controllers/Auth/NewPasswordController.php",
 		"/Users/chrisgrim/code/ei/resources/views/auth/register.blade.php",
@@ -701,7 +724,6 @@
 		"/Users/chrisgrim/code/ei/composer.lock",
 		"/Users/chrisgrim/code/ei/package.json",
 		"/Users/chrisgrim/code/ei/resources/js/pages/create/datepicker.vue",
-		"/Users/chrisgrim/code/ei/.env",
 		"/Users/chrisgrim/code/ei2/app/View/Components/GuestLayout.php",
 		"/Users/chrisgrim/code/ei2/app/Http/Controllers/Auth/ResetPasswordController.php",
 		"/Users/chrisgrim/code/ei2/app/Http/Controllers/RssFeedController.php",
@@ -791,21 +813,7 @@
 		"/Users/chrisgrim/code/ei2/resources/js/pages/adminArea/admin-stats.vue",
 		"/Users/chrisgrim/code/ei2/app/Http/Controllers/Search/SearchDataController.php",
 		"/Users/chrisgrim/code/ei2/app/Http/Controllers/Auth/VerificationController.php",
-		"/Users/chrisgrim/code/ei2/resources/js/pages/layouts/email-verified.vue",
-		"/Users/chrisgrim/code/ei2/resources/js/mixins/form-validation-mixin.js",
-		"/Users/chrisgrim/code/ei2/sftp-config-alt.json",
-		"/Users/chrisgrim/code/ei2/resources/js/pages/create/title.vue",
-		"/Users/chrisgrim/code/ei2/resources/js/pages/create/location-google.vue",
-		"/Users/chrisgrim/code/ei2/resources/sass/create/advisories.scss",
-		"/Users/chrisgrim/code/ei2/resources/sass/create/description.scss",
-		"/Users/chrisgrim/code/ei2/resources/sass/create/location.scss",
-		"/Users/chrisgrim/code/ei2/resources/sass/create/shows.scss",
-		"/Users/chrisgrim/code/ei2/resources/sass/create/title.scss",
-		"/Users/chrisgrim/code/ei2/app/Http/Controllers/Create/OrganizerController.php",
-		"/Users/chrisgrim/code/ei2/app/Http/Controllers/Create/EventController.php",
-		"/Users/chrisgrim/code/ei2/resources/js/pages/events/event-search.vue",
-		"/Users/chrisgrim/code/ei2/resources/js/pages/events/components/event-edit-item.vue",
-		"/Users/chrisgrim/code/ei2/resources/js/pages/create/advisories.vue"
+		"/Users/chrisgrim/code/ei2/resources/js/pages/layouts/email-verified.vue"
 	],
 	"find":
 	{
@@ -816,6 +824,7 @@
 		"height": 164.0,
 		"where_history":
 		[
+			"/Users/chrisgrim/code/ei/resources/sass",
 			"/Users/chrisgrim/code/ei",
 			"/Users/chrisgrim/code/ei2",
 			"/Users/chrisgrim/code/ei2/app",
@@ -875,6 +884,20 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"-old",
+			"log",
+			"30",
+			"leaflet-marker-icon",
+			"version",
+			"format",
+			"Format",
+			"format",
+			"date",
+			"dart",
+			"platform",
+			"div",
+			"submit",
+			"page",
 			"Alerts",
 			"alerts",
 			"Alerts",
@@ -988,21 +1011,7 @@
 			"user-profile-noimage__text",
 			"div",
 			"organizer",
-			"organizer-card__image",
-			"this",
-			"organizer",
-			"h2",
-			"loginresponse",
-			"LoginResponse",
-			"appendData",
-			"onFinishOrganizer",
-			"/login",
-			"onVerify",
-			"login",
-			"onVerify",
-			"grav",
-			"RegisteredUserController",
-			"/register"
+			"organizer-card__image"
 		],
 		"highlight": false,
 		"in_selection": false,
@@ -1020,7 +1029,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -1036,8 +1045,8 @@
 						"selection":
 						[
 							[
-								7913,
-								7913
+								7613,
+								7613
 							]
 						],
 						"settings":
@@ -1048,27 +1057,58 @@
 							"syntax": "Packages/PHP/PHP.sublime-syntax"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 2811.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "resources/js/app.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 10861,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								8467,
+								8467
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+						},
+						"translation.x": 29.0,
+						"translation.y": 2486.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 1,
-					"file": "resources/views/rss/feed.blade.php",
-					"semi_transient": true,
+					"buffer": 2,
+					"file": "resources/sass/app-lite.scss",
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1045,
+						"buffer_size": 659,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								117,
+								117
 							]
 						],
 						"settings":
@@ -1076,44 +1116,13 @@
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
-							"syntax": "Packages/Laravel Blade Highlighter/blade.sublime-syntax"
+							"syntax": "Packages/CSS/CSS.sublime-syntax"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "app/Http/Controllers/Auth/PasswordResetLinkController.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1394,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1140,
-								1140
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/PHP/PHP.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
 					"type": "text"
 				}
 			]

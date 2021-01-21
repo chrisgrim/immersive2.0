@@ -196,8 +196,7 @@
         </div>
         <PasswordForget 
             @close="hideAlerts" 
-            v-if="alerts.message" 
-            :message="alerts.message" />
+            v-if="alerts" />
     </div>
 </template>
 <script>
@@ -271,7 +270,9 @@
                 if (!this.user.email) { return false }
                 this.disabled = true;
                 await axios.post('/forgot-password', {email:this.user.email})
-                .then( res => { this.alerts = res.data })
+                .then( res => { 
+                    console.log(res.data);
+                    this.alerts = res.data })
                 .catch( err => { this.onErrors(err) });
             },
 

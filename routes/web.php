@@ -142,6 +142,8 @@ Route::GET('/create/{event}/review', 'Create\EventController@review');
 Route::GET('/create/{event}/submit', 'Create\EventController@submit');
 Route::GET('/create/{event}/thankyou', 'Create\EventController@completed');
 
+//Data Mining
+Route::POST('track/event/click', 'Data\UserBehaviorController@trackClicks');
 
 //Website Info
 Route::GET('/privacy-policy', 'LegalController@privacy');

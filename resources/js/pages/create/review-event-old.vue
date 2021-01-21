@@ -398,55 +398,62 @@
         </section>
 
         <!-- Location -->
-        <section id="location" v-if="event.hasLocation" class="section event-show location">
+        <section 
+            id="location" 
+            v-if="event.hasLocation" 
+            class="section event-show location">
             <div>
                 <div class="event-title">
                     <h2>Location</h2>
                 </div>
-                <div class="text" v-if="event.location.hiddenLocationToggle">
-                    <a rel="noreferrer" target="_blank" :href="`http://maps.google.com/maps?q=${event.location.city},+${event.location.region}`">
-                        <b><p v-if="event.location.venue">{{event.location.venue}}</p></b>
-                        <p><span v-if="event.location.city">{{event.location.city}},</span> <span v-if="event.location.region">{{event.location.region}}</span></p>
+                <div 
+                    class="text" 
+                    v-if="event.location.hiddenLocationToggle">
+                    <a 
+                        rel="noreferrer" 
+                        target="_blank" 
+                        :href="`http://maps.google.com/maps?q=${event.location.city},+${event.location.region}`">
+                        <b><p v-if="event.location.venue"> {{ event.location.venue }} </p></b>
+                        <p><span v-if="event.location.city"> {{ event.location.city }},</span> <span v-if="event.location.region"> {{ event.location.region }} </span></p>
                         <br>
-                        <p>{{event.location.hiddenLocation}}</p>
+                        <p> {{ event.location.hiddenLocation }} </p>
                     </a>
                 </div>
-                <div class="text" v-else="event.location.hiddenLocationToggle">
-                    <a rel="noreferrer" target="_blank" :href="`http://maps.google.com/maps?q=${event.location.home}+${event.location.street},+${event.location.city},+${event.location.region}`">
-                        <b><p v-if="event.location.venue">{{event.location.venue}}</p></b>
-                        <p>{{locationPlaceholder}}</p>  
+                <div 
+                    class="text" 
+                    v-else>
+                    <a 
+                        rel="noreferrer" 
+                        target="_blank" 
+                        :href="`http://maps.google.com/maps?q=${event.location.home}+${event.location.street},+${event.location.city},+${event.location.region}`">
+                        <b><p v-if="event.location.venue"> {{ event.location.venue }} </p></b>
+                        <p>
+                            <span v-if="event.location.home"> {{ event.location.home }} </span> 
+                            <span v-if="event.location.street"> {{ event.location.street }} </span> 
+                        </p>
+                        <p>
+                            <span v-if="event.location.city"> {{ event.location.city }}</span> 
+                            <span v-if="event.location.region">{{ event.location.region }}</span>
+                            <span v-if="event.location.country">{{ event.location.country }}</span>
+                            <span v-if="event.location.postal_code">{{ event.location.postal_code }}</span>
+                        </p>  
                     </a>
                 </div>
                 <div class="event-show-map">
                     <div v-if="center">
-                        <div class="zoom">
-                            <div class="zoom__in">
-                                <button @click.prevent="zoom += 1">
-                                    <svg viewBox="0 0 16 16" height="16" width="16" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M7 1a1 1 0 0 1 2 0v14a1 1 0 1 1-2 0V1z"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M0 8a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H1a1 1 0 0 1-1-1z"></path></svg>
-                                </button>
-                            </div>
-                            <div class="zoom__out">
-                                <button @click.prevent="zoom -= 1">
-                                    <svg viewBox="0 0 16 16" height="16" width="16" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M0 8a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H1a1 1 0 0 1-1-1z"></path></svg>
-                                </button>
-                            </div>
-                        </div>
                         <div style="width:100%;height:400px">
-                            <l-map :zoom="zoom" :center="center" :options="{ scrollWheelZoom: allowZoom, zoomControl: allowZoom }">
-                            <l-tile-layer :url="url"></l-tile-layer>
-                            <l-marker :lat-lng="center">
-                                <l-popup>
-                                    <div class="show-pop">
-                                        <a rel="noreferrer" target="_blank" :href="`http://maps.google.com/maps?q=${event.location.home}+${event.location.street},+${event.location.city},+${event.location.region}`">
-                                            <div class="info">
-                                                <div class="name">
-                                                    {{locationPlaceholder}} 
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </l-popup>                        
-                            </l-marker>
+                            <l-map 
+                                :zoom="zoom" 
+                                :center="center" 
+                                :options="{ scrollWheelZoom: false, zoomControl: true }">
+                                <l-tile-layer :url="url" />
+                                <l-marker :lat-lng="center">
+                                    <l-icon
+                                        :iconSize="[25, 40]"
+                                        :iconAnchor="[0,40]">
+                                        <img src="/images/vendor/leaflet/dist/marker-icon-2x.png" alt="">
+                                    </l-icon>
+                                </l-marker>
                             </l-map>
                         </div>  
                     </div>
@@ -487,7 +494,6 @@
 <script>
     import formValidationMixin from '../../mixins/form-validation-mixin'
     import {LMap, LTileLayer, LMarker, LPopup, LIcon} from 'vue2-leaflet'
-    import format from 'date-fns/format'
     import ContactOrganizer from '../organizers/contact-organizer.vue'
     import flatPickr from 'vue-flatpickr-component'
      import LoadMore  from '../../components/LoadMore.js'

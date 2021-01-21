@@ -13,9 +13,20 @@
             <item>
                 <title><![CDATA[{{ $event->name }}]]></title>
                 <link>{{Request::root()}}/events/{{ $event->slug }}</link>
-                @foreach($event->shows as $show)
-                    <dates>{{$show->date}}</dates>
-                @endforeach
+                <dates>
+                    @foreach($event->shows as $show)
+                        {{ $loop->first ? '' : ',' }}
+                        {{ date('M d Y', strtotime($show->date)) }}
+                    @endforeach
+                </dates>
+                <platform>
+                    @foreach($event->remotelocations as $platform)
+                        {{ $loop->first ? '' : ',' }}
+                        {{ $platform->name }}
+                    @endforeach
+                </platform>
+                <price>{{ $event->price_range }}</price>
+                <age>{{ $event->age_limits->name }}</age>
                 <category>{{ $event->category->name }}</category>
                 <description><![CDATA[{!! $event->description !!}]]></description>
                 <author><![CDATA[{{ $event->organizer->name  }}]]></author>

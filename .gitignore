@@ -14,4 +14,6 @@ npm-debug.log
 yarn-error.log
 /storage/debugbar
 /storage/logs
+sftp-config.json
+sftp-config-alt.json
 

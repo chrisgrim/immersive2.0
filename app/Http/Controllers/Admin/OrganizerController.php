@@ -35,7 +35,7 @@ class OrganizerController extends Controller
      */
     public function fetch(Request $request)
     {
-        return Organizer::with('user')->paginate(30);
+        return Organizer::with('user', 'users')->paginate(30);
     }
 
     /**
@@ -111,6 +111,18 @@ class OrganizerController extends Controller
     {
         $organizer = $organizer->load('user');
         return view('adminArea.showorgapproval',compact('organizer'));
+    }
+
+    /**
+     * Add a team member to the organization
+     *
+     * @param  \App\Organizer  $organizer
+     * @return \Illuminate\Http\Response
+     */
+    public function addTeamMember(Organizer $organizer, Request $request)
+    {
+        $ids = collect($request)->pluck('id');
+        $organizer->users()->sync($ids, ['role' => 'moderator']);
     }
 
      /**

@@ -99,6 +99,39 @@ class Organizer extends Model
     }
 
     /**
+     * The Organizer belongs to one user
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\belongsTo
+     */
+    public function owner() 
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    /**
+     * Get all of the users that belong to the team.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function users()
+    {
+        return $this->belongsToMany(User::class)
+                        ->withPivot('role')
+                        ->withTimestamps()
+                        ->as('membership');
+    }
+
+    /**
+     * Get all of the team's users including its owner.
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public function allUsers()
+    {
+        return $this->users->merge([$this->owner]);
+    }
+
+    /**
     * Assign the current user a color
     *
     * @return string
@@ -157,7 +190,7 @@ class Organizer extends Model
     */
     public static function getOrganizerEvents()
     {
-        $organizers = auth()->user()->organizers()->get();
+        $organizers = auth()->user()->allOrganizers();
 
         foreach ($organizers as $organizer) {
             $organizer->setRelation('pastEvents', $organizer->pastEvents()->paginate(7));

@@ -14,34 +14,54 @@
                 @keyup="onSearchOrganizers(organizer)"
                 type="text">
         </div>
-        <div v-if="organizers && organizers.length">
-            <div 
-                class="list"
-                v-for="(org) in organizers"
-                :key="org.id">
-                <div class="edit">
-                    <a :href="`/organizer/${org.slug}/edit`">
-                        <button class="default">Edit Organizer</button>
-                    </a>
+        <template v-if="organizers && organizers.length">
+            <div class="data-grid">
+                <div class="data-grid__row header">
+                    <p></p>
+                    <p>Organization</p>
+                    <p>Owner</p>
+                    <p>Members</p>
+                    <p></p>
                 </div>
-                <div>
-                    {{ org.name }}
-                </div>
-                <div>
-                    {{ org.user.email }}
-                </div>
-                <div>
-                    <button @click.prevent="showModal(org, 'changeOrg')">
-                        Change Owner
+                <div 
+                    class="data-grid__row"
+                    v-for="(org) in organizers"
+                    :key="org.id">
+                    <div class="edit">
+                        <a :href="`/organizer/${org.slug}/edit`">
+                            <IconSvg type="edit" />
+                        </a>
+                    </div>
+                    <div>
+                        <img :src="`/storage/${org.thumbImagePath}`">
+                        <p>{{ org.name }}</p>
+                    </div>
+                    <div>
+                        <button 
+                            class="noBox" 
+                            @click.prevent="showModal(org, 'changeOwner')">
+                            <p>{{ org.user.name }}</p>
+                        </button>
+                    </div>
+                    <div>
+                        <v-select 
+                            v-model="org.users"
+                            label="name"
+                            placeholder="Members"
+                            multiple
+                            @search="onSearchUsers"
+                            @input="addNewMember($event, org)"
+                            :clearable="false"
+                            :options="users.length ? users : org.users" />
+                    </div>
+                    <button 
+                        @click.prevent="showModal(org, 'deleteOrg')" 
+                        class="delete">
+                        <IconSvg type="delete" />
                     </button>
                 </div>
-                <button 
-                    @click.prevent="showModal(org, 'deleteOrg')" 
-                    class="delete-circle">
-                    <IconSvg type="delete" />
-                </button>
             </div>
-        </div>
+        </template>
         <VueDeleteModal 
             v-if="modal == 'deleteOrg'"
             :item="selectedModal"
@@ -49,33 +69,14 @@
             body="Deleting this organizer will delete all of the organizers events as well. Please be sure you know what you are doing."
             @close="modal = null"
             @ondelete="onDelete" />
-        <modal 
-            v-if="modal == 'changeOrg'" 
-            @close="modal = null">
-            <div slot="header">
-                <div class="circle sub">
-                    <p>!</p>
-                </div>
-            </div>
-            <div slot="body"> 
-                <h3>Change Organizer Owner</h3>
-                <v-select 
-                    v-model="user"
-                    label="name"
-                    placeholder="Enter User Name"
-                    @search="onSearchUsers"
-                    @search:focus="onSearchUsers"
-                    :clearable="false"
-                    :options="users" />
-            </div>
-            <div slot="footer">
-                <button 
-                    class="btn sub" 
-                    @click="onChangeOwner()">
-                    Change Owner 
-                </button>
-            </div>
-        </modal>
+        <VueDataModal 
+            v-if="modal == 'changeOwner'"
+            @onSubmit="onChangeOwner"
+            @close="modal = null"
+            :item="selectedModal">
+            <h3> Change owner of the organization {{ selectedModal.name }} </h3>
+            <p> Select user below </p>
+        </VueDataModal>
     </div>
 </template>
 
@@ -83,10 +84,11 @@
     
     import IconSvg from '../../components/Svg-icon'
     import VueDeleteModal from '../../components/Vue-Delete-Modal'
+    import VueDataModal from '../../components/Vue-Data-Modal'
 
     export default {
 
-        components: { IconSvg, VueDeleteModal },
+        components: { IconSvg, VueDeleteModal, VueDataModal },
 
         data() {
             return {
@@ -119,9 +121,16 @@
                 .then( res => { this.organizers = res.data.data });
             },
 
-            async onChangeOwner() {
-                await axios.post(`/admin/organizer/${this.selectedModal.slug}/changeUser`, this.user)
+            async onChangeOwner(value) {
+                await axios.post(`/admin/organizer/${this.selectedModal.slug}/changeUser`, value)
                 location.reload()
+            },
+
+            async addNewMember(value, organization) {
+                await axios.post(`/admin/organizer/${organization.slug}/addTeamMember`, value)
+                .then( res => {
+                    console.log(res.data);
+                })
             },
 
             onSearchOrganizers (query) {
@@ -131,7 +140,10 @@
 
             onSearchUsers (query) {
                 axios.get('/api/admin/users/search', { params: { keywords: query } })
-                .then(res => { this.users = res.data.data });
+                .then(  res => { 
+                    this.users = res.data.data 
+                    console.log(res.data.data);
+                });
             },
 
         },

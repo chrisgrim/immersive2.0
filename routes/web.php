@@ -76,6 +76,7 @@ Route::GET('/admin/organizers/{organizer}/finalize', 'Admin\OrganizerController@
 Route::GET('/admin/organizer', 'Admin\OrganizerController@index');
 Route::PATCH('/admin/organizer/{organizer}', 'Admin\OrganizerController@update');
 Route::GET('/admin/organizer/fetch', 'Admin\OrganizerController@fetch');
+Route::POST('/admin/organizer/{organizer}/addTeamMember', 'Admin\OrganizerController@addTeamMember');
 
 
 //Organizer 
@@ -84,6 +85,7 @@ Route::GET('/organizer/{organizer}/events', 'OrganizerController@fetchEvents');
 Route::POST('/organizer/{organizer}/patch', 'OrganizerController@update');
 Route::POST('message/organizer/{organizer}/{user}', 'OrganizerController@message');
 Route::POST('change/organizer/{organizer}/', 'AdminOrganizerController@edit');
+
 
 //User Profile Pages
 Route::RESOURCE('users', 'ProfilesController');

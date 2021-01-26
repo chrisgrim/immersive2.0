@@ -19,6 +19,6 @@ class OrganizerPolicy
      */
     public function update(User $user, Organizer $organizer)
     {
-        return $organizer->user_id == $user->id || $user->type == 'a' || $user->type == 'm';
+        return $user->belongsToOrganization($organizer) || $user->type == 'a' || $user->type == 'm';
     }
 }

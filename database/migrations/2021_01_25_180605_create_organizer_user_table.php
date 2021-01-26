@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class OrganizersUsersTable extends Migration
+class CreateOrganizerUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,14 @@ class OrganizersUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('organizer_user', function(Blueprint $table) {
-            $table->foreignId('user_id');
+        Schema::create('organizer_user', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('organizer_id');
+            $table->foreignId('user_id');
+            $table->string('role')->nullable();
             $table->timestamps();
+
+            $table->unique(['organizer_id', 'user_id']);
         });
     }
 

@@ -97,6 +97,54 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
+     * Get all of the teams the user belongs to.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function teams()
+    {
+        return $this->belongsToMany(Organizer::class)
+                        ->orderBy('created_at', 'DESC')
+                        ->withPivot('role')
+                        ->withTimestamps()
+                        ->as('membership');
+    }
+
+    /**
+     * Get all of the users's organizations including its owner.
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public function allOrganizers()
+    {
+        return $this->organizers->merge($this->teams);
+    }
+
+    /**
+     * Determine if the user owns the given organization.
+     *
+     * @param  mixed  $team
+     * @return bool
+     */
+    public function ownsOrganization($organizer)
+    {
+        return $this->id == $organizer->user_id;
+    }
+
+    /**
+     * Determine if the user belongs to the given organization.
+     *
+     * @param  mixed  $team
+     * @return bool
+     */
+    public function belongsToOrganization($organizer)
+    {
+        return $this->teams->contains(function ($t) use ($organizer) {
+            return $t->id === $organizer->id;
+        }) || $this->ownsOrganization($organizer);
+    }
+
+    /**
      * The User can send many messages
      *
      * @return \Illuminate\Database\Eloquent\Relations\hasMany

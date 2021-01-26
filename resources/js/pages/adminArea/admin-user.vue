@@ -13,39 +13,46 @@
                 @keyup="onSearch(userList)"
                 type="text">
         </div>
-        <div 
-            class="list" 
-            :key="item.id"
-            v-for="(item) in users.data">
-            <input 
-                type="text" 
-                v-model="item.name" 
-                placeholder="User Name"
-                @change="onUpdate(item)">
-            <input 
-                type="text" 
-                v-model="item.email" 
-                placeholder="Email"
-                @change="onUpdate(item)">
-            <select 
-                v-model="item.type" 
-                placeholder="User Type"
-                @change="onUpdate(item)">
-                <option value="a">
-                    Admin
-                </option>
-                <option value="m">
-                    Moderator
-                </option>
-                <option value="g">
-                    Guest
-                </option>
-            </select>
-            <button 
-                @click.prevent="showModal(item, 'delete')" 
-                class="delete-circle">
-                <IconSvg type="delete" />
-            </button>
+        <div class="data-grid">
+            <div class="data-grid__row header">
+                <p>Name</p>
+                <p>Email</p>
+                <p>Status</p>
+            </div>
+            <div 
+                class="data-grid__row" 
+                :key="item.id"
+                v-for="(item) in users.data">
+                <input 
+                    type="text" 
+                    v-model="item.name" 
+                    placeholder="User Name"
+                    @change="onUpdate(item)">
+                <input 
+                    type="text" 
+                    v-model="item.email" 
+                    placeholder="Email"
+                    @change="onUpdate(item)">
+                <select 
+                    v-model="item.type" 
+                    placeholder="User Type"
+                    @change="onUpdate(item)">
+                    <option value="a">
+                        Admin
+                    </option>
+                    <option value="m">
+                        Moderator
+                    </option>
+                    <option value="g">
+                        Guest
+                    </option>
+                </select>
+                <button 
+                    @click.prevent="showModal(item, 'delete')" 
+                    class="delete">
+                    <IconSvg type="delete" />
+                </button>
+            </div>
         </div>
         <pagination 
             :limit="1"
@@ -105,7 +112,9 @@
 
             onSearch(query) {
                 axios.get('/api/admin/users/search', { params: { keywords: query } })
-                .then( res => { this.users = res.data })
+                .then( res => { 
+                    this.users = res.data 
+                })
             },
 
             createList() {

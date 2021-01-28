@@ -219,7 +219,6 @@
 
             initializeCalendarObject() { 
                 return {
-                    maxDate: new Date().fp_incr(180),
                     mode: "multiple",
                     inline: true,
                     showMonths: 2,

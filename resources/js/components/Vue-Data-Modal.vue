@@ -1,30 +1,30 @@
 <template>
-    <div class="delete-box">
-        <div class="delete-box__container">
-            <div class="delete-box__close">
+    <div class="modal-box">
+        <div class="modal-box__container">
+            <div class="modal-box__close">
                 <button @click="onClose">
                     <IconSvg type="delete" />
                 </button>
             </div>
-            <div class="delete-box__body">
+            <div class="modal-box__body">
                 <slot></slot>
             </div>
-            <div class="delete-box__input">
+            <div class="modal-box__input">
                 <v-select 
-                    v-model="user"
+                    v-model="data"
                     label="name"
-                    placeholder="Enter User Name"
-                    @search="onUserSearch"
-                    @search:focus="onUserSearch"
-                    :clearable="false"
-                    :options="users" />
+                    placeholder="Enter Name"
+                    @search="onSearch"
+                    @search:focus="onSearch"
+                    :options="options" />
                 <button 
+                    class="submit" 
                     @click="onSubmit"
                     :disabled='isDisabled'>
                     Submit
                 </button>
             </div>
-            <div class="delete-box__footer">
+            <div class="modal-box__footer">
                 <button @click="onClose">Close</button>
             </div>
         </div>
@@ -36,30 +36,40 @@
     
     export default {
 
-        props: ['item'],
+        props: ['item', 'search'],
 
         components: { IconSvg },
+
+        computed: {
+            endpoint() {
+                if (this.search === 'user') { return '/api/admin/users/search' }
+                if (this.search ===  'organizer') { return '/api/admin/organizer/search' }
+                return '/api/admin/users/search'
+            },
+        },
 
         data() {
             return {
                 isDisabled: false,
-                user: '',
-                users: [],
+                data: null,
+                options: [],
             }
         },
 
         methods: {
             onSubmit() {
-                this.$emit('onSubmit', this.user);
+                this.$emit('onSubmit', this.data);
             },
 
             onClose() {
                 this.$emit('close', true);
             },
 
-            onUserSearch (query) {
-                axios.get('/api/admin/users/search', { params: { keywords: query } })
-                .then( res => { this.users = res.data.data });
+            onSearch (query) {
+                axios.get( this.endpoint, { params: { keywords: query } })
+                .then( res => { 
+                    this.options = res.data.data 
+                });
             },
         },
 

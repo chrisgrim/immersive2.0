@@ -122,7 +122,11 @@ class OrganizerController extends Controller
     public function addTeamMember(Organizer $organizer, Request $request)
     {
         $ids = collect($request)->pluck('id');
-        $organizer->users()->sync($ids, ['role' => 'moderator']);
+        $data = [];
+        foreach($ids as $id) { 
+            $data[$id] = [ 'role' => 'moderator' ];
+        } 
+        $organizer->users()->sync($data, ['role' => 'moderator']);
     }
 
      /**

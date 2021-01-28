@@ -529,19 +529,37 @@
 			}
 		},
 		{
-			"file": "app/Models/Organizer.php",
+			"file": "app/Models/MakeImage.php",
 			"settings":
 			{
-				"buffer_size": 5738,
+				"buffer_size": 8446,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "app/Http/Controllers/Admin/OrganizerController.php",
+			"file": "app/Http/Controllers/Create/ImageController.php",
 			"settings":
 			{
-				"buffer_size": 3832,
+				"buffer_size": 1092,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/Http/Controllers/Admin/EventController.php",
+			"settings":
+			{
+				"buffer_size": 5227,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/Models/Organizer.php",
+			"settings":
+			{
+				"buffer_size": 5816,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -550,27 +568,24 @@
 			"file": "resources/js/pages/adminArea/admin-organizer.vue",
 			"settings":
 			{
-				"buffer_size": 6134,
+				"buffer_size": 5360,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "resources/sass/components/grid-data-component.scss",
+			"contents": ".w3-info {\n    background-color: #DDDDDD;\n}\n\n.w3-info {\n    background-color: #72dea7;\n}\n",
 			"settings":
 			{
-				"buffer_size": 764,
-				"encoding": "UTF-8",
-				"line_ending": "Unix",
-				"name": "grid-data-component.scss"
+				"buffer_size": 89,
+				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "resources/js/components/Svg-icon.vue",
+			"file": "resources/sass/layout.scss",
 			"settings":
 			{
-				"buffer_size": 19875,
-				"encoding": "UTF-8",
+				"buffer_size": 6459,
 				"line_ending": "Unix"
 			}
 		}
@@ -712,28 +727,30 @@
 	[
 		"/Users/chrisgrim/code/ei",
 		"/Users/chrisgrim/code/ei/app",
-		"/Users/chrisgrim/code/ei/app/Http",
-		"/Users/chrisgrim/code/ei/app/Http/Controllers",
-		"/Users/chrisgrim/code/ei/app/Http/Controllers/Admin",
-		"/Users/chrisgrim/code/ei/database",
+		"/Users/chrisgrim/code/ei/app/Models",
 		"/Users/chrisgrim/code/ei/resources",
-		"/Users/chrisgrim/code/ei/resources/js",
-		"/Users/chrisgrim/code/ei/resources/js/components",
-		"/Users/chrisgrim/code/ei/resources/js/pages",
-		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea",
-		"/Users/chrisgrim/code/ei/resources/js/pages/events",
-		"/Users/chrisgrim/code/ei/resources/sass"
+		"/Users/chrisgrim/code/ei/resources/css",
+		"/Users/chrisgrim/code/ei/resources/sass",
+		"/Users/chrisgrim/code/ei/routes"
 	],
 	"file_history":
 	[
+		"/Users/chrisgrim/code/ei/app/Http/Controllers/OrganizerController.php",
+		"/Users/chrisgrim/code/ei/app/Http/Controllers/Admin/OrganizerController.php",
+		"/Users/chrisgrim/code/ei/app/Models/Organizer.php",
+		"/Users/chrisgrim/code/ei/resources/js/components/Svg-icon.vue",
+		"/Users/chrisgrim/code/ei/resources/sass/components/grid-data-component.scss",
+		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/admin-organizer.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/admin-user.vue",
+		"/Users/chrisgrim/code/ei/sftp-config.json",
+		"/Users/chrisgrim/code/ei/.gitignore",
+		"/Users/chrisgrim/code/ei/app/Http/Controllers/Admin/SearchController.php",
 		"/Users/chrisgrim/code/ei/resources/js/components/Vue-Data-Modal.vue",
 		"/Users/chrisgrim/code/ei/resources/sass/app.scss",
 		"/Users/chrisgrim/code/ei/resources/js/components/Vue-Delete-Modal.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/events/event-edit.vue",
-		"/Users/chrisgrim/code/ei/app/Http/Controllers/OrganizerController.php",
 		"/Users/chrisgrim/code/ei/app/Models/User.php",
 		"/Users/chrisgrim/code/ei/app/Policies/OrganizerPolicy.php",
-		"/Users/chrisgrim/code/ei/app/Models/Organizer.php",
 		"/Users/chrisgrim/code/ei/database/migrations/2021_01_25_180605_create_organizer_user_table.php",
 		"/Users/chrisgrim/code/ei/database/migrations/2021_01_21_223302_organizer_user_table.php",
 		"/Users/chrisgrim/code/ei/.eslintrc.json",
@@ -845,15 +862,7 @@
 		"/Users/chrisgrim/code/ei2/vendor/laravel/fortify/src/Contracts/RegisterResponse.php",
 		"/Users/chrisgrim/code/ei2/app/Http/Controllers/Auth/RegisterController.php",
 		"/Users/chrisgrim/code/ei2/vendor/laravel/fortify/src/Contracts/RegisterViewResponse.php",
-		"/Users/chrisgrim/code/ei2/resources/sass/auth/register.scss",
-		"/Users/chrisgrim/code/ei2/vendor/laravel/framework/src/Illuminate/Foundation/Auth/EmailVerificationRequest.php",
-		"/Users/chrisgrim/code/ei2/vendor/laravel/framework/src/Illuminate/Auth/Middleware/EnsureEmailIsVerified.php",
-		"/Users/chrisgrim/code/ei2/vendor/laravel/framework/src/Illuminate/Auth/Events/Verified.php",
-		"/Users/chrisgrim/code/ei2/resources/sass/slowlayout.scss",
-		"/Users/chrisgrim/code/ei2/resources/sass/adminarea/layout.scss",
-		"/Users/chrisgrim/code/ei2/app/Http/Controllers/EventController.php",
-		"/Users/chrisgrim/code/ei2/resources/js/pages/events/components/show-more.vue",
-		"/Users/chrisgrim/code/ei2/app/Models/Event.php"
+		"/Users/chrisgrim/code/ei2/resources/sass/auth/register.scss"
 	],
 	"find":
 	{
@@ -925,6 +934,19 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"value",
+			"filename",
+			"saveNewImage",
+			"createImage",
+			"saveNewImage",
+			"saveImage",
+			"Modal",
+			"modal",
+			"Modal",
+			"modal",
+			"onChangeOwner",
+			"filteredOptions",
+			"hasown",
 			"setSelected",
 			"height",
 			"25",
@@ -1039,20 +1061,7 @@
 			";\n",
 			"es__title",
 			"es__rating--element",
-			"rating",
-			"0",
-			"details",
-			"es__rating",
-			"es__title--name",
-			"transform: scale(1, 1.11)",
-			"es__title--name ",
-			"title",
-			"es__quickbuy--body",
-			"es__header--image img",
-			"header",
-			"es__ticket",
-			"es__ticket--buy",
-			"{\n"
+			"rating"
 		],
 		"highlight": false,
 		"in_selection": false,
@@ -1070,7 +1079,7 @@
 	"groups":
 	[
 		{
-			"selected": 4,
+			"selected": 7,
 			"sheets":
 			[
 				{
@@ -1098,27 +1107,58 @@
 							"syntax": "Packages/PHP/PHP.sublime-syntax"
 						},
 						"translation.x": 0.0,
-						"translation.y": 1326.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 6,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "app/Models/Organizer.php",
+					"file": "app/Models/MakeImage.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5738,
+						"buffer_size": 8446,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5021,
-								5021
+								7723,
+								7723
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/PHP/PHP.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "app/Http/Controllers/Create/ImageController.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1092,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								630,
+								1089
 							]
 						],
 						"settings":
@@ -1136,20 +1176,20 @@
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "app/Http/Controllers/Admin/OrganizerController.php",
+					"buffer": 3,
+					"file": "app/Http/Controllers/Admin/EventController.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3832,
+						"buffer_size": 5227,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3130,
-								3130
+								3043,
+								3043
 							]
 						],
 						"settings":
@@ -1160,27 +1200,27 @@
 							"syntax": "Packages/PHP/PHP.sublime-syntax"
 						},
 						"translation.x": 0.0,
-						"translation.y": 2398.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "resources/js/pages/adminArea/admin-organizer.vue",
+					"buffer": 4,
+					"file": "app/Models/Organizer.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 6134,
+						"buffer_size": 5816,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5426,
-								5426
+								5536,
+								5536
 							]
 						],
 						"settings":
@@ -1188,60 +1228,30 @@
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
-							"syntax": "Packages/Vuejs Complete Package/vue.tmLanguage"
+							"syntax": "Packages/PHP/PHP.sublime-syntax"
 						},
 						"translation.x": 0.0,
-						"translation.y": 3141.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "resources/sass/components/grid-data-component.scss",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 764,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								331,
-								331
-							]
-						],
-						"settings":
-						{
-							"auto_name": "grid-data-component.scss",
-							"incomplete_sync": null,
-							"syntax": "Packages/CSS/CSS.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 20.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
+					"stack_index": 7,
 					"type": "text"
 				},
 				{
 					"buffer": 5,
-					"file": "resources/js/components/Svg-icon.vue",
+					"file": "resources/js/pages/adminArea/admin-organizer.vue",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 19875,
+						"buffer_size": 5360,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								269,
-								269
+								4054,
+								4054
 							]
 						],
 						"settings":
@@ -1256,6 +1266,67 @@
 						"zoom_level": 1.0
 					},
 					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 89,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								88,
+								88
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/CSS/CSS.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "resources/sass/layout.scss",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 6459,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								127,
+								1753
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/CSS/CSS.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 118.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
 					"type": "text"
 				}
 			]

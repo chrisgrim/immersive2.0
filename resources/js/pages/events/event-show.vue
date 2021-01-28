@@ -29,9 +29,11 @@
             <div class="es__line" />
             <EventReviews :event="event" />
             <EventOrganizer :event="event" />
+            <!--
             <EventRatings 
                 :user="user"
                 :event="event" />
+            -->
         </div>
     </div>
 </template>

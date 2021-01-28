@@ -169,4 +169,41 @@ class MakeImage extends Model
             'thumbImagePath' => $dir . '/' . $filename. '-thumb.webp',
         ]);
     }
+
+    /**
+    * Finalizes the Image when the admin approves the event. Correctly names it.
+    *
+    * @return nothing
+    */
+    public static function finalize($value, $slug, $type, $request)
+    {   
+        // Get the pathinfo: event-images/myevent-e2e9agg
+        $dir = pathinfo($value->largeImagePath, PATHINFO_DIRNAME);
+
+        // Get the filename: myevent
+        $filename = pathinfo($value->largeImagePath, PATHINFO_FILENAME);
+
+        // Name is = tp slug or the request slug
+        $name = $slug ? $slug : $request->slug;
+
+        // Generate a random number: 546dsee
+        $rand = substr(md5(microtime()),rand(0,26),7);
+        // Create a new imagepath: event-images/myevent-546dsee-final/mynewevent
+        $newImagePath = $type . '-images/' . $name . '-' . $rand . '-'. 'final'  . '/' . $name;
+
+        Storage::copy('public/' . $dir . '/' . $filename . '.webp', 'public/' . $newImagePath . '.webp' );
+        Storage::copy('public/' . $dir . '/' . $filename . '.jpg', 'public/' . $newImagePath . '.jpg' );
+        Storage::copy('public/' . $dir . '/' . $filename . '-thumb.webp', 'public/' . $newImagePath . '-thumb.webp' );
+        Storage::copy('public/' . $dir . '/' . $filename . '-thumb.jpg', 'public/' . $newImagePath . '-thumb.jpg' );
+
+
+        $value->update([
+            'largeImagePath' => $newImagePath . '.webp',
+            'thumbImagePath' => $newImagePath . '-thumb.webp',
+        ]);
+
+        //Delete the original folder
+        Storage::deleteDirectory('public/' . $dir);
+    }
+
 }

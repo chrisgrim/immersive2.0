@@ -7,7 +7,9 @@
             <span class="es__title--name"><h1> {{ event.name }} </h1></span>
             <span class="es__title--tag"><i> {{ event.tag_line }} </i></span>
             <div class="es__title--rating">
-                <a href="#reviews">
+                <a 
+                    href="#reviews" 
+                    v-if="false">
                     <template v-if="event.ratingAmount">
                         <span class="es__star active"><IconSvg type="star" /></span><span style="font-weight:700;font-size:1.5rem"> {{ event.averageRating }} </span> <span>({{ event.ratingAmount }})</span>
                     </template>
@@ -15,7 +17,6 @@
                         <span class="es__star"><IconSvg type="star" /></span><span style="font-weight:700;font-size:1.5rem"> (No Ratings) </span>
                     </template>
                 </a>
-                · 
                 <template v-if="event.hasLocation">
                     <a href="#location">
                         <template v-if="event.location.city">

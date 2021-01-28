@@ -72,6 +72,7 @@
         <VueDataModal 
             v-if="modal == 'changeOwner'"
             @onSubmit="onChangeOwner"
+            search="user"
             @close="modal = null"
             :item="selectedModal">
             <h3> Change owner of the organization {{ selectedModal.name }} </h3>

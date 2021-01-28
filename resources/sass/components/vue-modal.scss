@@ -2,7 +2,7 @@
   #Delete Modal
 \*------------------------------------*/
 
-.delete-box {
+.modal-box {
     position: fixed;
     width: 100vw;
     height: 100vh;
@@ -11,55 +11,72 @@
     top: 0;
     left: 0;
 }
-.delete-box__container {
+.modal-box__container {
     background: white;
     width: 60rem;
     margin: auto;
     margin-top: 10rem;
     box-shadow: #ebebeb 0 0 20px 5px;
 }
-.delete-box__close {
+.modal-box__close {
     text-align: right;
 }
-.delete-box__close button{
+.modal-box__close button{
     background: #4a4a4a;
     border-radius: 5rem;
     margin: 1rem 1rem 0 1rem;
 }
-.delete-box__body {
+.modal-box__body {
     padding: 1rem 4rem;
 }
-.delete-box h3, .delete-box p {
+.modal-box h3, .modal-box p {
     padding: 1.2rem 0;
 }
-.delete-box p {
+.modal-box p {
     font-size: 1.5rem;
     line-height: initial;
 }
-.delete-box__input {
+.modal-box__input {
     padding: 0 4rem;
     height: 4rem;
     position: relative;
 }
 
-.delete-box__input input {
+.modal-box__input input.delete {
     height: 100%;
     position: absolute;
     padding-left: 1rem;
 }
 
-.delete-box__input button {
+.modal-box__input button.delete {
     height: 100%;
     position: absolute;
     margin-left: 19rem;
 }
-.delete-box__footer {
+
+.modal-box__footer {
     background: #333;
     text-align: right;
     margin-top: 3rem;
 }
-.delete-box__footer button{
+
+.modal-box__footer button{
     background: 0;
     color: #c3c3c3;
     border: 0;
+}
+
+.modal-box__input div.vs__dropdown-toggle {
+    min-height: 4rem;
+}
+
+.modal-box__input .v-select {
+    position: absolute;
+    width: 30rem;
+}
+
+.modal-box__input button.submit {
+    height: 100%;
+    position: absolute;
+    margin-left: 30rem;
 }

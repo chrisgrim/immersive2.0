@@ -207,6 +207,7 @@ class Organizer extends Model
     */
     public function deleteOrganizer($organizer) 
     {
+        if ($organizer->users()->exists()) { $organizer->users()->detach(); }
         foreach ($organizer->events as $event) { $event->delete(); }
         $organizer->delete();
     }

@@ -1,7 +1,7 @@
 <template>
     <div class="admin-events">
         <div class="">
-            <div class="admin-events__title">
+            <div class="title">
                 <h1>Events</h1>
             </div>
         </div>
@@ -13,78 +13,69 @@
                 @keyup="onSearch(eventList)"
                 type="text">
         </div>
-        <div 
-            class="list" 
-            :key="event.id"
-            v-for="event in events.data">
-            <div>
-                {{ event.name }}
+        <div class="data-grid">
+            <div class="data-grid__row header">
+                <p />
+                <p>Name</p>
+                <p>Organization</p>
+                <p>Status</p>
             </div>
-            <a :href="`/events/${event.slug}`">
-                <button class="default">
-                    view
-                </button>
-            </a>
-            <div>
-                <button @click="openModal(event)">
-                    Owner
-                </button>
-            </div>
-            <a :href="`/create/${event.slug}/title`">
-                <button class="default">
-                    edit
-                </button>
-            </a>
-            <div>
-                <template v-if="event.status === 'p'">
-                    <p>Live</p>
-                </template>
-                <template v-if="event.status === 'e'">
-                    <p>Embargoed <br> (goes live {{ cleanDate(event.embargo_date) }})</p>
-                </template>
+            <div 
+                class="data-grid__row" 
+                :key="event.id"
+                v-for="event in events.data">
+                <div class="edit">
+                    <a :href="`/create/${event.slug}/title`">
+                        <IconSvg type="edit" />
+                    </a>
+                </div>
+                <div>
+                    <a :href="`/events/${event.slug}`">
+                        <img :src="`/storage/${event.thumbImagePath}`">
+                        {{ event.name }}
+                    </a>
+                </div>
+                <div>
+                    <button 
+                        class="noBox" 
+                        @click.prevent="showModal(event, 'changeOrganizer')">
+                        {{ event.organizer.name }}
+                    </button>
+                </div>
+                <div>
+                    <template v-if="event.status === 'p'">
+                        <p>Live</p>
+                    </template>
+                    <template v-if="event.status === 'e'">
+                        <p>Embargoed <br> (goes live {{ cleanDate(event.embargo_date) }})</p>
+                    </template>
+                </div>
             </div>
         </div>
         <pagination 
             :limit="1"
             :list="events"
             @selectpage="onLoad" />
-        <modal 
-            v-if="modalVisible" 
-            @close="modalVisible = false">
-            <div slot="header">
-                <div class="circle sub">
-                    <p>!</p>
-                </div>
-            </div>
-            <div slot="body"> 
-                <h3>Change {{ modalData.name }} Event Organizer</h3>
-                <p>Current organizer is {{ modalData.organizer.name }}</p>
-                <v-select 
-                    v-model="organizer"
-                    label="name"
-                    placeholder="Enter Organizer"
-                    @search="searchOrganizers"
-                    @search:focus="searchOrganizers"
-                    :clearable="false"
-                    :options="organizers.data" />
-            </div>
-            <div slot="footer">
-                <button 
-                    class="btn sub" 
-                    @click="onChangeOwner">
-                    Change Owner
-                </button>
-            </div>
-        </modal>
+        <VueDataModal 
+            v-if="modal == 'changeOrganizer'"
+            @onSubmit="changeEventOrganization"
+            search="organizer"
+            @close="modal = null"
+            :item="modalData">
+            <h3>Change {{ modalData.name }} Event Organizer</h3>
+            <p>Current organizer is {{ modalData.organizer.name }}</p>
+        </VueDataModal>
     </div>
 </template>
 
 <script>
     import Pagination  from '../../components/pagination.vue'
+    import IconSvg from '../../components/Svg-icon'
+    import VueDataModal from '../../components/Vue-Data-Modal'
 
     export default {
 
-        components: { Pagination },
+        components: { Pagination, IconSvg, VueDataModal },
 
         data() {
             return {
@@ -93,7 +84,7 @@
                 organizer: '',
                 organizers: [],
                 modalData: null,
-                modalVisible: false,
+                modal: '',
             }
         },
 
@@ -113,20 +104,20 @@
                 .then( res => { this.organizers = res.data });
             },
 
-            async onChangeOwner() {
-                await axios.post(`/admin/event/${this.modalData.slug}/change-organizer`, this.organizer)
+            async changeEventOrganization(value) {
+                await axios.post(`/admin/event/${this.modalData.slug}/change-organizer`, value)
                 this.reset();
             },
 
-            openModal(data) {
-                this.modalData = data
-                this.modalVisible = true
+            showModal(event, arr) {
+                this.modalData = event;
+                this.modal = arr;
             },
 
             reset() {
                 this.onLoad();
                 this.modalData = null
-                this.modalVisible = false
+                this.modal = false
             },
 
             cleanDate(data) {

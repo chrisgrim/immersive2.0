@@ -1,12 +1,12 @@
 <template>
-    <div class="delete-box">
-        <div class="delete-box__container">
-            <div class="delete-box__close">
+    <div class="modal-box">
+        <div class="modal-box__container">
+            <div class="modal-box__close">
                 <button @click="onClose">
                     <IconSvg type="delete" />
                 </button>
             </div>
-            <div class="delete-box__body">
+            <div class="modal-box__body">
                 <h5>
                     Are you sure?
                 </h5>
@@ -18,17 +18,19 @@
                 </p>
                 <p><b> To permanently delete {{ item.name }}, type DELETE. </b></p>
             </div>
-            <div class="delete-box__input">
+            <div class="modal-box__input">
                 <input 
+                    class="delete" 
                     v-model="toDelete"
                     type="text">
                 <button 
+                    class="delete" 
                     @click="onDelete"
                     :disabled='isDisabled'>
                     DELETE
                 </button>
             </div>
-            <div class="delete-box__footer">
+            <div class="modal-box__footer">
                 <button @click="onClose">Close</button>
             </div>
         </div>

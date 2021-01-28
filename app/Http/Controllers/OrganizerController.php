@@ -133,8 +133,9 @@ class OrganizerController extends Controller
      */
     public function destroy(Organizer $organizer)
     {
-        if (auth()->user()->isAdmin()) { return $organizer->deleteOrganizer($organizer); }
-
+        if (auth()->user()->isAdmin()) { 
+            return $organizer->deleteOrganizer($organizer); 
+        }
         $organizer->events->first->exists() ? null :  $organizer->deleteOrganizer($organizer);
     }
 

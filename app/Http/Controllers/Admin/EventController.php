@@ -47,7 +47,10 @@ class EventController extends Controller
      */
     public function fetch(Request $request)
     {
-        return Event::where('status','p')->orWhere('status','e')->paginate(30);
+        return Event::where('status','p')
+            ->orWhere('status','e')
+            ->with('user')
+            ->paginate(30);
     }
 
     /**
@@ -114,7 +117,7 @@ class EventController extends Controller
         
         $slug = Event::finalSlug($event);
         
-        MakeImage::renameImage($event, $slug, 'event', null);
+        MakeImage::finalize($event, $slug, 'event', null);
 
         if ($event->embargo_date && $event->embargo_date > Carbon::now()) {
             $event->update([

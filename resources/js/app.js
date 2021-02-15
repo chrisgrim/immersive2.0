@@ -105,6 +105,8 @@ Vue.component('admin-organizer', () => import(/* webpackChunkName: "assets/ao" *
 Vue.component('admin-content-advisories', () => import(/* webpackChunkName: "assets/aca" */ './pages/adminArea/admin-content-advisories.vue'));
 Vue.component('vue-admin-remote-locations', () => import(/* webpackChunkName: "assets/arl" */ './pages/adminArea/admin-remote-locations.vue'));
 Vue.component('vue-admin-interactive-levels', () => import(/* webpackChunkName: "assets/ail" */ './pages/adminArea/admin-interactive-levels.vue'));
+Vue.component('vue-admin-event-show', () => import(/* webpackChunkName: "assets/aes" */ './pages/adminArea/admin-event-show.vue'));
+
 
 //Profile
 Vue.component('user-profile', () => import(/* webpackChunkName: "assets/up" */  './pages/profile/profile-index.vue'));
@@ -126,13 +128,11 @@ Vue.component('organizer-show', () => import(/* webpackChunkName: "assets/os" */
 //Events
 Vue.component('event-show', () => import(/* webpackChunkName: "assets/es" */ './pages/events/event-show.vue'));
 Vue.component('event-index', () => import(/* webpackChunkName: "assets/ei" */ './pages/events/event-index.vue'));
-Vue.component('search-listing', () => import(/* webpackChunkName: "assets/es" */ './pages/events/event-search.vue'));
-// Vue.component('event-map-search', () => import(/* webpackChunkName: "assets/ems" */ './pages/events/event-map-search.vue'));
-Vue.component('event-list-search', () => import(/* webpackChunkName: "assets/els" */ './pages/events/event-list-search.vue'));
 Vue.component('edit-events', () => import(/* webpackChunkName: "assets/ee" */ './pages/events/event-edit.vue'));
-// Vue.component('vue-event-index', () => import(/* webpackChunkName: "assets/eii" */ './pages/events/components/index-item.vue'));
 Vue.component('vue-event-edit-listing-item', () => import(/* webpackChunkName: "assets/edi" */ './pages/events/components/event-edit-item.vue'));
-Vue.component('vue-search-online', () => import(/* webpackChunkName: "assets/eos" */ './pages/events/search-online.vue'));
+Vue.component('vue-search-online', () => import(/* webpackChunkName: "assets/eos" */ './pages/search/vue-search-online.vue'));
+Vue.component('vue-search-location', () => import(/* webpackChunkName: "assets/esl" */ './pages/search/vue-search-location.vue'));
+Vue.component('vue-search-all', () => import(/* webpackChunkName: "assets/esa" */ './pages/search/vue-search-all.vue'));
 
 //Staffpicks
 Vue.component('vue-staffpicks-show', () => import(/* webpackChunkName: "assets/ssp" */ './pages/staffpicks/staffpicks-show.vue'));

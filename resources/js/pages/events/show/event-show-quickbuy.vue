@@ -5,12 +5,7 @@
             class="es__tickets subtext">
             <h3>{{ event.price_range }}</h3>
             <p @click="ticketsVisible =! ticketsVisible">
-                <template v-if="tickets.length > 1">
-                    Show all prices
-                </template>
-                <template v-else>
-                    Show pricing details
-                </template>
+                Show ticket details
             </p>
         </div>
 
@@ -47,44 +42,103 @@
         <div 
             :class="{visible: datesVisible}"
             class="es__tickets--background" />
-        <div 
-            v-if="!isMobile"
-            class="es__dates">
-            <template v-if="event.showtype == 's' || event.showtype == 'l'">
-                <button 
-                    @click="showDates"
-                    ref="datebutton"
-                    class="es__dates-button subtext">
-                    <h3>Dates</h3>
-                    <p 
-                        v-if="remaining && remaining.length > 1 ? remaining.length : ''" 
-                        class="header__show-info bold">{{ remaining.length }} show dates remaining</p>
-                    <p 
-                        v-else-if="remaining && remaining.length == 1 ? remaining.length : ''" 
-                        class="header__show-info bold">{{ remaining.length }} date remaining</p>
-                    <p 
-                        v-else 
-                        class="header__show-info bold">no dates remaining</p>
-                    <div class="es__dates-button--arrow">
-                        <IconSvg 
-                            v-if="datesVisible"
-                            type="delete" />
-                        <IconSvg 
-                            v-else
-                            type="back" />
-                    </div>
-                </button>
-                <template v-if="datesVisible">
-                    <div
-                        ref="dates" 
-                        class="es__dates--popup">
-                        <flat-pickr
-                            v-model="dates"
-                            :config="config"                                  
-                            class="form-control"
-                            placeholder="Select date"
-                            ref="datePicker"             
-                            name="dates" />
+        <template v-if="!isMobile">
+            <div class="es__dates">
+                <template v-if="event.showtype == 's' || event.showtype == 'l'">
+                    <button 
+                        @click="showDates"
+                        ref="datebutton"
+                        class="es__dates-button subtext">
+                        <h3>{{ showDateRange }}</h3>
+                        <p 
+                            v-if="remaining && remaining.length > 1 ? remaining.length : ''" 
+                            class="header__show-info bold">{{ remaining.length }} show dates remaining</p>
+                        <p 
+                            v-else-if="remaining && remaining.length == 1 ? remaining.length : ''" 
+                            class="header__show-info bold">{{ remaining.length }} date remaining</p>
+                        <p 
+                            v-else 
+                            class="header__show-info bold">no dates remaining</p>
+                        <div class="es__dates-button--arrow">
+                            <IconSvg 
+                                v-if="datesVisible"
+                                type="delete" />
+                            <IconSvg 
+                                v-else
+                                type="back" />
+                        </div>
+                    </button>
+                    <template v-if="datesVisible">
+                        <div
+                            ref="dates" 
+                            class="es__dates--popup">
+                            <flat-pickr
+                                v-model="dates"
+                                :config="config"                                  
+                                class="form-control"
+                                placeholder="Select date"
+                                ref="datePicker"             
+                                name="dates" />
+                            <div class="es__dates--description">
+                                <ShowMore
+                                    :text="event.show_times"
+                                    :limit="20" />
+                            </div>
+                        </div>
+                    </template>
+                </template>
+
+                <template v-if="event.showtype == 'o'">
+                    <button 
+                        @click="datesVisible =! datesVisible"
+                        class="es__dates-button subtext">
+                        <h3>Weekly</h3>  
+                        <div class="es__week--days">
+                            <p v-if="event.show_on_going.mon"><b>M</b></p>
+                            <p v-else>M</p>
+                            <p v-if="event.show_on_going.tue"><b>T</b></p>
+                            <p v-else>T</p>
+                            <p v-if="event.show_on_going.wed"><b>W</b></p>
+                            <p v-else>W</p>
+                            <p v-if="event.show_on_going.thu"><b>T</b></p>
+                            <p v-else>T</p>
+                            <p v-if="event.show_on_going.fri"><b>F</b></p>
+                            <p v-else>F</p>
+                            <p v-if="event.show_on_going.sat"><b>S</b></p>
+                            <p v-else>S</p>
+                            <p v-if="event.show_on_going.sun"><b>S</b></p>
+                            <p v-else>S</p>
+                        </div>   
+                        <div class="es__dates-button--arrow">
+                            <IconSvg 
+                                v-if="datesVisible"
+                                type="delete" />
+                            <IconSvg 
+                                v-else
+                                type="back" />
+                        </div>
+                    </button>
+                    <template v-if="datesVisible">
+                        <div class="es__dates--popup">
+                            <flat-pickr
+                                v-model="dates"
+                                :config="config"                                  
+                                class="form-control"
+                                placeholder="Select date"
+                                ref="datePicker"             
+                                name="dates" />
+                            <div class="es__dates--description">
+                                <ShowMore 
+                                    :text="event.show_times"
+                                    :limit="20" />
+                            </div>
+                        </div>
+                    </template>
+                </template>
+
+                <template v-if="event.showtype == 'a'">
+                    <div class="es__dates--body subtext">
+                        <h3>Available Anytime</h3>
                         <div class="es__dates--description">
                             <ShowMore 
                                 :text="event.show_times"
@@ -92,67 +146,9 @@
                         </div>
                     </div>
                 </template>
-            </template>
-
-            <template v-if="event.showtype == 'o'">
-                <button 
-                    @click="datesVisible =! datesVisible"
-                    class="es__dates-button subtext">
-                    <h3>Week Days</h3>  
-                    <div class="es__week--days">
-                        <p v-if="event.show_on_going.mon"><b>M</b></p>
-                        <p v-else>M</p>
-                        <p v-if="event.show_on_going.tue"><b>T</b></p>
-                        <p v-else>T</p>
-                        <p v-if="event.show_on_going.wed"><b>W</b></p>
-                        <p v-else>W</p>
-                        <p v-if="event.show_on_going.thu"><b>T</b></p>
-                        <p v-else>T</p>
-                        <p v-if="event.show_on_going.fri"><b>F</b></p>
-                        <p v-else>F</p>
-                        <p v-if="event.show_on_going.sat"><b>S</b></p>
-                        <p v-else>S</p>
-                        <p v-if="event.show_on_going.sun"><b>S</b></p>
-                        <p v-else>S</p>
-                    </div>   
-                    <div class="es__dates-button--arrow">
-                        <IconSvg 
-                            v-if="datesVisible"
-                            type="delete" />
-                        <IconSvg 
-                            v-else
-                            type="back" />
-                    </div>
-                </button>
-                <template v-if="datesVisible">
-                    <div class="es__dates--popup">
-                        <flat-pickr
-                            v-model="dates"
-                            :config="config"                                  
-                            class="form-control"
-                            placeholder="Select date"
-                            ref="datePicker"             
-                            name="dates" />
-                        <div class="es__dates--description">
-                            <ShowMore 
-                                :text="event.show_times"
-                                :limit="20" />
-                        </div>
-                    </div>
-                </template>
-            </template>
-
-            <template v-if="event.showtype == 'a'">
-                <div class="es__dates--body subtext">
-                    <h3>Available Anytime</h3>
-                    <div class="es__dates--description">
-                        <ShowMore 
-                            :text="event.show_times"
-                            :limit="20" />
-                    </div>
-                </div>
-            </template>
-        </div>
+            </div>
+        </template>
+        
 
         <div class="es__ticket--buy">
             <a 
@@ -179,6 +175,7 @@
     import IconSvg from '../../../components/Svg-icon'
     import ShowMore  from '../components/show-more.vue'
     import flatPickr from 'vue-flatpickr-component'
+
     export default {
 
         props: [ 'event', 'tickets' ],
@@ -191,6 +188,13 @@
                 if (this.event.websiteUrl) {return this.event.websiteUrl}
                 return this.event.organizer.website;
             },
+
+            showDateRange() {
+                if (this.event.shows.length > 1) {
+                    return `${this.cleanDate(this.event.shows[this.event.shows.length-1].date)} - ${this.cleanDate(this.event.shows[0].date)}`
+                }
+                return this.cleanDate(this.event.shows[0].date)
+            }
         },
 
         data() {
@@ -245,6 +249,10 @@
                         this.dates.push(event.date);
                     });
                 }
+            },
+
+            cleanDate(data) {
+                return this.$dayjs(data).format("MMM D");
             },
         },
 

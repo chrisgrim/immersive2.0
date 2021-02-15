@@ -27,6 +27,11 @@ state: {
     mobilelocation: false,
     mobiledates: false,
     dates: '',
+    filterPrice: [0, 100],
+    filterDates: [],
+    filterNaturalDates: [],
+    filterCategory: [],
+    filterTag: [],
   },
 
 
@@ -65,6 +70,21 @@ mutations: {
     displaydates (state, dates) {
         state.dates = dates
     },
+    filterCategory ( state, category) {
+        state.filterCategory = category
+    },
+    filterTag ( state, tag) {
+        state.filterTag = tag
+    },
+    filterPrice ( state, price) {
+        state.filterPrice = price
+    },
+    filterDates ( state, dates) {
+        state.filterDates = dates
+    },
+    filterNaturalDates ( state, naturaldates) {
+        state.filterNaturalDates = naturaldates
+    }
 },
 actions: {
     async getContent ({ commit }) {

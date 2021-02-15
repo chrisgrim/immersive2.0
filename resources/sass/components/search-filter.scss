@@ -1,0 +1,35 @@
+.filter .content {
+    width: 100%;
+    z-index: 1;
+    position: relative;
+    padding: 2rem;
+}
+
+.filter .content.location {
+    width: 100%;
+    z-index: 1;
+    position: absolute;
+    top:0;
+    padding: 2rem 2rem;
+}
+.filter .content.location .filter__block .filter.round {
+    height: 2.5rem;
+    padding: 1.3rem;
+}
+
+@media (min-width: 768px) {
+    .filter .content {
+        padding: 2rem 8rem;
+    }
+    .filter .content.location {
+        width: 100%;
+        z-index: 1;
+        position: relative;
+        padding: 2rem 2rem;
+        margin-bottom: 2rem;
+        /*border-bottom: 1px solid #dadce0;*/
+    }
+    .filter .content.location .filter__block .filter.round {
+        height: 3.5rem;
+    }
+}

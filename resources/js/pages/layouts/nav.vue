@@ -3,7 +3,7 @@
         <nav 
             v-if="!mobileDevice" 
             class="nav" 
-            :class="{ 'fixed' : isFixed, 'absolute' : isAbsolute, 'darkmenu' : blackText, 'narrow' : isNarrow }">
+            :class="{ 'fixed' : isFixed, 'absolute' : isAbsolute, 'darkmenu' : blackText, 'narrow' : isNarrow, 'fullwidth' : isFullWidth }">
             <div class="nav__bar">
                 <div class="nav-logo">
                     <a href="/">
@@ -397,7 +397,7 @@
                 return this.navtype != 'create'
             },
             hideSearch() {
-                return this.navtype != 'homepage' && this.navtype != 'create' && this.navtype !='onlinesearch' && this.navtype !='searchpage'
+                return this.navtype != 'homepage' && this.navtype != 'create' && this.navtype !='onlinesearch' && this.navtype !='searchpage' && this.navtype !='searchlocation'
             },
             isFixed() {
                 return ''
@@ -413,6 +413,9 @@
             },
             logoColor() {
                 return this.navtype == 'homepage' || this.navtype == 'org' ? 'white' : '#404040'
+            },
+            isFullWidth() {
+                return this.navtype ==='searchlocation'
             }
         },
 

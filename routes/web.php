@@ -25,9 +25,9 @@ Route::RESOURCE('interactivelevels', 'Admin\InteractiveLevelController');
 Route::POST('/search/storedata', 'Search\SearchDataController@store');
 Route::GET('/index/search', 'Search\EventController@index');
 Route::GET('/index/search-online', 'Search\OnlineSearchController@index');
+Route::GET('/index/search-all', 'Search\EventController@allSearch');
 Route::POST('/admin/search/data', 'Search\SearchDataController@create');
 
-Route::GET('/index/search-all', 'SearchController@allsearch');
 // This is the search for vuex
 Route::POST('/vuex/search', 'SearchController@filterIndex');
 
@@ -43,6 +43,7 @@ Route::GET('/admin/dashboard', 'Admin\AdminAreaController@index');
 
 //Admin Events
 Route::GET('/admin/events', 'Admin\EventController@index');
+Route::GET('/admin/events/show/{event}', 'Admin\EventController@show');
 Route::POST('/admin/events/fetch', 'Admin\EventController@fetch');
 Route::POST('/admin/event/{event}/approve', 'Admin\EventController@approve');
 Route::POST('/admin/event/{event}/fail', 'Admin\EventController@fail');

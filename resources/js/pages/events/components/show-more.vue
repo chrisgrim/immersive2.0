@@ -2,11 +2,11 @@
     <p class="text">
         <span :style="`white-space: ${whiteSpace};`">{{ adjustedText }}</span>
         <span 
-            v-if="showMore" 
+            v-show="showMore" 
             @click="showMore = false">... <span class="show-text"><br>Show More</span>
         </span>
         <span 
-            v-if="lessButton && !showMore && this.text.split(' ').length >= this.limit"
+            v-show="lessButton && !showMore && this.text.split(' ').length >= this.limit"
             @click="showMore = true"><span class="show-text"><br>Show Less</span>
         </span>
     </p>

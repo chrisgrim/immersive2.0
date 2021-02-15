@@ -5,7 +5,7 @@
             <button 
                 @click="datesVisible =! datesVisible"
                 class="es__dates-button subtext">
-                <h3>Dates</h3>
+                <h3>{{ showDateRange }}</h3>
                 <p 
                     v-if="remaining && remaining.length > 1 ? remaining.length : ''" 
                     class="header__show-info bold">{{ remaining.length }} show dates remaining</p>
@@ -113,6 +113,15 @@
 
         components: { ShowMore, flatPickr, IconSvg },
 
+        computed: {
+            showDateRange() {
+                if (this.event.shows.length > 1) {
+                    return `${this.cleanDate(this.event.shows[this.event.shows.length-1].date)} - ${this.cleanDate(this.event.shows[0].date)}`
+                }
+                return this.cleanDate(this.event.shows[0].date)
+            }
+        },
+
         data() {
             return {
                 config: this.initializeCalendarObject(),
@@ -147,6 +156,10 @@
                         this.dates.push(event.date);
                     });
                 }
+            },
+
+            cleanDate(data) {
+                return this.$dayjs(data).format("MMM D");
             },
         },
 

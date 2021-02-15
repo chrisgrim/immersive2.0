@@ -8,16 +8,16 @@
 
 @section('nav')
     @auth
-        <vue-nav navtype="searchlocation" :user= "{{auth()->user()}}"></vue-nav>
+        <vue-nav navtype="searchpage" :user= "{{auth()->user()}}"></vue-nav>
     @endauth
     @guest
-        <vue-nav navtype="searchlocation"></vue-nav>
+        <vue-nav navtype="searchpage"></vue-nav>
     @endguest
 @endsection
 
 @section('content')
     <div id="bodyArea">
-        <vue-search-location user="{{ auth()->id() }}" :tags="{{ $tags }}" :searchedevents="{{ $searchedevents }}" :onlineevents="{{ $onlineevents }}" :categories="{{ $categories }}">
+        <vue-search-all user="{{ auth()->id() }}" :tags="{{ $tags }}" :allevents="{{ $allevents }}" :categories="{{ $categories }}">
     </div>
 @endsection
 

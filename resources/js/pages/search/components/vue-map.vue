@@ -116,7 +116,6 @@
                 </l-map>
             </div>
         </div>
-        <MobileFilterBar />
     </section>
 </template>
 
@@ -125,14 +124,13 @@
     import {LMap, LTileLayer, LMarker, LPopup, LIcon} from 'vue2-leaflet'
     import Vue2LeafletMarkerCluster from 'vue2-leaflet-markercluster'
     import { latLng } from "leaflet"
-    import PopupContent from "../read/popup-content"
-    import MobileFilterBar  from './components/mobile-filter-bar.vue'
+    import PopupContent from "../../read/popup-content"
 
     export default {
 
-        components: { LPopup, LMap, LTileLayer, LMarker, 'l-marker-cluster': Vue2LeafletMarkerCluster, PopupContent, LIcon, MobileFilterBar },
+        components: { LPopup, LMap, LTileLayer, LMarker, 'l-marker-cluster': Vue2LeafletMarkerCluster, PopupContent, LIcon },
 
-        props: [ 'events', 'user' ],
+        props: [ 'events'],
 
         computed: {
             mapCenter() {

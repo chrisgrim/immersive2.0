@@ -12,6 +12,8 @@
 @import 'events/event-search';
 @import 'events/event-maps';
 
+@import 'search/event';
+
 @import 'nav/navbar';
 @import 'nav/footer';
 
@@ -27,6 +29,7 @@
 @import 'components/flatpickr';
 @import 'components/leaflet';
 @import 'components/multiselect';
+@import 'components/vue-list';
 
 @import 'components/sliderbutton';
 @import 'components/grid';

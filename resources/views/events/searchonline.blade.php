@@ -17,7 +17,7 @@
 
 @section('content')
     <div id="bodyArea">
-        <vue-search-online user="{{ auth()->id() }}" :tags="{{ $tags }}" :onlineevents="{{ $onlineevents }}" :categories="{{ $categories }}" :maxprice="{{ $maxprice }}">
+        <vue-search-online user="{{ auth()->id() }}" :tags="{{ $tags }}" :onlineevents="{{ $onlineevents }}" :categories="{{ $categories }}">
     </div>
 @endsection
 

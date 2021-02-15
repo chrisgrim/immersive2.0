@@ -8,13 +8,12 @@
                 <EventAbout 
                     :remaining="remaining"
                     :event="event" />
-                <EventStaffpick
-                    v-if="event.staffpick"
-                    :event="event" />
                 <EventDates 
                     v-if="isMobile"
                     :event="event" />
-                <EventLocation :event="event" />
+                <EventStaffpick
+                    v-if="event.staffpick"
+                    :event="event" />
                 <EventDetails :event="event" />
             </div>
             <div class="es__body--right">
@@ -28,6 +27,7 @@
         <div class="es__widebody">
             <div class="es__line" />
             <EventReviews :event="event" />
+            <EventLocation :event="event" />
             <EventOrganizer :event="event" />
             <!--
             <EventRatings 

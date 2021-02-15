@@ -18,6 +18,7 @@ export default {
                 price: new URL(window.location.href).searchParams.get("price0") ? [Number(new URL(window.location.href).searchParams.get("price0")), Number(new URL(window.location.href).searchParams.get("price1"))] : '',
                 remote: new URL(window.location.href).searchParams.get("remote"),
                 mapSearch: new URL(window.location.href).searchParams.get("mapsearch"),
+                naturalDate: [],
             }
         },
         
@@ -59,27 +60,25 @@ export default {
             
             if (this.url.category) {
                 let arr = this.url.category.split(',').map(Number);
-                this.category = this.categories.filter(element => arr.includes(element.id));
-                // this.$store.commit('searchtype', this.category.name);
-            }
-            if (this.url.city) {
-                this.city = this.url.city;
-            }
-            if (this.url.dates) {
-                console.log('getting dates');
-                this.dates = this.url.dates;
-                this.computerDate = this.url.dates;
-                this.naturalDate = this.url.dates.map(date => dayjs(date).format("ddd MMM D"));
-                this.$store.commit('displaydates', this.url.dates.map(date => dayjs(date).format("MMM D")));
+                this.url.category = this.categories.filter(element => arr.includes(element.id));
+                console.log(this.url.category);
+                this.$store.commit('filterCategory', this.url.category)
             }
             if (this.url.tag) {
                 let arr = this.url.tag.split(',');
-                this.tag = this.tags.filter(element => arr.includes(element.name));
-
-                // this.$store.commit('searchtype', this.tag.name);
+                this.url.tag = this.tags.filter(element => arr.includes(element.name));
+                this.$store.commit('filterTag', this.url.tag)
             }
             if (this.url.price) {
-                this.price = this.url.price;
+                this.$store.commit('filterPrice',  this.url.price)
+            }
+            if (this.url.dates) {
+                this.$store.commit('filterDates', this.url.dates)
+                this.$store.commit('filterNaturalDates', this.url.dates.map(date => dayjs(date).format("MMM D")));
+                this.$store.commit('displaydates', this.url.dates.map(date => dayjs(date).format("MMM D")));
+            }
+            if (this.url.city) {
+                this.city = this.url.city;
             }
         }
 

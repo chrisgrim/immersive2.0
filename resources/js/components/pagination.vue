@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="pagination">
         <ul 
             v-if="total > perPage"
             class="pagination">

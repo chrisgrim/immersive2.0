@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Models\Organizer;
 use App\Models\CityList;
 use App\Models\SearchData;
+use App\Models\Search;
 use App\Models\RemoteLocation;
 use DB;
 use Carbon\Carbon;
@@ -169,31 +170,73 @@ class EventController extends Controller
         });
 
         return json_encode($eventContent);
-
     }
 
-    public function allsearch(Request $request)
+    public function allSearch(Request $request)
     {
-        $maxprice = ceil(Event::getMostExpensive());
+        $request = Search::convertUrl($request);
+
         $categories = Category::all();
         $tags = Genre::where('admin', 1)->orderBy('rank', 'desc')->get();
 
-        if ($request->price || $request->category || $request->tag || $request->dates ) {
-            $onlineevents = Event::search('a')
-            ->rule(EventRemoteSearchRule::class)
-            ->where('hasLocation', false)
-            ->with(['organizer','category', 'genres'])
-            ->orderBy('published_at', 'desc')
-            ->paginate(8);
-        } else {
-            $onlineevents =  Event::where('hasLocation', false)
-            ->with(['organizer','category', 'genres'])
-            ->whereDate('closingDate', '>=', date("Y-m-d"))
-            ->orderByDesc('rank')
-            ->paginate(8);
-        }
+        $searchRequest = Event::boolSearch()
+        ->must('range', ['closingDate' => [ 'gte' => 'now/d']])
+        ->when($request->price, function ($builder) use ($request) {
+            return $builder->must('range', ['priceranges.price' => [ 'gte' => $request->price[0],'lte' => $request->price[1]]]);
+        })
+        ->when($request->category, function ($builder) use ($request) {
+            return $builder->filter('terms', ['category_id' => $request->category]);
+        })
+        ->when($request->tag, function ($builder) use ($request) {
+            return $builder->filter('terms', ['genres.name' => $request->tag]);
+        })
+        ->when($request->dates, function ($builder) use ($request) {
+            return $builder->should('range', ['shows.date' => [ 'gte' => $request->dates[0],'lte' => $request->dates[1]]])
+                ->should('term', ['showtype' => 'a'])
+                ->minimumShouldMatch(1);
+        })
+        ->sortRaw(['published_at' => 'desc'])
+        ->load(['genres', 'category'])
+        ->paginate(12);
 
-        return view('events.searchonline',compact('onlineevents', 'categories', 'maxprice', 'tags'));
+        $content = tap($searchRequest->toArray(), function (array &$content) {
+            $content['data'] = Arr::pluck($content['data'], 'model');
+        });
+
+        $allevents = json_encode($content);
+        
+        return view('events.searchall',compact('allevents', 'categories', 'tags'));
+    }
+
+    public function fetch(Request $request)
+    {
+        $request = Search::convertUrl($request);
+
+        $events = Event::boolSearch()
+        ->must('range', ['closingDate' => [ 'gte' => 'now/d']])
+        ->when($request->price, function ($builder) use ($request) {
+            return $builder->must('range', ['priceranges.price' => [ 'gte' => $request->price[0],'lte' => $request->price[1]]]);
+        })
+        ->when($request->category, function ($builder) use ($request) {
+            return $builder->filter('terms', ['category_id' => $request->category]);
+        })
+        ->when($request->tag, function ($builder) use ($request) {
+            return $builder->filter('terms', ['genres.name' => $request->tag]);
+        })
+        ->when($request->dates, function ($builder) use ($request) {
+            return $builder->should('range', ['shows.date' => [ 'gte' => $request->dates[0],'lte' => $request->dates[1]]])
+                ->should('term', ['showtype' => 'a'])
+                ->minimumShouldMatch(1);
+        })
+        ->sortRaw(['published_at' => 'desc'])
+        ->load(['genres', 'category'])
+        ->paginate(12);
+
+        $content = tap($events->toArray(), function (array &$content) {
+            $content['data'] = Arr::pluck($content['data'], 'model');
+        });
+
+        return json_encode($content);
     }
 
     public function searchLocation(Request $request)

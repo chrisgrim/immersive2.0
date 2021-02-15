@@ -33,6 +33,16 @@
                 :options="options" 
                 :series="series" />
         </div>
+        <div style="height:50rem">
+            <v-select 
+                @input="submit"
+                v-model="eventList"
+                label="name"
+                placeholder="Enter Name"
+                @search="onSearch"
+                @search:focus="onSearch"
+                :options="events.data" />
+        </div>
     </div>
 </template>
 
@@ -56,6 +66,8 @@
                 searchOptions: ['category', 'location', 'event', 'organizer'],
                 searchType: 'category',
                 active: '',
+                events: [],
+                eventList: '',
                 options: {
                     chart: {
                       id: 'vuechart-example'
@@ -83,7 +95,16 @@
                     this.series = [{data: res.data.map(name => name.count), name: res.data.map(name => name.name.substring(0, 20))}]
                 });
             },
-                
+
+            submit(value) {
+                window.location.href = `https://${window.location.hostname}/admin/events/${value.slug}`;
+            },
+
+            onSearch(events) {
+                axios.get('/api/admin/events/search', { params: { keywords: events } })
+                .then( res => { this.events = res.data });
+                this.events.data.filter(a => console.log(a.name))
+            },  
         },
 
         created() {

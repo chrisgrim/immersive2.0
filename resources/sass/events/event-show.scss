@@ -313,14 +313,18 @@ header.es__header {
     padding: 0;
     border: 0;
     z-index: 10;
+    width: 4.5rem;
+    height: 4.5rem;
+    top: 1rem;
+    left: 2rem;
+
 }
 .es__tickets--title path {
     fill: black !important;
 }
 .es__tickets--title svg {
-    height: 12px !important;
-    width: 12px !important;
-    position: absolute;
+    height: 14px !important;
+    width: 14px !important;
 }
 .es__tickets--background {
     display: none;
@@ -900,6 +904,8 @@ button.helpful:hover {
         padding: 2rem;
         margin: 0rem;
         padding-top: 8rem;
+        max-height: calc(100vh - 20rem);
+        overflow: hidden auto;
     }
 
 }

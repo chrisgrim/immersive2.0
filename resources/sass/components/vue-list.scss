@@ -1,0 +1,144 @@
+.list {
+    white-space: nowrap;
+    overflow-y: hidden;
+    overflow-x: auto;
+    scrollbar-width: none;
+    grid-column-gap: 1.4rem;
+    display: flex;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: none;
+    margin-left: -1rem;
+    margin-right: -1rem;
+    overflow: hidden !important;
+}
+
+.list.vertical {
+    width: 100%;
+    overflow: hidden;
+    white-space: inherit;
+}
+
+.list__wrapper {
+    white-space: nowrap;
+    overflow: visible;
+    width: 100%;
+}
+
+.list__wrapper.vertical {
+    white-space: inherit;
+}
+
+.list__element {
+    padding: 1rem;
+    display: inline-block;
+    white-space: normal;
+    vertical-align: top;
+    position: relative;
+}
+
+.list__url {
+    display: block;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    border-radius: 1.2rem;
+}
+
+.list .image__top {
+    contain: content;
+    overflow: hidden;
+    position: relative;
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
+    border-radius: 1rem;
+    pointer-events: none;
+    max-height: 24rem;
+}
+
+.list .image__middle {
+    padding-top: 65%;
+}
+
+.list .image {
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.list .image img {
+    position: static;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 1rem;
+    object-fit:cover;
+    -o-object-fit: cover;
+    object-fit: cover;
+    height: 23rem;
+    width: 100%;
+    transform-origin: 50% 65%;
+    transition: transform 0.1s, filter 0.1s;
+}
+
+.list .content {
+    padding: 0 0 1rem 0;
+}
+
+.list .title h3 {
+    margin: 1rem 0 0.5rem;
+    font-size: 1.6rem;
+    font-weight: 500;
+    line-height: 1.8rem;
+}
+
+.list .tagline p {
+    font-size: 1.4rem;
+    color: #424556;
+    line-height: 1.8rem;
+}
+
+.list .tags {
+    margin: 1rem;
+    color: #9fa6ce;
+    font-size: 1.4rem;
+}
+
+.list .tags li{
+    display: inline-block;
+}
+
+.list .organizer h3 {
+    margin: 0.2rem 0 0.3rem;
+    font-size: 1.6rem;
+    font-weight: 400;
+}
+
+.list .price h4 {
+    display: inline-block;
+    margin: 1rem 0;
+    font-size: 1.6rem;
+    font-weight: 800;
+}
+
+@media screen and (min-width: 768px) {
+    .list {
+        width: 100%;
+        overflow: hidden;
+        white-space: inherit;
+    }
+    
+    .list__element {
+        &:hover div.heart{
+            visibility: visible;
+            opacity: 1;
+        }
+    }
+}

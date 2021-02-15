@@ -15,6 +15,15 @@
                     d="M83,61H67V45c0-1.7-1.3-3-3-3s-3,1.3-3,3v16H45c-1.7,0-3,1.3-3,3s1.3,3,3,3h16v16c0,1.7,1.3,3,3,3s3-1.3,3-3 V67h16c1.7,0,3-1.3,3-3S84.7,61,83,61z" />
             </svg>
         </template>
+        <template v-if="type==='check'">
+            <svg 
+                viewBox="0 0 32 32" 
+                aria-hidden="true">
+                <path 
+                    fill="none" 
+                    d="m4 16.5 8 8 16-16" />
+            </svg>
+        </template>
         <template v-if="type==='star'">
             <svg 
                 viewBox="0 0 19 18"
@@ -251,6 +260,6 @@
     
     export default {
 
-        props: ['type', 'width', 'height'],
+        props: ['type', 'width', 'height', 'stroke', 'fill'],
 }
 </script>

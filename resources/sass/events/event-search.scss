@@ -15,6 +15,7 @@
     outline: none;
     width: 100%;
     z-index: -1;
+    height: 300px;
 }
 
 .event-search__container {
@@ -78,7 +79,7 @@ ul.pagination {
 /* -----------------Event List------------------------------------ */
 
 .event-search-list {
-    width: 100%;
+    width: 100vw;
 }
 
 .event__results {
@@ -99,9 +100,9 @@ ul.pagination {
 }
 
 .event__results--title p {
-    margin-top: 0.5rem;
-    font-size: 16px !important;
-    line-height: 24px !important;
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+    line-height: 1.4rem;
 }
 
 /* ---------------------------------------------Horizontal Card------------------------------------ */
@@ -147,26 +148,28 @@ a.event__horizontal-card:last-child .event__horizontal-card--element {
     display: none;
     padding: 0.5rem 0.8rem;
     border-radius: 2rem;
-    margin: 0 1rem;
+    margin: 0 2rem;
     font-size: 1.2rem;
     text-transform: uppercase;
     border: 1px solid #81899a;
+    margin-bottom: 1rem;
 }
 
 .event__horizontal-card--title {
-    margin: 1rem;
+    margin: 0 2rem;
     font-size: 1.6rem;
     font-weight: 500;
 }
 
 .event__horizontal-card--tagline {
-    margin: 1rem;
+    margin: 0 2rem;
     font-size: 1.4rem;
     color: #424556;
+    line-height: 1.2rem;
 }
 
 .event__horizontal-card--tags {
-    margin: 1rem;
+    margin: 1rem 2rem;
     color: #9fa6ce;
     font-size: 1.4rem;
 }
@@ -198,9 +201,12 @@ a.event__horizontal-card:last-child .event__horizontal-card--element {
     .event-search {
         min-height: calc(100vh - 7rem);
     }
+    .event-search-list {
+        width: 100%;
+    }
 
     .event__results--title {
-        padding: 1rem 0 3rem 0;
+        padding: 4rem 2rem 1rem 2rem;
         text-align: left;
     }
 

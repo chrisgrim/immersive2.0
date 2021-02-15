@@ -3,21 +3,12 @@
 \*------------------------------------ */
 .event__filter {
     width: 100%;
-    z-index: 901;
+    z-index: 1;
     background-color: #fff;
     position: relative;
     display: inline-block;
     border-radius: 2rem 2rem 0 0;
     border-top: 1px solid black;
-}
-
-.greyBar {
-    width: 6rem;
-    background: #a7a7a7;
-    height: 0.5rem;
-    border-radius: 5rem;
-    margin: auto;
-    margin-top: 2rem;
 }
 
 .filter__row {
@@ -44,8 +35,23 @@
     margin-bottom: 1rem;
 }
 
+.filter__block {
+    display: inline-block;
+    width: 100%;
+}
+
+.filter__block .button {
+    margin-top: 1rem;
+    display: inline-block;
+}
+
+.filter__block .element {
+    width: 100%;
+}
+
 .filter__block .filter.round {
     height: 3.5rem;
+    /*margin-right: 1rem;*/
 }
 
 .filterBar__relative {
@@ -120,75 +126,69 @@
 
 .filter__dates {
     width: 100%;
-    position: fixed;
-    top: 0;
     left: 0;
-    height: 100vh;
-    background: white;
-    padding-top: 10rem;
-    z-index: 999;
+    position: absolute;
 }
 
 .filter__dates h3 {
     margin-left: 5rem;
 }
 
-button.filter__dates--button {
-    position: absolute;
-    z-index: 1;
-    right: 3.5rem;
-    border-radius: 5rem;
-    top: 3.5rem;
-    border: 0;
-    background: #e6e6e6;
-}
-
-.filter__dates--bottom {
-    bottom: 10%;
-    position: absolute;
-    left: 0;
-    right: 0;
-    height: 7rem;
-}
-
 .filter__price {
-    min-width: 15rem;
-    padding: 2rem;
-    min-height: 15rem;
+    position: absolute;
+    height: 6rem;
+    width: 100%;
+    left: 0;
 }
 
 .filter__price .vue-slider {
     margin: auto;
     margin-top: 6rem;
+    margin-bottom: 2rem;
 }
 
-.filter__categories {
+.filter__category {
+    width:100%;
+    position: absolute;
+    left: 0;
+}
+
+.filter__tag {
+    width:100%;
+    left: 0;
+    position: absolute;
+}
+
+.filter__category--element .checkbox {
     display: inline-block;
-    width: 100%;
-    padding: 2rem;
-    height: 17rem;
-}
-
-.filter__categories--top {
-    height: 100%;
-    overflow-y: auto;
-    overflow-x: scroll;
-    scrollbar-width: none;
-    display: flex !important;
-}
-
-.filter__categories--middle {
-    white-space: nowrap;
-    overflow: visible;
-    transition: transform 0.5s ease 0s;
-}
-
-.filter__categories--bottom {
-    width: 36vw;
-    padding: 0.4rem;
-    display: inline-block;
-    white-space: normal;
+    border: 1px solid black;
+    height: 2.4rem;
+    width: 2.4rem;
+    background: white;
+    text-align: center;
+    overflow: hidden;
     vertical-align: top;
+    border-radius: 0.4rem;
+    margin-right:1rem;
+    position: relative;
+}
+
+.filter__category--element svg {
+    position: absolute;
+    top: .3rem;
+    left: 0.3rem;
+    stroke: white;
+    stroke-width: 4;
+    width: 1.6rem;
+    height: 1.6rem;
+}
+
+.filter__category--element .checkbox.active {
+    background: black;
+}
+
+.filter__category span {
+    font-size: 1.4rem;
 }
 
 .filter__categories--element {
@@ -219,8 +219,8 @@ button.filter {
     overflow: hidden;
     white-space: nowrap;
     height: 4.5rem;
-    flex-grow: 1;
-    flex-shrink: 1;
+/*    flex-grow: 1;
+    flex-shrink: 1;*/
     align-items: center;
     font-size: 1.4rem;
     line-height: 0;
@@ -236,10 +236,16 @@ button.filter {
 
 button.filter.round {
     border-radius: 5rem;
+    width: auto;
 }
 
-button.mobile-filter {
 
+button.borderless {
+    border: 0;
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    text-align: left;
 }
 
 .filter__dropdown {
@@ -249,57 +255,35 @@ button.mobile-filter {
     left: 0;
     right: 0;
     text-align: center;
-    width: 70%;
     background: white;
-    padding: 2rem;
     box-shadow: rgba(0, 0, 0, 0.15) 0 10px 37px;
-    border-radius: 5rem;
-    min-width: 65rem;
+    border-radius: 3rem;
+    top: 1.5rem;
+    overflow: hidden;
 }
 
-.filter__dropdown--grid {
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 1rem;
-    align-items: center;
-    font-size: 1.4rem;
-    padding: 2rem;
-}
-
-.filter__dropdown--grid button {
-    width: 100%;
-    align-items: center;
-    font-size: 1.4rem;
-    padding: 1rem;
-    margin: 0;
-    border: 0;
-    &:hover {
-        background: #ff385c;
-        color: white;
-    }
-    &.active {
-        background: #ff385c;
-        color: white;
-    }
+.filter__dropdown .element{
+    overflow: hidden auto;
+    max-height: calc(100vh - 33rem);
 }
 
 .filter__dropdown--footer {
-    padding: 1rem;
-    text-align: center;
+        padding: 1rem 3rem;
+        width: 100%;
+        border-top: 1px solid #d2d2d2;
+        justify-content: space-between;
+        display: flex;
+    }
+
+.filter__dropdown .grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 1rem;
+    text-align: left;
+    padding: 2rem;
+    background: white;
 }
 
-button.left-half {
-    border-radius: 5rem 0 0 5rem;
-}
-
-button.right-half {
-    border-radius: 0 5rem 5rem 0;
-    border: 1px solid #ff385c;
-    background: #ff385c;
-    color: white;
-    border-left: 0;
-}
 
 .filter__dropdown .form-control.input {
     display: none;
@@ -371,6 +355,10 @@ button.right-half {
 .filter__container--content {
     background: white;
     padding: 1rem 0 10rem 0;
+    display: inline-flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
 }
 
 .filter__container--content h3 {
@@ -468,6 +456,11 @@ button.pop-box__submit {
     padding: 0.3rem 1rem;
 }
 
+
+
+
+
+
 @media (min-width: 768px) {
     .event__filter {
         border-radius: 0;
@@ -494,32 +487,34 @@ button.pop-box__submit {
         border-radius: 5rem;
         top: 0.7rem;
     }
-
-    .filter__dates {
-        user-select: none;
-        width: 100%;
-        padding: 0;
-        position: relative;
-        height: inherit;
-    }
-
-    .filter__dropdown--footer {
-        float: right;
-        text-align: inherit;
-    }
-
     .filter__price {
-        padding: 0;
-        min-height: 0;
+        max-width: 35rem;
+        left: 8rem;
     }
-
-    .filter__categories {
-        padding: 0;
-        height: 0;
+    .filter__dates {
+        max-width: 65rem;
+        left: 8rem;
     }
-
-    .filter__categories {
+    .filter__category {
+        min-width: 70rem;
         width: inherit;
+    }
+
+    .filter__tag {
+        min-width: 70rem;
+        width: inherit;
+    }
+    .filter__category .filter__dropdown {
+        left: 8rem;
+    }
+    .filter__tag .filter__dropdown {
+        left: 8rem;
+    }
+    .filter__dropdown .element{
+        max-height: calc(100vh - 30rem);
+    }
+    .filter__dropdown .grid {
+        grid-template-columns: 1fr 1fr;
     }
 }
 

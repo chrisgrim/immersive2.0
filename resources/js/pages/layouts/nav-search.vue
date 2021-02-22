@@ -21,8 +21,8 @@
             :filterable="false"
             :get-option-label="searchBoxInput => searchBoxInput.model.name"
             :reduce="searchBoxInput => searchBoxInput.model"
-            @search="generateSearchList" 
-            @search:focus="generateSearchList" 
+            @search="debounce" 
+            @search:focus="debounce" 
             @input="searchInput">
             <template #option="{ model }">
                 <div 
@@ -176,6 +176,14 @@ export default {
     },
 
     methods: {
+
+        debounce(query) {
+            if (this.timeout) 
+                clearTimeout(this.timeout); 
+            this.timeout = setTimeout(() => {
+                this.generateSearchList(query);
+            }, 200); // delay
+        },
 
         async generateSearchList (query) {
             // if ( query && query.length < 3 ) { return }

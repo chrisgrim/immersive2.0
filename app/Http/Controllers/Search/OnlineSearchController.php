@@ -42,6 +42,7 @@ class OnlineSearchController extends Controller
         ->paginate(12);
 
 
+
         $content = tap($searchRequest->toArray(), function (array &$content) {
             $content['data'] = Arr::pluck($content['data'], 'model');
         });

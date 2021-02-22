@@ -2,7 +2,6 @@
     <div class="online search">
         <SearchFilter
             @allevents="updateAllEvents"
-            :page="pagination"
             :allevents="allevents" 
             :tags="tags" 
             :categories="categories" />
@@ -39,7 +38,6 @@
         data() {
             return {
                 allEventList: this.allevents,
-                pagination: 1,
             }
         },
 
@@ -49,7 +47,7 @@
             },
 
             selectPage (page) {
-                this.pagination = page
+                this.$store.commit('filterPagination', page)
             },
         },
     };

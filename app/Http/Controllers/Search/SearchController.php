@@ -28,6 +28,7 @@ class SearchController extends Controller
             ->join(Category::class)
             ->join(Genre::class)
             ->join(CityList::class)
+            // ->boostIndex(CityList::class, 2)
             ->fields(['name', 'name._2gram','name._3gram'])
             ->query($request->keywords)
             // ->analyzer('rebuilt_english')

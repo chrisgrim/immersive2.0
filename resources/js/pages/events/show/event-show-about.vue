@@ -1,7 +1,7 @@
 <template>
     <section>
         <div class="es__title pad4">
-            <a :href="`/index/search-online?category=${event.category.id}`">
+            <a :href="`/index/search-all?category=${event.category.id}`">
                 <span class="es__title--category"> {{ event.category.name }} </span>
             </a>
             <span class="es__title--name"><h1> {{ event.name }} </h1></span>

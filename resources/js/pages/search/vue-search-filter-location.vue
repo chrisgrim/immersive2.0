@@ -33,7 +33,7 @@
     
     export default {
 
-        props:['categories', 'events', 'onlineevents', 'tags', 'page', 'onlinepage'],
+        props:['categories', 'events', 'onlineevents', 'tags'],
 
         components: { vueNavSearch, VueFilterDates, VueFilterPrice, VueFilterCategory, VueFilterTag },
 
@@ -63,7 +63,6 @@
         data() {
             return {
                 active:'',
-                onlinePage: 1,
                 searchType: 'location',
                 mobile: window.innerWidth < 768,
                 boundaries: '',
@@ -77,8 +76,8 @@
             submit() {
                 this.reset();
                 axios.all([
-                    axios.post(`/api/search/mapboundary?page=1`, this.data),
-                    axios.post(`/api/search/online?page=1`, this.data)
+                    axios.post(`/api/search/mapboundary?page=${this.$store.state.pagination}`, this.data),
+                    axios.post(`/api/search/online?page=${this.$store.state.onlinePagination}`, this.data)
                 ])
                 .then(axios.spread((data1, data2) => {
                     this.$emit('locationevents', data1.data);
@@ -99,6 +98,8 @@
             },
 
             addData() {
+                this.$store.commit('filterPagination', 1)
+                this.$store.commit('filterOnlinePagination', 1)
                 this.data.category = this.$store.state.filterCategory.map(cat => cat.id)
                 this.data.dates = this.$store.state.filterDates;
                 this.data.price = this.$store.state.filterPrice;
@@ -127,11 +128,12 @@
                 return this.submit();
             },
 
-            page() {
-                axios.post(`/api/search/mapboundary?page=${this.page}`, this.data)
-                .then(res => {
-                    this.$emit('locationevents', res.data);
-                });
+            '$store.state.pagination'() {
+                this.submit()
+            },
+
+            '$store.state.onlinePagination'() {
+                this.submit()
             },
 
             '$store.state.filter': function(n) {
@@ -143,6 +145,7 @@
 
         created() {
             this.getPushState();
+            this.addData();
         },
 
 

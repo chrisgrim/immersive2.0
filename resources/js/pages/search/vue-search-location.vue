@@ -40,7 +40,6 @@
                 <SearchFilter
                     @locationevents="updateEvents"
                     @onlineevents="updateOnlineEvents"
-                    :page="pagination"
                     :events="searchedevents" 
                     :tags="tags" 
                     :categories="categories" />
@@ -64,7 +63,6 @@
                     <SearchFilter
                         @locationevents="updateEvents"
                         @onlineevents="updateOnlineEvents"
-                        :page="pagination"
                         :events="searchedevents" 
                         :tags="tags" 
                         :categories="categories" />
@@ -135,8 +133,6 @@
                 onlineEventList: this.onlineevents,
                 mobile: window.innerWidth < 768,
                 shiftDown: `transform: translate3d(0px, 0px, 0px);`,
-                pagination: 1,
-                onlinePagination: 1,
             }
         },
 
@@ -153,11 +149,11 @@
             },
 
             selectPage (page) {
-                this.pagination = page
+                this.$store.commit('filterPagination', page)
             },
 
             selectOnlinePage (page) {
-                this.onlinePagination = page
+                this.$store.commit('filterOnlinePagination', page)
             },
 
             showEvents() {

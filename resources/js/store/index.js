@@ -32,6 +32,8 @@ state: {
     filterNaturalDates: [],
     filterCategory: [],
     filterTag: [],
+    pagination: 1,
+    onlinePagination: 1,
   },
 
 
@@ -84,6 +86,12 @@ mutations: {
     },
     filterNaturalDates ( state, naturaldates) {
         state.filterNaturalDates = naturaldates
+    },
+    filterPagination ( state, pagination) {
+        state.pagination = pagination
+    },
+    filterOnlinePagination ( state, onlinePagination) {
+        state.onlinePagination = onlinePagination
     }
 },
 actions: {

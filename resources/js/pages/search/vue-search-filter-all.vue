@@ -32,7 +32,7 @@
     
     export default {
 
-        props:['categories', 'events', 'allevents', 'tags', 'page'],
+        props:['categories', 'events', 'allevents', 'tags'],
 
         components: { VueFilterDates, VueFilterPrice, VueFilterCategory, VueFilterTag },
 
@@ -41,6 +41,7 @@
         data() {
             return {
                 searchType: 'location',
+                filter: 'all',
                 data: {
                     category: [],
                     dates: [],
@@ -53,10 +54,10 @@
         methods: {
 
             submit() {
-                axios.post(`/api/search/all?page=${this.page}`, this.data)
+                axios.post(`/api/search/all?page=${this.$store.state.pagination}`, this.data)
                 .then(data => {
                     this.$emit('allevents', data);
-                    this.addPushState();
+                    this.addPushState(data);
                 })
                 .catch(err => {this.onErrors(err);});
             },
@@ -67,6 +68,7 @@
             },
 
             addData() {
+                this.$store.commit('filterPagination', 1)
                 this.data.category = this.$store.state.filterCategory.map(cat => cat.id)
                 this.data.dates = this.$store.state.filterDates;
                 this.data.price = this.$store.state.filterPrice;
@@ -75,13 +77,14 @@
         },
 
         watch: {
-            page() {
+            '$store.state.pagination'() {
                 this.submit()
-            },
+            }
         },
 
         created() {
             this.getPushState();
+            this.addData();
         },
 
 

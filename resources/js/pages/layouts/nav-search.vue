@@ -178,19 +178,16 @@ export default {
     methods: {
 
         async generateSearchList (query) {
-            console.log(query);
             // if ( query && query.length < 3 ) { return }
             if (this.searchtype === 'location') {
                 await axios.get('/api/search/navbar/location', { params: { keywords: query } })
                 .then( res => {
                     this.searchBoxOptions = res.data;
-                    console.log(res.data);
                 })
             } else {
                 await axios.get('/api/search/navbar', { params: { keywords: query } })
                 .then( res => {
                     this.searchBoxOptions = res.data;
-                    console.log(res.data);
                 })
             }
         },

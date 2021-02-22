@@ -32,7 +32,7 @@
     
     export default {
 
-        props:['categories', 'events', 'onlineevents', 'tags', 'page', 'onlinepage'],
+        props:['categories', 'events', 'onlineevents', 'tags'],
 
         components: { VueFilterDates, VueFilterPrice, VueFilterCategory, VueFilterTag },
 
@@ -41,6 +41,7 @@
         data() {
             return {
                 searchType: 'location',
+                filter: 'online',
                 data: {
                     category: [],
                     dates: [],
@@ -53,7 +54,7 @@
         methods: {
 
             submit() {
-                axios.post(`/api/search/online?page=${this.onlinepage}`, this.data)
+                axios.post(`/api/search/online?page=${this.$store.state.pagination}`, this.data)
                 .then(data => {
                     this.$emit('onlineevents', data);
                     this.addPushState();
@@ -67,6 +68,7 @@
             },
 
             addData() {
+                this.$store.commit('filterPagination', 1)
                 this.data.category = this.$store.state.filterCategory.map(cat => cat.id)
                 this.data.dates = this.$store.state.filterDates;
                 this.data.price = this.$store.state.filterPrice;
@@ -75,13 +77,14 @@
         },
 
         watch: {
-            onlinepage() {
+            '$store.state.pagination'() {
                 this.submit()
-            },
+            }
         },
 
         created() {
             this.getPushState();
+            this.addData();
         },
 
 

@@ -2,7 +2,6 @@
     <div class="online search">
         <SearchFilter
             @onlineevents="updateOnlineEvents"
-            :onlinepage="onlinePagination"
             :onlineevents="onlineevents" 
             :tags="tags" 
             :categories="categories" />
@@ -39,7 +38,6 @@
         data() {
             return {
                 onlineEventList: this.onlineevents,
-                onlinePagination: 1,
             }
         },
 
@@ -49,7 +47,7 @@
             },
 
             selectOnlinePage (page) {
-                this.onlinePagination = page
+                 this.$store.commit('filterPagination', page)
             },
         },
 

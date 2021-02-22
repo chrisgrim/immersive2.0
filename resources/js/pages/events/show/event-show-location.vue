@@ -38,7 +38,12 @@
                                     <l-icon
                                         :iconSize="[25, 40]"
                                         :iconAnchor="[0,40]">
-                                        <img src="/images/vendor/leaflet/dist/marker-icon-2x.png" alt="">
+                                        <a 
+                                            rel="noreferrer" 
+                                            target="_blank" 
+                                            :href="`http://maps.google.com/maps?q=${location.home?location.home:''}+${location.street?location.street:''},+${location.city?location.city:''},+${location.region?location.region:''}`">
+                                            <img src="/images/vendor/leaflet/dist/marker-icon-2x.png" alt="location marker">
+                                        </a>
                                     </l-icon>
                                 </l-marker>
                             </l-map>

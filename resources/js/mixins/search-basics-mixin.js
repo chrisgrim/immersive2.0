@@ -32,36 +32,39 @@ export default {
             if (this.data.lng) {
                 var lng = `lng=${this.data.lng}`
             }
-            if (this.data.category) {
+            if (this.data.category.length) {
                 var category = `category=${this.data.category}`
             }
             if (this.data.dates.length) {
                 var dates = `start=${this.data.dates[0]}&end=${this.data.dates[1]}`
             }
-            if (this.data.price) {
+            if (this.data.price.length) {
                 var price = `price0=${this.data.price[0]}&price1=${this.data.price[1]}`
             }
-            if (this.data.tag) {
+            var page = `page=${this.$store.state.pagination}`
+            if (this.data.tag.length) {
                 var tag = `tag=${this.data.tag}`
             }
             if (this.data.mapboundary) {
                 var mapboundary = `mapsearch=true&NElat=${this.data.mapboundary._northEast.lat}&NElng=${this.data.mapboundary._northEast.lng}&SWlat=${this.data.mapboundary._southWest.lat}&SWlng=${this.data.mapboundary._southWest.lng}&Clat=${this.center.lat}&Clng=${this.center.lng}&zoom=${this.zoom}`;
             }
-            let content = `${city ? city : ''}&${lat ? lat : ''}&${lng ? lng : ''}&${category ? category : '' }&${dates ? dates : ''}&${price ? price : ''}&${tag ? tag : '' }&${mapboundary ? mapboundary : ''}`;
+            let content = `${city ? city : ''}&${lat ? lat : ''}&${lng ? lng : ''}&${category ? category : '' }&${dates ? dates : ''}&${price ? price : ''}&${tag ? tag : '' }&${mapboundary ? mapboundary : ''}&${page ? page : '' }`;
             if (this.data.lat || this.data.mapboundary) {
                 history.pushState(null, null,`/index/search?${content}`)
             } else {
-                history.pushState(null, null,`/index/search-online?${content}`)
+                if (this.filter === 'all') {
+                    history.pushState(null, null,`/index/search-all?${content}`)
+                } else {
+                    history.pushState(null, null,`/index/search-online?${content}`)
+                }
             }
         },
 
         getPushState() {
             this.$store.commit('searchtype', '');
-            
             if (this.url.category) {
                 let arr = this.url.category.split(',').map(Number);
                 this.url.category = this.categories.filter(element => arr.includes(element.id));
-                console.log(this.url.category);
                 this.$store.commit('filterCategory', this.url.category)
             }
             if (this.url.tag) {

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "17fd33cb6911092d66619cc0797b0c9f",
+    "content-hash": "f5c59141cf5c4d14293b1500399f146a",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -64,16 +64,16 @@
         },
         {
             "name": "babenkoivan/elastic-adapter",
-            "version": "v1.10.0",
+            "version": "v1.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/babenkoivan/elastic-adapter.git",
-                "reference": "262a15835101e26a47a543fc6d30927751b502af"
+                "reference": "e89e5dbda88de881f531add3ceed2658c6455eea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/babenkoivan/elastic-adapter/zipball/262a15835101e26a47a543fc6d30927751b502af",
-                "reference": "262a15835101e26a47a543fc6d30927751b502af",
+                "url": "https://api.github.com/repos/babenkoivan/elastic-adapter/zipball/e89e5dbda88de881f531add3ceed2658c6455eea",
+                "reference": "e89e5dbda88de881f531add3ceed2658c6455eea",
                 "shasum": ""
             },
             "require": {
@@ -111,9 +111,19 @@
             ],
             "support": {
                 "issues": "https://github.com/babenkoivan/elastic-adapter/issues",
-                "source": "https://github.com/babenkoivan/elastic-adapter/tree/v1.10.0"
+                "source": "https://github.com/babenkoivan/elastic-adapter/tree/v1.12.0"
             },
-            "time": "2021-01-05T11:10:37+00:00"
+            "funding": [
+                {
+                    "url": "https://www.buymeacoffee.com/ivanbabenko",
+                    "type": "buymeacoffee"
+                },
+                {
+                    "url": "https://paypal.me/babenkoi",
+                    "type": "paypal"
+                }
+            ],
+            "time": "2021-02-01T12:44:21+00:00"
         },
         {
             "name": "babenkoivan/elastic-client",
@@ -308,20 +318,20 @@
         },
         {
             "name": "babenkoivan/elastic-scout-driver-plus",
-            "version": "v1.15.0",
+            "version": "v1.18.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/babenkoivan/elastic-scout-driver-plus.git",
-                "reference": "f09dc64040d011f79636d68fa691000e49b5439e"
+                "reference": "0e4ae22e67a37926659294db834278e3133eecbf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/babenkoivan/elastic-scout-driver-plus/zipball/f09dc64040d011f79636d68fa691000e49b5439e",
-                "reference": "f09dc64040d011f79636d68fa691000e49b5439e",
+                "url": "https://api.github.com/repos/babenkoivan/elastic-scout-driver-plus/zipball/0e4ae22e67a37926659294db834278e3133eecbf",
+                "reference": "0e4ae22e67a37926659294db834278e3133eecbf",
                 "shasum": ""
             },
             "require": {
-                "babenkoivan/elastic-adapter": "^1.10.0",
+                "babenkoivan/elastic-adapter": "^1.11.0",
                 "php": "^7.2"
             },
             "require-dev": {
@@ -367,9 +377,19 @@
             ],
             "support": {
                 "issues": "https://github.com/babenkoivan/elastic-scout-driver-plus/issues",
-                "source": "https://github.com/babenkoivan/elastic-scout-driver-plus/tree/v1.15.0"
+                "source": "https://github.com/babenkoivan/elastic-scout-driver-plus/tree/v1.18.1"
             },
-            "time": "2021-01-05T11:22:40+00:00"
+            "funding": [
+                {
+                    "url": "https://www.buymeacoffee.com/ivanbabenko",
+                    "type": "buymeacoffee"
+                },
+                {
+                    "url": "https://paypal.me/babenkoi",
+                    "type": "paypal"
+                }
+            ],
+            "time": "2021-02-10T20:59:13+00:00"
         },
         {
             "name": "brick/math",

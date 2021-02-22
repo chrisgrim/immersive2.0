@@ -16,6 +16,9 @@ class Search extends Model
      */
     public static function convertUrl($request)
     {
+        if ($request->price0 || $request->price1) {
+            $request->request->add(['price' => [$request->price0, $request->price1]]);
+        }
         if ($request->price && $request->price[1] >= 100) {
             $low = $request->price[0];
             $request->request->add(['price' => [$low, 9999]]);

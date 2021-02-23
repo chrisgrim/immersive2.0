@@ -5,7 +5,6 @@ use App\Http\Controllers\EventController;
 
 Route::GET('/', 'EventController@index')->name('home');
 
-Route::GET('/email/verify', 'Auth\VerificationController@show')->name('verification.notice');
 Route::GET('/login/{provider}', 'Auth\LoginController@redirectToProvider');
 Route::GET('/login/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
 

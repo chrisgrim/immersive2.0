@@ -41,7 +41,7 @@ export default {
         },
 
         onRegistered() {
-            return window.location.href = '/email/verify';
+            return window.location.href = '/verify-email';
         },
 
         onFinishOrganizer(value) {

@@ -2,12 +2,18 @@
   #Grid Data Component
 \*------------------------------------*/
 
+
 .data-grid {
     width: 100%;
     background: white;
     border: 1px solid #DDDDDD;
     border-radius: 1rem;
     overflow: hidden;
+}
+
+.data-grid .center {
+    text-align: center;
+    margin: auto;
 }
 
 .data-grid__row {
@@ -31,6 +37,7 @@
     color: black;
     font-size: 1.4rem;
     display: inline-block;
+    line-height: 1.6rem;
 }
 
 .data-grid__row img {
@@ -58,6 +65,12 @@
     border: 0;
     text-decoration: underline;
     padding: 0;
+    display: block;
+    font-size: 1.4rem;
+}
+.data-grid__row button.noBox.sm {
+   font-size: 0.5rem;
+   font-weight: 800;
 }
 
 .data-grid__row button.delete {
@@ -65,13 +78,20 @@
     padding: 0;
 }
 
-.organizers .data-grid__row{
+.organizers .data-grid__row {
     grid-template-columns: 5rem 1fr 1fr 1.5fr 5rem;
 }
-.users .data-grid__row{
+.users .data-grid__row {
     grid-template-columns: 1fr 1fr 1.5fr 5rem;
 }
-.admin-events .data-grid__row{
+.admin-events .data-grid__row {
     grid-template-columns: 5rem 1fr 1fr 5rem;
+}
+.event-edit .data-grid__row {
+    grid-template-columns: 5rem 1fr 15rem 15rem 15rem;
+}
+.event-edit .data-grid__row img {
+    width: 8rem;
+    border-radius: 0.4rem;
 }
 

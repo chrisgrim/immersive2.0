@@ -85,7 +85,7 @@ class Organizer extends Model
     */
     public function events() 
     {
-        return $this->hasMany(Event::class);
+        return $this->hasMany(Event::class)->orderByDesc('updated_at');
     }
     
     /**
@@ -193,8 +193,10 @@ class Organizer extends Model
         $organizers = auth()->user()->allOrganizers();
 
         foreach ($organizers as $organizer) {
-            $organizer->setRelation('pastEvents', $organizer->pastEvents()->paginate(7));
-            $organizer->setRelation('inProgressEvents', $organizer->inProgressEvents()->paginate(7));
+            $organizer->load('events');
+            // $organizer->setRelation('pastEvents', $organizer->pastEvents()->paginate(7));
+            // $organizer->setRelation('inProgressEvents', $organizer->inProgressEvents()->paginate(7));
+            // $organizer->setRelation('all', $organizer->events()->paginate(10));
         }
 
         return $organizers;

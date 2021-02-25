@@ -2,19 +2,21 @@
   #Event- Event Edit Page
 \*------------------------------------ */
 
+.event-edit {
+    padding: 0 8rem;
+}
+
 .event-edit__organizer {
     margin-top: 7rem;
 }
 
 .organizer-card {
-    width: 77%;
-    height: 8rem;
     position: relative;
     grid-template-columns: 6rem auto auto;
     -webkit-box-align: center;
     align-items: center;
     grid-gap: 2rem;
-    margin: auto;
+    margin-bottom: 2rem;
 }
 
 .organizer-card__image {
@@ -53,11 +55,42 @@
     line-height: 4.4rem;
 }
 
+.event-edit .status-circle {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 5rem;
+}
+
 .organizer-card__nav {
     text-align: right;
 }
 
-button.edit-organizer {
+button.solid {
+    color: #fff;
+    border-radius: 0.4rem;
+    border-width: 0.1rem;
+    background: #008489;
+    border-color: transparent;
+    font-size: 1.4rem;
+    font-weight: 600;
+    padding: 0.6rem 1.5rem;
+    line-height: 2.2rem;
+    min-width: 4.8rem;
+}
+button.outline {
+    color: #008489;
+    border-radius: 0.4rem;
+    background: #fff;
+    border: 1px solid #008489;
+    display: inline-block;
+    font-size: 1.4rem;
+    font-weight: 600;
+    padding: 0.6rem 1.5rem;
+    line-height: 2.2rem;
+    min-width: 4.8rem;
+}
+
+/*button.edit-organizer {
     color: #008489;
     border-radius: 0.4rem;
     background: #fff;
@@ -82,7 +115,7 @@ button.preview-organizer {
     line-height: 2.2rem;
     min-width: 4.8rem;
 }
-
+*/
 .event-edit__eventlist {
     padding: 4rem 8rem 4rem 8rem;
 }

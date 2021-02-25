@@ -164,7 +164,7 @@
                 <button 
                     v-else
                     class="event-bottom-bar__button">
-                    Head to event
+                    View Event
                 </button>
             </a>
         </div>

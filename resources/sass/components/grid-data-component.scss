@@ -77,6 +77,12 @@
     border: 0;
     padding: 0;
 }
+.data-grid__row .lg img {
+    width: 8rem;
+    border-radius: 0.4rem;
+}
+
+
 
 .organizers .data-grid__row {
     grid-template-columns: 5rem 1fr 1fr 1.5fr 5rem;
@@ -90,8 +96,11 @@
 .event-edit .data-grid__row {
     grid-template-columns: 5rem 1fr 15rem 15rem 15rem;
 }
-.event-edit .data-grid__row img {
-    width: 8rem;
-    border-radius: 0.4rem;
+.event-edit .data-grid__row {
+    grid-template-columns: 5rem 1fr 15rem 15rem 15rem;
 }
+.c-staffpicks .data-grid__row {
+    grid-template-columns: 1fr 1fr 10rem 10rem 15rem 5rem;
+}
+
 

@@ -13,19 +13,19 @@
 
         <Vue-Add-Staffpick v-if="add" />
 
-        <div class="c-staffpicks__list">
-            <div class="field c-staffpicks__list--filter">
-                <label>Filter by User</label>
-                <v-select 
-                    v-model="user"
-                    :options="loadstaff"
-                    label="name"
-                    placeholder="filter by user"
-                    @search:blur="active = null"
-                    @search:focus="active = 'rank'"
-                    @input="onLoad" />
-            </div>
-            <div class="c-staffpicks__list--grid-top">
+        <div class="field c-staffpicks__list--filter">
+            <label>Filter by User</label>
+            <v-select 
+                v-model="user"
+                :options="loadstaff"
+                label="name"
+                placeholder="filter by user"
+                @search:blur="active = null"
+                @search:focus="active = 'rank'"
+                @input="onLoad" />
+        </div>
+        <div class="data-grid">
+            <div class="data-grid__row header">
                 <p>event</p>
                 <p>comments</p>
                 <p>user</p>
@@ -35,10 +35,10 @@
             <div 
                 v-for="pick in staffpicks.data"
                 :key="pick.id"
-                class="list c-staffpicks__list--grid">
+                class="data-grid__row">
                 <div
                     v-if="pick.event"
-                    class="image">
+                    class="image lg">
                     <img 
                         class="c-staffpicks__list--image" 
                         :src="/storage/ + pick.event.thumbImagePath" 
@@ -51,7 +51,7 @@
                     <textarea 
                         v-model="pick.comments" 
                         class="create-input area" 
-                        rows="3"
+                        rows="1"
                         :class="{ active: active == `${pick.id}comments`}"
                         placeholder=" "
                         @click="active = `${pick.id}comments`"
@@ -83,7 +83,7 @@
                 </div>
                 <button 
                     @click.prevent="showModal(pick, 'delete')" 
-                    class="delete-circle">
+                    class="delete">
                     <IconSvg type="delete" />
                 </button>
             </div>

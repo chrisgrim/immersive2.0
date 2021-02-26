@@ -66,7 +66,7 @@
                                     :style="getStatusCircle(event)"
                                     class="status-circle" />
                             </div>
-                            <div>
+                            <div class="lg">
                                 <a 
                                     target="_blank"
                                     :href="`/create/${event.slug}/title`">

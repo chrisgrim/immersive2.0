@@ -9,6 +9,7 @@ use Laravel\Scout\Searchable;
 use ElasticScoutDriverPlus\CustomSearch;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Events\EventRequest;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 use Intervention\Image\ImageManagerStatic as Image;
@@ -266,7 +267,17 @@ class Event extends Model
      */
     public function shows() 
     {
-        return $this->hasMany(Show::class)->orderBy('date', 'DESC');;
+        return $this->hasMany(Show::class)->orderBy('date', 'DESC');
+    }
+
+    /**
+     * Each event has many eventrequest
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function eventRequest() 
+    {
+        return $this->hasMany(EventRequest::class);
     }
 
     /**

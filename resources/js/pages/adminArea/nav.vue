@@ -14,10 +14,10 @@
                     :class="{active: active == 'approve'}" 
                     class="admin-menu__item">
                     <div 
-                        v-if="user.needsApproval" 
+                        v-if="eventApproval" 
                         class="admin-menu__notification">
                         <p>
-                            {{ user.needsApproval }}
+                            {{ eventApproval }}
                         </p>
                     </div>
                     Approve Events
@@ -29,15 +29,31 @@
                     :class="{active: active == 'orgApprove'}" 
                     class="admin-menu__item">
                     <div 
-                        v-if="user.needsOrgApproval" 
+                        v-if="orgApproval" 
                         class="admin-menu__notification">
                         <p>
-                            {{ user.needsOrgApproval }}
+                            {{ orgApproval }}
                         </p>
                     </div>
                     Approve Organizers
                 </button>
             </a>
+
+            <a href="/admin/event-requests">
+                <button 
+                    :class="{active: active == 'requestApprove'}" 
+                    class="admin-menu__item">
+                    <div 
+                        v-if="requestApproval" 
+                        class="admin-menu__notification">
+                        <p>
+                            {{ requestApproval }}
+                        </p>
+                    </div>
+                    Approve Requests
+                </button>
+            </a>
+
             <a 
                 v-if="admin" 
                 href="/admin/events">
@@ -195,10 +211,23 @@
                 mod: this.loaduser.type == 'm' ? true : false,
                 active: '',
                 advisories: false,
+                eventApproval: '',
+                orgApproval: '',
+                requestApproval: ''
             };
         },
 
         methods: {
+
+            getStatus() {
+                axios.get('/admin/nav/fetch')
+                .then( res => {
+                    this.eventApproval = res.data.event;
+                    this.orgApproval = res.data.org;
+                    this.requestApproval = res.data.request;
+                })
+            },
+
             onLoad() {
                 let path = new URL(window.location.href).pathname;
                 path == '/categories/create' ? this.active = 'categories' : '';
@@ -216,16 +245,18 @@
                 path == '/reviewevents/create' ? this.active = 'reviews' : '';
                 path == '/staffpicks/create' ? this.active = 'picks' : '';
                 path == '/admin/organizers/finalize' ? this.active = 'orgApprove' : '';
+                path == '/admin/event-requests' ? this.active = 'requestApprove' : '';
                 path == '/admin/events/finalize' ? this.active = 'approve' : '';
 
                 if (this.active == 'contact' || this.active == 'remote' || this.active == 'mobilities' || this.active == 'interactive' || this.active == 'interactive') {
                     this.advisories = true;
                 }
-            }
+            },
         },
 
         mounted() {
             this.onLoad();
+            this.getStatus();
         },  
     }
 </script>

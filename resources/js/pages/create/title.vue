@@ -20,7 +20,7 @@
                 <button 
                     class="editTitle" 
                     v-if="resubmit" 
-                    @click.prevent="modal=true">
+                    @click.prevent="modal = 'changeEventName'">
                     Edit
                 </button>
             </div>
@@ -66,20 +66,19 @@
             previous="exit"
             next="location" 
             :event="event" />
-        <modal v-if="modal" @close="modal = false">
-            <div slot="header">
-                <div class="circle del">
-                    <p>?</p>
-                </div>
+        <VueModalForm 
+            v-if="modal === 'changeEventName'"
+            @onSubmit="changeTitle"
+            placeholder="New title and reason for title change"
+            @close="modal = null">
+            <h3>Change Event Title: {{ event.name }}</h3>
+            <p>Please let us know why you are changing the title and what you would like the new title to be. We generally make changes in 2-3 days.</p>
+        </VueModalForm>
+        <transition name="slide-fade">
+            <div v-if="titleUpdated" class="updated-notifcation">
+                <p>Your title change request has been submitted.</p>
             </div>
-            <div slot="body"> 
-                <h3>Changing the event name?</h3>
-                <p>Editing the event name will require the event to be reapproved.</p>
-            </div>
-            <div slot="footer">
-                <button class="btn del" @click="onResubmit()">Change</button>
-            </div>
-        </modal>
+        </transition>
         <transition name="slide-fade">
             <div v-if="updated" class="updated-notifcation">
                 <p>Your event has been updated.</p>
@@ -93,6 +92,7 @@
 	import { required, maxLength } from 'vuelidate/lib/validators';
     import Submit  from './components/submit-buttons.vue'
     import VueNewBeginner  from './components/vue-title-beginner.vue'
+    import VueModalForm from '../../components/Vue-Modal-Form'
 
 	export default {
 
@@ -100,7 +100,7 @@
 
 		props: ['event', 'newsubmission'],
 
-        components: { Submit, VueNewBeginner },
+        components: { Submit, VueNewBeginner, VueModalForm },
 
         computed: {
             endpoint() {
@@ -114,12 +114,14 @@
                 active: null,
                 disabled:false,
                 resubmit: false,
-                modal: false,
+                modal: '',
                 approved: this.event.status == 'p' || this.event.status == 'e' ? true : false,
                 serverErrors: '',
                 updated: false,
+                titleUpdated: false,
                 newEvent: this.newsubmission,
                 creationPage: 1,
+                nameChange: ''
 			}
 		},
 
@@ -138,6 +140,13 @@
 				await axios.patch( this.endpoint, this.title )
                 value == 'save' ? this.save() : this.onForward( value );
 			},
+
+            async changeTitle(value) {
+                await axios.patch( `/create/${this.event.slug}/change-title`, { changeName: value } )
+                this.modal = '';
+                this.titleUpdated = true;
+                setTimeout(() => this.titleUpdated = false, 3000);
+            },
 
             onResubmit() {
                 this.title.resubmit = 'resubmit';

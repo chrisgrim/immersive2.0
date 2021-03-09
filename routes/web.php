@@ -42,6 +42,10 @@ Route::GET('/admin/dashboard', 'Admin\AdminAreaController@index');
 
 //Admin Events
 Route::GET('/admin/events', 'Admin\EventController@index');
+Route::GET('/admin/event-requests', function () { return view('adminArea.eventrequests'); });
+Route::GET('/admin/event-requests/fetch', 'Admin\EventController@eventRequests');
+Route::POST('/admin/event-requests/delete/{EventRequest}', 'Admin\EventController@removeRequest');
+Route::POST('/admin/event-requests/respond/{EventRequest}', 'Admin\EventController@respondRequest');
 Route::GET('/admin/events/show/{event}', 'Admin\EventController@show');
 Route::POST('/admin/events/fetch', 'Admin\EventController@fetch');
 Route::POST('/admin/event/{event}/approve', 'Admin\EventController@approve');
@@ -56,6 +60,7 @@ Route::POST('/admin/event/boneyard/{event}/resurrect', 'Admin\BoneyardController
 Route::GET('/admin/boneyard', 'Admin\BoneyardController@index');
 Route::GET('/admin/events/purgatory', 'Admin\PurgatoryController@index');
 Route::POST('/admin/events/purgatory/fetch', 'Admin\PurgatoryController@fetch');
+Route::GET('/admin/nav/fetch', 'Admin\AdminAreaController@nav');
 
 //Admin Users
 Route::GET('/admin/users', 'Admin\UsersController@index');
@@ -110,7 +115,8 @@ Route::POST('/create/{organizer}/events/fetch', 'Create\EventController@fetch');
 //Create Title
 Route::GET('/create/{event}/title', 'Create\TitleController@create');
 Route::GET('/create/{event}/title/fetch', 'Create\TitleController@fetch');
-Route::PATCH('/create/{event}/title ', 'Create\TitleController@update');
+Route::PATCH('/create/{event}/title', 'Create\TitleController@update');
+Route::PATCH('/create/{event}/change-title', 'Create\TitleController@changeTitle');
 //Create Location
 Route::GET('/create/{event}/location', 'Create\LocationController@create');
 Route::GET('/create/{event}/location/fetch', 'Create\LocationController@fetch');

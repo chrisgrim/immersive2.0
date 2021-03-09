@@ -106,6 +106,7 @@ Vue.component('admin-content-advisories', () => import(/* webpackChunkName: "ass
 Vue.component('vue-admin-remote-locations', () => import(/* webpackChunkName: "assets/arl" */ './pages/adminArea/admin-remote-locations.vue'));
 Vue.component('vue-admin-interactive-levels', () => import(/* webpackChunkName: "assets/ail" */ './pages/adminArea/admin-interactive-levels.vue'));
 Vue.component('vue-admin-event-show', () => import(/* webpackChunkName: "assets/aes" */ './pages/adminArea/admin-event-show.vue'));
+Vue.component('vue-admin-event-requests', () => import(/* webpackChunkName: "assets/aers" */ './pages/adminArea/admin-event-requests.vue'));
 
 
 //Profile

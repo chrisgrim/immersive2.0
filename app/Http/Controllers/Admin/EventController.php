@@ -7,6 +7,7 @@ use App\Models\Organizer;
 use App\Models\Event;
 use App\Models\MakeImage;
 use App\Models\Message;
+use App\Models\Events\EventRequest;
 use App\Models\AdminArea;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
@@ -191,5 +192,30 @@ class EventController extends Controller
         }
 
         $event->delete();
+    }
+
+    /**
+     * Gets a list of all current event requests
+     */
+    public function eventRequests()
+    {
+        return EventRequest::where('status', 'r')->paginate(50);
+    }
+
+    /**
+     * Respond to Reqest
+     */
+    public function respondRequest(Request $request, EventRequest $EventRequest)
+    {
+        Message::eventnotification($EventRequest->event, $request->response, null);
+        $EventRequest->update([ 'status' => 'p' ]);
+    }
+
+    /**
+     * Remove Reqest
+     */
+    public function removeRequest(EventRequest $EventRequest)
+    {
+        $EventRequest->update([ 'status' => 'p' ]);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Create;
 use App\Http\Controllers\Controller;
 use App\Models\Event;
+use App\Models\Events\EventRequest;
 use Response;
 use Illuminate\Http\Request;
 use App\Http\Requests\TitleStoreRequest;
@@ -40,6 +41,13 @@ class TitleController extends Controller
     public function fetch(Event $event)
     {
         return $event;
+    }
+
+    public function changeTitle(Request $request, Event $event)
+    {
+        $event->eventRequest()->create([
+            'request' => $request->changeName
+        ]);
     }
 
     /**

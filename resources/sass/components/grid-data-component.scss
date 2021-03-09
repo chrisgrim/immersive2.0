@@ -19,7 +19,7 @@
 .data-grid__row {
     width: 100%;
     display: grid;
-    border-bottom: 1px solid #DDDDDD;
+    border-bottom: 1px solid #F2F2F2;
     position: relative;
     align-items: center;
     padding: 1rem;
@@ -82,6 +82,16 @@
     border-radius: 0.4rem;
 }
 
+.data-grid .hover-box {
+    position: absolute;
+    top: -1rem;
+    left: 5rem;
+    padding: 1rem 2rem;
+    background: white;
+    border: 1px solid black;
+    border-radius: 1rem;
+}
+
 
 
 .organizers .data-grid__row {
@@ -95,9 +105,7 @@
 }
 .event-edit .data-grid__row {
     grid-template-columns: 5rem 1fr 15rem 15rem 15rem;
-}
-.event-edit .data-grid__row {
-    grid-template-columns: 5rem 1fr 15rem 15rem 15rem;
+    min-height: 6rem;
 }
 .c-staffpicks .data-grid__row {
     grid-template-columns: 1fr 1fr 10rem 10rem 15rem 5rem;

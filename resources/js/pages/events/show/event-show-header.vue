@@ -55,6 +55,10 @@
         
         props: [ 'event', 'user' ],
 
+        computed: {
+
+        },
+
         data() {
             return {
                 showEventClass: 'es__favorite',

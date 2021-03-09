@@ -128,8 +128,7 @@ Vue.component('organizer-show', () => import(/* webpackChunkName: "assets/os" */
 //Events
 Vue.component('event-show', () => import(/* webpackChunkName: "assets/es" */ './pages/events/event-show.vue'));
 Vue.component('event-index', () => import(/* webpackChunkName: "assets/ei" */ './pages/events/event-index.vue'));
-Vue.component('vue-event-edit', () => import(/* webpackChunkName: "assets/ee" */ './pages/events/event-edit1.vue'));
-//Vue.component('vue-event-edit', () => import(/* webpackChunkName: "assets/ee" */ './pages/events/event-edit.vue'));
+Vue.component('vue-event-edit', () => import(/* webpackChunkName: "assets/ee" */ './pages/events/event-edit.vue'));
 Vue.component('vue-event-edit-listing-item', () => import(/* webpackChunkName: "assets/edi" */ './pages/events/components/event-edit-item.vue'));
 Vue.component('vue-search-online', () => import(/* webpackChunkName: "assets/eos" */ './pages/search/vue-search-online.vue'));
 Vue.component('vue-search-location', () => import(/* webpackChunkName: "assets/esl" */ './pages/search/vue-search-location.vue'));

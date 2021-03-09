@@ -13,6 +13,7 @@
         <script src="{{ mix('/assets/manifest.js') }}" defer></script>
         <script src="{{ mix('/assets/vendor.js') }}" defer></script>
         <script src="{{ mix('/assets/app.js') }}" defer></script>
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link
             rel="preload"
             href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600&display=swap"

@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"organ",
+				"organizers"
+			],
+			[
+				"orga",
+				"organizers"
+			],
+			[
 				"stat",
 				"statusCircle"
 			],
@@ -68,10 +76,6 @@
 				"computerDate"
 			],
 			[
-				"organ",
-				"organization"
-			],
-			[
 				"grid-tem",
 				"grid-template-rows\tproperty"
 			],
@@ -89,10 +93,6 @@
 			],
 			[
 				"org",
-				"organizer"
-			],
-			[
-				"orga",
 				"organizer"
 			],
 			[
@@ -529,19 +529,10 @@
 			}
 		},
 		{
-			"file": "resources/js/pages/events/event-edit1.vue",
+			"file": "resources/js/pages/events/event-edit.vue",
 			"settings":
 			{
-				"buffer_size": 9889,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "resources/sass/events/event-edit.scss",
-			"settings":
-			{
-				"buffer_size": 5012,
+				"buffer_size": 12818,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -550,7 +541,7 @@
 			"file": "resources/sass/components/grid-data-component.scss",
 			"settings":
 			{
-				"buffer_size": 1743,
+				"buffer_size": 2037,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -699,7 +690,6 @@
 		"/Users/chrisgrim/code/ei/resources/js",
 		"/Users/chrisgrim/code/ei/resources/js/pages",
 		"/Users/chrisgrim/code/ei/resources/js/pages/events",
-		"/Users/chrisgrim/code/ei/resources/js/pages/events/components",
 		"/Users/chrisgrim/code/ei/resources/sass",
 		"/Users/chrisgrim/code/ei/resources/sass/components",
 		"/Users/chrisgrim/code/ei/resources/sass/events",
@@ -707,11 +697,18 @@
 	],
 	"file_history":
 	[
+		"/Users/chrisgrim/code/ei/resources/js/app.js",
+		"/Users/chrisgrim/code/ei/resources/js/pages/events/show/event-show-header.vue",
+		"/Users/chrisgrim/code/ei/resources/sass/events/event-edit.scss",
+		"/Users/chrisgrim/code/ei/resources/sass/components/grid-data-component.scss",
+		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/admin-user.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/admin-staff-picks.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/events/event-edit1.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/admin-events.vue",
 		"/Users/chrisgrim/code/ei/app/Models/Organizer.php",
 		"/Users/chrisgrim/code/ei/resources/js/pages/events/show/event-show-quickbuy.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/admin-event-show.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/search/components/vue-location-list.vue",
-		"/Users/chrisgrim/code/ei/resources/js/app.js",
 		"/Users/chrisgrim/code/ei/app/Http/Controllers/Create/EventController.php",
 		"/Users/chrisgrim/code/ei/resources/views/events/index.blade.php",
 		"/Users/chrisgrim/code/ei/app/Http/Controllers/Auth/EmailVerificationPromptController.php",
@@ -719,7 +716,6 @@
 		"/Users/chrisgrim/code/ei/app/Http/Controllers/Auth/RegisteredUserController.php",
 		"/Users/chrisgrim/code/ei/app/Providers/EventServiceProvider.php",
 		"/Users/chrisgrim/code/ei/vendor/laravel/framework/src/Illuminate/Auth/Events/Registered.php",
-		"/Users/chrisgrim/code/ei/resources/js/pages/events/event-edit1.vue",
 		"/Users/chrisgrim/code/ei/app/Http/Controllers/EventController.php",
 		"/Users/chrisgrim/code/ei/resources/views/events/edit.blade.php",
 		"/Users/chrisgrim/code/ei/app/Providers/RouteServiceProvider.php",
@@ -786,7 +782,6 @@
 		"/Users/chrisgrim/code/ei/resources/sass/events/components/search-grid-component.scss",
 		"/Users/chrisgrim/code/ei/resources/sass/app-lite.scss",
 		"/Users/chrisgrim/code/ei/resources/js/mixins/mobile.js",
-		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/admin-events.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/admin-organizer.vue",
 		"/Users/chrisgrim/code/ei/resources/sass/components/vue-modal.scss",
 		"/Users/chrisgrim/code/ei/resources/js/components/Vue-Delete-Modal.vue",
@@ -795,12 +790,10 @@
 		"/Users/chrisgrim/code/ei/app/Http/Kernel.php",
 		"/Users/chrisgrim/code/ei/resources/sass/components/delete-modal.scss",
 		"/Users/chrisgrim/code/ei/vendor/laravel/framework/src/Illuminate/Routing/Middleware/ThrottleRequests.php",
-		"/Users/chrisgrim/code/ei/resources/sass/components/grid-data-component.scss",
 		"/Users/chrisgrim/code/ei/app/Http/Controllers/Admin/OrganizerController.php",
 		"/Users/chrisgrim/code/ei/app/Models/MakeImage.php",
 		"/Users/chrisgrim/code/ei/app/Http/Controllers/Create/ImageController.php",
 		"/Users/chrisgrim/code/ei/app/Http/Controllers/OrganizerController.php",
-		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/admin-user.vue",
 		"/Users/chrisgrim/code/ei/sftp-config.json",
 		"/Users/chrisgrim/code/ei/.gitignore",
 		"/Users/chrisgrim/code/ei/resources/js/pages/events/event-edit.vue",
@@ -831,10 +824,7 @@
 		"/Users/chrisgrim/code/ei/.env",
 		"/Users/chrisgrim/code/ei/resources/js/pages/layouts/register.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/layouts/forgotPassword.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/create/tickets.vue",
-		"/Users/chrisgrim/code/ei/routes/auth.php",
-		"/Users/chrisgrim/code/ei/app/Http/Controllers/Auth/NewPasswordController.php",
-		"/Users/chrisgrim/code/ei/resources/views/auth/register.blade.php"
+		"/Users/chrisgrim/code/ei/resources/js/pages/create/tickets.vue"
 	],
 	"find":
 	{
@@ -924,6 +914,18 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"WIP",
+			"statusDetail",
+			"event is ",
+			"add physical/remote location",
+			"pastShow",
+			"cleanDate",
+			"#de8437",
+			"#dec237",
+			"getStatus",
+			"canDeleteOrganizer",
+			"newEvent",
+			"5rem",
 			"yellow",
 			"green",
 			"statusCircle",
@@ -1039,19 +1041,7 @@
 			"onlinePage",
 			"onlinepage",
 			"online[age",
-			"selectOnlinePage",
-			"nav-search",
-			"filter__price",
-			"results",
-			"search results",
-			"online",
-			"tagline",
-			"search__map--update",
-			"filter__block",
-			"round",
-			"roung",
-			".event__filter",
-			"filter__block .nav-search__content"
+			"selectOnlinePage"
 		],
 		"highlight": false,
 		"in_selection": false,
@@ -1100,24 +1090,24 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "resources/js/pages/events/event-edit1.vue",
+					"file": "resources/js/pages/events/event-edit.vue",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 9889,
+						"buffer_size": 12818,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2835,
-								2835
+								242,
+								242
 							]
 						],
 						"settings":
@@ -1128,7 +1118,7 @@
 							"syntax": "Packages/Vuejs Complete Package/vue.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 928.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -1136,50 +1126,19 @@
 				},
 				{
 					"buffer": 2,
-					"file": "resources/sass/events/event-edit.scss",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 5012,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1105,
-								1105
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/CSS/CSS.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 960.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
 					"file": "resources/sass/components/grid-data-component.scss",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1743,
+						"buffer_size": 2037,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								686,
-								686
+								397,
+								397
 							]
 						],
 						"settings":
@@ -1190,10 +1149,10 @@
 							"syntax": "Packages/CSS/CSS.sublime-syntax"
 						},
 						"translation.x": 0.0,
-						"translation.y": 492.0,
+						"translation.y": 234.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 1,
 					"type": "text"
 				}
 			]

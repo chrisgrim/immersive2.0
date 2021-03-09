@@ -1,13 +1,22 @@
 <template>
     <div class="event-edit">
-        <div 
-            v-for="(organizer) in organizerList"
-            :key="organizer.id">
+        <div class="organizer--select">
+            <v-select 
+                v-model="organizer"
+                label="name"
+                placeholder="Organizations"
+                :clearable="false"
+                :options="organizers" />
+        </div>
+        <a href="/organizer/create">
+            <button style="height:3.9rem;" class="outline"> Add another organization </button>
+        </a>
+        <template v-if="organizer">
             <div class="event-edit__organizer">
                 <div class="organizer-card grid">
                     <div 
                         class="organizer-card__image" 
-                        :style="organizerStyle(organizer)">
+                        :style="organizer.thumbImagePath ? `background-image:url('/storage/${organizer.thumbImagePath.slice(0, -4)}jpg')` : `background:${organizer.hexColor}`">
                         <div 
                             class="organizer-card__image-icontext" 
                             v-if="!organizer.thumbImagePath">
@@ -17,272 +26,237 @@
                     <div class="organizer-card__title">
                         {{ organizer.name }}
                     </div>
-                    <div class="organizer-card__nav"> 
-                        <button
-                            v-if="organizer.status === 'p'"
-                            @click.prevent="showOrganizer(organizer)" 
-                            class="preview-organizer">
-                            Preview Organizer
-                        </button>
-                        <button
-                            v-else
-                            @click.prevent="" 
-                            class="preview-organizer">
-                            Pending Approval
-                        </button>
-                        <a :href="`/organizer/${organizer.slug}/edit`">
-                            <button class="edit-organizer">Edit</button>
+                    <div class="organizer-card__nav">           
+                        <button 
+                            @click.prevent="newEvent" 
+                            class="solid"> Add Event </button>
+                        <a 
+                            v-if="organizer.status === 'p'" 
+                            target="_blank" 
+                            :href="`/organizer/${organizer.slug}`">
+                            <button class="outline">
+                                Preview Organizer
+                            </button>
                         </a>
-                        <template v-if="canDeleteOrganizer(organizer)">
+                        <a :href="`/organizer/${organizer.slug}/edit`">
+                            <button class="outline">Edit</button>
+                        </a>
+                        <template v-if="!organizer.events.length">
                             <button                   
                                 @click.prevent="showModal(organizer, 'deleteOrg')" 
-                                class="edit-organizer">
+                                class="outline">
                                 Delete
                             </button>
                         </template>
                     </div>
                 </div>
-                <div class="listing-details-block">
-                    <tabs>
-                        <tab 
-                            title="Current Events" 
-                            :active="true" 
-                            :id="organizer.id" 
-                            class="event-edit__eventlist">
-                            <vue-event-edit-listing-item
-                                :organizer="organizer" 
-                                :events="organizer.in_progress_events.data" />
-                            <pagination
-                                :list="organizer.in_progress_events"
-                                :limit="2"
-                                @selectpage="selectPage($event, organizer,'current')" />
-                            <modal 
-                                v-if="modal == 'deleteOrg'" 
-                                @close="modal = null">
-                                <div slot="header">
-                                    <div class="circle del">
-                                        <p>X</p>
-                                    </div>
-                                </div>
-                                <div slot="body"> 
-                                    <h3>Are you sure?</h3>
-                                    <p>You are deleting your {{ selectedModal.name }} organizer.</p>
-                                </div>
-                                <div slot="footer">
-                                    <button class="btn del" @click="deleteOrg()">Delete</button>
-                                </div>
-                            </modal>
-                            <modal 
-                                v-if="modal == 'addreview'" 
-                                @close="modal = null">
-                                <div slot="header">
-                                    <h3>Add Review</h3>
-                                </div>
-                                <div slot="body">
-                                    <div class="review">
-                                        <div class="field">
-                                            <input 
-                                                type="text" 
-                                                v-model="reviewername" 
-                                                placeholder="Reviewer's name"
-                                                :class="{ active: activeItem == 'reviewername','error': $v.reviewername.$error}"
-                                                @input="$v.reviewername.$touch()"
-                                                @click="activeItem = 'reviewername'"
-                                                @blur="activeItem = 'reviewername'">
-                                            <div v-if="$v.reviewername.$error" class="validation-error">
-                                                <p class="error" v-if="!$v.reviewername.required">Please add a title.</p>
-                                            </div>
-                                        </div>
-                                        <div class="field">
-                                            <input 
-                                                type="text" 
-                                                v-model="url" 
-                                                @input="$v.url.$touch()"
-                                                placeholder="Link to the review"
-                                                :class="{ active: activeItem == 'url','error': $v.url.$error}"
-                                                @click="activeItem = 'url'"
-                                                @blur="activeItem = 'url'">
-                                            <div v-if="$v.url.$error" class="validation-error">
-                                                <p class="error" v-if="!$v.url.required">Please add a title.</p>
-                                                <p class="error" v-if="!$v.url.url">Must be a url (https://...)</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="field">
-                                        <textarea 
-                                            type="textarea" 
-                                            v-model="review"
-                                            rows="6"
-                                            @input="$v.review.$touch()"
-                                            placeholder="Review snippet (no longer than 120 characters)"
-                                            :class="{ active: activeItem == 'review','error': $v.review.$error}"
-                                            @click="activeItem = 'review'"
-                                            @blur="activeItem = 'review'" />
-                                        <div v-if="$v.review.$error" class="validation-error">
-                                            <p class="error" v-if="!$v.review.required">Must include review snippet</p>
-                                            <p class="error" v-if="!$v.review.maxLength">The review snippit is too long.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div slot="footer">
-                                    <button class="btn del" @click="submitReview()">Submit</button>
-                                </div>
-                            </modal>
-                        </tab>
-                        <tab 
-                            title="Past Events" 
-                            :id="organizer.id + 1" 
-                            class="event-edit__eventlist">
-                            <vue-event-edit-listing-item
-                                tab="current"
-                                :events="organizer.past_events.data" />
-                            <pagination
-                                :list="organizer.past_events"
-                                :limit="2"
-                                @selectpage="selectPage($event, organizer,'past')" />
-                        </tab>
-                    </tabs>
+
+
+                <div class="data-grid">
+                    <div class="data-grid__row header">
+                        <p>Status</p>
+                        <p>Event</p>
+                        <p class="center">To Do</p>
+                        <p class="center">Show Dates Remaining</p>
+                        <p>Last Modified</p>
+                    </div>
+                    <div 
+                        class="data-grid__row"
+                        v-for="(event, index) in organizer.events"
+                        :key="event.id">
+                        <div class="center">
+                            <div
+                                @mouseover="active = index" 
+                                @mouseleave="active = ''"
+                                :style="getStatusCircle(event)"
+                                class="status-circle" />
+                            <div 
+                                v-if="active === index"
+                                class="hover-box">
+                                <p>{{ getStatusDetail(event) }}</p>
+                            </div>
+                        </div>
+                        <div class="lg">
+                            <a 
+                                target="_blank"
+                                :href="`/create/${event.slug}/title`">
+                                <img 
+                                    v-if="event.thumbImagePath"
+                                    :src="`/storage/${event.thumbImagePath}`">
+                                <p v-if="event.name">{{ event.name }} 
+                                    <span 
+                                        style="text-decoration: underline;" 
+                                        v-if="event.status === 'p'">
+                                        (edit live event)
+                                    </span>
+                                </p>
+                                <p v-else>New Event</p>
+                            </a>
+                        </div>
+                        <div class="center">
+                            <p v-if="event.status === 'r'">
+                                {{ getStatus(event) }}
+                            </p>
+                            <a 
+                                v-else
+                                target="_blank"
+                                :href="getUrl(event)">
+                                <button class="noBox">
+                                    {{ getStatus(event) }}
+                                </button>
+                            </a>
+                        </div>
+                        <div class="remaining center">
+                            <a 
+                                v-if="event.status > '3'"
+                                :href="`/create/${event.slug}/shows`">
+                                <template v-if="event.showtype === 'a' || event.showtype === 'o'">
+                                    <button class="noBox">
+                                        Ongoing
+                                    </button>
+                                </template>
+                                <template v-else>
+                                    <button class="noBox">
+                                        {{ datesRemaining(event).length }}
+                                    </button>
+                                </template>
+                            </a>
+                            <p v-else>
+                                -
+                            </p>
+                        </div>
+                        <div>
+                            <p>{{ cleanDate(event.updated_at) }}</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div>
-            <div class="new-organization">
-                <div class="new-organization__title">
-                    <a href="/organizer/create">
-                        <button class="preview-organizer">Add another organization</button>
-                    </a>
-                </div>
-            </div>
-        </div>
+        </template>
     </div>
 </template>
 
 <script>
-    import { required, url, maxLength } from 'vuelidate/lib/validators'
-    import Pagination  from '../../components/pagination.vue'
-
-	export default {
+    export default {
 
         props: ['user'],
 
-        components: { Pagination },
-
-		data() {
-			return {
-				modal: '',
-				selectedModal:'',
-                organizerEvents: [],
-                review: '',
-                reviewername: '',
-                url: '',
-                activeItem: '',
-                webp: false,
-                limit: 8,
-                organizerList: [],
-			}
-		},
-
         computed: {
-
-            canDeleteOrganizer() {
-                return organizer => !organizer.in_progress_events.data.length && !organizer.past_events.data.length
+            datesRemaining() {
+                return event => event.shows.filter( show => this.$dayjs().subtract(1, 'day').format('YYYY-MM-DD 23:59:00') < show.date )
             },
-
-            getUrl(event) {
-                return this.events.in_progress_events;
+            getStatus() {
+                return event => this.status(event)
             },
-
-            organizerStyle() {
-                return organizer => organizer.thumbImagePath ? this.webp ? `background-image:url('/storage/${organizer.thumbImagePath}')` : `background-image:url('/storage/${organizer.thumbImagePath.slice(0, -4)}jpg')` : `background:${organizer.hexColor}`
+            getStatusDetail() {
+                return event => this.statusDetail(event)
             },
+            getUrl() {
+                return event => this.url(event)
+            },
+            getStatusCircle() {
+                return event => this.statusCircle(event)
+            },
+        },
 
-            reviewData() {
-                return {
-                    event: this.selectedModal,
-                    url: this.url,
-                    review: this.review,
-                    reviewername: this.reviewername
-                }
+        data() {
+            return {
+                active: true,
+                organizer: '',
+                organizers: [],
             }
         },
 
-		methods: {
+        methods: {
             async onload() {
                 await axios.get(`/create/organizers/fetch?timestamp=${new Date().getTime()}`)
                 .then(res => {
-                    this.organizerList = res.data;
+                    this.organizers = res.data;
+                    this.organizer = res.data[0];
                 })
             },
 
-            deleteOrg() {
-                axios.delete(`/organizer/${this.selectedModal.slug}`)
-                .then(res => {
-                    this.organizerList = this.organizerList.filter(ele => ele.id !== this.selectedModal.id);
+            newEvent() {
+                axios.post(`/events`, this.organizer)
+                .then(response => { 
+                    window.location.href = `/create/${response.data.slug}/title`; 
                 })
-            },
-
-            submitReview(index) {
-                axios.post(`/reviewevents`, this.reviewData)
-                .then(this.closeModal());
-            },
-
-			showModal(event, arr) {
-				this.selectedModal = event;
-                this.modal = arr;
-			},
-
-			closeModal() {
-                this.isModalVisible = false;
-                this.selectedModal = null;
-			},
-
-            selectPage(page, organizer, state) {
-                axios.post(`/create/${organizer.slug}/events/fetch`, {page:page, state: state})
-                .then(res => {
-                    this.organizerList.forEach(element => {
-                        if (element.id === organizer.id) {
-                            if (state === 'past') {element.past_events = res.data;}
-                            if (state === 'current') {element.in_progress_events = res.data;}
-                        }
-                    });
-                });
-            },
-
-			newEvent(organizer) {
-				axios.post(`/events`, organizer)
-				.then(res => { window.location.href = `/create/${res.data.slug}/title` })
                 .catch(error => { this.serverErrors = error.response.data.errors; });
-			},
-
-            showOrganizer(organizer) {
-                window.location.href = `/organizer/${organizer.slug}`;
             },
 
-            canUseWebP() {
-                let webp = (document.createElement('canvas').toDataURL('image/webp').indexOf('data:image/webp') == 0);
-                if (webp) {
-                    return this.webp = true
-                }
+            cleanDate(data) {
+                return this.$dayjs(data).format("MMM DD, YYYY");
             },
-		},
+
+            status(event) {
+                if (event.status === '0') return 'add event title';
+                if (event.status === '1') return 'add physical/remote location';
+                if (event.status === '2') return 'add category';
+                if (event.status === '3') return 'add show dates';
+                if (event.status === '4') return 'add pricing';
+                if (event.status === '5') return 'add show description';
+                if (event.status === '6') return 'add advisories';
+                if (event.status === '7') return 'add image';
+                if (event.status === '8') return 'review event';
+                if (event.status === 'p') return 'approved';
+                if (event.status === 'r') return 'under moderator review';
+                if (event.status === 'n') return 'revise and resubmit';
+                if (event.status === 'e') return `event live at ${this.cleanDate(event.embargo_date)}`;
+                return '-'
+            },
+
+            statusDetail(event) {
+                if (event.status === '0') return 'In progress';
+                if (event.status === '1') return 'In progress';
+                if (event.status === '2') return 'In progress';
+                if (event.status === '3') return 'In progress';
+                if (event.status === '4') return 'In progress';
+                if (event.status === '5') return 'In progress';
+                if (event.status === '6') return 'In progress';
+                if (event.status === '7') return 'In progress';
+                if (event.status === '8') return 'In progress';
+                if (event.status === 'p') return 'Approved';
+                if (event.status === 'r') return 'Under review';
+                if (event.status === 'n') return 'Fix moderator notes';
+                if (event.status === 'e') return `Visible on EI at ${this.cleanDate(event.embargo_date)}`;
+                return '-'
+            },
+
+            url(event) {
+                if (event.status === '0') return `/create/${event.slug}/title`;
+                if (event.status === '1') return `/create/${event.slug}/location`;
+                if (event.status === '2') return `/create/${event.slug}/category`;
+                if (event.status === '3') return `/create/${event.slug}/shows`;
+                if (event.status === '4') return `/create/${event.slug}/tickets`;
+                if (event.status === '5') return `/create/${event.slug}/description`;
+                if (event.status === '6') return `/create/${event.slug}/advisories`;
+                if (event.status === '7') return `/create/${event.slug}/images`;
+                if (event.status === '8') return `/create/${event.slug}/review`;
+                if (event.status === 'p') return `/events/${event.slug}`;
+                if (event.status === 'e') return `/create/${event.slug}/title`;
+                if (event.status === 'n') return `/create/${event.slug}/title`;
+                return `/create/${event.slug}/title`
+            },
+
+            statusCircle(event) {
+                if (event.status === '0') return `background: #ffc215`;
+                if (event.status === '1') return `background: #ffc215`;
+                if (event.status === '2') return `background: #ffc215`;
+                if (event.status === '3') return `background: #ffc215`;
+                if (event.status === '4') return `background: #ffc215`;
+                if (event.status === '5') return `background: #ffc215`;
+                if (event.status === '6') return `background: #ffc215`;
+                if (event.status === '7') return `background: #ffc215`;
+                if (event.status === '8') return `background: #ffc215`;
+                if (event.status === 'p') return `background: #1bbb1b`;
+                if (event.status === 'e') return `background: #1bbb1b`;
+                if (event.status === 'r') return `background: black`;
+                if (event.status === 'n') return `background: #bf1515`;
+                return `background: #bf1515`;
+            }
+        },
 
         mounted() {
-            this.canUseWebP();
             this.onload();
         },
-
-        validations: {
-            reviewername: {
-                // required,
-            },
-            url: {
-                // required,
-                // url
-            },
-            review: {
-                // required,
-                // maxLength: maxLength(120)
-            },
-        },
-    };
+    }
 </script>

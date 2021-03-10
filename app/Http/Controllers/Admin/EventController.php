@@ -63,7 +63,7 @@ class EventController extends Controller
     {
         return Event::where('status','p')
             ->orWhere('status','e')
-            ->with('user')
+            ->with('user','clicks')
             ->paginate(30);
     }
 

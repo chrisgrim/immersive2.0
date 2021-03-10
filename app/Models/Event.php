@@ -220,7 +220,7 @@ class Event extends Model
     }
 
     /**
-    * Each event hasOne StaffPick
+    * Each event has many event reviews
     *
     * @return \Illuminate\Database\Eloquent\Relations\belongsTo
     */
@@ -228,6 +228,16 @@ class Event extends Model
     {
         return $this->hasMany(ReviewEvent::class)
                     ->orderBy('rank', 'ASC');
+    }
+
+    /**
+    * Each event has many clicks
+    *
+    * @return \Illuminate\Database\Eloquent\Relations\belongsTo
+    */
+    public function clicks() 
+    {
+        return $this->hasMany(TrackClick::class);
     }
 
     /**

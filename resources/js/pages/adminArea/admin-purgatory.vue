@@ -1,7 +1,7 @@
 <template>
-    <div class="admin-events">
+    <div class="admin-purgatory">
         <div class="">
-            <div class="admin-events__title">
+            <div class="title">
                 <h1>Purgatory</h1>
             </div>
         </div>
@@ -13,26 +13,33 @@
                 @keyup="onSearch(eventList)"
                 type="text">
         </div>
-        <div 
-            class="list" 
-            :key="event.id"
-            v-for="event in events.data">
-            <div>
-                <img 
-                    style="height:40px;width:40px;object-fit:cover;" 
-                    :src="`/storage/${event.thumbImagePath}`" 
-                    alt="">
+        <div class="data-grid">
+            <div class="data-grid__row header">
+                <p>Name</p>
+                <p>Status</p>
             </div>
-            <div>
-                {{ event.name }}
-            </div>
-            <div>
-                <a 
-                    target="_blank" 
-                    :href="`/create/${event.slug}/title`">
-                    <button v-if="event.status == 'r'"> Event In Review </button>
-                    <button v-else> Edit </button>
-                </a>
+            <div 
+                class="data-grid__row" 
+                :key="event.id"
+                v-for="event in events.data">
+                <div class="lg">
+                    <a 
+                        target="_blank"
+                        :href="`/create/${event.slug}/title`">
+                        <img 
+                            v-if="event.thumbImagePath"
+                            :src="`/storage/${event.thumbImagePath}`">
+                        <p>{{ event.name }}</p>
+                    </a>
+                </div>
+                <div>
+                    <a 
+                        target="_blank" 
+                        :href="`/create/${event.slug}/title`">
+                        <button v-if="event.status == 'r'"> Event In Review </button>
+                        <button v-else> Edit </button>
+                    </a>
+                </div>
             </div>
         </div>
         <pagination 

@@ -42,12 +42,12 @@ Route::GET('/admin/dashboard', 'Admin\AdminAreaController@index');
 
 //Admin Events
 Route::GET('/admin/events', 'Admin\EventController@index');
+Route::GET('/admin/events/fetch', 'Admin\EventController@fetch');
 Route::GET('/admin/event-requests', function () { return view('adminArea.eventrequests'); });
 Route::GET('/admin/event-requests/fetch', 'Admin\EventController@eventRequests');
 Route::POST('/admin/event-requests/delete/{EventRequest}', 'Admin\EventController@removeRequest');
 Route::POST('/admin/event-requests/respond/{EventRequest}', 'Admin\EventController@respondRequest');
 Route::GET('/admin/events/show/{event}', 'Admin\EventController@show');
-Route::POST('/admin/events/fetch', 'Admin\EventController@fetch');
 Route::POST('/admin/event/{event}/approve', 'Admin\EventController@approve');
 Route::POST('/admin/event/{event}/fail', 'Admin\EventController@fail');
 Route::POST('/admin/event/{event}/reject', 'Admin\EventController@reject');

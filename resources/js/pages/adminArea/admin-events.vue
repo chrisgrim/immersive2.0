@@ -19,6 +19,7 @@
                 <p>Name</p>
                 <p>Organization</p>
                 <p>Status</p>
+                <p>Clicks</p>
             </div>
             <div 
                 class="data-grid__row" 
@@ -29,10 +30,14 @@
                         <IconSvg type="edit" />
                     </a>
                 </div>
-                <div>
-                    <a :href="`/events/${event.slug}`">
-                        <img :src="`/storage/${event.thumbImagePath}`">
-                        {{ event.name }}
+                <div class="lg">
+                    <a 
+                        target="_blank"
+                        :href="`/create/${event.slug}/title`">
+                        <img 
+                            v-if="event.thumbImagePath"
+                            :src="`/storage/${event.thumbImagePath}`">
+                        <p>{{ event.name }}</p>
                     </a>
                 </div>
                 <div>
@@ -42,13 +47,16 @@
                         {{ event.organizer.name }}
                     </button>
                 </div>
-                <div>
+                <div class="center">
                     <template v-if="event.status === 'p'">
                         <p>Live</p>
                     </template>
                     <template v-if="event.status === 'e'">
                         <p>Embargoed <br> (goes live {{ cleanDate(event.embargo_date) }})</p>
                     </template>
+                </div>
+                <div class="center">
+                    <p>{{ event.clicks.length }}</p>
                 </div>
             </div>
         </div>
@@ -90,7 +98,7 @@
 
         methods: {
             onLoad(page) {
-                axios.post(`/admin/events/fetch?page=${page}`)
+                axios.get(`/admin/events/fetch?page=${page}`)
                 .then( res => { this.events = res.data })
             },
 

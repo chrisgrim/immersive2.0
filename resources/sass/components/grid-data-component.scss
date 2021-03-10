@@ -101,7 +101,7 @@
     grid-template-columns: 1fr 1fr 1.5fr 5rem;
 }
 .admin-events .data-grid__row {
-    grid-template-columns: 5rem 1fr 1fr 5rem;
+    grid-template-columns: 5rem 1fr 0.7fr 5rem 5rem;
 }
 .event-edit .data-grid__row {
     grid-template-columns: 5rem 1fr 15rem 15rem 15rem;
@@ -112,6 +112,16 @@
 }
 .admin-events-requests .data-grid__row {
     grid-template-columns: 1fr 1fr 10rem 5rem;
+    min-height: 6rem;
+}
+
+.admin-boneyard .data-grid__row {
+    grid-template-columns: 1fr 20rem;
+    min-height: 6rem;
+}
+
+.admin-purgatory .data-grid__row {
+    grid-template-columns: 1fr 20rem;
     min-height: 6rem;
 }
 

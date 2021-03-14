@@ -207,15 +207,17 @@ class EventController extends Controller
      */
     public function respondRequest(Request $request, EventRequest $EventRequest)
     {
-        Message::eventnotification($EventRequest->event, $request->response, null);
+        Message::eventnotification($EventRequest->event, $request->textarea, null);
         $EventRequest->update([ 'status' => 'p' ]);
     }
 
     /**
      * Remove Reqest
      */
-    public function removeRequest(EventRequest $EventRequest)
+    public function editTitle(Request $request, EventRequest $EventRequest)
     {
-        $EventRequest->update([ 'status' => 'p' ]);
+        $EventRequest->event->update([
+            'name' => $request->input
+        ]);
     }
 }

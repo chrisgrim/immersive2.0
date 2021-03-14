@@ -8,8 +8,10 @@
         <div class="data-grid">
             <div class="data-grid__row header">
                 <p>Event</p>
-                <p>Request</p>
-                <p>Response</p>
+                <p>New Name</p>
+                <p>Reason</p>
+                <p>Change Name</p>
+                <p>Respond</p>
             </div>
             <div 
                 class="data-grid__row" 
@@ -26,22 +28,34 @@
                     </a>
                 </div>
                 <div>
+                    <p>{{ request.name }}</p>
+                </div>
+                <div>
                     <p>{{ request.request }}</p>
                 </div>
+                <button 
+                    @click="changeName(request)" 
+                    class="delete">
+                    <IconSvg type="edit" />
+                </button>
                 <button @click="addResponse(request)">
                     Respond
-                </button>
-                <button 
-                    @click="onDelete(request)" 
-                    class="delete">
-                    <IconSvg type="delete" />
                 </button>
             </div>
         </div>
         <VueModalForm 
+            v-if="modal === 'edit'"
+            @onSubmit="onSubmitNameChange"
+            input-placeholder=""
+            input="true"
+            @close="modal = null">
+            <h3>Enter new Event Name</h3>
+        </VueModalForm>
+        <VueModalForm 
             v-if="modal === 'response'"
-            @onSubmit="onSubmit"
-            placeholder="Respond to the request"
+            @onSubmit="onSubmitResponse"
+            textarea="true"
+            textarea-placeholder="Respond to the owner"
             @close="modal = null">
             <h3>Respond to request</h3>
         </VueModalForm>
@@ -76,19 +90,24 @@
                 .then( res => { this.requests = res.data })
             },
 
-            onSubmit(value) {
-                axios.post(`/admin/event-requests/respond/${this.selectedModal.id}`, {response: value})
+            onSubmitResponse(value) {
+                axios.post(`/admin/event-requests/respond/${this.selectedModal.id}`, value);
                 location.reload();
             },
 
-            onDelete(request) {
-                axios.post(`/admin/event-requests/delete/${request.id}`)
+            onSubmitNameChange(value) {
+                axios.post(`/admin/event-requests/edit/${this.selectedModal.id}`, value);
                 location.reload();
             },
 
             addResponse(request) {
                 this.selectedModal = request;
                 this.modal = 'response';
+            },
+
+            changeName(request) {
+                this.selectedModal = request;
+                this.modal = 'edit';
             },
 
             cleanDate(data) {

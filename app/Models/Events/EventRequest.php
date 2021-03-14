@@ -15,7 +15,7 @@ class EventRequest extends Model
     *
     * @var array
     */
-    protected $fillable = [ 'request', 'status' ];
+    protected $fillable = [ 'request', 'status', 'name' ];
 
     /**
     * The relations to eager load on every query. I am adding shows here because I need to filter by dates for the search

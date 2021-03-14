@@ -46,7 +46,8 @@ class TitleController extends Controller
     public function changeTitle(Request $request, Event $event)
     {
         $event->eventRequest()->create([
-            'request' => $request->changeName
+            'request' => $request->textarea,
+            'name' => $request->input,
         ]);
     }
 
@@ -66,7 +67,5 @@ class TitleController extends Controller
         ]);
 
         $event->updateEventStatus(1, $request);
-
-
     }
 }

@@ -22,7 +22,7 @@
                 :key="review.id"
                 v-for="review in reviews.data">
                 <div class="field">
-                    {{ review.event.name }}
+                    <p v-if="review.event">{{ review.event.name }}</p>
                 </div>
                 <div class="field">
                     <input 

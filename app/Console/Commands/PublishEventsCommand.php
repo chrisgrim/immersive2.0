@@ -44,6 +44,7 @@ class PublishEventsCommand extends Command
             if ($event->embargo_date <= Carbon::now() && $event->status == 'e' ) {
                 $event->update([
                     'status' => 'p',
+                    'embargo_date' => null,
                 ]);
             };
         };

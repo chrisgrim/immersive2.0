@@ -8,12 +8,21 @@
             </div>
             <div class="modal-box__body">
                 <slot></slot>
+                <input
+                    v-if="input"
+                    v-model="inputData"
+                    :placeholder="inputPlaceholder">
+                <div v-if="$v.inputData.$error" class="validation-error">
+                    <p class="error" v-if="!$v.inputData.required">The new title is required.</p>
+                    <p class="error" v-if="!$v.inputData.maxLength">The title is too long.</p>
+                </div>
                 <textarea
-                    v-model="data"
-                    :placeholder="placeholder" />
-                <div v-if="$v.data.$error" class="validation-error">
-                    <p class="error" v-if="!$v.data.required">Please add request.</p>
-                    <p class="error" v-if="!$v.data.maxLength">Please write a little less.</p>
+                    v-if="textarea"
+                    v-model="textareaData"
+                    :placeholder="textareaPlaceholder" />
+                <div v-if="$v.textareaData.$error" class="validation-error">
+                    <p class="error" v-if="!$v.textareaData.required">Please include a reason.</p>
+                    <p class="error" v-if="!$v.textareaData.maxLength">The reason is too long.</p>
                 </div>
                 <button 
                     @click="onSubmit"
@@ -30,21 +39,27 @@
 
 <script>
     import IconSvg from './Svg-icon'
-    import { required, maxLength } from 'vuelidate/lib/validators';
     
     export default {
 
-        props: ['item', 'placeholder'],
+        props: ['item', 'placeholder', 'input', 'textarea', 'inputPlaceholder', 'textareaPlaceholder'],
 
         components: { IconSvg },
 
         computed: {
+            data() {
+                return {
+                    input: this.inputData,
+                    textarea: this.textareaData
+                }
+            }
         },
 
         data() {
             return {
                 isDisabled: false,
-                data: null,
+                inputData: null,
+                textareaData: null,
             }
         },
 
@@ -61,10 +76,14 @@
         },
 
         validations: { 
-            data: {
-                required,
-                maxLength: maxLength(2000),
+            inputData: {
+                required() { return this.input ? this.inputData ? true : false : true },
+                maxLength() { return this.input ? this.inputData && this.inputData.length < 100 ? true : false : true },
             },
+            textareaData: {
+                required() { return this.textarea ? this.textareaData ? true : false : true },
+                maxLength() { return this.textarea ? this.textareaData && this.textareaData.length < 2000 ? true : false : true },
+            }
         },
 
     }

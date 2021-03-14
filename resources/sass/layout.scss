@@ -140,6 +140,17 @@ input.general {
     border: 1px solid #969696;
     font-size: 1.4rem;
 }
+input {
+    color: #484848;
+    border-radius: 5px;
+    border: 1px solid #ebebeb;
+    padding: 1rem;
+    font-size: 1.5rem;
+}
+input::placeholder {
+    color: #adadad;
+    font-size: 1.5rem;
+}
 textarea {
     position: relative;
     color: #484848;
@@ -153,7 +164,7 @@ textarea {
     border-radius: 5px;
     border-color: #ebebeb;
     margin: 1rem 0rem 1rem 0rem;
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     width: 100%;
     &.active {
         border-color: rgb(0, 132, 137);
@@ -163,7 +174,7 @@ textarea {
     }
     &::placeholder {
         color:#adadad;
-        font-size:1.4rem;
+        font-size:1.5rem;
         font-family: inherit;
     }
 }

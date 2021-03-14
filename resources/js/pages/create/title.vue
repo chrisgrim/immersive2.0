@@ -10,7 +10,7 @@
                 <h2>Title</h2>
             </div>
             <div 
-                @mouseover="resubmit=true" 
+                @mouseover="showResubmit=true" 
                 v-if="approved" 
                 class="field">
                 <label>Title</label>
@@ -19,7 +19,7 @@
                 </p>
                 <button 
                     class="editTitle" 
-                    v-if="resubmit" 
+                    v-if="showResubmit" 
                     @click.prevent="modal = 'changeEventName'">
                     Edit
                 </button>
@@ -69,10 +69,13 @@
         <VueModalForm 
             v-if="modal === 'changeEventName'"
             @onSubmit="changeTitle"
-            placeholder="New title and reason for title change"
+            textarea="true"
+            input="true"
+            textarea-placeholder="Reason for title change"
+            input-placeholder="New event name"
             @close="modal = null">
             <h3>Change Event Title: {{ event.name }}</h3>
-            <p>Please let us know why you are changing the title and what you would like the new title to be. We generally make changes in 2-3 days.</p>
+            <p>Please enter the new name for your event and add a reason for requesting this change. Changes may take up to 3 days to be approved. <br> Please note: events on Everything Immersive may not share the same name. If you are remounting a show, please edit the existing event and add new dates/times..</p>
         </VueModalForm>
         <transition name="slide-fade">
             <div v-if="titleUpdated" class="updated-notifcation">
@@ -88,17 +91,17 @@
 </template>
 
 <script>
-	import formValidationMixin from '../../mixins/form-validation-mixin'
-	import { required, maxLength } from 'vuelidate/lib/validators';
+    import formValidationMixin from '../../mixins/form-validation-mixin'
+    import { required, maxLength } from 'vuelidate/lib/validators';
     import Submit  from './components/submit-buttons.vue'
     import VueNewBeginner  from './components/vue-title-beginner.vue'
     import VueModalForm from '../../components/Vue-Modal-Form'
 
-	export default {
+    export default {
 
         mixins: [formValidationMixin],
 
-		props: ['event', 'newsubmission'],
+        props: ['event', 'newsubmission'],
 
         components: { Submit, VueNewBeginner, VueModalForm },
 
@@ -108,12 +111,12 @@
             },
         },
 
-		data() {
-			return {
+        data() {
+            return {
                 title: this.initializeTitleObject(),
                 active: null,
                 disabled:false,
-                resubmit: false,
+                showResubmit: false,
                 modal: '',
                 approved: this.event.status == 'p' || this.event.status == 'e' ? true : false,
                 serverErrors: '',
@@ -121,11 +124,10 @@
                 titleUpdated: false,
                 newEvent: this.newsubmission,
                 creationPage: 1,
-                nameChange: ''
-			}
-		},
+            }
+        },
 
-		methods: {
+        methods: {
             onLoad() {
                 axios.get(this.onFetch('title'))
                 .then(res => {
@@ -134,24 +136,18 @@
                 });
             },
 
-			async onSubmit(value) {
+            async onSubmit(value) {
                 if ( this.checkForChanges(value) ) { return this.onForward(value) }
                 if ( this.checkVuelidate() ) { return }
-				await axios.patch( this.endpoint, this.title )
+                await axios.patch( this.endpoint, this.title )
                 value == 'save' ? this.save() : this.onForward( value );
-			},
+            },
 
             async changeTitle(value) {
-                await axios.patch( `/create/${this.event.slug}/change-title`, { changeName: value } )
+                await axios.patch( `/create/${this.event.slug}/change-title`, value );
                 this.modal = '';
                 this.titleUpdated = true;
                 setTimeout(() => this.titleUpdated = false, 3000);
-            },
-
-            onResubmit() {
-                this.title.resubmit = 'resubmit';
-                this.approved = false;
-                this.modal = false;
             },
 
             clearInput() {
@@ -167,10 +163,9 @@
                 return {
                     name: this.event.name ? this.event.name : '',
                     tagLine: this.event.tag_line ? this.event.tag_line : '',
-                    resubmit: '',
                 }
             },
-		},
+        },
 
         created() {
             this.onLoad();
@@ -183,7 +178,7 @@
             }
         },
 
-		validations: {
+        validations: {
             title: {
                 name: {
                     required,
@@ -193,9 +188,9 @@
                 tagLine: {
                     required,
                     maxLength: maxLength(100)
-                }
-            }
-		},
+                },
+            },
+        },
     };
 
 </script>

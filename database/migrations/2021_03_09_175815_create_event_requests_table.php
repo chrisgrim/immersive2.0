@@ -17,6 +17,7 @@ class CreateEventRequestsTable extends Migration
             $table->id();
             $table->foreignId('event_id');
             $table->string('request');
+            $table->string('name');
             $table->char('status', 1)->default('r');
             $table->timestamps();
         });

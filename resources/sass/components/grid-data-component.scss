@@ -111,15 +111,13 @@
     grid-template-columns: 1fr 1fr 10rem 10rem 15rem 5rem;
 }
 .admin-events-requests .data-grid__row {
-    grid-template-columns: 1fr 1fr 10rem 5rem;
+    grid-template-columns: 0.8fr 0.8fr 1fr 5rem 10rem;
     min-height: 6rem;
 }
-
 .admin-boneyard .data-grid__row {
     grid-template-columns: 1fr 20rem;
     min-height: 6rem;
 }
-
 .admin-purgatory .data-grid__row {
     grid-template-columns: 1fr 20rem;
     min-height: 6rem;

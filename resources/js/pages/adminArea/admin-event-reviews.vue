@@ -13,14 +13,18 @@
 
         <Vue-Add-Review v-if="add" />
 
-        <div class="listing">
-            <div>
-                <h2>Latest Reviews</h2>
+        <div class="data-grid">
+            <div class="data-grid__row header">
+                <p>Name</p>
+                <p>Reviewer</p>
+                <p>Review URL</p>
+                <p>Review</p>
+                <p>Rank</p>
             </div>
             <div 
-                class="list" 
+                class="data-grid__row" 
                 :key="review.id"
-                v-for="review in reviews.data">
+                v-for="(review, index) in reviews.data">
                 <div class="field">
                     <p v-if="review.event">{{ review.event.name }}</p>
                 </div>
@@ -29,8 +33,8 @@
                         type="text" 
                         v-model="review.reviewer_name" 
                         placeholder="Reviewer's name"
-                        :class="{ active: active == 'reviewername'}"
-                        @click="active = 'reviewername'"
+                        :class="{ active: active == `name${index}`}"
+                        @click="active = `name${index}`"
                         @blur="onUpdate(review)">
                 </div>
                 <div class="field">
@@ -38,33 +42,33 @@
                         type="text" 
                         v-model="review.url" 
                         placeholder="Link to the review"
-                        :class="{ active: active == 'url'}"
-                        @click="active = 'url'"
+                        :class="{ active: active == `url${index}`}"
+                        @click="active = `url${index}`"
                         @blur="onUpdate(review)">
                 </div>
                 <div class="field">
                     <textarea 
                         type="textarea" 
                         v-model="review.review"
-                        rows="6"
+                        rows="3"
                         placeholder="Review snippet"
-                        :class="{ active: active == 'review'}"
-                        @click="active = 'review'"
+                        :class="{ active: active == `review${index}`}"
+                        @click="active = `review${index}`"
                         @blur="onUpdate(review)" />
                 </div>
-                <div class="field">
-                    <v-select 
-                        v-model="review.rank"
-                        :options="rankOptions"
-                        placeholder="Leave blank for default Rank of 5 (1 being most important)"
-                        @search:blur="active = null"
-                        @search:focus="active = 'rank'"
-                        @input="onUpdate(review)"
-                        :class="{ active: active == 'rank'}" />
-                </div>
+                <select 
+                    v-model="review.rank"
+                    placeholder="User Type"
+                    @change="onUpdate(review)">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
                 <button 
                     @click.prevent="showModal(review, 'delete')" 
-                    class="delete-circle">
+                    class="delete">
                     <IconSvg type="delete" />
                 </button>
             </div>
@@ -99,7 +103,6 @@
                 modal: '',
                 active: '',
                 reviews: [],
-                rankOptions: ['1', '2', '3', '4', '5'],
                 selectedModal: '',
             }
         },

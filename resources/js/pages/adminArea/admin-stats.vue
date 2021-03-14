@@ -97,7 +97,7 @@
             },
 
             submit(value) {
-                window.location.href = `https://${window.location.hostname}/admin/events/${value.slug}`;
+                window.location.href = `/admin/events/show/${value.slug}`;
             },
 
             onSearch(events) {

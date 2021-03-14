@@ -110,6 +110,9 @@
 .c-staffpicks .data-grid__row {
     grid-template-columns: 1fr 1fr 10rem 10rem 15rem 5rem;
 }
+.reviewevent .data-grid__row {
+    grid-template-columns: 1fr 1fr 1fr 1fr 5rem 3rem;
+}
 .admin-events-requests .data-grid__row {
     grid-template-columns: 0.8fr 0.8fr 1fr 5rem 10rem;
     min-height: 6rem;

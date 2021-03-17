@@ -529,10 +529,19 @@
 			}
 		},
 		{
-			"file": "app/Console/Commands/PublishEventsCommand.php",
+			"file": "resources/js/components/Vue-Modal-Form.vue",
 			"settings":
 			{
-				"buffer_size": 1088,
+				"buffer_size": 3030,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "resources/js/app.js",
+			"settings":
+			{
+				"buffer_size": 10889,
 				"line_ending": "Unix"
 			}
 		}
@@ -674,24 +683,24 @@
 	[
 		"/Users/chrisgrim/code/ei",
 		"/Users/chrisgrim/code/ei/app",
-		"/Users/chrisgrim/code/ei/app/Console",
-		"/Users/chrisgrim/code/ei/app/Console/Commands",
-		"/Users/chrisgrim/code/ei/app/Models",
+		"/Users/chrisgrim/code/ei/app/Http",
+		"/Users/chrisgrim/code/ei/app/Http/Controllers",
 		"/Users/chrisgrim/code/ei/resources",
 		"/Users/chrisgrim/code/ei/resources/js",
-		"/Users/chrisgrim/code/ei/resources/js/components",
 		"/Users/chrisgrim/code/ei/resources/js/pages",
-		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea",
 		"/Users/chrisgrim/code/ei/resources/js/pages/events",
-		"/Users/chrisgrim/code/ei/resources/sass",
-		"/Users/chrisgrim/code/ei/resources/sass/components",
 		"/Users/chrisgrim/code/ei/resources/views",
-		"/Users/chrisgrim/code/ei/resources/views/adminArea"
+		"/Users/chrisgrim/code/ei/resources/views/layouts"
 	],
 	"file_history":
 	[
-		"/Users/chrisgrim/code/ei/app/Console/Commands/PublishEventsCommand.php",
+		"/Users/chrisgrim/code/ei/database/migrations/2021_03_09_175815_create_event_requests_table.php",
+		"/Users/chrisgrim/code/ei/app/Models/Event.php",
+		"/Users/chrisgrim/code/ei/resources/sass/components/grid-data-component.scss",
 		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/admin-event-reviews.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/admin-events.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/admin-stats.vue",
+		"/Users/chrisgrim/code/ei/app/Console/Commands/PublishEventsCommand.php",
 		"/Users/chrisgrim/code/ei/app/Models/ShowOnGoing.php",
 		"/Users/chrisgrim/code/ei/app/Models/Show.php",
 		"/Users/chrisgrim/code/ei/app/Http/Controllers/Admin/EventController.php",
@@ -701,16 +710,12 @@
 		"/Users/chrisgrim/code/ei/node_modules/apexcharts/dist/apexcharts.js",
 		"/Users/chrisgrim/code/ei/node_modules/@vue/component-compiler-utils/node_modules/lru-cache/README.md",
 		"/Users/chrisgrim/code/ei/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Calculation/Logical.php",
-		"/Users/chrisgrim/code/ei/resources/sass/components/grid-data-component.scss",
 		"/Users/chrisgrim/code/ei/app/Http/Controllers/Create/TitleController.php",
 		"/Users/chrisgrim/code/ei/resources/js/mixins/form-validation-mixin.js",
 		"/Users/chrisgrim/code/ei/resources/sass/components/vue-modal.scss",
 		"/Users/chrisgrim/code/ei/resources/sass/layout.scss",
 		"/Users/chrisgrim/code/ei/app/Models/Events/EventRequest.php",
-		"/Users/chrisgrim/code/ei/database/migrations/2021_03_09_175815_create_event_requests_table.php",
 		"/Users/chrisgrim/code/ei/app/Models/TrackClick.php",
-		"/Users/chrisgrim/code/ei/app/Models/Event.php",
-		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/admin-events.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/admin-boneyard.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/admin-purgatory.vue",
 		"/Users/chrisgrim/code/ei/app/Models/Message.php",
@@ -788,7 +793,6 @@
 		"/Users/chrisgrim/code/ei/resources/js/components/Vue-List.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/events/components/pagination.vue",
 		"/Users/chrisgrim/code/ei/resources/js/components/pagination.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/admin-stats.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/layouts/nav.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/events/event-search.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/events/components/event-edit-item.vue",
@@ -908,6 +912,11 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"description",
+			"genre",
+			"show",
+			"vue-admin-event-show",
+			"tag_line",
 			"event.name",
 			"this.input ?",
 			"this.input",
@@ -1030,12 +1039,7 @@
 			"searchedevents",
 			"fetch",
 			"event-list-search",
-			"searchlisting",
-			"search-listing",
-			"event-list-search",
-			"admin/events",
-			"search-listing",
-			"event-search.vue"
+			"searchlisting"
 		],
 		"highlight": false,
 		"in_selection": false,
@@ -1053,7 +1057,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -1069,8 +1073,8 @@
 						"selection":
 						[
 							[
-								2338,
-								2338
+								384,
+								384
 							]
 						],
 						"settings":
@@ -1084,24 +1088,24 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "app/Console/Commands/PublishEventsCommand.php",
-					"semi_transient": true,
+					"file": "resources/js/components/Vue-Modal-Form.vue",
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1088,
+						"buffer_size": 3030,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								2963,
+								2963
 							]
 						],
 						"settings":
@@ -1109,10 +1113,41 @@
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
-							"syntax": "Packages/PHP/PHP.sublime-syntax"
+							"syntax": "Packages/Vuejs Complete Package/vue.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 643.0,
+						"translation.y": 1474.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "resources/js/app.js",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 10889,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								582,
+								563
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 23.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,

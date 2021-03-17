@@ -16,7 +16,7 @@ class CreateEventRequestsTable extends Migration
         Schema::create('event_requests', function (Blueprint $table) {
             $table->id();
             $table->foreignId('event_id');
-            $table->string('request');
+            $table->longText('request');
             $table->string('name');
             $table->char('status', 1)->default('r');
             $table->timestamps();

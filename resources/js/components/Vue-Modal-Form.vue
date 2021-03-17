@@ -14,7 +14,7 @@
                     :placeholder="inputPlaceholder">
                 <div v-if="$v.inputData.$error" class="validation-error">
                     <p class="error" v-if="!$v.inputData.required">The new title is required.</p>
-                    <p class="error" v-if="!$v.inputData.maxLength">The title is too long.</p>
+                    <p class="error" v-if="!$v.inputData.maxLength && inputData">The title is too long.</p>
                 </div>
                 <textarea
                     v-if="textarea"
@@ -22,7 +22,7 @@
                     :placeholder="textareaPlaceholder" />
                 <div v-if="$v.textareaData.$error" class="validation-error">
                     <p class="error" v-if="!$v.textareaData.required">Please include a reason.</p>
-                    <p class="error" v-if="!$v.textareaData.maxLength">The reason is too long.</p>
+                    <p class="error" v-if="!$v.textareaData.maxLength && textareaData">The reason is too long.</p>
                 </div>
                 <button 
                     @click="onSubmit"

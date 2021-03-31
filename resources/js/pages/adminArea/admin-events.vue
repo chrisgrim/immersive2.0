@@ -56,7 +56,7 @@
                     </template>
                 </div>
                 <div class="center">
-                    <p>{{ event.clicks.length }}</p>
+                    <p v-if="event.clicks">{{ event.clicks.length }}</p>
                 </div>
             </div>
         </div>

@@ -529,19 +529,34 @@
 			}
 		},
 		{
-			"file": "resources/js/components/Vue-Modal-Form.vue",
+			"file": "resources/js/pages/events/show/event-show-quickbuy.vue",
 			"settings":
 			{
-				"buffer_size": 3030,
-				"encoding": "UTF-8",
+				"buffer_size": 10767,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "resources/js/app.js",
+			"file": "sftp-config.json",
 			"settings":
 			{
-				"buffer_size": 10889,
+				"buffer_size": 1596,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "resources/js/pages/profile/components/profile-location-mixin.js",
+			"settings":
+			{
+				"buffer_size": 2330,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "resources/views/create/index.blade.php",
+			"settings":
+			{
+				"buffer_size": 983,
 				"line_ending": "Unix"
 			}
 		}
@@ -683,22 +698,31 @@
 	[
 		"/Users/chrisgrim/code/ei",
 		"/Users/chrisgrim/code/ei/app",
-		"/Users/chrisgrim/code/ei/app/Http",
-		"/Users/chrisgrim/code/ei/app/Http/Controllers",
 		"/Users/chrisgrim/code/ei/resources",
 		"/Users/chrisgrim/code/ei/resources/js",
+		"/Users/chrisgrim/code/ei/resources/js/mixins",
 		"/Users/chrisgrim/code/ei/resources/js/pages",
 		"/Users/chrisgrim/code/ei/resources/js/pages/events",
+		"/Users/chrisgrim/code/ei/resources/js/pages/events/show",
+		"/Users/chrisgrim/code/ei/resources/sass",
+		"/Users/chrisgrim/code/ei/resources/sass/create",
+		"/Users/chrisgrim/code/ei/resources/sass/events",
 		"/Users/chrisgrim/code/ei/resources/views",
+		"/Users/chrisgrim/code/ei/resources/views/create",
 		"/Users/chrisgrim/code/ei/resources/views/layouts"
 	],
 	"file_history":
 	[
+		"/Users/chrisgrim/code/ei/sftp-config.json",
+		"/Users/chrisgrim/code/ei/resources/sass/components/grid-data-component.scss",
+		"/Users/chrisgrim/code/ei/resources/sass/events/event-edit.scss",
+		"/Users/chrisgrim/code/ei/resources/js/components/Vue-Modal-Form.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/admin-events.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/create/tickets.vue",
+		"/Users/chrisgrim/code/ei/resources/sass/create/title.scss",
 		"/Users/chrisgrim/code/ei/database/migrations/2021_03_09_175815_create_event_requests_table.php",
 		"/Users/chrisgrim/code/ei/app/Models/Event.php",
-		"/Users/chrisgrim/code/ei/resources/sass/components/grid-data-component.scss",
 		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/admin-event-reviews.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/admin-events.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/admin-stats.vue",
 		"/Users/chrisgrim/code/ei/app/Console/Commands/PublishEventsCommand.php",
 		"/Users/chrisgrim/code/ei/app/Models/ShowOnGoing.php",
@@ -706,7 +730,6 @@
 		"/Users/chrisgrim/code/ei/app/Http/Controllers/Admin/EventController.php",
 		"/Users/chrisgrim/code/ei/resources/js/pages/create/title.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/admin-event-requests.vue",
-		"/Users/chrisgrim/code/ei/resources/js/components/Vue-Modal-Form.vue",
 		"/Users/chrisgrim/code/ei/node_modules/apexcharts/dist/apexcharts.js",
 		"/Users/chrisgrim/code/ei/node_modules/@vue/component-compiler-utils/node_modules/lru-cache/README.md",
 		"/Users/chrisgrim/code/ei/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Calculation/Logical.php",
@@ -729,7 +752,6 @@
 		"/Users/chrisgrim/code/ei/resources/views/events/edit.blade.php",
 		"/Users/chrisgrim/code/ei/resources/views/layouts/meta.blade.php",
 		"/Users/chrisgrim/code/ei/resources/js/pages/events/show/event-show-header.vue",
-		"/Users/chrisgrim/code/ei/resources/sass/events/event-edit.scss",
 		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/admin-user.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/admin-staff-picks.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/events/event-edit1.vue",
@@ -817,11 +839,8 @@
 		"/Users/chrisgrim/code/ei/app/Models/MakeImage.php",
 		"/Users/chrisgrim/code/ei/app/Http/Controllers/Create/ImageController.php",
 		"/Users/chrisgrim/code/ei/app/Http/Controllers/OrganizerController.php",
-		"/Users/chrisgrim/code/ei/sftp-config.json",
 		"/Users/chrisgrim/code/ei/.gitignore",
-		"/Users/chrisgrim/code/ei/app/Policies/OrganizerPolicy.php",
-		"/Users/chrisgrim/code/ei/database/migrations/2021_01_25_180605_create_organizer_user_table.php",
-		"/Users/chrisgrim/code/ei/database/migrations/2021_01_21_223302_organizer_user_table.php"
+		"/Users/chrisgrim/code/ei/app/Policies/OrganizerPolicy.php"
 	],
 	"find":
 	{
@@ -832,6 +851,9 @@
 		"height": 164.0,
 		"where_history":
 		[
+			"/Users/chrisgrim/code/ei",
+			"/Users/chrisgrim/code/ei/resources/views",
+			"/Users/chrisgrim/code/ei/resources/sass",
 			"/Users/chrisgrim/code/ei",
 			"/Users/chrisgrim/code/ei/resources/js",
 			"/Users/chrisgrim/code/ei/resources/sass",
@@ -912,6 +934,20 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"Dates",
+			"dates",
+			"onClickOutside",
+			"setPlace",
+			"updateEventFields",
+			"setPlace",
+			"set",
+			"location",
+			"setPlace",
+			"updateEventFields",
+			"clearInput",
+			"isOwner",
+			"nav",
+			"event-create__title",
 			"description",
 			"genre",
 			"show",
@@ -1025,21 +1061,7 @@
 			"allevents",
 			"pushData",
 			"addData",
-			"footer-content",
-			"allsearch",
-			"all",
-			"search",
-			"OnlineEvents",
-			"onlineevents",
-			"allSearch",
-			"allsearch",
-			"allsearach",
-			"esl",
-			"esa",
-			"searchedevents",
-			"fetch",
-			"event-list-search",
-			"searchlisting"
+			"footer-content"
 		],
 		"highlight": false,
 		"in_selection": false,
@@ -1057,7 +1079,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -1073,8 +1095,8 @@
 						"selection":
 						[
 							[
-								384,
-								384
+								3903,
+								3828
 							]
 						],
 						"settings":
@@ -1088,24 +1110,24 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "resources/js/components/Vue-Modal-Form.vue",
-					"semi_transient": false,
+					"file": "resources/js/pages/events/show/event-show-quickbuy.vue",
+					"semi_transient": true,
 					"settings":
 					{
-						"buffer_size": 3030,
+						"buffer_size": 10767,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2963,
-								2963
+								1874,
+								1890
 							]
 						],
 						"settings":
@@ -1116,27 +1138,58 @@
 							"syntax": "Packages/Vuejs Complete Package/vue.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 1474.0,
+						"translation.y": 887.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
 					"buffer": 2,
-					"file": "resources/js/app.js",
-					"semi_transient": true,
+					"file": "sftp-config.json",
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 10889,
+						"buffer_size": 1596,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								582,
-								563
+								1222,
+								551
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/JavaScript/JSON.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "resources/js/pages/profile/components/profile-location-mixin.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2330,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								42,
+								2321
 							]
 						],
 						"settings":
@@ -1147,10 +1200,41 @@
 							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
 						},
 						"translation.x": 0.0,
-						"translation.y": 23.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "resources/views/create/index.blade.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 983,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								853,
+								853
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Laravel Blade Highlighter/blade.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
 					"type": "text"
 				}
 			]

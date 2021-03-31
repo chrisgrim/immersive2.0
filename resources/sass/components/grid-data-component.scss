@@ -8,7 +8,7 @@
     background: white;
     border: 1px solid #DDDDDD;
     border-radius: 1rem;
-    overflow: hidden;
+    overflow: scroll;
 }
 
 .data-grid .center {
@@ -104,7 +104,7 @@
     grid-template-columns: 5rem 1fr 0.7fr 5rem 5rem;
 }
 .event-edit .data-grid__row {
-    grid-template-columns: 5rem 1fr 15rem 15rem 15rem;
+    grid-template-columns: 5rem 10rem 15rem 15rem 15rem;
     min-height: 6rem;
 }
 .c-staffpicks .data-grid__row {
@@ -124,6 +124,12 @@
 .admin-purgatory .data-grid__row {
     grid-template-columns: 1fr 20rem;
     min-height: 6rem;
+}
+
+@media (min-width: 768px) {
+    .event-edit .data-grid__row {
+        grid-template-columns: 5rem 1fr 15rem 15rem 15rem;
+    }
 }
 
 

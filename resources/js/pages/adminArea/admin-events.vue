@@ -49,10 +49,12 @@
                 </div>
                 <div class="center">
                     <template v-if="event.status === 'p'">
-                        <p>Live</p>
+                        <a :href="`/events/${event.slug}`">
+                            <p style="text-decoration: underline;">Live</p>
+                        </a>
                     </template>
                     <template v-if="event.status === 'e'">
-                        <p>Embargoed <br> (goes live {{ cleanDate(event.embargo_date) }})</p>
+                        <p style="text-decoration: underline;">Embargoed <br> (goes live {{ cleanDate(event.embargo_date) }})</p>
                     </template>
                 </div>
                 <div class="center">

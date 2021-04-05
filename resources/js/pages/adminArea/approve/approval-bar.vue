@@ -3,7 +3,7 @@
         <div class="approvebar">
             <div class="comments">
                 <div class="field">
-                    <label>Mod Comments</label>
+                    <label>Mod Comments1</label>
                     <textarea 
                         type="text"
                         name="comments" 

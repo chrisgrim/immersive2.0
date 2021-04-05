@@ -20,6 +20,7 @@
                     <p></p>
                     <p>Organization</p>
                     <p>Owner</p>
+                    <p>Email</p>
                     <p>Members</p>
                     <p></p>
                 </div>
@@ -42,6 +43,9 @@
                             @click.prevent="showModal(org, 'changeOwner')">
                             <p>{{ org.user.name }}</p>
                         </button>
+                    </div>
+                    <div>
+                        <p>{{ org.user.email }}</p>
                     </div>
                     <div>
                         <v-select 

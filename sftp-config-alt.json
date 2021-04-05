@@ -14,7 +14,7 @@
     "confirm_sync": true,
     "confirm_overwrite_newer": false,
     
-    "host": "64.227.102.103",
+    "host": "167.99.163.110",
     "user": "root",
     //"password": "password",
     //"port": "22",

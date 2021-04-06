@@ -41,7 +41,7 @@
                     <p class="error" v-if="!$v.title.name.maxLength">The title is too long.</p>
                 </div>
                 <div v-if="serverErrors" class="validation-error">
-                    <p class="error" v-if="serverErrors.errors.name">An event with this name already exists. Please reach out to us at support@everythingimmersive.com.</p>
+                    <p class="error" v-if="serverErrors.errors && serverErrors.errors.name">An event with this name already exists. Please reach out to us at support@everythingimmersive.com.</p>
                 </div>
             </div>
             <div class="field">
@@ -142,11 +142,13 @@
                 if ( this.checkForChanges(value) ) { return this.onForward(value) }
                 if ( this.checkVuelidate() ) { return }
                 await axios.patch( this.endpoint, this.title )
+                .then( res => {
+                    value == 'save' ? this.save() : this.onForward( value )
+                })
                 .catch( error => {
-                    console.log(error.response.data);
+                    this.disabled = false;
                     this.serverErrors = error.response.data;
                 })
-                // value == 'save' ? this.save() : this.onForward( value );
             },
 
             async changeTitle(value) {

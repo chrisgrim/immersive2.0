@@ -3,7 +3,7 @@
         <div class="approvebar">
             <div class="comments">
                 <div class="field">
-                    <label>Mod Comments1</label>
+                    <label>Mod Comments</label>
                     <textarea 
                         type="text"
                         name="comments" 
@@ -19,8 +19,11 @@
                     </div>
                 </div>
             </div>
-            <template v-if="exists">
+            <template v-if="exists && showExists">
                 <div class="admin-approve-similar-name">
+                    <button @click="showExists = false">
+                        close
+                    </button>
                     <a 
                         rel="noreferrer noopener" 
                         target="_blank" 
@@ -53,11 +56,12 @@
 <script>
     import { required } from 'vuelidate/lib/validators';
     import formValidationMixin from '../../../mixins/form-validation-mixin'
+    import IconSvg from '../../../components/Svg-icon'
 
     export default {
         props: ['loadevent', 'exists'],
 
-        mixins: [ formValidationMixin ],
+        mixins: [ formValidationMixin, IconSvg ],
 
         computed: {
             approvedOrg() {
@@ -71,6 +75,7 @@
                 comments: '',
                 commentsActive: false,
                 dis: false,
+                showExists: this.exists ? true : false,
                 buttons: [
                     { click: () => { this.onEditOrganizer() }, name: 'Organizer' },
                     { click: () => { this.onBack() }, name: 'Go Back' },

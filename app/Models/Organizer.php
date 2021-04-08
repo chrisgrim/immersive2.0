@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Laravel\Scout\Searchable;
-use ElasticScoutDriverPlus\CustomSearch;
+use ElasticScoutDriverPlus\QueryDsl;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 use Intervention\Image\ImageManagerStatic as Image;
@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Storage;
 class Organizer extends Model
 {
     use Searchable;
-    use CustomSearch;
+    use QueryDsl;
 
     /**
     * What protected variables are allowed to be passed to the database

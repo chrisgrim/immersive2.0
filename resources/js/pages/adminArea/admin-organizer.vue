@@ -41,7 +41,7 @@
                         <button 
                             class="noBox" 
                             @click.prevent="showModal(org, 'changeOwner')">
-                            <p>{{ org.user.name }}</p>
+                            <p style="text-decoration: underline;">{{ org.user.name }}</p>
                         </button>
                     </div>
                     <div>

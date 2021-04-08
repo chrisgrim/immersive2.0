@@ -529,43 +529,30 @@
 			}
 		},
 		{
-			"file": "resources/js/pages/adminArea/admin-events.vue",
+			"file": "resources/js/pages/adminArea/admin-organizer.vue",
 			"settings":
 			{
-				"buffer_size": 4574,
+				"buffer_size": 5463,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": ".gitignore",
+			"contents": "<?php\n\nnamespace App\\Models;\n\nuse Laravel\\Scout\\Searchable;\nuse ElasticScoutDriverPlus\\CustomSearch;\nuse ElasticScoutDriverPlus\\QueryDsl;\nuse Intervention\\Image\\ImageManagerStatic as Image;\nuse Illuminate\\Contracts\\Auth\\MustVerifyEmail;\nuse Illuminate\\Database\\Eloquent\\Factories\\HasFactory;\nuse Illuminate\\Foundation\\Auth\\User as Authenticatable;\nuse Illuminate\\Support\\Facades\\Storage;\nuse Illuminate\\Notifications\\Notifiable;\nuse Illuminate\\View\\View;\nuse Laravel\\Cashier\\Billable;\nuse Illuminate\\Support\\Str;\nuse App\\Models\\Events\\EventRequest;\nuse DB;\n\nclass User extends Authenticatable implements MustVerifyEmail\n{\n    use HasFactory;\n    use Notifiable;\n    use Billable;\n    use Searchable;\n    use CustomSearch;\n    use QueryDsl;\n\n    /**\n     * The attributes that are mass assignable.\n     *\n     * @var array\n     */\n    protected $fillable = [\n        'name', 'email', 'password','largeImagePath','thumbImagePath','provider','provider_id', 'gravatar', 'type', 'email_verified_at', 'newsletter_type', 'silence', 'unread', 'reminder'\n    ];\n\n    /**\n     * The attributes that should be hidden for arrays.\n     *\n     * @var array\n     */\n    protected $hidden = [\n        'password',\n        'remember_token',\n        'two_factor_recovery_codes',\n        'two_factor_secret',\n    ];\n\n    /**\n     * The attributes that should be cast to native types.\n     *\n     * @var array\n     */\n    protected $casts = [\n        'email_verified_at' => 'datetime',\n    ];\n\n    /**\n     * The accessors to append to the model's array form.\n     *\n     * @var array\n     */\n    protected $appends = [\n        'hasCreatedOrganizers', 'hasMessages', 'hexColor'\n    ];\n\n    /**\n     * Get the indexable data array for the model.\n     *\n     * @return array\n     */\n    public function toSearchableArray()\n    {\n        return [\n            \"name\" => $this->name,\n            \"email\" => $this->email,\n        ];\n    }\n\n    /**\n     * User can have many events\n     *\n     * @return \\Illuminate\\Database\\Eloquent\\Relations\\hasMany\n     */\n    public function events() \n    {\n        return $this->hasMany(Event::class);\n    }\n\n    /**\n     * The User has many organizations\n     *\n     * @return \\Illuminate\\Database\\Eloquent\\Relations\\hasMany\n     */\n    public function organizers() \n    {\n        return $this->hasMany(Organizer::class)\n                    ->orderBy('created_at', 'DESC');\n    }\n\n    /**\n     * Get all of the teams the user belongs to.\n     *\n     * @return \\Illuminate\\Database\\Eloquent\\Relations\\BelongsToMany\n     */\n    public function teams()\n    {\n        return $this->belongsToMany(Organizer::class)\n                        ->orderBy('created_at', 'DESC')\n                        ->withPivot('role')\n                        ->withTimestamps()\n                        ->as('membership');\n    }\n\n    /**\n     * Get all of the users's organizations including its owner.\n     *\n     * @return \\Illuminate\\Support\\Collection\n     */\n    public function allOrganizers()\n    {\n        return $this->organizers->merge($this->teams);\n    }\n\n    /**\n     * Determine if the user owns the given organization.\n     *\n     * @param  mixed  $team\n     * @return bool\n     */\n    public function ownsOrganization($organizer)\n    {\n        return $this->id == $organizer->user_id;\n    }\n\n    /**\n     * Determine if the user belongs to the given organization.\n     *\n     * @param  mixed  $team\n     * @return bool\n     */\n    public function belongsToOrganization($organizer)\n    {\n        return $this->teams->contains(function ($t) use ($organizer) {\n            return $t->id === $organizer->id;\n        }) || $this->ownsOrganization($organizer);\n    }\n\n    /**\n     * The User can send many messages\n     *\n     * @return \\Illuminate\\Database\\Eloquent\\Relations\\hasMany\n     */\n    public function messages()\n    {\n        return $this->hasMany(Message::class);\n    }\n\n     /**\n     * The User can send many messages\n     *\n     * @return \\Illuminate\\Database\\Eloquent\\Relations\\hasMany\n     */\n    public function modmessages()\n    {\n        return $this->hasMany(ModeratorComment::class);\n    }\n\n    /**\n     * The User belongs to many conversations\n     *\n     * @return \\Illuminate\\Database\\Eloquent\\Relations\\hasMany\n     */\n    public function conversations()\n    {\n        return $this->belongsToMany(Conversation::class)->orderBy('updated_at', 'DESC')->whereNull('event_id');\n    }\n\n    /**\n     * The User belongs to many conversations\n     *\n     * @return \\Illuminate\\Database\\Eloquent\\Relations\\hasMany\n     */\n    public function eventconversations()\n    {\n        return $this->belongsToMany(Conversation::class)->orderBy('updated_at', 'DESC')->whereNotNull('event_id');\n    }\n\n    /**\n     * The User has many Staff Picks\n     *\n     * @return \\Illuminate\\Database\\Eloquent\\Relations\\hasMany\n     */\n    public function staffpicks() \n    {\n        return $this->hasMany(StaffPick::class);\n    }\n\n    /**\n     * User can have many favorites\n     *\n     * @return \\Illuminate\\Database\\Eloquent\\Relations\\hasMany\n     */\n    public function favorites() \n    {\n        return $this->hasMany(Favorite::class);\n    }\n\n    public function favouritedEvents()\n    {\n        return $this->morphedByMany(Event::class, 'favorited', 'favorites');\n    }\n\n    /**\n     * Each User has One Location\n     *\n     * @return \\Illuminate\\Database\\Eloquent\\Relations\\HasOne\n     */\n    public function location() \n    {\n        return $this->hasOne(UserLocation::class);\n    }\n\n    /**\n    * Determine if the current user is Admin\n    *\n    * @return bool\n    */\n    public function isAdmin() {\n        return $this->type === 'a';\n    }\n\n    /**\n    * Determine if the current user is Moderator\n    *\n    * @return bool\n    */\n    public function isModerator() {\n        return $this->type === 'm' || $this->type === 'a';\n    }\n\n    /**\n    * Determine if the current user has created events\n    *\n    * @return bool\n    */\n    public function getHasCreatedOrganizersAttribute()\n    {\n        return $this->organizers()->count() ? true : false;    \n    }\n\n    /**\n    * Assign the current user a color\n    *\n    * @return string\n    */\n    public function gethexColorAttribute()\n    {\n        $myarray = ['#2F405F','#DA5E8E','#20B7A6','#749EEB','#1EAA9A']; \n        return $myarray[$this->id % count($myarray)];\n    }\n\n    /**\n    * Determine if the current user has messages \n    *\n    * @return bool\n    */\n    public function getHasMessagesAttribute()\n    {\n        return DB::table('conversations')\n            ->where('user_one', $this->id)\n            ->orWhere('user_two', $this->id)\n            ->count() ? true : false;\n    }\n\n\n    public function getGravatar()\n    {\n        $hash = md5(strtolower(trim($this->email)));\n        $url = \"https://www.gravatar.com/avatar/$hash?d=404\";\n        if (!strstr(get_headers($url, 1)[0], '404 Not Found')) {\n            $this->update([ 'gravatar' => \"https://www.gravatar.com/avatar/$hash?s=180\"]);\n        }\n    }\n\n    /**\n    * Saves the image that is passed from the controller\n    *\n    * @return string\n    */\n    public static function saveFile($request, $user, $width, $height)\n    {\n\n        ini_set('memory_limit','512M');\n\n        $extension = $request->file('image')->getClientOriginalExtension();\n        //      jpg\n        $rand = substr(md5(microtime()),rand(0,26),7);\n        //      546ds3g\n        $name =  Str::slug($user->name);\n        //      chris-grim\n        $directory = 'user-images/' . $name . '-' . $rand;\n        //      user-images/chris-grim-54fwd3g\n        $inputFile = $name . '.' . $extension;\n        //      chris-grim.jpg\n\n\n        $request->file('image')->storeAs('/public/' . $directory, $inputFile);\n        Image::make(storage_path().\"/app/public/$directory/$inputFile\")\n        ->fit($width, $height)\n        ->save(storage_path(\"/app/public/$directory/$name.webp\"))\n        ->save(storage_path(\"/app/public/$directory/$name.jpg\"))\n        ->fit( $width / 2, $height / 2)\n        ->save(storage_path(\"/app/public/$directory/$name-thumb.webp\"))\n        ->save(storage_path(\"/app/public/$directory/$name-thumb.jpg\"));\n\n        $user->update([ \n            'largeImagePath' => $directory . '/' . $name. '.webp',\n            'thumbImagePath' => $directory . '/' . $name. '-thumb.webp',\n        ]);\n\n    }\n\n    \n}\n",
+			"file": "app/Models/User.php",
+			"file_size": 8305,
+			"file_write_time": 132622086957704888,
 			"settings":
 			{
-				"buffer_size": 252,
+				"buffer_size": 8305,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "sftp-config.json",
+			"file": "database/migrations/2019_12_11_063149_create_moderator_comments_table.php",
 			"settings":
 			{
-				"buffer_size": 1596,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "resources/js/pages/profile/components/profile-location-mixin.js",
-			"settings":
-			{
-				"buffer_size": 2330,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "resources/views/create/index.blade.php",
-			"settings":
-			{
-				"buffer_size": 983,
+				"buffer_size": 921,
 				"line_ending": "Unix"
 			}
 		}
@@ -705,26 +692,37 @@
 	},
 	"expanded_folders":
 	[
-		"/Users/chrisgrim/code/ei"
+		"/Users/chrisgrim/code/ei",
+		"/Users/chrisgrim/code/ei/app",
+		"/Users/chrisgrim/code/ei/app/Models",
+		"/Users/chrisgrim/code/ei/database",
+		"/Users/chrisgrim/code/ei/database/migrations"
 	],
 	"file_history":
 	[
-		"/Users/chrisgrim/code/ei/sftp-config.json",
+		"/Users/chrisgrim/code/ei/app/Models/Event.php",
+		"/Users/chrisgrim/code/ei/composer.json",
+		"/Users/chrisgrim/code/ei/resources/views/create/index.blade.php",
+		"/Users/chrisgrim/code/ei/resources/js/pages/profile/components/profile-location-mixin.js",
 		"/Users/chrisgrim/code/ei/resources/sass/components/grid-data-component.scss",
+		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/admin-organizer.vue",
+		"/Users/chrisgrim/code/ei/resources/sass/adminarea/approval/show.scss",
+		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/approve/approval-bar.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/admin-categories.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/create/title.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/admin-events.vue",
+		"/Users/chrisgrim/code/ei/sftp-config.json",
 		"/Users/chrisgrim/code/ei/resources/sass/events/event-edit.scss",
 		"/Users/chrisgrim/code/ei/resources/js/components/Vue-Modal-Form.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/admin-events.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/create/tickets.vue",
 		"/Users/chrisgrim/code/ei/resources/sass/create/title.scss",
 		"/Users/chrisgrim/code/ei/database/migrations/2021_03_09_175815_create_event_requests_table.php",
-		"/Users/chrisgrim/code/ei/app/Models/Event.php",
 		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/admin-event-reviews.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/admin-stats.vue",
 		"/Users/chrisgrim/code/ei/app/Console/Commands/PublishEventsCommand.php",
 		"/Users/chrisgrim/code/ei/app/Models/ShowOnGoing.php",
 		"/Users/chrisgrim/code/ei/app/Models/Show.php",
 		"/Users/chrisgrim/code/ei/app/Http/Controllers/Admin/EventController.php",
-		"/Users/chrisgrim/code/ei/resources/js/pages/create/title.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/admin-event-requests.vue",
 		"/Users/chrisgrim/code/ei/node_modules/apexcharts/dist/apexcharts.js",
 		"/Users/chrisgrim/code/ei/node_modules/@vue/component-compiler-utils/node_modules/lru-cache/README.md",
@@ -781,7 +779,6 @@
 		"/Users/chrisgrim/code/ei/app/Models/Search.php",
 		"/Users/chrisgrim/code/ei/composer.lock",
 		"/Users/chrisgrim/code/ei/app/Http/Controllers/Search/SearchController.php",
-		"/Users/chrisgrim/code/ei/composer.json",
 		"/Users/chrisgrim/code/ei/routes/api.php",
 		"/Users/chrisgrim/code/ei/resources/views/events/searchall.blade.php",
 		"/Users/chrisgrim/code/ei/resources/js/pages/events/event-index.vue",
@@ -824,19 +821,13 @@
 		"/Users/chrisgrim/code/ei/resources/sass/events/components/search-grid-component.scss",
 		"/Users/chrisgrim/code/ei/resources/sass/app-lite.scss",
 		"/Users/chrisgrim/code/ei/resources/js/mixins/mobile.js",
-		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/admin-organizer.vue",
 		"/Users/chrisgrim/code/ei/resources/js/components/Vue-Delete-Modal.vue",
 		"/Users/chrisgrim/code/ei/app/Http/Controllers/Admin/SearchController.php",
 		"/Users/chrisgrim/code/ei/resources/js/components/Vue-Data-Modal.vue",
 		"/Users/chrisgrim/code/ei/app/Http/Kernel.php",
 		"/Users/chrisgrim/code/ei/resources/sass/components/delete-modal.scss",
 		"/Users/chrisgrim/code/ei/vendor/laravel/framework/src/Illuminate/Routing/Middleware/ThrottleRequests.php",
-		"/Users/chrisgrim/code/ei/app/Http/Controllers/Admin/OrganizerController.php",
-		"/Users/chrisgrim/code/ei/app/Models/MakeImage.php",
-		"/Users/chrisgrim/code/ei/app/Http/Controllers/Create/ImageController.php",
-		"/Users/chrisgrim/code/ei/app/Http/Controllers/OrganizerController.php",
-		"/Users/chrisgrim/code/ei/.gitignore",
-		"/Users/chrisgrim/code/ei/app/Policies/OrganizerPolicy.php"
+		"/Users/chrisgrim/code/ei/app/Http/Controllers/Admin/OrganizerController.php"
 	],
 	"find":
 	{
@@ -930,6 +921,12 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"CustomSearch",
+			"elastic",
+			"Exists",
+			"exists",
+			"UserEvents",
+			"clearInput",
 			"Dates",
 			"dates",
 			"onClickOutside",
@@ -1051,13 +1048,7 @@
 			"Pagination",
 			"pagination",
 			"all",
-			"allsearch",
-			"all",
-			"updateAllEvents",
-			"allevents",
-			"pushData",
-			"addData",
-			"footer-content"
+			"allsearch"
 		],
 		"highlight": false,
 		"in_selection": false,
@@ -1075,7 +1066,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 3,
 			"sheets":
 			[
 				{
@@ -1091,8 +1082,8 @@
 						"selection":
 						[
 							[
-								3903,
-								3828
+								6459,
+								6459
 							]
 						],
 						"settings":
@@ -1106,24 +1097,24 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "resources/js/pages/adminArea/admin-events.vue",
+					"file": "resources/js/pages/adminArea/admin-organizer.vue",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4574,
+						"buffer_size": 5463,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1826,
-								1826
+								1580,
+								1580
 							]
 						],
 						"settings":
@@ -1134,26 +1125,57 @@
 							"syntax": "Packages/Vuejs Complete Package/vue.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 836.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
 					"buffer": 2,
-					"file": ".gitignore",
-					"semi_transient": true,
+					"file": "app/Models/User.php",
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 252,
+						"buffer_size": 8305,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								252,
+								720,
+								720
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/PHP/PHP.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "database/migrations/2019_12_11_063149_create_moderator_comments_table.php",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 921,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
 								0
 							]
 						],
@@ -1162,106 +1184,13 @@
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
-							"syntax": "Packages/Git Formats/Git Ignore.sublime-syntax"
+							"syntax": "Packages/PHP/PHP.sublime-syntax"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "sftp-config.json",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1596,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1222,
-								551
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/JavaScript/JSON.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "resources/js/pages/profile/components/profile-location-mixin.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2330,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								42,
-								2321
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "resources/views/create/index.blade.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 983,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								853,
-								853
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Laravel Blade Highlighter/blade.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
 					"type": "text"
 				}
 			]

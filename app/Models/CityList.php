@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Laravel\Scout\Searchable;
-use ElasticScoutDriverPlus\CustomSearch;
+use ElasticScoutDriverPlus\QueryDsl;
 use Illuminate\Database\Eloquent\Model;
 
 class CityList extends Model
@@ -11,7 +11,7 @@ class CityList extends Model
 	protected $guarded = [];
 
 	use Searchable;
-    use CustomSearch;
+    use QueryDsl;
 
     /**
     * What events should be searchable for scout elastic search

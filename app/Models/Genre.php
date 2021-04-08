@@ -4,14 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
-use ElasticScoutDriverPlus\CustomSearch;
+use ElasticScoutDriverPlus\QueryDsl;
 use App\Scopes\AdminScope;
 use Illuminate\Support\Str;
 
 class Genre extends Model
 {
     use Searchable;
-    use CustomSearch;
+    use QueryDsl;
+
 
     /**
     * What protected variables are allowed to be passed to the database

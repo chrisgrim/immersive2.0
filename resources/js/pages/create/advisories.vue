@@ -325,13 +325,13 @@
             mobilityAdvisories: {
                 required,
                 maxChar() {
-                    return this.mobilityAdvisories.filter( mobility => mobility.mobilities.length > 30 ).length ? false : true
+                    return this.mobilityAdvisories.filter( mobility => mobility.mobilities.length > 60 ).length ? false : true
                 }
             },
             contentAdvisories: {
                 required,
                 maxChar() {
-                    return this.contentAdvisories.filter( content => content.advisories.length > 30 ).length ? false : true
+                    return this.contentAdvisories.filter( content => content.advisories.length > 60 ).length ? false : true
                 }
             },
             interactiveLevel: {

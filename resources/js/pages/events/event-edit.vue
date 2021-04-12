@@ -77,21 +77,30 @@
                             </div>
                         </div>
                         <div class="lg">
-                            <a 
-                                target="_blank"
-                                :href="`/create/${event.slug}/title`">
+                            <template v-if="locked(event)">
                                 <img 
                                     v-if="event.thumbImagePath"
                                     :src="`/storage/${event.thumbImagePath}`">
-                                <p v-if="event.name">{{ event.name }} 
-                                    <span 
-                                        style="text-decoration: underline;" 
-                                        v-if="event.status === 'p'">
-                                        (edit live event)
-                                    </span>
-                                </p>
+                                <p v-if="event.name">{{ event.name }}</p>
                                 <p v-else>New Event</p>
-                            </a>
+                            </template>
+                            <template v-else>
+                                <a 
+                                    target="_blank"
+                                    :href="`/create/${event.slug}/title`">
+                                    <img 
+                                        v-if="event.thumbImagePath"
+                                        :src="`/storage/${event.thumbImagePath}`">
+                                    <p v-if="event.name">{{ event.name }} 
+                                        <span 
+                                            style="text-decoration: underline;" 
+                                            v-if="event.status === 'p'">
+                                            (edit live event)
+                                        </span>
+                                    </p>
+                                    <p v-else>New Event</p>
+                                </a>
+                            </template>
                         </div>
                         <div class="center">
                             <p v-if="event.status === 'r'">
@@ -107,23 +116,38 @@
                             </a>
                         </div>
                         <div class="remaining center">
-                            <a 
-                                v-if="event.status > '3'"
-                                :href="`/create/${event.slug}/shows`">
-                                <template v-if="event.showtype === 'a' || event.showtype === 'o'">
-                                    <button class="noBox">
-                                        Ongoing
-                                    </button>
-                                </template>
-                                <template v-else>
-                                    <button class="noBox">
-                                        {{ datesRemaining(event).length }}
-                                    </button>
-                                </template>
-                            </a>
-                            <p v-else>
-                                -
-                            </p>
+                            <template v-if="locked(event)">
+                                <div v-if="event.status > '3'">
+                                    <template v-if="event.showtype === 'a' || event.showtype === 'o'">
+                                        <p>Ongoing</p>
+                                    </template>
+                                    <template v-else>
+                                        <p>{{ datesRemaining(event).length }}</p>
+                                    </template>
+                                </div>
+                                <p v-else>
+                                    -
+                                </p>
+                            </template>
+                            <template v-else>
+                                <a 
+                                    v-if="event.status > '3'"
+                                    :href="`/create/${event.slug}/shows`">
+                                    <template v-if="event.showtype === 'a' || event.showtype === 'o'">
+                                        <button class="noBox">
+                                            Ongoing
+                                        </button>
+                                    </template>
+                                    <template v-else>
+                                        <button class="noBox">
+                                            {{ datesRemaining(event).length }}
+                                        </button>
+                                    </template>
+                                </a>
+                                <p v-else>
+                                    -
+                                </p>
+                            </template>
                         </div>
                         <div>
                             <p>{{ cleanDate(event.updated_at) }}</p>
@@ -156,6 +180,9 @@
             getStatusCircle() {
                 return event => this.statusCircle(event)
             },
+            locked() {
+                return event => this.isLocked(event)
+            }
         },
 
         data() {
@@ -196,7 +223,7 @@
                 if (event.status === '5') return 'add show description';
                 if (event.status === '6') return 'add advisories';
                 if (event.status === '7') return 'add image';
-                if (event.status === '8') return 'review event';
+                if (event.status === '8') return 'submit event';
                 if (event.status === 'p') return 'approved';
                 if (event.status === 'r') return 'under moderator review';
                 if (event.status === 'n') return 'revise and resubmit';
@@ -252,6 +279,10 @@
                 if (event.status === 'r') return `background: black`;
                 if (event.status === 'n') return `background: #bf1515`;
                 return `background: #bf1515`;
+            },
+
+            isLocked(event) {
+                if (event.status === 'r') return true;
             }
         },
 

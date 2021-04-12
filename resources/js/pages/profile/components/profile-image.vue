@@ -8,7 +8,7 @@
                     v-if="avatar"
                     class="user-profile-image__wrapper"
                     :class="{ imageloaded: avatar, imageloading: uploading }"
-                    :style="`background:url('/storage/${avatar}')`">
+                    :style="`background:url(${avatar})`">
                     <image-upload @loaded="onImageUpload" />
                     <CubeSpinner :loading="loading" />
                     <span class="user-profile-image__update-text">
@@ -60,7 +60,7 @@
             <template v-if="avatar">
                 <img 
                     class="user-profile-image" 
-                    :src="`/storage/${avatar.slice(0, -4)}jpg`" 
+                    :src="avatar" 
                     :alt="`${loaduser.name}`">
             </template>
             <template v-else-if="user.gravatar">
@@ -101,7 +101,7 @@
         data() {
             return {
                 user: this.loaduser,
-                avatar: this.loaduser.thumbImagePath ? this.loaduser.thumbImagePath : null,
+                avatar: this.loaduser.thumbImagePath ? `/storage/${this.loaduser.thumbImagePath.slice(0, -4)}jpg` : null,
                 imageFile: '',
                 active: null,
                 loading: false,

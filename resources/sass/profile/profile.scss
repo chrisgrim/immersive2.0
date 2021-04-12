@@ -112,7 +112,11 @@ button.verify-email {
     border: 1px solid #e6e6e6;
     padding: .5rem;
     margin-left: 1rem;
-
+}
+button.verify-email:disabled,
+button.verify-email[disabled]{
+  border: 1px solid #999999;
+  color: #666666;
 }
 
 

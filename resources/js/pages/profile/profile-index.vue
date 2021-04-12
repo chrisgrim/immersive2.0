@@ -120,7 +120,7 @@
 
         props: ['loaduser', 'events', 'auth'],
 
-        mixins: [profileLocationMixin, formValidationMixin],
+        mixins: [ profileLocationMixin, formValidationMixin ],
 
         components: { ProfileImage },
 
@@ -163,7 +163,6 @@
         },
 
         methods: {
-
             initializeLocationObject() {
                 return {
                     street:  '',
@@ -180,13 +179,10 @@
             },
 
             async resend() {
-                this.disabled = true;
-                await axios.post(`/email/resend`)
-                .then(res => {
-                    this.onSent = true;
-                    this.disabled = false;
-                })
-                .catch( err => {  this.onErrors(err) })
+                if (this.checkVuelidate()) { return }
+                await axios.post(`/email/verification-notification`);
+                this.onSent = true;
+                this.disabled = false;
             },
 
             async onSubmit() {

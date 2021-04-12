@@ -2,8 +2,9 @@ export default {
 
     methods: {
         checkVuelidate() {
+            this.disabled = true;
             this.$v.$touch()
-            !this.$v.$invalid ? this.disabled = true : false;
+            this.$v.$invalid ? this.disabled = false : this.disabled = true;
             return this.$v.$invalid
         },
 

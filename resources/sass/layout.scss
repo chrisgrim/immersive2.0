@@ -249,6 +249,12 @@ button.default-border {
     z-index: 10;
     padding: 0.5rem;
 } 
+.image-validation-error {
+    display: block;
+    position: absolute;
+    width: 100%;
+    bottom: -3rem;
+}
 .validation-error p {
     margin: 0px;
     padding: 0px 5px;

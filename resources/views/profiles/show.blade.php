@@ -17,7 +17,7 @@
 @endsection
 
 @section('content')
-	<div id="bodyArea">
-		<user-profile :events="{{ $events }}" :loaduser="{{ $user }}" auth="{{auth()->id()}}" v-cloak></user-profile>	
-	</div>
+    <div id="bodyArea">
+        <user-profile :events="{{ $events }}" :loaduser="{{ $user }}" auth="{{auth()->id()}}" v-cloak></user-profile>   
+    </div>
 @endsection

@@ -8,6 +8,8 @@ use Cache;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
+
 
 class ProfilesController extends Controller
 {
@@ -19,18 +21,21 @@ class ProfilesController extends Controller
     public function __construct()
     {
         $this->middleware(['auth', 'verified'])->except('show');
+        // $this->middleware('can:update,user');
+        // ->except(['create','show','store','fetch']);
     }
 
     public function index(User $user)
     {
-        return view('profiles.index', compact('user'));
+        $this->authorize('update', $user);
+        return 'test';
     }
 
     public function show(User $user)
     {
         $events = $user->favouritedEvents()->get()->load('organizer');
         $user->load('location');
-        return view('profiles.index', compact('user', 'events'));
+        return view('profiles.show', compact('user', 'events'));
     }
 
     public function account()

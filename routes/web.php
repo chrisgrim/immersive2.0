@@ -5,8 +5,8 @@ use App\Http\Controllers\EventController;
 
 Route::GET('/', 'EventController@index')->name('home');
 
-Route::GET('/login/{provider}', 'Auth\LoginController@redirectToProvider');
-Route::GET('/login/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
+// Route::GET('/login/{provider}', 'Auth\LoginController@redirectToProvider');
+// Route::GET('/login/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
 
 Route::RESOURCE('events', 'EventController');
 Route::RESOURCE('categories', 'Admin\CategoryController');
@@ -89,7 +89,6 @@ Route::RESOURCE('organizer', 'OrganizerController');
 Route::GET('/organizer/{organizer}/events', 'OrganizerController@fetchEvents');
 Route::POST('/organizer/{organizer}/patch', 'OrganizerController@update');
 Route::POST('message/organizer/{organizer}/{user}', 'OrganizerController@message');
-Route::POST('change/organizer/{organizer}/', 'AdminOrganizerController@edit');
 
 
 //User Profile Pages

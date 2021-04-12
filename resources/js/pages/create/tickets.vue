@@ -3,7 +3,7 @@
         <section class="">
             <div class="listing-details-block">
                 <div class="title">
-                    <h2>Pricing</h2>
+                    <h2>Pricing & Access</h2>
                 </div>
                 <section 
                     v-if="event.show_times" 
@@ -11,7 +11,7 @@
                     <div class="field cost">
                         <div class="event-tickets__add">
                             <div class="field">
-                                <label class="area">Let our users know your ticket pricing</label>
+                                <label class="area">Let our users know your ticket pricing (if no cost choose free)</label>
                                 <v-select 
                                     v-model="selected"
                                     label="name"
@@ -156,7 +156,7 @@
                         </template>
                         <div class="c-ticklet-button">
                             <div class="field">
-                                <label>Choose your button text (your link for tickets or ticket info)</label>
+                                <label>Choose your call to action button text (your link for tickets or ticket info)</label>
                                 <v-select 
                                     v-model="callAction" 
                                     placeholder="Select call to action"
@@ -171,7 +171,7 @@
                                 </div>
                             </div>
                             <div class="field">
-                                <label>Button link (required)</label>
+                                <label>Call to action button link (required)</label>
                                 <input 
                                     type="text" 
                                     v-model="ticketUrl"

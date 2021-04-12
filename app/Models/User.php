@@ -282,43 +282,5 @@ class User extends Authenticatable implements MustVerifyEmail
         }
     }
 
-    /**
-    * Saves the image that is passed from the controller
-    *
-    * @return string
-    */
-    public static function saveFile($request, $user, $width, $height)
-    {
-
-        ini_set('memory_limit','512M');
-
-        $extension = $request->file('image')->getClientOriginalExtension();
-        //      jpg
-        $rand = substr(md5(microtime()),rand(0,26),7);
-        //      546ds3g
-        $name =  Str::slug($user->name);
-        //      chris-grim
-        $directory = 'user-images/' . $name . '-' . $rand;
-        //      user-images/chris-grim-54fwd3g
-        $inputFile = $name . '.' . $extension;
-        //      chris-grim.jpg
-
-
-        $request->file('image')->storeAs('/public/' . $directory, $inputFile);
-        Image::make(storage_path()."/app/public/$directory/$inputFile")
-        ->fit($width, $height)
-        ->save(storage_path("/app/public/$directory/$name.webp"))
-        ->save(storage_path("/app/public/$directory/$name.jpg"))
-        ->fit( $width / 2, $height / 2)
-        ->save(storage_path("/app/public/$directory/$name-thumb.webp"))
-        ->save(storage_path("/app/public/$directory/$name-thumb.jpg"));
-
-        $user->update([ 
-            'largeImagePath' => $directory . '/' . $name. '.webp',
-            'thumbImagePath' => $directory . '/' . $name. '-thumb.webp',
-        ]);
-
-    }
-
     
 }

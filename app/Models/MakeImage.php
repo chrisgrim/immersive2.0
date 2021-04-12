@@ -206,4 +206,49 @@ class MakeImage extends Model
         Storage::deleteDirectory('public/' . $dir);
     }
 
+    /**
+    * Saves an image when the user submits their event for the first time.
+    *
+    * @return string
+    */
+    public static function saveUserImage($request, $value, $width, $height, $type)
+    {
+        // Check if pathinfo for the largeimage path exists and is over 7 in length
+        if (strlen(pathinfo($value->largeImagePath, PATHINFO_DIRNAME)) > 7) {
+            // Get the pathinfo: event-images/myevent-e2e9agg
+            $dir = pathinfo($value->largeImagePath, PATHINFO_DIRNAME);
+            // Get the filename: myevent
+            $filename = pathinfo($value->largeImagePath, PATHINFO_FILENAME);
+            //Delete the original folder
+            Storage::deleteDirectory('public/' . $dir);
+
+        } else {
+            // Generate random number: 546ds3g
+            $id = auth()->user()->id;
+            // Generate random filename: fd45cz3
+            $filename = auth()->user()->name;
+            // Create dirctory name:  event-images/new-titles-54fwd3g-temp
+            $dir = $type . '-images/' . $filename . '-' . $id;
+        }
+
+        // Get extension: jpg
+        $extension = $request->file('image')->getClientOriginalExtension();
+        // Create title: new-titles.jpg
+        $inputFile = $filename . '.' . $extension;
+
+        $request->file('image')->storeAs('/public/' . $dir, $inputFile);
+        Image::make(storage_path()."/app/public/$dir/$inputFile")
+        ->fit($width, $height)
+        ->save(storage_path("/app/public/$dir/$filename.webp"))
+        ->save(storage_path("/app/public/$dir/$filename.jpg"))
+        ->fit( $width / 2, $height / 2)
+        ->save(storage_path("/app/public/$dir/$filename-thumb.webp"))
+        ->save(storage_path("/app/public/$dir/$filename-thumb.jpg"));
+
+        $value->update([ 
+            'largeImagePath' => $dir . '/' . $filename. '.webp',
+            'thumbImagePath' => $dir . '/' . $filename. '-thumb.webp',
+        ]);
+    }
+
 }

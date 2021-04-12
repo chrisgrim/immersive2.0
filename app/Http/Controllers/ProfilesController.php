@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\MakeImage;
 use Cache;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManagerStatic as Image;
@@ -21,14 +22,11 @@ class ProfilesController extends Controller
     public function __construct()
     {
         $this->middleware(['auth', 'verified'])->except('show');
-        // $this->middleware('can:update,user');
-        // ->except(['create','show','store','fetch']);
     }
 
     public function index(User $user)
     {
-        $this->authorize('update', $user);
-        return 'test';
+        //
     }
 
     public function show(User $user)
@@ -62,8 +60,9 @@ class ProfilesController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        $this->authorize('update', $user);
     	if($request->image) {
-			User::saveFile($request, $user, 600, 600);
+            MakeImage::saveUserImage($request,$user, 600, 600, 'user');
     	}
         if ($request->name) {
             $user->update([ 'name' => $request->name ]);
@@ -115,6 +114,7 @@ class ProfilesController extends Controller
                 ]
             );
         }
+        $user->fresh();
     }
 
     /**
@@ -125,6 +125,7 @@ class ProfilesController extends Controller
      */
     public function destroy(User $user)
     {
+        $this->authorize('update', $user);
         $user->conversations()->detach();
         $user->delete();
     }

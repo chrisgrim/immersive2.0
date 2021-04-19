@@ -4,6 +4,22 @@
 		"selected_items":
 		[
 			[
+				"clo",
+				"closeDuplicateName"
+			],
+			[
+				"ac",
+				"acceptDuplicateName"
+			],
+			[
+				"acce",
+				"acceptErrors"
+			],
+			[
+				"loc",
+				"locked"
+			],
+			[
 				"embar",
 				"embargo_date"
 			],
@@ -498,22 +514,6 @@
 			[
 				"new",
 				"newevent"
-			],
-			[
-				"ax",
-				"axiosOnline"
-			],
-			[
-				"is",
-				"isHovered"
-			],
-			[
-				"hov",
-				"hover"
-			],
-			[
-				"hover",
-				"hoverArray"
 			]
 		]
 	},
@@ -523,32 +523,34 @@
 			"file": "routes/web.php",
 			"settings":
 			{
-				"buffer_size": 9000,
+				"buffer_size": 8927,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "app/Models/Event.php",
+			"file": "app/Http/Controllers/EventController.php",
 			"settings":
 			{
-				"buffer_size": 14071,
+				"buffer_size": 4048,
+				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "resources/js/pages/create/description.vue",
+			"file": "resources/js/pages/events/event-edit.vue",
 			"settings":
 			{
-				"buffer_size": 6743,
+				"buffer_size": 13942,
+				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "resources/js/pages/create/tickets.vue",
+			"file": "resources/views/events/edit.blade.php",
 			"settings":
 			{
-				"buffer_size": 22584,
+				"buffer_size": 709,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -695,35 +697,59 @@
 		"/Users/chrisgrim/code/ei/app/Http/Controllers",
 		"/Users/chrisgrim/code/ei/app/Http/Controllers/Create",
 		"/Users/chrisgrim/code/ei/app/Models",
+		"/Users/chrisgrim/code/ei/app/Policies",
 		"/Users/chrisgrim/code/ei/resources",
 		"/Users/chrisgrim/code/ei/resources/js",
+		"/Users/chrisgrim/code/ei/resources/js/mixins",
 		"/Users/chrisgrim/code/ei/resources/js/pages",
-		"/Users/chrisgrim/code/ei/resources/js/pages/create"
+		"/Users/chrisgrim/code/ei/resources/js/pages/events",
+		"/Users/chrisgrim/code/ei/resources/sass",
+		"/Users/chrisgrim/code/ei/resources/sass/components",
+		"/Users/chrisgrim/code/ei/resources/views",
+		"/Users/chrisgrim/code/ei/resources/views/events",
+		"/Users/chrisgrim/code/ei/resources/views/profiles"
 	],
 	"file_history":
 	[
+		"/Users/chrisgrim/code/ei/app/Models/User.php",
+		"/Users/chrisgrim/code/ei/app/Models/Event.php",
+		"/Users/chrisgrim/code/ei/resources/js/pages/create/location-google.vue",
+		"/Users/chrisgrim/code/ei/app/Models/Location.php",
+		"/Users/chrisgrim/code/ei/app/Http/Controllers/Create/LocationController.php",
+		"/Users/chrisgrim/code/ei/resources/js/pages/create/title.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/approve/approval-bar.vue",
+		"/Users/chrisgrim/code/ei/resources/sass/adminarea/approval/show.scss",
+		"/Users/chrisgrim/code/ei/app/Http/Controllers/Create/TitleController.php",
+		"/Users/chrisgrim/code/ei/resources/js/components/Vue-Modal-Accept.vue",
+		"/Users/chrisgrim/code/ei/resources/sass/components/grid-data-component.scss",
+		"/Users/chrisgrim/code/ei/resources/js/pages/events/event-edit.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/create/advisories.vue",
+		"/Users/chrisgrim/code/ei/app/Http/Controllers/ProfilesController.php",
+		"/Users/chrisgrim/code/ei/resources/js/pages/profile/components/profile-image.vue",
+		"/Users/chrisgrim/code/ei/app/Models/MakeImage.php",
+		"/Users/chrisgrim/code/ei/app/Policies/UserPolicy.php",
+		"/Users/chrisgrim/code/ei/resources/js/mixins/form-validation-mixin.js",
+		"/Users/chrisgrim/code/ei/resources/js/pages/profile/profile-index.vue",
+		"/Users/chrisgrim/code/ei/resources/sass/profile/profile.scss",
+		"/Users/chrisgrim/code/ei/resources/sass/layout.scss",
+		"/Users/chrisgrim/code/ei/resources/views/profiles/show.blade.php",
+		"/Users/chrisgrim/code/ei/app/Providers/AuthServiceProvider.php",
+		"/Users/chrisgrim/code/ei/resources/js/pages/create/tickets.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/admin-event-requests.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/admin-organizer.vue",
-		"/Users/chrisgrim/code/ei/app/Models/User.php",
 		"/Users/chrisgrim/code/ei/app/Models/RemoteLocation.php",
 		"/Users/chrisgrim/code/ei/app/Models/Organizer.php",
 		"/Users/chrisgrim/code/ei/app/Models/Genre.php",
-		"/Users/chrisgrim/code/ei/app/Models/Event.php",
 		"/Users/chrisgrim/code/ei/app/Models/CityList.php",
 		"/Users/chrisgrim/code/ei/app/Models/Category.php",
 		"/Users/chrisgrim/code/ei/composer.json",
 		"/Users/chrisgrim/code/ei/resources/views/create/index.blade.php",
 		"/Users/chrisgrim/code/ei/resources/js/pages/profile/components/profile-location-mixin.js",
-		"/Users/chrisgrim/code/ei/resources/sass/components/grid-data-component.scss",
-		"/Users/chrisgrim/code/ei/resources/sass/adminarea/approval/show.scss",
-		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/approve/approval-bar.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/admin-categories.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/create/title.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/admin-events.vue",
 		"/Users/chrisgrim/code/ei/sftp-config.json",
 		"/Users/chrisgrim/code/ei/resources/sass/events/event-edit.scss",
 		"/Users/chrisgrim/code/ei/resources/js/components/Vue-Modal-Form.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/create/tickets.vue",
 		"/Users/chrisgrim/code/ei/resources/sass/create/title.scss",
 		"/Users/chrisgrim/code/ei/database/migrations/2021_03_09_175815_create_event_requests_table.php",
 		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/admin-event-reviews.vue",
@@ -735,10 +761,7 @@
 		"/Users/chrisgrim/code/ei/node_modules/apexcharts/dist/apexcharts.js",
 		"/Users/chrisgrim/code/ei/node_modules/@vue/component-compiler-utils/node_modules/lru-cache/README.md",
 		"/Users/chrisgrim/code/ei/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Calculation/Logical.php",
-		"/Users/chrisgrim/code/ei/app/Http/Controllers/Create/TitleController.php",
-		"/Users/chrisgrim/code/ei/resources/js/mixins/form-validation-mixin.js",
 		"/Users/chrisgrim/code/ei/resources/sass/components/vue-modal.scss",
-		"/Users/chrisgrim/code/ei/resources/sass/layout.scss",
 		"/Users/chrisgrim/code/ei/app/Models/Events/EventRequest.php",
 		"/Users/chrisgrim/code/ei/app/Models/TrackClick.php",
 		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/admin-boneyard.vue",
@@ -748,7 +771,6 @@
 		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/nav.vue",
 		"/Users/chrisgrim/code/ei/resources/views/adminArea/eventrequests.blade.php",
 		"/Users/chrisgrim/code/ei/resources/js/app.js",
-		"/Users/chrisgrim/code/ei/resources/js/pages/events/event-edit.vue",
 		"/Users/chrisgrim/code/ei/resources/views/events/edit.blade.php",
 		"/Users/chrisgrim/code/ei/resources/views/layouts/meta.blade.php",
 		"/Users/chrisgrim/code/ei/resources/js/pages/events/show/event-show-header.vue",
@@ -816,20 +838,7 @@
 		"/Users/chrisgrim/code/ei/resources/js/pages/layouts/nav.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/events/event-search.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/events/components/event-edit-item.vue",
-		"/Users/chrisgrim/code/ei/resources/views/adminArea/show.blade.php",
-		"/Users/chrisgrim/code/ei/resources/js/components/Svg-icon.vue",
-		"/Users/chrisgrim/code/ei/resources/sass/components/flatpickr.scss",
-		"/Users/chrisgrim/code/ei/resources/sass/app.scss",
-		"/Users/chrisgrim/code/ei/resources/js/pages/search/filter/vue-filter-online.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/search/filter/vue-filter-location.vue",
-		"/Users/chrisgrim/code/ei/resources/sass/components/grid.scss",
-		"/Users/chrisgrim/code/ei/resources/sass/events/components/search-grid-component.scss",
-		"/Users/chrisgrim/code/ei/resources/sass/app-lite.scss",
-		"/Users/chrisgrim/code/ei/resources/js/mixins/mobile.js",
-		"/Users/chrisgrim/code/ei/resources/js/components/Vue-Delete-Modal.vue",
-		"/Users/chrisgrim/code/ei/app/Http/Controllers/Admin/SearchController.php",
-		"/Users/chrisgrim/code/ei/resources/js/components/Vue-Data-Modal.vue",
-		"/Users/chrisgrim/code/ei/app/Http/Kernel.php"
+		"/Users/chrisgrim/code/ei/resources/views/adminArea/show.blade.php"
 	],
 	"find":
 	{
@@ -840,6 +849,11 @@
 		"height": 164.0,
 		"where_history":
 		[
+			"/Users/chrisgrim/code/ei/resources/views",
+			"/Users/chrisgrim/code/ei/resources/sass",
+			"/Users/chrisgrim/code/ei",
+			"/Users/chrisgrim/code/ei/resources",
+			"/Users/chrisgrim/code/ei/resources/js",
 			"/Users/chrisgrim/code/ei",
 			"/Users/chrisgrim/code/ei/resources/views",
 			"/Users/chrisgrim/code/ei/resources/sass",
@@ -923,6 +937,58 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"json",
+			"user",
+			"isad",
+			"response",
+			".admin-approve-similar-name",
+			"isDisabled",
+			"isDisaled",
+			"closeDuplicateName",
+			"serverErrors",
+			"VueModalForm",
+			"exists",
+			"statusDetail",
+			"rand",
+			"type",
+			"$type",
+			"saveFile",
+			"canEditPage",
+			"verify-email",
+			"customCheck",
+			"errorResponse",
+			"response",
+			"onErrors",
+			"onToggle",
+			"cleanDate",
+			"userOwnsPage",
+			"loading",
+			"avatar",
+			"imageFile",
+			"userOwnsPage",
+			"endPoint",
+			"FormData",
+			"formData",
+			"canUseWebP",
+			"canEditPage",
+			"webp",
+			"avatar",
+			"EventPolicy",
+			"submitObject",
+			"change/organizer/",
+			"AdminOrganizerController",
+			"logincontroller",
+			"user",
+			"onToggle",
+			"CubeSpinner",
+			"onSent",
+			"loading",
+			"onEditUser",
+			"onToggle",
+			"cleanDate",
+			"onSubmit",
+			"canEditPage",
+			"userOwnsPage",
 			"tagName",
 			"genre",
 			"CustomSearch",
@@ -998,59 +1064,7 @@
 			"endpoint",
 			",\n",
 			"options",
-			"onResubmit",
-			"onload",
-			"cleanDate",
-			"getDates",
-			"newEvent",
-			"mouseOver",
-			"IconSvg",
-			"datesRemaining",
-			"getStatus",
-			"getStatusDetail",
-			"past",
-			"pastShow",
-			"getUrl",
-			"getStatusCircle",
-			"mk-footer-copyright",
-			"WIP",
-			"statusDetail",
-			"event is ",
-			"add physical/remote location",
-			"pastShow",
-			"cleanDate",
-			"#de8437",
-			"#dec237",
-			"getStatus",
-			"canDeleteOrganizer",
-			"newEvent",
-			"5rem",
-			"yellow",
-			"green",
-			"statusCircle",
-			"getStatusCircle",
-			"statusCircle",
-			"StatusCircle",
-			"'name'",
-			"newEvent",
-			"canDeleteOrganizer",
-			"showOrganizer",
-			"organizerStyle",
-			"fixedprice",
-			"computed:",
-			"computed:{",
-			"remaining",
-			"cleanDate",
-			"dayjs",
-			"grid-data-component",
-			"data-grid",
-			"email/verify",
-			"EventController",
-			"generateSearchList",
-			"lodash",
-			"pagination",
-			"Pagination",
-			"pagination"
+			"onResubmit"
 		],
 		"highlight": false,
 		"in_selection": false,
@@ -1077,15 +1091,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 9000,
+						"buffer_size": 8927,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								6459,
-								6459
+								5068,
+								5068
 							]
 						],
 						"settings":
@@ -1104,19 +1118,19 @@
 				},
 				{
 					"buffer": 1,
-					"file": "app/Models/Event.php",
+					"file": "app/Http/Controllers/EventController.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 14071,
+						"buffer_size": 4048,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								7606,
-								7829
+								2420,
+								2437
 							]
 						],
 						"settings":
@@ -1127,55 +1141,27 @@
 							"syntax": "Packages/PHP/PHP.sublime-syntax"
 						},
 						"translation.x": 0.0,
-						"translation.y": 6756.0,
+						"translation.y": 1487.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
 					"buffer": 2,
-					"file": "resources/js/pages/create/description.vue",
-					"semi_transient": true,
+					"file": "resources/js/pages/events/event-edit.vue",
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 6743,
+						"buffer_size": 13942,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2433,
-								2440
-							],
-							[
-								2772,
-								2779
-							],
-							[
-								2856,
-								2863
-							],
-							[
-								2907,
-								2914
-							],
-							[
-								2996,
-								3003
-							],
-							[
-								3094,
-								3101
-							],
-							[
-								3185,
-								3192
-							],
-							[
-								4260,
-								4267
+								7713,
+								7717
 							]
 						],
 						"settings":
@@ -1186,7 +1172,7 @@
 							"syntax": "Packages/Vuejs Complete Package/vue.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 1923.0,
+						"translation.y": 3450.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -1194,19 +1180,19 @@
 				},
 				{
 					"buffer": 3,
-					"file": "resources/js/pages/create/tickets.vue",
+					"file": "resources/views/events/edit.blade.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 22584,
+						"buffer_size": 709,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								11146,
-								11146
+								606,
+								606
 							]
 						],
 						"settings":
@@ -1214,13 +1200,13 @@
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
-							"syntax": "Packages/Vuejs Complete Package/vue.tmLanguage"
+							"syntax": "Packages/Laravel Blade Highlighter/blade.sublime-syntax"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 139.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 1,
 					"type": "text"
 				}
 			]
@@ -1295,6 +1281,14 @@
 		"selected_items":
 		[
 			[
+				"authse",
+				"app/Providers/AuthServiceProvider.php"
+			],
+			[
+				"AuthServiceProvider",
+				"app/Providers/AuthServiceProvider.php"
+			],
+			[
 				"events register",
 				"vendor/laravel/framework/src/Illuminate/Auth/Events/Registered.php"
 			],
@@ -1316,10 +1310,6 @@
 			],
 			[
 				"authser",
-				"app/Providers/AuthServiceProvider.php"
-			],
-			[
-				"authse",
 				"app/Providers/AuthServiceProvider.php"
 			],
 			[

@@ -40,9 +40,6 @@
                     <p class="error" v-if="!$v.title.name.required">Please add a title.</p>
                     <p class="error" v-if="!$v.title.name.maxLength">The title is too long.</p>
                 </div>
-                <div v-if="serverErrors" class="validation-error">
-                    <p class="error" v-if="serverErrors.errors && serverErrors.errors.name">An event with this name already exists. Please reach out to us at support@everythingimmersive.com.</p>
-                </div>
             </div>
             <div class="field">
                 <label>Project tag line (required)</label>
@@ -68,6 +65,17 @@
             previous="exit"
             next="location" 
             :event="event" />
+        <VueModalAccept 
+            @onSubmit="acceptDuplicateName"
+            @close="clearInput()"
+            v-if="serverErrors.errors && serverErrors.errors.name">
+            <h3>Warning</h3>
+            <p style="display:inline">An event named {{ title.name }} already exists. Please review the live listing to ensure you are not creating a duplicate event.</p>
+            <a 
+                style="color:#3a3aff" 
+                target="_blank" 
+                :href="`/events/${serverErrors.errors.name}`">View Event</a>
+        </VueModalAccept>
         <VueModalForm 
             v-if="modal === 'changeEventName'"
             @onSubmit="changeTitle"
@@ -98,6 +106,7 @@
     import Submit  from './components/submit-buttons.vue'
     import VueNewBeginner  from './components/vue-title-beginner.vue'
     import VueModalForm from '../../components/Vue-Modal-Form'
+    import VueModalAccept from '../../components/Vue-Modal-Accept'
 
     export default {
 
@@ -105,7 +114,7 @@
 
         props: ['event', 'newsubmission'],
 
-        components: { Submit, VueNewBeginner, VueModalForm },
+        components: { Submit, VueNewBeginner, VueModalForm, VueModalAccept },
 
         computed: {
             endpoint() {
@@ -167,10 +176,16 @@
                 this.newEvent = false;
             },
 
+            acceptDuplicateName() {
+                this.title.accept_duplicate_name = true;
+                this.clearInput()
+            },
+
             initializeTitleObject() {
                 return {
                     name: this.event.name ? this.event.name : '',
                     tagLine: this.event.tag_line ? this.event.tag_line : '',
+                    accept_duplicate_name: false,
                 }
             },
         },
@@ -191,7 +206,6 @@
                 name: {
                     required,
                     maxLength: maxLength(100),
-                    serverFailed(){ return !this.serverErrors['name']; },
                 },
                 tagLine: {
                     required,

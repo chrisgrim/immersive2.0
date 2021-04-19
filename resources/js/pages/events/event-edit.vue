@@ -156,13 +156,23 @@
                 </div>
             </div>
         </template>
+        <VueModalAccept 
+            @onSubmit="limited = false"
+            @close="limited = false"
+            v-if="limited">
+            <h3>Sorry</h3>
+            <p>We only allow up to 5 unpublished events at any time. If you would like to add more events, please submit your current WIP events for approval.</p>
+        </VueModalAccept>
     </div>
 </template>
 
 <script>
+    import VueModalAccept from '../../components/Vue-Modal-Accept'
     export default {
 
         props: ['user'],
+
+        components: { VueModalAccept },
 
         computed: {
             datesRemaining() {
@@ -190,6 +200,7 @@
                 active: true,
                 organizer: '',
                 organizers: [],
+                limited: false,
             }
         },
 
@@ -203,11 +214,21 @@
             },
 
             newEvent() {
+                if (this.checkPermission()) return ;
                 axios.post(`/events`, this.organizer)
-                .then(response => { 
-                    window.location.href = `/create/${response.data.slug}/title`; 
+                .then(res => { 
+                    window.location.href = `/create/${res.data.slug}/title`; 
                 })
                 .catch(error => { this.serverErrors = error.response.data.errors; });
+            },
+
+            checkPermission() {
+                const status = ['p','e','n','r'];
+                if (this.organizers.flatMap( org => org.events).filter(event => !status.includes(event.status)).length > 5) {
+                    this.user.type === 'g' ? this.limited = true : null
+                    return this.user.type === 'g' ? true : false
+                }
+                return false;
             },
 
             cleanDate(data) {

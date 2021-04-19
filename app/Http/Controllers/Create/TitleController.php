@@ -6,6 +6,7 @@ use App\Models\Event;
 use App\Models\Events\EventRequest;
 use Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use App\Http\Requests\TitleStoreRequest;
 
 class TitleController extends Controller
@@ -59,8 +60,8 @@ class TitleController extends Controller
      */
     public function update(TitleStoreRequest $request, Event $event)
     {
-        if ($event->exists($event, $request)) return Response::json(['errors' => ['name' => 'same name']], 404); 
-
+        if ($event->exists($event, $request) && !$request->accept_duplicate_name) return Response::json(['errors' => ['name' => Str::slug($request->name)]], 404); 
+        
         $event->update([ 
             'name' => $request->name,
             'tag_line' => $request->tagLine,

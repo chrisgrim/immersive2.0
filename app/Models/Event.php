@@ -447,10 +447,7 @@ class Event extends Model
     */
     public function exists($event, $request) 
     {
-        $eventExists = Event::UserEvents()->where('slug', Str::slug($request->name))->first();
-
-        return $eventExists && $eventExists->id !== $event->id;
-
+        return Event::where('slug', Str::slug($request->name))->where('id', '!=', $event->id )->exists();
     }
 
     /**

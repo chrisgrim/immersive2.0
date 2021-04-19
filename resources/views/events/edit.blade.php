@@ -21,7 +21,7 @@
             message="submitted">
             </vue-alert>
         @endif
-		<vue-event-edit user="{{auth()->id()}}"/>	
+		<vue-event-edit :user="{{auth()->user()}}"/>	
 	</div>
 @endsection
 

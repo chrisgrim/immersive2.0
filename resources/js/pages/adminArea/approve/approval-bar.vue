@@ -19,17 +19,17 @@
                     </div>
                 </div>
             </div>
-            <template v-if="exists && showExists">
-                <div class="admin-approve-similar-name">
-                    <button @click="showExists = false">
-                        close
-                    </button>
-                    <a 
-                        rel="noreferrer noopener" 
-                        target="_blank" 
-                        :href="`/events/${exists.slug}`">An event named {{ exists.name }} already exists</a>
-                </div>
-            </template>
+            <VueModalAccept 
+                @onSubmit="showExists = false"
+                @close="showExists = false"
+                v-if="exists && showExists">
+                <h3>Warning</h3>
+                <p style="display:inline">An event named {{ exists.name }} already exists. Please review the live listing to ensure you are not approving a duplicate event.</p>
+                <a 
+                    style="color:#3a3aff" 
+                    target="_blank" 
+                    :href="`/events/${exists.slug}`">View Event</a>
+            </VueModalAccept>
             <div class="admin-approve-url">
                 <a 
                     rel="noreferrer noopener" 
@@ -57,11 +57,14 @@
     import { required } from 'vuelidate/lib/validators';
     import formValidationMixin from '../../../mixins/form-validation-mixin'
     import IconSvg from '../../../components/Svg-icon'
+    import VueModalAccept from '../../../components/Vue-Modal-Accept'
 
     export default {
         props: ['loadevent', 'exists'],
 
         mixins: [ formValidationMixin, IconSvg ],
+
+        components: { VueModalAccept },
 
         computed: {
             approvedOrg() {

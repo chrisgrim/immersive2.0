@@ -239,6 +239,15 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
+    * Determine if the current user is curator
+    *
+    * @return bool
+    */
+    public function isCurator() {
+        return $this->type === 'c' || $this->type === 'm' || $this->type === 'a';
+    }
+
+    /**
     * Determine if the current user has created events
     *
     * @return bool

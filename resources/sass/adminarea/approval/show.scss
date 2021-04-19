@@ -66,28 +66,6 @@
     color: white;
     border-radius: 5rem 0rem 0rem 5rem;
 }
-.admin-approve-similar-name {
-    background: purple;
-    position: fixed;
-    right: 25%;
-    padding: 1rem;
-    color: white;
-    border-radius: 2rem;
-    left: 25%;
-    top: 15rem;
-    height: 10rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.admin-approve-similar-name button{
-    position: absolute;
-    top: 0;
-    right: 0;
-    border-radius: 2rem;
-    margin-top: -2rem;
-    margin-right: -3rem;
-}
 
 .admin-approval__space {
     height: 20rem;

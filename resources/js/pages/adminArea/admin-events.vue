@@ -3,6 +3,12 @@
         <div class="">
             <div class="title">
                 <h1>Events</h1>
+                <select 
+                    v-model="dateFilter"
+                    id="dates">
+                    <option value="published">Published At</option>
+                    <option value="updated">Updated At</option>
+                </select>
             </div>
         </div>
         <div class="field">
@@ -18,6 +24,7 @@
                 <p />
                 <p>Name</p>
                 <p>Organization</p>
+                <p>Sum.</p>
                 <p>Status</p>
                 <p>Clicks</p>
             </div>
@@ -26,14 +33,16 @@
                 :key="event.id"
                 v-for="event in events.data">
                 <div class="edit">
-                    <a :href="`/create/${event.slug}/title`">
+                    <a 
+                        target="_blank"
+                        :href="`/create/${event.slug}/title`">
                         <IconSvg type="edit" />
                     </a>
                 </div>
                 <div class="lg">
                     <a 
                         target="_blank"
-                        :href="`/create/${event.slug}/title`">
+                        :href="`/events/${event.slug}`">
                         <img 
                             v-if="event.thumbImagePath"
                             :src="`/storage/${event.thumbImagePath}`">
@@ -46,6 +55,13 @@
                         @click.prevent="showModal(event, 'changeOrganizer')">
                         {{ event.organizer.name }}
                     </button>
+                </div>
+                <div class="center">
+                    <a 
+                        target="_blank"
+                        :href="`/admin/events/show/${event.slug}`">
+                        <IconSvg type="edit" />
+                    </a>
                 </div>
                 <div class="center">
                     <template v-if="event.status === 'p'">
@@ -95,13 +111,19 @@
                 organizers: [],
                 modalData: null,
                 modal: '',
+                page:1,
+                dateFilter: 'published'
             }
         },
 
         methods: {
             onLoad(page) {
-                axios.get(`/admin/events/fetch?page=${page}`)
-                .then( res => { this.events = res.data })
+                console.log(this.dateFilter);
+                axios.get(`/admin/events/fetch?page=${page}&date=${this.dateFilter}`)
+                .then( res => { 
+                    console.log(res.data);
+                    this.events = res.data 
+                })
             },
 
             onSearch(events) {
@@ -138,6 +160,12 @@
         created() {
             this.onLoad()
         },
+
+        watch: {
+            dateFilter() {
+                this.onLoad()
+            }
+        }
 
     }
 

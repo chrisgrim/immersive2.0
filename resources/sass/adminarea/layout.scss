@@ -220,11 +220,19 @@
     margin-right: -1rem;
     background: black;
 }
+#admin .title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
 #admin .title h1 {
     display: inline-block;
     vertical-align: top;
     line-height: 6rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 #admin .title .add {

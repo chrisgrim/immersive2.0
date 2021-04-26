@@ -3,15 +3,31 @@
         <img 
             style="width:20rem"
             :src="`/storage/${loadevent.largeImagePath.slice(0, -4)}jpg`" alt="">
-        <h1 style="padding:2rem 0rem">{{loadevent.name}}</h1>
-        <p>{{loadevent.tag_line}}</p>
-        <p>{{showDates}}</p>
-        <p>{{loadevent.price_range}}</p>
-
-        <h3 style="display:inline-block;">{{loadevent.name}}:</h3>
-        <span style="display: inline-block;"><p>{{showDates}};</p></span>
-        <span style="display: inline-block;"><p>{{loadevent.price_range}};</p></span>
-        <span style="display: inline-block;"><p>{{loadevent.tag_line}}</p></span>
+        <h4>Title: </h4><p>{{loadevent.name}}</p>
+        <h4>Tag Line: </h4><p>{{loadevent.tag_line}}</p>
+        <h4>Dates: </h4><p>{{showDates}}</p>
+        <h4>Price Range: </h4><p>{{loadevent.price_range}}</p>
+        <h4>Description: </h4><p>{{loadevent.description}}</p>
+        <h4>Age Limit: </h4><p>{{loadevent.age_limits.name}}</p>
+        <template v-if="loadevent.hasLocation">
+            <h4>Location: </h4>
+            <template v-if="loadevent.location.venue">
+                <h4>Venue: </h4> <p>{{ loadevent.location.venue }}</p>
+            </template>
+            <h4>Address</h4>
+            <p><span v-if="loadevent.location.city"> {{ loadevent.location.city }},</span> <span v-if="loadevent.location.region"> {{ loadevent.location.region }} </span></p>
+        </template>
+        <template v-else>
+            <h4>Platforms: </h4>
+            <div 
+                v-for="location in loadevent.remotelocations"
+                :key="location.id">
+                <p>
+                    {{ location.name }}
+                </p>
+            </div>
+        </template>
+        <h4>Event Url (click to copy url)</h4>
         <div>
             <button @click="copyURL">
                 https://everythingimmersive.com/events/{{loadevent.slug}}

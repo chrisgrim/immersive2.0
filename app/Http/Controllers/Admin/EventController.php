@@ -61,9 +61,16 @@ class EventController extends Controller
      */
     public function fetch(Request $request)
     {
+        // return $request;
         return Event::where('status','p')
             ->orWhere('status','e')
             ->with('user','clicks')
+            ->when(request('date') === 'published', function ($q) {
+                return $q->orderByDesc('published_at');
+            })
+            ->when(request('date') === 'updated', function ($q) {
+                return $q->orderByDesc('updated_at');
+            })
             ->paginate(30);
     }
 

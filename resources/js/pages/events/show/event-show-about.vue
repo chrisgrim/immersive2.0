@@ -42,7 +42,13 @@
         </div>
 
         <div class="es__description pad4">
-            <h2>Experience hosted by <a href="#organizer">{{ event.organizer.name }}</a></h2>
+            <h2>Experience hosted by 
+                <a 
+                    target="_blank" 
+                    :href="`/organizer/${event.organizer.slug}`">
+                    {{ event.organizer.name }}
+                </a>
+            </h2>
             <a 
                 v-if="event.organizer.thumbImagePath"
                 href="#organizer">

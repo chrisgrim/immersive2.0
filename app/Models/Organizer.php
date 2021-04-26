@@ -21,7 +21,7 @@ class Organizer extends Model
     * @var array
     */
     protected $fillable = [
-    	'user_id','name','website','slug','description','rating','largeImagePath','thumbImagePath','instagramHandle','twitterHandle','facebookHandle', 'email', 'status'
+    	'user_id','name','website','slug','description','rating','largeImagePath','thumbImagePath','instagramHandle','twitterHandle','facebookHandle', 'email', 'status', 'patreon'
     ];
 
      /**

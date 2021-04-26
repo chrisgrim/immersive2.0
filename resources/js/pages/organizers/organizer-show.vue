@@ -87,6 +87,18 @@
                     class="organizer-show-info__description">
                     <p>{{ organizer.description }}</p>
                 </div>
+                <template v-if="organizer.patreon">
+                    <div class="patreon">
+                        <a 
+                            target="_blank" 
+                            rel="noreferrer noopener"
+                            :href="organizer.patreon">
+                            <button class="patreon">
+                                Become a patreon for {{organizer.name}}
+                            </button>
+                        </a>
+                    </div>
+                </template>
                 <template v-if="events">
                     <div class="organizer-show__events">
                         <h2>Events by {{ organizer.name }}</h2>

@@ -21,7 +21,14 @@ select {
    appearance: none !important;
 }
 input { font-family: 'Montserrat', sans-serif; }
-
+input:focus {
+    outline: none !important;
+    border:1px solid #008489;
+}
+textarea:focus {
+    outline: none !important;
+    border:1px solid #008489;
+}
 
 *, *:before, *:after {
     -webkit-box-sizing: border-box;
@@ -234,6 +241,15 @@ button.default-border {
         background:$default-color;
         color:white;
     }
+}
+
+button.patreon {
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: white;
+    background: #ff5c49;
+    border: 0;
 }
 
 .clean-box {

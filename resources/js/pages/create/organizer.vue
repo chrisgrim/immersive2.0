@@ -15,7 +15,7 @@
                             v-if="approved" 
                             class="field">
                             <p class="name">
-                                {{organizer.name}}
+                                {{ organizer.name }}
                             </p>
                             <button 
                                 class="editTitle" 
@@ -32,10 +32,9 @@
                                 type="text" 
                                 placeholder=" " 
                                 name="name"
-                                :class="{ active: active == 'name','error': $v.organizer.name.$error }"
+                                :class="{ 'error': $v.organizer.name.$error }"
                                 @input="$v.organizer.name.$touch"
-                                @click="toggle('name')"
-                                @blur="active = null"
+                                @click="toggle()"
                                 v-model="organizer.name">
                             <div v-if="$v.organizer.name.$error" class="validation-error">
                                 <p class="error" v-if="!$v.organizer.name.required">The name is required</p>
@@ -50,10 +49,8 @@
                                 name="description" 
                                 v-model="organizer.description" 
                                 placeholder=" "
-                                :class="{ active: active == 'description','error': $v.organizer.description.$error }"
+                                :class="{ 'error': $v.organizer.description.$error }"
                                 @input="$v.organizer.description.$touch"
-                                @click="active = 'description'"
-                                @blur="active = null" 
                                 rows="8" />
                             <div v-if="$v.organizer.description.$error" class="validation-error">
                                 <p class="error" v-if="!$v.organizer.description.required">The description is required</p>
@@ -65,10 +62,9 @@
                                 type="url" 
                                 v-model="organizer.website" 
                                 name="website"
-                                :class="{ active: active == 'website','error': $v.organizer.$error && $v.organizer.website.$error }"
+                                :class="{ 'error': $v.organizer.$error && $v.organizer.website.$error }"
                                 @input="$v.organizer.website.$touch"
-                                @click="toggle('website')"
-                                @blur="active = null" 
+                                @click="toggle()"
                                 placeholder=" ">
                             <div v-if="$v.organizer.$error && $v.organizer.website.$error" class="validation-error">
                                 <p class="error" v-if="!$v.organizer.website.url">Must be a url (Needs http://)</p>
@@ -81,10 +77,8 @@
                                 type="text" 
                                 v-model="organizer.email" 
                                 name="email"
-                                @click="active = 'email'"
-                                :class="{ active: active == 'email','error': $v.organizer.$error && $v.organizer.email.$error }"
+                                :class="{'error': $v.organizer.$error && $v.organizer.email.$error }"
                                 @input="$v.organizer.email.$touch"
-                                @blur="active = null" 
                                 placeholder=" ">
                             <div v-if="$v.organizer.$error && $v.organizer.email.$error" class="validation-error">
                                 <p class="error" v-if="!$v.organizer.email.email">Must be email</p>
@@ -97,9 +91,7 @@
                                 v-model="organizer.twitterHandle" 
                                 name="twitterHandle"
                                 @input="$v.organizer.twitterHandle.$touch"
-                                @click="active = 'twitter'"
-                                :class="{ active: active == 'twitter','error': $v.organizer.twitterHandle.$error}"
-                                @blur="active = null" 
+                                :class="{ 'error': $v.organizer.twitterHandle.$error}"
                                 placeholder=" ">
                             <div v-if="$v.organizer.twitterHandle.$error" class="validation-error">
                                 <p class="error" v-if="!$v.organizer.twitterHandle.ifHttp">Please only include the social media handle (no urls or @)</p>
@@ -112,9 +104,7 @@
                                 v-model="organizer.facebookHandle" 
                                 name="facebookHandle"
                                 @input="$v.organizer.facebookHandle.$touch"
-                                @click="active = 'facebook'"
-                                :class="{ active: active == 'facebook','error': $v.organizer.facebookHandle.$error }"
-                                @blur="active = null" 
+                                :class="{ 'error': $v.organizer.facebookHandle.$error }"
                                 placeholder=" ">
                             <div v-if="$v.organizer.facebookHandle.$error" class="validation-error">
                                 <p class="error" v-if="!$v.organizer.facebookHandle.ifHttp">Please only include the social media handle (no urls or @)</p>
@@ -127,12 +117,23 @@
                                 v-model="organizer.instagramHandle" 
                                 name="instagramHandle"
                                 @input="$v.organizer.instagramHandle.$touch"
-                                @click="active = 'instagram'"
-                                :class="{ active: active == 'instagram','error': $v.organizer.instagramHandle.$error }"
-                                @blur="active = null" 
+                                :class="{'error': $v.organizer.instagramHandle.$error }"
                                 placeholder=" ">
                             <div v-if="$v.organizer.instagramHandle.$error" class="validation-error">
                                 <p class="error" v-if="!$v.organizer.instagramHandle.ifHttp">Please only include the social media handle (no urls or @)</p>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label>Organization Patreon</label>
+                            <input 
+                                type="text" 
+                                v-model="organizer.patreon" 
+                                name="facebookPatreon"
+                                @input="$v.organizer.patreon.$touch"
+                                :class="{ 'error': $v.organizer.patreon.$error }"
+                                placeholder="https://www.patreon.com/...">
+                            <div v-if="$v.organizer.patreon.$error" class="validation-error">
+                                <p class="error" v-if="!$v.organizer.patreon.ifHttp">Please use the full patreon link</p>
                             </div>
                         </div>
                     </div>
@@ -263,8 +264,7 @@ export default {
             }
         },
 
-        toggle(value) {
-            this.active = value;
+        toggle() {
             this.serverErrors = [];
         },
 
@@ -315,6 +315,10 @@ export default {
 
         validateText(str) {
             return str && str.startsWith("http") || str && str.startsWith("@") ? true : false
+        },
+
+        validatePatreon(value) {
+            return value && !value.startsWith("https://www.patreon.com/") || value && value.length < 25 ? true : false
         },
 
         //checks to see if passed variable is in the server errors
@@ -369,6 +373,11 @@ export default {
                     return this.validateText(this.organizer.instagramHandle) ? false : true
                 }
             },
+            patreon: {
+                ifHttp() {
+                    return this.validatePatreon(this.organizer.patreon) ? false : true
+                }
+            }
         },
     },
 };

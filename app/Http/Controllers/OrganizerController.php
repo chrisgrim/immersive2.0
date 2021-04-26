@@ -119,6 +119,7 @@ class OrganizerController extends Controller
                 'twitterHandle' => $request->twitterHandle,
                 'facebookHandle' => $request->facebookHandle,
                 'instagramHandle' => $request->instagramHandle,
+                'patreon' => $request->patreon,
             ]
         );
         $request->image ? MakeImage::saveImage($request, $organizer, 600, 600, 'organizer') : null;

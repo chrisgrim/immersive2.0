@@ -73,7 +73,7 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        if (auth()->user()->events()->whereNotIn('status', ['p','e','n','r'])->count() > 5 && !auth()->user()->isCurator()) {return null;}
+        if (auth()->user()->events()->whereNotIn('status', ['p','e'])->count() > 5 && !auth()->user()->isCurator()) {return null;}
         return Event::newEvent($request);
     }
 

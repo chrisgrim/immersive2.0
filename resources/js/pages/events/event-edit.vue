@@ -223,10 +223,12 @@
             },
 
             checkPermission() {
-                const status = ['p','e','n','r'];
+                const status = ['p','e'];
                 if (this.organizers.flatMap( org => org.events).filter(event => !status.includes(event.status)).length > 5) {
-                    this.user.type === 'g' ? this.limited = true : null
-                    return this.user.type === 'g' ? true : false
+                    // this.user.type === 'g' ? this.limited = true : null
+                    // return this.user.type === 'g' ? true : false
+                    this.limited = true;
+                    return true;
                 }
                 return false;
             },

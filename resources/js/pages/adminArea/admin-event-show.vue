@@ -3,12 +3,11 @@
         <img 
             style="width:20rem"
             :src="`/storage/${loadevent.largeImagePath.slice(0, -4)}jpg`" alt="">
-        <h4>Title: </h4><p>{{loadevent.name}}</p>
-        <h4>Tag Line: </h4><p>{{loadevent.tag_line}}</p>
-        <h4>Dates: </h4><p>{{showDates}}</p>
-        <h4>Price Range: </h4><p>{{loadevent.price_range}}</p>
-        <h4>Description: </h4><p>{{loadevent.description}}</p>
-        <h4>Age Limit: </h4><p>{{loadevent.age_limits.name}}</p>
+        <p>{{loadevent.name}}</p>
+        <p><i>{{loadevent.tag_line}}</i></p>
+        <p>{{showDates}}</p>
+        <p>{{loadevent.price_range}}</p>
+        <p>{{loadevent.age_limits.name}}</p>
         <template v-if="loadevent.hasLocation">
             <h4>Location: </h4>
             <template v-if="loadevent.location.venue">
@@ -27,6 +26,7 @@
                 </p>
             </div>
         </template>
+        <h4>Description: </h4><p>{{loadevent.description}}</p>
         <h4>Event Url (click to copy url)</h4>
         <div>
             <button @click="copyURL">

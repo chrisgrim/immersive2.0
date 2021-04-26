@@ -3,9 +3,11 @@ export default {
 
         setPlace() {
             let place = this.autocomplete.getPlace();
-            this.map.center = L.latLng(place.geometry.location.lat(), place.geometry.location.lng());
-            this.updateLats(place);
-            this.getAddressObject(place.address_components);
+            if (place) {
+                this.map.center = L.latLng(place.geometry.location.lat(), place.geometry.location.lng());
+                this.updateLats(place);
+                this.getAddressObject(place.address_components);
+            }
         },
 
         updateLats(e) {

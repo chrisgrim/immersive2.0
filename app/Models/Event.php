@@ -514,31 +514,20 @@ class Event extends Model
     *
     * @return Nothing
     */
-    public function storeDescription($request, $event) 
+    public function storeGenres($request, $event) 
     {
-
-        // $web = get_headers($request->websiteUrl, 1)[0];
-        // if (strstr($web, '302') || strstr($web, '200 OK') || strstr($web, '301')) {
-        // } else { return abort(404, "broken");}
-
-        // $ticket = get_headers($request->ticketUrl, 1)[0];
-        // if (strstr($ticket, '302') || strstr($ticket, '200 OK') || strstr($ticket, '301')) {
-        // } else { return abort(404, "broken");}
-
-        $event->update($request->except(['genre']));
-
-        if ($request->has('genre')) {
-            foreach ($request['genre'] as $genre) {
+        if ($request->has('genres')) {
+            foreach ($request['genres'] as $genre) {
                 Genre::firstOrCreate([
-                    'slug' => Str::slug($genre)
+                    'slug' => Str::slug($genre['name'])
                 ],
                 [
-                    'name' => $genre,
+                    'name' => $genre['name'],
                     'user_id' => auth()->user()->id,
                 ]);
             };
-            $newSync = Genre::whereIn('slug', collect($request->genre)->map(function ($item) {
-                return Str::slug($item); 
+            $newSync = Genre::whereIn('slug', collect($request['genres'])->map(function ($genre) {
+                return Str::slug($genre['name']); 
             })->toArray())->get();
             $event->genres()->sync($newSync);
         };

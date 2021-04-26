@@ -85,7 +85,7 @@
                     <input 
                         ref="autocomplete" 
                         :placeholder="locationPlaceholder"
-                        :class="{ active: active == 'location', 'error': $v.location.latitude.$error }"
+                        :class="{ active: active == 'location', 'error': $v.location.$error }"
                         autocomplete="false"
                         onfocus="value = ''" 
                         @click="active = 'location'"
@@ -313,7 +313,7 @@
                 },
                 hiddenLocationToggle: {},
                 venue: {
-                    maxLength: maxLength(40)
+                    maxLength: maxLength(60)
                 },
                 hiddenLocation: {
                     ifHidden() {

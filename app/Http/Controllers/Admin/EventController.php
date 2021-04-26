@@ -61,7 +61,7 @@ class EventController extends Controller
      */
     public function fetch(Request $request)
     {
-        // return $request;
+        // return Event::where('status','p')->paginate(30);
         return Event::where('status','p')
             ->orWhere('status','e')
             ->with('user','clicks')
@@ -71,7 +71,7 @@ class EventController extends Controller
             ->when(request('date') === 'updated', function ($q) {
                 return $q->orderByDesc('updated_at');
             })
-            ->paginate(30);
+            ->paginate(15);
     }
 
     /**

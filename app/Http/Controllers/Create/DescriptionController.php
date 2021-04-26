@@ -24,9 +24,7 @@ class DescriptionController extends Controller
     public function create(Event $event)
     {
         if ($event->checkEventStatus(5)) return back();
-        $event->load('genres');
-        $tags = Genre::where('admin', true)->orWhere('user_id', auth()->user()->id)->get();
-        return view('create.description', compact('event', 'tags'));
+        return view('create.description', compact('event'));
     }
 
      /**
@@ -37,10 +35,7 @@ class DescriptionController extends Controller
      */
     public function fetch(Event $event)
     {
-        return [
-            'event' => $event,
-            'genres' => $event->genres()->get(),
-        ];
+        return $event;
     }
 
     /**
@@ -51,7 +46,10 @@ class DescriptionController extends Controller
      */
     public function update(DescriptionStoreRequest $request, Event $event)
     {  
-        $event->storeDescription($request, $event);
+        $event->update([
+            'description' => $request->description,
+            'websiteUrl' => $request->websiteUrl
+        ]);
         $event->updateEventStatus(6, $request);
         $event = $event->fresh();
         $event->searchable();

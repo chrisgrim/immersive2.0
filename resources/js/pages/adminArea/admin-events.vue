@@ -60,12 +60,14 @@
                     <a 
                         target="_blank"
                         :href="`/admin/events/show/${event.slug}`">
-                        <IconSvg type="edit" />
+                        <IconSvg type="book" />
                     </a>
                 </div>
                 <div class="center">
                     <template v-if="event.status === 'p'">
-                        <a :href="`/events/${event.slug}`">
+                        <a 
+                            target="_blank"
+                            :href="`/events/${event.slug}`">
                             <p style="text-decoration: underline;">Live</p>
                         </a>
                     </template>

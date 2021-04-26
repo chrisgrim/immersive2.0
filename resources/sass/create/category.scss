@@ -11,6 +11,16 @@
     grid-template-columns: 1fr 1fr;
 }
 
+.category-description {
+    width: 100%;
+    border: 1px solid #ccbebe;
+    border-radius: 1rem;
+    padding: 2rem;
+    margin: 2rem 0;
+}
+.tag-section {
+    margin-top: 4rem;
+}
 .event-enter-category {
     max-width: 70rem;
     width: 100%;

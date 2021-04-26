@@ -157,6 +157,13 @@
             </div>
         </template>
         <VueModalAccept 
+            @onSubmit="newUserLimited = false"
+            @close="newUserLimited = false"
+            v-if="newUserLimited">
+            <h3>Sorry</h3>
+            <p>New users may only create additional drafts after their first event is approved and published. This ensures that you’ve had the chance to try out every step of our process.</p>
+        </VueModalAccept>
+        <VueModalAccept 
             @onSubmit="limited = false"
             @close="limited = false"
             v-if="limited">
@@ -170,7 +177,7 @@
     import VueModalAccept from '../../components/Vue-Modal-Accept'
     export default {
 
-        props: ['user'],
+        props: ['user', 'published', 'unpublished'],
 
         components: { VueModalAccept },
 
@@ -201,6 +208,7 @@
                 organizer: '',
                 organizers: [],
                 limited: false,
+                newUserLimited: false,
             }
         },
 
@@ -214,6 +222,7 @@
             },
 
             newEvent() {
+
                 if (this.checkPermission()) return ;
                 axios.post(`/events`, this.organizer)
                 .then(res => { 
@@ -223,10 +232,12 @@
             },
 
             checkPermission() {
-                const status = ['p','e'];
-                if (this.organizers.flatMap( org => org.events).filter(event => !status.includes(event.status)).length > 5) {
-                    // this.user.type === 'g' ? this.limited = true : null
-                    // return this.user.type === 'g' ? true : false
+                // if (this.user.type !== 'g') {return false}
+                if (this.published === 0 && this.unpublished >= 1) {
+                    this.newUserLimited = true
+                    return true
+                }
+                if (this.unpublished > 4) {
                     this.limited = true;
                     return true;
                 }

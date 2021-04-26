@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Create;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Event;
+use App\Models\Genre;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
@@ -27,9 +29,9 @@ class CategoryController extends Controller
     public function create(Event $event)
     {
         if ($event->checkEventStatus(2)) return back();
+        $tags = Genre::where('admin', true)->orWhere('user_id', auth()->user()->id)->get();
         $categories = Category::all();
-        $event->load('category');
-        return view('create.category', compact('event','categories'));
+        return view('create.category', compact('event','categories', 'tags'));
     }
 
     /**
@@ -39,7 +41,10 @@ class CategoryController extends Controller
     */
     public function fetch(Event $event)
     {
-        return $event->category()->first();
+        return [
+            'category' => $event->category()->first(),
+            'genres' => $event->genres()->get(),
+        ];
     }
 
     /**
@@ -49,7 +54,8 @@ class CategoryController extends Controller
     */
     public function update(Request $request, Event $event)
     {
-        $event->update([ 'category_id' => request('id') ]);
+        $event->storeGenres($request, $event);
+        $event->update([ 'category_id' => $request->category['id'] ]);
         $event->updateEventStatus(3, $request);
     }
 }

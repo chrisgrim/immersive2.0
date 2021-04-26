@@ -1,48 +1,76 @@
 <template>
     <div 
-        :class="{ showcat: catgory}" 
+        :class="{ showcat: category}" 
         class="event-create__category grid">
         <section 
-            :class="{ showcat: catgory}" 
+            :class="{ showcat: category}" 
             class="event-enter-category">
             <div class="title">
                 <h2>Immersive Categories</h2>
             </div>
             <div class="field">
+                <label>The broad categorization of your event</label>
                 <v-select 
-                    v-model="catgory"
+                    v-model="category"
                     label="name"
                     :options="categoryOptions"
                     :clearable="false"
                     placeholder="Select Category"
                     @search:blur="active = null"
                     @search:focus="active = 'category'"
-                    @input="$v.catgory.$touch"
-                    :class="{ active: active == 'category','error': $v.catgory.$error}" />
+                    @input="$v.category.$touch"
+                    :class="{ active: active == 'category','error': $v.category.$error}" />
                 <input 
                     type="hidden" 
                     name="category" 
-                    v-model="catgory">
-                <div v-if="$v.catgory.$error" class="validation-error">
-                    <p class="error" v-if="!$v.catgory.required">Please select your event's category</p>
+                    v-model="category">
+                <div v-if="$v.category.$error" class="validation-error">
+                    <p class="error" v-if="!$v.category.required">
+                        Please select your event's category 
+                    </p>
                 </div>
-                <div>
-                    <br>
-                    <p v-text="this.catgory ? catgory.description : ''" />
+                <template v-if="category">
+                    <div class="category-description">
+                        <p>{{ category.description }}</p>
+                    </div>
+                </template>
+            </div>
+            <div class="tag-section">
+                <div class="title">
+                    <h3>Event Tags</h3>
+                </div>
+                <div class="field">
+                    <label>Tags will help users with the more finite categorization of your event. You can select from pre-generated tags or create your own tags.</label>
+                    <v-select 
+                        v-model="genres"
+                        label="name"
+                        placeholder="Type here to create your own" 
+                        :options="tags"
+                        taggable
+                        multiple
+                        @search:blur="active = null"
+                        @search:focus="active = 'genre'"
+                        @input="$v.genres.$touch"
+                        :class="{ active: active == 'genre','error': $v.genres.$error }" />
+                    <div v-if="$v.genres.$error" class="validation-error">
+                        <p class="error" v-if="!$v.genres.name.required && $v.genres.maxLength">Must enter at least one Tag</p>
+                        <p class="error" v-if="!$v.genres.maxLength">No more than 10 tags</p>
+                        <p class="error" v-if="!$v.genres.name.maxChar && $v.genres.name.required">Tag character length is too long</p>
+                    </div>
                 </div>
             </div>
         </section>
 
         <section 
-            :class="{ showcat: catgory}" 
-            v-if="catgory" 
+            :class="{ showcat: category}" 
+            v-if="category" 
             class="event-show-category__image" 
             :style="`height:calc(${window/pageHeight}px - 7rem)`">
             <picture>       
                 <source 
                     type="image/webp" 
-                    :srcset="`/storage/${catgory.largeImagePath}`"> 
-                <img :src="`/storage/${catgory.largeImagePath.slice(0, -4)}jpg`">
+                    :srcset="`/storage/${category.largeImagePath}`"> 
+                <img :src="`/storage/${category.largeImagePath.slice(0, -4)}jpg`">
             </picture>
         </section>
         <Submit 
@@ -64,11 +92,11 @@
 <script>
     import Submit  from './components/submit-buttons.vue'
     import formValidationMixin from '../../mixins/form-validation-mixin'
-	import { required } from 'vuelidate/lib/validators';
+	import { required, maxLength } from 'vuelidate/lib/validators';
 
 	export default {
 
-        props: ['event', 'categories'],
+        props: ['event', 'categories', 'tags'],
 
         mixins: [ formValidationMixin ],
 
@@ -82,7 +110,8 @@
 
 		data() {
 			return {
-				catgory: '',
+				category: '',
+                genres: '',
 				categoryOptions: this.categories,
 				active: null,
                 window: window.innerHeight,
@@ -98,13 +127,16 @@
 			async onSubmit(value) {
                 if ( this.checkForChanges(value) ) { return this.onForward(value) }
                 if ( this.checkVuelidate() ) { return }
-				await axios.patch(this.endpoint, this.catgory)
+				await axios.patch(this.endpoint, {category: this.category, genres: this.genres})
                 value == 'save' ? this.save() : this.onForward(value);
 			},
 
             onLoad() {
                 axios.get(this.onFetch('category'))
-                .then( res => { this.catgory = res.data; });
+                .then( res => { 
+                    res.data.genres ? this.genres = res.data.genres : null;
+                    res.data.category ? this.category = res.data.category : null; 
+                });
             },
 		},
 
@@ -120,9 +152,18 @@
         },
 
 		validations: {
-			catgory: {
+			category: {
 				required
 			},
+            genres: {
+                maxLength: maxLength(10),
+                required,
+                name: {
+                    maxChar() {
+                        return this.genres.length ? this.genres.filter( tag => tag.name.length > 30 ).length ? false : true : false
+                    }
+                }
+            },
 		},
     };
 </script>

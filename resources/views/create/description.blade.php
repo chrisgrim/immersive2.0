@@ -3,6 +3,6 @@
 @section('created')
     <div class="create-body">
         @include('create.nav')	
-        <create-description :event="{{$event}}" :loadtags="{{$tags}}"></create-description>
+        <create-description :loadevent="{{$event}}"></create-description>
     </div>
 @endsection

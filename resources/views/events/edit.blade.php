@@ -21,7 +21,10 @@
             message="submitted">
             </vue-alert>
         @endif
-		<vue-event-edit :user="{{auth()->user()}}"/>	
+		<vue-event-edit 
+            :unpublished="{{auth()->user()->events()->whereNotIn('status', ['p','e'])->count()}}"
+            :published="{{auth()->user()->events()->whereIn('status', ['p','e'])->count()}}"
+            :user="{{auth()->user()}}"/>	
 	</div>
 @endsection
 

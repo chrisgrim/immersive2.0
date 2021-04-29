@@ -86,54 +86,76 @@
                         </div>
                         <div class="field">
                             <label>Twitter handle (optional)</label>
-                            <input 
-                                type="text" 
-                                v-model="organizer.twitterHandle" 
-                                name="twitterHandle"
-                                @input="$v.organizer.twitterHandle.$touch"
-                                :class="{ 'error': $v.organizer.twitterHandle.$error}"
-                                placeholder=" ">
-                            <div v-if="$v.organizer.twitterHandle.$error" class="validation-error">
-                                <p class="error" v-if="!$v.organizer.twitterHandle.ifHttp">Please only include the social media handle (no urls or @)</p>
+                            <div class="inline input">
+                                <p>
+                                    https://www.twitter.com/
+                                </p>
+                                <input 
+                                    type="text" 
+                                    v-model="organizer.twitterHandle" 
+                                    name="twitterHandle"
+                                    @input="$v.organizer.twitterHandle.$touch"
+                                    :class="{ 'error': $v.organizer.twitterHandle.$error}"
+                                    placeholder=" ">
+                                <div v-if="$v.organizer.twitterHandle.$error" class="validation-error">
+                                    <p class="error" v-if="!$v.organizer.twitterHandle.ifHttp">Please only include the social media handle (no urls or @)</p>
+                                </div>
                             </div>
                         </div>
                         <div class="field">
                             <label>Facebook handle (optional)</label>
-                            <input 
-                                type="text" 
-                                v-model="organizer.facebookHandle" 
-                                name="facebookHandle"
-                                @input="$v.organizer.facebookHandle.$touch"
-                                :class="{ 'error': $v.organizer.facebookHandle.$error }"
-                                placeholder=" ">
-                            <div v-if="$v.organizer.facebookHandle.$error" class="validation-error">
-                                <p class="error" v-if="!$v.organizer.facebookHandle.ifHttp">Please only include the social media handle (no urls or @)</p>
+                            <div class="inline input">
+                                <p>
+                                    https://www.facebook.com/
+                                </p>
+                                <input 
+                                    type="text" 
+                                    v-model="organizer.facebookHandle" 
+                                    name="facebookHandle"
+                                    @input="$v.organizer.facebookHandle.$touch"
+                                    :class="{ 'error': $v.organizer.facebookHandle.$error }"
+                                    placeholder=" ">
+                                <div v-if="$v.organizer.facebookHandle.$error" class="validation-error">
+                                    <p class="error" v-if="!$v.organizer.facebookHandle.ifHttp">Please only include the social media handle (no urls or @)</p>
+                                </div>
                             </div>
                         </div>
                         <div class="field">
                             <label>Instagram handle (optional)</label>
-                            <input 
-                                type="text" 
-                                v-model="organizer.instagramHandle" 
-                                name="instagramHandle"
-                                @input="$v.organizer.instagramHandle.$touch"
-                                :class="{'error': $v.organizer.instagramHandle.$error }"
-                                placeholder=" ">
-                            <div v-if="$v.organizer.instagramHandle.$error" class="validation-error">
-                                <p class="error" v-if="!$v.organizer.instagramHandle.ifHttp">Please only include the social media handle (no urls or @)</p>
+                            <div class="inline input">
+                                <p>
+                                    https://www.instagram.com/
+                                </p>
+                                <input 
+                                    type="text" 
+                                    v-model="organizer.instagramHandle" 
+                                    name="instagramHandle"
+                                    @input="$v.organizer.instagramHandle.$touch"
+                                    :class="{'error': $v.organizer.instagramHandle.$error }"
+                                    placeholder=" ">
+                                <div v-if="$v.organizer.instagramHandle.$error" class="validation-error">
+                                    <p class="error" v-if="!$v.organizer.instagramHandle.ifHttp">Please only include the social media handle (no urls or @)</p>
+                                </div>
                             </div>
                         </div>
                         <div class="field">
-                            <label>Organization Patreon</label>
-                            <input 
-                                type="text" 
-                                v-model="organizer.patreon" 
-                                name="facebookPatreon"
-                                @input="$v.organizer.patreon.$touch"
-                                :class="{ 'error': $v.organizer.patreon.$error }"
-                                placeholder="https://www.patreon.com/...">
-                            <div v-if="$v.organizer.patreon.$error" class="validation-error">
-                                <p class="error" v-if="!$v.organizer.patreon.ifHttp">Please use the full patreon link</p>
+                            <label>Organization Patreon (optional)</label>
+                            <div class="inline input">
+                                <p>
+                                    https://www.patreon.com/
+                                </p>
+                                <input 
+                                    type="text" 
+                                    v-model="organizer.patreon" 
+                                    name="patreon"
+                                    @input="$v.organizer.patreon.$touch"
+                                    :class="{ 'error': $v.organizer.patreon.$error }"
+                                    placeholder="">
+                                <div v-if="$v.organizer.patreon.$error" class="validation-error">
+                                    <p class="error" v-if="!$v.organizer.patreon.ifHttp">
+                                        Please use the full patreon link
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -317,10 +339,6 @@ export default {
             return str && str.startsWith("http") || str && str.startsWith("@") ? true : false
         },
 
-        validatePatreon(value) {
-            return value && !value.startsWith("https://www.patreon.com/") || value && value.length < 25 ? true : false
-        },
-
         //checks to see if passed variable is in the server errors
         hasServerError(field) {
             return (field && _.has(this, 'serverErrors.' + field) && !_.isEmpty(this.serverErrors[field]));
@@ -375,7 +393,7 @@ export default {
             },
             patreon: {
                 ifHttp() {
-                    return this.validatePatreon(this.organizer.patreon) ? false : true
+                    return this.validateText(this.organizer.patreon) ? false : true
                 }
             }
         },

@@ -92,9 +92,9 @@
                         <a 
                             target="_blank" 
                             rel="noreferrer noopener"
-                            :href="organizer.patreon">
+                            :href="`https://www.patreon.com/${organizer.patreon}`">
                             <button class="patreon">
-                                Become a patreon for {{organizer.name}}
+                                Back {{organizer.name}} on Patreon
                             </button>
                         </a>
                     </div>

@@ -8,12 +8,14 @@
             </div>
             <div class="modal-box__body">
                 <slot></slot>
-                <button 
-                    style="display:block;" 
-                    @click="onSubmit"
-                    :disabled='isDisabled'>
-                    Accept
-                </button>
+                <template v-if="accept">
+                    <button 
+                        style="display:block;" 
+                        @click="onSubmit"
+                        :disabled='isDisabled'>
+                        Accept
+                    </button>
+                </template>
             </div>
             <div class="modal-box__footer">
                 <button @click="onClose">Close</button>
@@ -26,7 +28,7 @@
     import IconSvg from './Svg-icon'
     export default {
 
-        props: [],
+        props: ['accept'],
 
         components: { IconSvg },
 

@@ -159,16 +159,18 @@
         <VueModalAccept 
             @onSubmit="newUserLimited = false"
             @close="newUserLimited = false"
+            :accept="false"
             v-if="newUserLimited">
-            <h3>Sorry</h3>
+            <h3>Notice</h3>
             <p>New users may only create additional drafts after their first event is approved and published. This ensures that you’ve had the chance to try out every step of our process.</p>
         </VueModalAccept>
         <VueModalAccept 
             @onSubmit="limited = false"
             @close="limited = false"
+            :accept="false"
             v-if="limited">
-            <h3>Sorry</h3>
-            <p>We only allow up to 5 unpublished events at any time. If you would like to add more events, please submit your current WIP events for approval.</p>
+            <h3>Notice</h3>
+            <p>We only allow up to 5 unpublished events at any time. If you would like to add more events, please submit your current events for approval.</p>
         </VueModalAccept>
     </div>
 </template>

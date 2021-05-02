@@ -529,46 +529,31 @@
 			}
 		},
 		{
-			"file": "resources/js/pages/organizers/organizer-show.vue",
+			"contents": "Searching 11 files for \"tag-section\" (regex)\n\n/Users/chrisgrim/code/ei/resources/sass/create/category.scss:\n   19      margin: 2rem 0;\n   20  }\n   21: .tag-section {\n   22      margin-top: 4rem;\n   23  }\n\n1 match in 1 file\n",
 			"settings":
 			{
-				"buffer_size": 7051,
-				"encoding": "UTF-8",
+				"buffer_size": 223,
+				"line_ending": "Unix",
+				"name": "Find Results",
+				"scratch": true
+			}
+		},
+		{
+			"contents": "<template>\n    <div class=\"event-index-container\">\n        <div class=\"event-index\">\n            <header \n                class=\"padded event-index__header\" \n                style=\"background: url('/storage/website-files/header-image.jpg') center center / cover no-repeat;\">\n                <div class=\"event-index__header--content\">\n                    <div class=\"event-index__header--title\">\n                        <h3>Discover immersive experiences...</h3>\n                    </div>\n                    \n                    <div class=\"index-nav-search\">\n                        <vue-nav-search page=\"homepage\" />\n                    </div>\n                </div>\n            </header>\n\n            <section \n                id=\"latestevents\" \n                class=\"padded event-list\" \n                v-cloak>\n                <div class=\"padded-width\">\n                    <div \n                        class=\"event-index__eventlist\" \n                        ref=\"list\">\n                        <div class=\"event-index__eventlist--middle vertical\">\n                            <div \n                                class=\"eventlist__element\" \n                                :style=\"`width:${width}`\">\n                                <div class=\"card index\">\n                                    <div \n                                        itemprop=\"itemListElement\" \n                                        itemscope=\"\" \n                                        itemtype=\"http://schema.org/ListItem\">\n                                        <a \n                                            href=\"/index/search-online\" \n                                            class=\"card-url\" />\n                                        <div class=\"card-image__top index\">\n                                            <div \n                                                class=\"card-image__middle\" \n                                                style=\"padding-top: 65%;\">\n                                                <div class=\"card-image\">\n                                                    <picture>\n                                                        <source \n                                                            type=\"image/webp\" \n                                                            srcset=\"/storage/website-files/online-events.jpg\"> \n                                                        <img \n                                                            style=\"object-fit:cover\" \n                                                            loading=\"lazy\" \n                                                            class=\"card-image__img index\" \n                                                            src=\"/storage/website-files/online-events.jpg\" \n                                                            alt=\"Online Events showing on Everything Immersive\">\n                                                    </picture>\n                                                </div>\n                                            </div>\n                                        </div>\n                                        <div class=\"card-content index\">\n                                            <div class=\"card-title\">\n                                                <h3>Online Only</h3>\n                                            </div>\n                                        </div>\n                                    </div>\n                                </div>\n                            </div>\n\n                            <div \n                                class=\"eventlist__element\" \n                                :style=\"`width:${width}`\">\n                                <div class=\"card index\">\n                                    <div \n                                        itemprop=\"itemListElement\" \n                                        itemscope=\"\" \n                                        itemtype=\"http://schema.org/ListItem\">\n                                        <a\n                                            href=\"/index/search-online?tag=horror&id=8\" \n                                            class=\"card-url\" />\n                                        <div class=\"card-image__top index\">\n                                            <div \n                                                lass=\"card-image__middle\" \n                                                style=\"padding-top: 65%;\">\n                                                <div class=\"card-image\">\n                                                    <picture>\n                                                        <source \n                                                            type=\"image/webp\" \n                                                            srcset=\"/storage/website-files/horror.jpg\"> \n                                                        <img \n                                                            style=\"object-fit:cover\" \n                                                            loading=\"lazy\" \n                                                            class=\"card-image__img index\" \n                                                            src=\"/storage/website-files/horror.jpg\" \n                                                            alt=\"Online Events showing on Everything Immersive\">\n                                                    </picture>\n                                                </div>\n                                            </div>\n                                        </div>\n                                        <div class=\"card-content index\">\n                                            <div class=\"card-title\">\n                                                <h3>Horror</h3>\n                                            </div>\n                                        </div>\n                                    </div>\n                                </div>\n                            </div>\n\n                            <div \n                                class=\"eventlist__element\" \n                                :style=\"`width:${width}`\">\n                                <div class=\"card index\">\n                                    <div \n                                        itemprop=\"itemListElement\" \n                                        itemscope=\"\" \n                                        itemtype=\"http://schema.org/ListItem\">\n                                        <a \n                                            href=\"/index/search-all\" \n                                            class=\"card-url\" />\n                                        <div class=\"card-image__top index\">\n                                            <div \n                                                class=\"card-image__middle\" \n                                                style=\"padding-top: 65%;\">\n                                                <div class=\"card-image\">\n                                                    <picture>\n                                                        <source \n                                                            type=\"image/webp\" \n                                                            srcset=\"/storage/website-files/latest-events.jpg\"> \n                                                        <img \n                                                            style=\"object-fit:cover\" \n                                                            loading=\"lazy\" \n                                                            class=\"card-image__img index\" \n                                                            src=\"/storage/website-files/latest-events.jpg\" \n                                                            alt=\"Online Events showing on Everything Immersive\">\n                                                    </picture>\n                                                </div>\n                                            </div>\n                                        </div>\n                                        <div class=\"card-content index\">\n                                            <div class=\"card-title\">\n                                                <h3>All Events</h3>\n                                            </div>\n                                        </div>\n                                    </div>\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            </section>\n\n            <section \n                id=\"latestevents\" \n                class=\"padded staffpicks__banner\" \n                v-if=\"staffpicks.length\">\n                <div class=\"padded-width\">\n                    <div class=\"banner-title__staffpicks\">\n                        <div style=\"display:inline-block;\">\n                            <h3>Staff Picks</h3>\n                            <p>Our experienced staff is dedicated to finding you the best shows and events available.</p>\n                        </div>\n                        <div class=\"staffpicks__selection__button\">\n                            <a href=\"/staffpicks/current\">\n                                <button class=\"staffpicks__selection--loadmore\">\n                                    See all\n                                </button>\n                            </a>\n                        </div>\n                    </div>\n                    <div \n                        class=\"event-index__eventlist\" \n                        ref=\"list\">\n                        <div class=\"event-index__eventlist--middle vertical staff\">\n                            <div \n                                v-for=\"(pick, index) in staffpicks\"\n                                :key=\"pick.id\" \n                                class=\"eventlist__element staff\"\n                                :class=\"{\n                                    back: hoveredIndicesBack.includes(index),\n                                    front: hoveredIndicesFront.includes(index),\n                                    current: index === hoveredIndex\n                                }\"\n                                @mouseenter=\"hoveredIndex = index\"\n                                @mouseleave=\"hoveredIndex = null\"\n                                :style=\"`width:${staffwidth}%`\">\n                                <div class=\"card black staff\">\n                                    <a :href=\"`/events/${pick.event.slug}`\">\n                                        <div \n                                            class=\"card-image__top staff\" \n                                            :style=\"`height:${staffHeight}rem`\">\n                                            <div class=\"card-image__middle staff\">\n                                                <div class=\"card-image\">\n                                                    <picture>\n                                                        <source \n                                                            type=\"image/webp\" \n                                                            :srcset=\"`/storage/${pick.event.thumbImagePath}`\"> \n                                                        <img \n                                                            style=\"object-fit:cover\" \n                                                            loading=\"lazy\" \n                                                            class=\"card-image__img staff\" \n                                                            :src=\"`/storage/${pick.event.thumbImagePath.slice(0, -4)}jpg`\" \n                                                            :alt=\"`${pick.event.name} Immersive Event`\">\n                                                    </picture>\n                                                </div>\n                                            </div>\n                                        </div>\n                                    </a>\n                                    <div class=\"card-content staff\">\n                                        <a :href=\"`/events/${pick.event.slug}`\">\n                                            <div class=\"event-index__staffpicks--title\">\n                                                <h3 class=\"black\">\n                                                    {{ pick.event.name }}\n                                                </h3>\n                                            </div>\n                                        </a>\n                                    </div>\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            </section>\n\n            <section>\n                <div>\n                    <div class=\"index-contributers\">\n                        <h3>Check out our partners</h3>\n                        <div class=\"contributer-content grid\">\n                            <div class=\"contributer__element\">\n                                <a \n                                    target=\"_blank\" \n                                    rel=\"noopener noreferrer\" \n                                    href=\"https://www.argn.com/\">\n                                    <button \n                                        style=\"background: url('/storage/website-files/argn-logo.jpg') center center / cover no-repeat;\" \n                                        class=\"contributer--button\" />\n                                </a>\n                            </div>\n                            <div class=\"contributer__element\">\n                                <a \n                                    target=\"_blank\" \n                                    rel=\"noopener noreferrer\" \n                                    href=\"https://roomescapeartist.com/\">\n                                    <button \n                                        style=\"background: url('/storage/website-files/rea-logo.png') center center / cover no-repeat;\" \n                                        class=\"contributer--button\" />\n                                </a>\n                            </div>\n                            <div class=\"contributer__element\">\n                                <a \n                                    target=\"_blank\" \n                                    rel=\"noopener noreferrer\" \n                                    href=\"https://noproscenium.com/\">\n                                    <button \n                                        style=\"background: url('/storage/website-files/nopro-logo.jpg') center center / cover no-repeat;\" \n                                        class=\"contributer--button\" />\n                                </a>\n                            </div>\n                            <div class=\"contributer__element\">\n                                <a \n                                    target=\"_blank\" \n                                    rel=\"noopener noreferrer\" \n                                    href=\"https://www.herefest.com/\">\n                                    <button \n                                        style=\"background: url('/storage/website-files/here-logo.png') center center / cover no-repeat;\" \n                                        class=\"contributer--button\" />\n                                </a>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            </section>\n\n            <section class=\"announcement padded\">\n                <div class=\"header-title__announcement\">\n                    <h3>Read The 2020 Immersive Entertainment Industry Annual Report</h3>\n                    <p>Discover The Strength of Immersive Entertainment!</p>\n                    <br>\n                    <p><a href=\"/storage/website-files/documents/2020 Immersive Entertainment Industry Annual Report.pdf\"><button class=\"black\">Check out the report here</button></a></p>\n                </div>\n            </section>\n        </div>\n    </div>\n</template>\n\n<script>\n    import ShowMore  from './components/show-more.vue'\n    import vueNavSearch  from '../layouts/nav-search.vue'\n\n    export default {\n\n        props:['categories', 'staffpicks'],\n\n        components: { ShowMore, vueNavSearch },\n\n        computed: {\n            user () {\n                return this.$store.state.user ? this.$store.state.user : ''\n            },\n            staffHeight() {\n                if (this.mobile) {return;}\n                if (this.staffpicks.length > 2) {\n                    return '25';\n                }\n                if (this.staffpicks.length == '2') {\n                    return '40';\n                }\n                return '50';\n            },\n\n            isHovered() {\n                return this.hoveredIndex !== null;\n            },\n\n            hoveredIndicesBack() {\n                if (! this.isHovered) { return [];}\n                return [this.hoveredIndex - 1];\n            },\n\n            hoveredIndicesFront() {\n                if (! this.isHovered) { return [];}\n                return [this.hoveredIndex + 1];\n            },\n        },\n\n        data() {\n            return {\n                location: [],\n                mobile: window.innerWidth < 768 ? true : false,\n                translateStaff: 0,\n                translateCat: 0,\n                staffwidth: window.innerWidth > 768 ? 100 : 90,\n                width: window.innerWidth > 768 ? '33%' : '90%',\n                hover: '',\n                hoverArray: [],\n                hoveredIndex: null,\n            }\n        },\n\n        methods: {\n            showMore(name){\n                name == 'cat' && this.translateCat != -200 ? this.translateCat -= 100 : '';\n                name == 'staff' && this.translateStaff != (this.staffpicks.length -1) * -100? this.translateStaff -= 100 : '';\n            },\n            showLess(name){\n                name == 'cat' && this.translateCat != 0 ? this.translateCat += 100 : '';\n                name == 'staff' && this.translateStaff != 0 ? this.translateStaff += 100 : '';\n            },\n\n        },\n\n        watch: {\n            hover() {\n                return this.hoverArray = [this.hover - 1, this.hover + 1]\n            },\n        },\n    };\n</script>",
+			"file": "resources/js/pages/events/event-index.vue",
+			"file_size": 18321,
+			"file_write_time": 132578912174406710,
+			"settings":
+			{
+				"buffer_size": 18342,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "resources/js/pages/create/organizer.vue",
+			"file": "resources/js/pages/create/category.vue",
 			"settings":
 			{
-				"buffer_size": 18694,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "resources/sass/create/organizer.scss",
-			"settings":
-			{
-				"buffer_size": 2142,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "resources/sass/app-create.scss",
-			"settings":
-			{
-				"buffer_size": 353,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "resources/sass/create.scss",
-			"settings":
-			{
-				"buffer_size": 885,
+				"buffer_size": 5996,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -711,14 +696,10 @@
 	[
 		"/Users/chrisgrim/code/ei",
 		"/Users/chrisgrim/code/ei/app",
-		"/Users/chrisgrim/code/ei/app/Http",
-		"/Users/chrisgrim/code/ei/app/Models",
 		"/Users/chrisgrim/code/ei/database",
 		"/Users/chrisgrim/code/ei/resources",
 		"/Users/chrisgrim/code/ei/resources/js",
-		"/Users/chrisgrim/code/ei/resources/js/components",
 		"/Users/chrisgrim/code/ei/resources/js/pages",
-		"/Users/chrisgrim/code/ei/resources/js/pages/create",
 		"/Users/chrisgrim/code/ei/resources/js/pages/events",
 		"/Users/chrisgrim/code/ei/resources/js/pages/organizers",
 		"/Users/chrisgrim/code/ei/resources/sass",
@@ -730,9 +711,14 @@
 	],
 	"file_history":
 	[
+		"/Users/chrisgrim/code/ei/resources/sass/create/category.scss",
+		"/Users/chrisgrim/code/ei/resources/js/pages/organizers/organizer-show.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/create/organizer.vue",
+		"/Users/chrisgrim/code/ei/resources/sass/create/organizer.scss",
+		"/Users/chrisgrim/code/ei/resources/sass/app-create.scss",
+		"/Users/chrisgrim/code/ei/resources/sass/create.scss",
 		"/Users/chrisgrim/code/ei/resources/js/components/Vue-Modal-Accept.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/events/event-edit.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/create/organizer.vue",
 		"/Users/chrisgrim/code/ei/resources/sass/layout.scss",
 		"/Users/chrisgrim/code/ei/resources/sass/organizer.scss",
 		"/Users/chrisgrim/code/ei/app/Http/Controllers/OrganizerController.php",
@@ -745,7 +731,6 @@
 		"/Users/chrisgrim/code/ei/resources/views/create/category.blade.php",
 		"/Users/chrisgrim/code/ei/resources/js/pages/create/category.vue",
 		"/Users/chrisgrim/code/ei/app/Http/Controllers/Create/CategoryController.php",
-		"/Users/chrisgrim/code/ei/resources/sass/create/category.scss",
 		"/Users/chrisgrim/code/ei/app/Models/Event.php",
 		"/Users/chrisgrim/code/ei/resources/views/events/edit.blade.php",
 		"/Users/chrisgrim/code/ei/resources/js/pages/create/location-google.vue",
@@ -853,11 +838,7 @@
 		"/Users/chrisgrim/code/ei/resources/sass/events/components/search-filters.scss",
 		"/Users/chrisgrim/code/ei/resources/js/pages/search/components/vue-map.vue",
 		"/Users/chrisgrim/code/ei/resources/sass/search/event.scss",
-		"/Users/chrisgrim/code/ei/resources/sass/components/vue-list.scss",
-		"/Users/chrisgrim/code/ei/resources/sass/components/multiselect.scss",
-		"/Users/chrisgrim/code/ei/resources/sass/components/search-filter.scss",
-		"/Users/chrisgrim/code/ei/resources/sass/events/event-maps.scss",
-		"/Users/chrisgrim/code/ei/resources/sass/nav/navbar.scss"
+		"/Users/chrisgrim/code/ei/resources/sass/components/vue-list.scss"
 	],
 	"find":
 	{
@@ -868,6 +849,7 @@
 		"height": 164.0,
 		"where_history":
 		[
+			"/Users/chrisgrim/code/ei/resources/sass/create",
 			"/Users/chrisgrim/code/ei/resources/js",
 			"/Users/chrisgrim/code/ei/resources/sass",
 			"/Users/chrisgrim/code/ei/app",
@@ -963,6 +945,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"tag-section",
 			"patreon",
 			"Sorry",
 			"rel",
@@ -1089,8 +1072,7 @@
 			"clearInput",
 			"isOwner",
 			"nav",
-			"event-create__title",
-			"description"
+			"event-create__title"
 		],
 		"highlight": false,
 		"in_selection": false,
@@ -1108,7 +1090,7 @@
 	"groups":
 	[
 		{
-			"selected": 5,
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -1139,125 +1121,51 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "resources/js/pages/organizers/organizer-show.vue",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 7051,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4350,
-								4350
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Vuejs Complete Package/vue.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 1442.0,
-						"zoom_level": 1.0
-					},
 					"stack_index": 3,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "resources/js/pages/create/organizer.vue",
+					"buffer": 1,
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 18694,
+						"buffer_size": 223,
 						"regions":
 						{
+							"match":
+							{
+								"flags": 112,
+								"regions":
+								[
+									[
+										152,
+										163
+									]
+								],
+								"scope": ""
+							}
 						},
 						"selection":
 						[
 							[
-								5061,
-								5061
+								74,
+								74
 							]
 						],
 						"settings":
 						{
+							"detect_indentation": false,
 							"incomplete_sync": null,
+							"line_numbers": false,
+							"output_tag": 1,
 							"remote_loading": false,
+							"result_base_dir": "",
+							"result_file_regex": "^([^ \t].*):$",
+							"result_line_regex": "^ +([0-9]+):",
+							"scroll_past_end": true,
 							"synced": false,
-							"syntax": "Packages/Vuejs Complete Package/vue.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 1600.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "resources/sass/create/organizer.scss",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2142,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1731,
-								1731
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/CSS/CSS.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 1458.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "resources/sass/app-create.scss",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 353,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								352,
-								352
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/CSS/CSS.sublime-syntax"
+							"syntax": "Packages/Default/Find Results.hidden-tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -1267,20 +1175,20 @@
 					"type": "text"
 				},
 				{
-					"buffer": 5,
-					"file": "resources/sass/create.scss",
+					"buffer": 2,
+					"file": "resources/js/pages/events/event-index.vue",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 885,
+						"buffer_size": 18342,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								187,
-								187
+								509,
+								509
 							]
 						],
 						"settings":
@@ -1288,13 +1196,44 @@
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
-							"syntax": "Packages/CSS/CSS.sublime-syntax"
+							"syntax": "Packages/Vuejs Complete Package/vue.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 95.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "resources/js/pages/create/category.vue",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5996,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3100,
+								3100
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Vuejs Complete Package/vue.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 2,
 					"type": "text"
 				}
 			]

@@ -65,7 +65,7 @@
             :class="{ showcat: category}" 
             v-if="category" 
             class="event-show-category__image" 
-            :style="`height:calc(${window/pageHeight}px - 7rem)`">
+            :style="`height:calc(${window/pageHeight}px + 7rem)`">
             <picture>       
                 <source 
                     type="image/webp" 

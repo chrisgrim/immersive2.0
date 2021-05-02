@@ -67,6 +67,7 @@
             :event="event" />
         <VueModalAccept 
             @onSubmit="acceptDuplicateName"
+            :accept="true"
             @close="clearInput()"
             v-if="serverErrors.errors && serverErrors.errors.name">
             <h3>Warning</h3>

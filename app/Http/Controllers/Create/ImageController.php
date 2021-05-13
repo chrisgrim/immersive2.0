@@ -33,9 +33,21 @@ class ImageController extends Controller
      */
     public function update(Request $request, Event $event)
     {
+        $event->update([
+            'video' => $request->video,
+        ]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function addImage(Request $request, Event $event)
+    {
         $event->inProgress() ? MakeImage::saveNewImage($request, $event, 1280, 720, 'event') : MakeImage::updateImage($request, $event, 1280, 720, 'event');
         $event->updateEventStatus(8, $request);
         return $event;
-
     }
 }

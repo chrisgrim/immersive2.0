@@ -142,6 +142,7 @@ Route::GET('/create/{event}/advisories/fetch', 'Create\AdvisoriesController@fetc
 Route::PATCH('/create/{event}/advisories ', 'Create\AdvisoriesController@update');
 //Create Image
 Route::GET('/create/{event}/images', 'Create\ImageController@create');
+Route::POST('/create/{event}/add-images', 'Create\ImageController@addImage');
 Route::POST('/create/{event}/images', 'Create\ImageController@update');
 //Create Review
 Route::GET('/create/{event}/review', 'Create\EventController@review');

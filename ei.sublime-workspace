@@ -4,6 +4,22 @@
 		"selected_items":
 		[
 			[
+				"upda",
+				"updateImage"
+			],
+			[
+				"shpw",
+				"showImageUpdatedModal"
+			],
+			[
+				"sub",
+				"submitImage"
+			],
+			[
+				"has",
+				"hasVideo"
+			],
+			[
 				"vald",
 				"validateText"
 			],
@@ -158,10 +174,6 @@
 			[
 				"cate",
 				"category"
-			],
-			[
-				"sub",
-				"submit"
 			],
 			[
 				"com",
@@ -436,10 +448,6 @@
 				"components"
 			],
 			[
-				"has",
-				"hasLogo"
-			],
-			[
 				"or",
 				"organizer"
 			],
@@ -506,14 +514,6 @@
 			[
 				"mod",
 				"modalVisible"
-			],
-			[
-				"inl",
-				"inline-block\tdisplay"
-			],
-			[
-				"dis",
-				"displayExample"
 			]
 		]
 	},
@@ -523,38 +523,16 @@
 			"file": "routes/web.php",
 			"settings":
 			{
-				"buffer_size": 8927,
+				"buffer_size": 9005,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"contents": "Searching 11 files for \"tag-section\" (regex)\n\n/Users/chrisgrim/code/ei/resources/sass/create/category.scss:\n   19      margin: 2rem 0;\n   20  }\n   21: .tag-section {\n   22      margin-top: 4rem;\n   23  }\n\n1 match in 1 file\n",
+			"file": "resources/js/pages/create/image.vue",
 			"settings":
 			{
-				"buffer_size": 223,
-				"line_ending": "Unix",
-				"name": "Find Results",
-				"scratch": true
-			}
-		},
-		{
-			"contents": "<template>\n    <div class=\"event-index-container\">\n        <div class=\"event-index\">\n            <header \n                class=\"padded event-index__header\" \n                style=\"background: url('/storage/website-files/header-image.jpg') center center / cover no-repeat;\">\n                <div class=\"event-index__header--content\">\n                    <div class=\"event-index__header--title\">\n                        <h3>Discover immersive experiences...</h3>\n                    </div>\n                    \n                    <div class=\"index-nav-search\">\n                        <vue-nav-search page=\"homepage\" />\n                    </div>\n                </div>\n            </header>\n\n            <section \n                id=\"latestevents\" \n                class=\"padded event-list\" \n                v-cloak>\n                <div class=\"padded-width\">\n                    <div \n                        class=\"event-index__eventlist\" \n                        ref=\"list\">\n                        <div class=\"event-index__eventlist--middle vertical\">\n                            <div \n                                class=\"eventlist__element\" \n                                :style=\"`width:${width}`\">\n                                <div class=\"card index\">\n                                    <div \n                                        itemprop=\"itemListElement\" \n                                        itemscope=\"\" \n                                        itemtype=\"http://schema.org/ListItem\">\n                                        <a \n                                            href=\"/index/search-online\" \n                                            class=\"card-url\" />\n                                        <div class=\"card-image__top index\">\n                                            <div \n                                                class=\"card-image__middle\" \n                                                style=\"padding-top: 65%;\">\n                                                <div class=\"card-image\">\n                                                    <picture>\n                                                        <source \n                                                            type=\"image/webp\" \n                                                            srcset=\"/storage/website-files/online-events.jpg\"> \n                                                        <img \n                                                            style=\"object-fit:cover\" \n                                                            loading=\"lazy\" \n                                                            class=\"card-image__img index\" \n                                                            src=\"/storage/website-files/online-events.jpg\" \n                                                            alt=\"Online Events showing on Everything Immersive\">\n                                                    </picture>\n                                                </div>\n                                            </div>\n                                        </div>\n                                        <div class=\"card-content index\">\n                                            <div class=\"card-title\">\n                                                <h3>Online Only</h3>\n                                            </div>\n                                        </div>\n                                    </div>\n                                </div>\n                            </div>\n\n                            <div \n                                class=\"eventlist__element\" \n                                :style=\"`width:${width}`\">\n                                <div class=\"card index\">\n                                    <div \n                                        itemprop=\"itemListElement\" \n                                        itemscope=\"\" \n                                        itemtype=\"http://schema.org/ListItem\">\n                                        <a\n                                            href=\"/index/search-online?tag=horror&id=8\" \n                                            class=\"card-url\" />\n                                        <div class=\"card-image__top index\">\n                                            <div \n                                                lass=\"card-image__middle\" \n                                                style=\"padding-top: 65%;\">\n                                                <div class=\"card-image\">\n                                                    <picture>\n                                                        <source \n                                                            type=\"image/webp\" \n                                                            srcset=\"/storage/website-files/horror.jpg\"> \n                                                        <img \n                                                            style=\"object-fit:cover\" \n                                                            loading=\"lazy\" \n                                                            class=\"card-image__img index\" \n                                                            src=\"/storage/website-files/horror.jpg\" \n                                                            alt=\"Online Events showing on Everything Immersive\">\n                                                    </picture>\n                                                </div>\n                                            </div>\n                                        </div>\n                                        <div class=\"card-content index\">\n                                            <div class=\"card-title\">\n                                                <h3>Horror</h3>\n                                            </div>\n                                        </div>\n                                    </div>\n                                </div>\n                            </div>\n\n                            <div \n                                class=\"eventlist__element\" \n                                :style=\"`width:${width}`\">\n                                <div class=\"card index\">\n                                    <div \n                                        itemprop=\"itemListElement\" \n                                        itemscope=\"\" \n                                        itemtype=\"http://schema.org/ListItem\">\n                                        <a \n                                            href=\"/index/search-all\" \n                                            class=\"card-url\" />\n                                        <div class=\"card-image__top index\">\n                                            <div \n                                                class=\"card-image__middle\" \n                                                style=\"padding-top: 65%;\">\n                                                <div class=\"card-image\">\n                                                    <picture>\n                                                        <source \n                                                            type=\"image/webp\" \n                                                            srcset=\"/storage/website-files/latest-events.jpg\"> \n                                                        <img \n                                                            style=\"object-fit:cover\" \n                                                            loading=\"lazy\" \n                                                            class=\"card-image__img index\" \n                                                            src=\"/storage/website-files/latest-events.jpg\" \n                                                            alt=\"Online Events showing on Everything Immersive\">\n                                                    </picture>\n                                                </div>\n                                            </div>\n                                        </div>\n                                        <div class=\"card-content index\">\n                                            <div class=\"card-title\">\n                                                <h3>All Events</h3>\n                                            </div>\n                                        </div>\n                                    </div>\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            </section>\n\n            <section \n                id=\"latestevents\" \n                class=\"padded staffpicks__banner\" \n                v-if=\"staffpicks.length\">\n                <div class=\"padded-width\">\n                    <div class=\"banner-title__staffpicks\">\n                        <div style=\"display:inline-block;\">\n                            <h3>Staff Picks</h3>\n                            <p>Our experienced staff is dedicated to finding you the best shows and events available.</p>\n                        </div>\n                        <div class=\"staffpicks__selection__button\">\n                            <a href=\"/staffpicks/current\">\n                                <button class=\"staffpicks__selection--loadmore\">\n                                    See all\n                                </button>\n                            </a>\n                        </div>\n                    </div>\n                    <div \n                        class=\"event-index__eventlist\" \n                        ref=\"list\">\n                        <div class=\"event-index__eventlist--middle vertical staff\">\n                            <div \n                                v-for=\"(pick, index) in staffpicks\"\n                                :key=\"pick.id\" \n                                class=\"eventlist__element staff\"\n                                :class=\"{\n                                    back: hoveredIndicesBack.includes(index),\n                                    front: hoveredIndicesFront.includes(index),\n                                    current: index === hoveredIndex\n                                }\"\n                                @mouseenter=\"hoveredIndex = index\"\n                                @mouseleave=\"hoveredIndex = null\"\n                                :style=\"`width:${staffwidth}%`\">\n                                <div class=\"card black staff\">\n                                    <a :href=\"`/events/${pick.event.slug}`\">\n                                        <div \n                                            class=\"card-image__top staff\" \n                                            :style=\"`height:${staffHeight}rem`\">\n                                            <div class=\"card-image__middle staff\">\n                                                <div class=\"card-image\">\n                                                    <picture>\n                                                        <source \n                                                            type=\"image/webp\" \n                                                            :srcset=\"`/storage/${pick.event.thumbImagePath}`\"> \n                                                        <img \n                                                            style=\"object-fit:cover\" \n                                                            loading=\"lazy\" \n                                                            class=\"card-image__img staff\" \n                                                            :src=\"`/storage/${pick.event.thumbImagePath.slice(0, -4)}jpg`\" \n                                                            :alt=\"`${pick.event.name} Immersive Event`\">\n                                                    </picture>\n                                                </div>\n                                            </div>\n                                        </div>\n                                    </a>\n                                    <div class=\"card-content staff\">\n                                        <a :href=\"`/events/${pick.event.slug}`\">\n                                            <div class=\"event-index__staffpicks--title\">\n                                                <h3 class=\"black\">\n                                                    {{ pick.event.name }}\n                                                </h3>\n                                            </div>\n                                        </a>\n                                    </div>\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            </section>\n\n            <section>\n                <div>\n                    <div class=\"index-contributers\">\n                        <h3>Check out our partners</h3>\n                        <div class=\"contributer-content grid\">\n                            <div class=\"contributer__element\">\n                                <a \n                                    target=\"_blank\" \n                                    rel=\"noopener noreferrer\" \n                                    href=\"https://www.argn.com/\">\n                                    <button \n                                        style=\"background: url('/storage/website-files/argn-logo.jpg') center center / cover no-repeat;\" \n                                        class=\"contributer--button\" />\n                                </a>\n                            </div>\n                            <div class=\"contributer__element\">\n                                <a \n                                    target=\"_blank\" \n                                    rel=\"noopener noreferrer\" \n                                    href=\"https://roomescapeartist.com/\">\n                                    <button \n                                        style=\"background: url('/storage/website-files/rea-logo.png') center center / cover no-repeat;\" \n                                        class=\"contributer--button\" />\n                                </a>\n                            </div>\n                            <div class=\"contributer__element\">\n                                <a \n                                    target=\"_blank\" \n                                    rel=\"noopener noreferrer\" \n                                    href=\"https://noproscenium.com/\">\n                                    <button \n                                        style=\"background: url('/storage/website-files/nopro-logo.jpg') center center / cover no-repeat;\" \n                                        class=\"contributer--button\" />\n                                </a>\n                            </div>\n                            <div class=\"contributer__element\">\n                                <a \n                                    target=\"_blank\" \n                                    rel=\"noopener noreferrer\" \n                                    href=\"https://www.herefest.com/\">\n                                    <button \n                                        style=\"background: url('/storage/website-files/here-logo.png') center center / cover no-repeat;\" \n                                        class=\"contributer--button\" />\n                                </a>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            </section>\n\n            <section class=\"announcement padded\">\n                <div class=\"header-title__announcement\">\n                    <h3>Read The 2020 Immersive Entertainment Industry Annual Report</h3>\n                    <p>Discover The Strength of Immersive Entertainment!</p>\n                    <br>\n                    <p><a href=\"/storage/website-files/documents/2020 Immersive Entertainment Industry Annual Report.pdf\"><button class=\"black\">Check out the report here</button></a></p>\n                </div>\n            </section>\n        </div>\n    </div>\n</template>\n\n<script>\n    import ShowMore  from './components/show-more.vue'\n    import vueNavSearch  from '../layouts/nav-search.vue'\n\n    export default {\n\n        props:['categories', 'staffpicks'],\n\n        components: { ShowMore, vueNavSearch },\n\n        computed: {\n            user () {\n                return this.$store.state.user ? this.$store.state.user : ''\n            },\n            staffHeight() {\n                if (this.mobile) {return;}\n                if (this.staffpicks.length > 2) {\n                    return '25';\n                }\n                if (this.staffpicks.length == '2') {\n                    return '40';\n                }\n                return '50';\n            },\n\n            isHovered() {\n                return this.hoveredIndex !== null;\n            },\n\n            hoveredIndicesBack() {\n                if (! this.isHovered) { return [];}\n                return [this.hoveredIndex - 1];\n            },\n\n            hoveredIndicesFront() {\n                if (! this.isHovered) { return [];}\n                return [this.hoveredIndex + 1];\n            },\n        },\n\n        data() {\n            return {\n                location: [],\n                mobile: window.innerWidth < 768 ? true : false,\n                translateStaff: 0,\n                translateCat: 0,\n                staffwidth: window.innerWidth > 768 ? 100 : 90,\n                width: window.innerWidth > 768 ? '33%' : '90%',\n                hover: '',\n                hoverArray: [],\n                hoveredIndex: null,\n            }\n        },\n\n        methods: {\n            showMore(name){\n                name == 'cat' && this.translateCat != -200 ? this.translateCat -= 100 : '';\n                name == 'staff' && this.translateStaff != (this.staffpicks.length -1) * -100? this.translateStaff -= 100 : '';\n            },\n            showLess(name){\n                name == 'cat' && this.translateCat != 0 ? this.translateCat += 100 : '';\n                name == 'staff' && this.translateStaff != 0 ? this.translateStaff += 100 : '';\n            },\n\n        },\n\n        watch: {\n            hover() {\n                return this.hoverArray = [this.hover - 1, this.hover + 1]\n            },\n        },\n    };\n</script>",
-			"file": "resources/js/pages/events/event-index.vue",
-			"file_size": 18321,
-			"file_write_time": 132578912174406710,
-			"settings":
-			{
-				"buffer_size": 18342,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "resources/js/pages/create/category.vue",
-			"settings":
-			{
-				"buffer_size": 5996,
-				"encoding": "UTF-8",
+				"buffer_size": 11788,
 				"line_ending": "Unix"
 			}
 		}
@@ -696,14 +674,16 @@
 	[
 		"/Users/chrisgrim/code/ei",
 		"/Users/chrisgrim/code/ei/app",
+		"/Users/chrisgrim/code/ei/app/Http",
+		"/Users/chrisgrim/code/ei/app/Http/Controllers",
+		"/Users/chrisgrim/code/ei/app/Models",
 		"/Users/chrisgrim/code/ei/database",
+		"/Users/chrisgrim/code/ei/database/migrations",
 		"/Users/chrisgrim/code/ei/resources",
 		"/Users/chrisgrim/code/ei/resources/js",
+		"/Users/chrisgrim/code/ei/resources/js/components",
 		"/Users/chrisgrim/code/ei/resources/js/pages",
-		"/Users/chrisgrim/code/ei/resources/js/pages/events",
-		"/Users/chrisgrim/code/ei/resources/js/pages/organizers",
-		"/Users/chrisgrim/code/ei/resources/sass",
-		"/Users/chrisgrim/code/ei/resources/sass/create",
+		"/Users/chrisgrim/code/ei/resources/js/pages/create",
 		"/Users/chrisgrim/code/ei/resources/views",
 		"/Users/chrisgrim/code/ei/resources/views/create",
 		"/Users/chrisgrim/code/ei/resources/views/events",
@@ -711,28 +691,45 @@
 	],
 	"file_history":
 	[
+		"/Users/chrisgrim/code/ei/resources/sass/events/event-show.scss",
+		"/Users/chrisgrim/code/ei/resources/js/mixins/form-validation-mixin.js",
+		"/Users/chrisgrim/code/ei/resources/sass/layout.scss",
+		"/Users/chrisgrim/code/ei/resources/js/pages/create/image.vue",
+		"/Users/chrisgrim/code/ei/app/Http/Controllers/Create/ImageController.php",
+		"/Users/chrisgrim/code/ei/app/Models/MakeImage.php",
+		"/Users/chrisgrim/code/ei/resources/sass/slowlayout.scss",
+		"/Users/chrisgrim/code/ei/resources/js/pages/events/show/event-show-about.vue",
+		"/Users/chrisgrim/code/ei/resources/sass/create/image.scss",
+		"/Users/chrisgrim/code/ei/resources/js/pages/events/show/VideoPlayer.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/events/show/event-show-header.vue",
+		"/Users/chrisgrim/code/ei/resources/views/events/edit.blade.php",
+		"/Users/chrisgrim/code/ei/app/Models/Event.php",
+		"/Users/chrisgrim/code/ei/resources/js/pages/create/components/submit-buttons.vue",
+		"/Users/chrisgrim/code/ei/app/Models/Organizer.php",
+		"/Users/chrisgrim/code/ei/resources/sass/components/vue-modal.scss",
+		"/Users/chrisgrim/code/ei/config/mail.php",
+		"/Users/chrisgrim/code/ei/database/migrations/2021_05_03_205107_add_video_to_events_table.php",
+		"/Users/chrisgrim/Downloads/newtask.txt",
+		"/Users/chrisgrim/code/ei/resources/js/pages/create/category.vue",
+		"/Users/chrisgrim/code/ei/resources/js/components/Vue-Modal-Accept.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/create/title.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/events/event-index.vue",
 		"/Users/chrisgrim/code/ei/resources/sass/create/category.scss",
 		"/Users/chrisgrim/code/ei/resources/js/pages/organizers/organizer-show.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/create/organizer.vue",
 		"/Users/chrisgrim/code/ei/resources/sass/create/organizer.scss",
 		"/Users/chrisgrim/code/ei/resources/sass/app-create.scss",
 		"/Users/chrisgrim/code/ei/resources/sass/create.scss",
-		"/Users/chrisgrim/code/ei/resources/js/components/Vue-Modal-Accept.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/events/event-edit.vue",
-		"/Users/chrisgrim/code/ei/resources/sass/layout.scss",
 		"/Users/chrisgrim/code/ei/resources/sass/organizer.scss",
 		"/Users/chrisgrim/code/ei/app/Http/Controllers/OrganizerController.php",
-		"/Users/chrisgrim/code/ei/app/Models/Organizer.php",
 		"/Users/chrisgrim/code/ei/database/migrations/2021_04_26_220507_add_patreon_to_organizers_table.php",
 		"/Users/chrisgrim/code/ei/resources/js/pages/create/description.vue",
 		"/Users/chrisgrim/code/ei/resources/js/components/Svg-icon.vue",
 		"/Users/chrisgrim/code/ei/app/Http/Controllers/Create/DescriptionController.php",
 		"/Users/chrisgrim/code/ei/resources/views/create/description.blade.php",
 		"/Users/chrisgrim/code/ei/resources/views/create/category.blade.php",
-		"/Users/chrisgrim/code/ei/resources/js/pages/create/category.vue",
 		"/Users/chrisgrim/code/ei/app/Http/Controllers/Create/CategoryController.php",
-		"/Users/chrisgrim/code/ei/app/Models/Event.php",
-		"/Users/chrisgrim/code/ei/resources/views/events/edit.blade.php",
 		"/Users/chrisgrim/code/ei/resources/js/pages/create/location-google.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/create/components/google-location-mixin.js",
 		"/Users/chrisgrim/code/ei/app/Http/Controllers/EventController.php",
@@ -742,21 +739,17 @@
 		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/admin-events.vue",
 		"/Users/chrisgrim/code/ei/resources/sass/components/grid-data-component.scss",
 		"/Users/chrisgrim/code/ei/resources/sass/adminarea/layout.scss",
-		"/Users/chrisgrim/code/ei/resources/js/pages/events/show/event-show-about.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/layouts/nav-search.vue",
 		"/Users/chrisgrim/code/ei/app/Models/User.php",
 		"/Users/chrisgrim/code/ei/app/Models/Location.php",
 		"/Users/chrisgrim/code/ei/app/Http/Controllers/Create/LocationController.php",
-		"/Users/chrisgrim/code/ei/resources/js/pages/create/title.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/approve/approval-bar.vue",
 		"/Users/chrisgrim/code/ei/resources/sass/adminarea/approval/show.scss",
 		"/Users/chrisgrim/code/ei/app/Http/Controllers/Create/TitleController.php",
 		"/Users/chrisgrim/code/ei/resources/js/pages/create/advisories.vue",
 		"/Users/chrisgrim/code/ei/app/Http/Controllers/ProfilesController.php",
 		"/Users/chrisgrim/code/ei/resources/js/pages/profile/components/profile-image.vue",
-		"/Users/chrisgrim/code/ei/app/Models/MakeImage.php",
 		"/Users/chrisgrim/code/ei/app/Policies/UserPolicy.php",
-		"/Users/chrisgrim/code/ei/resources/js/mixins/form-validation-mixin.js",
 		"/Users/chrisgrim/code/ei/resources/js/pages/profile/profile-index.vue",
 		"/Users/chrisgrim/code/ei/resources/sass/profile/profile.scss",
 		"/Users/chrisgrim/code/ei/resources/views/profiles/show.blade.php",
@@ -784,7 +777,6 @@
 		"/Users/chrisgrim/code/ei/node_modules/apexcharts/dist/apexcharts.js",
 		"/Users/chrisgrim/code/ei/node_modules/@vue/component-compiler-utils/node_modules/lru-cache/README.md",
 		"/Users/chrisgrim/code/ei/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Calculation/Logical.php",
-		"/Users/chrisgrim/code/ei/resources/sass/components/vue-modal.scss",
 		"/Users/chrisgrim/code/ei/app/Models/Events/EventRequest.php",
 		"/Users/chrisgrim/code/ei/app/Models/TrackClick.php",
 		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/admin-boneyard.vue",
@@ -795,7 +787,6 @@
 		"/Users/chrisgrim/code/ei/resources/views/adminArea/eventrequests.blade.php",
 		"/Users/chrisgrim/code/ei/resources/js/app.js",
 		"/Users/chrisgrim/code/ei/resources/views/layouts/meta.blade.php",
-		"/Users/chrisgrim/code/ei/resources/js/pages/events/show/event-show-header.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/admin-user.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/admin-staff-picks.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/events/event-edit1.vue",
@@ -826,19 +817,8 @@
 		"/Users/chrisgrim/code/ei/app/Http/Controllers/Search/SearchController.php",
 		"/Users/chrisgrim/code/ei/routes/api.php",
 		"/Users/chrisgrim/code/ei/resources/views/events/searchall.blade.php",
-		"/Users/chrisgrim/code/ei/resources/js/pages/events/event-index.vue",
 		"/Users/chrisgrim/code/ei/resources/views/events/searchonline.blade.php",
-		"/Users/chrisgrim/code/ei/resources/views/events/search.blade.php",
-		"/Users/chrisgrim/code/ei/resources/js/pages/events/event-show.vue",
-		"/Users/chrisgrim/code/ei/resources/sass/events/event-search.scss",
-		"/Users/chrisgrim/code/ei/resources/sass/events/event-show.scss",
-		"/Users/chrisgrim/code/ei/resources/js/pages/events/show/event-show-dates.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/events/components/show-more.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/events/show/test.vue",
-		"/Users/chrisgrim/code/ei/resources/sass/events/components/search-filters.scss",
-		"/Users/chrisgrim/code/ei/resources/js/pages/search/components/vue-map.vue",
-		"/Users/chrisgrim/code/ei/resources/sass/search/event.scss",
-		"/Users/chrisgrim/code/ei/resources/sass/components/vue-list.scss"
+		"/Users/chrisgrim/code/ei/resources/views/events/search.blade.php"
 	],
 	"find":
 	{
@@ -849,6 +829,13 @@
 		"height": 164.0,
 		"where_history":
 		[
+			"/Users/chrisgrim/code/ei/resources/sass",
+			"/Users/chrisgrim/code/ei/resources/js/pages",
+			"/Users/chrisgrim/code/ei/resources/js",
+			"/Users/chrisgrim/code/ei/resources/js/mixins",
+			"/Users/chrisgrim/code/ei/resources/sass",
+			"/Users/chrisgrim/code/ei",
+			"/Users/chrisgrim/code/ei/resources/sass",
 			"/Users/chrisgrim/code/ei/resources/sass/create",
 			"/Users/chrisgrim/code/ei/resources/js",
 			"/Users/chrisgrim/code/ei/resources/sass",
@@ -945,6 +932,56 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"onImageUpload",
+			"image-upload",
+			"imageFile",
+			"validation-error",
+			"onLoad",
+			"checkResubmitStatus",
+			"onLoad",
+			"checkResubmitStatus",
+			"updateImage",
+			"addVideo",
+			"onLoad",
+			"save",
+			"onToggle",
+			".image-display-example",
+			"image-display-example",
+			"youtube",
+			"video",
+			"image",
+			"onSubmit",
+			"save",
+			"readyToSubmit",
+			"next",
+			"onSubmit",
+			"review",
+			"onToggle",
+			"imageUpdated",
+			"showUpdatedModal",
+			"onToggle",
+			"onSubmit",
+			"readySubmit",
+			"validateText",
+			"addVideo",
+			"style=\"font-weight: 400;\"",
+			"<a",
+			"</span>",
+			"<span style=\"font-weight: 400;\">",
+			"create/organizers",
+			"host",
+			"mail.php",
+			"modal-box",
+			"ifHttp",
+			"facebookHandle",
+			"organizer.facebookHandle",
+			"onToggle",
+			"event",
+			"websiteUrl",
+			"image-loader",
+			"hasLocation",
+			"patreon",
+			"css",
 			"tag-section",
 			"patreon",
 			"Sorry",
@@ -1022,57 +1059,7 @@
 			"response",
 			"onErrors",
 			"onToggle",
-			"cleanDate",
-			"userOwnsPage",
-			"loading",
-			"avatar",
-			"imageFile",
-			"userOwnsPage",
-			"endPoint",
-			"FormData",
-			"formData",
-			"canUseWebP",
-			"canEditPage",
-			"webp",
-			"avatar",
-			"EventPolicy",
-			"submitObject",
-			"change/organizer/",
-			"AdminOrganizerController",
-			"logincontroller",
-			"user",
-			"onToggle",
-			"CubeSpinner",
-			"onSent",
-			"loading",
-			"onEditUser",
-			"onToggle",
-			"cleanDate",
-			"onSubmit",
-			"canEditPage",
-			"userOwnsPage",
-			"tagName",
-			"genre",
-			"CustomSearch",
-			"elastic",
-			"Exists",
-			"exists",
-			"UserEvents",
-			"clearInput",
-			"Dates",
-			"dates",
-			"onClickOutside",
-			"setPlace",
-			"updateEventFields",
-			"setPlace",
-			"set",
-			"location",
-			"setPlace",
-			"updateEventFields",
-			"clearInput",
-			"isOwner",
-			"nav",
-			"event-create__title"
+			"cleanDate"
 		],
 		"highlight": false,
 		"in_selection": false,
@@ -1090,7 +1077,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -1099,15 +1086,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 8927,
+						"buffer_size": 9005,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2013,
-								2078
+								8088,
+								8088
 							]
 						],
 						"settings":
@@ -1121,74 +1108,24 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 223,
-						"regions":
-						{
-							"match":
-							{
-								"flags": 112,
-								"regions":
-								[
-									[
-										152,
-										163
-									]
-								],
-								"scope": ""
-							}
-						},
-						"selection":
-						[
-							[
-								74,
-								74
-							]
-						],
-						"settings":
-						{
-							"detect_indentation": false,
-							"incomplete_sync": null,
-							"line_numbers": false,
-							"output_tag": 1,
-							"remote_loading": false,
-							"result_base_dir": "",
-							"result_file_regex": "^([^ \t].*):$",
-							"result_line_regex": "^ +([0-9]+):",
-							"scroll_past_end": true,
-							"synced": false,
-							"syntax": "Packages/Default/Find Results.hidden-tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
 					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "resources/js/pages/events/event-index.vue",
-					"semi_transient": false,
+					"buffer": 1,
+					"file": "resources/js/pages/create/image.vue",
+					"semi_transient": true,
 					"settings":
 					{
-						"buffer_size": 18342,
+						"buffer_size": 11788,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								509,
-								509
+								8675,
+								8675
 							]
 						],
 						"settings":
@@ -1199,41 +1136,10 @@
 							"syntax": "Packages/Vuejs Complete Package/vue.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 95.0,
+						"translation.y": 3974.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "resources/js/pages/create/category.vue",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 5996,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3100,
-								3100
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Vuejs Complete Package/vue.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
 					"type": "text"
 				}
 			]
@@ -1307,6 +1213,10 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"mail",
+				"config/mail.php"
+			],
 			[
 				"authse",
 				"app/Providers/AuthServiceProvider.php"
@@ -1434,10 +1344,6 @@
 			[
 				"auth ",
 				"config/auth.php"
-			],
-			[
-				"mail",
-				"config/mail.php"
 			],
 			[
 				"servu",

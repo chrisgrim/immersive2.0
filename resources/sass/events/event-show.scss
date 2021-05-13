@@ -12,6 +12,21 @@
     display: inline-block;
 }
 
+.youtube {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%;
+}
+
+iframe.youtube-iframe {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    border-radius: 1rem;
+}
+
 /* ------------------------------------*\
   #Layout
 \*------------------------------------ */

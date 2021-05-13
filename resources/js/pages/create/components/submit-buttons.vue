@@ -36,7 +36,7 @@
                     <button 
                         :disabled="ready" 
                         class="create" 
-                        @click.prevent="onForward(next)"> 
+                        @click.prevent="submit"> 
                         Review 
                     </button>
                 </div>
@@ -52,7 +52,7 @@
                 </div>
             </div>
             <div v-else>
-                <template v-if="approved && next!='review'">
+                <template v-if="approved">
                     <div class="create-button__forward">
                         <button 
                             :disabled="disabled" 

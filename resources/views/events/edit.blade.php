@@ -22,6 +22,7 @@
             </vue-alert>
         @endif
 		<vue-event-edit 
+            :allevents="{{auth()->user()->events()->whereIn('status', ['p','e'])->get()}}"
             :unpublished="{{auth()->user()->events()->whereNotIn('status', ['p','e'])->count()}}"
             :published="{{auth()->user()->events()->whereIn('status', ['p','e'])->count()}}"
             :user="{{auth()->user()}}"/>	

@@ -1,8 +1,41 @@
 <template>
     <div class="event-create__image">
         <section class="field">
-            <h2 style="text-align:center">Upload Image</h2>
-            <div class="event-create-image">          
+            <div class="event-create-image"> 
+                <h2>Upload Image</h2>
+                <div class="field">
+                    <label> Would you like to add a youtube video? </label>
+                    <div id="cover">
+                        <input  
+                            v-model="hasVideo" 
+                            type="checkbox" 
+                            id="checkbox">
+                        <div id="bar" />
+                        <div id="knob">
+                            <p v-if="hasVideo">Yes</p>
+                            <p v-else>No</p>
+                        </div>
+                    </div>
+                </div>     
+                <template v-if="hasVideo">
+                    <div class="field">
+                        <div class="inline input">
+                            <p>
+                                https://youtu.be/
+                            </p>
+                            <input 
+                                type="text" 
+                                v-model="video" 
+                                name="video"
+                                @input="$v.video.$touch"
+                                :class="{ 'error': $v.video.$error }"
+                                placeholder="eg: q9fQW4VFNk8Y">
+                            <div v-if="$v.video.$error" class="validation-error">
+                                <p class="error" v-if="!$v.video.ifHttp">Please only include the youtube video id (no urls or @)</p>
+                            </div>
+                        </div>
+                    </div>
+                </template> 
                 <div class="image-loader">
                     <label 
                         class="image-loader__label" 
@@ -45,38 +78,34 @@
                             <image-upload @loaded="onImageUpload" />
                             <CubeSpinner :loading="loading" />
                         </div>
-                        <div style="margin-top:1rem;">
-                            <p>Must be at least 800px wide by 450px tall.</p>
-                        </div>
                     </label>
                     <div>
                         <div v-if="$v.imageFile.$error" class="validation-error image">
-                            <p class="error" v-if="!$v.imageFile.required">The image is required</p>
                             <p class="error" v-if="!$v.imageFile.fileSize">The image file size is over 10mb</p>
                             <p class="error" v-if="!$v.imageFile.fileType">The image needs to be a JPG, PNG or GIF</p>
                             <p class="error" v-if="!$v.imageFile.imageRatio">The image needs to be at least 800 x 450</p>
                         </div>
                     </div>
                 </div>
+                <div class="image-display-example">
+                    <div class="iphone-example">
+                        <img
+                            class="underlay" 
+                            :src="displayExample">
+                        <img 
+                            class="overlay" 
+                            src="/storage/website-files/iphone-example.png">
+                    </div>
+                    <div class="computer-example">
+                        <img
+                            class="underlay" 
+                            :src="displayExample">
+                        <img 
+                            class="overlay" 
+                            src="/storage/website-files/computer-example.png">
+                    </div>
+                </div>  
             </div>
-            <div class="image-display-example">
-                <div class="iphone-example">
-                    <img
-                        class="underlay" 
-                        :src="displayExample">
-                    <img 
-                        class="overlay" 
-                        src="/storage/website-files/iphone-example.png">
-                </div>
-                <div class="computer-example">
-                    <img
-                        class="underlay" 
-                        :src="displayExample">
-                    <img 
-                        class="overlay" 
-                        src="/storage/website-files/computer-example.png">
-                </div>
-            </div>  
         </section>
         <Submit 
             @submit="onSubmit"
@@ -88,6 +117,11 @@
         <transition name="slide-fade">
             <div v-if="updated" class="updated-notifcation">
                 <p>Your event has been updated.</p>
+            </div>
+        </transition>
+        <transition name="slide-fade">
+            <div v-if="imageUpdated" class="updated-notifcation">
+                <p>Image has been added</p>
             </div>
         </transition>
     </div>
@@ -121,10 +155,6 @@
                 return `${this.imageFile.src && !this.$v.imageFile.$error ? this.imageFile.src : this.image}`
             },
 
-            endpoint() {
-                return `/create/${this.event.slug}/images`
-            },
-
             readySubmit() {
                 return this.readyToSubmit && this.imageAdded ? false : true;
             },
@@ -145,7 +175,10 @@
                 formData: new FormData(),
                 imageAdded: this.event.largeImagePath ? true : false,
                 updated: false,
+                imageUpdated: false,
                 approved: this.event.status == 'p' || this.event.status == 'e' ? true : false,
+                hasVideo: this.event.video ? true : false,
+                video: this.event.video ? this.event.video  : ''
             };
         },
 
@@ -153,23 +186,44 @@
             onImageUpload(image) {
                 this.imageFile = image; 
                 this.$v.$touch(); 
-                if (this.$v.$invalid) { 
-                    return false; 
-                };
-                this.onSubmit();
+                if (this.$v.$invalid) { return }
+                this.formData.append('image', this.imageFile.file);
+                this.submitImage();
             },
 
-            onSubmit() {
+            submitImage() {
                 this.onToggle();
-                this.formData.append('image', this.imageFile.file);
-                axios.post(this.endpoint, this.formData)
+                axios.post(`/create/${this.event.slug}/add-images`, this.formData)
                 .then(res => {
-                    if (this.approved) {this.updated = true;setTimeout(() => this.updated = false, 3000)};
+                    console.log(res.data);
                     res.data.status >= 8 ? this.readyToSubmit = true : false;
+                    this.showImageUpdatedModal()
                     this.imageAdded = true;
                     this.onToggle();
                 })
                 .catch(err => { this.onErrors(err) });
+            },
+
+            onSubmit(value) {
+                this.onToggle();
+                this.$v.$touch(); 
+                if (this.$v.$invalid) { return }
+                axios.post(`/create/${this.event.slug}/images`, {video: this.hasVideo ? this.video : null})
+                .then(res => {
+                    if (this.approved) {this.showUpdatedModal()}
+                    value == 'save' ? this.updateImage() : this.onForward(value);
+                })
+                .catch(err => { this.onErrors(err) });
+            },
+
+            showUpdatedModal() {
+                this.updated = true; 
+                setTimeout(() => this.updated = false, 3000)
+            },
+
+            showImageUpdatedModal() {
+                this.imageUpdated = true; 
+                setTimeout(() => this.imageUpdated = false, 3000)
             },
 
             navChange(value) {
@@ -179,6 +233,18 @@
             onToggle() {
                 this.loading = !this.loading;
                 this.disabled = !this.disabled;
+            },
+
+            updateImage() {
+                this.checkResubmitStatus();
+                this.disabled = false;
+                this.loading = !this.loading;
+                this.updated = true;
+                setTimeout(() => this.updated = false, 3000);
+            },
+
+            validateText(str) {
+                return str && str.startsWith("http") || str && str.startsWith("@") ? true : false
             },
 
             checkSubmissionStatus() {
@@ -199,8 +265,12 @@
         },
 
         validations: {
+            video: {
+                ifHttp() {
+                    return this.validateText(this.video) ? false : true
+                }
+            },
             imageFile: {
-                required,
                 fileSize() { 
                     return this.imageFile ? this.imageFile.file.size < 10485760 : true 
                 },

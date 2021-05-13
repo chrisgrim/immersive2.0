@@ -60,17 +60,27 @@
                 :text="event.description"
                 :limit="100" />
         </div>
+
+        <template v-if="event.video">
+            <div class="video">
+                <VideoPlayer
+                    :alt="`${event.name} Immersive Event`"
+                    :src="`https://www.youtube.com/embed/${event.video}`" />
+            </div>
+        </template>
+
     </section>
 </template>
 
 <script>
     import ShowMore  from '../components/show-more.vue'
     import IconSvg from '../../../components/Svg-icon'
+    import VideoPlayer  from './VideoPlayer.vue'
     export default {
 
         props: [ 'event', 'remaining'],
 
-        components: { ShowMore, IconSvg },
+        components: { ShowMore, IconSvg, VideoPlayer },
 
         data() {
             return {

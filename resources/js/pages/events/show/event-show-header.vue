@@ -24,7 +24,7 @@
                 :event="event" />
         </nav>
         <div class="es__header--content">
-            <div class="es__header--image">
+            <div class="es__header--image">   
                 <picture>
                     <source 
                         type="image/webp" 

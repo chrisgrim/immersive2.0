@@ -27,10 +27,46 @@ class ShowsController extends Controller
      */
     public function create(Event $event)
     {
+        return 'test';
         if ($event->checkEventStatus(3)) return back();
         $event->load('showOnGoing','shows.tickets','timezone');
         $timezones = Timezone::all()->sortBy('offset')->values();
         return view('create.show', compact('event', 'timezones'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     * 
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Event $event)
+    {
+        if ($request->shows)  Show::saveNewShows($request, $event);
+
+        if ($request->limited) {
+            //check if the start and finish include the week dates
+            foreach (CarbonPeriod::create($request->startDate, $request->endDate) as $date) {
+                $calendarDays[] = strtolower($date->format('D'));
+            }
+            $weekDays= array_keys (array_filter($request->week));
+            if (empty(array_intersect($calendarDays, $weekDays))) return abort(500, "noOverlap");
+            
+            ShowOnGoing::saveNewShowOnGoing($request, $event);
+            Show::saveNewShows($request, $event);
+        }
+
+        if($request->onGoing) {
+            ShowOnGoing::saveNewShowOnGoing($request, $event);
+            Show::saveNewShows($request, $event);
+        }
+
+        if ($request->always) Show::saveAlwaysShow($request, $event);
+
+        Show::updateEvent($request, $event);
+        $event->updateEventStatus(4, $request);
+        $event = $event->fresh();
+        $event->searchable();
     }
 
     /**
@@ -75,42 +111,5 @@ class ShowsController extends Controller
                 'embargo_date' => $event->embargo_date,
             ));
         }
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     * 
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Event $event)
-    {
-
-
-        if ($request->shows)  Show::saveNewShows($request, $event);
-
-        if ($request->limited) {
-            //check if the start and finish include the week dates
-            foreach (CarbonPeriod::create($request->start_date, $request->end_date) as $date) {
-                $calendarDays[] = strtolower($date->format('D'));
-            }
-            $weekDays= array_keys (array_filter($request->week));
-            if (empty(array_intersect($calendarDays, $weekDays))) return abort(500, "noOverlap");
-            
-            ShowOnGoing::saveNewShowOnGoing($request, $event);
-            Show::saveNewShows($request, $event);
-        }
-
-        if($request->onGoing) {
-            ShowOnGoing::saveNewShowOnGoing($request, $event);
-            Show::saveNewShows($request, $event);
-        }
-
-        if ($request->always) Show::saveAlwaysShow($request, $event);
-
-        Show::updateEvent($request, $event);
-        $event->updateEventStatus(4, $request);
-        $event = $event->fresh();
-        $event->searchable();
     }
 }

@@ -4,19 +4,17 @@
             <div class="field">
                 <label> Show Times</label>
                 <textarea 
-                    v-model="showTimes" 
+                    v-model="datesObject.showTimes" 
                     class="create-input area"
-                    :class="{ active: active == 'times','error': $v.showTimes.$error }"
+                    :class="{ 'error': $v.datesObject.showTimes.$error }"
                     rows="8" 
-                    :placeholder="placeholdera" 
+                    :placeholder="'Please provide a brief description of daily times. For example:' + '\n' + '\n' + 'Show begins everyday at 12PM.' + '\n' + 'Enjoy at any time.'" 
                     required
-                    @click="active = 'times'"
-                    @blur="active = null"
-                    @input="$v.showTimes.$touch"
+                    @input="$v.datesObject.showTimes.$touch"
                     autofocus />
-                <div v-if="$v.showTimes.$error" class="validation-error">
-                    <p class="error" v-if="!$v.showTimes.required">Please give a brief description of show times</p>
-                    <p class="error" v-if="!$v.showTimes.maxLength">Show time is too long</p>
+                <div v-if="$v.datesObject.showTimes.$error" class="validation-error">
+                    <p class="error" v-if="!$v.datesObject.showTimes.required">Please give a brief description of show times</p>
+                    <p class="error" v-if="!$v.datesObject.showTimes.maxLength">Show time is too long</p>
                 </div>
             </div>
         </section>
@@ -42,11 +40,11 @@
                 <div v-if="showEmbargoDate">
                     <div class="embargo-calendar">
                         <flat-pickr
-                            v-model="embargoDate"
+                            v-model="datesObject.embargoDate"
                             :config="embargoCalendarConfig"
                             ref="datePicker"
                             @on-value-update="$v.showEmbargoDate.$touch" 
-                            :events="eventsToBeEmitted"                                             
+                            :events="['onValueUpdate']"                                             
                             class="form-control"
                             placeholder="Select date"               
                             name="dates" />
@@ -76,7 +74,7 @@
     import { required, maxLength } from 'vuelidate/lib/validators'
     import flatPickr from 'vue-flatpickr-component'
     import 'flatpickr/dist/flatpickr.css'
-    import Submit  from './submit-buttons.vue'
+    import Submit  from '../components/submit-buttons.vue'
 
     export default {
 
@@ -86,33 +84,13 @@
 
         components: { flatPickr, Submit },
 
-        computed: {
-            endpoint() {
-                return `/create/${this.event.slug}/shows`
-            },
-
-            submitObject() {
-                return {
-                    'showtimes': this.showTimes,
-                    'embargo_date' : this.showEmbargoDate ? this.embargoDate : null,
-                    'always': true,
-                    'resubmit': this.resubmit,
-                }
-            },
-        },
-
         data() {
             return {
-                active: null,
                 disabled: false,
                 updated: false,
-                eventsToBeEmitted : ['onReady', 'onChange','onValueUpdate'],
-                timezone: this.event.timezone ? this.event.timezone : '',
-                showTimes: this.event.shows.length ? this.event.show_times : '',
+                datesObject: this.initializeDatesObject(),
                 showEmbargoDate: this.event.embargo_date ? true : false,
-                embargoDate: this.event.embargo_date ? this.event.embargo_date : '',
                 embargoCalendarConfig: this.initializeEmbargoCalendarObject(),
-                placeholdera: 'Please provide a brief description of daily times. For example:' + '\n' + '\n' + 'Show begins everyday at 12PM.' + '\n' + 'Enjoy at any time.',
             }
         },
 
@@ -120,8 +98,24 @@
             async onSubmit(value) {
                 if ( this.checkForChanges(value) ) { return this.onForward(value) }
                 if (this.checkVuelidate()) { return false }
-                await axios.post(this.endpoint, this.submitObject)
+                await axios.post(`/create/${this.event.slug}/shows`, this.datesObject)
                 value == 'save' ? this.save() : this.onForward(value);
+            },
+
+            async renew(value) {
+                if ( this.checkForChanges(value) ) { return this.onForward(value) }
+                if (this.checkVuelidate()) { return false }
+                await axios.post(`/create/${this.event.slug}/shows`, this.datesObject)
+                value == 'save' ? this.save() : this.onForward(value);
+            },
+
+            initializeDatesObject() {
+                return {
+                    showTimes: this.event.show_times,
+                    embargoDate: this.event.embargo_date,
+                    always: true,
+                    resubmit: this.resubmit,
+                }
             },
 
             initializeEmbargoCalendarObject() {
@@ -131,16 +125,16 @@
                     mode: "single",
                     inline: true,
                     showMonths: 1,
-                    dateFormat: 'Y-m-d H:i:s',
-                    eventsToBeEmitted : ['onReady', 'onChange','onValueUpdate'],   
+                    dateFormat: 'Y-m-d H:i:s', 
                 }
             },
-
-            onLoad() {},
+            
+            onLoad() {
+            },
         },
 
         mounted() {
-            if (this.changeType) { this.$v.showTimes.$touch() }
+            if (this.changeType) { this.$v.datesObject.showTimes.$touch() }
         },
 
         watch: {
@@ -150,9 +144,11 @@
         },
 
         validations: {
-            showTimes: {
-                required,
-                maxLength: maxLength(1000)
+            datesObject: {
+                showTimes: {
+                    required,
+                    maxLength: maxLength(1000)
+                },
             },
             showEmbargoDate: {
                 isRequired() {

@@ -7,11 +7,11 @@
                     <div class="calendar mobileshow">
                         <flat-pickr
                             v-if="mobile"
-                            v-model="dates"
+                            v-model="datesObject.dates"
                             :config="calendarConfig"
                             ref="datePicker"
                             @on-value-update="onDateChange" 
-                            :events="eventsToBeEmitted"                                           
+                            :events="['onValueUpdate']"                                           
                             class="form-control"
                             placeholder="Select date"        
                             name="dates" />
@@ -20,22 +20,22 @@
                 <template v-else>
                     <div class="calendar desktopshow">
                         <flat-pickr
-                            v-model="dates"
+                            v-model="datesObject.dates"
                             :config="calendarConfig"
                             ref="datePicker"                                              
                             class="form-control"
                             @on-value-update="onDateChange" 
-                            :events="eventsToBeEmitted"
+                            :events="['onValueUpdate']"
                             placeholder="Select date"   
                             name="dates" />
                     </div>
                 </template>
-                <div v-if="$v.dates.$error" class="validation-error">
-                    <p class="error" v-if="!$v.dates.required">Please add at least 1 show date</p>
+                <div v-if="$v.datesObject.dates.$error" class="validation-error">
+                    <p class="error" v-if="!$v.datesObject.dates.required">Please add at least 1 show date</p>
                 </div>
                 <div>
-                    <label v-if="formattedDates.length">({{ formattedDates.length }} dates selected)</label>
-                    <label v-if="!formattedDates.length && dates.length">({{ dates.length }} dates selected)</label>
+                    <label v-if="datesObject.dateArray.length">({{ datesObject.dateArray.length }} dates selected)</label>
+                    <label v-if="!datesObject.dateArray.length && datesObject.dates.length">({{ datesObject.dates.length }} dates selected)</label>
                 </div>
             </div>
         </section>
@@ -43,21 +43,19 @@
             <div class="field">
                 <label> Show Timezone </label>
                 <v-select 
-                    v-model="timezone"
+                    v-model="datesObject.timezone"
                     label="description"
                     :options="timezones"
                     :clearable="false"
                     placeholder="Select timezone"
-                    @search:blur="active = null"
-                    @search:focus="active = 'timezone'"
-                    @input="$v.timezone.$touch"
-                    :class="{ active: active == 'timezone','error': $v.timezone.$error }">
+                    @input="$v.datesObject.timezone.$touch"
+                    :class="{ 'error': $v.datesObject.timezone.$error }">
                     <template #option="{ description }">
                         <p>{{ description }}</p>
                     </template>
                 </v-select>
-                <div v-if="$v.timezone.$error" class="validation-error">
-                    <p class="error" v-if="!$v.timezone.required">Please include timezone of show</p>
+                <div v-if="$v.datesObject.timezone.$error" class="validation-error">
+                    <p class="error" v-if="!$v.datesObject.timezone.required">Please include timezone of show</p>
                 </div>
             </div>
         </section>
@@ -65,19 +63,17 @@
             <div class="field">
                 <label> Show Times</label>
                 <textarea 
-                    v-model="showTimes"
+                    v-model="datesObject.showTimes"
                     class="create-input area"
-                    :class="{ active: active == 'times','error': $v.showTimes.$error }"
+                    :class="{ 'error': $v.datesObject.showTimes.$error }"
                     rows="8" 
-                    :placeholder="placeholders" 
+                    :placeholder="'Please provide a brief description of show times. For example:' + '\n' + '\n' + '“Doors at 7, Show at 8.”' + '\n' + '“Two shows an hour from 8-10.”'" 
                     required
-                    @click="active = 'times'"
-                    @blur="active = null"
-                    @input="$v.showTimes.$touch"
+                    @input="$v.datesObject.showTimes.$touch"
                     autofocus />
-                <div v-if="$v.showTimes.$error" class="validation-error">
-                    <p class="error" v-if="!$v.showTimes.required">Please give a brief description of show times</p>
-                    <p class="error" v-if="!$v.showTimes.maxLength">Show time is too long</p>
+                <div v-if="$v.datesObject.showTimes.$error" class="validation-error">
+                    <p class="error" v-if="!$v.datesObject.showTimes.required">Please give a brief description of show times</p>
+                    <p class="error" v-if="!$v.datesObject.showTimes.maxLength">Show time is too long</p>
                 </div>
             </div>
         </section>
@@ -103,11 +99,11 @@
                 <div v-if="showEmbargoDate">
                     <div class="embargo-calendar">
                         <flat-pickr
-                            v-model="embargoDate"
+                            v-model="datesObject.embargoDate"
                             :config="embargoCalendarConfig"
                             ref="datePicker"
                             @on-value-update="$v.showEmbargoDate.$touch" 
-                            :events="eventsToBeEmitted"                                          
+                            :events="['onValueUpdate']"                                          
                             class="form-control"
                             placeholder="Select date"               
                             name="dates" />
@@ -138,7 +134,7 @@
     import { required, maxLength } from 'vuelidate/lib/validators'
     import flatPickr from 'vue-flatpickr-component'
     import 'flatpickr/dist/flatpickr.css'
-    import Submit  from './submit-buttons.vue'
+    import Submit  from '../components/submit-buttons.vue'
 
     export default {
 
@@ -148,38 +144,14 @@
 
         components: { flatPickr, Submit },
 
-        computed: {
-            endpoint() {
-                return `/create/${this.event.slug}/shows`
-            },
-
-            submitObject() {
-                return {
-                    'dates': this.formattedDates.length ? this.formattedDates : this.dates,
-                    'showtimes': this.showTimes,
-                    'embargo_date' : this.showEmbargoDate ? this.embargoDate : null,
-                    'shows': true,
-                    'timezone': this.timezone,
-                    'resubmit': this.resubmit,
-                }
-            },
-        },
-
         data() {
             return {
-                active: null,
+                datesObject: this.initializeDatesObject(),
                 disabled: false,
                 updated: false,
-                dates: this.event.shows ? this.event.shows.map(a => a.date) : '',
-                formattedDates: this.event.shows ? this.event.shows.map(a => a.date) : '',
-                eventsToBeEmitted : ['onReady', 'onChange','onValueUpdate'],
-                timezone: this.event.timezone ? this.event.timezone : '',
-                showTimes: this.event.shows.length ? this.event.show_times : '',
                 showEmbargoDate: this.event.embargo_date ? true : false,
-                embargoDate: this.event.embargo_date ? this.event.embargo_date : '',
                 calendarConfig: this.initializeCalendarObject(),
                 embargoCalendarConfig: this.initializeEmbargoCalendarObject(),
-                placeholders: 'Please provide a brief description of show times. For example:' + '\n' + '\n' + '“Doors at 7, Show at 8.”' + '\n' + '“Two shows an hour from 8-10.”',
                 mobile: window.innerWidth < 768,
             }
         },
@@ -188,16 +160,29 @@
             async onSubmit(value) {
                 if ( this.checkForChanges(value) ) { return this.onForward(value) }
                 if (this.checkVuelidate()) { return false }
-                await axios.post(this.endpoint, this.submitObject)
+                await axios.post(`/create/${this.event.slug}/shows`, this.datesObject)
                 value == 'save' ? this.save() : this.onForward(value);
             },
 
-            onLoad() {},
-
             onDateChange(value) {
-                this.formattedDates = []
-                this.$v.dates.$touch()
-                value.forEach( date => { this.formattedDates.push(this.$dayjs(date).format("YYYY-MM-DD HH:mm:ss")) })
+                this.$v.datesObject.dates.$touch()
+                this.datesObject.dateArray = value.map( date => this.$dayjs(date).format("YYYY-MM-DD HH:mm:ss"))
+            },
+
+            initializeDatesObject() {
+                return {
+                    dates: this.loadDates(),
+                    dateArray: this.loadDates(),
+                    showTimes: this.event.show_times,
+                    embargoDate : this.event.embargo_date,
+                    shows: true,
+                    timezone: this.event.timezone,
+                    resubmit: this.resubmit,
+                }
+            },
+
+            loadDates() {
+                return this.event.shows ? this.event.shows.map(a => a.date) : ''
             },
 
             initializeEmbargoCalendarObject() {
@@ -220,11 +205,14 @@
                     dateFormat: 'Y-m-d H:i:s',     
                 }
             },
+
+            onLoad() {
+            },
         },
 
         mounted() {
             setTimeout(() => this.$refs.datePicker.fp.jumpToDate(new Date()), 100);
-            if (this.changeType) { this.$v.dates.$touch() }
+            if (this.changeType) { this.$v.datesObject.dates.$touch() }
         },
 
         watch: {
@@ -234,24 +222,26 @@
         },
 
         validations: {
-            showTimes: {
-                required,
-                maxLength: maxLength(1000)
-            },
-            dates: {
-                ifDates() { 
-                    return this.dates.length ? true : false
+            datesObject: {
+                showTimes: {
+                    required,
+                    maxLength: maxLength(1000)
                 },
-            },
-            timezone: {
-                required
+                dates: {
+                    ifDates() { 
+                        return this.datesObject.dates.length ? true : false
+                    },
+                },
+                timezone: {
+                    required
+                },
             },
             showEmbargoDate: {
                 isRequired() {
-                    return this.showEmbargoDate ? this.embargoDate ? true : false : true
+                    return this.showEmbargoDate ? this.datesObject.embargoDate ? true : false : true
                 },
                 afterOpening() {
-                    return this.embargoDate > this.formattedDates.sort()[0] ? false : true
+                    return this.datesObject.embargoDate > this.datesObject.dateArray.sort()[0] ? false : true
                 }
             },
         },

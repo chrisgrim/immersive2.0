@@ -53,14 +53,26 @@
             </div>
             <div v-else>
                 <template v-if="approved">
-                    <div class="create-button__forward">
-                        <button 
-                            :disabled="disabled" 
-                            class="create" 
-                            @click.prevent="save()"> 
-                            Save 
-                        </button>
-                    </div>
+                    <template v-if="renew">
+                        <div class="create-button__forward">
+                            <button 
+                                :disabled="disabled" 
+                                class="create" 
+                                @click.prevent="renewDates()"> 
+                                Save and Renew
+                            </button>
+                        </div>
+                    </template>
+                    <template v-else>
+                        <div class="create-button__forward">
+                            <button 
+                                :disabled="disabled" 
+                                class="create" 
+                                @click.prevent="save()"> 
+                                Save 
+                            </button>
+                        </div>
+                    </template>
                 </template>
             </div>
         </div>
@@ -73,7 +85,7 @@ import formValidationMixin from '../../../mixins/form-validation-mixin'
 
     export default {
 
-        props: ['event','next', 'previous', 'disabled','newsubmission', 'ready'],
+        props: ['event','next', 'previous', 'disabled','newsubmission', 'ready', 'renew'],
 
         mixins: [formValidationMixin],
 
@@ -92,9 +104,14 @@ import formValidationMixin from '../../../mixins/form-validation-mixin'
                 this.$emit('submit', 'save');
             },
 
+            renewDates() {
+                this.$emit('renewDates', 'save');
+            },
+
             acceptWarning() {
                 this.$emit('newevent', true);
-            }
+            },
+
         }
 
     }

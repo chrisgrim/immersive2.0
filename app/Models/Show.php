@@ -110,14 +110,14 @@ class Show extends Model
         }
 
         // Delete all old shows
-        $showDelete = $event->shows()->whereNotIn('date', $request->dates)->get();
+        $showDelete = $event->shows()->whereNotIn('date', $request->dateArray)->get();
         foreach($showDelete as $show){
             $show->tickets()->delete();
         }
-        $event->shows()->whereNotIn('date', $request->dates)->delete();
+        $event->shows()->whereNotIn('date', $request->dateArray)->delete();
 
         //  for each date do this
-        foreach( $request->dates as $date) {
+        foreach( $request->dateArray as $date) {
 
             //  for each show update or create. This means if I have a lot of overlapping dates I don't delete all of them
             $show = Show::updateOrCreate([
@@ -169,18 +169,19 @@ class Show extends Model
 
         if ($event->status === 'e' && $request->embargo_date === null ) {
             return $event->update([
-                'show_times' => $request->showtimes,
-                'embargo_date' => $request->embargo_date,
+                'show_times' => $request->showTimes,
+                'embargo_date' => $request->embargoDate,
                 'closingDate' => $lastDate,
                 'showtype' => $type,
                 'timezone_id' => $request->timezone ? $request->timezone['id'] : null,
                 'status' => 'p'
             ]);
         }
+
         if ($event->status === 'p' && $request->embargo_date ) {
             $event->update([
-                'show_times' => $request->showtimes,
-                'embargo_date' => $request->embargo_date,
+                'show_times' => $request->showTimes,
+                'embargo_date' => $request->embargoDate,
                 'closingDate' => $lastDate,
                 'showtype' => $type,
                 'timezone_id' => $request->timezone ? $request->timezone['id'] : null,
@@ -188,9 +189,10 @@ class Show extends Model
             ]);
             return $event->unsearchable();
         }
+        
         $event->update([
-            'show_times' => $request->showtimes,
-            'embargo_date' => $request->embargo_date,
+            'show_times' => $request->showTimes,
+            'embargo_date' => $request->embargoDate,
             'closingDate' => $lastDate,
             'showtype' => $type,
             'timezone_id' => $request->timezone ? $request->timezone['id'] : null,

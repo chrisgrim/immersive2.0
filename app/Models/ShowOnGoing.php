@@ -34,12 +34,12 @@ class ShowOnGoing extends Model
     {
         if ($request->limited) 
         {
-            $period = CarbonPeriod::create(new Carbon($request->start_date), new Carbon($request->end_date));
+            $period = CarbonPeriod::create(new Carbon($request->startDate), new Carbon($request->endDate));
         } 
         elseif($request->onGoing) 
         {
-            $initialdate = new Carbon($request->start_date);
-            $period = CarbonPeriod::create(new Carbon($request->start_date), $initialdate->addMonths(6));
+            $initialdate = new Carbon($request->startDate);
+            $period = CarbonPeriod::create(new Carbon($request->startDate), $initialdate->addMonths(6));
         } 
         else
         {
@@ -60,16 +60,16 @@ class ShowOnGoing extends Model
                 'sun' => $request->week['sun'],
             ]
         );
-        $dates=[];
+        $dateArray=[];
         foreach ($period as $date) {
-            if ($date->isMonday() && $request->week['mon']) {$dates[]=$date->format('Y-m-d H:i:s');}
-            if ($date->isTuesday() && $request->week['tue']) {$dates[]=$date->format('Y-m-d H:i:s');}
-            if ($date->isWednesday() && $request->week['wed']) {$dates[]=$date->format('Y-m-d H:i:s');}
-            if ($date->isThursday() && $request->week['thu']) {$dates[]=$date->format('Y-m-d H:i:s');}
-            if ($date->isFriday() && $request->week['fri']) {$dates[]=$date->format('Y-m-d H:i:s');}
-            if ($date->isSaturday() && $request->week['sat']) {$dates[]=$date->format('Y-m-d H:i:s');}
-            if ($date->isSunday() && $request->week['sun']) {$dates[]=$date->format('Y-m-d H:i:s');}
+            if ($date->isMonday() && $request->week['mon']) {$dateArray[]=$date->format('Y-m-d H:i:s');}
+            if ($date->isTuesday() && $request->week['tue']) {$dateArray[]=$date->format('Y-m-d H:i:s');}
+            if ($date->isWednesday() && $request->week['wed']) {$dateArray[]=$date->format('Y-m-d H:i:s');}
+            if ($date->isThursday() && $request->week['thu']) {$dateArray[]=$date->format('Y-m-d H:i:s');}
+            if ($date->isFriday() && $request->week['fri']) {$dateArray[]=$date->format('Y-m-d H:i:s');}
+            if ($date->isSaturday() && $request->week['sat']) {$dateArray[]=$date->format('Y-m-d H:i:s');}
+            if ($date->isSunday() && $request->week['sun']) {$dateArray[]=$date->format('Y-m-d H:i:s');}
         }
-        $request->request->add(['dates' => $dates]);
+        $request->request->add(['dateArray' => $dateArray]);
     }
 }

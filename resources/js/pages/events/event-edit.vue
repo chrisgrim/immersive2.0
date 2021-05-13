@@ -234,7 +234,7 @@
             },
 
             checkPermission() {
-                // if (this.user.type !== 'g') {return false}
+                if (this.user.type !== 'g') {return false}
                 if (this.published === 0 && this.unpublished >= 1) {
                     this.newUserLimited = true
                     return true

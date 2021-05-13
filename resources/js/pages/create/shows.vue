@@ -5,6 +5,9 @@
                 <div class="title">
                     <h2>Dates and Times</h2>
                 </div>
+                <template v-if="showRenew">
+                    <VueRenewShow />
+                </template>
                 <input 
                     style="opacity:0;position:absolute;top:0;" 
                     autofocus>
@@ -30,6 +33,7 @@
                 </div>
                 <template v-if="showType.id === 1">
                     <vue-limited-show-dates
+                        :renew="showRenew"
                         :event="event"
                         :resubmit="resubmit"
                         :change-type="changeType"
@@ -37,6 +41,7 @@
                 </template>
                 <template v-if="showType.id === 2">
                     <vue-limited-run
+                        :renew="showRenew"
                         :event="event"
                         :resubmit="resubmit"
                         :change-type="changeType"
@@ -44,6 +49,7 @@
                 </template>
                 <template v-if="showType.id === 3">
                     <vue-open-ended 
+                        :renew="showRenew"
                         :event="event"
                         :resubmit="resubmit"
                         :change-type="changeType"
@@ -51,6 +57,7 @@
                 </template>
                 <template v-if="showType.id === 4">
                     <vue-everyday 
+                        :renew="showRenew"
                         :event="event"
                         :resubmit="resubmit"
                         :change-type="changeType"
@@ -91,10 +98,11 @@
 
 <script>
     import formValidationMixin from '../../mixins/form-validation-mixin'
-    import VueLimitedRun  from './components/vue-limited-run.vue'
-    import VueLimitedShowDates from './components/vue-limited-show-dates.vue'
-    import VueOpenEnded  from './components/vue-open-ended.vue'
-    import VueEveryday  from './components/vue-everyday.vue'
+    import VueLimitedRun  from './shows/vue-limited-run.vue'
+    import VueLimitedShowDates from './shows/vue-limited-show-dates.vue'
+    import VueOpenEnded  from './shows/vue-open-ended.vue'
+    import VueEveryday  from './shows/vue-everyday.vue'
+    import VueRenewShow  from './shows/vue-renew-show.vue'
 
 
 export default {
@@ -102,7 +110,7 @@ export default {
 
     mixins: [ formValidationMixin ],
 
-    components: { VueLimitedRun, VueLimitedShowDates, VueOpenEnded, VueEveryday },
+    components: { VueLimitedRun, VueLimitedShowDates, VueOpenEnded, VueEveryday, VueRenewShow },
 
     computed: {
         published() {
@@ -115,6 +123,7 @@ export default {
             showType: '',
             active: null,
             modal: false,
+            showRenew: this.checkRenew(),
             showTypeOptions: [
                 {   id: 1, name: 'Select Dates (Specific Dates)', description:'Your show has specific performance dates.'},
                 {   id: 2, name: 'Limited Run (A range of dates, by day of week)', description:'Your show has an opening date and a closing date, and may have dark days each week.'}, 
@@ -147,6 +156,14 @@ export default {
             this.resubmit = true;
             this.approved = false;
             this.modal = false;
+        },
+
+        checkRenew() {
+            if (!this.event.shows.length) {return}
+            const lastShowDate = this.event.shows[0].date;
+            const oneMonthOut = this.$dayjs().add(30, 'day').format('YYYY-MM-DD 23:59:00')
+
+            return lastShowDate < oneMonthOut ? true : false
         },
     },
 

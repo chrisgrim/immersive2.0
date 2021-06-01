@@ -93,7 +93,6 @@ class OrganizerController extends Controller
      * Update the specified resource in storage. 
         Update event with the correct organization.
         First Check to make sure user can edit the organizer. If not, then redirect back with error.
-
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Organizer  $organizer
@@ -138,6 +137,19 @@ class OrganizerController extends Controller
             return $organizer->deleteOrganizer($organizer); 
         }
         $organizer->events->first->exists() ? null :  $organizer->deleteOrganizer($organizer);
+    }
+
+    /**
+     * Assign organizer to user.
+     *
+     * @param  \App\Organizer  $organizer
+     * @return \Illuminate\Http\Response
+     */
+    public function assign(Organizer $organizer)
+    {
+        auth()->user()->update([
+            'current_team_id' => $organizer->id
+        ]);
     }
 
     /**

@@ -89,6 +89,7 @@ Route::RESOURCE('organizer', 'OrganizerController');
 Route::GET('/organizer/{organizer}/events', 'OrganizerController@fetchEvents');
 Route::POST('/organizer/{organizer}/patch', 'OrganizerController@update');
 Route::POST('message/organizer/{organizer}/{user}', 'OrganizerController@message');
+Route::POST('assign/organizer/{organizer}', 'OrganizerController@assign');
 
 
 //User Profile Pages

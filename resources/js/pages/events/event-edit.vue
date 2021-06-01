@@ -4,6 +4,7 @@
             <v-select 
                 v-model="organizer"
                 label="name"
+                @input="selectOrganizer"
                 placeholder="Organizations"
                 :clearable="false"
                 :options="organizers" />
@@ -211,7 +212,7 @@
                 return event => this.isLocked(event)
             },
             isShowing() {
-                return event => !event.isShowing
+                return event => event.status === 'p' && !event.isShowing
             },
         },
 
@@ -230,18 +231,28 @@
                 await axios.get(`/create/organizers/fetch?timestamp=${new Date().getTime()}`)
                 .then(res => {
                     this.organizers = res.data;
-                    this.organizer = res.data[0];
+                    this.organizer = this.displayCurrentOrganizer(res.data);
                 })
             },
 
-            newEvent() {
+            async selectOrganizer(organizer) {
+                await axios.post(`/assign/organizer/${organizer.slug}`)
+            },
 
+            async newEvent() {
                 if (this.checkPermission()) return ;
-                axios.post(`/events`, this.organizer)
+                await axios.post(`/events`, this.organizer)
                 .then(res => { 
                     window.location.href = `/create/${res.data.slug}/title`; 
                 })
                 .catch(error => { this.serverErrors = error.response.data.errors; });
+            },
+
+            displayCurrentOrganizer(organizers) {
+                if (this.user.current_team_id) {
+                    return organizers.find(organizer => organizer.id === this.user.current_team_id)
+                }
+                return organizers[0];
             },
 
             checkPermission() {

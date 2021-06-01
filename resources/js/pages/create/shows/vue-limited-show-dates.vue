@@ -82,7 +82,7 @@
                 <label> Does the event have a specific embargo date? <br> (i.e. The date you would like it to first appear on EI) </label>
                 <div id="cover">
                     <input 
-                        @input="$v.showEmbargoDate.$touch" 
+                        @change="toggleEmbargoDate()" 
                         v-model="showEmbargoDate" 
                         type="checkbox" 
                         id="checkbox">
@@ -162,6 +162,11 @@
                 if (this.checkVuelidate()) { return false }
                 await axios.post(`/create/${this.event.slug}/shows`, this.datesObject)
                 value == 'save' ? this.save() : this.onForward(value);
+            },
+
+            toggleEmbargoDate() {
+                this.$v.showEmbargoDate.$touch();
+                if (!this.showEmbargoDate) { this.datesObject.embargoDate = null }
             },
 
             onDateChange(value) {

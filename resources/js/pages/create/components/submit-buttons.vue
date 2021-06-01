@@ -85,13 +85,14 @@ import formValidationMixin from '../../../mixins/form-validation-mixin'
 
     export default {
 
-        props: ['event','next', 'previous', 'disabled','newsubmission', 'ready', 'renew'],
+        props: ['event','next', 'previous', 'disabled','newsubmission', 'ready'],
 
         mixins: [formValidationMixin],
 
         data() {
             return {
                approved: this.event.status == 'p' || this.event.status == 'e' ? true : false,
+               renew: this.checkRenew(),
             }
         },
 
@@ -112,6 +113,16 @@ import formValidationMixin from '../../../mixins/form-validation-mixin'
                 this.$emit('newevent', true);
             },
 
+            checkRenew() {
+                if (!this.event.shows.length) {return}
+                if (this.next !== 'tickets') {return}
+                if (this.event.showtype === 's' || this.event.showtype === 'l') {return}
+                    
+                const lastShowDate = this.event.shows[0].date;
+                const oneMonthOut = this.$dayjs().add(30, 'day').format('YYYY-MM-DD 23:59:00')
+                
+                return lastShowDate < oneMonthOut ? true : false
+            }
         }
 
     }

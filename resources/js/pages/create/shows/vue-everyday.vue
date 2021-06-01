@@ -23,7 +23,7 @@
                 <label> Does the event have a specific embargo date? <br> (i.e. The date you would like it to first appear on EI) </label>
                 <div id="cover">
                     <input 
-                        @input="$v.showEmbargoDate.$touch" 
+                        @change="toggleEmbargoDate()" 
                         v-model="showEmbargoDate" 
                         type="checkbox" 
                         id="checkbox">
@@ -109,6 +109,11 @@
                 value == 'save' ? this.save() : this.onForward(value);
             },
 
+            toggleEmbargoDate() {
+                this.$v.showEmbargoDate.$touch();
+                if (!this.showEmbargoDate) { this.datesObject.embargoDate = null }
+            },
+
             initializeDatesObject() {
                 return {
                     showTimes: this.event.show_times,
@@ -152,7 +157,7 @@
             },
             showEmbargoDate: {
                 isRequired() {
-                    return this.showEmbargoDate ? this.embargoDate ? true : false : true
+                    return this.showEmbargoDate ? this.datesObject.embargoDate ? true : false : true
                 },
             },
         },

@@ -50,14 +50,19 @@
 
         computed: {
             showDates() {
+                if (!this.loadevent.shows.length) { return }
+
+                const lastDate = this.cleanDate(this.loadevent.shows[0].date)
+                const firstDate = this.cleanDate(this.loadevent.shows[this.loadevent.shows.length-1].date)
+
                 if (this.loadevent.showtype === 'o') { 
-                    return this.cleanDate(this.loadevent.shows[0].date) + '-' + this.cleanDate(this.loadevent.shows[this.loadevent.shows.length-1].date)
+                    return firstDate + '-' + lastDate
                 }
                 if (this.loadevent.showtype === 'l' || this.loadevent.showtype === 's') { 
                     if (this.loadevent.shows.length > 2) {
-                        return this.cleanDate(this.loadevent.shows[0].date) + '-' + this.cleanDate(this.loadevent.shows[this.loadevent.shows.length-1].date)
+                        return firstDate + '-' + lastDate
                     } else {
-                        return this.cleanDate(this.loadevent.shows[0].date)
+                        return lastDate
                     }
                 }
                 return 'Available Anytime'

@@ -5,8 +5,8 @@
                 <div class="title">
                     <h2>Dates and Times</h2>
                 </div>
-                <template v-if="showRenew">
-                    <VueRenewShow />
+                <template>
+                    <VueRenewShow :event="event" />
                 </template>
                 <input 
                     style="opacity:0;position:absolute;top:0;" 
@@ -33,7 +33,6 @@
                 </div>
                 <template v-if="showType.id === 1">
                     <vue-limited-show-dates
-                        :renew="showRenew"
                         :event="event"
                         :resubmit="resubmit"
                         :change-type="changeType"
@@ -41,7 +40,6 @@
                 </template>
                 <template v-if="showType.id === 2">
                     <vue-limited-run
-                        :renew="showRenew"
                         :event="event"
                         :resubmit="resubmit"
                         :change-type="changeType"
@@ -49,7 +47,6 @@
                 </template>
                 <template v-if="showType.id === 3">
                     <vue-open-ended 
-                        :renew="showRenew"
                         :event="event"
                         :resubmit="resubmit"
                         :change-type="changeType"
@@ -57,7 +54,6 @@
                 </template>
                 <template v-if="showType.id === 4">
                     <vue-everyday 
-                        :renew="showRenew"
                         :event="event"
                         :resubmit="resubmit"
                         :change-type="changeType"
@@ -123,7 +119,6 @@ export default {
             showType: '',
             active: null,
             modal: false,
-            showRenew: this.checkRenew(),
             showTypeOptions: [
                 {   id: 1, name: 'Select Dates (Specific Dates)', description:'Your show has specific performance dates.'},
                 {   id: 2, name: 'Limited Run (A range of dates, by day of week)', description:'Your show has an opening date and a closing date, and may have dark days each week.'}, 

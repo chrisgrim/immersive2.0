@@ -60,7 +60,8 @@
                         <p class="center">Show Dates Remaining</p>
                         <p>Last Modified</p>
                     </div>
-                    <div 
+                    <div
+                        :class="{'is-past': isShowing(event)}"
                         class="data-grid__row"
                         v-for="(event, index) in organizer.events"
                         :key="event.id">
@@ -134,9 +135,16 @@
                                     v-if="event.status > '3'"
                                     :href="`/create/${event.slug}/shows`">
                                     <template v-if="event.showtype === 'a' || event.showtype === 'o'">
-                                        <button class="noBox">
-                                            Ongoing
-                                        </button>
+                                        <template v-if="isShowing(event)">
+                                            <button class="noBox">
+                                                Add more time
+                                            </button>
+                                        </template>
+                                        <template v-else>
+                                            <button class="noBox">
+                                                Ongoing
+                                            </button>
+                                        </template>
                                     </template>
                                     <template v-else>
                                         <button class="noBox">
@@ -201,7 +209,10 @@
             },
             locked() {
                 return event => this.isLocked(event)
-            }
+            },
+            isShowing() {
+                return event => !event.isShowing
+            },
         },
 
         data() {

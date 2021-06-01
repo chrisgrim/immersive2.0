@@ -27,7 +27,6 @@ class ShowsController extends Controller
      */
     public function create(Event $event)
     {
-        return 'test';
         if ($event->checkEventStatus(3)) return back();
         $event->load('showOnGoing','shows.tickets','timezone');
         $timezones = Timezone::all()->sortBy('offset')->values();

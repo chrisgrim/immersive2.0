@@ -171,7 +171,7 @@
             :accept="false"
             v-if="newUserLimited">
             <h3>Notice</h3>
-            <p>New users may only create additional drafts after their first event is approved and published. This ensures that you’ve had the chance to try out every step of our process.</p>
+            <p>New users may only create additional events after their first couple of events are approved and published. This ensures that you’ve had the chance to try out every step of our process.</p>
         </VueModalAccept>
         <VueModalAccept 
             @onSubmit="limited = false"
@@ -257,7 +257,7 @@
 
             checkPermission() {
                 if (this.user.type !== 'g') {return false}
-                if (this.published === 0 && this.unpublished >= 1) {
+                if (this.published === 0 && this.unpublished >= 2) {
                     this.newUserLimited = true
                     return true
                 }

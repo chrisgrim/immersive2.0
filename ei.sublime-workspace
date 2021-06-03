@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"sta",
+				"Status"
+			],
+			[
+				"org",
+				"organizers"
+			],
+			[
+				"orga",
+				"organizers"
+			],
+			[
 				"check",
 				"checkRenew"
 			],
@@ -42,10 +54,6 @@
 			[
 				"vald",
 				"validateText"
-			],
-			[
-				"orga",
-				"organizer"
 			],
 			[
 				"if",
@@ -216,10 +224,6 @@
 				"addMember"
 			],
 			[
-				"org",
-				"organizer"
-			],
-			[
 				"organi",
 				"organizer_id"
 			],
@@ -254,10 +258,6 @@
 			[
 				"temp",
 				"temp_value"
-			],
-			[
-				"sta",
-				"starRatings"
 			],
 			[
 				"rat",
@@ -523,24 +523,8 @@
 			"file": "routes/web.php",
 			"settings":
 			{
-				"buffer_size": 9005,
+				"buffer_size": 9080,
 				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "database/seeders/DatabaseSeeder.php",
-			"settings":
-			{
-				"buffer_size": 1926,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "database/seeders/EventSeeder.php",
-			"settings":
-			{
-				"buffer_size": 864,
 				"line_ending": "Unix"
 			}
 		}
@@ -683,15 +667,14 @@
 		"/Users/chrisgrim/code/ei",
 		"/Users/chrisgrim/code/ei/app",
 		"/Users/chrisgrim/code/ei/app/Console",
-		"/Users/chrisgrim/code/ei/database",
-		"/Users/chrisgrim/code/ei/database/factories",
-		"/Users/chrisgrim/code/ei/database/seeders",
+		"/Users/chrisgrim/code/ei/app/Http",
+		"/Users/chrisgrim/code/ei/app/Http/Controllers",
 		"/Users/chrisgrim/code/ei/resources",
 		"/Users/chrisgrim/code/ei/resources/js",
 		"/Users/chrisgrim/code/ei/resources/js/pages",
-		"/Users/chrisgrim/code/ei/resources/js/pages/create",
-		"/Users/chrisgrim/code/ei/resources/js/pages/create/components",
-		"/Users/chrisgrim/code/ei/resources/js/pages/create/shows",
+		"/Users/chrisgrim/code/ei/resources/js/pages/events",
+		"/Users/chrisgrim/code/ei/resources/js/pages/layouts",
+		"/Users/chrisgrim/code/ei/resources/js/pages/organizers",
 		"/Users/chrisgrim/code/ei/resources/sass",
 		"/Users/chrisgrim/code/ei/resources/sass/create",
 		"/Users/chrisgrim/code/ei/resources/views",
@@ -700,7 +683,13 @@
 	],
 	"file_history":
 	[
+		"/Users/chrisgrim/code/ei/resources/js/pages/events/event-edit.vue",
+		"/Users/chrisgrim/code/ei/app/Http/Controllers/OrganizerController.php",
+		"/Users/chrisgrim/code/ei/app/Models/User.php",
+		"/Users/chrisgrim/code/ei/resources/sass/components/grid-data-component.scss",
 		"/Users/chrisgrim/code/ei/resources/sass/create/shows.scss",
+		"/Users/chrisgrim/code/ei/resources/js/pages/organizers/organizer-show.vue",
+		"/Users/chrisgrim/code/ei/database/seeders/DatabaseSeeder.php",
 		"/Users/chrisgrim/code/ei/app/Http/Controllers/Create/ShowsController.php",
 		"/Users/chrisgrim/code/ei/resources/js/pages/create/components/submit-buttons.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/create/shows/vue-open-ended.vue",
@@ -724,7 +713,6 @@
 		"/Users/chrisgrim/code/ei/vendor/laravel/scout/src/Searchable.php",
 		"/Users/chrisgrim/code/ei/resources/js/mixins/form-validation-mixin.js",
 		"/Users/chrisgrim/code/ei/public/assets/cre.js",
-		"/Users/chrisgrim/code/ei/resources/js/pages/events/event-edit.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/events/event-show.vue",
 		"/Users/chrisgrim/code/ei/resources/sass/events/event-show.scss",
 		"/Users/chrisgrim/code/ei/resources/sass/layout.scss",
@@ -747,13 +735,11 @@
 		"/Users/chrisgrim/code/ei/resources/js/pages/create/title.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/events/event-index.vue",
 		"/Users/chrisgrim/code/ei/resources/sass/create/category.scss",
-		"/Users/chrisgrim/code/ei/resources/js/pages/organizers/organizer-show.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/create/organizer.vue",
 		"/Users/chrisgrim/code/ei/resources/sass/create/organizer.scss",
 		"/Users/chrisgrim/code/ei/resources/sass/app-create.scss",
 		"/Users/chrisgrim/code/ei/resources/sass/create.scss",
 		"/Users/chrisgrim/code/ei/resources/sass/organizer.scss",
-		"/Users/chrisgrim/code/ei/app/Http/Controllers/OrganizerController.php",
 		"/Users/chrisgrim/code/ei/database/migrations/2021_04_26_220507_add_patreon_to_organizers_table.php",
 		"/Users/chrisgrim/code/ei/resources/js/pages/create/description.vue",
 		"/Users/chrisgrim/code/ei/resources/js/components/Svg-icon.vue",
@@ -767,10 +753,8 @@
 		"/Users/chrisgrim/code/ei/sftp-config.json",
 		"/Users/chrisgrim/code/ei/app/Http/Controllers/Admin/EventController.php",
 		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/admin-events.vue",
-		"/Users/chrisgrim/code/ei/resources/sass/components/grid-data-component.scss",
 		"/Users/chrisgrim/code/ei/resources/sass/adminarea/layout.scss",
 		"/Users/chrisgrim/code/ei/resources/js/pages/layouts/nav-search.vue",
-		"/Users/chrisgrim/code/ei/app/Models/User.php",
 		"/Users/chrisgrim/code/ei/app/Models/Location.php",
 		"/Users/chrisgrim/code/ei/app/Http/Controllers/Create/LocationController.php",
 		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/approve/approval-bar.vue",
@@ -826,8 +810,7 @@
 		"/Users/chrisgrim/code/ei/app/Providers/EventServiceProvider.php",
 		"/Users/chrisgrim/code/ei/vendor/laravel/framework/src/Illuminate/Auth/Events/Registered.php",
 		"/Users/chrisgrim/code/ei/app/Providers/RouteServiceProvider.php",
-		"/Users/chrisgrim/code/ei/app/Http/Controllers/Search/EventController.php",
-		"/Users/chrisgrim/code/ei/resources/js/mixins/search-basics-mixin.js"
+		"/Users/chrisgrim/code/ei/app/Http/Controllers/Search/EventController.php"
 	],
 	"find":
 	{
@@ -838,6 +821,8 @@
 		"height": 164.0,
 		"where_history":
 		[
+			"/Users/chrisgrim/code/ei/resources/js",
+			"/Users/chrisgrim/code/ei/resources/sass",
 			"/Users/chrisgrim/code/ei/resources/js/pages/create",
 			"/Users/chrisgrim/code/ei/resources/js",
 			"/Users/chrisgrim/code/ei/resources/sass",
@@ -943,6 +928,20 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"checkPermission",
+			"isShowing",
+			"statusCircle",
+			"checkPermission",
+			"organizer",
+			"charat",
+			"thumbimage",
+			"organizer",
+			"onSelect",
+			"edit-listing",
+			"renew-dates",
+			"renew-dats",
+			"data-grid",
+			"isShowing",
 			"renew",
 			"renewDates",
 			"submit",
@@ -1056,21 +1055,7 @@
 			"image",
 			"onSubmit",
 			"save",
-			"readyToSubmit",
-			"next",
-			"onSubmit",
-			"review",
-			"onToggle",
-			"imageUpdated",
-			"showUpdatedModal",
-			"onToggle",
-			"onSubmit",
-			"readySubmit",
-			"validateText",
-			"addVideo",
-			"style=\"font-weight: 400;\"",
-			"<a",
-			"</span>"
+			"readyToSubmit"
 		],
 		"highlight": false,
 		"in_selection": false,
@@ -1088,7 +1073,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -1097,15 +1082,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 9005,
+						"buffer_size": 9080,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								7139,
-								7139
+								5141,
+								5141
 							]
 						],
 						"settings":
@@ -1117,68 +1102,6 @@
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "database/seeders/DatabaseSeeder.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1926,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								403,
-								442
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/PHP/PHP.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 134.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "database/seeders/EventSeeder.php",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 864,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								327,
-								334
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/PHP/PHP.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 48.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,

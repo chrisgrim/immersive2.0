@@ -24,8 +24,7 @@
     "\\.sublime-(project|workspace)", "sftp-config(-alt\\d?)?\\.json",
     "sftp-settings\\.json", "/venv/", "\\.svn/", "\\.hg/", "\\.git/",
     "\\.bzr", "_darcs", "CVS", "\\.DS_Store", "Thumbs\\.db", "desktop\\.ini",
-    "\\.env", "vendor/", "node_modules/", "tests/", "storage/app/", "storage/framework/cache/", "storage/framework/sessions/", "storage/framework/views/",
-    "storage/logs/", "public/files/", "public/photos/", "public/storage/", "storage/debugbar/"
+    "\\.env", "vendor/", "node_modules/", "tests/", "storage/", "public/files/", "public/photos/", "public/storage/"
     ],
     //"file_permissions": "664",
     //"dir_permissions": "775",

@@ -273,6 +273,7 @@
             },
 
             status(event) {
+                if (this.isShowing(event)) return 'expiring soon';
                 if (event.status === '0') return 'add event title';
                 if (event.status === '1') return 'add physical/remote location';
                 if (event.status === '2') return 'add category';
@@ -290,6 +291,7 @@
             },
 
             statusDetail(event) {
+                if (this.isShowing(event)) return 'expiring soon';
                 if (event.status === '0') return 'In progress';
                 if (event.status === '1') return 'In progress';
                 if (event.status === '2') return 'In progress';
@@ -323,6 +325,7 @@
             },
 
             statusCircle(event) {
+                if (this.isShowing(event)) return `background: rgb(228 230 147)`;
                 if (event.status === '0') return `background: #ffc215`;
                 if (event.status === '1') return `background: #ffc215`;
                 if (event.status === '2') return `background: #ffc215`;

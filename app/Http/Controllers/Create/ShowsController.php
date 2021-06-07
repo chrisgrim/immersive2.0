@@ -66,6 +66,7 @@ class ShowsController extends Controller
         $event->updateEventStatus(4, $request);
         $event = $event->fresh();
         $event->searchable();
+        return $event;
     }
 
     /**

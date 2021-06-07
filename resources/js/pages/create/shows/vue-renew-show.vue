@@ -1,11 +1,11 @@
 <template>
-    <div v-if="showRenew">
+    <div v-if="checkRenew">
         <div class="renew-dates">
-            <template v-if="showRenew === 'a'">
-                <p>Your show has less than month left to show as still active. If your show is still going, please click the Save and Renew below to add an additional 6 months.</p>
+            <template v-if="checkRenew === 'a'">
+                <p>Your event will expire in less than one month. If your event is still going, please click the Save and Renew button below to add an additional 6 months.</p>
             </template>
-            <template v-if="showRenew === 'o'">
-                <p>Your show has less than month left to show as still active. If your show is still going, please click the Save and Renew below to add an additional 6 months.</p>
+            <template v-if="checkRenew === 'o'">
+                <p>Your event will expire in less than one month. If your event is still going, please click the Save and Renew button below to add an additional 6 months.</p>
             </template>
         </div>
     </div>
@@ -13,15 +13,10 @@
 
 <script>
     export default {
-        props: [ 'event' ],
 
-    data() {
-        return {
-            showRenew: this.checkRenew()
-        }
-    },
+    props: [ 'event' ],
 
-    methods: {
+    computed: {
         checkRenew() {
             if (!this.event.shows.length) {return}
             if (this.event.status !== 'p' && this.event.status !== 'e') {return}

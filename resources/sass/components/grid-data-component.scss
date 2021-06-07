@@ -33,7 +33,7 @@
     font-weight: 600;
 } 
 .data-grid__row.is-past {
-    background: gainsboro;
+    background: #f9ffdc;
 }
 .data-grid__row.is-past img {
     opacity: 0.4;
@@ -97,9 +97,8 @@
     background: white;
     border: 1px solid black;
     border-radius: 1rem;
+    z-index: 1;
 }
-
-
 
 .organizers .data-grid__row {
     grid-template-columns: 5rem 1fr 1fr 1fr 1.5fr 5rem;

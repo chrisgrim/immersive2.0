@@ -57,13 +57,19 @@
         </section>
         <Submit 
             @submit="onSubmit"
+            @renewDates="renewDates"
             :disabled="disabled" 
             previous="category"
             next="tickets" 
-            :event="event" />
+            :event="editEvent" />
         <transition name="slide-fade">
             <div v-if="updated" class="updated-notifcation">
                 <p>Your event has been updated.</p>
+            </div>
+        </transition>
+        <transition name="slide-fade">
+            <div v-if="renewed" class="updated-notifcation">
+                <p>Your event has been renewed.</p>
             </div>
         </transition>
     </div>
@@ -86,8 +92,10 @@
 
         data() {
             return {
+                editEvent: this.event,
                 disabled: false,
                 updated: false,
+                renewed: false,
                 datesObject: this.initializeDatesObject(),
                 showEmbargoDate: this.event.embargo_date ? true : false,
                 embargoCalendarConfig: this.initializeEmbargoCalendarObject(),
@@ -102,11 +110,21 @@
                 value == 'save' ? this.save() : this.onForward(value);
             },
 
-            async renew(value) {
+            async renewDates(value) {
                 if ( this.checkForChanges(value) ) { return this.onForward(value) }
                 if (this.checkVuelidate()) { return false }
                 await axios.post(`/create/${this.event.slug}/shows`, this.datesObject)
-                value == 'save' ? this.save() : this.onForward(value);
+                .then( res => {
+                    this.editEvent = res.data;
+                    this.$emit('updateEvent', res.data)
+                })
+                this.hasBeenRenewed()
+            },
+
+            hasBeenRenewed() {
+                this.disabled = false;
+                this.renewed = true;
+                setTimeout(() => this.renewed = false, 3000);
             },
 
             toggleEmbargoDate() {

@@ -6,7 +6,7 @@
                     <h2>Dates and Times</h2>
                 </div>
                 <template>
-                    <VueRenewShow :event="event" />
+                    <VueRenewShow :event="editEvent" />
                 </template>
                 <input 
                     style="opacity:0;position:absolute;top:0;" 
@@ -47,14 +47,16 @@
                 </template>
                 <template v-if="showType.id === 3">
                     <vue-open-ended 
-                        :event="event"
+                        @updateEvent="updateEvent"
+                        :event="editEvent"
                         :resubmit="resubmit"
                         :change-type="changeType"
                         :timezones="timezones" />
                 </template>
                 <template v-if="showType.id === 4">
                     <vue-everyday 
-                        :event="event"
+                        @updateEvent="updateEvent"
+                        :event="editEvent"
                         :resubmit="resubmit"
                         :change-type="changeType"
                         :timezones="timezones" />
@@ -128,6 +130,7 @@ export default {
             resubmit: false,
             changeType: false,
             creationPage: 4,
+            editEvent: this.event,
         }
     },
 
@@ -137,6 +140,13 @@ export default {
             if (this.event.showtype == 'l') { return this.showType = this.showTypeOptions[1]}
             if (this.event.showtype == 'o') { return this.showType = this.showTypeOptions[2]}
             if (this.event.showtype == 'a') { return this.showType = this.showTypeOptions[3]}
+        },
+
+        updateEvent(value) {
+            console.log(this.editEvent);
+            console.log(value);
+            this.editEvent = value;
+            console.log(this.editEvent);
         },
 
         changeShowType() {

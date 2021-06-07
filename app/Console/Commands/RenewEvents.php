@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\Models\User;
+use App\Models\Event;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\EventRenew;
 use Carbon\Carbon;

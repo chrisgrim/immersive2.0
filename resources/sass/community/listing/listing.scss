@@ -1,0 +1,100 @@
+.listing-show {
+    padding: 0 8rem;
+}
+.listing-header {
+    position: relative;
+    width: 100%;
+}
+.listing-image {
+    height: 23rem;
+    position: relative;
+    border-radius: 1rem;
+    overflow: hidden;
+}
+.listing-image img {
+    -o-object-fit: cover;
+    object-fit: cover;
+    vertical-align: bottom;
+    height: 100%;
+    width: 100%;
+}
+.listing-image  label.default__image-upload {
+    width: 100%;
+    height: 100%;
+}
+.listing-content {
+    width: 70%;
+    margin: 4rem auto;
+    max-width: 1600px;
+}
+.listing-content h2, .listing-content h3, .listing-content p  {
+    margin-top: 1rem;
+}
+.listing-content ul {
+    margin: inherit;
+    padding-inline-start: 4rem;
+}
+.listing-blurb {
+    position: relative;
+}
+.listing-content button.edit {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+.listing-card {
+    margin: 6rem 0 0 0;
+    padding: 6rem 0 0 0;
+    border-top: 1px solid #d4d4d4;
+    position: relative;
+}
+.add-new-listing-card {
+    border: 1px solid #d4d4d4;
+    padding: 1rem;
+    border-radius: 1rem;
+    margin-top: 6rem;
+    width: 16rem;
+    display: flex;
+    flex-direction: column;
+}
+.add-new-listing-card button.main {
+    font-weight: 700;
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    height: 4rem;
+}
+.add-new-listing-card button.main svg {
+    width:15%;
+    margin-left: 0.5rem;
+}
+.add-new-listing-card button {
+    border: 0;
+    font-size: 1.2rem;
+    text-align: left;
+}
+.add-new-listing-card button.sub:hover {
+    background: blue;
+    color: white;
+}
+.listing__card-image img {
+    width: 60%;
+}
+.card__image-upload {
+    width: 25rem;
+    border: 1px solid #d4d4d4;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+}
+.card__image-upload svg {
+    width: 16%;
+}
+.listing-card .field {
+    margin-bottom: 1rem;
+}
+.listing-card .v-select {
+    width: 25rem;
+    margin-bottom: 2rem;
+}

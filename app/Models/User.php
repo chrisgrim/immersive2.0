@@ -14,6 +14,7 @@ use Illuminate\View\View;
 use Laravel\Cashier\Billable;
 use Illuminate\Support\Str;
 use App\Models\Events\EventRequest;
+use App\Models\Curated\Community;
 use DB;
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -183,6 +184,14 @@ class User extends Authenticatable implements MustVerifyEmail
     public function eventconversations()
     {
         return $this->belongsToMany(Conversation::class)->orderBy('updated_at', 'DESC')->whereNotNull('event_id');
+    }
+
+    /**
+     * The communities that belong to the user.
+     */
+    public function communities()
+    {
+        return $this->belongsToMany(Community::class);
     }
 
     /**

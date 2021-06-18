@@ -30,6 +30,13 @@
                 <template v-if="hideMenuNav">
                     <div class="nav-menu">
                         <template v-if="user">
+                            <div class="nav-menu-item">
+                                <a 
+                                    class="menu-link" 
+                                    href="/communities">
+                                    Communities
+                                </a>
+                            </div>
                             <div 
                                 class="nav-menu-item" 
                                 v-if="user.hasMessages ">

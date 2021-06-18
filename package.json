@@ -28,9 +28,12 @@
         "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {
+        "@tiptap/starter-kit": "^2.0.0-beta.77",
+        "@tiptap/vue-2": "^2.0.0-beta.35",
         "apexcharts": "^3.23.1",
         "leaflet": "^1.7.1",
         "leaflet-geosearch": "^3.2.1",
+        "remixicon": "^2.5.0",
         "v-money": "^0.8.1",
         "vue": "^2.6.12",
         "vue-apexcharts": "^1.6.0",

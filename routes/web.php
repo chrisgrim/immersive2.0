@@ -18,6 +18,14 @@ Route::RESOURCE('mobilities', 'Admin\MobilitiesController');
 Route::RESOURCE('staffpicks', 'Admin\StaffPicksController');
 Route::RESOURCE('reviewevents', 'Admin\ReviewEventsController');
 Route::RESOURCE('interactivelevels', 'Admin\InteractiveLevelController');
+Route::RESOURCE('communities', 'Curated\CommunityController');
+Route::RESOURCE('listings', 'Curated\ListingController');
+Route::RESOURCE('cards', 'Curated\CardController');
+
+// ----------   Communities Page -------
+Route::GET('/create/{community}/listing', 'Curated\ListingController@create');
+Route::GET('/{community}/{listing}', 'Curated\ListingController@show');
+Route::GET('/listings/{listing}/fetch', 'Curated\ListingController@fetch');
 
 // ----------   Search Page -------
 

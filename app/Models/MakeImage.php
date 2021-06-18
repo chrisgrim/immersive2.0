@@ -9,6 +9,49 @@ use Intervention\Image\ImageManagerStatic as Image;
 
 class MakeImage extends Model
 {
+
+    /**
+    * Saves an image when the user submits their event for the first time.
+    *
+    * @return string
+    */
+    public static function generateImage($request, $item, $width, $height, $type)
+    {
+        // create either new-titles or random like 69sjj3s
+        $name = $item->name ? $item->name : $item->id;
+
+        // generate rand variable like 546ds3g
+        $rand = substr(md5(microtime()),rand(0,26),7);
+
+        // create title like: new-titles
+        $title = Str::slug($name);
+
+        // get extension: (jpg)
+        $extension = $request->file('image')->getClientOriginalExtension();
+
+        // combine title and extension:  new-titles.jpg
+        $inputFile= $title . '.' . $extension;
+
+        // create filename and set it = to title: new-titles
+        $fileName= $title;
+
+        // create directory: event-images/new-titles-54fwd3g
+        $directory= $type . '-images/' . $title . '-' . $rand;
+
+        $request->file('image')->storeAs('/public/' . $directory, $inputFile);
+        Image::make(storage_path()."/app/public/$directory/$inputFile")
+        ->orientate()
+        ->fit($width, $height )
+        ->save(storage_path("/app/public/$directory/$fileName.webp"))
+        ->save(storage_path("/app/public/$directory/$fileName.jpg"))
+        ->fit( $width / 2, $height / 2 )
+        ->save(storage_path("/app/public/$directory/$fileName-thumb.webp"))
+        ->save(storage_path("/app/public/$directory/$fileName-thumb.jpg"));
+
+        $item->update([ 'thumbImagePath' => $directory . '/' . $fileName. '-thumb.webp' ]);
+    }
+
+
     /**
     * Saves an image when the user submits their event for the first time.
     *
@@ -39,6 +82,7 @@ class MakeImage extends Model
 
         $request->file('image')->storeAs('/public/' . $directory, $inputFile);
         Image::make(storage_path()."/app/public/$directory/$inputFile")
+        ->orientate()
         ->fit($width, $height)
         ->save(storage_path("/app/public/$directory/$fileName.webp"))
         ->save(storage_path("/app/public/$directory/$fileName.jpg"))
@@ -79,6 +123,7 @@ class MakeImage extends Model
 
         $request->file('image')->storeAs('/public/' . $directory, $inputFile);
         Image::make(storage_path() . "/app/public/$directory/$inputFile")
+        ->orientate()
         ->fit($width, $height)
         ->save(storage_path("/app/public/$directory/$fileName.webp"))
         ->save(storage_path("/app/public/$directory/$fileName.jpg"))
@@ -157,6 +202,7 @@ class MakeImage extends Model
 
         $request->file('image')->storeAs('/public/' . $dir, $inputFile);
         Image::make(storage_path()."/app/public/$dir/$inputFile")
+        ->orientate()
         ->fit($width, $height)
         ->save(storage_path("/app/public/$dir/$filename.webp"))
         ->save(storage_path("/app/public/$dir/$filename.jpg"))
@@ -249,6 +295,17 @@ class MakeImage extends Model
             'largeImagePath' => $dir . '/' . $filename. '.webp',
             'thumbImagePath' => $dir . '/' . $filename. '-thumb.webp',
         ]);
+    }
+
+    /**
+    * Saves an image when the user submits their event for the first time.
+    *
+    * @return string
+    */
+    public static function deleteImage($item)
+    {
+        $directory = pathinfo($item->thumbImagePath, PATHINFO_DIRNAME);
+        Storage::deleteDirectory('public/' . $directory);
     }
 
 }

@@ -18,11 +18,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::GET('search/events', 'Search\EventController@list');
 Route::GET('search/navbar', 'Search\SearchController@nav');
 Route::GET('search/navbar/location', 'Search\SearchController@location');
 Route::POST('search/mapboundary', 'Search\EventController@mapBoundary');
 Route::POST('search/online', 'Search\OnlineSearchController@fetch');
 Route::POST('search/all', 'Search\EventController@fetch');
+
 
 // IS USED Admin get list of events
 Route::GET('admin/event/deleted/search', 'Admin\SearchController@deletedEvents');

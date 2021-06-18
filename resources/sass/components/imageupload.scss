@@ -1,0 +1,23 @@
+.default__image-upload-container {
+    width: 100%;
+    height: 100%;
+}
+.default__image-upload {
+    width: 25rem;
+    height: 16rem;
+    border: 1px solid #d4d4d4;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.default__image-upload svg {
+    width: 16%;
+}
+.default__image-upload  input.fileinput {
+    display: none;
+}

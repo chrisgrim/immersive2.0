@@ -10,6 +10,7 @@ import { Icon }  from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import Dayjs from 'vue-dayjs';
 import vSelect from 'vue-select'
+import 'remixicon/fonts/remixicon.css'
 
 Vue.component('v-select', vSelect)
 window.axios = require('axios');
@@ -46,7 +47,11 @@ Icon.Default.mergeOptions({
   shadowUrl: require('leaflet/dist/images/marker-shadow.png')
 });
 
-
+//Curated
+Vue.component('vue-community-index', () => import(/* webpackChunkName: "assets/vci" */ './pages/community/index.vue'));
+Vue.component('vue-community-show', () => import(/* webpackChunkName: "assets/vcs" */ './pages/community/show.vue'));
+Vue.component('vue-listing-show', () => import(/* webpackChunkName: "assets/vls" */ './pages/community/listing/show.vue'));
+Vue.component('vue-listing-create', () => import(/* webpackChunkName: "assets/vlc" */ './pages/community/listing/create.vue'));
 
 //Nav
 Vue.component('vue-nav', () => import(/* webpackChunkName: "assets/ls" */ './pages/layouts/nav.vue'));

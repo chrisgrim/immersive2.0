@@ -262,6 +262,24 @@ class EventController extends Controller
         }
     }
 
+    public function list(Request $request)
+    {
+        if (! $request->keywords) return Event::where('status','p')->paginate(10);
+        
+        $events = Event::multiMatchSearch()
+            ->fields(['name', 'name._2gram','name._3gram'])
+            ->query($request->keywords)
+            ->type('bool_prefix')
+            ->sort('rank', 'desc')
+            ->paginate(10);
+
+        $filter = tap($events->toArray(), function (array &$content) {
+            $content['data'] = Arr::pluck($content['data'], 'model');
+        });
+
+        return json_encode($filter);
+    }
+
     public function searchEvents(Request $request)
     {
         if ($request->keywords) {

@@ -23,9 +23,15 @@ Route::RESOURCE('listings', 'Curated\ListingController');
 Route::RESOURCE('cards', 'Curated\CardController');
 
 // ----------   Communities Page -------
+Route::GET('/communities/{community}/fetch', 'Curated\CommunityController@fetch');
 Route::GET('/create/{community}/listing', 'Curated\ListingController@create');
-Route::GET('/{community}/{listing}', 'Curated\ListingController@show');
+Route::POST('/create/{community}/listing', 'Curated\ListingController@store');
+Route::PATCH('/listings/{listing}/order', 'Curated\ListingController@order');
+Route::GET('/communities/{community}/{listing}', 'Curated\ListingController@show');
 Route::GET('/listings/{listing}/fetch', 'Curated\ListingController@fetch');
+Route::POST('/create/{listing}/card', 'Curated\CardController@store');
+
+
 
 // ----------   Search Page -------
 

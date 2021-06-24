@@ -25,7 +25,6 @@ class CreateCommunitiesTable extends Migration
             $table->string('facebookHandle')->nullable();
             $table->string('patreon')->nullable();
             $table->char('status', 1)->default('d');
-            $table->integer('rank')->unsigned()->default(0);
             $table->timestamps();
         });
         Schema::create('community_user', function(Blueprint $table) {

@@ -273,11 +273,15 @@ class EventController extends Controller
             ->sort('rank', 'desc')
             ->paginate(10);
 
-        $filter = tap($events->toArray(), function (array &$content) {
-            $content['data'] = Arr::pluck($content['data'], 'model');
-        });
+        if ( $events->count() !== 0 ) {
+            $filter = tap($events->toArray(), function (array &$content) {
+                $content['data'] = Arr::pluck($content['data'], 'model');
+            });
+            return json_encode($filter);
+        } else {
+            return Event::Where('name', 'like', '%' . $request->keywords . '%')->paginate(10);
+        }
 
-        return json_encode($filter);
     }
 
     public function searchEvents(Request $request)

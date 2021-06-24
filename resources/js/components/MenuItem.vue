@@ -5,7 +5,7 @@
         @click="action"
         :title="title">
         <svg class="remix">
-            <use :xlink:href="`/website-files/icons.svg#ri-${icon}`" />
+            <use :xlink:href="`/storage/website-files/icons.svg#ri-${icon}`" />
         </svg>
     </button>
 </template>

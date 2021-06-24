@@ -30,7 +30,7 @@
                 :value="{{ $listing }}" />    
         @else 
             @if ( $community->curators->contains('id', auth()->user()->id) )
-                <vue-listing-show
+                <vue-listing-edit
                     :community="{{ $community }}" 
                     :owner="true"
                     :value="{{ $listing }}" 
@@ -38,7 +38,6 @@
             @else
                 <vue-listing-show
                     :community="{{ $community }}" 
-                    :owner="false"
                     :value="{{ $listing }}" 
                     :user="{{ auth()->user() }}"/>    
             @endif

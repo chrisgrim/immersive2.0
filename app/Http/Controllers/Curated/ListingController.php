@@ -5,13 +5,19 @@ namespace App\Http\Controllers\Curated;
 use Illuminate\Http\Request;
 use App\Models\Curated\Listing;
 use App\Models\Curated\Community;
-use App\Models\MakeImage;
+use App\Models\Curated\Card;
+use App\Models\ImageFile;
 use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Collection;
 
 class ListingController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware(['auth', 'verified'])->except('show');
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -20,6 +26,8 @@ class ListingController extends Controller
      */
     public function create(Community $community)
     {
+        $this->authorize('update', $community);
+        
         return view('communities.listings.create', compact('community'));
     }
 
@@ -29,17 +37,18 @@ class ListingController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Community $community)
     {
-        $listing = Listing::create([
+        $this->authorize('update', $community);
+
+        $listing = $community->listings()->create([
             'blurb' => $request->blurb,
             'name' => $request->name,
             'slug' => Str::slug($request->name),
-            'community_id' => $request->community_id,
             'user_id' => auth()->user()->id,
         ]);
 
-        if ($request->image) { MakeImage::saveImage($request, $listing, 1200, 500, 'listing'); }
+        if ($request->image) { ImageFile::saveImage($request, $listing, 1200, 500, 'listing'); }
 
         return $listing;
     }
@@ -52,7 +61,6 @@ class ListingController extends Controller
      */
     public function show(Community $community, Listing $listing)
     {
-        return $listing->largeImagePatha;
         $listing->load('cards');
         return view('communities.listings.show', compact('listing','community'));
     }
@@ -77,8 +85,39 @@ class ListingController extends Controller
      */
     public function update(Request $request, Listing $listing)
     {
+        $this->authorize('update', $listing);
+
         $listing->update($request->except(['image']));
 
-        if ($request->image) { MakeImage::saveNewImage($request, $listing, 1200, 500, 'listing'); }
+        if ($request->image) { ImageFile::replaceImage($request, $listing, 1200, 500, 'listing'); }
+    }
+
+    /**
+     * Order the specified resource.
+     *
+     * @param  \App\Curated\Listing  $listing
+     * @return \Illuminate\Http\Response
+     */
+    public function order(Request $request, Listing $listing)
+    {
+        foreach ($request->all() as $card) {
+            Card::find($card['id'])->update([
+                'order' => $card['order'],
+            ]);
+        }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Listing $listing
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Listing $listing)
+    {
+        $this->authorize('delete', $listing);
+
+        ImageFile::deletePreviousImages($listing);
+        $listing->delete();
     }
 }

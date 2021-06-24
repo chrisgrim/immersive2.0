@@ -8,10 +8,10 @@
 
 @section('nav')
     @auth
-        <vue-nav :user= "{{auth()->user()}}"></vue-nav>
+        <vue-nav navtype="homepage" :user= "{{auth()->user()}}"></vue-nav>
     @endauth
     @guest
-        <vue-nav></vue-nav>
+        <vue-nav navtype="homepage"></vue-nav>
     @endguest
 @endsection
 @section('content')
@@ -22,9 +22,7 @@
             message="submitted">
             </vue-alert>
         @endif        
-        <vue-community-index 
-            :value="{{$communities}}"
-            :user="{{auth()->user()}}"/>
+        <vue-community-create :user="{{auth()->user()}}"/>
     </div>
 @endsection
 

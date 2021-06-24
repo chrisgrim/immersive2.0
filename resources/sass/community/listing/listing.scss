@@ -23,9 +23,9 @@
     height: 100%;
 }
 .listing-content {
-    width: 70%;
+    width: 100%;
     margin: 4rem auto;
-    max-width: 1600px;
+    max-width: 800px;
 }
 .listing-content h2, .listing-content h3, .listing-content p  {
     margin-top: 1rem;
@@ -36,11 +36,6 @@
 }
 .listing-blurb {
     position: relative;
-}
-.listing-content button.edit {
-    position: absolute;
-    bottom: 0;
-    right: 0;
 }
 .listing-card {
     margin: 6rem 0 0 0;
@@ -93,8 +88,4 @@
 }
 .listing-card .field {
     margin-bottom: 1rem;
-}
-.listing-card .v-select {
-    width: 25rem;
-    margin-bottom: 2rem;
 }

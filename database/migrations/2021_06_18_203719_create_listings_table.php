@@ -23,7 +23,7 @@ class CreateListingsTable extends Migration
             $table->string('largeImagePath')->nullable();
             $table->string('thumbImagePath')->nullable();
             $table->char('status', 1)->default('d');
-            $table->integer('rank')->unsigned()->default(0);
+            $table->integer('order')->unsigned()->default(0);
             $table->timestamps();
         });
     }

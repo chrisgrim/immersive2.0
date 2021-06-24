@@ -9,7 +9,7 @@ class Listing extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+    protected $fillable = [ 'name', 'slug', 'blurb', 'thumbImagePath', 'largeImagePath', 'user_id', 'community_id', 'status', 'order' ];
 
     /**
     * Sets the Route Key to slug instead of ID
@@ -34,6 +34,18 @@ class Listing extends Model
      */
     public function cards()
     {
-        return $this->hasMany(Card::class);
+        return $this->hasMany(Card::class)->orderBy('order', 'ASC');;
+    }
+
+    /**
+     * Delete any listings with the listing
+     */
+    public static function boot() {
+        parent::boot();
+        self::deleting(function($listing) { 
+            $listing->cards()->each(function($card) {
+                $card->destroyCard($card);
+            });
+        });
     }
 }

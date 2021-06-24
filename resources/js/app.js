@@ -50,7 +50,9 @@ Icon.Default.mergeOptions({
 //Curated
 Vue.component('vue-community-index', () => import(/* webpackChunkName: "assets/vci" */ './pages/community/index.vue'));
 Vue.component('vue-community-show', () => import(/* webpackChunkName: "assets/vcs" */ './pages/community/show.vue'));
+Vue.component('vue-community-create', () => import(/* webpackChunkName: "assets/vcc" */ './pages/community/create.vue'));
 Vue.component('vue-listing-show', () => import(/* webpackChunkName: "assets/vls" */ './pages/community/listing/show.vue'));
+Vue.component('vue-listing-edit', () => import(/* webpackChunkName: "assets/vle" */ './pages/community/listing/edit.vue'));
 Vue.component('vue-listing-create', () => import(/* webpackChunkName: "assets/vlc" */ './pages/community/listing/create.vue'));
 
 //Nav

@@ -3,35 +3,41 @@
 namespace App\Http\Controllers\Curated;
 
 use Illuminate\Http\Request;
-use App\Models\MakeImage;
 use App\Models\ImageFile;
 use App\Models\Curated\Card;
 use App\Models\Curated\Listing;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 
 class CardController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth', 'verified'])->except('show');
+    }
+
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Listing $listing)
     {
+        $this->authorize('update', $listing);
+
         $card = Card::create([
             'blurb' => $request->blurb,
             'name' => $request->name ? $request->name : null,
             'url' => $request->url ? $request->url : null,
-            'thumbImagePath' => $request->thumbImagePath ? $request->thumbImagePath : null,
-            'listing_id' => $request->listing_id,
+            'listing_id' => $listing->id,
+            'order' => $listing->cards()->exists() ? $listing->cards->last()->order + 1 : 0
         ]);
 
-        if ($request->image) { 
-            $directory = ImageFile::saveImage($request, $card, 600, 400, 'card'); 
-        }
+        if ($request->thumbImagePath) { $card->update(['thumbImagePath' => $request->thumbImagePath]); }
+        if ($request->image) { ImageFile::saveCardImage($request, $card, 1200, 500, 'card'); }
 
-        return Listing::with('cards')->find($request->listing_id);
+        return $listing->load('cards');
     }
 
     /**
@@ -54,7 +60,14 @@ class CardController extends Controller
      */
     public function update(Request $request, Card $card)
     {
-        $card->update($request->all());
+        $this->authorize('update', $card);
+
+        $card->update($request->except(['image']));
+
+        if ($request->image) { ImageFile::replaceCardImage($request, $card, 1200, 500, 'card'); }
+
+        return $card->fresh();
+
     }
 
     /**
@@ -65,6 +78,8 @@ class CardController extends Controller
      */
     public function destroy(Card $card)
     {
+        $this->authorize('delete', $card);
+
         $listing = $card->listing_id;
         $card->destroyCard($card);
         return Listing::with('cards')->find($listing);

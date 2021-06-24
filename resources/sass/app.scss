@@ -16,7 +16,9 @@
 
 // communities
 @import 'community/index';
+@import 'community/create';
 @import 'community/listing/listing';
+@import 'community/listing/edit';
 
 // auth
 @import 'auth/login';

@@ -52,7 +52,6 @@
                     </div>
                 </div>
 
-
                 <div class="data-grid">
                     <div class="data-grid__row header">
                         <p>Status</p>

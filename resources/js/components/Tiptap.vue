@@ -14,6 +14,7 @@
 </template>
 <script>
     import { Editor, EditorContent } from '@tiptap/vue-2'
+    import Link from '@tiptap/extension-link'
     import StarterKit from '@tiptap/starter-kit'
     import MenuBar from './MenuBar.vue'
 
@@ -49,7 +50,7 @@
         mounted() {
             this.editor = new Editor({
                 extensions: [
-                    StarterKit,
+                    StarterKit, Link
                 ],
                 content: this.value,
                 onUpdate: () => {

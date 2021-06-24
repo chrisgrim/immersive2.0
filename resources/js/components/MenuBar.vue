@@ -69,6 +69,18 @@ export default {
           isActive: () => this.editor.isActive('paragraph'),
         },
         {
+          icon: 'link',
+          title: 'Link',
+          action: () => this.editor.chain().focus().setLink({ href: window.prompt('URL') }).run(),
+          isActive: () => this.editor.isActive('link'),
+        },
+        {
+          icon: 'link-unlink',
+          title: 'UnLink',
+          action: () => this.editor.chain().focus().unsetLink().run(),
+          isActive: () => this.editor.isActive('link'),
+        },
+        {
           icon: 'list-unordered',
           title: 'Bullet List',
           action: () => this.editor.chain().focus().toggleBulletList().run(),

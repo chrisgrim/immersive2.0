@@ -2,7 +2,7 @@
 
 namespace App\Models\Curated;
 
-use App\Models\MakeImage;
+use App\Models\ImageFile;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
@@ -10,7 +10,8 @@ use Illuminate\Support\Str;
 class Card extends Model
 {
     use HasFactory;
-    protected $guarded = [];
+
+    protected $fillable = [ 'name', 'blurb', 'url', 'thumbImagePath', 'order', 'listing_id' ];
 
     /**
      * Get the Collection that owns the Card.
@@ -29,7 +30,7 @@ class Card extends Model
     {
         if ($card->thumbImagePath) {
             if (!Str::contains($card->thumbImagePath, 'event-images')) { 
-                MakeImage::deleteImage($card);
+                ImageFile::deletePreviousImages($card);
             }
         }
         $card->delete();

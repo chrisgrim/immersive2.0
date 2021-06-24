@@ -4,7 +4,7 @@
             v-for="(card) in cards"
             :key="card.id"
             class="com-card">
-            <a :href="`/listings/${card.slug}`">
+            <a :href="`/communities/${community.slug}/${card.slug}`">
                 <div class="com-card-wrapper">
                     <div style="padding-top:43.08%;border:1.5px solid rgba(0, 0, 0, 0.08);border-bottom:none;border-radius:16px 16px 0px 0px;" />
                     <div class="com-card-text">
@@ -30,7 +30,7 @@
 
 <script>
     export default {
-        props:['cards'],
+        props:['cards', 'community'],
 
         computed: {
 

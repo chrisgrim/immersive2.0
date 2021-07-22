@@ -252,7 +252,7 @@
             },
 
             cleanDate(data) {
-                return this.$dayjs(data).format("MMM D");
+                return this.$dayjs(data).format("MMM D, YYYY");
             },
         },
 

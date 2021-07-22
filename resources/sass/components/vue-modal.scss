@@ -19,12 +19,17 @@
     box-shadow: #ebebeb 0 0 20px 5px;
 }
 .modal-box__close {
-    text-align: right;
+    display: flex;
+    justify-content: flex-end;
 }
-.modal-box__close button{
-    background: #4a4a4a;
-    border-radius: 5rem;
-    margin: 1rem 1rem 0 1rem;
+.modal-box__close button {
+    border: 0;
+    display: flex;
+    align-content: center;
+}
+.modal-box__close button svg {
+    width: 2.5rem;
+    height: 2.5rem;
 }
 .modal-box__body {
     padding: 1rem 4rem;

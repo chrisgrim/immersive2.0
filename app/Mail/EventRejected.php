@@ -37,11 +37,9 @@ class EventRejected extends Mailable
     public function build()
     {
         return $this->from('submissions@everythingimmersive.com')
-                    ->view('emails.event-rejected')
+                    ->view('emails.events.event-rejected')
                     ->with([
                         'name' => $this->event->name,
-                        'image' => $this->event->largeImagePath,
-                        'slug' => $this->event->slug,
                     ]);
     }
 }

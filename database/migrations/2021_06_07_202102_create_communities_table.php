@@ -17,14 +17,15 @@ class CreateCommunitiesTable extends Migration
             $table->id();
             $table->string('slug')->unique();
             $table->string('name')->nullable();
-            $table->mediumText('blurb')->nullable();
+            $table->foreignId('user_id');
+            $table->text('blurb')->nullable();
             $table->string('largeImagePath')->nullable();
             $table->string('thumbImagePath')->nullable();
             $table->string('instagramHandle')->nullable();
             $table->string('twitterHandle')->nullable();
             $table->string('facebookHandle')->nullable();
             $table->string('patreon')->nullable();
-            $table->char('status', 1)->default('d');
+            $table->char('status', 1)->default('r');
             $table->timestamps();
         });
         Schema::create('community_user', function(Blueprint $table) {

@@ -1,103 +1,56 @@
-.community-show {
-    padding: 0 8rem;
-}
 .community-index {
-    padding: 5rem 8rem 0 8rem;
-}
-.community-index .data-grid__row {
-    grid-template-columns: 5rem 1fr 15rem 15rem 15rem;
-}
-.com-header {
+    margin: 5rem 8rem 0 8rem;
     position: relative;
+}
+.community-index .hero {
     width: 100%;
-}
-.com-content {
-    display: flex;
-    flex-direction: column;
-}
-.com-image {
-    height: 23rem;
     position: relative;
+    border: 1px solid black;
     border-radius: 1rem;
     overflow: hidden;
+    margin: 3rem 0px 0 0;
 }
-.com-image img {
-    -o-object-fit: cover;
-    object-fit: cover;
-    vertical-align: bottom;
-    height: 100%;
+.community-index .hero .header {
     width: 100%;
-}
-.com-intro {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+    height: 18rem;
+    overflow: hidden;
     display: grid;
-    grid-template-columns: auto 30rem;
-    column-gap: 1.6rem;
+    grid-template-columns: 0.4fr 0.6fr;
+    background: black;
 }
-.com-blurb {
-    height: 100%;
-}
-.com-curators {
-    border: 1px solid #d4d4d4;
-    padding: 1rem;
-    border-radius: 1rem;
-}
-.curator {
-    padding: 1rem;
+.community-index .hero .header .com-name {
     display: flex;
     align-items: center;
-    text-align: center;
-    flex-direction: column;
+    justify-content: center;
 }
-.curator img {
-    width: 19%;
-    border-radius: 5rem;
+.community-index .hero .header .com-image {
+    height: 18rem;
+}
+.community-index .album.container{
+    padding: 2rem 1rem;
 }
 .collections {
     margin: 4rem 0;
 }
-.com-card__grid {
-    display: grid;
-    row-gap: 32px;
-    grid-template-columns: repeat(3, 1fr);
-    column-gap: 16px;
-}
-.com-card {
-    background-color: #FFFFFF;
-    border-radius: 16px;
-    width: 100%;
-}
 .com-card-wrapper {
-    -webkit-box-direction: normal;
-    -webkit-box-orient: vertical;
-    color: #222222;
-    display: flex;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    height: 100%;
-    white-space: normal;
     width: 100%;
-    position: relative;
-    border-radius: 1rem;
-    overflow: hidden;
+    margin-right: 6px;
+    margin-top: 4px;
+    margin-bottom: 8px;
 }
 .com-card-text {
-    position: absolute;
-    top: 2rem;
-    bottom: 2rem;
-    left: 2rem;
-    right: 2rem;
+    padding-top: .8rem;
+}
+.com-card-text h4 {
+    font-size: 1.8rem;
+    color: rgb(34, 34, 34);
 }
 .com-card-image {
-    padding-top:80%;
+    border-radius: 1rem;
+    overflow: hidden;
+    padding-top: 100%;
     position: relative;
-    -webkit-flex: 1;
-    -ms-flex: 1 1 0%;
-    flex: 1;
-    background-position: 50% 50%;
-    background-repeat: no-repeat;
+    flex: 1 1 0%;
 }
 .com-card-image img {
     object-fit: cover;

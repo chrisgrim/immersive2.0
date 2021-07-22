@@ -16,11 +16,9 @@
 @endsection
 @section('content')
 	<div id="bodyArea">
-        @if ( session()->exists( 'submitted' ))
-            <vue-alert 
-            message="submitted">
-            </vue-alert>
-        @endif
+        @if ( session('submitted'))
+            <vue-alert message="{{ session('submitted') }}"></vue-alert>
+        @endif   
 		<vue-event-edit 
             :allevents="{{auth()->user()->events()->whereIn('status', ['p','e'])->get()}}"
             :unpublished="{{auth()->user()->events()->whereNotIn('status', ['p','e'])->count()}}"

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Event;
 use App\Models\User;
 use App\Models\Organizer;
+use App\Models\Curated\Community;
 use App\Models\Events\EventRequest;
 
 class AdminAreaController extends Controller
@@ -40,6 +41,7 @@ class AdminAreaController extends Controller
         return [
             'event' => Event::where('status', 'r')->count(),
             'org' => Organizer::where('status', 'r')->count(),
+            'com' => Community::where('status', 'r')->count(),
             'request' => EventRequest::where('status', 'r')->count()
         ];
     }

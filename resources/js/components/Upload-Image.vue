@@ -12,7 +12,7 @@
         <div v-if="$v.imageFile.$error" class="validation-error image">
             <p class="error" v-if="!$v.imageFile.fileSize">The image file size is over 10mb</p>
             <p class="error" v-if="!$v.imageFile.fileType">The image needs to be a JPG, PNG or GIF</p>
-            <p class="error" v-if="!$v.imageFile.imageRatio">The image needs to be at least 800 x 450</p>
+            <p class="error" v-if="!$v.imageFile.imageRatio">The image needs to be at least {{width}} x {{height}}</p>
             <p class="error" v-if="!$v.imageFile.imageRequired">An Image is required</p>
         </div>
     </div>
@@ -25,8 +25,29 @@
     export default {
 
         components: { CubeSpinner, ImageUpload },
-        
-        props: ['image', 'validate'],
+
+        props: {
+            height: {
+              type: Number,
+              default: 500
+            },
+            width: {
+              type: Number,
+              default: 800
+            },
+            size: {
+                type: Number,
+                default: 10485760
+            },
+            image: {
+                type: String,
+                default: null
+            },
+            validate: {
+                type: Boolean,
+                default: false
+            }
+        },
 
         computed: {
             hasImage() {
@@ -52,7 +73,7 @@
                 this.imageFile = image; 
                 this.$v.$touch(); 
                 if (this.$v.$invalid) { return }
-                this.$emit('addImage', this.imageFile.file)
+                this.$emit('addImage', this.imageFile.file, this.imageFile.src)
             },
 
             onToggle() {
@@ -73,13 +94,13 @@
         validations: {
             imageFile: {
                 fileSize() { 
-                    return this.imageFile ? this.imageFile.file.size < 10485760 : true 
+                    return this.imageFile ? this.imageFile.file.size < this.size : true 
                 },
                 fileType() {
                     return this.imageFile ? ['image/jpeg','image/png','image/gif'].includes(this.imageFile.file.type) : true
                 },
                 imageRatio() {
-                    return this.imageFile ? this.imageFile.width >= 800 && this.imageFile.height >= 450 : true 
+                    return this.imageFile ? this.imageFile.width >= this.width && this.imageFile.height >= this.height : true 
                 },
                 imageRequired() {
                     return this.imageFile

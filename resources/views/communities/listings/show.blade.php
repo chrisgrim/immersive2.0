@@ -16,32 +16,11 @@
 @endsection
 @section('content')
     <div id="bodyArea">
-
-        @if ( session()->exists( 'submitted' ))
-            <vue-alert 
-            message="submitted">
-            </vue-alert>
-        @endif
-
-        @guest 
-            <vue-listing-show
-                :community="{{ $community }}" 
-                :owner="false"
-                :value="{{ $listing }}" />    
-        @else 
-            @if ( $community->curators->contains('id', auth()->user()->id) )
-                <vue-listing-edit
-                    :community="{{ $community }}" 
-                    :owner="true"
-                    :value="{{ $listing }}" 
-                    :user="{{ auth()->user() }}"/>    
-            @else
-                <vue-listing-show
-                    :community="{{ $community }}" 
-                    :value="{{ $listing }}" 
-                    :user="{{ auth()->user() }}"/>    
-            @endif
-        @endauth
+        
+        <vue-listing-show
+            :community="{{ $community }}" 
+            :owner="false"
+            :value="{{ $listing }}" />    
     </div>
 @endsection
 

@@ -8,6 +8,7 @@ use App\Models\Curated\Community;
 use App\Models\Curated\Card;
 use App\Models\ImageFile;
 use Illuminate\Support\Str;
+use App\Http\Requests\ListingStoreRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Collection;
 
@@ -17,6 +18,21 @@ class ListingController extends Controller
     public function __construct()
     {
         $this->middleware(['auth', 'verified'])->except('show');
+    }
+
+    /**
+     * Show the form for editing a resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index(Community $community)
+    {
+        if($community->status !== 'p') { return redirect('/communities');}
+        $this->authorize('update', $community);
+
+        $listings = $community->listings()->latest()->with('cards:id,listing_id,thumbImagePath')->paginate(10);
+        
+        return view('communities.listings.index', compact('listings', 'community'));
     }
 
     /**
@@ -37,18 +53,18 @@ class ListingController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Community $community)
+    public function store(ListingStoreRequest $request, Community $community)
     {
         $this->authorize('update', $community);
 
         $listing = $community->listings()->create([
             'blurb' => $request->blurb,
             'name' => $request->name,
-            'slug' => Str::slug($request->name),
+            'slug' => Str::slug($request->name) . '-' . $community->id,
             'user_id' => auth()->user()->id,
         ]);
 
-        if ($request->image) { ImageFile::saveImage($request, $listing, 1200, 500, 'listing'); }
+        if ($request->image) { ImageFile::saveImage($request, $listing, 1000, 600, 'listing'); }
 
         return $listing;
     }
@@ -61,8 +77,23 @@ class ListingController extends Controller
      */
     public function show(Community $community, Listing $listing)
     {
-        $listing->load('cards');
+        if($listing->status !== 'p') { return redirect()->back();}
+        $listing->load('cards', 'user');
         return view('communities.listings.show', compact('listing','community'));
+    }
+
+    /**
+     * Edit the specified resource.
+     *
+     * @param  \App\Curated\Listing  $listing
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Community $community, Listing $listing)
+    {
+        $this->authorize('edit', $listing);
+
+        $listing->load('cards', 'user');
+        return view('communities.listings.edit', compact('listing','community'));
     }
 
     /**
@@ -73,7 +104,18 @@ class ListingController extends Controller
      */
     public function fetch(Listing $listing)
     {
-        return $listing->load('cards');
+        return $listing->load('cards','user');
+    }
+
+    /**
+     * Pagin ate the specified resource.
+     *
+     * @param  \App\Curated\Listing  $listing
+     * @return \Illuminate\Http\Response
+     */
+    public function paginate(Community $community)
+    {
+        return $community->listings()->latest()->paginate(10);
     }
 
     /**
@@ -89,7 +131,7 @@ class ListingController extends Controller
 
         $listing->update($request->except(['image']));
 
-        if ($request->image) { ImageFile::replaceImage($request, $listing, 1200, 500, 'listing'); }
+        if ($request->image) { ImageFile::replaceImage($request, $listing, 1000, 600, 'listing'); }
     }
 
     /**

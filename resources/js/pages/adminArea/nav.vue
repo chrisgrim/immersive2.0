@@ -39,6 +39,21 @@
                 </button>
             </a>
 
+            <a href="/admin/communities/finalize">
+                <button 
+                    :class="{active: active == 'comApprove'}" 
+                    class="admin-menu__item">
+                    <div 
+                        v-if="comApproval" 
+                        class="admin-menu__notification">
+                        <p>
+                            {{ comApproval }}
+                        </p>
+                    </div>
+                    Approve Communities
+                </button>
+            </a>
+
             <a href="/admin/event-requests">
                 <button 
                     :class="{active: active == 'requestApprove'}" 
@@ -213,6 +228,7 @@
                 advisories: false,
                 eventApproval: '',
                 orgApproval: '',
+                comApproval: '',
                 requestApproval: ''
             };
         },
@@ -224,6 +240,7 @@
                 .then( res => {
                     this.eventApproval = res.data.event;
                     this.orgApproval = res.data.org;
+                    this.comApproval = res.data.com;
                     this.requestApproval = res.data.request;
                 })
             },
@@ -245,6 +262,7 @@
                 path == '/reviewevents/create' ? this.active = 'reviews' : '';
                 path == '/staffpicks/create' ? this.active = 'picks' : '';
                 path == '/admin/organizers/finalize' ? this.active = 'orgApprove' : '';
+                path == '/admin/communities/finalize' ? this.active = 'comApprove' : '';
                 path == '/admin/event-requests' ? this.active = 'requestApprove' : '';
                 path == '/admin/events/finalize' ? this.active = 'approve' : '';
 

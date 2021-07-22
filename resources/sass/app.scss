@@ -17,8 +17,11 @@
 // communities
 @import 'community/index';
 @import 'community/create';
+@import 'community/show';
 @import 'community/listing/listing';
 @import 'community/listing/edit';
+@import 'community/listing/index';
+@import 'community/listing/create';
 
 // auth
 @import 'auth/login';
@@ -42,6 +45,7 @@
 @import 'components/spinner';
 @import 'components/grid-data-component';
 @import 'components/imageupload';
+@import 'components/table';
 
 
 

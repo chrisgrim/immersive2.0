@@ -1,17 +1,22 @@
-.listing-show {
-    padding: 0 8rem;
+
+.listing-owner p {
+    font-size: 1.2rem;
+}
+.listing-show .sidebar .sticky{
+    top:12rem;
+}
+.listing-show .sidebar .sticky h3{
+    font-size: 1.5rem;
+    color: black;
+}
+.listing-show  .sidebar .sticky p{
+    font-size: 1.2rem;
 }
 .listing-header {
     position: relative;
     width: 100%;
 }
-.listing-image {
-    height: 23rem;
-    position: relative;
-    border-radius: 1rem;
-    overflow: hidden;
-}
-.listing-image img {
+.listing-image img, .listing__card-image img {
     -o-object-fit: cover;
     object-fit: cover;
     vertical-align: bottom;
@@ -27,8 +32,8 @@
     margin: 4rem auto;
     max-width: 800px;
 }
-.listing-content h2, .listing-content h3, .listing-content p  {
-    margin-top: 1rem;
+.listing-show .content h2, .listing-show .content h3, .listing-show .content p  {
+    margin-top: 2rem;
 }
 .listing-content ul {
     margin: inherit;
@@ -38,9 +43,7 @@
     position: relative;
 }
 .listing-card {
-    margin: 6rem 0 0 0;
-    padding: 6rem 0 0 0;
-    border-top: 1px solid #d4d4d4;
+    margin: 2rem 0 0 0;
     position: relative;
 }
 .add-new-listing-card {
@@ -73,7 +76,8 @@
     color: white;
 }
 .listing__card-image img {
-    width: 60%;
+    width: 100%;
+    border-radius: 1rem;
 }
 .card__image-upload {
     width: 25rem;
@@ -88,4 +92,17 @@
 }
 .listing-card .field {
     margin-bottom: 1rem;
+}
+.listing-card a {
+    text-decoration: underline;
+    color: initial;
+}
+.listing-card .blurb {
+    margin-top: 2rem;
+}
+.listing-show .listing__card-image {
+    height: 40rem;
+    position: relative;
+    border-radius: 1rem;
+    overflow: hidden;
 }

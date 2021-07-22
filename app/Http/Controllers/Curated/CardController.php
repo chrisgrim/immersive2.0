@@ -37,7 +37,7 @@ class CardController extends Controller
         if ($request->thumbImagePath) { $card->update(['thumbImagePath' => $request->thumbImagePath]); }
         if ($request->image) { ImageFile::saveCardImage($request, $card, 1200, 500, 'card'); }
 
-        return $listing->load('cards');
+        return $listing->load('cards', 'user');
     }
 
     /**
@@ -82,6 +82,6 @@ class CardController extends Controller
 
         $listing = $card->listing_id;
         $card->destroyCard($card);
-        return Listing::with('cards')->find($listing);
+        return Listing::with('cards','user')->find($listing);
     }
 }

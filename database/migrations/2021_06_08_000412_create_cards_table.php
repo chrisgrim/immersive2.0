@@ -17,10 +17,11 @@ class CreateCardsTable extends Migration
             $table->id();
             $table->foreignId('listing_id');
             $table->string('name')->nullable();
-            $table->text('blurb')->nullable();
+            $table->mediumText('blurb')->nullable();
             $table->string('url')->nullable();
             $table->string('thumbImagePath')->nullable();
             $table->integer('order')->unsigned()->default(0);
+            $table->char('type', 1)->default('b');
             $table->timestamps();
         });
     }

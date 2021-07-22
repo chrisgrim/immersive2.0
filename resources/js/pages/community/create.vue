@@ -2,6 +2,8 @@
     <div class="community-create">
         <div class="image">
             <CardImage
+                :height="800"
+                :width="1500"
                 :validate="checkImage"
                 @addImage="addImage" />
         </div>
@@ -10,6 +12,7 @@
                 <input 
                     type="text" 
                     v-model="community.name"
+                    @input="clearErrors"
                     :class="{ 'error': $v.community.name.$error }"
                     placeholder="Community Names">
                 <div v-if="$v.community.name.$error" class="validation-error">
@@ -17,23 +20,41 @@
                     <p class="error" v-if="!$v.community.name.maxLength">The name is too long.</p>
                 </div>
             </div>
-            <div class="community-blurb">    
-                <tiptap 
-                    @cancel="onEdit=false"
-                    @save="submitCommunity"
+            <div class="field">
+                <textarea 
+                    type="text"
+                    name="description" 
+                    v-model="community.blurb" 
+                    placeholder="Community description."
                     :class="{ 'error': $v.community.blurb.$error }"
-                    v-model="community.blurb" />
+                    @input="$v.community.blurb.$touch"
+                    rows="14" />
                 <div v-if="$v.community.blurb.$error" class="validation-error">
-                    <p class="error" v-if="!$v.community.blurb.required">Please add a description.</p>
-                    <p class="error" v-if="!$v.community.blurb.maxLength">The description is too long.</p>
+                    <p class="error" v-if="!$v.community.blurb.required">Must provide a short description</p>
+                    <p class="error" v-if="!$v.community.blurb.maxLength">Description is too long</p>
                 </div>
             </div>
+            <div class="buttons">
+                <button 
+                    :disabled="disabled"
+                    @click="submitCommunity">Submit</button>
+            </div>
+        </div>
+        <div v-if="serverErrors" class="updated-notifcation">
+            <transition-group name="slide-fade">
+                <ul 
+                    v-for="(error, index) in serverErrors"
+                    :key="`name${index}`">
+                    <li>
+                        <p> {{ error.toString() }}</p>
+                    </li>
+                </ul>
+            </transition-group>
         </div>
     </div>
 </template>
 
 <script>
-    import Tiptap from '../../components/Tiptap.vue'
     import CardImage from '../../components/Upload-Image.vue'
     import formValidationMixin from '../../mixins/form-validation-mixin'
     import { required, maxLength } from 'vuelidate/lib/validators';
@@ -43,7 +64,7 @@
 
         mixins: [formValidationMixin],
 
-        components: { CardImage, Tiptap },
+        components: { CardImage },
 
         computed: {
 
@@ -54,6 +75,8 @@
                 community: this.initializeCommunityObject(),
                 formData: new FormData(),
                 checkImage: false,
+                serverErrors: null,
+                disabled: false,
             }
         },
 
@@ -63,8 +86,11 @@
                 this.addCommunityData();
                 await axios.post(`/communities`, this.formData)
                 .then( res => {
-                    window.location.href = `/communities/${res.data.slug}`
+                    window.location.href = `/create/communities/thanks`
                 })
+                .catch(err => {
+                    this.onErrors(err);
+                });
             },
 
             initializeCommunityObject() {
@@ -84,7 +110,7 @@
                     return true
                 }
             },
-
+            
             addCommunityData() {
                 this.formData.append('name', this.community.name);
                 this.formData.append('blurb', this.community.blurb);
@@ -95,11 +121,11 @@
             community: {
                 name: {
                     required,
-                    maxLength: maxLength(50),
+                    maxLength: maxLength(60),
                 },
                 blurb: {
                     required,
-                    maxLength: maxLength(50000)
+                    maxLength: maxLength(500)
                 },
             },
         },

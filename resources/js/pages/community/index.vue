@@ -1,64 +1,57 @@
 <template>
     <div class="community-index">
-        <div class="add-community">
-            <a href="/communities/create">
-                <button>
-                    Add New Community
+        <div class="add">
+            <div class="add-button">
+                <button 
+                    @click="active=!active"
+                    :class="{active: active}">
+                    <svg>
+                        <use :xlink:href="`/storage/website-files/icons.svg#ri-add-fill`" />
+                    </svg>
                 </button>
-            </a>
-        </div>
-        <div class="table">
-            <div class="data-grid">
-                <div class="data-grid__row header">
-                    <p>Status</p>
-                    <p>Community</p>
-                    <p>Last Modified</p>
-                </div>
-                <div
-                    class="data-grid__row"
-                    v-for="(community, index) in communities"
-                    :key="community.id">
-                    <div class="center">
-                        <div
-                            @mouseover="active = index" 
-                            @mouseleave="active = ''"
-                            :style="getStatusCircle(community)"
-                            class="status-circle" />
-                        <div 
-                            v-if="active === index"
-                            class="hover-box">
-                            <p>{{ getStatusDetail(community) }}</p>
+                <template v-if="active">
+                    <div class="options">
+                        <div class="title">
+                            <p>Create</p>
                         </div>
+                        <a href="/communities/create">
+                            Community
+                        </a>
+                        <a href="#">
+                            Listing
+                        </a>
                     </div>
-                    <div class="lg">
-                        <template v-if="locked(community)">
+                </template>
+            </div>
+        </div>
+        <div>
+            <h2>My Communities</h2>
+            <div
+                class="hero"
+                v-for="(community) in communities"
+                :key="community.id">
+                <a
+                    target="_blank"
+                    :href="`/communities/${community.slug}`">
+                    <div class="header">
+                        <div class="com-name">
+                            <h2>{{ community.name }}</h2>
+                        </div>
+                        <div class="com-image">
                             <img 
                                 v-if="community.thumbImagePath"
                                 :src="`/storage/${community.thumbImagePath}`">
-                            <p v-if="community.name">{{ community.name }}</p>
-                            <p v-else>New Event</p>
-                        </template>
-                        <template v-else>
-                            <a 
-                                target="_blank"
-                                :href="`/communities/${community.slug}`">
-                                <img 
-                                    v-if="community.thumbImagePath"
-                                    :src="`/storage/${community.thumbImagePath}`">
-                                <p v-if="community.name">{{ community.name }} 
-                                    <span 
-                                        style="text-decoration: underline;" 
-                                        v-if="community.status === 'p'">
-                                        (edit community)
-                                    </span>
-                                </p>
-                                <p v-else>New Event</p>
-                            </a>
-                        </template>
+                        </div>
                     </div>
-                    <div>
-                        <p>{{ cleanDate(community.updated_at) }}</p>
-                    </div>
+                </a>
+                <SimpleAlbum 
+                    :title="true"
+                    :image="true"
+                    :elements="community.limited_listings" />
+                <div>
+                    <a :href="`/index/${community.slug}/listing`">
+                        <button>Edit</button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -66,9 +59,13 @@
 </template>
 
 <script>
+    
+    import SimpleAlbum from '../../components/Vue-Album-Simple.vue'
     export default {
         
         props: ['user', 'value' ],
+
+        components: { SimpleAlbum },
 
         computed: {
             locked() {
@@ -79,9 +76,6 @@
             },
             getStatusCircle() {
                 return community => this.statusCircle(community)
-            },
-            getStatusDetail() {
-                return community => this.statusDetail(community)
             },
         },
 
@@ -99,26 +93,20 @@
                     console.log(res.data);
                 })
             },
-            status(event) {
-                if (event.status === 'p') return 'approved';
-                if (event.status === 'r') return 'under moderator review';
-                if (event.status === 'n') return 'revise and resubmit';
-                return '-'
-            },
-            statusDetail(event) {
-                if (event.status === 'p') return 'Approved';
-                if (event.status === 'r') return 'Under review';
-                if (event.status === 'n') return 'Fix moderator notes';
+            status(community) {
+                if (community.status === 'p') return 'approved';
+                if (community.status === 'r') return 'under review';
+                if (community.status === 'n') return 'revise and resubmit';
                 return '-'
             },
             statusCircle(community) {
-                if (community.status === 'd') return `background: #1bbb1b`;
+                if (community.status === 'p') return `background: rgb(27, 187, 27)`;
                 if (community.status === 'r') return `background: black`;
-                if (community.status === 'n') return `background: #bf1515`;
+                if (community.status === 'n') return `background: rgb(255 194 21)`;
                 return `background: #bf1515`;
             },
-            isLocked(event) {
-                if (event.status === 'r') return true;
+            isLocked(community) {
+                if (community.status === 'r') return true;
             },
             cleanDate(data) {
                 return this.$dayjs(data).format("MMM DD, YYYY");

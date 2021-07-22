@@ -2,6 +2,7 @@
 
 @section('meta')
     <title>{{config('app.name')}}</title>
+    <link href="{{ mix('/assets/app-create.css') }}" rel="stylesheet">
     <link href="{{ mix('/assets/app-lite.css') }}" rel="stylesheet">
     <link href="{{ mix('/assets/app.css') }}" rel="stylesheet">
 @endsection 
@@ -15,13 +16,7 @@
     @endguest
 @endsection
 @section('content')
-    <div id="bodyArea">
-
-        @if ( session()->exists( 'submitted' ))
-            <vue-alert 
-            message="submitted">
-            </vue-alert>
-        @endif        
+    <div id="bodyArea">   
         <vue-community-create :user="{{auth()->user()}}"/>
     </div>
 @endsection

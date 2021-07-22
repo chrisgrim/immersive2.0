@@ -1,17 +1,5 @@
 .edit-listing__body {
-    grid-template-columns: 1fr 30rem;
-    grid-gap: 2rem;
     margin: 2rem 0;
-}
-.edit-listing__content {
-
-}
-.edit-listing__nav {
-
-}
-.edit-listing__nav .sticky{
-    top:0;
-    position: sticky;
 }
 .nav-card__item {
     border: 1px solid black;
@@ -22,3 +10,36 @@
     line-height: 1.2rem;
     cursor: pointer;
 }
+.listing-edit .listing-image {
+    height: 20rem;
+    position: relative;
+    border-radius: 1rem;
+    overflow: hidden;
+}
+.listing-edit .default__image-upload {
+    margin-bottom: 0
+}
+.listing-card.edit {
+    margin: 2rem 0 0 0;
+    position: relative;
+    padding: 1rem;
+}
+.edit-block .delete {
+    position: absolute;
+    top: -1rem;
+    right: -1rem;
+}
+.listing-card.edit .header {
+    display: grid;
+    grid-template-columns: 26rem 1fr;
+}
+.edit-block .block {
+    padding: 2rem;
+    border: 1px solid transparent;
+}
+.edit-block .block.hover {
+    cursor: pointer;
+    border:1px solid black;
+    border-radius: 1rem;
+}
+

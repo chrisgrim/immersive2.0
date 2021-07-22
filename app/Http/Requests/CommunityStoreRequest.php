@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+use App\Rules\CommunityUniqueSlugRule;
 
 class CommunityStoreRequest extends FormRequest
 {
@@ -13,7 +15,7 @@ class CommunityStoreRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +26,8 @@ class CommunityStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => ['required', 'max:60', new CommunityUniqueSlugRule($this->name)],
+            'blurb' => 'required|string|min:1|max:500',
         ];
     }
 }

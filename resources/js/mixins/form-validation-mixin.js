@@ -19,6 +19,10 @@ export default {
             this.disabled = false;
         },
 
+        clearErrors() {
+            this.serverErrors = null
+        },
+
         onSingleError(err) {
             this.disabled = false;
             this.serverErrors = err.response.data.message;

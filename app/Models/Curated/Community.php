@@ -11,7 +11,20 @@ class Community extends Model
 {
     use HasFactory;
 
-    protected $fillable = [ 'name', 'slug', 'blurb', 'thumbImagePath', 'largeImagePath', 'instagramHandle', 'twitterHandle', 'facebookHandle', 'patreon' ];
+    protected $fillable = [ 'name', 'user_id', 'slug', 'blurb', 'thumbImagePath', 'largeImagePath', 'instagramHandle', 'twitterHandle', 'facebookHandle', 'patreon', 'status' ];
+
+    /**
+     * Delete any listings with the community
+     */
+    public static function boot() {
+        parent::boot();
+        self::deleting(function($community) { 
+            $community->listings()->each(function($listing) {
+                ImageFile::deletePreviousImages($listing);
+                $listing->delete();
+            });
+        });
+    }
 
     /**
     * Sets the Route Key to slug instead of ID
@@ -28,28 +41,34 @@ class Community extends Model
      */
     public function listings()
     {
-        return $this->hasMany(Listing::class);
+        return $this->hasMany(Listing::class)->orderBy('order', 'ASC');
+    }
+
+    public function limitedListings()
+    {
+        return $this->hasMany(Listing::class)->orderBy('order', 'ASC')->limit(3);
     }
 
     /**
-     * Get the collections for the community .
+     * Get the owner of the community .
+     */
+    public function owner()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    /**
+     * Get the curators for the community .
      */
     public function curators()
     {
         return $this->belongsToMany(User::class);
     }
 
-    /**
-     * Delete any listings with the community
-     */
-    public static function boot() {
-        parent::boot();
-        self::deleting(function($community) { 
-            $community->listings()->each(function($listing) {
-                ImageFile::deletePreviousImages($listing);
-                $listing->delete();
-            });
-        });
+    public function notify() 
+    {
+        //
     }
+
 
 }

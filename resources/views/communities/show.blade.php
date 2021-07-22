@@ -16,13 +16,6 @@
 @endsection
 @section('content')
     <div id="bodyArea">
-
-        @if ( session()->exists( 'submitted' ))
-            <vue-alert 
-            message="submitted">
-            </vue-alert>
-        @endif
-
         @guest
             <vue-community-show 
                 :owner="false"
@@ -33,14 +26,12 @@
                 <vue-community-show
                     :owner="true"
                     :listings="{{ $listings }}" 
-                    :value="{{ $community }}" 
-                    :user="{{ auth()->user() }}"/>
+                    :value="{{ $community }}" />
             @else
                 <vue-community-show
                     :owner="false"
                     :listings="{{ $listings }}" 
-                    :value="{{ $community }}" 
-                    :user="{{ auth()->user() }}"/>
+                    :value="{{ $community }}" />
             @endif
         @endauth
     </div>

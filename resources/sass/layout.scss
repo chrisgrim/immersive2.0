@@ -3,16 +3,17 @@
 \*------------------------------------*/
 
 html { font-size: 62.5%; font-family: 'Montserrat', sans-serif; height:100%;} 
-body { font-size: 16px; font-size: 1.6rem; line-height: 2.4rem; font-family: 'Montserrat', sans-serif; margin:0px; height:100%;color:$font-color;} /* =14px */
-p { font-size: 16px; font-size: 1.6rem; line-height: 2.4rem; font-family: 'Montserrat', sans-serif; margin:0px;color:$font-color;margin-left:1px;} /* =14px */
-h1   { font-size: 46px; font-size: 4.6rem; font-family: 'Montserrat', sans-serif; margin:0px; color:$font-color;display: inherit; transform: scale(1,1.05);} /* =24px */
-h2   { font-size: 31px; font-size: 3.1rem; font-family: 'Montserrat', sans-serif; margin:0px; color:$font-color; transform: scale(1,1.05);;margin:0;} /* =24px */
-h3   { font-size: 24px; font-size: 2.4rem; font-family: 'Montserrat', sans-serif; margin:0px; color:$font-color; transform: scale(1,1.05);;font-weight: 500;} /* =24px */
-h4   { font-size: 16px; font-size: 2.0rem; font-family: 'Montserrat', sans-serif; margin:0px; color:$font-color; transform: scale(1,1.05);;font-weight: 500;} /* =24px */
+body { font-size: 16px; font-size: 1.6rem; line-height: 2rem; font-family: 'Montserrat', sans-serif; margin:0px; height:100%;color:$font-color;} /* =14px */
+p { font-size: 16px; font-size: 1.6rem; line-height: 2rem; font-family: 'Montserrat', sans-serif; margin:0px;color:$font-color;margin-left:1px;} /* =14px */
+h1   { font-size: 46px; font-size: 4.6rem;line-height: 4.6rem; font-family: 'Montserrat', sans-serif; margin:0px; color:$font-color;display: inherit; transform: scale(1,1.05);} /* =24px */
+h2   { font-size: 31px; font-size: 3.1rem;line-height: 3.1rem; font-family: 'Montserrat', sans-serif; margin:0px; color:$font-color; transform: scale(1,1.05);;margin:0;} /* =24px */
+h3   { font-size: 24px; font-size: 2.4rem;line-height: 2.4rem; font-family: 'Montserrat', sans-serif; margin:0px; color:$font-color; transform: scale(1,1.05);;font-weight: 500;} /* =24px */
+h4   { font-size: 16px; font-size: 2.0rem;line-height: 2.0rem; font-family: 'Montserrat', sans-serif; margin:0px; color:$font-color; transform: scale(1,1.05);;font-weight: 500;} /* =24px */
 a { text-decoration: none; color: inherit; }
 textarea { font-family: 'Montserrat', sans-serif; }
 button {cursor: pointer; font-family: 'Montserrat', sans-serif;}
-ul {margin:0;padding:0;}
+ul {margin:0;padding:0;margin-left:2rem;font-size: 1.4rem;line-height: initial;}
+li {margin-top: 0.5rem;}
 select {
    -o-appearance: none !important;
    -ms-appearance: none !important;
@@ -73,7 +74,13 @@ main {
     display: grid;
     grid-column-gap: 3rem;
 }
-
+.flex {
+    display: flex;
+}
+.btw {
+    justify-content: space-between;
+    align-items: center;
+}
 .mobile {
     display: none;
 }
@@ -283,7 +290,7 @@ button.patreon {
     margin: 2rem 0;
 }
 .blurb p {
-    font-size: 1.9rem;
+    font-size: 1.5rem;
     margin-top: 2rem;
 }
 .blurb strong {
@@ -294,8 +301,105 @@ button.patreon {
     font-weight: 500;
     text-decoration: underline;
 }
-
-
+ .breadcrumbs {
+    padding: 1rem 0;
+}
+.breadcrumbs a {
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #969696;
+}
+.breadcrumbs p {
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: black;
+}
+.add {
+    position: absolute;
+    right: 0;
+    top: -1rem;
+}
+.add-button {
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+    z-index: 100;
+}
+.add-button .options {
+    border-radius: 1rem;
+    box-shadow: 0 0 8px rgb(0 0 0 / 15%);
+    position: absolute;
+    top: 115%;
+    padding: 1rem 2rem;
+    background: white;
+}
+.add-button .options .title{
+    margin: 0.5rem 0 0 0;
+    padding: 0.5rem;
+}
+.add-button .options a {
+    display: block;
+    font-weight: 600;
+    color: black;
+    padding:0.5rem;
+    border-radius: 1rem;
+}
+.add-button .options a:hover {
+    background: #dedede;
+}
+.add-button .options p {
+    font-size: 1.2rem;
+    white-space: nowrap;
+}
+.add-button button {
+    border: 0;
+    height: 5rem;
+    width: 5rem;
+    display: flex;
+    padding: 0;
+    border-radius: 5rem;
+    justify-content: center;
+    align-items: center;
+}
+.add-button button.active {
+    background: black;
+}
+.add-button button.active svg {
+    fill: white;
+}
+.add-button button:hover {
+    background: #dedede;
+}
+.add-button svg {
+    height: 4rem;
+    width: 4rem;
+}
+button.round {
+    border: 0;
+    height: 3rem;
+    width: 3rem;
+    display: flex;
+    padding: 0;
+    border-radius: 5rem;
+    justify-content: center;
+    align-items: center;
+    border:2px solid black;
+}
+button.round:hover {
+    background: #dedede;
+}
+button.round.active {
+    background: black;
+}
+button.round.active svg {
+    fill: white;
+}
+button.round svg {
+    height: 3rem;
+    width: 3rem;
+}
 
 @media (max-width: 768px) {
     html { font-size: 62.5%; font-family: 'Montserrat', sans-serif; height:100%;} 

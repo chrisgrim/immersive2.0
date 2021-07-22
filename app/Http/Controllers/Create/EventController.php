@@ -76,7 +76,7 @@ class EventController extends Controller
      */
     public function completed(Event $event)
     {
-        return redirect('create/events/edit')->with('submitted', 'submitted');
+        return redirect('create/events/edit')->with('submitted', 'Your event has been submitted for review');
     }
 
 }

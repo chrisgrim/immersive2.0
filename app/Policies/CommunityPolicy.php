@@ -33,4 +33,16 @@ class CommunityPolicy
     {
         return $user->type == 'a' || $user->type == 'm';
     }
+
+    /**
+     * Determine whether the user can delete the community.
+     *
+     * @param  \App\User  $user
+     * @param  \App\community  $community
+     * @return mixed
+     */
+    public function owner(User $user, Community $community)
+    {
+        return $community->owner->id === $user->id || $user->type == 'a' || $user->type == 'm';
+    }
 }

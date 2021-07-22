@@ -39,8 +39,9 @@ class ModeratorComments extends Mailable
         return $this->from('submissions@everythingimmersive.com')
                     ->view('emails.moderator-comments')
                     ->with([
+                        'image' => $this->ModeratorComment->event->largeImagePath,
                         'comments' => $this->ModeratorComment->comments,
-                        'eventname' => $this->ModeratorComment->event->name,
+                        'name' => $this->ModeratorComment->event->name,
                     ]);
     }
 }

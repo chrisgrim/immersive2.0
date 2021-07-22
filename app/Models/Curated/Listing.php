@@ -3,6 +3,7 @@
 namespace App\Models\Curated;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Listing extends Model
@@ -22,7 +23,16 @@ class Listing extends Model
     }
 
     /**
-     * Get the Community that owns the Collection.
+    * Helpful command to see published listings
+    *
+    * @return bool
+    */
+    public function isPublished() {
+        return $this->status == 'p';
+    }
+
+    /**
+     * Get the Community that owns the Listing.
      */
     public function community()
     {
@@ -30,11 +40,19 @@ class Listing extends Model
     }
 
     /**
+     * Get the user that owns the Listing.
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
      * Get the cards for the collection .
      */
     public function cards()
     {
-        return $this->hasMany(Card::class)->orderBy('order', 'ASC');;
+        return $this->hasMany(Card::class)->orderBy('order', 'ASC');
     }
 
     /**

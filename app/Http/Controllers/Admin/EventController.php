@@ -11,7 +11,7 @@ use App\Models\Events\EventRequest;
 use App\Models\AdminArea;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
-use App\Mail\EventChanges;
+use App\Mail\EventComments;
 use App\Mail\EventApproved;
 use App\Mail\EventRejected;
 use Illuminate\Support\Facades\Mail;
@@ -178,7 +178,7 @@ class EventController extends Controller
     {
         if(auth()->id() != $event->user->id ) {
             $Message = Message::eventnotification($event, 'denied', $request);
-            Mail::to($event->user)->send(new EventChanges($Message, $event));
+            Mail::to($event->user)->send(new EventComments($Message, $event));
         }
         $event->update([
             'status' => 'n',

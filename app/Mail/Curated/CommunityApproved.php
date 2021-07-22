@@ -1,34 +1,32 @@
 <?php
 
-namespace App\Mail;
+namespace App\Mail\Curated;
 
-use App\Models\Message;
-use App\Models\Event;
 use Illuminate\Bus\Queueable;
+use App\Models\Curated\Community;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class EventChanges extends Mailable
+class CommunityApproved extends Mailable
 {
     use Queueable, SerializesModels;
 
     /**
-     * The Message instance.
+     * The community instance.
      *
-     * @var ModeratorComment
+     * @var community
      */
-    protected $Message, $event;
+    protected $community;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(Message $Message, Event $event)
+    public function __construct(Community $community)
     {
-        $this->Message = $Message;
-        $this->Event = $event;
+        $this->community = $community;
     }
 
     /**
@@ -39,10 +37,11 @@ class EventChanges extends Mailable
     public function build()
     {
         return $this->from('submissions@everythingimmersive.com')
-                    ->view('emails.moderator-comments')
+                    ->view('emails.curated.community-approved')
                     ->with([
-                        'comments' => $this->Message->message,
-                        'eventname' => $this->Event->name,
+                        'name' => $this->community->name,
+                        'image' => $this->community->largeImagePath,
+                        'slug' => $this->community->slug,
                     ]);
     }
 }

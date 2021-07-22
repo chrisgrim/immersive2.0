@@ -15,6 +15,7 @@ use Laravel\Cashier\Billable;
 use Illuminate\Support\Str;
 use App\Models\Events\EventRequest;
 use App\Models\Curated\Community;
+use App\Models\Curated\Listing;
 use DB;
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -202,6 +203,16 @@ class User extends Authenticatable implements MustVerifyEmail
     public function staffpicks() 
     {
         return $this->hasMany(StaffPick::class);
+    }
+
+    /**
+     * The User has many Staff Picks
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     */
+    public function listings() 
+    {
+        return $this->hasMany(Listing::class);
     }
 
     /**

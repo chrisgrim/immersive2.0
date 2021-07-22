@@ -17,9 +17,8 @@
 @section('content')
     <div id="bodyArea">
 
-        @if ( session()->exists( 'submitted' ))
-            <vue-alert 
-            message="submitted">
+        @if ( session('submitted'))
+            <vue-alert message="{{ session('submitted') }}">
             </vue-alert>
         @endif        
         <vue-community-index 

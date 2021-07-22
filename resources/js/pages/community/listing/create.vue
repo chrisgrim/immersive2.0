@@ -1,33 +1,43 @@
 <template>
-    <div class="listing-show">
-        <div class="listing-content">
-            <div>
-                <CardImage
-                    :validate="checkImage"
-                    @addImage="addImage" />
-            </div>
-            <div class="field">
-                <input 
-                    type="text" 
-                    v-model="listing.name"
-                    :class="{ 'error': $v.listing.name.$error }"
-                    placeholder="Listing Name">
-                <div v-if="$v.listing.name.$error" class="validation-error">
-                    <p class="error" v-if="!$v.listing.name.required">Please add a name.</p>
-                    <p class="error" v-if="!$v.listing.name.maxLength">The name is too long.</p>
+    <div>
+        <div class="listing-create lay-a">
+            <div class="wrapper">
+                <div class="content">
+                    <div class="field">
+                        <input 
+                            type="text" 
+                            v-model="listing.name"
+                            input="clearError"
+                            :class="{ 'error': $v.listing.name.$error }"
+                            placeholder="Collection Name... ie: Top 20 Horror Events">
+                        <div v-if="$v.listing.name.$error" class="validation-error">
+                            <p class="error" v-if="!$v.listing.name.required">Please add a name.</p>
+                            <p class="error" v-if="!$v.listing.name.maxLength">The name is too long.</p>
+                        </div>
+                    </div>
+                    <button @click="submitListing">Submit</button>
+                </div>
+                <div class="sidebar">
+                    <div class="sticky">
+                        <h3>Create a collection</h3>
+                        <ul>
+                            <li>Once the collection has been created you can edit it at anytime.</li>
+                            <li>Collections aren't visible until you make them live.</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-            <div class="listing-blurb">    
-                <tiptap 
-                    @cancel="onEdit=false"
-                    @save="submitListing"
-                    :class="{ 'error': $v.listing.blurb.$error }"
-                    v-model="listing.blurb" />
-                <div v-if="$v.listing.blurb.$error" class="validation-error">
-                    <p class="error" v-if="!$v.listing.blurb.required">Please add a description.</p>
-                    <p class="error" v-if="!$v.listing.blurb.maxLength">The description is too long.</p>
-                </div>
-            </div>
+        </div>
+        <div v-if="serverErrors" class="updated-notifcation">
+            <transition-group name="slide-fade">
+                <ul 
+                    v-for="(error, index) in serverErrors"
+                    :key="`name${index}`">
+                    <li>
+                        <p> {{ error.toString() }}</p>
+                    </li>
+                </ul>
+            </transition-group>
         </div>
     </div>
 </template>
@@ -43,8 +53,6 @@
 
         mixins: [formValidationMixin],
 
-        components: { CardImage, Tiptap },
-
         computed: {
 
         },
@@ -52,41 +60,39 @@
         data() {
             return {
                 listing: this.initializeListingObject(),
-                formData: new FormData(),
                 checkImage: false,
+                serverErrors: null,
             }
         },
 
         methods: {
 
             async submitListing() {
-                if ( this.checkVuelidate() || this.checkForImage()) { return }
-                this.addListingData();
-                await axios.post(`/create/${this.community.slug}/listing`, this.formData)
+                if ( this.checkVuelidate()) { return }
+                await axios.post(`/create/${this.community.slug}/listing`, this.listing)
                 .then( res => {
-                    window.location.href = `/communities/${this.community.slug}/${res.data.slug}`
+                    window.location.href = `/communities/${this.community.slug}/${res.data.slug}/edit`
                 })
+                .catch(err => {
+                    this.onErrors(err);
+                });
             },
-            addImage(image) {
-                this.formData.append('image', image);
-            },
-            addListingData() {
-                this.formData.append('name', this.listing.name);
-                this.formData.append('blurb', this.listing.blurb);
-            },
-            checkForImage() {
-                if (!this.formData.has('image')) {
-                    this.checkImage = true;
-                    return true
-                }
-            },
+            // addImage(image) {
+            //     this.formData.append('image', image);
+            // },
+            // addListingData() {
+            //     this.formData.append('name', this.listing.name);
+            //     this.formData.append('blurb', this.listing.blurb);
+            // },
+            // checkForImage() {
+            //     if (!this.formData.has('image')) {
+            //         this.checkImage = true;
+            //         return true
+            //     }
+            // },
             initializeListingObject() {
                 return this.listing = {
                     name: null,
-                    blurb: null,
-                    url: null,
-                    thumbImagePath: null,
-                    largeImagePath: null,
                     community_id: this.community.id,
                 }
             },
@@ -97,10 +103,6 @@
                 name: {
                     required,
                     maxLength: maxLength(50),
-                },
-                blurb: {
-                    required,
-                    maxLength: maxLength(50000)
                 },
             },
         },

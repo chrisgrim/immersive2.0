@@ -24,13 +24,26 @@ Route::RESOURCE('cards', 'Curated\CardController');
 
 // ----------   Communities Page -------
 Route::GET('/communities/{community}/fetch', 'Curated\CommunityController@fetch');
+Route::POST('/communities/{community}/curators/remove', 'Curated\CommunityController@removeCurator');
+Route::POST('/communities/{community}/curators/owner', 'Curated\CommunityController@updateOwner');
+Route::POST('/communities/{community}/curators/add', 'Curated\CommunityController@addCurator');
+Route::GET('/create/communities/thanks', 'Curated\CommunityController@submitted');
+Route::PATCH('/index/{community}/order', 'Curated\CommunityController@order');
 Route::GET('/create/{community}/listing', 'Curated\ListingController@create');
+Route::GET('/index/{community}/listing', 'Curated\ListingController@index');
+Route::GET('/index/{community}/paginate', 'Curated\ListingController@paginate');
 Route::POST('/create/{community}/listing', 'Curated\ListingController@store');
 Route::PATCH('/listings/{listing}/order', 'Curated\ListingController@order');
 Route::GET('/communities/{community}/{listing}', 'Curated\ListingController@show');
+Route::GET('/communities/{community}/{listing}/edit', 'Curated\ListingController@edit');
 Route::GET('/listings/{listing}/fetch', 'Curated\ListingController@fetch');
 Route::POST('/create/{listing}/card', 'Curated\CardController@store');
 
+// ----------   Admin Communities Page -------
+Route::GET('admin/communities/finalize', 'Admin\CommunityController@index');
+Route::GET('admin/communities/{community}/show', 'Admin\CommunityController@show');
+Route::POST('admin/communities/{community}/approve', 'Admin\CommunityController@approve');
+Route::POST('admin/communities/{community}/reject', 'Admin\CommunityController@reject');
 
 
 // ----------   Search Page -------

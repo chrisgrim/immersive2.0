@@ -4,12 +4,8 @@
             v-for="(card) in cards"
             :key="card.id"
             class="com-card">
-            <a :href="`/communities/${community.slug}/${card.slug}`">
-                <div class="com-card-wrapper">
-                    <div style="padding-top:43.08%;border:1.5px solid rgba(0, 0, 0, 0.08);border-bottom:none;border-radius:16px 16px 0px 0px;" />
-                    <div class="com-card-text">
-                        <h4>{{card.name}}</h4>
-                    </div>
+            <div class="com-card-wrapper">
+                <a :href="`/communities/${community.slug}/${card.slug}`">
                     <div class="com-card-image">
                         <template v-if="card && card.thumbImagePath">
                             <picture>
@@ -22,8 +18,11 @@
                             </picture>
                         </template>
                     </div>
-                </div>
-            </a>
+                    <div class="com-card-text">
+                        <h4>{{card.name}}</h4>
+                    </div>
+                </a>
+            </div>
         </div>
     </div>
 </template>

@@ -52,9 +52,14 @@
             <a 
                 v-if="event.organizer.thumbImagePath"
                 href="#organizer">
-                <img 
-                    :src="`/storage/${event.organizer.thumbImagePath}`" 
-                    :alt="`Logo of ${event.organizer.name}`">
+                <picture>
+                    <source 
+                        type="image/webp" 
+                        :srcset="`/storage/${event.organizer.thumbImagePath}`"> 
+                    <img 
+                        :src="`/storage/${event.organizer.thumbImagePath.slice(0, -4)}jpg`" 
+                        :alt="`Logo of ${event.organizer.name}`">
+                </picture>
             </a>
             <ShowMore 
                 :text="event.description"

@@ -1,142 +1,187 @@
 <template>
-    <div class="listing-show">
-        <div class="listing-header">
-            <div class="listing-image">
-                <template v-if="onEdit">
-                    <CardImage
-                        :image="`/storage/${headerImage}`"
-                        @addImage="addImage" />
-                </template>
-                <template v-else>
-                    <picture v-if="headerImage">
-                        <source 
-                            type="image/webp" 
-                            :srcset="`/storage/${headerImage}`"> 
-                        <img 
-                            :src="`/storage/${headerImage.slice(0, -4)}`" 
-                            :alt="`${listing.name} Listing`">
-                    </picture>
-                </template>
-            </div>
+    <div class="listing-edit lay-a">
+        <div class="breadcrumbs">
+            <p v-if="owner">
+                <a :href="`/index/${community.slug}/listing`">{{community.name}}</a> > {{listing.name}}
+            </p>
+            <p v-else>
+                <a :href="`/communities/${community.slug}`">{{community.name}}</a> > {{listing.name}}
+            </p>
         </div>
-        <div class="edit-listing__body grid">
-            <div class="edit-listing__body">
-                <template v-if="onEdit">
-                    <div class="field h2">
-                        <input 
-                            type="text" 
-                            v-model="listing.name"
-                            :class="{ 'error': $v.listing.name.$error }"
-                            placeholder="Listing Name">
-                        <div v-if="$v.listing.name.$error" class="validation-error">
-                            <p class="error" v-if="!$v.listing.name.required">Please add a name.</p>
-                            <p class="error" v-if="!$v.listing.name.maxLength">The name is too long.</p>
-                        </div>
-                    </div>
-                    <div class="listing-blurb">
-                        <tiptap 
-                            @cancel="resetListing"
-                            @save="submitListing"
-                            :class="{ 'error': $v.listing.blurb.$error }"
-                            v-model="listing.blurb" />
-                        <div v-if="$v.listing.blurb.$error" class="validation-error">
-                            <p class="error" v-if="!$v.listing.blurb.required">Please add a description.</p>
-                            <p class="error" v-if="!$v.listing.blurb.maxLength">The description is too long.</p>
-                        </div>
-                    </div>
-                </template>
-                <template v-else>
-                    <div class="listing-name">
-                        <h2>{{ listing.name }}</h2>
-                    </div>
-                    <div class="listing-owner">
-                        <a :href="`/communities/${community.slug}`">{{community.name}}</a>
-                    </div>
-                    <div class="listing-blurb blurb">
-                        <div v-html="listing.blurb" />   
-                        <button
-                            class="edit"
-                            @click="onEdit=true">Edit</button>
-                    </div>
-                </template>
-                <div 
-                    v-for="card in listing.cards"
-                    :key="card.id"
-                    class="listing-card">
-                    <Card 
-                        :owner="owner"
-                        @update="updateListing"
-                        :parentCard="card" />
-                </div>
-                <div v-if="cardType" class="listing-card">
-                    <InternalCard 
-                        @update="updateListing"
-                        :listing="listing" 
-                        v-if="cardType==='i'" />
-                    <ExternalCard 
-                        @update="updateListing"
-                        :listing="listing" 
-                        v-if="cardType==='e'" />
-                    <BlankCard 
-                        @update="updateListing"
-                        :listing="listing" 
-                        v-if="cardType==='b'" />
-                </div>
-                <div class="add-new-listing-card">
-                    <button 
-                        @click="showAddButtonOptions"
-                        class="main">
-                        add new 
-                        <svg class="remix">
-                            <use v-if="!buttonOptions" :xlink:href="`/storage/website-files/icons.svg#ri-add-circle-line`" />
-                            <use v-else :xlink:href="`/storage/website-files/icons.svg#ri-close-circle-line`" />
-                        </svg>
-                    </button>
-                    <template v-if="buttonOptions">
-                        <button class="sub" @click="selectButton('i')">
-                            Event from Ei
-                        </button>
-                        <button class="sub" @click="selectButton('e')">
-                            Event outside EI
-                        </button>
-                        <button class="sub" @click="selectButton('b')">
-                            Blank card
-                        </button>
-                    </template>
-                </div>
-            </div>
-            <div class="edit-listing__nav">
-                <div class="sticky">
-                    <div class="status">
-                        <h4>Status:</h4>
-                        <button @click="updateStatus">{{ listingStatus }}</button>
-                    </div>
-                    <div class="div">
-                        <h4>List Cards:</h4>
-                        <draggable
-                            v-model="listing.cards" 
-                            @start="isDragging=true" 
-                            @end="debounce">
-                            <div 
-                                v-for="(card) in listing.cards"
-                                :key="`list${card.id}`"
-                                class="nav-card__item">
-                                {{ card.name ? card.name : `card${card.id}` }}
+        <div class="wrapper">
+            <div class="content">
+                <div class="edit-listing__body grid">
+                    <template v-if="nameEdit">
+                        <div class="field h3">
+                            <input 
+                                type="text" 
+                                @blur="submitListing"
+                                v-model="listing.name"
+                                :class="{ 'error': $v.listing.name.$error }"
+                                placeholder="Collection Name">
+                            <div v-if="$v.listing.name.$error" class="validation-error">
+                                <p class="error" v-if="!$v.listing.name.required">Please add a name.</p>
+                                <p class="error" v-if="!$v.listing.name.maxLength">The name is too long.</p>
                             </div>
-                        </draggable>
+                        </div>
+                    </template>
+                    <template v-else>
+                        <div 
+                            @click="nameEdit=true"
+                            class="listing-name">
+                            <h2>{{ listing.name }}</h2>
+                        </div>
+                    </template>
+                    <template v-if="tagEdit">
+                        <div class="field">
+                            <input 
+                                type="text"
+                                @blur="submitListing"
+                                v-model="listing.blurb"
+                                :class="{ 'error': $v.listing.blurb.$error }"
+                                placeholder="Collection tag line">
+                            <div v-if="$v.listing.blurb.$error" class="validation-error">
+                                <p class="error" v-if="!$v.listing.blurb.maxLength">The name is too long.</p>
+                            </div>
+                        </div>
+                    </template>
+                    <template v-else>
+                        <div 
+                            @click="tagEdit=true"
+                            class="listing-blurb blurb">
+                            <p>{{ listing.blurb }}</p>
+                        </div>
+                    </template>
+                    <div 
+                        v-for="card in listing.cards"
+                        :key="card.id"
+                        class="listing-card">
+                        <div class="edit-block">
+                            <EditCard 
+                                @update="updateListing"
+                                :parent-card="card" />
+                        </div>
+                    </div>
+                    <EventBlock 
+                        v-if="blockType==='e'"
+                        @cancel="clear"
+                        @update="updateListing"
+                        :listing="listing" />
+                    <ImageBlock 
+                        v-if="blockType==='i'"
+                        @update="updateListing"
+                        :listing="listing" />
+                    <TextBlock 
+                        v-if="blockType==='t'"
+                        @cancel="clear"
+                        @update="updateListing"
+                        :listing="listing" />
+                    <div class="add-new-listing-card">
+                        <button 
+                            @click="showAddButtonOptions"
+                            class="main">
+                            add new card
+                            <svg class="remix">
+                                <use v-if="!buttonOptions" :xlink:href="`/storage/website-files/icons.svg#ri-add-circle-line`" />
+                                <use v-else :xlink:href="`/storage/website-files/icons.svg#ri-close-circle-line`" />
+                            </svg>
+                        </button>
+                        <template v-if="buttonOptions">
+                            <button class="sub" @click="selectButton('i')">
+                                Image Block
+                            </button>
+                            <button class="sub" @click="selectButton('t')">
+                                Text Block
+                            </button>
+                            <button class="sub" @click="selectButton('e')">
+                                Event Block
+                            </button>
+                        </template>
+                    </div>
+                </div>
+            </div>
+            <div class="sidebar">
+                <div class="sticky">
+                    <div class="menu">
+                        <button 
+                            @click="showStatus=!showStatus"
+                            class="component-title">
+                            <p>Status</p>
+                            <svg v-if="showStatus"><use :xlink:href="`/storage/website-files/icons.svg#ri-arrow-up-s-line`" /></svg>
+                            <svg v-else><use :xlink:href="`/storage/website-files/icons.svg#ri-arrow-down-s-line`" /></svg>
+                        </button>
+                        <template v-if="showStatus">
+                            <div class="component-body">
+                                <div class="flex btw">
+                                    <p>Visibility:</p>
+                                    <button @click="updateStatus">
+                                        {{ listingStatus }}
+                                    </button>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                    <div class="menu">
+                        <button 
+                            @click="showFeatured=!showFeatured"
+                            class="component-title">
+                            <p>Featured Image</p>
+                            <svg v-if="showFeatured"><use :xlink:href="`/storage/website-files/icons.svg#ri-arrow-up-s-line`" /></svg>
+                            <svg v-else><use :xlink:href="`/storage/website-files/icons.svg#ri-arrow-down-s-line`" /></svg>
+                        </button>
+                        <template v-if="showFeatured">
+                            <div class="component-body">
+                                <div class="listing-image">
+                                    <CardImage
+                                        :image="`/storage/${headerImage}`"
+                                        @addImage="addImage" />
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                    <div class="menu">
+                        <button 
+                            @click="showOrder=!showOrder"
+                            class="component-title">
+                            <p>Card Order</p>
+                            <svg v-if="showOrder"><use :xlink:href="`/storage/website-files/icons.svg#ri-arrow-up-s-line`" /></svg>
+                            <svg v-else><use :xlink:href="`/storage/website-files/icons.svg#ri-arrow-down-s-line`" /></svg>
+                        </button>
+                        <template v-if="showOrder">
+                            <div class="component-body">
+                                <draggable
+                                    v-model="listing.cards" 
+                                    @start="isDragging=true" 
+                                    @end="debounce">
+                                    <div 
+                                        v-for="(card) in listing.cards"
+                                        :key="`list${card.id}`"
+                                        class="nav-card__item">
+                                        {{ card.name ? card.name : `card${card.id}` }}
+                                    </div>
+                                </draggable>
+                            </div>
+                        </template>
                     </div>
                 </div>
             </div>
         </div>
+        <transition name="slide-fade">
+            <div 
+                v-if="updated" 
+                class="updated-notifcation">
+                <p>Your collection has been updated.</p>
+            </div>
+        </transition>
     </div>
 </template>
 
 <script>
     import Card  from './card.vue'
-    import Tiptap from '../../../components/Tiptap.vue'
-    import InternalCard from './internal-card.vue'
-    import ExternalCard from './external-card.vue'
-    import BlankCard from './blank-card.vue'
+    import EditCard  from './card-edit.vue'
+    import EventBlock from './block-event.vue'
+    import ImageBlock from './block-image.vue'
+    import TextBlock from './block-text.vue'
     import CardImage from '../../../components/Upload-Image.vue'
     import Draggable from "vuedraggable";
     import formValidationMixin from '../../../mixins/form-validation-mixin'
@@ -147,7 +192,7 @@
 
         mixins: [formValidationMixin],
 
-        components: { Card, CardImage, Tiptap, InternalCard, ExternalCard, BlankCard, Draggable },
+        components: { Card, CardImage, EventBlock, Draggable, EditCard, ImageBlock, TextBlock },
 
         computed: {
             listingStatus() {
@@ -162,8 +207,14 @@
                 headerImage: window.innerWidth < 768 ? this.value.thumbImagePath : this.value.largeImagePath,
                 onEdit: false,
                 buttonOptions:false,
-                cardType:null,
+                blockType:null,
                 formData: new FormData(),
+                showStatus: true,
+                showFeatured: true,
+                showOrder: false,
+                updated: false,
+                nameEdit: false,
+                tagEdit: false,
             }
         },
 
@@ -173,8 +224,9 @@
                 this.addListingData();
                 await axios.post(`/listings/${this.listing.slug}`, this.formData)
                 .then( res => {
+                    this.onUpdated();
+                    this.clear();
                 })
-                location.reload();
             },
             async updateListOrder() {
                 var list = this.listing.cards.map(function(item, index){
@@ -220,6 +272,11 @@
                 this.clear()
                 this.listing = value
             },
+            onUpdated() {
+                this.$v.$reset();
+                this.updated = true;
+                setTimeout(() => this.updated = false, 3000);
+            },
             showAddButtonOptions() {
                 this.clear();
                 this.resetListing();
@@ -227,14 +284,16 @@
             },
             selectButton(val) {
                 this.buttonOptions = false;
-                this.cardType = val;
+                this.blockType = val;
             },
             createCard() {
 
             },
             clear() {
                 this.onEdit = false;
-                this.cardType = null;
+                this.blockType = null;
+                this.nameEdit = false;
+                this.tagEdit = false;
             }
         },
 
@@ -242,11 +301,10 @@
             listing: {
                 name: {
                     required,
-                    maxLength: maxLength(50),
+                    maxLength: maxLength(80),
                 },
                 blurb: {
-                    required,
-                    maxLength: maxLength(50000)
+                    maxLength: maxLength(255)
                 },
             },
         },

@@ -58,7 +58,7 @@ class ImageFile extends Model
 
     public static function generateName($collection)
     {
-        return Str::slug($collection->name ? $collection->name : $collection->id);
+        return Str::slug($collection->name ? $collection->name . '-' . $collection->id : $collection->id);
     }
 
     public static function generateFileName($request, $name)

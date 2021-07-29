@@ -54,7 +54,7 @@
     width: 100%;
     flex: 0 0 25%;
     padding: 0;
-    padding-right: 1rem;
+    margin-right: 1rem;
 }
 .album.listing .card {
     width: 100%;
@@ -96,4 +96,7 @@
     left: 0px;
     right: 0px;
     position: absolute;
+}
+.album p.card-text {
+    font-size: 1.2rem;
 }

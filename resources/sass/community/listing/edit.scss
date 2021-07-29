@@ -14,7 +14,12 @@
     height: 20rem;
     position: relative;
     border-radius: 1rem;
-    overflow: hidden;
+}
+.listing-edit .listing-image .delete{
+    position: absolute;
+    right: -1rem;
+    top: -1rem;
+    z-index: 1;
 }
 .listing-edit .default__image-upload {
     margin-bottom: 0
@@ -41,5 +46,37 @@
     cursor: pointer;
     border:1px solid black;
     border-radius: 1rem;
+}
+.li-listing .add {
+    position: relative;
+}
+.add-new-listing-card {
+    border: 1px solid #d4d4d4;
+    padding: 1rem;
+    border-radius: 1rem;
+    margin-top: 6rem;
+    width: 16rem;
+    display: flex;
+    flex-direction: column;
+}
+.add-new-listing-card button.main {
+    font-weight: 700;
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    height: 4rem;
+}
+.add-new-listing-card button.main svg {
+    width:15%;
+    margin-left: 0.5rem;
+}
+.add-new-listing-card button {
+    border: 0;
+    font-size: 1.2rem;
+    text-align: left;
+}
+.add-new-listing-card button.sub:hover {
+    background: blue;
+    color: white;
 }
 

@@ -22,22 +22,30 @@ Route::RESOURCE('communities', 'Curated\CommunityController');
 Route::RESOURCE('listings', 'Curated\ListingController');
 Route::RESOURCE('cards', 'Curated\CardController');
 
-// ----------   Communities Page -------
+// ----------   Communities -------
 Route::GET('/communities/{community}/fetch', 'Curated\CommunityController@fetch');
 Route::POST('/communities/{community}/curators/remove', 'Curated\CommunityController@removeCurator');
 Route::POST('/communities/{community}/curators/owner', 'Curated\CommunityController@updateOwner');
 Route::POST('/communities/{community}/curators/add', 'Curated\CommunityController@addCurator');
 Route::GET('/create/communities/thanks', 'Curated\CommunityController@submitted');
-Route::PATCH('/index/{community}/order', 'Curated\CommunityController@order');
+Route::GET('/communities/{community}/edit', 'Curated\ListingController@index');
+// ----------   Shelves -------
+Route::POST('/shelves/{community}', 'Curated\ShelfController@store');
+Route::GET('/shelves/{shelf}', 'Curated\ShelfController@fetch');
+Route::PUT('/shelves/{shelf}', 'Curated\ShelfController@update');
+Route::PUT('/shelf/order', 'Curated\ShelfController@order');
+Route::DELETE('/shelves/{shelf}', 'Curated\ShelfController@destroy');
+// ----------   Listings -------
+Route::PUT('/listing/order', 'Curated\ListingController@order');
 Route::GET('/create/{community}/listing', 'Curated\ListingController@create');
-Route::GET('/index/{community}/listing', 'Curated\ListingController@index');
 Route::GET('/index/{community}/paginate', 'Curated\ListingController@paginate');
 Route::POST('/create/{community}/listing', 'Curated\ListingController@store');
-Route::PATCH('/listings/{listing}/order', 'Curated\ListingController@order');
 Route::GET('/communities/{community}/{listing}', 'Curated\ListingController@show');
 Route::GET('/communities/{community}/{listing}/edit', 'Curated\ListingController@edit');
+Route::PUT('/communities/{community}/{listing}/update', 'Curated\ListingController@update');
 Route::GET('/listings/{listing}/fetch', 'Curated\ListingController@fetch');
 Route::POST('/create/{listing}/card', 'Curated\CardController@store');
+Route::PUT('/card/order', 'Curated\CardController@order');
 
 // ----------   Admin Communities Page -------
 Route::GET('admin/communities/finalize', 'Admin\CommunityController@index');

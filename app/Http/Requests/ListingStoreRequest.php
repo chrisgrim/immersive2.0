@@ -26,8 +26,8 @@ class ListingStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'max:60', new ListingUniqueSlugRule($this->name, $this->id, $this->community)],
-            // 'blurb' => 'required|string|min:1|max:10000',
+            'name' => ['required', 'max:100', new ListingUniqueSlugRule($this->name, $this->listing, $this->community)],
+            'blurb' => 'required|string|max:100',
         ];
     }
 }

@@ -258,7 +258,9 @@ button.patreon {
     background: #ff5c49;
     border: 0;
 }
-
+.borderless {
+    border:0 !important;
+}
 .clean-box {
     width: 100%;
     border: 1px solid #ccbebe;
@@ -353,7 +355,18 @@ button.patreon {
     font-size: 1.2rem;
     white-space: nowrap;
 }
-.add-button button {
+.add-button button.add__listing {
+    border: 0;
+    padding: 0.5rem;
+    display: block;
+    font-weight: 600;
+    color: black;
+    border-radius: 1rem;
+}
+.add-button button.add__listing:hover {
+    background: #dedede;
+}
+.add-button button.add__icon {
     border: 0;
     height: 5rem;
     width: 5rem;
@@ -363,16 +376,16 @@ button.patreon {
     justify-content: center;
     align-items: center;
 }
-.add-button button.active {
+.add-button button.add__icon.active {
     background: black;
 }
-.add-button button.active svg {
+.add-button button.add__icon.active svg {
     fill: white;
 }
-.add-button button:hover {
+.add-button button.add__icon:hover {
     background: #dedede;
 }
-.add-button svg {
+.add-button button.add__icon svg {
     height: 4rem;
     width: 4rem;
 }

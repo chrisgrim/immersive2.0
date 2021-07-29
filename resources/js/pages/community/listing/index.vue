@@ -8,17 +8,8 @@
             </div>
             <div class="li-header__content">
                 <div class="li-wrapper">
-                    <div class="field h3">
-                        <input 
-                            type="text" 
-                            v-model="community.name"
-                            @input="clearName"
-                            :class="{ 'error': $v.community.name.$error }"
-                            placeholder="Community Names">
-                        <div v-if="$v.community.name.$error" class="validation-error">
-                            <p class="error" v-if="!$v.community.name.required">Please add a name.</p>
-                            <p class="error" v-if="!$v.community.name.maxLength">The name is too long.</p>
-                        </div>
+                    <div class="com-name">
+                        <h2>{{ community.name }}</h2>
                     </div>
                     <div class="field">
                         <textarea 
@@ -43,8 +34,8 @@
             </div>
             <div class="li-image">
                 <CardImage
-                    :height="800"
-                    :width="1500"
+                    :height="500"
+                    :width="800"
                     :image="`/storage/${headerImage}`"
                     @addImage="addImage" />
             </div>
@@ -62,6 +53,7 @@
                     <div class="add-button">
                         <button 
                             @click="onAdd=!onAdd"
+                            class="add__icon" 
                             :class="{active: onAdd}">
                             <svg>
                                 <use :xlink:href="`/storage/website-files/icons.svg#ri-add-fill`" />
@@ -75,28 +67,42 @@
                                 <a :href="`/create/${community.slug}/listing`">
                                     Listing
                                 </a>
+                                <button 
+                                    class="add__listing"
+                                    @click="addShelf">
+                                    Shelf
+                                </button>
                             </div>
                         </template>
                     </div>
                 </div>
-                <h3>My Collections</h3>
-                <div 
-                    v-if="listings && listings.length"
-                    class="listings">
-                    <ListingAlbum
-                        :edit="true"
-                        :title="true"
-                        :draggable="true"
-                        :parent="community"
-                        v-model="listings" />
+                <draggable
+                    v-model="shelves"
+                    @start="isDragging=true" 
+                    @end="debounce">
                     <div 
-                        v-if="paginate.current_page !== paginate.last_page"
-                        class="loadmore">
-                        <button @click="fetchListings">
-                            Load More
-                        </button>
+                        class="shelves" 
+                        v-for="(shelf, index) in shelves"
+                        @mouseover="showDelete = index"
+                        @mouseleave="showDelete = null"
+                        :key="shelf.id">
+                        <div 
+                            v-if="showDelete === index && shelves.length > 1"
+                            class="delete">
+                            <button 
+                                @click="deleteShelf(shelf)"
+                                class="round">
+                                <svg>
+                                    <use :xlink:href="`/storage/website-files/icons.svg#ri-close-line`" />
+                                </svg>
+                            </button>
+                        </div>
+                        <Shelf 
+                            @updated="onUpdated"
+                            :community="community"
+                            :loadshelf="shelf" />
                     </div>
-                </div>
+                </draggable>
             </div>
             <div class="com-curators">
                 <h4>Owner</h4>
@@ -137,7 +143,7 @@
             <div 
                 v-if="updated" 
                 class="updated-notifcation">
-                <p>Your event has been updated.</p>
+                <p>Your changes have been saved.</p>
             </div>
         </transition>
         <div 
@@ -159,16 +165,16 @@
 <script>
     import CardImage from '../../../components/Upload-Image.vue'
     import Curators from './curators.vue'
+    import Shelf from './shelf-edit.vue'
     import formValidationMixin from '../../../mixins/form-validation-mixin'
     import { required, maxLength } from 'vuelidate/lib/validators';
-    import ListingAlbum from '../../../components/Vue-Album-Listing.vue'
     export default {
         
-        props: [ 'loadcommunity', 'user', 'loadlistings', 'loadowner' ],
+        props: [ 'loadcommunity', 'user', 'loadshelves', 'loadowner' ],
 
         mixins: [formValidationMixin],
 
-        components: { CardImage, Curators, ListingAlbum },
+        components: { CardImage, Curators, Shelf },
 
         computed: {
             getStatus() {
@@ -181,26 +187,24 @@
 
         data() {
             return {
-                listings: this.loadlistings.data,
+                shelves: this.loadshelves,
                 community: this.loadcommunity,
-                communityBackup: this.loadcommunity,
                 headerImage: window.innerWidth < 768 ? this.loadcommunity.thumbImagePath : this.loadcommunity.largeImagePath,
                 active: null,
                 formData: new FormData(),
-                buttonOptions: null,
                 serverErrors: null,
-                paginate: this.loadlistings,
                 updated: false,
                 owner: this.loadowner,
                 curators: this.loadcommunity.curators.filter(u => u.id !== this.loadowner.id),
                 curatorsTable: false,
                 onAdd: false,
+                showDelete: null,
             }
         },
 
         methods: {
             async patchCommunity() {
-                this.addListingData();
+                this.addCommunityData();
                 await axios.post(`/communities/${this.community.slug}`, this.formData)
                 .then( res => {
                     this.onUpdated();
@@ -210,27 +214,35 @@
                     this.onErrors(err);
                 });
             },
-            async updateListOrder() {
-                var list = this.listings.map(function(item, index){
-                    item.order = index;
-                    return item;
-                })
-                await axios.patch(`/index/${this.community.slug}/order`, list)
-                .then( res => {
-                    console.log(res.data);
-                })
-            },
-            async fetchListings() {
-                await axios.get(`/index/${this.community.slug}/paginate?page=${this.paginate.to}`)
-                .then( res => {
-                    console.log(res.data);
-                    this.paginate = res.data
-                    this.listings = this.listings.concat(res.data.data);
-                })
-            },
             async resetCommunity() {
                 await axios.get(`/communities/${this.community.slug}/fetch`)
                 .then( res => { this.community = res.data });
+                this.$v.$reset();
+            },
+            async addShelf() {
+                await axios.post(`/shelves/${this.community.slug}`)
+                .then( res => { 
+                    this.shelves = res.data 
+                });
+                this.clear();
+            },
+            async updateShelfOrder() {
+                var list = this.shelves.map(function(item, index){
+                    item.order = index;
+                    return item;
+                })
+                await axios.put(`/shelf/order`, list)
+                .then( res => {
+                    this.onUpdated();
+                })
+            },
+            async deleteShelf(shelf) {
+                if (this.shelves.length <= 1) { return alert('Communities must have at least one shelf') }
+                if (shelf.listings_with_cards.length) { return alert(`Can't delete shelf with posts`)}
+                await axios.delete(`/shelves/${shelf.id}`)
+                .then( res => { 
+                    this.shelves = res.data 
+                });
                 this.$v.$reset();
             },
             status(listing) {
@@ -241,14 +253,11 @@
                 if (listing.status === 'p') return `background: rgb(27, 187, 27)`;
                 if (listing.status === 'd') return `background: rgb(255 194 21)`;
             },
-            showAddButtonOptions() {
-                this.buttonOptions =! this.buttonOptions;
-            },
             addImage(image) {
                 this.formData.append('image', image);
-                this.updateCommunity();
+                this.patchCommunity();
             },
-            addListingData() {
+            addCommunityData() {
                 this.formData.append('_method', 'PUT');
                 this.formData.append('name', this.community.name);
                 this.formData.append('blurb', this.community.blurb);
@@ -262,24 +271,24 @@
                 this.$v.community.name.$touch();
                 this.serverErrors = null;
             },
+            clear() {
+                this.onAdd = false;
+            },
             updateCurators(owner, curators) {
                 this.owner = owner;
                 this.curators = curators
-            }
-        },
-
-        watch: {
-            listings() {
-                this.updateListOrder();
-            }
+            },
+            debounce() {
+                if (this.timeout) 
+                    clearTimeout(this.timeout); 
+                this.timeout = setTimeout(() => {
+                    this.updateShelfOrder();
+                }, 500); // delay
+            },
         },
 
         validations: {
             community: {
-                name: {
-                    required,
-                    maxLength: maxLength(60),
-                },
                 blurb: {
                     required,
                     maxLength: maxLength(500)

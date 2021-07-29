@@ -1,5 +1,7 @@
 <template>
-    <div>
+    <div 
+        :class="{event: card.name}"
+        class="body">
         <a 
             v-if="card.url"
             target="_blank" 
@@ -20,18 +22,27 @@
         </template>
         <template v-if="card.name">
             <div class="card-name">
-                <h2>{{ card.name }}</h2>
+                <h3>{{ card.name }}</h3>
             </div>
         </template>
         <template v-if="card.blurb">
             <div class="card-blurb">
-                <div v-html="card.blurb" />
+                <p v-html="card.blurb" />
             </div>
         </template>
         <template v-if="card.url">
-            <a target="_blank" rel="noopener noreferrer nofollow" :href="card.url">
-                <button class="black">Check it out</button>
-            </a>
+            <div class="card-out">
+                <a target="_blank" rel="noopener noreferrer nofollow" :href="card.url">
+                    <button class="black">Check it out</button>
+                </a>
+            </div>
+        </template>
+        <template v-if="card.name">
+            <div class="seperator">
+                <span class="a" />
+                <span class="a" />
+                <span class="a b" />
+            </div>
         </template>
     </div>
 </template>

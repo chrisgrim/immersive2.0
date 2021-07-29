@@ -26,7 +26,7 @@ class CommunityStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'max:60', new CommunityUniqueSlugRule($this->name)],
+            'name' => ['required', 'max:60', new CommunityUniqueSlugRule($this->name, $this->community)],
             'blurb' => 'required|string|min:1|max:500',
         ];
     }

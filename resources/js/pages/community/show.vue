@@ -2,7 +2,7 @@
     <div class="community-show">
         <div class="com-header">
             <div v-if="owner" class="com-edit">
-                <a :href="`/index/${community.slug}/listing`">
+                <a :href="`/communities/${community.slug}/edit`">
                     <button>Edit Community</button>
                 </a>
             </div>
@@ -28,13 +28,15 @@
             </div>
         </div>
         <div class="com-intro">
-            <div class="listings">
-                <template v-if="listings && listings.length">
-                    <ListingAlbum
-                        :title="true"
-                        :parent="community"
-                        v-model="listings" />
-                </template>
+            <div class="li-listing">
+                <div 
+                    class="shelves" 
+                    v-for="(shelf, index) in shelvesWithListings"
+                    :key="shelf.id">
+                    <Shelf 
+                        :community="community"
+                        :shelf="shelf" />
+                </div>
             </div>
             <div class="com-curators">
                 <h4>Meet your curators</h4>
@@ -60,15 +62,17 @@
 </template>
 
 <script>
-    import ListingAlbum from '../../components/Vue-Album-Listing.vue'
+    import Shelf from './listing/shelf-show.vue'
     export default {
         
-        props: [ 'value', 'listings', 'owner' ],
+        props: [ 'value', 'shelves', 'owner' ],
 
-        components: { ListingAlbum },
+        components: { Shelf },
 
         computed: {
-
+            shelvesWithListings() {
+                return this.shelves.filter( shelf => shelf.public_listings_with_cards.length)
+            }
         },
 
         data() {

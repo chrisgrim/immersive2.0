@@ -4,6 +4,7 @@
             <div class="add-button">
                 <button 
                     @click="active=!active"
+                    class="add__icon"
                     :class="{active: active}">
                     <svg>
                         <use :xlink:href="`/storage/website-files/icons.svg#ri-add-fill`" />
@@ -17,9 +18,6 @@
                         <a href="/communities/create">
                             Community
                         </a>
-                        <a href="#">
-                            Listing
-                        </a>
                     </div>
                 </template>
             </div>
@@ -30,9 +28,7 @@
                 class="hero"
                 v-for="(community) in communities"
                 :key="community.id">
-                <a
-                    target="_blank"
-                    :href="`/communities/${community.slug}`">
+                <a :href="`/communities/${community.slug}/edit`">
                     <div class="header">
                         <div class="com-name">
                             <h2>{{ community.name }}</h2>
@@ -44,13 +40,9 @@
                         </div>
                     </div>
                 </a>
-                <SimpleAlbum 
-                    :title="true"
-                    :image="true"
-                    :elements="community.limited_listings" />
                 <div>
-                    <a :href="`/index/${community.slug}/listing`">
-                        <button>Edit</button>
+                    <a :href="`/communities/${community.slug}`">
+                        <button>View</button>
                     </a>
                 </div>
             </div>
@@ -60,12 +52,11 @@
 
 <script>
     
-    import SimpleAlbum from '../../components/Vue-Album-Simple.vue'
     export default {
         
         props: ['user', 'value' ],
 
-        components: { SimpleAlbum },
+        components: {  },
 
         computed: {
             locked() {

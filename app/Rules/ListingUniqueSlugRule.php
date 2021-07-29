@@ -5,6 +5,7 @@ namespace App\Rules;
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Support\Str;
 Use App\Models\Curated\Listing;
+use Illuminate\Support\Facades\Log;
 
 class ListingUniqueSlugRule implements Rule
 {
@@ -13,10 +14,10 @@ class ListingUniqueSlugRule implements Rule
      *
      * @return void
      */
-    public function __construct($name, $id, $community)
+    public function __construct($name, $listing, $community)
     {
         $this->name = $name;
-        $this->id = $id;
+        $this->listing = $listing;
         $this->community = $community;
     }
 
@@ -30,7 +31,12 @@ class ListingUniqueSlugRule implements Rule
     public function passes($attribute, $value)
     {
         if (Listing::where('slug', '=', Str::slug($this->name . '-' . $this->community->id))->exists()) {
-            return false;
+            if (!$this->listing) { return false; }
+            if (Listing::where('slug', '=', Str::slug($this->name . '-' . $this->community->id))->first()->id === $this->listing->id) {
+                return true;
+            } else {
+                return false;
+            }
         } else {
             return true;
         }
@@ -43,6 +49,6 @@ class ListingUniqueSlugRule implements Rule
      */
     public function message()
     {
-        return "You can't have multiple lists with the same name per community";
+        return "Post names must be unique per community";
     }
 }

@@ -29,10 +29,9 @@ class ListingController extends Controller
     {
         if($community->status !== 'p') { return redirect('/communities');}
         $this->authorize('update', $community);
-
-        $listings = $community->listings()->latest()->with('cards:id,listing_id,thumbImagePath')->paginate(10);
+        $shelves = $community->shelves()->with('listingsWithCards')->get();
         
-        return view('communities.listings.index', compact('listings', 'community'));
+        return view('communities.listings.index', compact('community', 'shelves'));
     }
 
     /**
@@ -61,6 +60,7 @@ class ListingController extends Controller
             'blurb' => $request->blurb,
             'name' => $request->name,
             'slug' => Str::slug($request->name) . '-' . $community->id,
+            'shelf_id' => $request->shelf_id,
             'user_id' => auth()->user()->id,
         ]);
 
@@ -77,7 +77,8 @@ class ListingController extends Controller
      */
     public function show(Community $community, Listing $listing)
     {
-        if($listing->status !== 'p') { return redirect()->back();}
+        $this->authorize('preview', $listing);
+
         $listing->load('cards', 'user');
         return view('communities.listings.show', compact('listing','community'));
     }
@@ -125,13 +126,21 @@ class ListingController extends Controller
      * @param  \App\Listing $listing
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Listing $listing)
+    public function update(ListingStoreRequest $request, Community $community, Listing $listing)
     {
         $this->authorize('update', $listing);
 
         $listing->update($request->except(['image']));
+        $listing->update(['slug' => Str::slug($request->name) . '-' . $community->id]);
 
         if ($request->image) { ImageFile::replaceImage($request, $listing, 1000, 600, 'listing'); }
+
+        if ($request->deleteImage) { 
+            ImageFile::deletePreviousImages($listing); 
+            ImageFile::clearImagePaths($listing); 
+        }
+        
+        return $listing->load('cards', 'user');
     }
 
     /**
@@ -140,11 +149,11 @@ class ListingController extends Controller
      * @param  \App\Curated\Listing  $listing
      * @return \Illuminate\Http\Response
      */
-    public function order(Request $request, Listing $listing)
+    public function order(Request $request)
     {
-        foreach ($request->all() as $card) {
-            Card::find($card['id'])->update([
-                'order' => $card['order'],
+        foreach ($request->all() as $list) {
+            Listing::find($list['id'])->update([
+                'order' => $list['order'],
             ]);
         }
     }
@@ -161,5 +170,6 @@ class ListingController extends Controller
 
         ImageFile::deletePreviousImages($listing);
         $listing->delete();
+        return $listing->shelf->load('listingsWithCards');
     }
 }

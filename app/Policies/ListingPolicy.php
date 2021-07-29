@@ -35,6 +35,26 @@ class ListingPolicy
     }
 
     /**
+     * Determine whether the user can see the listing.
+     *
+     * @param  \App\User  $user
+     * @param  \App\listing  $listing
+     * @return mixed
+     */
+    public function preview(?User $user, Listing $listing)
+    {
+        if ($listing->status !== 'p') {
+            if ($user) {
+                return $listing->community->curators->contains('id', $user->id) || $user->type == 'a' || $user->type == 'm';
+            } else {
+                return false;
+            }
+        } else {
+            return true;
+        }
+    }
+
+    /**
      * Determine whether the user can delete the listing.
      *
      * @param  \App\User  $user

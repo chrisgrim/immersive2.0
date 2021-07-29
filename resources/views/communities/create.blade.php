@@ -9,10 +9,10 @@
 
 @section('nav')
     @auth
-        <vue-nav navtype="homepage" :user= "{{auth()->user()}}"></vue-nav>
+        <vue-nav :user= "{{auth()->user()}}"></vue-nav>
     @endauth
     @guest
-        <vue-nav navtype="homepage"></vue-nav>
+        <vue-nav></vue-nav>
     @endguest
 @endsection
 @section('content')

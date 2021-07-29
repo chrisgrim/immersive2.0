@@ -13,9 +13,10 @@ class CommunityUniqueSlugRule implements Rule
      *
      * @return void
      */
-    public function __construct($name)
+    public function __construct($name, $community)
     {
         $this->name = $name;
+        $this->community = $community;
     }
 
     /**
@@ -27,7 +28,16 @@ class CommunityUniqueSlugRule implements Rule
      */
     public function passes($attribute, $value)
     {
-        return Community::where('slug', '=', Str::slug($this->name))->exists() ? false : true;
+        if (Community::where('slug', '=', Str::slug($this->name))->exists()) {
+            if (!$this->community) { return false; }
+            if (Community::where('slug', '=', Str::slug($this->name))->first()->id === $this->community->id) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return true;
+        }
     }
 
     /**
@@ -37,6 +47,6 @@ class CommunityUniqueSlugRule implements Rule
      */
     public function message()
     {
-        return 'Each Community must have a unique name';
+        return 'Every Community must have a unique name';
     }
 }

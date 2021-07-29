@@ -44,9 +44,20 @@ class Community extends Model
         return $this->hasMany(Listing::class)->orderBy('order', 'ASC');
     }
 
+    /**
+     * Returns limited listings for the community .
+     */
     public function limitedListings()
     {
         return $this->hasMany(Listing::class)->orderBy('order', 'ASC')->limit(3);
+    }
+
+    /**
+     * Returns community Shelves.
+     */
+    public function shelves()
+    {
+        return $this->hasMany(Shelf::class)->orderBy('order', 'ASC');
     }
 
     /**

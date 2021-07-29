@@ -18,10 +18,11 @@
 @import 'community/index';
 @import 'community/create';
 @import 'community/show';
-@import 'community/listing/listing';
+@import 'community/listing/show';
 @import 'community/listing/edit';
 @import 'community/listing/index';
 @import 'community/listing/create';
+@import 'community/listing/shelf';
 
 // auth
 @import 'auth/login';

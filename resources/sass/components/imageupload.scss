@@ -3,6 +3,9 @@
     height: 100%;
     position: relative;
 }
+.default__image-upload-container.hoverImage{
+    opacity: 0.8;
+}
 .default__image-upload {
     width: 25rem;
     height: 16rem;
@@ -15,10 +18,15 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+    align-items: center;
 }
 .default__image-upload svg {
-    width: 16%;
+    width: 16% !important;
+    height:16% !important;
 }
 .default__image-upload  input.fileinput {
     display: none;
+}
+.default__image-upload-container .hoverImage svg{
+    fill:white;
 }

@@ -24,6 +24,7 @@
             </vue-alert>
         @endif
         <vue-listing-create 
+            :shelves="{{ $community->shelves }}"
             :community="{{ $community }}"
             :user="{{ auth()->user() }}"/>    
     </div>

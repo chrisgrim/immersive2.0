@@ -1,0 +1,85 @@
+.lay-a{
+    padding: 0 2rem;
+    width: 100%;
+    margin: auto;
+}
+.lay-a .wrapper {
+    display: flex;
+}
+.lay-a .content {
+    width: 100%;
+    display: inline-block;
+}
+.lay-a .sidebar {
+    display: none;
+}
+.lay-a .sidebar .sticky{
+    top:4rem;
+    position: sticky;
+    opacity: 1;
+    transition: 0.1s;
+}
+.lay-a .sidebar .sticky.hidden {
+    opacity: 0;
+}
+.lay-a .sidebar .menu .component-title {
+    display: flex;
+    justify-content: space-between;
+    height: 4rem;
+    padding: 1rem;
+    align-items: center;
+    width: 100%;
+    border: 1px solid black;
+    margin-bottom: 1rem;
+}
+.lay-a .sidebar .menu .component-title button{
+    border:0;
+}
+.lay-a .sidebar .menu .component-body {
+    width:100%;
+    height:100%;
+    padding: 2rem;
+}
+.lay-a .sidebar .menu p {
+    font-size: 1.5rem;
+    display: inline-block;
+}
+.lay-a .sidebar .menu svg {
+    width: 1.4rem;
+    height: 1.4rem;
+}
+
+.lay-a .content h2, .lay-a .content h3, .lay-a .content h4, .lay-a .content p  {
+    margin-top: 1rem;
+    min-height: 0.1rem;
+}
+
+.lay-a .content ul {
+    margin: inherit;
+    padding-inline-start: 4rem;
+}
+
+@media only screen and (min-width: 992px) {
+    .lay-a .content {
+        width: 66%;
+    }
+    .lay-a .sidebar {
+        width: 33%;
+        display: inline-block;
+        padding: 0 2rem;
+    }
+}
+
+@media only screen and (min-width: 1160px) {
+    .lay-a {
+        width: 1150px;
+    }
+    .lay-a .content {
+        width: 66%;
+    }
+    .lay-a .sidebar {
+        width: 33%;
+        display: inline-block;
+        padding: 0 2rem;
+    }
+}

@@ -57,6 +57,8 @@ class CommunityController extends Controller
             'slug' => Str::slug($request->name),
         ]);
 
+        $community->shelves()->create(['name' => 'First Shelf']);
+
         if ($request->image) { ImageFile::saveImage($request, $community, 1500, 800, 'community'); }
 
         $community->curators()->attach(auth()->user()->id);
@@ -73,9 +75,9 @@ class CommunityController extends Controller
     public function show(Community $community)
     {
         if($community->status !== 'p') { return redirect('/communities');}
-        $listings = $community->listings()->where('status', 'p')->with('cards:id,listing_id,thumbImagePath')->latest()->limit(4)->get();
+        $shelves = $community->shelves()->with('publicListingsWithCards')->limit(3)->get();
         $community->load('curators');
-        return view('communities.show', compact('community', 'listings'));
+        return view('communities.show', compact('community', 'shelves'));
     }
 
     /**
@@ -98,17 +100,6 @@ class CommunityController extends Controller
     public function list(Community $community)
     {
         //
-    }
-
-    /**
-     * Fetch the specified resource.
-     *
-     * @param  \App\Curated\Listing  $listing
-     * @return \Illuminate\Http\Response
-     */
-    public function listings(Community $community)
-    {
-        return 'test';
     }
 
     /**
@@ -139,21 +130,6 @@ class CommunityController extends Controller
 
         return $community->load('curators');
 
-    }
-
-    /**
-     * Order the specified resource.
-     *
-     * @param  \App\Curated\Community  $community
-     * @return \Illuminate\Http\Response
-     */
-    public function order(Request $request, Community $community)
-    {
-        foreach ($request->all() as $list) {
-            Listing::find($list['id'])->update([
-                'order' => $list['order'],
-            ]);
-        }
     }
 
     /**

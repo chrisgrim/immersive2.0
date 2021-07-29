@@ -17,9 +17,10 @@ class CreateListingsTable extends Migration
             $table->id();
             $table->string('slug')->unique();
             $table->string('name')->nullable();
-            $table->tinyText('blurb')->nullable();
+            $table->string('blurb')->nullable();
             $table->foreignId('community_id');
             $table->foreignId('user_id');
+            $table->foreignId('shelf_id');
             $table->string('largeImagePath')->nullable();
             $table->string('thumbImagePath')->nullable();
             $table->char('status', 1)->default('d');

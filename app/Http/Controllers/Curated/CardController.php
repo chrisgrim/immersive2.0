@@ -71,6 +71,21 @@ class CardController extends Controller
     }
 
     /**
+     * Order the specified resource.
+     *
+     * @param  \App\Curated\Listing  $listing
+     * @return \Illuminate\Http\Response
+     */
+    public function order(Request $request)
+    {
+        foreach ($request->all() as $card) {
+            Card::find($card['id'])->update([
+                'order' => $card['order'],
+            ]);
+        }
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Card $card

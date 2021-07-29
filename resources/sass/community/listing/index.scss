@@ -59,6 +59,7 @@
 .li-image {
     position: relative;
     display: inline-block;
+    background: #d4d4d4;
 }
 .li-image.live:after {
     content: "";
@@ -86,12 +87,17 @@
     margin-top: 0; 
 }
 .li-listing {
-    padding: 1rem;
     border-radius: 1rem;
     position: relative;
 }
 .li-listing h3 {
     margin-bottom: 2rem;
+}
+.li-listing .delete {
+    position: absolute;
+    right: -1rem;
+    top: -1rem;
+    z-index: 1;
 }
 .curator-table {
     background: gainsboro;

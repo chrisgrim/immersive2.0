@@ -16,11 +16,21 @@
 @endsection
 @section('content')
     <div id="bodyArea">
-        
-        <vue-listing-show
-            :community="{{ $community }}" 
-            :owner="false"
-            :value="{{ $listing }}" />    
+
+        @guest
+            <vue-listing-show
+                :community="{{ $community }}" 
+                :owner="false"
+                :value="{{ $listing }}" />
+        @endguest
+
+        @auth
+            <vue-listing-show
+                :community="{{ $community }}" 
+                :owner="{{ $community->curators->contains('id', auth()->user()->id) ? 'true' : 'false' }}"
+                :value="{{ $listing }}" />
+        @endauth
+
     </div>
 @endsection
 

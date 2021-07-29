@@ -1,9 +1,21 @@
 <template>
-    <div class="default__image-upload-container">
+    <div 
+        @mouseover="overImage = true"
+        @mouseleave="overImage = false"
+        :class="{ hoverImage: overImage }"
+        class="default__image-upload-container">
+        <!-- <template v-if="hover">
+            <div class="hover">
+                <svg>
+                    <use :xlink:href="`/storage/website-files/icons.svg#ri-image-line`" />
+                </svg>
+            </div>
+        </template> -->
         <label 
+            :class="{ hoverImage: overImage }"
             class="default__image-upload" 
             :style="backgroundImage">
-            <svg v-if="!hasImage">
+            <svg>
                 <use :xlink:href="`/storage/website-files/icons.svg#ri-image-line`" />
             </svg>
             <image-upload @loaded="loaded" />
@@ -45,7 +57,11 @@
             },
             validate: {
                 type: Boolean,
-                default: false
+                default: true
+            },
+            externalSubmit: {
+                type: Boolean,
+                default: false,
             }
         },
 
@@ -65,13 +81,14 @@
                 imageFile: '',
                 formData: new FormData(),
                 updated: false,
+                overImage: false,
             };
         },
 
         methods: {
             loaded(image) {
-                this.imageFile = image; 
-                this.$v.$touch(); 
+                this.imageFile = image;
+                if (this.validate) { this.checkValidation() }
                 if (this.$v.$invalid) { return }
                 this.$emit('addImage', this.imageFile.file, this.imageFile.src)
             },
@@ -82,12 +99,18 @@
             },
             checkValidation() {
                 this.$v.$touch(); 
+            },
+            reset() {
+                this.imageFile = '';
             }
         },
 
         watch: {
-            validate() {
+            externalSubmit() {
                 this.checkValidation()
+            },
+            image() {
+                if (this.image === `/storage/null`) {this.reset()}
             }
         },
 

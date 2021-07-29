@@ -25,7 +25,7 @@
         @endif
         <vue-listing-index
             :loadowner="{{$community->owner()->first()}}"
-            :loadlistings="{{ json_encode($listings) }}" 
+            :loadshelves="{{ $shelves }}" 
             :loadcommunity="{{ $community }}" 
             :user="{{ auth()->user() }}"/>
     </div>

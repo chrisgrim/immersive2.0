@@ -110,4 +110,12 @@ class ImageFile extends Model
     {
         $collection->update([ 'thumbImagePath' => "$type-images/$name-$collection->id/$name-thumb.webp" ]);
     }
+
+    public static function clearImagePaths($collection)
+    {
+        $collection->update([ 
+            'thumbImagePath' => null,
+            'largeImagePath' => null
+        ]);
+    }
 }

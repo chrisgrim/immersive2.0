@@ -2,7 +2,7 @@
     <div class="listing-edit lay-a">
         <div class="breadcrumbs">
             <p v-if="owner">
-                <a :href="`/index/${community.slug}/listing`">{{community.name}}</a> > {{listing.name}}
+                <a :href="`/communities/${community.slug}/edit`">{{community.name}}</a> > {{listing.name}}
             </p>
             <p v-else>
                 <a :href="`/communities/${community.slug}`">{{community.name}}</a> > {{listing.name}}
@@ -15,14 +15,18 @@
                         <div class="field h3">
                             <input 
                                 type="text" 
-                                @blur="submitListing"
                                 v-model="listing.name"
+                                @input="clearErrors"
                                 :class="{ 'error': $v.listing.name.$error }"
                                 placeholder="Collection Name">
                             <div v-if="$v.listing.name.$error" class="validation-error">
                                 <p class="error" v-if="!$v.listing.name.required">Please add a name.</p>
                                 <p class="error" v-if="!$v.listing.name.maxLength">The name is too long.</p>
                             </div>
+                        </div>
+                        <div class="editor__footer borderless">
+                            <button class="outline" @click="resetListing">Cancel</button>
+                            <button @click="submitListing">Save</button>
                         </div>
                     </template>
                     <template v-else>
@@ -44,6 +48,10 @@
                                 <p class="error" v-if="!$v.listing.blurb.maxLength">The name is too long.</p>
                             </div>
                         </div>
+                        <div class="editor__footer borderless">
+                            <button class="outline" @click="resetListing">Cancel</button>
+                            <button @click="submitListing">Save</button>
+                        </div>
                     </template>
                     <template v-else>
                         <div 
@@ -52,16 +60,21 @@
                             <p>{{ listing.blurb }}</p>
                         </div>
                     </template>
-                    <div 
-                        v-for="card in listing.cards"
-                        :key="card.id"
-                        class="listing-card">
-                        <div class="edit-block">
-                            <EditCard 
-                                @update="updateListing"
-                                :parent-card="card" />
+                    <draggable
+                        v-model="listing.cards" 
+                        @start="isDragging=true" 
+                        @end="debounce">
+                        <div 
+                            v-for="card in listing.cards"
+                            :key="card.id"
+                            class="listing-card">
+                            <div class="edit-block">
+                                <EditCard 
+                                    @update="updateListing"
+                                    :parent-card="card" />
+                            </div>
                         </div>
-                    </div>
+                    </draggable>
                     <EventBlock 
                         v-if="blockType==='e'"
                         @cancel="clear"
@@ -102,6 +115,15 @@
             </div>
             <div class="sidebar">
                 <div class="sticky">
+                    <template>
+                        <div class="menu">
+                            <a :href="`/communities/${community.slug}/${value.slug}`">
+                                <button class="outline">
+                                    view
+                                </button>
+                            </a>
+                        </div>
+                    </template>
                     <div class="menu">
                         <button 
                             @click="showStatus=!showStatus"
@@ -123,6 +145,30 @@
                     </div>
                     <div class="menu">
                         <button 
+                            @click="showShelf=!showShelf"
+                            class="component-title">
+                            <p>Shelf</p>
+                            <svg v-if="showShelf"><use :xlink:href="`/storage/website-files/icons.svg#ri-arrow-up-s-line`" /></svg>
+                            <svg v-else><use :xlink:href="`/storage/website-files/icons.svg#ri-arrow-down-s-line`" /></svg>
+                        </button>
+                        <template v-if="showShelf">
+                            <div class="component-body">
+                                <v-select
+                                    v-model="listing.shelf_id"
+                                    :reduce="shelf => shelf.id"
+                                    :options="shelves"
+                                    :class="{ 'error': $v.listing.shelf_id.$error }"
+                                    placeholder="Shelf"
+                                    @input="submitListing"
+                                    label="name" />
+                                <div v-if="$v.listing.shelf_id.$error" class="validation-error">
+                                    <p class="error" v-if="!$v.listing.shelf_id.required">Please select the shelf.</p>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                    <div class="menu">
+                        <button 
                             @click="showFeatured=!showFeatured"
                             class="component-title">
                             <p>Featured Image</p>
@@ -132,8 +178,21 @@
                         <template v-if="showFeatured">
                             <div class="component-body">
                                 <div class="listing-image">
+                                    <template v-if="listing.thumbImagePath">
+                                        <div class="delete">
+                                            <button 
+                                                @click="deleteFeaturedImage"
+                                                class="round">
+                                                <svg>
+                                                    <use :xlink:href="`/storage/website-files/icons.svg#ri-close-line`" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </template>
                                     <CardImage
-                                        :image="`/storage/${headerImage}`"
+                                        :width="600"
+                                        :height="300"
+                                        :image="`/storage/${listing.thumbImagePath}`"
                                         @addImage="addImage" />
                                 </div>
                             </div>
@@ -173,6 +232,17 @@
                 <p>Your collection has been updated.</p>
             </div>
         </transition>
+        <div v-if="serverErrors" class="updated-notifcation">
+            <transition-group name="slide-fade">
+                <ul 
+                    v-for="(error, index) in serverErrors"
+                    :key="`name${index}`">
+                    <li>
+                        <p> {{ error.toString() }}</p>
+                    </li>
+                </ul>
+            </transition-group>
+        </div>
     </div>
 </template>
 
@@ -188,7 +258,7 @@
     import { required, maxLength } from 'vuelidate/lib/validators';
     export default {
         
-        props: [ 'value', 'user', 'owner', 'community'],
+        props: [ 'value', 'user', 'owner', 'community', 'shelves'],
 
         mixins: [formValidationMixin],
 
@@ -204,14 +274,15 @@
         data() {
             return {
                 listing: this.value,
-                headerImage: window.innerWidth < 768 ? this.value.thumbImagePath : this.value.largeImagePath,
                 onEdit: false,
                 buttonOptions:false,
                 blockType:null,
                 formData: new FormData(),
-                showStatus: true,
-                showFeatured: true,
+                serverErrors: null,
+                showStatus: false,
+                showFeatured: false,
                 showOrder: false,
+                showShelf: false,
                 updated: false,
                 nameEdit: false,
                 tagEdit: false,
@@ -222,8 +293,21 @@
             async submitListing() {
                 if ( this.checkVuelidate()) { return }
                 this.addListingData();
-                await axios.post(`/listings/${this.listing.slug}`, this.formData)
+                await axios.post(`/communities/${this.community.slug}/${this.listing.slug}/update`, this.formData)
                 .then( res => {
+                    window.history.pushState(null, null, "/communities" + `/${this.community.slug}/${res.data.slug}/edit`);
+                    this.listing = res.data;
+                    this.onUpdated();
+                    this.clear();
+                })
+                .catch(err => {
+                    this.onErrors(err);
+                });
+            },
+            async deleteFeaturedImage() {
+                await axios.put(`/communities/${this.community.slug}/${this.listing.slug}/update`, {name:this.listing.name,blurb:this.listing.blurb, deleteImage:true})
+                .then( res => {
+                    this.listing = res.data;
                     this.onUpdated();
                     this.clear();
                 })
@@ -233,7 +317,7 @@
                     item.order = index;
                     return item;
                 })
-                await axios.patch(`/listings/${this.listing.slug}/order`, list)
+                await axios.put(`/card/order`, list)
                 .then( res => {
                     console.log(res.data);
                 })
@@ -241,7 +325,7 @@
             async resetListing() {
                 await axios.get(`/listings/${this.listing.slug}/fetch`)
                 .then( res => { this.listing = res.data })
-                this.onEdit = false;
+                this.clear();
             },
             updateStatus() {
                 if (this.listing.status === 'd') {
@@ -260,6 +344,7 @@
             },
             addImage(image) {
                 this.formData.append('image', image);
+                this.submitListing();
             },
             addListingData() {
                 this.formData.append('_method', 'PUT');
@@ -267,10 +352,12 @@
                 this.formData.append('blurb', this.listing.blurb);
                 this.formData.append('community_id', this.community.id);
                 this.formData.append('status', this.listing.status);
+                this.formData.append('shelf_id', this.listing.shelf_id);
             },
             updateListing(value) {
                 this.clear()
                 this.listing = value
+                this.onUpdated();
             },
             onUpdated() {
                 this.$v.$reset();
@@ -294,6 +381,9 @@
                 this.blockType = null;
                 this.nameEdit = false;
                 this.tagEdit = false;
+            },
+            clearErrors() {
+                this.serverErrors = null
             }
         },
 
@@ -306,6 +396,9 @@
                 blurb: {
                     maxLength: maxLength(255)
                 },
+                shelf_id: {
+                    required
+                }
             },
         },
 

@@ -3,7 +3,7 @@
         <div class="listing-create lay-a">
             <div class="wrapper">
                 <div class="content">
-                    <div class="field">
+                    <div class="field h3">
                         <input 
                             type="text" 
                             v-model="listing.name"
@@ -15,6 +15,31 @@
                             <p class="error" v-if="!$v.listing.name.maxLength">The name is too long.</p>
                         </div>
                     </div>
+                    <div class="field">
+                        <input 
+                            type="text" 
+                            v-model="listing.blurb"
+                            input="clearError"
+                            :class="{ 'error': $v.listing.blurb.$error }"
+                            placeholder="Tag Line">
+                        <div v-if="$v.listing.blurb.$error" class="validation-error">
+                            <p class="error" v-if="!$v.listing.blurb.required">Please add short tag line.</p>
+                            <p class="error" v-if="!$v.listing.blurb.maxLength">The tag line is too long.</p>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <v-select
+                            v-model="listing.shelf_id"
+                            :reduce="shelf => shelf.id"
+                            :options="shelves"
+                            :class="{ 'error': $v.listing.shelf_id.$error }"
+                            placeholder="Shelf"
+                            label="name" />
+                        <div v-if="$v.listing.shelf_id.$error" class="validation-error">
+                            <p class="error" v-if="!$v.listing.shelf_id.required">Please select the shelf.</p>
+                        </div>
+                    </div>
+                    <br>
                     <button @click="submitListing">Submit</button>
                 </div>
                 <div class="sidebar">
@@ -49,7 +74,7 @@
     import { required, maxLength } from 'vuelidate/lib/validators';
     export default {
         
-        props: [ 'community', 'user', ],
+        props: [ 'community', 'user', 'shelves' ],
 
         mixins: [formValidationMixin],
 
@@ -93,7 +118,9 @@
             initializeListingObject() {
                 return this.listing = {
                     name: null,
+                    blurb: null,
                     community_id: this.community.id,
+                    shelf_id: null,
                 }
             },
         },
@@ -102,8 +129,15 @@
             listing: {
                 name: {
                     required,
-                    maxLength: maxLength(50),
+                    maxLength: maxLength(100)
                 },
+                blurb: {
+                    required,
+                    maxLength: maxLength(100)
+                },
+                shelf_id: {
+                    required,
+                }
             },
         },
 

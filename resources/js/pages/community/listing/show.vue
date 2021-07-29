@@ -2,7 +2,7 @@
     <div class="listing-show lay-a">
         <div class="breadcrumbs">
             <p v-if="owner">
-                <a :href="`/index/${community.slug}/listing`">{{community.name}}</a> > {{listing.name}}
+                <a :href="`/communities/${community.slug}/edit`">{{community.name}}</a> > {{listing.name}}
             </p>
             <p v-else>
                 <a :href="`/communities/${community.slug}`">{{community.name}}</a> > {{listing.name}}
@@ -28,11 +28,11 @@
                     <div class="listing-name">
                         <h2>{{ listing.name }}</h2>
                     </div>
-                    <div class="listing-owner">
-                        <p>by {{ listing.user.name }}</p>
-                    </div>
                     <div class="listing-blurb blurb">
                         <div v-html="listing.blurb" />
+                    </div>
+                    <div class="listing-owner">
+                        <p>by {{ listing.user.name }}</p>
                     </div>
                     <div 
                         v-for="card in listing.cards"
@@ -43,6 +43,13 @@
                 </div>
             </div>
             <div class="sidebar">
+                <template v-if="owner">
+                    <a :href="`/communities/${community.slug}/${value.slug}/edit`">
+                        <button class="outline">
+                            edit
+                        </button>
+                    </a>
+                </template>
                 <div 
                     :class="{ hidden : sideHidden }"
                     class="sticky">
@@ -74,7 +81,7 @@
             return {
                 listing: this.value,
                 headerImage: window.innerWidth < 768 ? this.value.thumbImagePath : this.value.largeImagePath,
-                sideHidden: true,
+                sideHidden: this.value.thumbImagePath ? true : false,
             }
         },
 
@@ -83,8 +90,13 @@
               if (this.timeout) 
                     clearTimeout(this.timeout); 
                 this.timeout = setTimeout(() => {
-                    window.scrollY > 375 ? this.sideHidden = false : this.sideHidden = true;
+                    this.setHeight();
                 }, 25); // delay
+            },
+            setHeight() {
+                if (this.value.thumbImagePath) {
+                    return window.scrollY > 375 ? this.sideHidden = false : this.sideHidden = true;
+                }
             }
         },
 

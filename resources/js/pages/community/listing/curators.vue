@@ -13,15 +13,11 @@
         <div class="table">
             <div class="head row">
                 <div class="col c-30"><p>Curator</p></div>
-                <div class="col c-20"></div>
-                <div class="col c-20"></div>
+                <div class="col c-10"></div>
             </div>
             <div class="row">
                 <div class="col c-30">
-                    <p>{{ owner.name }}</p>
-                </div>
-                <div class="col c-20">
-                    <p>Owner</p>
+                    <p>{{ owner.name }} (Owner)</p>
                 </div>
             </div>
             <div 
@@ -29,16 +25,14 @@
                 :key="curator.id"
                 class="row">
                 <div class="col c-30">
-                    <p>{{ curator.name }}</p>
-                </div>
-                <div class="col c-20">
+                    <p>{{ curator.name }}</p> 
                     <button 
                         @click="updateOwner(curator)"
                         class="noBox">
-                        Make Owner
+                        (Make Owner)
                     </button>
                 </div>
-                <div class="col c-20">
+                <div class="col c-10">
                     <button 
                         class="noBox" 
                         @click="removeCurator(curator)">

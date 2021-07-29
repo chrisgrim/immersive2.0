@@ -40,13 +40,6 @@
                     @addImage="addImage" />
             </div>
         </div>
-        <Curators 
-            v-if="curatorsTable"
-            @close="curatorsTable = false"
-            @update="updateCurators"
-            :community="community"
-            :loadowner="owner"
-            :loadcurators="curators" />
         <div class="li-content">
             <div class="li-listing">
                 <div class="add">
@@ -105,38 +98,12 @@
                 </draggable>
             </div>
             <div class="com-curators">
-                <h4>Owner</h4>
-                <div class="curator">
-                    <template v-if="owner && owner.thumbImagePath">
-                        <picture>
-                            <source 
-                                type="image/webp" 
-                                :srcset="`/storage/${owner.thumbImagePath}`"> 
-                            <img 
-                                :src="`/storage/${owner.thumbImagePath.slice(0, -4)}`" 
-                                :alt="`${owner.name} Community`">
-                        </picture>
-                    </template>
-                    <p>{{ owner.name }}</p>
-                </div>
-                <h4>Curators</h4>
-                <div 
-                    v-for="curator in curators"
-                    :key="curator.id"
-                    class="curator">
-                    <template v-if="curator && curator.thumbImagePath">
-                        <picture>
-                            <source 
-                                type="image/webp" 
-                                :srcset="`/storage/${curator.thumbImagePath}`"> 
-                            <img 
-                                :src="`/storage/${curator.thumbImagePath.slice(0, -4)}`" 
-                                :alt="`${curator.name} Community`">
-                        </picture>
-                    </template>
-                    <p>{{ curator.name }}</p>
-                </div>
-                <button @click="curatorsTable =! curatorsTable">Edit curators</button>
+                <Curators
+                    @close="curatorsTable = false"
+                    @update="updateCurators"
+                    :community="community"
+                    :loadowner="owner"
+                    :loadcurators="curators" />
             </div>
         </div>
         <transition name="slide-fade">

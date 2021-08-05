@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\ImageFile;
 use App\Models\Curated\Card;
 use App\Models\Curated\Listing;
+use App\Http\Requests\CardStoreRequest;
+use App\Actions\Curated\StoreCardAction;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 
@@ -58,16 +60,9 @@ class CardController extends Controller
      * @param  \App\Card  $card
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Card $card)
+    public function update(CardStoreRequest $request, Card $card, StoreCardAction $storeCardAction)
     {
-        $this->authorize('update', $card);
-
-        $card->update($request->except(['image']));
-
-        if ($request->image) { ImageFile::replaceCardImage($request, $card, 1200, 500, 'card'); }
-
-        return $card->fresh();
-
+        $storeCardAction->update($request, $card);
     }
 
     /**

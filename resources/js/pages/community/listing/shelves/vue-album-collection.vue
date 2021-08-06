@@ -96,7 +96,7 @@
                     item.order = index;
                     return item;
                 })
-                await axios.put(`/listing/order`, list)
+                await axios.put(`/listings/${this.community.slug}/order`, list)
                 .then( res => {
                     this.$emit('updated')
                 })

@@ -3,15 +3,12 @@
 namespace App\Http\Controllers\Curated;
 
 use Illuminate\Http\Request;
-use App\Models\ImageFile;
-use App\Models\User;
-use App\Models\Curated\Collection;
 use App\Models\Curated\Community;
 use App\Models\Curated\Listing;
 use Illuminate\Validation\ValidationException;
 use App\Http\Requests\CommunityStoreRequest;
+use App\Actions\Curated\CommunityActions;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Str;
 
 class CommunityController extends Controller
 {
@@ -48,22 +45,9 @@ class CommunityController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CommunityStoreRequest $request)
+    public function store(CommunityStoreRequest $request, CommunityActions $communityActions)
     {
-        $community = Community::create([
-            'blurb' => $request->blurb,
-            'name' => $request->name,
-            'user_id' => auth()->id(),
-            'slug' => Str::slug($request->name),
-        ]);
-
-        $community->shelves()->create(['name' => 'First Shelf']);
-
-        if ($request->image) { ImageFile::saveImage($request, $community, 1500, 800, 'community'); }
-
-        $community->curators()->attach(auth()->user()->id);
-
-        return $community; 
+        return $communityActions->create($request);
     }
 
     /**
@@ -74,32 +58,9 @@ class CommunityController extends Controller
      */
     public function show(Community $community)
     {
-        if($community->status !== 'p') { return redirect('/communities');}
         $shelves = $community->shelves()->with('publicListingsWithCards')->limit(3)->get();
         $community->load('curators');
         return view('communities.show', compact('community', 'shelves'));
-    }
-
-    /**
-     * Fetch the specified resource.
-     *
-     * @param  \App\Curated\Listing  $listing
-     * @return \Illuminate\Http\Response
-     */
-    public function fetch(Community $community)
-    {
-        return $community->load('curators');
-    }
-
-    /**
-     * Fetch the specified resource.
-     *
-     * @param  \App\Curated\Listing  $listing
-     * @return \Illuminate\Http\Response
-     */
-    public function list(Community $community)
-    {
-        //
     }
 
     /**
@@ -110,7 +71,8 @@ class CommunityController extends Controller
      */
     public function edit(Community $community)
     {
-        //
+        $shelves = $community->shelves()->with('listingsWithCards')->get();
+        return view('communities.listings.index', compact('community', 'shelves'));
     }
 
     /**
@@ -120,16 +82,9 @@ class CommunityController extends Controller
      * @param  \App\Community  $community
      * @return \Illuminate\Http\Response
      */
-    public function update(CommunityStoreRequest $request, Community $community)
+    public function update(CommunityStoreRequest $request, Community $community, CommunityActions $communityActions)
     {
-        $this->authorize('update', $community);
-
-        $community->update($request->except(['image']));
-
-        if ($request->image) { ImageFile::replaceImage($request, $community, 1500, 800, 'community'); }
-
-        return $community->load('curators');
-
+        return $communityActions->update($request, $community);
     }
 
     /**
@@ -138,13 +93,9 @@ class CommunityController extends Controller
      * @param  \App\Community $community
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Community $community)
+    public function destroy(Community $community, CommunityActions $communityActions)
     {
-        $this->authorize('delete', $community);
-
-        ImageFile::deletePreviousImages($community);
-        $community->delete();
-        return auth()->user()->communities;
+        return $communityActions->destroy($community);
     }
 
     /**
@@ -159,36 +110,14 @@ class CommunityController extends Controller
     }
 
     /**
-     * Makes a new owner of the community
-     *
-     * @param  \App\Event  $event
-     * @return \Illuminate\Http\Response
-     */
-    public function updateOwner(Request $request, Community $community)
-    {
-        $this->authorize('owner', $community);
-        $community->update([
-            'user_id' => $request->id
-        ]);
-        return $community->fresh()->load('curators', 'owner');
-    }
-
-    /**
      * Adds a Curator to the Community
      *
      * @param  \App\Event  $event
      * @return \Illuminate\Http\Response
      */
-    public function addCurator(Request $request, Community $community)
+    public function addCurator(Request $request, Community $community,  CommunityActions $communityActions)
     {
-        $this->authorize('owner', $community);
-        $curator =  User::where('email', '=', $request->email)->first();
-        if ($curator) {
-            $community->curators()->attach($curator->id);
-            return $community->fresh()->load('curators', 'owner');
-        } else {
-            throw ValidationException::withMessages(['user' => 'No User exists with that email']);
-        }
+        return $communityActions->addCurator($request, $community);
     }
 
     /**
@@ -197,11 +126,20 @@ class CommunityController extends Controller
      * @param  \App\Event  $event
      * @return \Illuminate\Http\Response
      */
-    public function removeCurator(Request $request, Community $community)
+    public function removeCurator(Request $request, Community $community, CommunityActions $communityActions)
     {
-        $this->authorize('owner', $community);
-        $community->curators()->detach($request->id);
-        return $community->fresh()->load('curators', 'owner');
+        return $communityActions->removeCurator($request, $community);
+    }
+
+    /**
+     * Makes a new owner of the community
+     *
+     * @param  \App\Event  $event
+     * @return \Illuminate\Http\Response
+     */
+    public function updateOwner(Request $request, Community $community, CommunityActions $communityActions)
+    {
+        return $communityActions->updateOwner($request, $community);
     }
 
 

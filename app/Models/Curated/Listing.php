@@ -68,6 +68,7 @@ class Listing extends Model
      */
     public function limitedCards()
     {
+        return $this->hasMany(Card::class)->orderBy('order', 'ASC');
         return $this->hasMany(Card::class)->orderBy('order', 'ASC')->limit(4);
     }
 

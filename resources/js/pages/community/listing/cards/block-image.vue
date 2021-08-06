@@ -8,8 +8,8 @@
 </template>
 
 <script>
-    import CardImage from '../../../components/Upload-Image.vue'
-    import formValidationMixin from '../../../mixins/form-validation-mixin'
+    import CardImage from '../../../../components/Upload-Image.vue'
+    import formValidationMixin from '../../../../mixins/form-validation-mixin'
     export default {
         
         props: [ 'listing' ],
@@ -30,7 +30,7 @@
 
         methods: {
             async saveCard() {
-                await axios.post(`/create/${this.listing.slug}/card`, this.formData)
+                await axios.post(`/cards/${this.listing.slug}/create`, this.formData)
                 .then( res => {
                     this.$emit('update', res.data)
                 })

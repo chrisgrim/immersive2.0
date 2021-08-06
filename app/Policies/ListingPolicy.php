@@ -29,18 +29,6 @@ class ListingPolicy
      * @param  \App\listing  $listing
      * @return mixed
      */
-    public function edit(?User $user, Listing $listing)
-    {
-        return $listing->community->curators->contains('id', $user->id) || $user->type == 'a' || $user->type == 'm';
-    }
-
-    /**
-     * Determine whether the user can see the listing.
-     *
-     * @param  \App\User  $user
-     * @param  \App\listing  $listing
-     * @return mixed
-     */
     public function preview(?User $user, Listing $listing)
     {
         if ($listing->status !== 'p') {
@@ -61,7 +49,7 @@ class ListingPolicy
      * @param  \App\listing  $listing
      * @return mixed
      */
-    public function delete(User $user, Listing $listing)
+    public function destroy(User $user, Listing $listing)
     {
         return $listing->community->curators->contains('id', $user->id) || $user->type == 'a' || $user->type == 'm';
     }

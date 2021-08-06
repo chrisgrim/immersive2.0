@@ -247,11 +247,10 @@
 </template>
 
 <script>
-    import Card  from './card.vue'
-    import EditCard  from './card-edit.vue'
-    import EventBlock from './block-event.vue'
-    import ImageBlock from './block-image.vue'
-    import TextBlock from './block-text.vue'
+    import EditCard  from './cards/card-edit.vue'
+    import EventBlock from './cards/block-event.vue'
+    import ImageBlock from './cards/block-image.vue'
+    import TextBlock from './cards/block-text.vue'
     import CardImage from '../../../components/Upload-Image.vue'
     import Draggable from "vuedraggable";
     import formValidationMixin from '../../../mixins/form-validation-mixin'
@@ -262,7 +261,7 @@
 
         mixins: [formValidationMixin],
 
-        components: { Card, CardImage, EventBlock, Draggable, EditCard, ImageBlock, TextBlock },
+        components: { CardImage, EventBlock, Draggable, EditCard, ImageBlock, TextBlock },
 
         computed: {
             listingStatus() {
@@ -274,6 +273,7 @@
         data() {
             return {
                 listing: this.value,
+                listingBeforeEdit: { ...this.value },
                 onEdit: false,
                 buttonOptions:false,
                 blockType:null,
@@ -305,7 +305,7 @@
                 });
             },
             async deleteFeaturedImage() {
-                await axios.put(`/communities/${this.community.slug}/${this.listing.slug}/update`, {name:this.listing.name,blurb:this.listing.blurb, deleteImage:true})
+                await axios.put(`/listings/${this.listing.slug}/update`, {name:this.listing.name,blurb:this.listing.blurb, deleteImage:true})
                 .then( res => {
                     this.listing = res.data;
                     this.onUpdated();
@@ -317,14 +317,11 @@
                     item.order = index;
                     return item;
                 })
-                await axios.put(`/card/order`, list)
-                .then( res => {
-                    console.log(res.data);
-                })
+                await axios.put(`/cards/${this.listing.slug}/order`, list)
+                this.onUpdated();
             },
-            async resetListing() {
-                await axios.get(`/listings/${this.listing.slug}/fetch`)
-                .then( res => { this.listing = res.data })
+            resetListing() {
+                this.listing = { ...this.listingBeforeEdit }
                 this.clear();
             },
             updateStatus() {
@@ -366,15 +363,11 @@
             },
             showAddButtonOptions() {
                 this.clear();
-                this.resetListing();
                 this.buttonOptions =! this.buttonOptions;
             },
             selectButton(val) {
                 this.buttonOptions = false;
                 this.blockType = val;
-            },
-            createCard() {
-
             },
             clear() {
                 this.onEdit = false;

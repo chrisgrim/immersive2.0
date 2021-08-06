@@ -47,9 +47,9 @@
 </template>
 
 <script>
-    import Tiptap from '../../../components/Tiptap.vue'
-    import CardImage from '../../../components/Upload-Image.vue'
-    import formValidationMixin from '../../../mixins/form-validation-mixin'
+    import Tiptap from '../../../../components/Tiptap.vue'
+    import CardImage from '../../../../components/Upload-Image.vue'
+    import formValidationMixin from '../../../../mixins/form-validation-mixin'
     import { required, maxLength, url } from 'vuelidate/lib/validators';
     export default {
         
@@ -76,7 +76,7 @@
             async saveCard() {
                 if ( this.checkVuelidate()) { return }
                 this.addCardData();
-                await axios.post(`/create/${this.listing.slug}/card`, this.formData)
+                await axios.post(`/cards/${this.listing.slug}/create`, this.formData)
                 .then( res => {
                     this.$emit('update', res.data)
                 })

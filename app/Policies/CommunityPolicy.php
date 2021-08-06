@@ -23,13 +23,47 @@ class CommunityPolicy
     }
 
     /**
+     * Determine whether the user can see the community.
+     *
+     * @param  \App\User  $user
+     * @param  \App\listing  $listing
+     * @return mixed
+     */
+    public function preview(?User $user, Community $community)
+    {
+        if ($community->status === 'p') { 
+            return true;
+        } else {
+            if ($user) {
+                return $community->curators->contains('id', $user->id) || $user->type == 'a' || $user->type == 'm';
+            }
+        }
+    }
+
+    /**
+     * Determine whether the user can see the community.
+     *
+     * @param  \App\User  $user
+     * @param  \App\listing  $listing
+     * @return mixed
+     */
+    public function locked(?User $user, Community $community)
+    {
+        if ($community->status === 'p') { 
+            if ($user) {
+                return $community->curators->contains('id', $user->id) || $user->type == 'a' || $user->type == 'm';
+            }
+        }
+    }
+
+    /**
      * Determine whether the user can delete the community.
      *
      * @param  \App\User  $user
      * @param  \App\community  $community
      * @return mixed
      */
-    public function delete(User $user, Community $community)
+    public function destroy(User $user, Community $community)
     {
         return $user->type == 'a' || $user->type == 'm';
     }

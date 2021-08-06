@@ -23,13 +23,13 @@ class CardPolicy
     }
 
     /**
-     * Determine whether the user can delete the card.
+     * Determine whether the user can destroy the card.
      *
      * @param  \App\User  $user
      * @param  \App\card  $card
      * @return mixed
      */
-    public function delete(User $user, Card $card)
+    public function destroy(User $user, Card $card)
     {
         return $card->listing->community->curators->contains('id', $user->id) || $user->type == 'a' || $user->type == 'm';
     }

@@ -57,7 +57,7 @@
                                 <div class="title">
                                     <p>Add New</p>
                                 </div>
-                                <a :href="`/create/${community.slug}/listing`">
+                                <a :href="`/listings/${community.slug}/create`">
                                     Listing
                                 </a>
                                 <button 
@@ -132,7 +132,7 @@
 <script>
     import CardImage from '../../../components/Upload-Image.vue'
     import Curators from './curators.vue'
-    import Shelf from './shelf-edit.vue'
+    import Shelf from './shelves/shelf-edit.vue'
     import formValidationMixin from '../../../mixins/form-validation-mixin'
     import { required, maxLength } from 'vuelidate/lib/validators';
     export default {
@@ -156,6 +156,7 @@
             return {
                 shelves: this.loadshelves,
                 community: this.loadcommunity,
+                communityBeforeEdit: { ...this.loadcommunity },
                 headerImage: window.innerWidth < 768 ? this.loadcommunity.thumbImagePath : this.loadcommunity.largeImagePath,
                 active: null,
                 formData: new FormData(),
@@ -182,8 +183,7 @@
                 });
             },
             async resetCommunity() {
-                await axios.get(`/communities/${this.community.slug}/fetch`)
-                .then( res => { this.community = res.data });
+                this.community = { ...this.communityBeforeEdit }
                 this.$v.$reset();
             },
             async addShelf() {

@@ -14,7 +14,7 @@
             </template>
 
 
-            <template v-if="card.name">
+            <template v-if="card.name || cardBeforeEdit.name">
                 <template v-if="onEdit">
                     <div class="field h3">
                         <input 
@@ -36,6 +36,20 @@
                 </template>
             </template>
 
+            <template v-if="card.url || cardBeforeEdit.url">
+                <template v-if="onEdit">
+                    <div class="field h3">
+                        <input 
+                            type="text" 
+                            v-model="card.url"
+                            :class="{ 'error': $v.card.url.$error }"
+                            placeholder="Url">
+                        <div v-if="$v.card.url.$error" class="validation-error">
+                            <p class="error" v-if="!$v.card.url.maxLength">The url is too long.</p>
+                        </div>
+                    </div>
+                </template>
+            </template>
 
             <template v-if="card.blurb">
                 <template v-if="onEdit">
@@ -70,14 +84,21 @@
                 </div>
             </template>
         </div>
+        <transition name="slide-fade">
+            <div 
+                v-if="updated" 
+                class="updated-notifcation">
+                <p>Your listing has been updated.</p>
+            </div>
+        </transition>
     </div>
 </template>
 
 <script>
-    import Tiptap from '../../../components/Tiptap.vue'
-    import CardImage from '../../../components/Upload-Image.vue'
-    import formValidationMixin from '../../../mixins/form-validation-mixin'
-    import { required, maxLength } from 'vuelidate/lib/validators';
+    import Tiptap from '../../../../components/Tiptap.vue'
+    import CardImage from '../../../../components/Upload-Image.vue'
+    import formValidationMixin from '../../../../mixins/form-validation-mixin'
+    import { maxLength } from 'vuelidate/lib/validators';
     export default {
         
         props: [ 'parentCard', 'owner' ],
@@ -93,26 +114,28 @@
         data() {
             return {
                 card: this.parentCard,
+                cardBeforeEdit: { ...this.parentCard },
                 onEdit: false,
                 formData: new FormData(),
                 image: null,
                 onAdd: null,
                 hover: false,
+                updated: false,
             }
         },
 
         methods: {
             async updateCard() {
-                // if ( this.checkVuelidate()) { return }
+                if ( this.checkVuelidate()) { return }
                 this.appendCardData();
                 await axios.post(`/cards/${this.card.id}`, this.formData)
-                this.onEdit = false;
-                this.hover = false;
+                .then( res => { this.cardBeforeEdit = res.data })
+                this.onUpdated();
+                this.clear();
             },
             async resetCard() {
-                await axios.get(`/cards/${this.card.id}`)
-                this.onEdit = false;
-                this.hover = false
+                this.card = { ...this.cardBeforeEdit }
+                this.clear();
             },
             async deleteCard() {
                 await axios.delete(`/cards/${this.card.id}`)
@@ -136,6 +159,15 @@
                 this.image = src;
                 this.updateCard();
             },
+            clear() {
+                this.onEdit = false;
+                this.hover = false
+            },
+            onUpdated() {
+                this.$v.$reset();
+                this.updated = true;
+                setTimeout(() => this.updated = false, 3000);
+            },
         },
 
         validations: {
@@ -144,8 +176,10 @@
                     maxLength: maxLength(50),
                 },
                 blurb: {
-                    required,
                     maxLength: maxLength(50000)
+                },
+                url: {
+                    maxLength: maxLength(100),
                 },
             },
         },

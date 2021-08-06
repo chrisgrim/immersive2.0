@@ -52,7 +52,7 @@
 
         data() {
             return {
-                imageArray: [this.element.thumbImagePath].concat(this.element.limited_cards.map( e => e.thumbImagePath)).filter(e => e != null)
+                imageArray: [this.element.thumbImagePath].concat(this.element.limited_cards.map( e => e.thumbImagePath)).filter(e => e != null),
             }
         },
 

@@ -45,7 +45,7 @@
                 :community="community"
                 v-model="listings" />
             <div 
-                v-if="paginate.current_page !== paginate.last_page"
+                v-if="shelf.listings_with_cards.length > 4 && paginate.next_page_url"
                 class="loadmore">
                 <button @click="fetchListings">
                     Load More
@@ -57,7 +57,7 @@
 
 <script>
     import CollectionAlbum from './vue-album-collection.vue'
-    import formValidationMixin from '../../../mixins/form-validation-mixin'
+    import formValidationMixin from '../../../../mixins/form-validation-mixin'
     import { required, maxLength } from 'vuelidate/lib/validators';
     export default {
         
@@ -74,11 +74,12 @@
         data() {
             return {
                 shelf: this.loadshelf,
-                listings:this.loadshelf.listings_with_cards,
-                paginate: this.loadshelf.listings_with_cards,
+                shelfBeforeEdit: { ...this.loadshelf },
+                listings:this.loadshelf.listings_with_cards.slice(0,4),
                 editName: false,
                 hover: false,
                 serverErrors: null,
+                paginate: this.generatePaginateObject(),
             }
         },
 
@@ -95,17 +96,16 @@
                     this.onErrors(err);
                 });
             },
-            async resetShelf() {
-                await axios.get(`/shelves/${this.shelf.id}`)
-                .then( res => { this.shelf = res.data })
-                this.clear();
-            },
             async fetchListings() {
-                await axios.get(`/index/${this.community.slug}/paginate?page=${this.paginate.to}`)
+                await axios.get(this.paginate.next_page_url)
                 .then( res => {
                     this.paginate = res.data
                     this.listings = this.listings.concat(res.data.data);
                 })
+            },
+            resetShelf() {
+                this.shelf = { ...this.shelfBeforeEdit }
+                this.clear();
             },
             updateShelf(value) {
                 this.shelf = value;
@@ -114,6 +114,12 @@
             clear() {
                 this.editName = false;
                 this.hover = false;
+            },
+            generatePaginateObject() {
+                return {
+                    to: 2,
+                    next_page_url: `/shelves/${this.loadshelf.id}/paginate?page=2`
+                }
             }
         },
 

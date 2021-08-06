@@ -13,8 +13,8 @@
 </template>
 
 <script>
-    import Tiptap from '../../../components/Tiptap.vue'
-    import formValidationMixin from '../../../mixins/form-validation-mixin'
+    import Tiptap from '../../../../components/Tiptap.vue'
+    import formValidationMixin from '../../../../mixins/form-validation-mixin'
     import { required, maxLength } from 'vuelidate/lib/validators';
     export default {
         
@@ -37,7 +37,7 @@
         methods: {
             async saveCard() {
                 if ( this.checkVuelidate()) { return }
-                await axios.post(`/create/${this.listing.slug}/card`, this.card)
+                await axios.post(`/cards/${this.listing.slug}/create`, this.card)
                 .then( res => {
                     this.$emit('update', res.data)
                 })

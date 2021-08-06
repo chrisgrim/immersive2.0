@@ -7,7 +7,7 @@ use App\Models\ImageFile;
 use App\Models\Curated\Card;
 use App\Models\Curated\Listing;
 use App\Http\Requests\CardStoreRequest;
-use App\Actions\Curated\StoreCardAction;
+use App\Actions\Curated\CardActions;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 
@@ -24,22 +24,9 @@ class CardController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Listing $listing)
+    public function store(Request $request, Listing $listing, CardActions $cardActions)
     {
-        $this->authorize('update', $listing);
-
-        $card = Card::create([
-            'blurb' => $request->blurb,
-            'name' => $request->name ? $request->name : null,
-            'url' => $request->url ? $request->url : null,
-            'listing_id' => $listing->id,
-            'order' => $listing->cards()->exists() ? $listing->cards->last()->order + 1 : 0
-        ]);
-
-        if ($request->thumbImagePath) { $card->update(['thumbImagePath' => $request->thumbImagePath]); }
-        if ($request->image) { ImageFile::saveCardImage($request, $card, 1200, 500, 'card'); }
-
-        return $listing->load('cards', 'user');
+        return $cardActions->create($request, $listing);
     }
 
     /**
@@ -60,24 +47,9 @@ class CardController extends Controller
      * @param  \App\Card  $card
      * @return \Illuminate\Http\Response
      */
-    public function update(CardStoreRequest $request, Card $card, StoreCardAction $storeCardAction)
+    public function update(CardStoreRequest $request, Card $card, CardActions $cardActions)
     {
-        $storeCardAction->update($request, $card);
-    }
-
-    /**
-     * Order the specified resource.
-     *
-     * @param  \App\Curated\Listing  $listing
-     * @return \Illuminate\Http\Response
-     */
-    public function order(Request $request)
-    {
-        foreach ($request->all() as $card) {
-            Card::find($card['id'])->update([
-                'order' => $card['order'],
-            ]);
-        }
+        return $cardActions->update($request, $card);
     }
 
     /**
@@ -86,12 +58,19 @@ class CardController extends Controller
      * @param  \App\Card $card
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Card $card)
+    public function destroy(Card $card, CardActions $cardActions)
     {
-        $this->authorize('delete', $card);
+        return $cardActions->destroy($card);
+    }
 
-        $listing = $card->listing_id;
-        $card->destroyCard($card);
-        return Listing::with('cards','user')->find($listing);
+    /**
+     * Order the specified resource.
+     *
+     * @param  \App\Curated\Listing  $listing
+     * @return \Illuminate\Http\Response
+     */
+    public function order(Request $request, Listing $listing, CardActions $cardActions)
+    {
+        $cardActions->reorder($request);
     }
 }

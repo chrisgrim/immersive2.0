@@ -94,7 +94,7 @@
 
             async submitListing() {
                 if ( this.checkVuelidate()) { return }
-                await axios.post(`/create/${this.community.slug}/listing`, this.listing)
+                await axios.post(`/listings/${this.community.slug}/store`, this.listing)
                 .then( res => {
                     window.location.href = `/communities/${this.community.slug}/${res.data.slug}/edit`
                 })

@@ -66,7 +66,7 @@
 </template>
 
 <script>
-    import Card  from './card.vue'
+    import Card  from './cards/card.vue'
     export default {
         
         props: [ 'value', 'user', 'owner', 'community'],

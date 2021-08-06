@@ -54,7 +54,7 @@
                                 :alt="`${curator.name} Community`">
                         </picture>
                     </template>
-                    {{ curator.name}}
+                    {{ curator.name }}
                 </div>
             </div>
         </div>
@@ -62,7 +62,7 @@
 </template>
 
 <script>
-    import Shelf from './listing/shelf-show.vue'
+    import Shelf from './listing/shelves/shelf-show.vue'
     export default {
         
         props: [ 'value', 'shelves', 'owner' ],

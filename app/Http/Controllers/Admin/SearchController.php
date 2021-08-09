@@ -26,7 +26,7 @@ class SearchController extends Controller
         ->fields(['name', 'name._2gram','name._3gram'])
         ->query($request->keywords)
         ->type('bool_prefix')
-        ->load(['user'])
+        ->load(['user', 'users'])
         ->paginate(30);
 
         $filter = tap($organizer->toArray(), function (array &$content) {

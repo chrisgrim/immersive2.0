@@ -1,15 +1,6 @@
 <template>
     <div class="curator-table">
         <h4>Curators</h4>
-        <div class="close">
-            <button 
-                class="noBox" 
-                @click="closeCuratorTable">
-                <svg class="remix">
-                    <use :xlink:href="`/storage/website-files/icons.svg#ri-close-circle-line`" />
-                </svg>
-            </button>
-        </div>
         <div class="table">
             <div class="head row">
                 <div class="col c-30"><p>Curator</p></div>
@@ -134,9 +125,6 @@
                     this.onErrors(err);
                 });
             },
-            closeCuratorTable() {
-                this.$emit("close", true );
-            }
         },
 
         validations: {

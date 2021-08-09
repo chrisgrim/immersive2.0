@@ -99,7 +99,6 @@
             </div>
             <div class="com-curators">
                 <Curators
-                    @close="curatorsTable = false"
                     @update="updateCurators"
                     :community="community"
                     :loadowner="owner"
@@ -164,7 +163,6 @@
                 updated: false,
                 owner: this.loadowner,
                 curators: this.loadcommunity.curators.filter(u => u.id !== this.loadowner.id),
-                curatorsTable: false,
                 onAdd: false,
                 showDelete: null,
             }

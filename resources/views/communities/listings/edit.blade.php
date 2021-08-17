@@ -25,7 +25,7 @@
         @endif
     
         <vue-listing-edit
-            :shelves="{{ $community->shelves }}"
+            :sections="{{ $community->sections }}"
             :community="{{ $community }}" 
             :owner="true"
             :value="{{ $listing }}" 

@@ -1,9 +1,30 @@
 @import 'variables';
 
+//Full Page 
+@import 'layouts/full-page';
+
+// Nav
+@import 'nav/navbar';
+@import 'nav/footer';
+
+//Headers
+@import 'components/headers/headerA';
+
+//Sections
+@import 'components/sections/SectionA';
+
+//Albums
+@import 'components/albums/album';
+@import 'components/albums/grid-image';
+@import 'components/albums/image';
+
+
+//Shelves
+@import 'components/shelves/shelf';
+
 // Layout
 
 @import 'components/login';
-@import 'components/album';
 
 @import 'events/event-show';
 /*@import 'events/event-show-old';*/
@@ -15,23 +36,19 @@
 
 @import 'search/event';
 
-@import 'nav/navbar';
-@import 'nav/footer';
-
 @import 'auth/verify';
 @import 'auth/register';
 
 @import 'slowlayout';
 
-//Full Page 
-@import 'layouts/full-page';
+//plugins
+@import 'plugins/flatpickr';
+@import 'plugins/leaflet';
 
 // Multiselect
 @import 'multiselect';
 
 @import 'components/modal';
-@import 'components/flatpickr';
-@import 'components/leaflet';
 @import 'components/multiselect';
 @import 'components/vue-list';
 

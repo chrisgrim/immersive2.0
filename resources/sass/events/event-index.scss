@@ -1,52 +1,8 @@
 /* ------------------------------------*\
   #Event- Index Page
 \*------------------------------------ */
-.event-index-container {
-    width: 100%;
-    margin: auto;
-}
 
-.event-index {
 
-}
-
-header.padded {
-    padding: 4rem 8rem 4rem 8rem;
-}
-
-section.padded {
-    padding: 2rem 8rem 4rem 8rem;
-}
-
-.padded-width {
-    max-width: 1400px;
-    margin: 0 auto;
-    position: relative;
-}
-
-.event-list-black {
-    padding: 2rem 8rem 4rem 8rem;
-    background: black;
-}
-
-/*.event-index__button--more {
-    color: #008489;
-    border-radius: 1rem;
-    background: #fff;
-    border: 1px solid #008489;
-    display: inline-block;
-    font-size: 1.4rem;
-    height: 19rem;
-    border-radius: 1rem;
-    width: 3rem;
-    transition: width 1s;
-    &:hover {
-        background: $default-color;
-        color:white;
-        width: 5rem;
-        
-    }
-}*/
 
 .index-nav-search {
     position: relative;
@@ -58,9 +14,6 @@ section.padded {
 }
 
 /* --------------------------------- Header Index Page ---------------------------------------------------- */
-.event-index__header {
-    height: 81vh;
-}
 
 .event-index__header--content {
     width: 100%;
@@ -132,70 +85,6 @@ section.padded {
     }
 }
 
-/* --------------------------------- Categories Index Page ---------------------------------------------------- */
-
-.event-index__categories {
-    position: relative;
-}
-
-.event-index__categories--top {
-    overflow: hidden;
-    margin-left: -1rem;
-    margin-right: -1rem;
-}
-
-.event-index__categories--middle {
-    white-space: nowrap;
-    overflow: visible;
-    transition: -ms-transform 0.5s ease 0s, -webkit-transform 0.5s ease 0s, transform 0.5s ease 0s;
-}
-
-.event-index__categories--bottom {
-    width: 20%;
-    display: inline-block;
-    padding:1rem;
-    white-space: normal;
-    vertical-align: top;
-}
-.event-index__categories--list {
-    display: inline-block;
-    grid-gap: 3rem;
-    align-items: center;
-    text-align: center;
-    margin: 4rem 0rem;
-    height: 100%;
-}
-.event-index__categories--item {
-    width:100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 10rem;
-    text-align: center;
-    & h4 {
-        font-size: 1.5rem;
-    }
-    &:hover{
-        background: black;
-        & h4 {
-            color:white;
-        }
-    }
-}
-.index-category__slider-button--left {
-    position: absolute;
-    top: 4.4rem;
-    left: -1.6rem;
-    z-index: 1;
-}
-.index-category__slider-button--right {
-    position: absolute;
-    top: 4.4rem;
-    right: -1.6rem;
-    z-index: 1;
-}
-
 
 
 /*--------------------------------- Contributers ---------------------------------------------------- */
@@ -210,14 +99,7 @@ section.padded {
         color:white;
     }
 }
-.contributer-content {
-    grid-template-columns: repeat(4, 1fr) !important;
-    margin:4rem 0;
-    grid-gap: 2rem !important;
-}
-.contributer-img {
-    width:10rem;
-}
+
 button.contributer--button {
     background: 0;
     color: white;
@@ -229,59 +111,10 @@ button.contributer--button {
         border:1px solid black;
     }
 }
-.announcement {
-    background:black;
-}
-.header-title__announcement {
-    padding: 5rem 0rem;
-    & h3, p {
-        color:white;
-    }
-}
-
-.see-more-events {
-    margin: 2rem 0rem;
-}
-
-/* Extra large devices (large laptops and desktops, 1200px and below) --------------------------------- */
-@media screen and (max-width: 1200px) {
-    section.padded {
-        padding: 2rem 4rem 3rem 4rem;
-        &.events {
-            padding:4rem 0rem;
-        }
-    }
-    header.padded {
-        padding: 3rem 4rem;
-    }
-    .event-index__categories--bottom {
-        width: 25%;
-    }
-}
 
 /* Mobile devices (iphones, 768px and lower) --------------------------------- */
 @media screen and (max-width: 768px) {
-    header.padded {
-        padding: 2rem 2rem 6rem 2rem;
-    }
 
-    section.padded {
-        padding: 2rem 2rem;
-        &.events {
-            padding:4rem 0rem;
-        }
-    }
-
-    section.padded.staffpicks__banner {
-        padding: 2rem 2rem 6rem 2rem;
-    }
-
-    .event-index {
-        padding-top: 0;
-    }
-    .event-list {
-        padding-top: 1rem;
-    }
     .index-contributers {
         padding:3.2rem 2rem 4rem 2rem;
     }
@@ -312,15 +145,6 @@ button.contributer--button {
     }
 }
 
-
-@media (min-width: 768px) {
-    .eventlist__element {
-        &:hover div.heart{
-            visibility: visible;
-            opacity: 1;
-        }
-    }
-}
 
 
 

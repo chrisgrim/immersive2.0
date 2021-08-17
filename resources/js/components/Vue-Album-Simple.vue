@@ -5,9 +5,6 @@
                 v-for="(element) in elements"
                 :key="element.id"
                 class="col">
-<!--                 <a 
-                    :href="link" 
-                    class="card-url" /> -->
                 <div class="card">
                     <div class="card-img">
                         <div>

@@ -1,0 +1,56 @@
+/*simple album*/
+
+.album.container {
+    width: 100%
+}
+.album .row {
+    display: flex;
+    flex-wrap: wrap;
+}
+.album .col {
+    padding: 0;
+    position: relative;
+    display: flex;
+    width: 100%;
+    padding-right: 1rem;
+}
+.album.three .col {
+    flex: 0 0 33.3333333333%;
+}
+.album.four .col {
+    flex: 0 0 25%;
+}
+.album .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    max-width: inherit;
+    width: 100%;
+    overflow: hidden;
+}
+
+.album.simple .card img {
+    position: static;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    -o-object-fit: cover;
+    object-fit: cover;
+    height: 23rem;
+    width: 100%;
+}
+.album .card-body {
+    padding: 1rem 0;
+}
+.album p.card-title{
+    font-weight: 700;
+
+}
+.album p.card-text {
+    font-size: 1.2rem;
+}

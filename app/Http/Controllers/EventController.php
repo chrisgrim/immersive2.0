@@ -7,6 +7,7 @@ use App\Models\CityList;
 use App\Models\Category;
 use App\Models\Organizer;
 use App\Models\StaffPick;
+use App\Models\Curated\Community;
 use Session;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
@@ -46,10 +47,12 @@ class EventController extends Controller
             ->limit(4)
             ->get();
 
+        $community = Community::find(3)->load('sections.publicFeatured');
+
         $categories = Category::orderBy('rank', 'desc')
             ->limit(14)
             ->get();
-        return view('events.index', compact('categories', 'staffpicks'));
+        return view('home.index', compact('categories', 'staffpicks', 'community'));
     }
 
     /**

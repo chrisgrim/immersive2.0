@@ -10,6 +10,8 @@ use App\Models\ImageFile;
 use Illuminate\Support\Str;
 use App\Http\Requests\ListingStoreRequest;
 use App\Actions\Curated\ListingActions;
+use App\Models\Featured\Section;
+use App\Models\Featured\Feature;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Collection;
 
@@ -72,7 +74,7 @@ class ListingController extends Controller
      */
     public function edit(Community $community, Listing $listing)
     {
-        $listing->load('cards', 'user');
+        $listing->load('cards', 'user', 'section');
         return view('communities.listings.edit', compact('listing','community'));
     }
 

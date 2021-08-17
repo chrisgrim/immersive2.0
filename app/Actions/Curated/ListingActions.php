@@ -7,6 +7,7 @@ use App\Models\ImageFile;
 use App\Models\Curated\Card;
 use App\Models\Curated\Listing;
 use App\Models\Curated\Community;
+use App\Models\Featured\Feature;
 use Illuminate\Support\Str;
 
 class ListingActions
@@ -24,9 +25,16 @@ class ListingActions
             'blurb' => $request->blurb,
             'name' => $request->name,
             'slug' => Str::slug($request->name) . '-' . $community->id,
-            'shelf_id' => $request->shelf_id,
             'user_id' => auth()->user()->id,
+            'section_id'=> $request->section_id,
         ]);
+
+        $featured = $listing->featured()->create([
+            'user_id' => auth()->id(),
+            'type' => 'l'
+        ]);
+
+        $featured->sections()->attach($request->section_id);
 
         if ($request->image) { ImageFile::saveImage($request, $listing, 800, 500, 'listing'); }
 
@@ -41,6 +49,11 @@ class ListingActions
      */
     public function update(Request $request, Listing $listing)
     {
+        if ($listing->section_id !== $request->section_id) {
+            $listing->featured()->first()->sections()->detach($listing->section_id);
+            $listing->featured()->first()->sections()->attach($request->section_id);
+        }
+
         $listing->update($request->except(['image']));
         $listing->update(['slug' => Str::slug($request->name) . '-' . $listing->community->id]);
 
@@ -64,7 +77,6 @@ class ListingActions
     {
         ImageFile::deletePreviousImages($listing);
         $listing->delete();
-        return $listing->shelf->load('listingsWithCards');
     }
 
     /**

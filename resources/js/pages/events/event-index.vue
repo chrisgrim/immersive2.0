@@ -284,7 +284,7 @@
 
     export default {
 
-        props:['categories', 'staffpicks'],
+        props:['categories', 'staffpicks', 'section'],
 
         components: { ShowMore, vueNavSearch },
 

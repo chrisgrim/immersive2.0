@@ -48,13 +48,14 @@ Icon.Default.mergeOptions({
 });
 
 //Curated
-Vue.component('vue-community-index', () => import(/* webpackChunkName: "assets/vci" */ './pages/community/index.vue'));
-Vue.component('vue-community-show', () => import(/* webpackChunkName: "assets/vcs" */ './pages/community/show.vue'));
-Vue.component('vue-community-create', () => import(/* webpackChunkName: "assets/vcc" */ './pages/community/create.vue'));
-Vue.component('vue-listing-show', () => import(/* webpackChunkName: "assets/vls" */ './pages/community/listing/show.vue'));
-Vue.component('vue-listing-index', () => import(/* webpackChunkName: "assets/vli" */ './pages/community/listing/index.vue'));
-Vue.component('vue-listing-edit', () => import(/* webpackChunkName: "assets/vle" */ './pages/community/listing/edit.vue'));
-Vue.component('vue-listing-create', () => import(/* webpackChunkName: "assets/vlc" */ './pages/community/listing/create.vue'));
+Vue.component('vue-community-index', () => import(/* webpackChunkName: "assets/vci" */ './pages/curated/index.vue'));
+Vue.component('vue-community-show', () => import(/* webpackChunkName: "assets/vcs" */ './pages/curated/show.vue'));
+Vue.component('vue-community-create', () => import(/* webpackChunkName: "assets/vcc" */ './pages/curated/create.vue'));
+Vue.component('vue-community-edit', () => import(/* webpackChunkName: "assets/vce" */ './pages/curated/edit.vue'));
+
+Vue.component('vue-listing-show', () => import(/* webpackChunkName: "assets/vls" */ './pages/curated/listing/show.vue'));
+Vue.component('vue-listing-edit', () => import(/* webpackChunkName: "assets/vle" */ './pages/curated/listing/edit.vue'));
+Vue.component('vue-listing-create', () => import(/* webpackChunkName: "assets/vlc" */ './pages/curated/listing/create.vue'));
 
 Vue.component('vue-community-admin-approval', () => import(/* webpackChunkName: "assets/vcaa" */ './pages/adminArea/approve/community-approval-list.vue'));
 Vue.component('vue-community-approval-bar', () => import(/* webpackChunkName: "assets/vcab" */ './pages/adminArea/approve/community-approval-bar.vue'));
@@ -70,6 +71,8 @@ Vue.component('vue-nav', () => import(/* webpackChunkName: "assets/ls" */ './pag
 //Footer
 Vue.component('vue-footer', () => import(/* webpackChunkName: "assets/lfo" */ './pages/layouts/footer.vue'));
 
+//Home
+Vue.component('index', () => import(/* webpackChunkName: "assets/ei" */ './pages/home/index.vue'));
 
 //Components
 Vue.component('favorite', () => import(/* webpackChunkName: "assets/lf" */ './pages/layouts/favorite.vue'));
@@ -142,7 +145,6 @@ Vue.component('organizer-show', () => import(/* webpackChunkName: "assets/os" */
 
 //Events
 Vue.component('event-show', () => import(/* webpackChunkName: "assets/es" */ './pages/events/event-show.vue'));
-Vue.component('event-index', () => import(/* webpackChunkName: "assets/ei" */ './pages/events/event-index.vue'));
 Vue.component('vue-event-edit', () => import(/* webpackChunkName: "assets/ee" */ './pages/events/event-edit.vue'));
 Vue.component('vue-event-edit-listing-item', () => import(/* webpackChunkName: "assets/edi" */ './pages/events/components/event-edit-item.vue'));
 Vue.component('vue-search-online', () => import(/* webpackChunkName: "assets/eos" */ './pages/search/vue-search-online.vue'));

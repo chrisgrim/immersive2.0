@@ -1,0 +1,33 @@
+.listing-index {
+    padding: 0 8rem 8rem 8rem;
+    max-width: 1600px;
+    margin: auto;
+}
+.li-content {
+    display: grid;
+    grid-template-columns: 1fr 30rem;
+    grid-gap: 2rem;
+}
+.li-content .add-new-listing-card {
+    margin-top: 0; 
+}
+.li-listing {
+    border-radius: 1rem;
+    position: relative;
+}
+.li-listing h3 {
+    margin-bottom: 2rem;
+}
+.li-listing .delete {
+    position: absolute;
+    right: -1rem;
+    top: -1rem;
+    z-index: 1;
+}
+.curator-table {
+    background: gainsboro;
+    padding: 1rem;
+    border-radius: 1rem;
+    margin: 1rem 0;
+    position: relative;
+}

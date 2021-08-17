@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Curated;
 
 use Illuminate\Http\Request;
-use App\Models\ImageFile;
 use App\Models\Curated\Card;
 use App\Models\Curated\Listing;
 use App\Http\Requests\CardStoreRequest;

@@ -22,6 +22,7 @@ class CardActions
             'blurb' => $request->blurb,
             'name' => $request->name ? $request->name : null,
             'url' => $request->url ? $request->url : null,
+            'event_id' => $request->event_id ? $request->event_id : null,
             'listing_id' => $listing->id,
             'order' => $listing->cards()->exists() ? $listing->cards->last()->order + 1 : 0
         ]);

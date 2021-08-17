@@ -9,9 +9,10 @@
 @section('content')
     <div id="bodyArea">
         <div class="com">
-            <vue-community-show
-                    :value="{{ $community }}" 
-                    :user="{{ auth()->user() }}"/>
+            <vue-community-show 
+                :owner="false"
+                :sections="{{ $sections }}" 
+                :value="{{ $community }}"/>    
         </div>
         <div class="admin-approval__space">
             

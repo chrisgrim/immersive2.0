@@ -5,13 +5,21 @@ namespace App\Models\Curated;
 use App\Models\ImageFile;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Event;
 use Illuminate\Support\Str;
 
 class Card extends Model
 {
     use HasFactory;
 
-    protected $fillable = [ 'name', 'blurb', 'url', 'thumbImagePath', 'order', 'listing_id' ];
+    protected $fillable = [ 'name', 'blurb', 'url', 'thumbImagePath', 'order', 'listing_id', 'event_id' ];
+
+    /**
+    * The relations to eager load on every query. I am adding shows here because I need to filter by dates for the search
+    *
+    * @var array
+    */
+    protected $with = ['event'];
 
     /**
      * Get the Collection that owns the Card.
@@ -19,6 +27,14 @@ class Card extends Model
     public function listing()
     {
         return $this->belongsTo(Listing::class);
+    }
+
+    /**
+     * Card belongs to an event.
+     */
+    public function event()
+    {
+        return $this->belongsTo(Event::class);
     }
 
     /**

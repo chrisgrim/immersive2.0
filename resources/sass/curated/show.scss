@@ -1,0 +1,57 @@
+.community-show {
+    padding: 0 8rem 8rem 8rem;
+    max-width: 1600px;
+    margin: auto;
+}
+.com-intro {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    display: grid;
+    grid-template-columns: auto 30rem;
+    column-gap: 1.6rem;
+}
+.com-curators {
+    border: 1px solid #d4d4d4;
+    padding: 1rem;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+}
+.curator {
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: 5rem 1fr;
+    align-items: center;
+}
+.curator img {
+    width: 4rem;
+    border-radius: 5rem;
+}
+.community-show .listings {
+    position: relative;
+    width:100%;
+    display: inline-block;
+}
+.com-card__grid {
+    display: flex;
+    height: 100%;
+    list-style: none;
+    overflow: auto hidden;
+    padding-left: 0px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    min-width: 100%;
+    scroll-snap-type: x mandatory;
+}
+.com-card {
+    border-style: solid;
+    border-color: transparent;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    display: flex;
+    background-color: #FFFFFF;
+    border-radius: 16px;
+    width: 100%;
+    border-width: 0px 5px;
+    max-width: 25%;
+    flex: 0 0 25%;
+}

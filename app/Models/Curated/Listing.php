@@ -4,13 +4,17 @@ namespace App\Models\Curated;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\User;
+use App\Models\Featured\Feature;
+use App\Models\Featured\Section;
 use Illuminate\Database\Eloquent\Model;
 
 class Listing extends Model
 {
     use HasFactory;
 
-    protected $fillable = [ 'name', 'slug', 'blurb', 'thumbImagePath', 'shelf_id', 'largeImagePath', 'user_id', 'community_id', 'status', 'order' ];
+    protected $fillable = [ 'name', 'slug', 'blurb', 'thumbImagePath', 'largeImagePath', 'user_id', 'community_id', 'section_id', 'status', 'order' ];
+
+    protected $with = ['limitedCards'];
 
     /**
     * Sets the Route Key to slug instead of ID
@@ -40,11 +44,19 @@ class Listing extends Model
     }
 
     /**
-     * Get the Shelf that owns the Listing.
+     * Get the Section that owns the Listing.
      */
-    public function shelf()
+    public function section()
     {
-        return $this->belongsTo(Shelf::class);
+        return $this->belongsTo(Section::class);
+    }
+
+    /**
+     * Get all of the listings featureds.
+     */
+    public function featured()
+    {
+        return $this->morphOne(Feature::class, 'featureable');
     }
 
     /**
@@ -69,7 +81,6 @@ class Listing extends Model
     public function limitedCards()
     {
         return $this->hasMany(Card::class)->orderBy('order', 'ASC');
-        // return $this->hasMany(Card::class)->orderBy('order', 'ASC')->limit(4);
     }
 
     /**
@@ -81,6 +92,10 @@ class Listing extends Model
             $listing->cards()->each(function($card) {
                 $card->destroyCard($card);
             });
+            $featured = $listing->featured()->first();
+            $ids = $featured->sections->map(function($section) { return $section->id; });
+            $featured->sections()->detach($ids);
+            $featured->delete();
         });
     }
 }

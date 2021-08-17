@@ -5,6 +5,7 @@ namespace App\Models\Curated;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\ImageFile;
 use App\Models\User;
+use App\Models\Featured\Section;
 use Illuminate\Database\Eloquent\Model;
 
 class Community extends Model
@@ -53,11 +54,11 @@ class Community extends Model
     }
 
     /**
-     * Returns community Shelves.
+     * Get all of the post's comments.
      */
-    public function shelves()
+    public function sections()
     {
-        return $this->hasMany(Shelf::class)->orderBy('order', 'ASC');
+        return $this->morphMany(Section::class, 'container')->orderBy('order', 'ASC');
     }
 
     /**

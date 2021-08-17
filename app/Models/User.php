@@ -206,6 +206,16 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
+     * The User has many Sections
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     */
+    public function sections() 
+    {
+        return $this->hasMany(Section::class);
+    }
+
+    /**
      * The User has many Staff Picks
      *
      * @return \Illuminate\Database\Eloquent\Relations\hasMany

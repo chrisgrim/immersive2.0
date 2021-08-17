@@ -8,7 +8,9 @@
         <editor-content class="editor__content" :editor="editor" />
         <div class="editor__footer">
             <button class="outline" @click="cancel">Cancel</button>
-            <button @click="save">Save</button>
+            <button 
+                :disabled="disabled" 
+                @click="save">Save</button>
         </div>
     </div>
 </template>
@@ -20,7 +22,7 @@
 
     export default {
 
-        props: ['community', 'value'],
+        props: ['community', 'value', 'disabled'],
 
         components: {EditorContent, MenuBar },
 

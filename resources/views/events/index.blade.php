@@ -63,9 +63,14 @@
            <vue-email-verify :user="{{auth()->user()}}" message="verify"></vue-email-verify>
         @endif
         @if($staffpicks)
-            <event-index :categories="{{$categories}}" :staffpicks="{{$staffpicks}}"/>
+            <event-index 
+                :categories="{{$categories}}" 
+                :section="{{$section}}"
+                :staffpicks="{{$staffpicks}}"/>
         @else
-            <event-index :categories="{{$categories}}"/>
+            <event-index 
+                :section="{{$section}}"
+                :categories="{{$categories}}"/>
         @endif
     </div>
 @endsection

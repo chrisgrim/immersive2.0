@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Curated;
 
 use Illuminate\Http\Request;
 use App\Models\Curated\Community;
+use App\Models\Featured\Section;
+use App\Models\Featured\Feature;
 use App\Models\Curated\Listing;
+use App\Models\Event;
 use Illuminate\Validation\ValidationException;
 use App\Http\Requests\CommunityStoreRequest;
 use App\Actions\Curated\CommunityActions;
@@ -25,7 +28,7 @@ class CommunityController extends Controller
      */
     public function index()
     {
-        $communities = auth()->user()->communities->load('limitedListings');
+        $communities = auth()->user()->communities;
         return view('communities.index', compact('communities'));
     }
 
@@ -58,9 +61,9 @@ class CommunityController extends Controller
      */
     public function show(Community $community)
     {
-        $shelves = $community->shelves()->with('publicListingsWithCards')->limit(3)->get();
+        $sections = $community->sections()->with('publicFeatured.featureable')->get();
         $community->load('curators');
-        return view('communities.show', compact('community', 'shelves'));
+        return view('communities.show', compact('community', 'sections'));
     }
 
     /**
@@ -71,8 +74,8 @@ class CommunityController extends Controller
      */
     public function edit(Community $community)
     {
-        $shelves = $community->shelves()->with('listingsWithCards')->get();
-        return view('communities.listings.index', compact('community', 'shelves'));
+        $sections = $community->sections()->with('featured')->get();
+        return view('communities.edit', compact('community', 'sections'));
     }
 
     /**

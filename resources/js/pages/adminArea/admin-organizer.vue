@@ -37,16 +37,33 @@
                         <img :src="`/storage/${org.thumbImagePath}`">
                         <p>{{ org.name }}</p>
                     </div>
-                    <div>
-                        <button 
-                            class="noBox" 
-                            @click.prevent="showModal(org, 'changeOwner')">
-                            <p style="text-decoration: underline;">{{ org.user.name }}</p>
-                        </button>
-                    </div>
-                    <div>
-                        <p>{{ org.user.email }}</p>
-                    </div>
+
+                    <template v-if="org.user">
+                        <div>
+                            <button 
+                                class="noBox" 
+                                @click.prevent="showModal(org, 'changeOwner')">
+                                <p style="text-decoration: underline;">{{ org.user.name }}</p>
+                            </button>
+                        </div>
+                        <div v-if="org.user">
+                            <p>{{ org.user.email }}</p>
+                        </div>
+                    </template>
+
+                    <template v-else>
+                        <div>
+                            <button 
+                                class="noBox" 
+                                @click.prevent="showModal( org, 'changeOwner')">
+                                <p style="text-decoration: underline;"> No User</p>
+                            </button>
+                        </div>
+                        <div v-if="org.user">
+                            <p> No User </p>
+                        </div>
+                    </template>
+
                     <div>
                         <v-select 
                             v-model="org.users"

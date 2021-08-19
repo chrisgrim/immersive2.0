@@ -8,15 +8,21 @@
 @import 'nav/footer';
 
 //Headers
-@import 'components/headers/headerA';
+@import 'components/headers/header-a';
+@import 'components/headers/header-b';
 
 //Sections
-@import 'components/sections/SectionA';
+@import 'components/sections/section-a';
+@import 'components/sections/section-b';
 
 //Albums
 @import 'components/albums/album';
+@import 'components/albums/album-a';
 @import 'components/albums/grid-image';
 @import 'components/albums/image';
+
+//Features
+@import 'components/features/feature-a';
 
 
 //Shelves
@@ -28,7 +34,6 @@
 
 @import 'events/event-show';
 /*@import 'events/event-show-old';*/
-@import 'events/event-index';
 @import 'events/staffpicks';
 @import 'events/components/event-grid-component';
 @import 'events/event-search';
@@ -45,11 +50,8 @@
 @import 'plugins/flatpickr';
 @import 'plugins/leaflet';
 
-// Multiselect
-@import 'multiselect';
 
-@import 'components/modal';
-@import 'components/multiselect';
+@import 'components/modals/modal';
 @import 'components/vue-list';
 
 @import 'components/sliderbutton';

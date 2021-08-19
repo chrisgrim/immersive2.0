@@ -16,13 +16,15 @@
 @endsection
 
 @section('content')
-    <div class="account-index">
-        <div class="account-notifications_header">
-            <h2>Disclaimer</h2>
+    <div class="disclaimer section-a">
+        <div class="section-a__wrapper">
+            <div class="name">
+                <h2>Disclaimer</h2>
+            </div>
+            <section>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum voluptatibus illum voluptatem voluptas itaque, sequi necessitatibus illo pariatur delectus vero ipsam ad, eaque, blanditiis adipisci doloremque reprehenderit ipsa eius ab?
+            </section>
         </div>
-        <section class="account-index-content">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum voluptatibus illum voluptatem voluptas itaque, sequi necessitatibus illo pariatur delectus vero ipsam ad, eaque, blanditiis adipisci doloremque reprehenderit ipsa eius ab?
-        </section>
     </div>
 @endsection
 

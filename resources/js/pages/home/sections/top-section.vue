@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="name">
-            <h3>{{ section.name }}</h3>
+            <h2>{{ section.name }}</h2>
         </div>
         <div class="album four image container">
             <div class="row">

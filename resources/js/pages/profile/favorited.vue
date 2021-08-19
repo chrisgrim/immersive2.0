@@ -1,18 +1,19 @@
 <template>
-    <div class="favorited-index">
-        <div class="favorited-index__title">
-            <h3>Your Favorited Events</h3>
-        </div>
-
-        <div class="event-index-eventlist grid">
-            <vue-event-index :events="eventList.data" />
-        </div>
-        <div>
-            <pagination 
-                :limit="1"
-                :list="eventList"
-                @selectpage="onLoad" />
-        </div>
+    <div class="favorited">
+        <section class="section-a">
+            <div class="section-a__wrapper">
+                <div class="name">
+                    <h3>Your Favorited Events</h3>
+                </div>
+                <vue-event-index :events="eventList.data" />
+                <div>
+                    <pagination 
+                        :limit="1"
+                        :list="eventList"
+                        @selectpage="onLoad" />
+                </div>
+            </div>
+        </section>
     </div>
 </template>
 

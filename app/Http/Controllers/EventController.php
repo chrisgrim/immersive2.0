@@ -47,7 +47,11 @@ class EventController extends Controller
             ->limit(4)
             ->get();
 
-        $community = Community::find(3)->load('sections.publicFeatured');
+        if ( Community::first()) {
+            $community = Community::first()->load('sections.publicFeatured');
+        } else {
+            $community = 'test';
+        }
 
         $categories = Category::orderBy('rank', 'desc')
             ->limit(14)

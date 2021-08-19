@@ -1,0 +1,22 @@
+.album-a {
+    width: 100%;
+    overflow: hidden;
+    margin-left: -1rem;
+    margin-right: -1rem;
+}
+.album-a__middle.vertical {
+    white-space: inherit;
+}
+.album-a__middle {
+    white-space: nowrap;
+    overflow: visible;
+    transition: transform 0.5s ease 0s;
+    width: 100%;
+}
+.album-a .element {
+    padding: 1rem;
+    display: inline-block;
+    white-space: normal;
+    vertical-align: top;
+    position: relative;
+}

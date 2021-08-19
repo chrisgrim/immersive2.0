@@ -413,6 +413,12 @@ button.round svg {
     height: 3rem;
     width: 3rem;
 }
+.three {
+    grid-template-columns: 1fr 1fr 1fr;
+}
+.four {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
 
 @media (max-width: 768px) {
     html { font-size: 62.5%; font-family: 'Montserrat', sans-serif; height:100%;} 

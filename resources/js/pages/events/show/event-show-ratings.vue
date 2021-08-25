@@ -1,7 +1,7 @@
 <template>
     <section 
         id="reviews" 
-        class="es__rating--reviews pad4">
+        class="es__rating--reviews element">
         <template v-if="event.ratingAmount > 1">
             <span class="es__star active"><IconSvg type="star" /></span><h2>{{event.averageRating}} ({{event.ratingAmount}} Reviews)</h2>
         </template>

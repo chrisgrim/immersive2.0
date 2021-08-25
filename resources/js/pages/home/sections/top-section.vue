@@ -26,9 +26,9 @@
                             </picture>
                         </div>
                         <div class="card-body">
-                            <p class="card-title">
-                                {{ listing.featureable.name }}
-                            </p>
+                            <div class="name">
+                                <p>{{ listing.featureable.name }}</p>
+                            </div>
                         </div>
                     </div>
                 </div>

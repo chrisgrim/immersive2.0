@@ -1,5 +1,5 @@
 <template>
-    <div class="es__dates pad4">
+    <div class="es__dates element">
         <h2>Show Dates</h2>
         <template v-if="event.showtype == 's' || event.showtype == 'l'">
             <button 
@@ -144,7 +144,6 @@
                     disable: [],
                 }
             },
-
             getDates() {
                 if(this.event.shows) {
                     this.event.shows.forEach(event=> {
@@ -157,7 +156,6 @@
                     });
                 }
             },
-
             cleanDate(data) {
                 return this.$dayjs(data).format("MMM D");
             },

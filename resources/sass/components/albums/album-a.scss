@@ -1,22 +1,42 @@
-.album-a {
-    width: 100%;
-    overflow: hidden;
-    margin-left: -1rem;
-    margin-right: -1rem;
+.album-a .card {
+    display: grid;
+    grid-template-columns: 29rem auto
 }
-.album-a__middle.vertical {
-    white-space: inherit;
-}
-.album-a__middle {
-    white-space: nowrap;
-    overflow: visible;
-    transition: transform 0.5s ease 0s;
-    width: 100%;
-}
-.album-a .element {
-    padding: 1rem;
-    display: inline-block;
-    white-space: normal;
-    vertical-align: top;
+.album-a .col {
     position: relative;
+    margin: 1rem;
 }
+.album-a .card-img {
+    border-radius: 1rem;
+    overflow: hidden;
+    position: relative;
+    padding-top: 56%;
+}
+.album-a .card img {
+    -o-object-fit: cover;
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    position: absolute;
+}
+.album-a .tags {
+    color: #9fa6ce;
+    font-size: 1.4rem;
+    margin: 0;
+}
+.album-a .tags li {
+    display: inline-block;
+}
+.album-a .name p {
+    font-weight: 500;
+}
+.album-a .blurb p {
+    font-size: 1.2rem;
+    margin-top: 1rem;
+}
+
+

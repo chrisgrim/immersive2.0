@@ -1,6 +1,6 @@
 <template>
     <section v-if="event.eventreviews ? event.eventreviews.length : null">
-        <div class="pad4">
+        <div class="element">
             <div 
                 class="box" 
                 v-for="review in event.eventreviews"

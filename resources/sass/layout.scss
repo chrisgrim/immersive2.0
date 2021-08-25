@@ -207,34 +207,6 @@ textarea {
     background: white;
 }
 
-.hearted {
-    fill:#FF5A5F; 
-    fill-opacity:1;
-    stroke:#FF5A5F; 
-    height: 2.4rem; 
-    width: 2.4rem; 
-    overflow: visible;
-    stroke-width:2;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-top: -1.2rem;
-    margin-left: -1.2rem;
-}
-.unhearted {
-    fill: none;
-    fill-opacity: 0;
-    stroke: #000;
-    height: 2.4rem; 
-    width: 2.4rem; 
-    stroke-width: 2;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-top: -1.2rem;
-    margin-left: -1.2rem;
-}
-
 button.default-border {
     color: $default-color;
     border-radius: 0.4rem;
@@ -293,7 +265,6 @@ button.patreon {
 }
 .blurb p {
     font-size: 1.5rem;
-    margin-top: 2rem;
 }
 .blurb strong {
     font-weight: 500;
@@ -389,35 +360,13 @@ button.patreon {
     height: 4rem;
     width: 4rem;
 }
-button.round {
-    border: 0;
-    height: 3rem;
-    width: 3rem;
-    display: flex;
-    padding: 0;
-    border-radius: 5rem;
-    justify-content: center;
-    align-items: center;
-    border:2px solid black;
-}
-button.round:hover {
-    background: #dedede;
-}
-button.round.active {
-    background: black;
-}
-button.round.active svg {
-    fill: white;
-}
-button.round svg {
-    height: 3rem;
-    width: 3rem;
-}
-.three {
-    grid-template-columns: 1fr 1fr 1fr;
-}
-.four {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+.alert-dot svg {
+    fill: red !important;
+    position: absolute !important;
+    width: 2.5rem !important;
+    height: 2.5rem !important;
+    right: -0.3rem;
+    top: -0.3rem;
 }
 
 @media (max-width: 768px) {

@@ -1,7 +1,7 @@
 <template>
     <section
         id="staffpick"
-        class="es__staffpick pad4">
+        class="es__staffpick element">
         <div class="es__staffpick--title">
             <picture>
                 <source 

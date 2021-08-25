@@ -1,5 +1,5 @@
 <template>
-    <section class="es__details pad4">
+    <section class="es__details element">
         <div>
             <div class="title">
                 <h3>Audience Role</h3>

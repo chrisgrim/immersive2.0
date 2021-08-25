@@ -1,0 +1,47 @@
+.btn.rounded {
+    border-radius: 5rem;
+}
+.btn.caps{
+    text-transform: uppercase;
+}
+.btn-borderless {
+    border:0;
+}
+
+
+
+
+
+/*-------------------------------Outline---------------------------------*/
+.btn-outline {
+    border: 1px solid #81899a;
+}
+
+
+/*----------------------------------Icon---------------------------------*/
+button.btn-icon {
+    border: 0;
+    height: 3rem;
+    width: 3rem;
+    display: flex;
+    padding: 0;
+    border-radius: 5rem;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid black;
+}
+button.btn-icon:hover {
+    background: #dedede;
+}
+button.btn-icon.active {
+    background: black;
+}
+button.btn-icon.active svg {
+    fill: white;
+}
+button.btn-icon svg {
+    height: 3rem;
+    width: 3rem;
+}
+
+

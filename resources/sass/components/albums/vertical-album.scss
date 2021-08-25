@@ -1,0 +1,31 @@
+.album.vertical .row {
+    display: flex;
+    flex-wrap: wrap;
+}
+.album.vertical .col {
+    display: inherit;
+}
+.album.three.vertical .col {
+    width: 100%;
+}
+.album.four.vertical .col {
+    width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+    .album.three.vertical .col {
+        width: 50%;
+    }
+    .album.four.vertical .col {
+        width: 33.3333333333%;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .album.three.vertical .col {
+        width: 33.3333333333%;
+    }
+    .album.four.vertical .col {
+        width: 25%;
+    }
+}

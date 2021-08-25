@@ -2,22 +2,11 @@
   #Event- Show Page
 \*------------------------------------ */
 
-.show-content {
-    margin: 0;
-    background: white;
-}
-.show-content h2 {
-    font-size: 2rem;
-    padding-bottom: 2rem;
-    display: inline-block;
-}
-
 .youtube {
     position: relative;
     width: 100%;
     padding-bottom: 56.25%;
 }
-
 iframe.youtube-iframe {
     width: 100%;
     position: absolute;
@@ -31,10 +20,6 @@ iframe.youtube-iframe {
   #Layout
 \*------------------------------------ */
 
-.pad4 {
-    padding: 3rem 0;
-    border-bottom: 1px solid #DDDDDD;
-}
 .subtext p {
     font-size: 1.4rem;
     color: #717171;
@@ -44,29 +29,6 @@ iframe.youtube-iframe {
     height: 1px;
     background: #DDDDDD;
     width: 100%;
-}
-.es__body {
-    max-width: 1280px;
-    width:100%;
-    margin: auto;
-    padding: 0 8rem;
-    display: grid;
-    grid-template-columns: 1fr 37rem;
-    grid-column-gap: 9rem;
-    padding-bottom: 4rem;
-}
-.es__body h2 {
-    font-size: 2rem;
-    padding-bottom: 2rem;
-    display: inline-block;
-}
-.es__body--left {
-    position: relative;
-    display: inline-block;
-}
-.es__body--right {
-    position: relative;
-    display: inline-block;
 }
 .es__quickbuy--body {
     position: fixed;
@@ -80,22 +42,11 @@ iframe.youtube-iframe {
     padding: 2rem;
     margin-top: 4rem;
 }
-.es__widebody {
-    max-width: 1280px;
-    margin: auto;
-    padding: 0 8rem;
-}
 
 /* ------------------------------------*\
   Header
 \*------------------------------------ */
 
-header.es__header {
-    max-width: 1280px;
-    margin: auto;
-    padding: 2rem 8rem 0 8rem;
-    position: relative;
-}
 .es__header--image img {
     height: 50vh;
     width: 100%;
@@ -120,7 +71,7 @@ header.es__header {
 .es__favorite {
     position: absolute;
     right: 0;
-    top: 4rem;
+    top: 2rem;
     background: white;
     border-radius: 0.5rem;
     width: 5rem;
@@ -140,7 +91,7 @@ header.es__header {
 }
 .es__admin--edit {
     position: absolute;
-    top: 4rem;
+    top: 2rem;
     right: 17rem;
     background: white;
     height: 5rem;
@@ -260,7 +211,7 @@ header.es__header {
 /* ------------------------------------*\
   Details
 \*------------------------------------ */
-.es__details.pad4 {
+.es__details.element {
     border: 0;
 }
 .es__details h3 {
@@ -577,7 +528,9 @@ header.es__header {
 /* ------------------------------------*\
   Organizer
 \*------------------------------------ */
-
+.es__organizer.element {
+    border:0;
+}
 .es__organizer--details {
     display: grid;
     grid-template-columns: 6rem 1fr;
@@ -814,13 +767,7 @@ button.helpful:hover {
 
 
 
-
-
 @media (min-width: 768px) {
-
-    .pad4 {
-        padding: 4.8rem 0;
-    }
     .es__description p {
         margin-top: 2rem;
     }
@@ -836,23 +783,19 @@ button.helpful:hover {
         top: 3rem;
         display: inherit;
     }
-
     .es__map .leaflet-touch .leaflet-bar {
         border: 0;
         border-radius: 1rem;
         box-shadow: rgba(0, 0, 0, 0.16) 0 4px 24px, rgba(0, 0, 0, 0.04) 0 0 0 1px !important;
     }
-
     .es__map .leaflet-touch .leaflet-bar a:first-child {
         border-top-left-radius: 1rem;
         border-top-right-radius: 1rem;
     }
-
     .es__map .leaflet-touch .leaflet-bar a:last-child {
         border-bottom-left-radius: 1rem;
         border-bottom-right-radius: 1rem;
     }
-
     .es__map .leaflet-touch .leaflet-bar a {
         width: 40px;
         height: 40px;
@@ -877,7 +820,6 @@ button.helpful:hover {
         width: 100%;
     }
     .es__ticket--buy button {
-
         padding: 1.6rem 5rem;
     }
     .es__header--image img {
@@ -922,23 +864,4 @@ button.helpful:hover {
         max-height: calc(100vh - 20rem);
         overflow: hidden auto;
     }
-
 }
-
-@media (max-width: 768px) {
-    .es__body {
-        padding: 0 2rem;
-        grid-template-columns: 1fr;
-        grid-column-gap: 0;
-    }
-    header.es__header {
-        padding: 0;
-        width:100%;
-    }
-    .es__widebody {
-        padding:0 2rem;
-    }
-}
-
-
-

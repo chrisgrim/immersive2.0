@@ -17,6 +17,5 @@
 
 @section('content')
     <div id="bodyArea"> 
-        <category-show :category="{{$category}}"> 
     </div>
 @endsection

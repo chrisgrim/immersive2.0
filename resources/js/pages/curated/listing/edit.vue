@@ -182,7 +182,7 @@
                                         <div class="delete">
                                             <button 
                                                 @click="deleteFeaturedImage"
-                                                class="round">
+                                                class="icon">
                                                 <svg>
                                                     <use :xlink:href="`/storage/website-files/icons.svg#ri-close-line`" />
                                                 </svg>

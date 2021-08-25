@@ -2,18 +2,18 @@
   #Event- Index Page
 \*------------------------------------ */
 
-
-
-.index-nav-search {
-    position: relative;
+.homepage .intro {
     width: 100%;
-    &.mobile {
-        width: 100%;
-        margin-top: 1.7rem;
-    }
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
 }
-
-
+.homepage .intro h3 {
+    color: white;
+    font-size: 2rem;
+    padding-top: 4rem;
+}
 
 
 
@@ -50,27 +50,5 @@ button.contributer--button {
     }
     button.contributer--button {
         min-height: 5rem;
-    }
-    .event-index__categories--bottom {
-        width: 8%;
-        padding: .4rem;
-    }
-    .event-index__categories--top {
-        height: 100%;
-        overflow-y: auto;
-        overflow-x: scroll;
-        scrollbar-width: none;
-        grid-column-gap: 1.4rem !important;
-        display: -webkit-box!important;
-        display: flex!important;
-    }
-    .event-index__categories--item h4 {
-        font-size: 1rem;
-    }
-    .index-category__slider-button--left {
-        display: none;
-    }
-    .index-category__slider-button--right {
-       display: none;
     }
 }

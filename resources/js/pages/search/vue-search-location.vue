@@ -32,7 +32,9 @@
                                 <div class="title">
                                     <h3>Online events</h3>
                                 </div>
-                                <vue-event-index :events="onlineEventList.data" />
+                                <VueEventIndex 
+                                    :col="4"
+                                    :events="onlineEventList.data" />
                             </div>
                         </div>
                     </div>
@@ -87,7 +89,9 @@
                                         <h3>Online Events</h3>
                                     </div>
                                     <template v-if="onlineEventList.data">
-                                        <vue-event-index :events="onlineEventList.data" />
+                                        <VueEventIndex 
+                                            :col="4"
+                                            :events="onlineEventList.data" />
                                     </template>
                                     <div>
                                         <pagination 
@@ -108,14 +112,14 @@
 
 <script>
     import SearchFilter  from './vue-search-filter-location.vue'
-    import VueList from './components/vue-location-list.vue'
+    import VueList from './components/album-location-search.vue'
     import Pagination  from '../events/components/pagination.vue'
     import searchBasicsMixin from '../../mixins/search-basics-mixin'
-    import vueEventIndex from '../events/components/index-item.vue'
+    import VueEventIndex from '../events/components/index-item.vue'
     import VueSearchMap from './components/vue-map.vue'
 
     export default {
-        components: { SearchFilter, VueList, Pagination, vueEventIndex, VueSearchMap },
+        components: { SearchFilter, VueList, Pagination, VueEventIndex, VueSearchMap },
 
         mixins: [ searchBasicsMixin ],
 

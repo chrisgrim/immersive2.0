@@ -1,6 +1,6 @@
 <template>
     <section>
-        <div class="es__title pad4">
+        <div class="es__about element">
             <a :href="`/index/search-all?category=${event.category.id}`">
                 <span class="es__title--category"> {{ event.category.name }} </span>
             </a>
@@ -41,7 +41,7 @@
             </template>
         </div>
 
-        <div class="es__description pad4">
+        <div class="es__description element">
             <h2>Experience hosted by 
                 <a 
                     target="_blank" 
@@ -73,7 +73,6 @@
                     :src="`https://www.youtube.com/embed/${event.video}`" />
             </div>
         </template>
-
     </section>
 </template>
 
@@ -83,7 +82,7 @@
     import VideoPlayer  from './VideoPlayer.vue'
     export default {
 
-        props: [ 'event', 'remaining'],
+        props: [ 'event'],
 
         components: { ShowMore, IconSvg, VideoPlayer },
 

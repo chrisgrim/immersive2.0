@@ -1,56 +1,69 @@
 <template>
-    <div class="event-index-container">
-        <div class="event-index">
-            <header class="padded staffpicks">
-                <div class="header-title">
-                    <h3>StaffPicks for the week of {{ week }}</h3>
-                </div>
-            </header>
-            <section class="padded">
-                <div class="staffpicks__banner--top">
-                    <div 
-                        v-for="(staffpick) in staffpicks"
-                        :key="staffpick.id">
-                        <a :href="`/events/${staffpick.event.slug}`">
-                            <div class="staffpicks__selection--main show">
-                                <div class="staffpicks__image">
+    <div class="staffpicks">
+        <div class="section-a">
+            <div class="section-a__wrapper">
+                <h2>StaffPicks for the week of {{ week }}</h2>
+                <div class="album-a">
+                    <a 
+                        v-for="(card) in staffpicks" 
+                        :key="card.id"
+                        class="row">
+                        <div class="card">
+                            <div class="col">
+                                <a 
+                                    :href="`/events/${card.event.slug}`" 
+                                    class="card-url" />
+                                <div class="card-img">                            
                                     <picture>
                                         <source 
                                             type="image/webp" 
-                                            :srcset="`/storage/${staffpick.event.thumbImagePath}`"> 
+                                            :srcset="`/storage/${card.event.thumbImagePath}`"> 
                                         <img 
-                                            :src="`/storage/${staffpick.event.thumbImagePath.slice(0, -4)}jpg`" 
-                                            :alt="`${staffpick.event.name} Immersive Event`">
+                                            loading="lazy" 
+                                            :src="`/storage/${card.event.thumbImagePath.slice(0, -4)}jpg`" 
+                                            :alt="`${card.event.name} Immersive Event`">
                                     </picture>
                                 </div>
-                                <div class="staffpicks__content">
-                                    <div class="staffpicks__title">
-                                        <h4>{{ staffpick.event.name }}</h4>
-                                        <p>{{ staffpick.event.organizer.name }}</p>
-                                        <p>{{ staffpick.event.price_range }}</p>
-                                    </div>
-                                    <div class="staffpicks__summary">
-                                        <p>" {{ staffpick.comments }} "</p>
-                                    </div>
-                                    <div class="staffpicks__user">
-                                        <div class="staffpicks__user--name">
-                                            <i><p>-{{ staffpick.user.name }}</p></i>
+                            </div>
+                            <div class="col">
+                                <div class="card-body">
+                                    <template v-if="card.event.name">
+                                        <div class="name">
+                                            <p>{{ card.event.name }}</p>
                                         </div>
-                                        <picture>
-                                            <source 
-                                                type="image/webp" 
-                                                :srcset="`/storage/${staffpick.user.thumbImagePath}`"> 
-                                            <img 
-                                                :src="`/storage/${staffpick.user.thumbImagePath.slice(0, -4)}jpg`" 
-                                                :alt="`${staffpick.user.name} Immersive Event`">
-                                        </picture>
+                                    </template>
+                                    <template v-if="card.event.blurb">
+                                        <div class="blurb">
+                                            <p>{{ card.event.tag_line }}</p>
+                                        </div>
+                                    </template>
+                                    <div class="price">
+                                        {{ fixedprice(card.event) }}
                                     </div>
+                                    <template v-if="card.comments">
+                                        <div class="summary">
+                                            <p>"{{ card.comments }}"</p>
+                                        </div>
+                                    </template>
+                                    <template v-if="card.user">
+                                        <div class="user">
+                                            <p>{{card.user.name}}</p>
+                                            <picture v-if="card.user.thumbImagePath">
+                                                <source 
+                                                    type="image/webp" 
+                                                    :srcset="`/storage/${card.user.thumbImagePath}`"> 
+                                                <img 
+                                                    :src="`/storage/${card.user.thumbImagePath.slice(0, -4)}jpg`" 
+                                                    :alt="`${card.user.name} Immersive Event`">
+                                            </picture>
+                                        </div>
+                                    </template>
                                 </div>
                             </div>
-                        </a>
-                    </div>
+                        </div>
+                    </a>
                 </div>
-            </section>
+            </div>
         </div>
     </div>
 </template>
@@ -62,6 +75,9 @@
         props:['staffpicks', 'week'],
 
         computed: {
+            fixedprice() {
+                return event => event.price_range.replace(/\d+(\.\d{1,2})?/g, dec => parseInt(dec));
+            },
         },
 
         data() {

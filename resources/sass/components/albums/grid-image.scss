@@ -1,20 +1,6 @@
-.album .col {
-    display: flex;
-    width: 100%;
-    flex: 0 0 25%;
-    padding: 0;
-    padding-right: 1rem;
-}
 .album.grid-image .card {
     width: 100%;
     margin: initial;
-}
-.album .card-img{
-    display: grid;
-    flex: 1 1 0%;
-    border-radius: 1rem;
-    overflow: hidden;
-    position: relative;
 }
 .album .card-img.grid-image{
     grid-template-columns: 1fr 0.5fr;
@@ -38,7 +24,7 @@
 .grid-image .img.top {
     border-bottom: 1px solid white;
 }
-.album .card img {
+.album .grid-image .card img {
     -o-object-fit: cover;
     object-fit: cover;
     height: 100%;

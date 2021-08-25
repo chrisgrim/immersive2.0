@@ -1,0 +1,46 @@
+.lay-b {
+    max-width: 1280px;
+    width: 100%;
+    margin: auto;
+    padding: 0;
+    position: relative;
+}
+.lay-b__wrapper {
+    display: grid;
+}
+header.lay-b {
+    padding: 0;
+}
+.lay-b__left {
+    position: relative;
+    display: inline-block;
+}
+.lay-b__right {
+    position: relative;
+    display: inline-block;
+}
+.lay-b .element {
+    border-bottom: 1px solid #DDDDDD;
+    padding: 3rem 2rem;
+}
+.lay-b h2 {
+    font-size: 2rem;
+    padding-bottom: 2rem;
+    display: inline-block;
+}
+
+@media only screen and (min-width: 768px) {
+    .lay-b {
+        padding: 2rem 8rem;
+    }
+    .lay-b__wrapper {
+        grid-template-columns: 1fr 37rem;
+        grid-column-gap: 9rem;
+    }
+    header.lay-b {
+        padding: 0 8rem;
+    }
+    .lay-b .element {
+        padding: 4rem 0;
+    }
+}

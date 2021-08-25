@@ -2,6 +2,7 @@
 
 //Full Page 
 @import 'layouts/full-page';
+@import 'layouts/lay-b';
 
 // Nav
 @import 'nav/navbar';
@@ -17,24 +18,37 @@
 
 //Albums
 @import 'components/albums/album';
+@import 'components/albums/vertical-album';
 @import 'components/albums/album-a';
+@import 'components/albums/favorite';
 @import 'components/albums/grid-image';
 @import 'components/albums/image';
 
 //Features
 @import 'components/features/feature-a';
 
+//Buttons
+@import 'components/buttons/button';
+@import 'components/buttons/button-outline';
 
 //Shelves
 @import 'components/shelves/shelf';
+
+//Dropdowns
+@import 'components/dropdowns/v-select';
+@import 'components/dropdowns/nav-dropdown';
+
+//Staffpicks
+@import 'staffpicks/staffpicks';
+
+//Home
+@import 'home/index';
 
 // Layout
 
 @import 'components/login';
 
 @import 'events/event-show';
-/*@import 'events/event-show-old';*/
-@import 'events/staffpicks';
 @import 'events/components/event-grid-component';
 @import 'events/event-search';
 @import 'events/event-maps';

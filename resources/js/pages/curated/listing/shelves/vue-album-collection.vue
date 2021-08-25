@@ -19,7 +19,7 @@
                         class="delete">
                         <button 
                             @click="deleteListing(feature.featureable)"
-                            class="round">
+                            class="btn-icon">
                             <svg>
                                 <use :xlink:href="`/storage/website-files/icons.svg#ri-close-line`" />
                             </svg>

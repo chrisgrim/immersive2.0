@@ -1,7 +1,7 @@
 <template>
     <section
         id="location"
-        class="pad4 subtext">
+        class="element subtext">
         <template v-if="event.hasLocation">
             <div>
                 <h2>Location</h2>

@@ -26,12 +26,12 @@
                             </picture>
                         </div>
                         <div class="card-body">
-                            <p class="card-title">
-                                {{ listing.featureable.name }}
-                            </p>
-                            <p class="card-blurb">
-                                {{ listing.featureable.blurb }}
-                            </p>
+                            <div class="name">
+                                <p>{{ listing.featureable.name }}</p>
+                            </div>
+                            <div class="blurb">
+                                <p>{{ listing.featureable.blurb }}</p>
+                            </div>
                         </div>
                     </div>
                 </div>

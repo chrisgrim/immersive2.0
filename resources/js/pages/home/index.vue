@@ -3,13 +3,10 @@
         <div>
             <section 
                 class="section-b" 
-                style="background: url('/storage/website-files/header-image.jpg') center center / cover no-repeat;height:40vh">
-                <div class="section-a flex">
+                style="background: url('/storage/website-files/header-image.jpg') center center / cover no-repeat;height:53vh;">
+                <div class="intro">
                     <div class="name">
-                        <h3>Discover immersive experiences...</h3>
-                    </div>
-                    <div class="index-nav-search">
-                        <vue-nav-search page="homepage" />
+                        <h3> Welcome to immersive theater</h3>
                     </div>
                 </div>
             </section>
@@ -92,7 +89,7 @@
 </template>
 
 <script>
-    import vueNavSearch  from '../layouts/nav-search.vue'
+    import SearchBar  from '../../components/search-bars/search-all.vue'
     import TopShelf from './sections/top-section.vue'
     import BottomShelf from './sections/bottom-section.vue'
     import Partners from './sections/partners.vue'
@@ -102,7 +99,7 @@
 
         props:['categories', 'staffpicks', 'community'],
 
-        components: { vueNavSearch, TopShelf, BottomShelf, Partners, StaffPicks },
+        components: { SearchBar, TopShelf, BottomShelf, Partners, StaffPicks },
 
         computed: {
             sectionsWithListings() {

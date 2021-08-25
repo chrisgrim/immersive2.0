@@ -2,7 +2,7 @@
     <div class="filter">
         <div class="content location">
             <div class="filter__block">
-                <vue-nav-search :searchtype="searchType" />
+                <SearchBar />
                 <VueFilterDates
                     :mobile="isMobile()"
                     @submit="pushData" />
@@ -23,7 +23,7 @@
 </template>
 
 <script>
-    import vueNavSearch from '../layouts/nav-search.vue'
+    import SearchBar from '../../components/search-bars/search-location.vue'
     import searchBasicsMixin from '../../mixins/search-basics-mixin'
     import mobile from '../../mixins/mobile'
     import VueFilterDates from './filter/vue-filter-dates.vue'
@@ -35,7 +35,7 @@
 
         props:['categories', 'events', 'onlineevents', 'tags'],
 
-        components: { vueNavSearch, VueFilterDates, VueFilterPrice, VueFilterCategory, VueFilterTag },
+        components: { SearchBar, VueFilterDates, VueFilterPrice, VueFilterCategory, VueFilterTag },
 
         mixins: [ searchBasicsMixin, mobile ],
 

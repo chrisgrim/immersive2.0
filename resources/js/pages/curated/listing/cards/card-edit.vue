@@ -78,7 +78,7 @@
                 <div class="delete">
                     <button 
                         @click="deleteCard"
-                        class="round">
+                        class="btn-icon">
                         <svg>
                             <use :xlink:href="`/storage/website-files/icons.svg#ri-close-line`" />
                         </svg>

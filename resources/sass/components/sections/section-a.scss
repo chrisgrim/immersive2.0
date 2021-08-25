@@ -1,9 +1,9 @@
 .section-a {
     margin: 0px auto;
     position: relative;
-    max-width: 1760px;
-    padding-right: 8rem;
-    padding-left: 8rem;
+    max-width: 1200px;
+    padding-right: 2rem;
+    padding-left: 2rem;
     height: 100%;
 }
 .section-a__wrapper {
@@ -12,4 +12,12 @@
 }
 .section-a h2 {
     margin-bottom: 2rem;
+}
+
+@media screen and (min-width: 768px) {
+    .section-a {
+        max-width: 1760px;
+        padding-right: 8rem;
+        padding-left: 8rem;
+    }
 }

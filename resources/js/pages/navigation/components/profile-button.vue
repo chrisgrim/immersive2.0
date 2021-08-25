@@ -36,6 +36,21 @@
         <ul 
             v-show="onToggle" 
             class="sub-dropdown">
+            <li v-if="user.hasMessages">
+                <a href="/messages">
+                    <div 
+                        v-if="user.unread" 
+                        class="alert-dot">
+                        <svg><circle cx="20.7" cy="3.7" r="3.1" /></svg>
+                    </div>
+                    Inbox
+                </a>
+            </li>
+            <li v-if="isModerator">
+                <a href="/communities">
+                    Communities
+                </a>
+            </li>
             <li>
                 <a :href="'/users/'+ url">
                     Profile
@@ -63,28 +78,28 @@
 </template>
 
 <script>
-	export default {
-        props: ['user', 'screenwidth'],
+    export default {
+        props: ['user', 'mobile'],
 
-		data() {
-			return {
-				avatar: this.user.thumbImagePath ? `/storage/${this.user.thumbImagePath}` : '',
-				userName: this.user.name,
-				url: this.user.id,
-				onToggle:false,
+        data() {
+            return {
+                avatar: this.user.thumbImagePath ? `/storage/${this.user.thumbImagePath}` : '',
+                userName: this.user.name,
+                url: this.user.id,
+                onToggle:false,
                 isModerator: this.user && this.user.type == 'a' || this.user && this.user.type == 'm'
-			};
-		},
+            };
+        },
 
-		methods: {
-			async logout(){
-				await axios.post('/logout');
+        methods: {
+            async logout(){
+                await axios.post('/logout');
                 location.reload();
-					
+                    
             }, 
 
             toggle() {
-                if (this.screenwidth) {
+                if (this.mobile) {
                     return window.location.href = `/account-settings`;
                 }
                 return this.onToggle = !this.onToggle;
@@ -95,7 +110,7 @@
                 if (!arr || arr.contains(event.target)) return;
                 this.onToggle = false;
             },
-		},
+        },
 
         mounted() {
             document.addEventListener("click", this.onClickOutside);
@@ -104,7 +119,7 @@
         beforeUnmount() {
             document.removeEventListener("click", this.onClickOutside);
         }
-	}
+    }
 </script>
 
 

@@ -30,7 +30,7 @@
                     <h3>Add Name</h3>
                 </template>
                 <template v-if="!editName && hover">
-                    <button class="round noBox">
+                    <button class="btn-icon noBox">
                         <svg>
                             <use :xlink:href="`/storage/website-files/icons.svg#ri-pencil-line`" />
                         </svg>

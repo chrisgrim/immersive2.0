@@ -10,8 +10,8 @@
                 <div class="title">
                     <h3>Online Events</h3>
                 </div>
-                <VueList 
-                    :items="onlineEventList.data" 
+                <SearchAlbum 
+                    :items="allEventList.data" 
                     :vertical="true" />
                 <pagination 
                     :limit="1"
@@ -26,10 +26,10 @@
     import SearchFilter  from './vue-search-filter.vue'
     import Pagination  from '../events/components/pagination.vue'
     import searchBasicsMixin from '../../mixins/search-basics-mixin'
-    import VueList from '../../components/Vue-List.vue'
+    import SearchAlbum from './components/album-search.vue'
 
     export default {
-        components: { SearchFilter, Pagination, VueList },
+        components: { SearchFilter, Pagination, SearchAlbum },
 
         mixins: [ searchBasicsMixin ],
 

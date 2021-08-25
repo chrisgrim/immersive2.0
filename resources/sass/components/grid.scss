@@ -41,7 +41,7 @@
     }
 }
 
-.card {
+/*.card {
     position: relative;
     border-radius: 1rem;
     max-width: 50rem;
@@ -49,7 +49,7 @@
     &.black {
         background: black;
     }
-}
+}*/
 
 .card.index {
     margin-bottom: 1rem;
@@ -177,37 +177,6 @@ img.card-image__img.index {
     }
 }
 
-.heart {
-    position: absolute;
-    right: 5%;
-    top: 5%;
-    border-radius: 50%;
-    width: 4rem;
-    height: 4rem;
-    background-color: white;
-    border: 1px solid white;
-    box-shadow: rgba(0, 0, 0, 0.1) 0 2px 0 0, rgba(0, 0, 0, 0.04) 0 0 0 0.5px;
-/*    -webkit-transition-duration: 0.3s;*/
-    -webkit-transition-property: -webkit-transform;
-    transition-property: transform, visibility;
-    -webkit-transform: translateZ(0);
-    -ms-transform: translateZ(0);
-    transform: translateZ(0);
-    visibility: hidden;
-    &:hover {
-        -webkit-transform: scale(1.07);
-        -ms-transform: scale(1.07);
-        transform: scale(1.07);
-    }
-}
-
-.heart.visible {
-    visibility: visible;
-    opacity: 1;
-    box-shadow: none;
-    right: 0;
-    top: 0;
-}
 
 /* --------------------------------- Event card for Staff Picks on Index Page ---------------------------------------------------- */
 .eventlist__element.staff {

@@ -1,24 +1,35 @@
 /*simple album*/
 
+.album {
+    white-space: nowrap;
+    overflow-y: hidden;
+    overflow-x: auto;
+    scrollbar-width: none;
+    grid-column-gap: 1.4rem;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: none;
+}
 .album.container {
     width: 100%
 }
 .album .row {
-    display: flex;
-    flex-wrap: wrap;
+    white-space: nowrap;
+    overflow: visible;
+    width: 100%;
 }
 .album .col {
-    padding: 0;
+    padding: 0 0.8rem;
     position: relative;
     display: flex;
     width: 100%;
-    padding-right: 1rem;
+    flex: 0 0 auto;
+    display: inline-block;
 }
 .album.three .col {
-    flex: 0 0 33.3333333333%;
+    width: 80%;
 }
 .album.four .col {
-    flex: 0 0 25%;
+    width: 80%;
 }
 .album .card {
     position: relative;
@@ -31,26 +42,62 @@
     max-width: inherit;
     width: 100%;
     overflow: hidden;
+    margin-top: 0;
 }
-
-.album.simple .card img {
-    position: static;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+.album .card-img{
+    display: grid;
+    border-radius: 1rem;
+    overflow: hidden;
+    position: relative;
+}
+.album .card img {
     -o-object-fit: cover;
     object-fit: cover;
-    height: 23rem;
+    height: 100%;
     width: 100%;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    position: absolute;
 }
 .album .card-body {
     padding: 1rem 0;
 }
-.album p.card-title{
-    font-weight: 700;
-
+.album .name p {
+    font-weight: 500;
 }
-.album p.card-text {
+.album .blurb p {
     font-size: 1.2rem;
+    margin-top: 1rem;
+}
+
+@media screen and (min-width: 768px) {
+    .album {
+        width: 100%;
+        overflow: visible;
+        white-space: inherit;
+    }
+    .album .row {
+        white-space: inherit;
+    }
+    .album.three .col {
+        width: 50%;
+    }
+    .album.four .col {
+        width: 33.3333333333%;
+    }
+    .album .card:hover div.heart {
+        visibility: visible;
+        opacity: 1;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .album.three .col {
+        width: 33.3333333333%;
+    }
+    .album.four .col {
+        width: 25%;
+    }
 }

@@ -60,26 +60,6 @@ class SearchController extends Controller
 
     }
 
-    public function location(Request $request) 
-    {
-        if ($request->keywords) {
-            $cityResult = CityList::multiMatchSearch()
-                ->fields(['name'])
-                ->query($request->keywords)
-                ->type('bool_prefix')
-                ->sort('rank', 'desc')
-                ->sort('population', 'desc')
-                ->size(4)
-                ->execute();
-            return $cityResult->matches();
-        }
-        $searchResult = CityList::matchAllSearch()
-        ->sort('rank', 'desc')
-        ->size(10)
-        ->execute();
-        return $searchResult->matches();
-    }
-
     public function allsearch(Request $request)
     {
         $maxprice = ceil(Event::getMostExpensive());
@@ -104,41 +84,87 @@ class SearchController extends Controller
         return view('events.searchonline',compact('onlineevents', 'categories', 'maxprice', 'tags'));
     }
 
-    public function searchLocation(Request $request)
+    public function location(Request $request) 
     {
         if ($request->keywords) {
-            $city = CityList::search($request->keywords)
-            ->rule(CityListSearchRule::class)
-            ->orderBy('rank', 'desc')
-            ->orderBy('population', 'desc')
-            ->get();
-        } else {
-            $city = CityList::search('*')
-            ->orderBy('rank', 'desc')
-            ->orderBy('population', 'desc')
-            ->take(10)
-            ->get();
+            $cityResult = CityList::multiMatchSearch()
+                ->fields(['name'])
+                ->query($request->keywords)
+                ->type('bool_prefix')
+                ->sort('rank', 'desc')
+                ->sort('population', 'desc')
+                ->size(6)
+                ->execute();
+            return $cityResult->matches();
         }
-
-        if ($city->count()) {
-            return [
-                'data' => $city,
-            ];
-        }
+        $searchResult = CityList::matchAllSearch()
+        ->sort('rank', 'desc')
+        ->size(6)
+        ->execute();
+        return $searchResult->matches();
     }
 
-    public function searchEvents(Request $request)
+    public function events(Request $request)
     {
         if ($request->keywords) {
-            $events = Event::search($request->keywords)
-                ->rule(EventSearchRule::class)
-                ->get();
-             if ($events->count()) {
-                return $events;  
-            }
+            $events = Event::multiMatchSearch()
+                ->join(Organizer::class)
+                ->fields(['name'])
+                ->query($request->keywords)
+                ->type('bool_prefix')
+                ->size(6)
+                ->execute();
+            return $events->matches();
         }
-        return Event::where('status','p')->take(10)->get();
+        $events = Event::matchAllSearch()
+        // ->sort('rank', 'desc')
+        ->size(6)
+        ->execute();
+        return $events->matches();
     }
+
+    public function tags(Request $request)
+    {
+        if ($request->keywords) {
+            $tags = Category::multiMatchSearch()
+                ->join(Genre::class)
+                ->fields(['name'])
+                ->query($request->keywords)
+                ->type('bool_prefix')
+                ->size(6)
+                ->execute();
+            return $tags->matches();
+        }
+        $tags = Category::matchAllSearch()
+        ->join(Genre::class)
+        ->sort('rank', 'desc')
+        ->size(6)
+        ->execute();
+        return $tags->matches();
+    }
+
+    // public function searchLocation(Request $request)
+    // {
+    //     if ($request->keywords) {
+    //         $city = CityList::search($request->keywords)
+    //         ->rule(CityListSearchRule::class)
+    //         ->orderBy('rank', 'desc')
+    //         ->orderBy('population', 'desc')
+    //         ->get();
+    //     } else {
+    //         $city = CityList::search('*')
+    //         ->orderBy('rank', 'desc')
+    //         ->orderBy('population', 'desc')
+    //         ->take(10)
+    //         ->get();
+    //     }
+
+    //     if ($city->count()) {
+    //         return [
+    //             'data' => $city,
+    //         ];
+    //     }
+    // }
 
     public function searchBoneyard(Request $request)
     {

@@ -1,5 +1,5 @@
 <template>
-    <header class="es__header">
+    <header class="lay-b">
         <nav 
             v-if="isMobile"
             class="es__mobile-nav">

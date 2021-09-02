@@ -1,36 +1,39 @@
 <template>
-    <div class="modal-box">
-        <div class="modal-box__container">
-            <div class="modal-box__close">
+    <div class="modal accept">
+        <div class="wrapper">
+            <div class="header">
                 <button @click="onClose">
-                    <IconSvg type="delete" />
+                    <svg>
+                        <use :xlink:href="`/storage/website-files/icons.svg#ri-close-line`" />
+                    </svg>
                 </button>
             </div>
-            <div class="modal-box__body">
+            <div class="body">
                 <slot></slot>
                 <template v-if="accept">
                     <button 
-                        style="display:block;" 
+                        class="btn-login btn-borderless" 
                         @click="onSubmit"
                         :disabled='isDisabled'>
                         Accept
                     </button>
                 </template>
             </div>
-            <div class="modal-box__footer">
-                <button @click="onClose">Close</button>
+            <div class="footer">
+                <button 
+                    class="btn-borderless" 
+                    @click="onClose">
+                    Close
+                </button>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-    import IconSvg from './Svg-icon'
     export default {
 
         props: ['accept'],
-
-        components: { IconSvg },
 
         data() {
             return {

@@ -15,3 +15,7 @@
         <vue-register></vue-register>
     </div>
 @endsection
+
+@section('footer')
+    <vue-footer></vue-footer>
+@endsection 

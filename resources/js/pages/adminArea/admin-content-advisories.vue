@@ -1,163 +1,105 @@
 <template>
-    <div class="contentlevels">
+    <div class="admin-content-advisories">
         <div class="">
             <div class="title">
                 <h1>Content Advisories</h1>
-                <div class="add">
-                    <button @click.prevent="isModalVisible = true">
-                        <IconSvg type="add" />
+                <div class="add-button">
+                    <button 
+                        @click="onAdd=!onAdd"
+                        class="add__icon" 
+                        :class="{active: onAdd}">
+                        <svg>
+                            <use :xlink:href="`/storage/website-files/icons.svg#ri-add-fill`" />
+                        </svg>
                     </button>
                 </div>
             </div>
         </div>
 
-        <div 
-            class="list"
-            :key="advisory.id" 
-            v-for="(advisory) in contentAdvisories">
-            <input 
-                type="text" 
-                v-model="advisory.advisories" 
-                placeholder="Content Advisories"
-                @blur="onUpdate(advisory)">
-            <input 
-                type="text" 
-                v-model="advisory.rank" 
-                placeholder="Content Advisories"
-                @blur="onUpdate(advisory)">
-            <button 
-                @click.prevent="showModal(advisory)" 
-                class="delete-circle">
-                <IconSvg type="delete" />
-            </button>
-        </div>
-        <modal 
-            v-if="isEditModalVisible" 
-            @close="isEditModalVisible = false">
-            <div slot="header">
-                <div class="circle del">
-                    <p>X</p>
-                </div>
+        <div class="data-grid">
+            <div class="data-grid__row header">
+                <p>Advisory</p>
+                <p>Rank</p>
             </div>
-            <div slot="body"> 
-                <h3>Are you sure?</h3>
-                <p>You are deleting {{ modalDelete.advisories }}.</p>
-            </div>
-            <div slot="footer">
+            <div 
+                class="data-grid__row"
+                :key="advisory.id" 
+                v-for="(advisory) in contentAdvisories">
+                <input 
+                    type="text" 
+                    v-model="advisory.advisories" 
+                    placeholder="Content Advisories"
+                    @blur="onUpdate(advisory)">
+                <input 
+                    type="text" 
+                    v-model="advisory.rank" 
+                    placeholder="Content Advisories"
+                    @blur="onUpdate(advisory)">
                 <button 
-                    class="btn del" 
-                    @click.prevent="onDelete(modalDelete)">
-                    Delete
+                    @click.prevent="selectedModal=advisory" 
+                    class="delete">
+                    <svg>
+                        <use :xlink:href="`/storage/website-files/icons.svg#ri-close-line`" />
+                    </svg>
                 </button>
             </div>
-        </modal>
-
-        <div class="pin noimg">
-            <modal 
-                v-if="isModalVisible" 
-                @close="isModalVisible = false">
-                <div slot="header">
-                    <div />
-                </div>
-                <div slot="body" class="body">
-                    <div class="text">
-                        <div class="name">
-                            <input 
-                                type="text" 
-                                v-model="contentAdvisory" 
-                                placeholder="Content Advisory"
-                                :class="{ active: contentActive}"
-                                @click="contentActive = true"
-                                @blur="contentActive = false"
-                                @input="$v.contentAdvisory.$touch">
-                            <div v-if="$v.contentAdvisory.$error" class="validation-error">
-                                <p class="error" v-if="!$v.contentAdvisory.required">Please Add Content Advisories </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div slot="footer">
-                    <button 
-                        @click.prevent="onSubmit()" 
-                        class="btn sub">
-                        Submit
-                    </button>
-                </div>
-            </modal>
         </div>
+        <AddContentAdvisory 
+            @update="update"
+            @close="onAdd=false"
+            v-if="onAdd" />
+        <VueDeleteModal 
+            v-if="selectedModal"
+            :item="selectedModal"
+            :strict="true"
+            body="You are deleting the category. Please be sure you know what you are doing."
+            @close="selectedModal=null"
+            @ondelete="onDelete" />
     </div>
 </template>
 
 <script>
-    
-    import { required } from 'vuelidate/lib/validators'
-    import IconSvg from '../../components/Svg-icon'
-
+    import VueDeleteModal from '../../components/modals/Vue-Modal-Delete'
+    import AddContentAdvisory from './components/add-content-advisory'
 
     export default {
-
-        components: { IconSvg },
+        components: { AddContentAdvisory, VueDeleteModal },
 
         data() {
             return {
-                contentAdvisory: '',
-                contentActive: false,
                 contentAdvisories: '',
-                isModalVisible: false,
-                isEditModalVisible: false,
-                modalDelete: '',
+                selectedModal: null,
+                onAdd: false,
             }
         },
 
         methods: {
 
-            onSubmit() {
-                this.$v.$touch(); 
-                if (this.$v.$invalid) { return false }
-
-                axios.post('/contentadvisories', { advisories: this.contentAdvisory })
-                .then(res => { this.contentAdvisories = res.data; this.clearAdvisory(); })
-                .catch( this.isModalVisible = false );
+            async onDelete() {
+                await axios.delete(`/contentadvisories/${this.selectedModal.id}`)
+                .then(res => { 
+                    this.contentAdvisories = res.data; 
+                    this.selectedModal = null 
+                })
             },
-
-            onDelete(advisory) {
-                axios.delete(`/contentadvisories/${advisory.id}`)
-                .then(res => { this.contentAdvisories = res.data; this.isEditModalVisible = false })
-                .catch(error => { this.serverErrors = error.response.data.errors; });
-            },
-
-            onLoad() {
-                axios.get('/contentadvisories')
+            async onLoad() {
+                await axios.get('/contentadvisories')
                 .then( res => { this.contentAdvisories = res.data })
-                .catch();
             },
-
-            onUpdate(advisory) {
-                axios.patch(`/contentadvisories/${advisory.id}`, advisory)
+            async onUpdate(advisory) {
+                await axios.patch(`/contentadvisories/${advisory.id}`, advisory)
                 .then( res => { this.contentAdvisories = res.data })
-                .catch();
             },
-
-            clearAdvisory() {
-                this.isModalVisible = false;
-                this.contentAdvisory = '';
-            },
-
-            showModal(advisory) {
-                this.modalDelete = advisory;
-                this.isEditModalVisible = true;
-            },
+            update(value) {
+                this.contentAdvisories = value
+                this.onAdd = false
+            }
         },
 
         created() {
             this.onLoad()
         },
 
-        validations: {
-            contentAdvisory: {
-                required,
-            },
-        },
     }
 
 </script>

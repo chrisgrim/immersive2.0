@@ -1,27 +1,28 @@
 <template>
-    <div class="c-staffpicks">
+    <div class="admin-staffpicks">
         <div class="">
             <div class="title">
                 <h1>Picks of the Week</h1>
-                <div class="add">
-                    <button @click.prevent="add = true" ref="button">
-                        <IconSvg type="add" />
+                <div class="add-button">
+                    <button 
+                        @click="onAdd=!onAdd"
+                        class="add__icon" 
+                        :class="{active: onAdd}">
+                        <svg>
+                            <use :xlink:href="`/storage/website-files/icons.svg#ri-add-fill`" />
+                        </svg>
                     </button>
                 </div>
             </div>
         </div>
 
-        <Vue-Add-Staffpick v-if="add" />
-
-        <div class="field c-staffpicks__list--filter">
+        <div class="field">
             <label>Filter by User</label>
             <v-select 
                 v-model="user"
                 :options="loadstaff"
                 label="name"
                 placeholder="filter by user"
-                @search:blur="active = null"
-                @search:focus="active = 'rank'"
                 @input="onLoad" />
         </div>
         <div class="data-grid">
@@ -39,11 +40,8 @@
                 <div
                     v-if="pick.event"
                     class="image lg">
-                    <img 
-                        class="c-staffpicks__list--image" 
-                        :src="/storage/ + pick.event.thumbImagePath" 
-                        :alt="pick.event.name">
-                    <div class="c-staffpicks__list--name">
+                    <img :src="/storage/ + pick.event.thumbImagePath">
+                    <div class="admin-staffpicks__list--name">
                         {{ pick.event.name }}
                     </div>
                 </div>
@@ -52,9 +50,7 @@
                         v-model="pick.comments" 
                         class="create-input area" 
                         rows="1"
-                        :class="{ active: active == `${pick.id}comments`}"
                         placeholder=" "
-                        @click="active = `${pick.id}comments`"
                         @blur="onUpdate(pick)"
                         required 
                         autofocus />
@@ -63,15 +59,16 @@
                     <label>{{ pick.user.name }}</label>
                 </div>
                 <div class="rank">
-                    <v-select 
+                    <select 
                         v-model="pick.rank"
-                        :options="rankOptions"
-                        placeholder="Leave blank for default Rank of 5 (1 being most important)"
-                        @search:blur="active = null"
-                        @search:focus="active = 'rank'"
-                        @input="onUpdate(pick)"
-                        :clearable=false
-                        :class="{ active: active == 'rank'}" />
+                        @change="onUpdate(pick)"
+                        placeholder="Leave blank for default Rank of 5 (1 being most important)">
+                        <option 
+                            v-for="picknum in ['1', '2', '3', '4', '5']"
+                            :key="picknum">
+                            {{ picknum }}
+                        </option>
+                    </select>
                 </div>
                 <div class="date-s">
                     <flat-pickr
@@ -82,9 +79,11 @@
                         name="dates" />
                 </div>
                 <button 
-                    @click.prevent="showModal(pick, 'delete')" 
+                    @click.prevent="selectedModal=pick" 
                     class="delete">
-                    <IconSvg type="delete" />
+                    <svg>
+                        <use :xlink:href="`/storage/website-files/icons.svg#ri-close-line`" />
+                    </svg>
                 </button>
             </div>
             <pagination 
@@ -92,12 +91,18 @@
                 :list="staffpicks"
                 @selectpage="onLoad" />
         </div>
+        <AddStaffPick
+            :user="loaduser"
+            :staff="loadstaff"
+            @update="update"
+            @close="onAdd=false"
+            v-if="onAdd" />
         <VueDeleteModal 
-            v-if="modal == 'delete'"
+            v-if="selectedModal"
             :item="selectedModal"
             :strict="true"
-            body="You are deleting the staff pick"
-            @close="modal = null"
+            body="You are deleting the staff pick. Please be sure you know what you are doing."
+            @close="selectedModal=null"
             @ondelete="onDelete" />
     </div>
 </template>
@@ -106,15 +111,14 @@
     import flatPickr from 'vue-flatpickr-component'
     import 'flatpickr/dist/flatpickr.css'
     import Pagination  from '../../components/pagination.vue'
-    import IconSvg from '../../components/Svg-icon'
-    import VueAddStaffpick from './components/vue-add-staffpick'
-    import VueDeleteModal from '../../components/Vue-Delete-Modal'
+    import AddStaffPick from './components/add-staff-pick'
+    import VueDeleteModal from '../../components/modals/Vue-Modal-Delete'
 
     export default {
 
-        props: ['loadstaff'],
+        props: ['loadstaff', 'loaduser'],
 
-        components: { flatPickr, Pagination, IconSvg, VueAddStaffpick, VueDeleteModal },
+        components: { flatPickr, Pagination, AddStaffPick, VueDeleteModal },
 
         computed: {
             updateObject() {
@@ -126,10 +130,9 @@
 
         data() {
             return {
-                add: false,
+                onAdd: false,
                 dates: [],
                 listDates: [],
-                active: '',
                 rankOptions: ['1', '2', '3', '4', '5'],
                 user: null,
                 staffpicks:[],
@@ -143,35 +146,27 @@
         },
 
         methods: {
-
-            onLoad(page) {
-                axios.post(`/admin/staffpicks/fetch`, { page: page, user: this.user ? this.user.id : '' })
+            async onLoad(page) {
+                await axios.post(`/admin/staffpicks/fetch`, { page: page, user: this.user ? this.user.id : '' })
                 .then( res => { this.staffpicks = res.data })
             },
-
             async onDelete() {
                 await axios.delete(`/staffpicks/${this.selectedModal.id}`)
                 location.reload();
             },
-
-            onUpdate(pick) {
-                axios.patch(`/staffpicks/${pick.id}`, pick)
-                .then( res => { 
-                    this.staffpicks = res.data; this.active = null 
-                })
+            async onUpdate(pick) {
+                await axios.patch(`/staffpicks/${pick.id}`, pick)
+                .then( res => { this.staffpicks = res.data })
             },
-
+            update(value) {
+                this.staffpicks = value
+                this.onAdd = false
+            },
             updateDates(date, pick) {
                 pick.start_date = this.$dayjs(date[0]).format("YYYY-MM-DD HH:mm:ss")
                 pick.end_date = this.$dayjs(date[1]).format("YYYY-MM-DD HH:mm:ss")
                 this.onUpdate(pick)
             },
-
-            showModal(pick, arr) {
-                this.selectedModal = pick;
-                this.modal = arr;
-            },
-
             initializeDateObject(val) {
                 return {
                     altFormat:'M d',
@@ -183,7 +178,6 @@
                     onClose:  [this.listDateFunc()], 
                 }
             },
-
             listDateFunc() {
                 const that = this;
                 return function(value) {
@@ -197,7 +191,7 @@
 
         mounted() {
             this.onLoad()
-            this.$nextTick(() => this.$refs.button.focus())
+            // this.$nextTick(() => this.$refs.button.focus())
         },
 
     }

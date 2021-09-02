@@ -51,7 +51,7 @@
             </h2>
             <a 
                 v-if="event.organizer.thumbImagePath"
-                href="#organizer">
+                :href="`/organizer/${event.organizer.slug}`">
                 <picture>
                     <source 
                         type="image/webp" 

@@ -152,7 +152,7 @@
 <script>
     import ShowMore  from '../components/show-more.vue'
     import IconSvg from '../../../components/Svg-icon'
-    import VueLogin from '../../layouts/login-pop'
+    import VueLogin from '../../profile/login-modal'
     import formValidationMixin from '../../../mixins/form-validation-mixin'
     import { required, numeric, between, maxLength, minLength } from 'vuelidate/lib/validators'
     import flatPickr from 'vue-flatpickr-component'

@@ -61,10 +61,10 @@
 @section('content')
     <div id="bodyArea" class="org">
         @auth
-            <organizer-show :user="{{auth()->user()}}" :loadorganizer="{{ $organizer }}"></organizer-show> 
+            <organizer-show :user="{{auth()->user()}}" :organizer="{{ $organizer }}"></organizer-show> 
         @endauth
         @guest
-            <organizer-show :loadorganizer="{{ $organizer }}"></organizer-show> 
+            <organizer-show :organizer="{{ $organizer }}"></organizer-show> 
         @endguest
     </div>
 @endsection

@@ -1,0 +1,43 @@
+/*------------------------------------*\
+  #Login- Login Page
+\*------------------------------------*/
+
+.login-home.modal {
+    position: relative;
+    background: 0;
+    min-height: calc(100vh - 17rem);
+    z-index: 0;
+}
+.login-home.modal .wrapper {
+    box-shadow: none;
+    border: 1px solid #B0B0B0;
+    margin: 2rem 0;
+}
+
+
+
+/*-----------------------------------login form------------------------------*/
+
+.login-form p {
+    font-size:1.3rem;
+}
+.login-form button.forget {
+    padding: 0;
+    margin-bottom: 2rem;
+    font-size: 1.2rem;
+}
+.login-form button.submit {
+    margin-bottom: 1rem;
+}
+.login-form .password svg {
+    width: 2rem;
+    height: 2rem;
+    position: absolute;
+    top: 1.4rem;
+    right: 3rem;
+}
+
+/*-----------------------------------Register form------------------------------*/
+
+
+

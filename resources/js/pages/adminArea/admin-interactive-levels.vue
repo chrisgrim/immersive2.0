@@ -1,179 +1,115 @@
 <template>
-    <div class="genres">
+    <div class="admin-interactive-levels">
         <div class="">
             <div class="title">
                 <h1>Interactive Levels</h1>
-                <div class="add">
-                    <button @click.prevent="isModalVisible = true">
-                        <IconSvg type="add" />
+                <div class="add-button">
+                    <button 
+                        @click="onAdd=!onAdd"
+                        class="add__icon" 
+                        :class="{active: onAdd}">
+                        <svg>
+                            <use :xlink:href="`/storage/website-files/icons.svg#ri-add-fill`" />
+                        </svg>
                     </button>
                 </div>
             </div>
         </div>
 
-        <div 
-            class="list" 
-            :key="interactiveLevel.id"
-            v-for="(interactiveLevel) in interactiveLevels">
-            <input 
-                type="text" 
-                v-model="interactiveLevel.name" 
-                placeholder="Interactive Level"
-                @blur="onUpdate(interactiveLevel)">
-            <textarea
-                type="text" 
-                v-model="interactiveLevel.description" 
-                placeholder="Interactive level description"
-                @blur="onUpdate(interactiveLevel)" />
-            <input 
-                type="text" 
-                v-model="interactiveLevel.rank" 
-                placeholder="Rank"
-                @blur="onUpdate(interactiveLevel)">
-            <button 
-                @click.prevent="showModal(interactiveLevel)" 
-                class="delete-circle">
-                <IconSvg type="delete" />
-            </button>
-        </div>
-        <modal 
-            v-if="isEditModalVisible" 
-            @close="isEditModalVisible = false">
-            <div slot="header">
-                <div class="circle del">
-                    <p>X</p>
-                </div>
-            </div>
-            <div slot="body"> 
-                <h3>Are you sure?</h3>
-                <p>You are deleting {{ modalDelete.level }}.</p>
-            </div>
-            <div slot="footer">
+        <div class="data-grid">
+            <div class="data-grid__row header">
+                <p>Name</p>
+                <p>Description</p>
+                <p>Rank</p>
+            </div>  
+            <div 
+                class="data-grid__row" 
+                :key="level.id"
+                v-for="(level) in interactiveLevels">
+                <input 
+                    type="text" 
+                    v-model="level.name" 
+                    placeholder="Interactive Level"
+                    @blur="onUpdate(level)">
+                <textarea
+                    type="text" 
+                    v-model="level.description" 
+                    placeholder="Interactive level description"
+                    @blur="onUpdate(level)" />
+                <input 
+                    type="text" 
+                    v-model="level.rank" 
+                    placeholder="Rank"
+                    @blur="onUpdate(level)">
                 <button 
-                    class="btn del" 
-                    @click.prevent="onDelete(modalDelete)">
-                    Delete
+                    @click.prevent="selectedModal=level" 
+                    class="delete">
+                    <svg>
+                        <use :xlink:href="`/storage/website-files/icons.svg#ri-close-line`" />
+                    </svg>
                 </button>
             </div>
-        </modal>
-
-        <div class="pin noimg">
-            <modal 
-                v-if="isModalVisible" 
-                @close="isModalVisible = false">
-                <div slot="header">
-                    <div />
-                </div>
-                <div slot="body" class="body">
-                    <div class="text">
-                        <div class="name">
-                            <input 
-                                type="text" 
-                                v-model="interactiveLevel.name" 
-                                placeholder="Interactive Level"
-                                :class="{ active: active = 'name'}"
-                                @click="active = 'name'"
-                                @blur="active = null"
-                                @input="$v.interactiveLevel.name.$touch">
-                            <div v-if="$v.interactiveLevel.name.$error" class="validation-error">
-                                <p class="error" v-if="!$v.interactiveLevel.name.required">Please add interactive level name </p>
-                            </div>
-                            <textarea
-                                type="text" 
-                                v-model="interactiveLevel.description" 
-                                placeholder="Interactive level description"
-                                @blur="onUpdate(interactiveLevel)" />
-                            <div v-if="$v.interactiveLevel.description.$error" class="validation-error">
-                                <p class="error" v-if="!$v.interactiveLevel.description.required">Please add interactive level description </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div slot="footer">
-                    <button 
-                        @click.prevent="onSubmit()" 
-                        class="btn sub">
-                        Submit
-                    </button>
-                </div>
-            </modal>
         </div>
+        <AddInteractiveLevel 
+            @update="update"
+            @close="onAdd=false"
+            v-if="onAdd" />
+        <VueDeleteModal 
+            v-if="selectedModal"
+            :item="selectedModal"
+            :strict="true"
+            body="You are deleting the category. Please be sure you know what you are doing."
+            @close="selectedModal=null"
+            @ondelete="onDelete" />
     </div>
 </template>
 
 <script>
     
-    import { required } from 'vuelidate/lib/validators';
-    import IconSvg from '../../components/Svg-icon'
+    import VueDeleteModal from '../../components/modals/Vue-Modal-Delete'
+    import AddInteractiveLevel from './components/add-interactive-level'
 
     export default {
+        components: { AddInteractiveLevel, VueDeleteModal },
 
-        components: { IconSvg },
 
         data() {
             return {
                 interactiveLevels: '',
-                active: '',
-                interactiveLevel: {
-                    name: '',
-                    description: '',
-                },
-                isModalVisible: false,
-                isEditModalVisible: false,
-                modalDelete: '',
-
+                selectedModal: '',
+                onAdd: false,
             }
         },
 
         methods: {
+            async onDelete() {
+                await axios.delete(`/interactivelevels/${this.selectedModal.id}`)
+                .then( res => { 
+                    this.interactiveLevels = res.data; 
+                    this.selectedModal = null 
+                })
+            },
 
-            onSubmit() {
-                this.$v.$touch(); 
-                if (this.$v.$invalid) { return false }
-
-                axios.post('/interactivelevels', this.interactiveLevel)
+            async onLoad() {
+                await axios.get('/interactivelevels')
                 .then( res => { this.interactiveLevels = res.data })
-                .catch( this.isModalVisible = false );
             },
 
-            onDelete(interactiveLevel) {
-                axios.delete(`/interactivelevels/${interactiveLevel.id}`)
-                .then( res => { this.interactiveLevels = res.data; this.isEditModalVisible = false })
-                .catch( error => { this.serverErrors = error.response.data.errors });
-            },
-
-            onLoad() {
-                axios.get('/interactivelevels')
-                .then( res => { this.interactiveLevels = res.data })
-                .catch( error => { this.serverErrors = error.response.data.errors; });
-            },
-
-            onUpdate(interactiveLevel) {
-                axios.patch(`/interactivelevels/${interactiveLevel.id}`, interactiveLevel)
+            async onUpdate(interactiveLevel) {
+                await axios.patch(`/interactivelevels/${interactiveLevel.id}`, interactiveLevel)
                 .then(res => { this.interactiveLevels = res.data })
-                .catch( error => {  this.serverErrors = error.response.data.errors });
             },
+            update(value) {
+                this.interactiveLevels = value
+                this.onAdd = false
+            }
 
-            showModal(interactiveLevel) {
-                this.modalDelete = interactiveLevel;
-                this.isEditModalVisible = true;
-            },
         },
 
-        created() {
+        mounted() {
             this.onLoad()
         },
 
-        validations: {
-            interactiveLevel: {
-                name: {
-                    required,
-                },
-                description: {
-                    required,
-                }
-            },
-        },
     }
 
 </script>

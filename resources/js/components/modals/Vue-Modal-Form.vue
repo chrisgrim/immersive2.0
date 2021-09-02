@@ -1,28 +1,36 @@
 <template>
-    <div class="modal-box">
-        <div class="modal-box__container">
-            <div class="modal-box__close">
+    <div class="modal">
+        <div class="wrapper">
+            <div class="header">
                 <button @click="onClose">
-                    <IconSvg type="delete" />
+                    <svg>
+                        <use :xlink:href="`/storage/website-files/icons.svg#ri-close-line`" />
+                    </svg>
                 </button>
             </div>
-            <div class="modal-box__body">
+            <div class="body">
                 <slot></slot>
-                <input
-                    v-if="input"
-                    v-model="inputData"
-                    :placeholder="inputPlaceholder">
-                <div v-if="$v.inputData.$error" class="validation-error">
-                    <p class="error" v-if="!$v.inputData.required">The new title is required.</p>
-                    <p class="error" v-if="!$v.inputData.maxLength && inputData">The title is too long.</p>
+                <div class="field">
+                    <input
+                        v-if="input"
+                        v-model="inputData"
+                        :class="{error : $v.inputData.$error}"
+                        :placeholder="inputPlaceholder">
+                    <div v-if="$v.inputData.$error" class="validation-error">
+                        <p class="error" v-if="!$v.inputData.required">The new title is required.</p>
+                        <p class="error" v-if="!$v.inputData.maxLength && inputData">The title is too long.</p>
+                    </div>
                 </div>
-                <textarea
-                    v-if="textarea"
-                    v-model="textareaData"
-                    :placeholder="textareaPlaceholder" />
-                <div v-if="$v.textareaData.$error" class="validation-error">
-                    <p class="error" v-if="!$v.textareaData.required">Please include a reason.</p>
-                    <p class="error" v-if="!$v.textareaData.maxLength && textareaData">The reason is too long.</p>
+                <div class="field">
+                    <textarea
+                        v-if="textarea"
+                        :class="{error : $v.textareaData.$error}"
+                        v-model="textareaData"
+                        :placeholder="textareaPlaceholder" />
+                    <div v-if="$v.textareaData.$error" class="validation-error">
+                        <p class="error" v-if="!$v.textareaData.required">Please include a reason.</p>
+                        <p class="error" v-if="!$v.textareaData.maxLength && textareaData">The reason is too long.</p>
+                    </div>
                 </div>
                 <button 
                     @click="onSubmit"
@@ -30,21 +38,21 @@
                     Submit
                 </button>
             </div>
-            <div class="modal-box__footer">
-                <button @click="onClose">Close</button>
+            <div class="footer">
+                <button 
+                    class="btn-borderless" 
+                    @click="onClose">
+                    Close
+                </button>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-    import IconSvg from './Svg-icon'
-    
     export default {
 
         props: ['item', 'placeholder', 'input', 'textarea', 'inputPlaceholder', 'textareaPlaceholder'],
-
-        components: { IconSvg },
 
         computed: {
             data() {

@@ -99,7 +99,7 @@
 <script>
     import Pagination  from '../../components/pagination.vue'
     import IconSvg from '../../components/Svg-icon'
-    import VueDataModal from '../../components/Vue-Data-Modal'
+    import VueDataModal from '../../components/modals/Vue-Data-Modal'
 
     export default {
 

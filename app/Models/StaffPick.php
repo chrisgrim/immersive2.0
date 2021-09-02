@@ -66,15 +66,15 @@ class StaffPick extends Model
 
     public static function saveStaffPick($request)
     {
-        Event::find($request->event_id['id'])->increment('rank',3);
+        Event::find($request->event['id'])->increment('rank',3);
         StaffPick::Create(
             [
-            'event_id' => $request->event_id['id'],
-            'user_id' => auth()->id(),
+            'event_id' => $request->event['id'],
+            'user_id' => $request->staff['id'],
             'comments' => $request->comments,
             'rank' => $request->rank ? $request->rank : 5,
-            'start_date' => $request->dates[0],
-            'end_date' => $request->dates[1]
+            'start_date' => $request->submitDates[0],
+            'end_date' => $request->submitDates[1]
             ]
         );
     }

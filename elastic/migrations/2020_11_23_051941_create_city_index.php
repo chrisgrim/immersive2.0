@@ -13,7 +13,7 @@ final class CreateCityIndex implements MigrationInterface
      */
     public function up(): void
     {
-         Index::create('city_lists', function (Mapping $mapping, Settings $settings) {
+        Index::create('city_lists', function (Mapping $mapping, Settings $settings) {
             $mapping->text('name', ['analyzer' => 'rebuilt_english']);
             $mapping->integer('population');
             $mapping->integer('rank');

@@ -27,7 +27,7 @@
                             <template v-if="card.category">
                                 <div class="category">
                                     <button class="btn btn-outline caps rounded">
-                                        <p>{{ card.category.name }}</p>
+                                        {{ card.category.name }}
                                     </button>
                                 </div>
                             </template>

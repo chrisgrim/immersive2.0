@@ -52,6 +52,7 @@ class OrganizerController extends Controller
     {  
         $organizer = Organizer::Create($request->except(['image', 'user_id']) + ['user_id' => auth()->id(), 'slug' => Str::slug($request->name)]);
         $request->image ? MakeImage::saveImage($request, $organizer, 600, 600, 'organizer') : null;
+        auth()->user()->update([ 'current_team_id' => $organizer->id]);
         $organizer->update(['status' => 'r']);
     }
 

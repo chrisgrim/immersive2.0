@@ -1,0 +1,38 @@
+.notification-a {
+    border: 1px solid green;
+    border-radius: 2rem;
+    background: #b3e6b3;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    z-index: 100;
+}
+.notification-a button {
+    border: 0;
+    background: 0;
+    position: absolute;
+    right: 0.7rem;
+    top: 0.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.4rem;
+    fill: green;
+    z-index: 100;
+    border-radius: 3rem;
+}
+.notification-a button:hover {
+    background: green;
+    fill:white;
+}
+.notification-a svg {
+    width: 2rem;
+    height: 2rem;
+}
+.notification-a h3 {
+    font-size: 1.7rem !important;
+    margin-bottom: 1rem !important;
+}
+.notification-a p {
+    font-size: 1.3rem !important;
+    margin-bottom: 0 !important;
+}

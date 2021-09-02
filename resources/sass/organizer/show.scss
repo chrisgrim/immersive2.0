@@ -1,0 +1,84 @@
+/* ------------------------------------*\
+  #Organizer- Show Page
+\*------------------------------------ */
+.organizer-show.lay-a {
+    padding-top: 4rem;
+}
+.lay-a.organizer-show .sidebar .sticky {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.organizer-show .logo {
+    width: 100%;
+    vertical-align: top;
+    display: inline-block;
+    margin-bottom: 2rem;
+    width: 28%;
+    padding: 2rem 2rem 2rem 1rem;
+}
+.organizer-show .logo img {
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+}
+.organizer-show .social {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2rem;
+}
+.organizer-show .social a {
+    display: flex;
+    align-items: center;
+}
+.organizer-show .social a svg{
+    width: 3.7rem;
+    height: 3.7rem;
+    margin: 1.5rem;
+}
+.organizer-show .social a span{
+    font-size: 2rem;
+    font-weight: 500;
+}
+.organizer-show .intro {
+    padding: 2rem 1rem 2rem 2rem;
+    width: 70%;
+    display: inline-block;
+}
+.organizer-show .joined p {
+    font-size: 1.4rem;
+    color: #717171;
+}
+.organizer-show .description {
+    white-space: pre-line;
+    margin-bottom: 2rem
+}
+.organizer-show .patreon {
+    margin-bottom: 2rem
+}
+
+
+@media screen and (min-width: 768px) {
+    .organizer-show .intro {
+        padding: 2rem 0;
+        width: 100%;
+    }
+    .organizer-show .logo {
+        width:100%;
+        padding: 0;
+        display:flex;
+        justify-content: center;
+    }
+    .organizer-show .logo img {
+        width: 20rem;
+        height: 20rem;
+    }
+    .organizer-show .social a svg{
+        width: 2.7rem;
+        height: 2.7rem;
+    }
+    .organizer-show .social a span{
+        font-size: 1.5rem;
+        font-weight: 400;
+    }
+}

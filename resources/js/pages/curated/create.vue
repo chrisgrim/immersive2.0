@@ -49,8 +49,9 @@
         <div class="guide">
             <h3>Create a Community</h3>
             <ul>
-                <li>Community info here blah blah</li>
-                <li>Community image size is at least 800px wide by 500px tall</li>
+                <li>Start with entering the title of what this Community will be called. It should be something clear, conscience, and short yet broad in topic and scope. Examples: “Staff Picks” or “Now Playing: Remote”.</li>
+                <li>Next, in the larger textbox, provide details as to what content this Community will be showcasing. Ideally, it’ll be a tweet sized summary of this Community’s listings. Examples: “Curious to learn what the NoPro staff currently loves? Staff Picks will showcase what we can’t get enough of and highly recommend” and “A listing of all currently playing remote based experience, ranging from livestreams, team games, and podplays”.</li>
+                <li>Finally, in the gray rectangle on the right, click the icon to upload an image. It must be at least 800px wide by 500px tall. In other words, it needs to be rectangular in shape, being twice as wide as it is tall.</li>
             </ul>
         </div>
         <div v-if="serverErrors" class="updated-notifcation">

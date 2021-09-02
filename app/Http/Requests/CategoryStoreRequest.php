@@ -23,21 +23,11 @@ class CategoryStoreRequest extends FormRequest
      */
     public function rules()
     {
-        if ($this->category && !$this->image) {
-            return [
-                'name' => "required|unique:categories,name,{$this->category->id}",
-                'description' => 'required|string|min:1|max:40000',
-                'rank' => 'numeric'
-            ];
-        }
-        if ($this->image && $this->name) {
-            return [
-                'name' => "required|unique:categories,name",
-                'description' => 'required|string|min:1|max:40000',
-                'rank' => 'numeric'
-            ];
-        }
         return [
+            'name' => "required|unique:categories,name",
+            'description' => 'required|string|min:1|max:40000',
+            'rank' => 'numeric',
+            'image' => 'required|dimensions:min_width=800,min_height=800'
         ];
     }
 }

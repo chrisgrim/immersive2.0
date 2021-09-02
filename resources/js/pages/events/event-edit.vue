@@ -44,7 +44,7 @@
                         </a>
                         <template v-if="!organizer.events.length">
                             <button                   
-                                @click.prevent="showModal(organizer, 'deleteOrg')" 
+                                @click.prevent="selectedModal=organizer" 
                                 class="outline">
                                 Delete
                             </button>
@@ -180,16 +180,24 @@
             <h3>Notice</h3>
             <p>We only allow up to 5 unpublished events at any time. If you would like to add more events, please submit your current events for approval.</p>
         </VueModalAccept>
+        <VueModalDelete
+            v-if="selectedModal"
+            :item="selectedModal"
+            :strict="true"
+            body="You are deleting your organization. Please be sure you know what you are doing."
+            @close="selectedModal=null"
+            @ondelete="deleteOrganizer" />
     </div>
 </template>
 
 <script>
-    import VueModalAccept from '../../components/Vue-Modal-Accept'
+    import VueModalAccept from '../../components/modals/Vue-Modal-Accept'
+    import VueModalDelete from '../../components/modals/Vue-Modal-Delete'
     export default {
 
         props: ['user', 'published', 'unpublished'],
 
-        components: { VueModalAccept },
+        components: { VueModalAccept, VueModalDelete },
 
         computed: {
             datesRemaining() {
@@ -222,6 +230,7 @@
                 organizers: [],
                 limited: false,
                 newUserLimited: false,
+                selectedModal: null,
             }
         },
 
@@ -233,11 +242,9 @@
                     this.organizer = this.displayCurrentOrganizer(res.data);
                 })
             },
-
             async selectOrganizer(organizer) {
                 await axios.post(`/assign/organizer/${organizer.slug}`)
             },
-
             async newEvent() {
                 if (this.checkPermission()) return ;
                 await axios.post(`/events`, this.organizer)
@@ -246,14 +253,16 @@
                 })
                 .catch(error => { this.serverErrors = error.response.data.errors; });
             },
-
+            async deleteOrganizer() {
+                await axios.delete(`/organizer/${this.selectedModal.slug}`, this.selectedModal)
+                location.reload();
+            },
             displayCurrentOrganizer(organizers) {
                 if (this.user.current_team_id) {
                     return organizers.find(organizer => organizer.id === this.user.current_team_id)
                 }
                 return organizers[0];
             },
-
             checkPermission() {
                 if (this.user.type !== 'g') {return false}
                 if (this.published === 0 && this.unpublished >= 2) {
@@ -343,7 +352,7 @@
 
             isLocked(event) {
                 if (event.status === 'r') return true;
-            }
+            },
         },
 
         mounted() {

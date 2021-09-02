@@ -57,7 +57,7 @@
     import { required } from 'vuelidate/lib/validators';
     import formValidationMixin from '../../../mixins/form-validation-mixin'
     import IconSvg from '../../../components/Svg-icon'
-    import VueModalAccept from '../../../components/Vue-Modal-Accept'
+    import VueModalAccept from '../../../components/modals/Vue-Modal-Accept'
 
     export default {
         props: ['loadevent', 'exists'],

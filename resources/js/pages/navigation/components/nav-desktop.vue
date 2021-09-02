@@ -37,7 +37,7 @@
                                         @click="searchOpen='e'"
                                         :class="{active : searchOpen==='e'}"
                                         class="btn-borderless"> 
-                                        Events
+                                        Listings
                                     </button>
                                     <button 
                                         @click="searchOpen='t'"
@@ -81,27 +81,17 @@
                                 </a>
                             </div>
                             <div class="nav-menu-item">
-                                <a @click="onSubmit('register')">
-                                    <button>Register</button>
-                                </a>
-                            </div>
-                            <div class="nav-menu-item">
-                                <a @click="onSubmit('login')">
-                                    <button>Login</button>
-                                </a>
+                                <ProfileButton 
+                                    :mobile="mobile" 
+                                    :user="user" />
                             </div>
                         </template>
                     </div>
                 </template>
             </div>
-            <div v-if="login">
-                <LoginPopup 
-                    @close="login = false"
-                    :page="loginType" />
-            </div>
         </nav>
         <template v-if="searchOpen && this.navtype !== 'homepage'">
-            <div class="nav-back" />
+            <div class="modal-backdrop" />
         </template>
     </div>
 </template>
@@ -109,13 +99,12 @@
 <script>
     import ProfileButton from './profile-button.vue'
     import SearchBar from '../../../components/search-bars/search-dropdown.vue'
-    import LoginPopup from '../../layouts/login-pop'
 
     export default {
 
         props:['user', 'passedclass', 'navtype'],
 
-        components: { ProfileButton, SearchBar, LoginPopup },
+        components: { ProfileButton, SearchBar },
 
         computed: {
             hideMenuNav() {
@@ -130,18 +119,12 @@
             return {
                 mobile: false,
                 page: this.navtype,
-                login: false,
-                loginType: 'register',
                 searchOpen: this.navtype == 'homepage' ? 'l' : false,
                 navClass:this.passedclass
             };
         },
 
         methods: {
-            onSubmit(value) {
-                this.loginType = value;
-                this.login = true;
-            },
             openSearch() {
                 this.navClass.open = true;
                 this.searchOpen = 'l'

@@ -30,9 +30,6 @@ Route::DELETE('/sections/listing/{listing}', 'Featured\SectionController@deleteL
 // ----------   Featured -------
 Route::PUT('/featured/{section}/reorder', 'Featured\FeaturedController@order');
 
-
-Route::GET('/shelves/{shelf}/paginate', 'Curated\ShelfController@paginate');
-
 // ----------   Search Page -------
 Route::POST('/search/storedata', 'Search\SearchDataController@store');
 Route::GET('/index/search', 'Search\EventController@index');

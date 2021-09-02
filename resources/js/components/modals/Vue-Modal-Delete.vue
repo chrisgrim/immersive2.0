@@ -1,12 +1,14 @@
 <template>
-    <div class="modal-box">
-        <div class="modal-box__container">
-            <div class="modal-box__close">
+    <div class="modal delete">
+        <div class="wrapper">
+            <div class="header">
                 <button @click="onClose">
-                    <IconSvg type="delete" />
+                    <svg>
+                        <use :xlink:href="`/storage/website-files/icons.svg#ri-close-line`" />
+                    </svg>
                 </button>
             </div>
-            <div class="modal-box__body">
+            <div class="body">
                 <h5>
                     Are you sure?
                 </h5>
@@ -17,34 +19,33 @@
                     {{ body }}
                 </p>
                 <p><b> To permanently delete {{ item.name }}, type DELETE. </b></p>
+                <div class="input">
+                    <input
+                        v-model="toDelete"
+                        type="text">
+                    <button
+                        class="btn-borderless btn-login"
+                        @click="onDelete"
+                        :disabled='isDisabled'>
+                        DELETE
+                    </button>
+                </div>
             </div>
-            <div class="modal-box__input">
-                <input 
-                    class="delete" 
-                    v-model="toDelete"
-                    type="text">
+            <div class="footer">
                 <button 
-                    class="delete" 
-                    @click="onDelete"
-                    :disabled='isDisabled'>
-                    DELETE
+                    class="btn-borderless" 
+                    @click="onClose">
+                    Close
                 </button>
-            </div>
-            <div class="modal-box__footer">
-                <button @click="onClose">Close</button>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-    import IconSvg from './Svg-icon'
     
     export default {
-
         props: ['item', 'strict', 'body'],
-
-        components: { IconSvg },
 
         data() {
             return {

@@ -8,7 +8,7 @@
     background: 0;
     z-index: 1001;
     height: 8rem;
-    padding: 0 8rem;
+/*    padding: 0 8rem;*/
     margin: auto;
 }
 .nav.fixed {
@@ -104,10 +104,6 @@
 .nav.absolute.open::after {
     background: 0;
 }
-.nav.narrow .nav__bar {
-    max-width: 1280px;
-    padding: 0 8rem;
-}
 .nav.fullwidth {
     padding: 0 2rem;
 }
@@ -121,10 +117,11 @@
 }
 .nav__bar {
     display: grid;
-    grid-template-columns: .333fr .333fr .333fr;
+    grid-template-columns: 1fr 1fr 1fr;
     align-items: center;
     height: 100%;
     position: relative;
+    margin: auto;
 }
 
 /* ------------------------------------*\ #Logo \*------------------------------------ */
@@ -171,7 +168,9 @@
 
 /* ------------------------------------*\ #Menu \*------------------------------------ */
 .nav-menu {
-    justify-self: right;
+    display: flex;
+    align-items: center;
+        justify-content: flex-end;
 }
 .mobile.active .nav-menu {
     position: fixed;
@@ -193,9 +192,15 @@
 }
 .nav-menu-item {
     position: relative;
-    display: inline-block;
     margin-left: 2rem;
-    min-width: 3rem;
+}
+.mobile .nav-menu-item {
+    margin: 0
+}
+.nav-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .nav-menu-item a {
     font-family: "Montserrat", sans-serif;
@@ -204,19 +209,6 @@
     font-size: 1.35rem;
     font-weight: 500;
     transition: all 0.2s ease-in-out;
-}
-.nav-menu-item button {
-    border: 0;
-    font-size: 1.35rem;
-    color: #484848;
-    font-weight: 500;
-    padding: 0;
-    background: 0;
-}
-.mobile .nav-menu-item {
-    margin: 0;
-    padding: 0;
-    float: inherit;
 }
 .mobile .nav-menu-item svg {
     width: 2.5rem;
@@ -231,33 +223,14 @@
     overflow: hidden;
     line-height: 1.5rem;
 }
-.nav.fixed .nav-menu-item button {
-    color:white;
-}
-.nav.absolute .nav-menu-item button {
-    color: white;
-}
 .nav.fixed .nav-menu-item a {
     color: white;
 }
 .nav.absolute .nav-menu-item a {
     color: white;
 }
-.nav.absolute.darkmenu .nav-menu-item a {
-    color: black;
-}
 
 /* ------------------------------------*\ #Profile Button \*------------------------------------ */
-
-.nav-dropdown {
-    width: 3.2rem;
-    height: 3.2rem;
-    border-radius: 50%;
-    position: absolute;
-    top: 0;
-    margin-top: -2rem;
-    cursor: pointer;
-}
 .mobile .nav-dropdown {
     position: absolute;
     border-radius: 50%;
@@ -266,26 +239,43 @@
     top: 0;
     margin-top: 0;
 }
-button.nav-dropdown--icon {
+.nav-dropdown--icon {
+    border-radius: 50%;
     width: 3.2rem;
     height: 3.2rem;
+    cursor: pointer;
+    overflow: hidden;
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
+    align-items: center;
 }
-button.nav-dropdown--icon h2{
+.nav-dropdown--icon.active {
+    box-shadow: 0px 1px 7px rgb(0 0 0 / 50%);
+}
+.nav-dropdown--icon:hover {
+    box-shadow: 0px 1px 7px rgb(0 0 0 / 50%);
+}
+.nav-dropdown--icon h2{
     color: white;
     font-size: 2.3rem;
+    height: 100%;
 }
-.mobile button.nav-dropdown--icon h2{
+.mobile .nav-dropdown--icon h2{
     color: white;
     font-size: 1.5rem;
 }
-button.nav-dropdown--icon img {
-    height: 100%;
+.nav-dropdown--icon picture {
     width: 100%;
-    border-radius: 50%;
+    height: 100%;
+}
+.nav-dropdown--icon img {
+    width: 100%;
+    height: 100%;
+}
+.nav-dropdown--icon svg {
+    fill:white;
+    width: 2.5rem;
+    height: 2.5rem;
 }
 .nav-menu-item ul.sub-dropdown  {
     background: rgb(255, 255, 255);
@@ -341,5 +331,21 @@ button.nav-dropdown--icon img {
 }
 .nav-menu-item ul.sub-dropdown li a:hover {
     background: #eaeaea;
+}
+
+
+
+
+@media only screen and (min-width: 768px) {
+    .nav .nav__bar {
+        padding: 0 8rem;
+    }
+}
+
+@media only screen and (min-width: 1160px) {
+    .nav.narrow .nav__bar {
+        max-width: 1280px;
+        padding: 0 8rem;
+    }
 }
 

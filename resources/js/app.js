@@ -74,7 +74,6 @@ Vue.component('index', () => import(/* webpackChunkName: "assets/ei" */ './pages
 
 //Components
 Vue.component('favorite', () => import(/* webpackChunkName: "assets/lf" */ './pages/layouts/favorite.vue'));
-Vue.component('modal', () => import(/* webpackChunkName: "assets/lm" */ './pages/layouts/modal.vue'));
 Vue.component('tabs', () => import(/* webpackChunkName: "assets/lts" */ './pages/layouts/tabs.vue'));
 Vue.component('tab', () => import(/* webpackChunkName: "assets/lt" */ './pages/layouts/tab.vue'));
 // Vue.component('image-upload', () => import(/* webpackChunkName: "assets/liu" */ './pages/layouts/image-upload.vue'));
@@ -149,9 +148,8 @@ Vue.component('vue-search-all', () => import(/* webpackChunkName: "assets/esa" *
 Vue.component('vue-staffpicks-show', () => import(/* webpackChunkName: "assets/ssp" */ './pages/staffpicks/staffpicks-show.vue'));
 
 
-//Login z
-Vue.component('login-pop', () => import(/* webpackChunkName: "assets/llp" */ './pages/layouts/login-pop.vue'));
-Vue.component('vue-register', () => import(/* webpackChunkName: "assets/lr" */ './pages/layouts/register.vue'));
+//Login 
+Vue.component('vue-register', () => import(/* webpackChunkName: "assets/lr" */ './pages/profile/login.vue'));
 Vue.component('vue-reset-password', () => import(/* webpackChunkName: "assets/lrp" */ './pages/layouts/reset-password.vue'));
 
 /**

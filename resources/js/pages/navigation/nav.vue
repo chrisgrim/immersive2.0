@@ -4,7 +4,7 @@
             <NavDesktop
                 :navtype="navtype"
                 :user="user"
-                :passedclass="{ 'fixed' : isFixed, 'absolute' : isAbsolute, 'darkmenu' : blackText, 'narrow' : isNarrow, 'fullwidth' : isFullWidth }" />
+                :passedclass="{ 'fixed' : isFixed, 'absolute' : isAbsolute, 'narrow' : isNarrow, 'fullwidth' : isFullWidth }" />
         </template>
         <template v-if="mobile && showMenu && !fullmap">
             <NavMobile
@@ -45,16 +45,13 @@
                 return ''
             },
             isAbsolute() {
-                return this.navtype == 'homepage' || this.navtype == 'org' || this.navtype == 'create'
+                return this.navtype == 'homepage' || this.navtype == 'create'
             },
             isNarrow() {
-                return this.navtype == 'show'
-            },
-            blackText() {
-                return this.navtype == 'org'
+                return this.navtype == 'show' || this.navtype == 'org'
             },
             logoColor() {
-                return this.navtype == 'homepage' || this.navtype == 'org' ? 'white' : '#404040'
+                return this.navtype == 'homepage' ? 'white' : '#404040'
             },
             isFullWidth() {
                 return this.navtype ==='searchlocation'

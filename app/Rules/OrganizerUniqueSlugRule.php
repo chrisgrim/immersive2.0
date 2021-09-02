@@ -17,7 +17,6 @@ class OrganizerUniqueSlugRule implements Rule
     {
         $this->name = $name;
         $this->id = $id;
-        $router->model('brand', '\App\Brand')
     }
 
     /**

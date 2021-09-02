@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\MobilityAdvisory;
 use Illuminate\Http\Request;
+use App\Http\Requests\MobilityStoreRequest;
 
 class MobilitiesController extends Controller
 {
@@ -44,7 +45,7 @@ class MobilitiesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MobilityStoreRequest $request)
     {
         MobilityAdvisory::saveMobilitiesLevel($request);
         return MobilityAdvisory::where('admin', true)->get();

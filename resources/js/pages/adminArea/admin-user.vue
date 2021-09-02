@@ -21,22 +21,18 @@
             </div>
             <div 
                 class="data-grid__row" 
-                :key="item.id"
-                v-for="(item) in users.data">
+                :key="user.id"
+                v-for="(user) in users.data">
                 <input 
                     type="text" 
-                    v-model="item.name" 
+                    v-model="user.name" 
                     placeholder="User Name"
-                    @change="onUpdate(item)">
-                <input 
-                    type="text" 
-                    v-model="item.email" 
-                    placeholder="Email"
-                    @change="onUpdate(item)">
+                    @change="onUpdate(user)">
+                <p>{{ user.email }}</p>
                 <select 
-                    v-model="item.type" 
+                    v-model="user.type" 
                     placeholder="User Type"
-                    @change="onUpdate(item)">
+                    @change="onUpdate(user)">
                     <option value="a">
                         Admin
                     </option>
@@ -48,9 +44,11 @@
                     </option>
                 </select>
                 <button 
-                    @click.prevent="showModal(item, 'delete')" 
+                    @click.prevent="selectedModal=user" 
                     class="delete">
-                    <IconSvg type="delete" />
+                    <svg>
+                        <use :xlink:href="`/storage/website-files/icons.svg#ri-close-line`" />
+                    </svg>
                 </button>
             </div>
         </div>
@@ -59,39 +57,30 @@
             :list="users"
             @selectpage="onLoad" />
         <VueDeleteModal 
-            v-if="modal == 'delete'"
+            v-if="selectedModal"
             :item="selectedModal"
             :strict="true"
             body="You are deleting the user. Please be sure you know what you are doing."
-            @close="modal = null"
+            @close="selectedModal=null"
             @ondelete="onDelete" />
     </div>
 </template>
 
 <script>
-
-    import IconSvg from '../../components/Svg-icon'
     import Pagination  from '../../components/pagination.vue'
-    import VueDeleteModal from '../../components/Vue-Delete-Modal'
+    import VueDeleteModal from '../../components/modals/Vue-Modal-Delete'
 
     export default {
-
-        components: { IconSvg, Pagination, VueDeleteModal },
+        components: { Pagination, VueDeleteModal },
 
         data() {
             return {
                 users: [],
                 userList: [],
                 searchUserOptions: [],
-                regionActive: false,
-                user: '',
-                isModalVisible: false,
-                modal: false,
-                selectedModal: '',
-                isLoading: '',
+                selectedModal: null,
             }
         },
-
 
         methods: {
 
@@ -112,19 +101,12 @@
 
             onSearch(query) {
                 axios.get('/api/admin/users/search', { params: { keywords: query } })
-                .then( res => { 
-                    this.users = res.data 
-                })
+                .then( res => { this.users = res.data })
             },
 
             createList() {
                 this.searchUserOptions = this.userlist;
             },
-
-            showModal(user, arr) {
-                this.selectedModal = user;
-                this.modal = arr;
-            }, 
         },
 
         created() {

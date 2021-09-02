@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\ContentAdvisory;
 use Illuminate\Http\Request;
+use App\Http\Requests\ContentAdvisoryStoreRequest;
 
 class ContentAdvisoriesController extends Controller
 {
@@ -44,7 +45,7 @@ class ContentAdvisoriesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ContentAdvisoryStoreRequest $request)
     {
         ContentAdvisory::saveAdvisory($request);
         return ContentAdvisory::where('admin', true)->get();

@@ -1,5 +1,5 @@
 <template>
-    <div class="organizers">
+    <div class="admin-organizers">
         <div class="">
             <div class="title">
                 <h1>Organizers</h1>
@@ -105,8 +105,8 @@
 <script>
     
     import IconSvg from '../../components/Svg-icon'
-    import VueDeleteModal from '../../components/Vue-Delete-Modal'
-    import VueDataModal from '../../components/Vue-Data-Modal'
+    import VueDeleteModal from '../../components/modals/Vue-Modal-Delete'
+    import VueDataModal from '../../components/modals/Vue-Data-Modal'
 
     export default {
 

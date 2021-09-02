@@ -87,13 +87,7 @@
             <div 
                 class="nav-menu-item" 
                 v-if="user">
-                <div class="nav-icon">
-                    <svg>
-                        <circle 
-                            cx="12" 
-                            cy="12" 
-                            r="10.4" />
-                    </svg>         
+                <div class="nav-icon"> 
                     <ProfileButton 
                         :mobile="mobile" 
                         :user="user" />

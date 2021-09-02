@@ -8,7 +8,7 @@
     background: white;
     border: 1px solid #DDDDDD;
     border-radius: 1rem;
-    overflow: auto;
+    /*overflow: auto;*/
 }
 
 .data-grid .center {
@@ -25,7 +25,14 @@
     padding: 1rem;
     grid-gap: 2rem;
 }
-
+.data-grid__row svg {
+    width: 2rem;
+    height: 2rem;
+}
+.data-grid__row .v-select input {
+    width: 0;
+    height: 100%;
+}
 .data-grid__row.header{
     background: #ececec;
 }
@@ -100,11 +107,32 @@ button.noBox {
     z-index: 1;
 }
 
-.organizers .data-grid__row {
+.admin-organizers .data-grid__row {
     grid-template-columns: 5rem 1fr 1fr 1fr 1.5fr 5rem;
+}
+.admin-tags .data-grid__row {
+    grid-template-columns: 1fr 10rem 10rem 5rem;
+}
+.contactlevels .data-grid__row {
+    grid-template-columns: 1fr 1fr 5rem;
+}
+.admin-remote-locations .data-grid__row {
+    grid-template-columns: 1fr 1fr 1fr 1fr 5rem;
+}
+.admin-content-advisories .data-grid__row {
+    grid-template-columns: 1fr 1fr 5rem;
+}
+.admin-mobility .data-grid__row {
+    grid-template-columns: 1fr 1fr 5rem;
+}
+.admin-interactive-levels .data-grid__row {
+    grid-template-columns: 1fr 1fr 1fr 5rem;
 }
 .users .data-grid__row {
     grid-template-columns: 1fr 1fr 1.5fr 5rem;
+}
+.categories .data-grid__row {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 5rem;
 }
 .admin-events .data-grid__row {
     grid-template-columns: 5rem 1fr 0.7fr 4rem 5rem 5rem;
@@ -113,8 +141,14 @@ button.noBox {
     grid-template-columns: 5rem 10rem 15rem 15rem 15rem;
     min-height: 6rem;
 }
-.c-staffpicks .data-grid__row {
-    grid-template-columns: 1fr 1fr 10rem 10rem 15rem 5rem;
+.admin-staffpicks .data-grid__row {
+    grid-template-columns: 1fr 1fr 10rem 5rem 20rem 5rem;
+}
+.admin-staffpicks .add-window .data-grid__row {
+    grid-template-columns: 1fr 1fr 7rem 1fr;
+}
+.admin-staffpicks .add-window .data-grid__row.headerA {
+    background: #ececec;
 }
 .reviewevent .data-grid__row {
     grid-template-columns: 1fr 1fr 1fr 1fr 5rem 3rem;
@@ -125,11 +159,9 @@ button.noBox {
 }
 .admin-boneyard .data-grid__row {
     grid-template-columns: 1fr 20rem;
-    min-height: 6rem;
 }
 .admin-purgatory .data-grid__row {
     grid-template-columns: 1fr 20rem;
-    min-height: 6rem;
 }
 
 @media (min-width: 768px) {

@@ -1,6 +1,9 @@
 .album-a .card {
     display: grid;
-    grid-template-columns: 29rem auto
+    grid-template-columns: 29rem auto;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid rgb(214, 214, 214);
+    padding-bottom: 1rem;
 }
 .album-a .col {
     position: relative;
@@ -23,6 +26,17 @@
     right: 0px;
     position: absolute;
 }
+.album-a .category button {
+    padding: 0.7rem 1rem;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+.album-a .heart {
+    right: 0;
+    top: 0;
+    width: 3rem;
+    height: 3rem;
+}
 .album-a .tags {
     color: #9fa6ce;
     font-size: 1.4rem;
@@ -37,6 +51,13 @@
 .album-a .blurb p {
     font-size: 1.2rem;
     margin-top: 1rem;
+}
+.album-a .price {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    text-align: right;
+    font-weight: 800;
 }
 
 

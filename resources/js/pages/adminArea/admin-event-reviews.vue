@@ -91,7 +91,7 @@
     import IconSvg from '../../components/Svg-icon'
     import Pagination  from '../../components/pagination.vue'
     import VueAddReview from './components/vue-add-event-review'
-    import VueDeleteModal from '../../components/Vue-Delete-Modal'
+    import VueDeleteModal from '../../components/modals/Vue-Modal-Delete'
 
     export default {
 

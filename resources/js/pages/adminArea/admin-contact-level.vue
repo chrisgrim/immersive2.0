@@ -3,159 +3,101 @@
         <div class="">
             <div class="title">
                 <h1>Contact Levels</h1>
-                <div class="add">
-                    <button @click.prevent="isModalVisible = true">
-                        <IconSvg type="add" />
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <div 
-            class="list" 
-            :key="level.id"
-            v-for="(level) in contactLevels">
-            <input 
-                type="text" 
-                v-model="level.level" 
-                placeholder="Contact Level Name"
-                @blur="onUpdate(level)">
-            <input 
-                type="text" 
-                v-model="level.rank" 
-                placeholder="Contact Level Rank"
-                @blur="onUpdate(level)">
-            <button 
-                @click.prevent="showModal(level)" 
-                class="delete-circle">
-                <IconSvg type="delete" />
-            </button>
-        </div>
-        <modal 
-            v-if="isEditModalVisible" 
-            @close="isEditModalVisible = false">
-            <div slot="header">
-                <div class="circle del">
-                    <p>X</p>
-                </div>
-            </div>
-            <div slot="body"> 
-                <h3>Are you sure?</h3>
-                <p>You are deleting {{modalDelete.level}}.</p>
-            </div>
-            <div slot="footer">
-                <button 
-                    class="btn del" 
-                    @click.prevent="onDelete(modalDelete)">Delete</button>
-            </div>
-        </modal>
-
-        <div class="pin noimg">
-            <modal 
-                v-if="isModalVisible" 
-                @close="isModalVisible = false">
-                <div slot="header">
-                    <div />
-                </div>
-                <div slot="body" class="body">
-                    <div class="text">
-                        <div class="name">
-                            <input 
-                                type="text" 
-                                v-model="contactLevel" 
-                                placeholder="Contact Level Name"
-                                :class="{ active: levelActive}"
-                                @click="levelActive = true"
-                                @blur="levelActive = false"
-                                @input="$v.contactLevel.$touch">
-                            <div v-if="$v.contactLevel.$error" class="validation-error">
-                                <p class="error" v-if="!$v.contactLevel.required">Please Add Contact Level </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div slot="footer">
+                <div class="add-button">
                     <button 
-                        @click.prevent="onSubmit()" 
-                        class="btn sub">
-                        Submit
+                        @click="onAdd=!onAdd"
+                        class="add__icon" 
+                        :class="{active: onAdd}">
+                        <svg>
+                            <use :xlink:href="`/storage/website-files/icons.svg#ri-add-fill`" />
+                        </svg>
                     </button>
                 </div>
-            </modal>
+            </div>
         </div>
+
+        <div class="data-grid">
+            <div class="data-grid__row header">
+                <p>Name</p>
+                <p>Rank</p>
+            </div>
+            <div 
+                class="data-grid__row"
+                :key="level.id"
+                v-for="(level) in contactLevels">
+                <input 
+                    type="text" 
+                    v-model="level.level" 
+                    placeholder="Contact Level Name"
+                    @blur="onUpdate(level)">
+                <input 
+                    type="text" 
+                    v-model="level.rank" 
+                    placeholder="Contact Level Rank"
+                    @blur="onUpdate(level)">
+                <button 
+                    @click.prevent="selectedModal=level" 
+                    class="delete">
+                    <svg>
+                        <use :xlink:href="`/storage/website-files/icons.svg#ri-close-line`" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <AddContactLevel 
+            @update="update"
+            @close="onAdd=false"
+            v-if="onAdd" />
+        <VueDeleteModal 
+            v-if="selectedModal"
+            :item="selectedModal"
+            :strict="true"
+            :body="`You are deleting ${selectedModal.level}`"
+            @close="selectedModal=null"
+            @ondelete="onDelete" />
     </div>
 </template>
 
 <script>
-    
-    import { required } from 'vuelidate/lib/validators';
-    import IconSvg from '../../components/Svg-icon'
-
+    import VueDeleteModal from '../../components/modals/Vue-Modal-Delete'
+    import AddContactLevel from './components/add-contact-level'
 
     export default {
 
-        components: { IconSvg },
+        components: { VueDeleteModal, AddContactLevel },
 
         data() {
             return {
                 contactLevels: '',
-                levelActive: false,
-                contactLevel: '',
-                isModalVisible: false,
-                isEditModalVisible: false,
-                modalDelete: '',
+                onAdd: false,
+                selectedModal: null,
             }
         },
 
         methods: {
-
-            onSubmit() {
-                this.$v.$touch(); 
-                if (this.$v.$invalid) { return false }
-
-                axios.post('/contactlevels', {level: this.contactLevel})
+            async onDelete() {
+                await axios.delete(`/contactlevels/${this.selectedModal.id}`)
+                .then( res => { 
+                    this.contactLevels = res.data 
+                    this.selectedModal = null
+                })
+            },
+            async onLoad() {
+                await axios.get('/contactlevels')
                 .then( res => { this.contactLevels = res.data })
-                .catch( this.isModalVisible = false );
             },
-
-            onDelete(level) {
-                axios.delete(`/contactlevels/${level.id}`)
-                .then( res => { this.isEditModalVisible = false; this.contactLevels = res.data })
-                .catch( error => { this.serverErrors = error.response.data.errors; });
-            },
-
-            onLoad() {
-                axios.get('/contactlevels')
+            async onUpdate(level) {
+                await axios.patch(`/contactlevels/${level.id}`, level )
                 .then( res => { this.contactLevels = res.data })
-                .catch( error => { this.serverErrors = error.response.data.errors });
             },
-
-            onUpdate(level) {
-                axios.patch(`/contactlevels/${level.id}`, level )
-                .then( res => { this.contactLevels = res.data })
-                .catch( error => { this.serverErrors = error.response.data.errors });
-            },
-
-            showModal(level) {
-                this.modalDelete = level;
-                this.isEditModalVisible = true;
-            },
-
-            clearData() {
-                this.isModalVisible = false;
-                this.contactLevel = '';
-            },
-
+            update(value) {
+                this.contactLevels = value
+                this.onAdd = false
+            }
         },
 
-        created() {
+        mounted() {
             this.onLoad()
-        },
-
-        validations: {
-            contactLevel: {
-                required,
-            },
         },
     }
 

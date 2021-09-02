@@ -1,6 +1,7 @@
 <template>
     <div 
-        class="album four" 
+        :class="[col, align]"
+        class="album" 
         ref="list">
         <div 
             class="row" 
@@ -44,9 +45,9 @@
                             </div>
                         </template>
                         <div class="price">
-                            <h4 :class="{ black : color=='black' }">
+                            <p :class="{ black : color=='black' }">
                                 {{ event.price_range }} <span v-if="isShowing(event)"> (Event passed) </span>
-                            </h4>
+                            </p>
                         </div>
                     </div>
                     <favorite 
@@ -61,7 +62,21 @@
 
 <script>
     export default {
-        props:['events', 'loadurl', 'color', 'favorite', 'past', 'col'],
+        props: {
+            events: Array,
+            loadurl: String,
+            color: String,
+            favorite: String,
+            past: Boolean,
+            col: {
+              type: String,
+              default: 'four'
+            },
+            align: {
+              type: String,
+              default: null
+            },
+        },
 
         computed: {
             url() {

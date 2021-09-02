@@ -7,7 +7,15 @@
 .btn-borderless {
     border:0;
 }
-
+.btn.underline {
+    text-decoration: underline;
+}
+button:disabled,
+button[disabled]{
+    background: #a2a2a2 !important;
+    color: white !important;
+    cursor: default;
+}
 
 
 
@@ -17,6 +25,17 @@
     border: 1px solid #81899a;
 }
 
+/*-------------------------------Login---------------------------------*/
+
+.btn-login {
+    background-image: radial-gradient(circle at center center, #ff385c 0%, #e61e4d 27.5%, #e31c5f 40%, #d70466 57.5%, #bd1e59 75%, #bd1e59 100%);
+    color: white;
+    min-width: 200px !important;
+    background-size: 200% 200% !important;
+    width: 100%;
+    border: 0;
+    border-radius: 1rem;
+}
 
 /*----------------------------------Icon---------------------------------*/
 button.btn-icon {

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\InteractiveLevel;
 use Illuminate\Http\Request;
+use App\Http\Requests\InteractiveLevelStoreRequest;
 
 class InteractiveLevelController extends Controller
 {
@@ -44,7 +45,7 @@ class InteractiveLevelController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(InteractiveLevelStoreRequest $request)
     {
         InteractiveLevel::saveInteractiveLevel($request);
         return InteractiveLevel::all();

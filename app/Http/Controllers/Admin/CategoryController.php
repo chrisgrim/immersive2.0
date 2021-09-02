@@ -9,6 +9,7 @@ use App\Models\MakeImage;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Requests\CategoryStoreRequest;
+use App\Http\Requests\CategoryUpdateRequest;
 
 class CategoryController extends Controller
 {
@@ -83,7 +84,7 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(CategoryStoreRequest $request, Category $category)
+    public function update(CategoryUpdateRequest $request, Category $category)
     {
         $category->updateElements($request, $category);
         return [

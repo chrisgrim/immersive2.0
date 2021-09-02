@@ -47,7 +47,7 @@ class SearchController extends Controller
         if (! $request->keywords) return Genre::orderBy('name')->paginate(40);
 
         $genre = Genre::multiMatchSearch()
-            ->fields(['name', 'name._2gram','name._3gram'])
+            ->fields(['name'])
             ->query($request->keywords)
             ->type('bool_prefix')
             ->sort('rank', 'desc')

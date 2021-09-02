@@ -20,8 +20,7 @@
                                     <h2>{{ url.city }}</h2>
                                 </template>
                             </div>
-                            <VueList 
-                                :items="eventList.data" />
+                            <VueList :items="eventList.data" />
                             <pagination
                                 :list="eventList"
                                 :limit="2"
@@ -72,8 +71,7 @@
                         <div class="event__results">
                             <div>
                                 <template v-if="eventList.data.length">
-                                    <VueList 
-                                        :items="eventList.data" />
+                                    <VueList :items="eventList.data" />
                                 </template>
                             </div>
                             <div>
@@ -82,7 +80,6 @@
                                     :limit="2"
                                     @selectpage="selectPage" />
                             </div>
-                            <div style="border-bottom:1px solid #d6d6d6;margin: 0 0 3rem 0;" />
                             <template v-if="!mobile">
                                 <div class="event-search-list">
                                     <div class="title">
@@ -90,7 +87,7 @@
                                     </div>
                                     <template v-if="onlineEventList.data">
                                         <VueEventIndex 
-                                            :col="4"
+                                            col="three"
                                             :events="onlineEventList.data" />
                                     </template>
                                     <div>

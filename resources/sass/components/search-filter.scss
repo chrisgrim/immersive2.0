@@ -1,13 +1,13 @@
 .filter .content {
     width: 100%;
-    z-index: 1;
+    z-index: 3;
     position: relative;
     padding: 2rem;
 }
 
 .filter .content.location {
     width: 100%;
-    z-index: 1;
+    z-index: 3;
     position: absolute;
     top:0;
     padding: 2rem 2rem;

@@ -2,6 +2,7 @@
     padding: 0 2rem;
     width: 100%;
     margin: auto;
+    margin-top: 2rem;
 }
 .lay-a .wrapper {
     display: flex;
@@ -13,7 +14,7 @@
 .lay-a .sidebar {
     display: none;
 }
-.lay-a .sidebar .sticky{
+.lay-a .sidebar .sticky {
     top:4rem;
     position: sticky;
     opacity: 1;
@@ -49,7 +50,11 @@
     height: 1.4rem;
 }
 
-.lay-a .content h2, .lay-a .content h3, .lay-a .content h4, .lay-a .content p  {
+.lay-a .content h2, .lay-a .content h3, .lay-a .content h4  {
+    min-height: 0.1rem;
+    margin-bottom: 2rem;
+}
+.lay-a .content p  {
     margin-top: 1rem;
     min-height: 0.1rem;
 }
@@ -59,7 +64,10 @@
     padding-inline-start: 4rem;
 }
 
-@media only screen and (min-width: 992px) {
+@media only screen and (min-width: 768px) {
+    .lay-a {
+        padding: 2rem 3rem;
+    }
     .lay-a .content {
         width: 66%;
     }
@@ -72,7 +80,11 @@
 
 @media only screen and (min-width: 1160px) {
     .lay-a {
-        width: 1150px;
+        padding: 0 8rem;
+        max-width: 1280px;
+    }
+    .lay-a .wrapper {
+        display: flex;
     }
     .lay-a .content {
         width: 66%;

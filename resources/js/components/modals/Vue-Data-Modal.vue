@@ -1,44 +1,46 @@
 <template>
-    <div class="modal-box">
-        <div class="modal-box__container">
-            <div class="modal-box__close">
+    <div class="modal">
+        <div class="wrapper">
+            <div class="header">
                 <button @click="onClose">
-                    <IconSvg type="delete" />
+                    <svg>
+                        <use :xlink:href="`/storage/website-files/icons.svg#ri-close-line`" />
+                    </svg>
                 </button>
             </div>
-            <div class="modal-box__body">
+            <div class="body">
                 <slot></slot>
+                <div class="input">
+                    <v-select 
+                        v-model="data"
+                        label="name"
+                        placeholder="Enter Name"
+                        @search="onSearch"
+                        @search:focus="onSearch"
+                        :options="options" />
+                    <button 
+                        class="btn-login btn-borderless" 
+                        @click="onSubmit"
+                        :disabled='disabled'>
+                        Submit
+                    </button>
+                </div>
             </div>
-            <div class="modal-box__input">
-                <v-select 
-                    v-model="data"
-                    label="name"
-                    placeholder="Enter Name"
-                    @search="onSearch"
-                    @search:focus="onSearch"
-                    :options="options" />
+            <div class="footer">
                 <button 
-                    class="submit" 
-                    @click="onSubmit"
-                    :disabled='isDisabled'>
-                    Submit
+                    class="btn-borderless" 
+                    @click="onClose">
+                    Close
                 </button>
-            </div>
-            <div class="modal-box__footer">
-                <button @click="onClose">Close</button>
             </div>
         </div>
     </div>
 </template>
 
-<script>
-    import IconSvg from './Svg-icon'
-    
+<script>    
     export default {
 
         props: ['item', 'search'],
-
-        components: { IconSvg },
 
         computed: {
             endpoint() {
@@ -46,6 +48,9 @@
                 if (this.search ===  'organizer') { return '/api/admin/organizer/search' }
                 return '/api/admin/users/search'
             },
+            disabled() {
+                return this.data ? false : true;
+            }
         },
 
         data() {
@@ -60,11 +65,9 @@
             onSubmit() {
                 this.$emit('onSubmit', this.data);
             },
-
             onClose() {
                 this.$emit('close', true);
             },
-
             onSearch (query) {
                 axios.get( this.endpoint, { params: { keywords: query } })
                 .then( res => { 
@@ -72,10 +75,6 @@
                 });
             },
         },
-
-        watch: {
-
-        }
 
     }
 </script>

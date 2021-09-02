@@ -3,6 +3,7 @@
 //Full Page 
 @import 'layouts/full-page';
 @import 'layouts/lay-b';
+@import 'layouts/lay-c';
 
 // Nav
 @import 'nav/navbar';
@@ -27,6 +28,9 @@
 //Features
 @import 'components/features/feature-a';
 
+//Notifications
+@import 'components/notifications/notifications';
+
 //Buttons
 @import 'components/buttons/button';
 @import 'components/buttons/button-outline';
@@ -37,6 +41,10 @@
 //Dropdowns
 @import 'components/dropdowns/v-select';
 @import 'components/dropdowns/nav-dropdown';
+@import 'components/dropdowns/create-dropdown';
+
+//Modals
+@import 'components/modals/modal';
 
 //Staffpicks
 @import 'staffpicks/staffpicks';
@@ -44,9 +52,10 @@
 //Home
 @import 'home/index';
 
-// Layout
+//Profile
+@import 'profile/login';
 
-@import 'components/login';
+// Layout
 
 @import 'events/event-show';
 @import 'events/components/event-grid-component';
@@ -55,17 +64,12 @@
 
 @import 'search/event';
 
-@import 'auth/verify';
-@import 'auth/register';
-
 @import 'slowlayout';
 
 //plugins
 @import 'plugins/flatpickr';
 @import 'plugins/leaflet';
 
-
-@import 'components/modals/modal';
 @import 'components/vue-list';
 
 @import 'components/sliderbutton';

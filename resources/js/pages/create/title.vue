@@ -71,11 +71,12 @@
             @close="clearInput()"
             v-if="serverErrors.errors && serverErrors.errors.name">
             <h3>Warning</h3>
-            <p style="display:inline">An event named {{ title.name }} already exists. Please review the live listing to ensure you are not creating a duplicate event.</p>
-            <a 
-                style="color:#3a3aff" 
-                target="_blank" 
-                :href="`/events/${serverErrors.errors.name}`">View Event</a>
+            <p>An event named {{ title.name }} already exists. Please review the live listing to ensure you are not creating a duplicate event.
+                <a 
+                    style="color:#3a3aff" 
+                    target="_blank" 
+                    :href="`/events/${serverErrors.errors.name}`">View Event</a>
+            </p>
         </VueModalAccept>
         <VueModalForm 
             v-if="modal === 'changeEventName'"
@@ -106,8 +107,8 @@
     import { required, maxLength } from 'vuelidate/lib/validators';
     import Submit  from './components/submit-buttons.vue'
     import VueNewBeginner  from './components/vue-title-beginner.vue'
-    import VueModalForm from '../../components/Vue-Modal-Form'
-    import VueModalAccept from '../../components/Vue-Modal-Accept'
+    import VueModalForm from '../../components/modals/Vue-Modal-Form'
+    import VueModalAccept from '../../components/modals/Vue-Modal-Accept'
 
     export default {
 

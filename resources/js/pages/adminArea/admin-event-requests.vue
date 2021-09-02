@@ -69,7 +69,7 @@
 <script>
     import Pagination  from '../../components/pagination.vue'
     import IconSvg from '../../components/Svg-icon'
-    import VueModalForm from '../../components/Vue-Modal-Form'
+    import VueModalForm from '../../components/modals/Vue-Modal-Form'
 
     export default {
 

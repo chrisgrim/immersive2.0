@@ -26,7 +26,12 @@
     import RegisterForm from './components/register-form'
     export default {
 
-        props: ['page', 'redirect'],
+        props: {
+            page: {
+                type: String,
+                default: 'login'
+            },
+        },
 
         components: { LoginForm, RegisterForm },
 
@@ -44,21 +49,12 @@
                 this.isLogin = val === 'login' ? true : false
             },
             closeWindow() {
-                this.conditionalBodyClass(false, 'noscroll')
+                document.body.classList.remove('noscroll')
                 this.$emit('close', false)
             },
             hideAlerts() {
                 this.disabled = false;
                 this.alerts = false;
-            },
-            conditionalBodyClass(bool, className) {
-                if (bool) {
-                    document.body.classList.add(className)
-                    this.$store.commit('showmap', true);
-                } else {
-                    document.body.classList.remove(className)
-                    this.$store.commit('showmap', false);
-                }
             },
             onClickOutside(event) {
                 let arr =  this.$refs.myDiv;
@@ -70,12 +66,12 @@
 
         mounted() {
             setTimeout(() => document.addEventListener("click", this.onClickOutside), 200);
-            this.conditionalBodyClass(true, 'noscroll')
+            document.body.classList.add('noscroll')
         },
 
-        unmounted() {
+        destroyed() {
             document.removeEventListener("click", this.onClickOutside);
-            this.conditionalBodyClass(false, 'noscroll')
+            document.body.classList.remove('noscroll')
         },
 
     }

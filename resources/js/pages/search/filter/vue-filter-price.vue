@@ -7,7 +7,7 @@
             :class="{ active: hasPrice }" 
             class="filter round">
             <template v-if="hasPrice">
-                ${{ price[0] }} - ${{ price[1] }}
+                ${{ value[0] }} - ${{ value[1] }}
             </template>
             <template v-else>
                 Price
@@ -18,7 +18,7 @@
                 <div class="filter__dropdown">
                     <div>
                         <vue-slider
-                            v-model="price"
+                            v-model="inputVal"
                             tooltip="always"
                             v-bind="priceOptions"
                             @drag-end="mobileSubmit"
@@ -55,15 +55,23 @@
     import 'vue-slider-component/theme/antd.css'
     export default {
 
-        props: ['mobile'],
+        props: ['value', 'mobile'],
 
         components: { VueSlider },
+
+        computed: {
+            inputVal: {
+                get() { return this.value },
+                set(val) { this.$emit('input', val) }
+            },
+            hasPrice() {
+                return this.value[0] === 0 && this.value[1] === 100 ? false : true;
+            },
+        },
 
         data() {
             return {
                 active: false,
-                price:  this.$store.state.filterCategory,
-                hasPrice: false,
                 priceOptions: { min: 0, max: 100 },
                 sliderFormat: v => `$${('' + v).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`,
             }
@@ -74,21 +82,16 @@
                 this.$emit('submit', true);
                 this.active = false;
             },
-
             mobileSubmit() {
                 this.$store.commit('filterPrice', this.price)
             },
-
             clear() {
-                this.price = [0,100];
-                this.$store.commit('filterPrice', [0,100])
+                this.inputVal = [0,100];
             },
-
             show() {
                 this.active =! this.active;
                 setTimeout(() => document.addEventListener('click', this.onClickOutside), 200);
             },
-
             onClickOutside(event) {
                 if (this.active == false) {return}
                 let price = this.$refs.price;
@@ -96,23 +99,7 @@
                 this.active = false;
                 this.submit();
             },
-
-            onLoad() {
-                if (this.$store.state.filterPrice) {
-                    this.price = this.$store.state.filterPrice;
-                    this.hasPrice = true;
-                }
-            }
         },
 
-        mounted() {
-            this.onLoad();
-        },
-
-        watch: {
-            price() {
-                this.price[0] === 0 && this.price[1] === 100 ? this.hasPrice = false : this.hasPrice = true;
-            },
-        },
     }
 </script>

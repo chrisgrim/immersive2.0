@@ -145,3 +145,6 @@
 .vs__dropdown-option:hover {
     background:#76c4f3;
 }
+.v-select.active input::placeholder {
+    color: black;
+}

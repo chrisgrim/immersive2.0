@@ -21,7 +21,7 @@
                 id="password" 
                 :type="isVisible ? 'text' : 'password'" 
                 v-model="user.password"
-                :class="{'error': $v.user.password.$error || $v.user.email.serverFailed.$error }"
+                :class="{'error': $v.user.password.$error || !$v.user.email.serverFailed }"
                 @input="clear('password')"
                 @keyup.enter="onSubmit"
                 required
@@ -29,7 +29,7 @@
             <div v-if="$v.user.password.$error" class="validation-error">
                 <p class="error" v-if="!$v.user.password.required">The password is required</p>
             </div>
-            <div v-if="$v.user.email.serverFailed.$error" class="validation-error">
+            <div v-if="$v.user.email.$error" class="validation-error">
                 <p class="error" v-if="!$v.user.email.serverFailed">The login information doesn't match our records</p>
             </div>
             <div class="password">
@@ -91,15 +91,12 @@
     import { required } from 'vuelidate/lib/validators'
     import formValidationMixin from '../../../mixins/form-validation-mixin'
     export default {
-
         mixins: [formValidationMixin],
-
         computed: {
             isDisabled() {
                 return this.disabled || Object.keys(this.serverErrors).length !== 0;
             }
         }, 
-
         data() {
             return {
                 user: this.initializeUserObject(),
@@ -110,7 +107,6 @@
                 isVisible: false,       
             }
         },
-
         methods: {
             async onSubmit() {
                 if (this.checkVuelidate()) { return false }
@@ -150,7 +146,6 @@
                 }
             },
         },
-
         validations: {
             user: {
                 email: {
@@ -163,6 +158,5 @@
                 },
             }
         },
-
     }
 </script>

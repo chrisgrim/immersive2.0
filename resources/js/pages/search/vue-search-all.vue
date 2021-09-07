@@ -1,9 +1,10 @@
 <template>
     <div class="online search">
         <SearchFilter
-            @allevents="updateAllEvents"
-            :allevents="allevents" 
-            :tags="tags" 
+            @update="updateEvents"
+            :tags="tags"
+            filter="all"
+            v-model="paginate"
             :categories="categories" />
         <div class="search__list">
             <div class="results">
@@ -11,11 +12,11 @@
                     <h3>All Events</h3>
                 </div>
                 <SearchAlbum 
-                    :items="allEventList.data" 
+                    :items="events.data" 
                     :vertical="true" />
                 <pagination 
                     :limit="1"
-                    :list="allEventList"
+                    :list="events"
                     @selectpage="selectPage" />
             </div>
         </div>
@@ -23,31 +24,28 @@
 </template>
 
 <script>
-    import SearchFilter  from './vue-search-filter-all.vue'
-    import Pagination  from '../events/components/pagination.vue'
-    import searchBasicsMixin from '../../mixins/search-basics-mixin'
+    import SearchFilter  from './vue-search-filter.vue'
+    import Pagination  from './components/search-pagination.vue'
     import SearchAlbum from './components/album-search.vue'
 
     export default {
         components: { SearchFilter, Pagination, SearchAlbum },
 
-        mixins: [ searchBasicsMixin ],
-
         props:['allevents','categories','user', 'tags'],
 
         data() {
             return {
-                allEventList: this.allevents,
+                events: this.allevents,
+                paginate: 1,
             }
         },
 
         methods: {
-            updateAllEvents(value) {
-                this.allEventList = value.data;
+            updateEvents(value) {
+                this.events = value.data;
             },
-
             selectPage (page) {
-                this.$store.commit('filterPagination', page)
+                this.paginate = page
             },
         },
     };

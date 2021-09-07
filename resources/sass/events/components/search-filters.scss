@@ -1,28 +1,16 @@
 /* ------------------------------------*\
   #Event- Search Filters
 \*------------------------------------ */
-.event__filter {
-    width: 100%;
-    z-index: 1;
-    background-color: #fff;
-    position: relative;
-    display: inline-block;
-    border-radius: 2rem 2rem 0 0;
-    border-top: 1px solid black;
-}
-
 .filter__row {
     width: 100%;
     text-align: center;
 }
-
 .filter__content {
     width: 100%;
     z-index: 1;
     position: relative;
     padding: 2rem;
 }
-
 .filter__grid {
     justify-content: left;
     align-items: end;
@@ -34,94 +22,22 @@
     position: relative;
     margin-bottom: 1rem;
 }
-
 .filter__block {
     display: inline-block;
     width: 100%;
 }
-
 .filter__block .button {
     margin-top: 1rem;
     display: inline-block;
 }
-
 .filter__block .element {
     width: 100%;
 }
-
 .filter__block .filter.round {
     height: 3.5rem;
-    /*margin-right: 1rem;*/
 }
-
-.filterBar__relative {
-    height:10rem;
-}
-
-.filter__location {
-    width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    background: white;
-    padding-top: 2rem;
-    z-index: 999;
-}
-
-.filter__location--back {
-    display: inline-block;
-    padding: 2rem;
-}
-
-.filter__location .nav-search__content {
-    width: 78%;
-    display: inline-block;
-    vertical-align: top;
-    margin-top: 0.7rem;
-}
-
-.filter__location .nav-search__content .icon {
-    display: none;
-}
-
-.filter__location .multiselect__placeholder {
-    color: black;
-    padding: 0 1rem;
-}
-
-.filter__location .multiselect__input {
-    color: black;
-    padding: 0 1rem;
-    font-size: 1.4rem !important;
-}
-
-.filter__location .multiselect__select {
-    color: black;
-    padding: 0 1rem;
-    font-size: 1.4rem !important;
-}
-
-.filter__location .multiselect__single {
-    color: black;
-    padding: 0 1rem;
-    font-size: 1.4rem !important;
-}
-
-.filter__location .multiselect__content .option__desc {
-    color: black;
-    font-size: 1.4rem;
-    padding: 0 1rem;
-}
-
-.filter__location button {
-    position: absolute;
-    z-index: 1;
-    right: 3.5rem;
-    border-radius: 5rem;
-    top: 3.5rem;
-    border: 0;
-    background: #e6e6e6;
+.filter .vs__selected-options {
+    padding: 0 0 0 2.5rem;
 }
 
 .filter__dates {
@@ -168,7 +84,7 @@
     text-align: center;
     overflow: hidden;
     vertical-align: top;
-    border-radius: 0.4rem;
+    border-radius: 5rem;
     margin-right:1rem;
     position: relative;
 }
@@ -184,7 +100,7 @@
 }
 
 .filter__category--element .checkbox.active {
-    background: black;
+    border: 8px solid black;
 }
 
 .filter__category span {
@@ -462,10 +378,6 @@ button.pop-box__submit {
 
 
 @media (min-width: 768px) {
-    .event__filter {
-        border-radius: 0;
-        border: 0;
-    }
 
     .filter__location {
         width: 100%;

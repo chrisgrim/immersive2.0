@@ -139,10 +139,10 @@
             this.$store.commit('adduser', this.user);
         },
 
-        created () {
+        created() {
             window.addEventListener('scroll', this.handleScroll);
         },
-        unmounted () {
+        destroyed() {
             window.removeEventListener('scroll', this.handleScroll);
         }
     }

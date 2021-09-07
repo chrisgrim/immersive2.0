@@ -35,14 +35,8 @@
             showMenu() {
                 return this.navtype != 'show' && this.navtype != 'messageshow' 
             },
-            hideMenuNav() {
-                return this.navtype != 'create'
-            },
-            hideSearch() {
-                return this.navtype != 'create' && this.navtype !='onlinesearch' && this.navtype !='searchpage' && this.navtype !='searchlocation'
-            },
             isFixed() {
-                return ''
+                return this.navtype ==='searchlocation'
             },
             isAbsolute() {
                 return this.navtype == 'homepage' || this.navtype == 'create'

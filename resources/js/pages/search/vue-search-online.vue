@@ -1,9 +1,10 @@
 <template>
     <div class="online search">
         <SearchFilter
-            @onlineevents="updateOnlineEvents"
-            :onlineevents="onlineevents" 
-            :tags="tags" 
+            @update="updateEvents"
+            :tags="tags"
+            filter="all"
+            v-model="paginate"
             :categories="categories" />
         <div class="search__list">
             <div class="results">
@@ -11,12 +12,12 @@
                     <h3>Online Events</h3>
                 </div>
                 <SearchAlbum 
-                    :items="allEventList.data" 
+                    :items="events.data" 
                     :vertical="true" />
                 <pagination 
                     :limit="1"
-                    :list="onlineEventList"
-                    @selectpage="selectOnlinePage" />
+                    :list="events"
+                    @selectpage="selectPage" />
             </div>
         </div>
     </div>
@@ -25,29 +26,27 @@
 <script>
     import SearchFilter  from './vue-search-filter.vue'
     import Pagination  from '../events/components/pagination.vue'
-    import searchBasicsMixin from '../../mixins/search-basics-mixin'
     import SearchAlbum from './components/album-search.vue'
 
     export default {
         components: { SearchFilter, Pagination, SearchAlbum },
 
-        mixins: [ searchBasicsMixin ],
-
-        props:['searchedevents','onlineevents','categories','user', 'tags'],
+        props:['onlineevents','categories','user', 'tags'],
 
         data() {
             return {
-                onlineEventList: this.onlineevents,
+                events: this.onlineevents,
+                paginate: 1,
             }
         },
 
         methods: {
-            updateOnlineEvents(value) {
-                this.onlineEventList = value.data;
+            updateEvents(value) {
+                this.events = value.data;
             },
 
-            selectOnlinePage (page) {
-                 this.$store.commit('filterPagination', page)
+            selectPage (page) {
+                this.paginate = page
             },
         },
 

@@ -62,7 +62,7 @@
                 </button>
             </div>
         </modal>
-        <vue-email-verify
+        <EmailVerificationModal
             v-if="isVerifyVisible"
             @close="isVerifyVisible = false"
             :user="user" 
@@ -73,13 +73,13 @@
     
     import { required, maxLength } from 'vuelidate/lib/validators';
     import formValidationMixin from '../../mixins/form-validation-mixin'
-    import vueEmailVerify from '../layouts/email-verified.vue'
+    import EmailVerificationModal from '../profile/components/email-verification-modal.vue'
 
     export default {
 
         props: ['loadorganizer', 'user'],
 
-        components: { vueEmailVerify },
+        components: { EmailVerificationModal },
 
         mixins: [formValidationMixin],
 

@@ -261,7 +261,7 @@
             this.getDates();
         },
 
-        unmounted() {
+        destroyed() {
             document.removeEventListener("click", this.onClickOutside);
         },
 

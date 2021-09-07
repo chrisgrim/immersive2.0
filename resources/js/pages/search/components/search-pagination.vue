@@ -34,7 +34,9 @@
                     @click="nextPage">
                     <slot name="next-nav">
                         <svg>
-                            <use :xlink:href="`/storage/website-files/icons.svg#ri-arrow-right-s-line`" />
+                            <svg>
+                                <use :xlink:href="`/storage/website-files/icons.svg#ri-arrow-right-s-line`" />
+                            </svg>
                         </svg>
                     </slot>
                 </button>

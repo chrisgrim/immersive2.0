@@ -4,19 +4,22 @@
             <div class="filter__block">
                 <VueFilterDates
                     :mobile="isMobile()"
-                    :url="url"
-                    @submit="pushData" />
+                    v-model="data.dates"
+                    @submit="submit" />
                 <VueFilterPrice
                     :mobile="isMobile()"
-                    @submit="pushData" />
+                    v-model="data.price"
+                    @submit="submit" />
                 <VueFilterCategory 
                     :mobile="isMobile()"
                     :categories="categories"
-                    @submit="pushData" />
+                    v-model="data.category"
+                    @submit="submit" />
                 <VueFilterTag 
                     :mobile="isMobile()"
                     :tags="tags"
-                    @submit="pushData" />
+                    v-model="data.tag"
+                    @submit="submit" />
             </div>
         </div>
     </div>
@@ -32,62 +35,63 @@
     
     export default {
 
-        props:['categories', 'events', 'onlineevents', 'tags'],
+        props:['value','categories', 'tags', 'filter'],
 
         components: { VueFilterDates, VueFilterPrice, VueFilterCategory, VueFilterTag },
 
         mixins: [ searchBasicsMixin, mobile ],
+        
+        computed: {
+            inputVal: {
+                get() { return this.value },
+                set(val) { this.$emit('input', val) }
+            },
+        },
 
         data() {
             return {
-                searchType: 'location',
-                filter: 'online',
                 data: {
-                    category: [],
-                    dates: [],
-                    price: [],
-                    tag: [],
+                    category: this.initilizeCategory(),
+                    dates: this.initilizeDates(),
+                    price: this.initilizePrice(),
+                    tag: this.initilizeTag(),
                 }
             }
         },
 
         methods: {
-
-            submit() {
-                axios.post(`/api/search/online?page=${this.$store.state.pagination}`, this.data)
-                .then(data => {
-                    this.$emit('onlineevents', data);
-                    this.addPushState();
-                })
-                .catch(err => {this.onErrors(err);});
+            async submit() {
+                this.inputVal = 1
+                await axios.post(`/api/search/all?page=${this.value}`, this.data)
+                .then(data => { this.$emit('update', data) })
+                this.addPushState();
             },
-
-            pushData() {
-                this.addData();
-                this.submit();
+            async next() {
+                await axios.post(`/api/search/all?page=${this.value}`, this.data)
+                .then( data => { this.$emit('update', data) })
+                this.addPushState();
             },
-
-            addData() {
-                this.$store.commit('filterPagination', 1)
-                this.data.category = this.$store.state.filterCategory.map(cat => cat.id)
-                this.data.dates = this.$store.state.filterDates;
-                this.data.price = this.$store.state.filterPrice;
-                this.data.tag = this.$store.state.filterTag.map(tag => tag.name);
+            initilizeCategory() {
+                let cat = new URL(window.location.href).searchParams.get("category")
+                return cat ? cat.split(',').map(Number) : []
+            },
+            initilizeTag() {
+                let tag = new URL(window.location.href).searchParams.get("tag")
+                return tag ? tag.split(',') : []
+            },
+            initilizePrice() {
+                return new URL(window.location.href).searchParams.get("price0") ? [Number(new URL(window.location.href).searchParams.get("price0")), Number(new URL(window.location.href).searchParams.get("price1"))] : [0,100]
+            },
+            initilizeDates() {
+                return new URL(window.location.href).searchParams.get("start") ? [new URL(window.location.href).searchParams.get("start"), new URL(window.location.href).searchParams.get("end")] : []
             },
         },
 
         watch: {
-            '$store.state.pagination'() {
-                this.submit()
+            value() {
+                this.next()
             }
         },
+    }
 
-        created() {
-            this.getPushState();
-            this.addData();
-        },
-
-
-}
-    
 </script>

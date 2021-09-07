@@ -118,6 +118,10 @@
     font-size: 1.5rem;
     font-weight: 800;
 }
+.album .favorite-button button.heart-btn svg{
+    fill: rgba(0, 0, 0, 0.5);
+    stroke: white;
+}
 
 @media screen and (min-width: 768px) {
     .album {

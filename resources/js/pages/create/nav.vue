@@ -172,7 +172,7 @@
             }
         },
 
-        unmounted() {
+        destroyed() {
             window.removeEventListener('resize', this.handleResize);
         },
 

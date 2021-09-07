@@ -1,0 +1,40 @@
+ul.pagination {
+    text-align: center;
+    padding-bottom: 2rem;
+    display: flex;
+}
+.pagination li {
+    display: inline;
+    padding: 0.3rem;
+}
+.pagination li button {
+    border: 0;
+    font-weight: 500;
+    background: white;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.pagination li.active button {
+    background: black;
+    color: white;
+}
+.pagination li button.paginate__arrows {
+    border: 0;
+    box-shadow: 0 0 0 1px transparent, 0 0 0 4px transparent, 0 2px 4px rgba(0, 0, 0, 0.18);
+    border-radius: 5rem;
+    width: inherit;
+    height: inherit;
+    padding: 0.4rem;
+    &:hover {
+        background: black;
+        color: white;
+    }
+}
+.pagination li button.paginate__arrows svg {
+    width: 2.4rem;
+    height: 2.4rem;
+}

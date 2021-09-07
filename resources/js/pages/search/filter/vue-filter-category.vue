@@ -4,12 +4,12 @@
         ref="cat">
         <button
             @click="show" 
-            :class="{ active: category.length }" 
+            :class="{ active: value.length }" 
             class="filter round">
-            <template v-if="category.length && !mobile">
-                <span> {{ category[0].name }} </span>
-                <span v-if="category.length > 1">
-                    +{{ category.length - 1 }}
+            <template v-if="value.length && !mobile">
+                <span> {{ categoryList[0].name }} </span>
+                <span v-if="value.length > 1">
+                    +{{ value.length - 1 }}
                 </span>
             </template>
             <template v-else>
@@ -29,12 +29,8 @@
                                 <button class="borderless">
                                     <span>
                                         <div 
-                                            :class="{ active: category.includes(cat) }"
-                                            class="checkbox">
-                                            <IconSvg 
-                                                v-if="category.includes(cat)"
-                                                type="check" />
-                                        </div>
+                                            :class="{ active: value.includes(cat.id) }"
+                                            class="checkbox" />
                                     </span>
                                     <span>{{ cat.name }}</span>
                                 </button>
@@ -43,7 +39,7 @@
                     </div>
                     <div class="filter__dropdown--footer">
                         <button 
-                            v-if="category.length" 
+                            v-if="value.length" 
                             @click="clear" 
                             class="borderless">
                             Clear
@@ -67,21 +63,23 @@
 </template>
 
 <script>
-    import IconSvg from '../../../components/Svg-icon'
     export default {
 
-        props: ['categories', 'mobile'],
-
-        components: { IconSvg },
+        props: ['value','categories', 'mobile'],
 
         computed: {
-
+            inputVal: {
+                get() { return this.value },
+                set(val) { this.$emit('input', val) }
+            },
+            categoryList()  {
+                return this.categories.filter( cat => this.value.includes(cat.id))
+            }
         },
 
         data() {
             return {
                 active: false,
-                category: this.$store.state.filterCategory,
             }
         },
 
@@ -91,33 +89,30 @@
                 this.active = false;
             },
 
-            push(value) {
-                if (!value) return;
-                if (this.category.includes(value)) {
-                   let removeIndex = this.category.map(function(item) { return item.id; }).indexOf(value.id);
-                   this.category.splice(removeIndex, 1);
+            push(category) {
+                if (!category) return;
+                if (this.value.includes(category.id)) {
+                   let removeIndex = this.value.indexOf(category.id);
+                   this.inputVal.splice(removeIndex, 1);
                 } else {
-                    this.category.push(value);
+                    this.inputVal.push(category.id);
                 }
-                this.$store.commit('filterCategory', this.category)
             },
 
             clear() {
-                this.category = [];
-                this.$store.commit('filterCategory', [])
+                this.inputVal = [];
+                this.submit();
             },
-
             show() {
                 this.active =! this.active;
                 setTimeout(() => document.addEventListener('click', this.onClickOutside), 200);
             },
-
             onClickOutside(event) {
                 if (this.active == false) {return}
                 let cat = this.$refs.cat;
                 if (!cat || cat.contains(event.target)) return;
                 this.active = false;
-                this.submit();
+                if (this.value.length) this.submit();
             },
         },
 

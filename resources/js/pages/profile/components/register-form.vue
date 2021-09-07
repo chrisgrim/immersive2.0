@@ -29,8 +29,13 @@
                 autofocus>
             <div v-if="$v.user.email.$error" class="validation-error">
                 <p class="error" v-if="!$v.user.email.required">The email is required</p>
-                <p class="error" v-if="!$v.user.email.email">Must be a valid email</p>
-                <p class="error" v-if="!$v.user.email.serverFailed">{{serverErrors.email[0]}}</p>
+                <p class="error" v-if="!$v.user.email.serverFailed">
+                    <span 
+                        v-for="(error, index) in serverErrors.email"
+                        :key="index">
+                        {{ error }}
+                    </span>
+                </p>
             </div>
         </div>
         <div class="field">
@@ -84,7 +89,7 @@
 </template>
 
 <script>
-    import { required, maxLength, email } from 'vuelidate/lib/validators'
+    import { required, maxLength } from 'vuelidate/lib/validators'
     import formValidationMixin from '../../../mixins/form-validation-mixin'
     export default {
 
@@ -116,7 +121,7 @@
                 this.$emit('update', 'login')
             },
             clear(val) {
-                val==='email' ? this.$v.user.email.$touch() : this.$v.user.password.$touch()
+                val === 'email' ? this.$v.user.email.$touch() : this.$v.user.password.$touch()
                 this.serverErrors = []
             },
             initializeUserObject() {
@@ -134,7 +139,6 @@
             user: {
                 email: {
                     required,
-                    email,
                     serverFailed(){ return !this.serverErrors.email },
                 },
                 name: {

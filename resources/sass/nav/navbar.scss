@@ -340,6 +340,9 @@
     .nav .nav__bar {
         padding: 0 8rem;
     }
+    .nav.fullwidth .nav__bar {
+        padding: 0;
+    }
 }
 
 @media only screen and (min-width: 1160px) {

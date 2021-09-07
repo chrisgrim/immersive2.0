@@ -4,12 +4,12 @@
         ref="tag">
         <button 
             @click="show" 
-            :class="{ active : tag.length }" 
+            :class="{ active : value.length }" 
             class="filter round">
-            <template v-if="tag.length && !mobile">
-                <span> {{ tag[0].name }} </span>
-                <span v-if="tag.length > 1">
-                    +{{ tag.length - 1 }}
+            <template v-if="value.length && !mobile">
+                <span> {{ tagList[0].name }} </span>
+                <span v-if="value.length > 1">
+                    +{{ value.length - 1 }}
                 </span>
             </template>
             <template v-else>
@@ -29,12 +29,8 @@
                                 <button class="borderless">
                                     <span>
                                         <div 
-                                            :class="{ active: tag.includes(item) }"
-                                            class="checkbox">
-                                            <IconSvg 
-                                                v-if="tag.includes(item)"
-                                                type="check" />
-                                        </div>
+                                            :class="{ active: value.includes(item.name) }"
+                                            class="checkbox" />
                                     </span>
                                     <span>{{ item.name }}</span>
                                 </button>
@@ -43,7 +39,7 @@
                     </div>
                     <div class="filter__dropdown--footer">
                         <button 
-                            v-if="tag.length" 
+                            v-if="value.length" 
                             @click="clear" 
                             class="borderless">
                             Clear
@@ -67,21 +63,23 @@
 </template>
 
 <script>
-    import IconSvg from '../../../components/Svg-icon'
     export default {
 
-        props: ['tags', 'mobile'],
-
-        components: { IconSvg },
+        props: ['value', 'tags', 'mobile'],
 
         computed: {
-
+            inputVal: {
+                get() { return this.value },
+                set(val) { this.$emit('input', val) }
+            },
+            tagList() {
+                return this.tags.filter( tag => this.value.includes(tag.name))
+            }
         },
 
         data() {
             return {
                 active: false,
-                tag: this.$store.state.filterTag,
             }
         },
 
@@ -90,34 +88,30 @@
                 this.$emit('submit', true);
                 this.active = false;
             },
-
-            push(value) {
-                if (!value) return;
-                if (this.tag.includes(value)) {
-                    let removeIndex = this.tag.map(function(item) { return item.id; }).indexOf(value.id);
-                    this.tag.splice(removeIndex, 1);
+            push(tag) {
+                if (!tag) return;
+                if (this.value.includes(tag.name)) {
+                    let removeIndex = this.value.indexOf(tag.name);
+                    this.inputVal.splice(removeIndex, 1);
                 } else {
-                    this.tag.push(value);
+                    this.inputVal.push(tag.name);
                 }
                 this.$store.commit('filterTag', this.tag)
             },
-
             clear() {
-                this.tag = [];
-                this.$store.commit('filterTag', [])
+                this.inputVal = [];
+                this.submit();
             },
-
             show() {
                 this.active =! this.active;
                 setTimeout(() => document.addEventListener('click', this.onClickOutside), 200);
             },
-
             onClickOutside(event) {
                 if (this.active === false) {return}
                 let tag = this.$refs.tag;
                 if (!tag || tag.contains(event.target)) return;
                 this.active = false;
-                if (this.tag.length) this.submit();
+                if (this.value.length) this.submit();
             },
         },
     }

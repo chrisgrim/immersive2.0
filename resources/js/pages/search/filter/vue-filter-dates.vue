@@ -5,9 +5,9 @@
         <button 
             @click="show('dates')" 
             :class="{ active : naturalDate.length }" 
-            class="filter round">
+            class="filter round dates">
             <template v-if="displayDate">
-                {{ naturalDate[0] }}{{ naturalDate[1] ? ' | ' + naturalDate[1] : '' }}
+                {{ naturalDate[0] }}{{ naturalDate[1] ? ' — ' + naturalDate[1] : '' }}
             </template>
             <template v-else>
                 Dates
@@ -52,11 +52,15 @@
     import flatPickr from 'vue-flatpickr-component'
     export default {
 
-        props: ['url', 'mobile'],
+        props: ['value','url', 'mobile'],
 
         components: { flatPickr },
 
         computed: {
+            inputVal: {
+                get() { return this.value },
+                set(val) { this.$emit('input', val) }
+            },
             displayDate() {
                 return this.naturalDate.length;
             },
@@ -68,46 +72,35 @@
         data() {
             return {
                 active: false,
-                dates: this.$store.state.filterDates,
-                computerDate: this.$store.state.filterDates,
-                naturalDate: this.$store.state.filterNaturalDates,
+                dates: this.value,
+                naturalDate: this.initializeNaturalDate(),
                 calendarConfig: this.initializeCalendarObject(),
             }
         },
 
         methods: {
             submit() {
-                this.$store.commit('filterDates', this.computerDate)
                 this.$emit('submit', true);
                 this.active = false;
             },
-
             clear() {
                 this.naturalDate = []; 
-                this.computerDate = []; 
+                this.inputVal = []; 
                 this.dates = [];
-                this.$store.commit('filterDates', []);
-                this.$store.commit('filterNaturalDates', []);
             },
-
             show() {
                 this.active =! this.active;
                 setTimeout(() => document.addEventListener('click', this.onClickOutside), 200);
             },
-
             dateFunc() {
                 const that = this;
                 return function(value) {
-                    that.computerDate = value.map(date => 
+                    that.inputVal = value.map(date => 
                         this.formatDate(date, 'Y-m-d H:i:S'));
                     that.naturalDate = value.map(date => 
-                        this.formatDate(date, 'D M d'));
-                    let shortestDates = value.map(date => 
-                        this.formatDate(date, 'M d'));
-                    that.$store.commit('displaydates', shortestDates);
+                        this.formatDate(date, 'M j'));
                 }
             },
-
             initializeCalendarObject() { 
                 return {
                     altFormat:'M d',
@@ -119,7 +112,9 @@
                     onClose: [this.dateFunc()], 
                 }
             },
-
+            initializeNaturalDate() {
+                return this.value.length ? [this.$dayjs(this.value[0]).format("MMM D"), this.$dayjs(this.value[1]).format("MMM D")] : []
+            },
             onClickOutside(event) {
                 if (this.active == false) {return}
                 let dates = this.$refs.dates;

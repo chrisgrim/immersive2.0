@@ -31,6 +31,9 @@
 //Notifications
 @import 'components/notifications/notifications';
 
+//Pagination
+@import 'components/pagination/pagination';
+
 //Buttons
 @import 'components/buttons/button';
 @import 'components/buttons/button-outline';
@@ -46,6 +49,9 @@
 //Modals
 @import 'components/modals/modal';
 
+//Maps
+@import 'components/map/leaflet';
+
 //Staffpicks
 @import 'staffpicks/staffpicks';
 
@@ -58,7 +64,6 @@
 // Layout
 
 @import 'events/event-show';
-@import 'events/components/event-grid-component';
 @import 'events/event-search';
 @import 'events/event-maps';
 

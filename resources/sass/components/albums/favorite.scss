@@ -1,60 +1,42 @@
 .favorite-button {
     z-index: 2;
 }
+.favorite-button button.heart-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    background: 0;
+    height: 3.2rem;
+    width: 3.2rem;
+    padding: 0;
+}
+.favorite-button button.heart-btn:hover {
+    -webkit-transform: scale(1.07);
+    -ms-transform: scale(1.07);
+    transform: scale(1.07);
+}
+.favorite-button button.heart-btn svg{
+    display: block;
+    height: 2.4rem;
+    width: 2.4rem;
+    stroke-width: 2;
+    overflow: visible;
+    fill: white;
+    stroke: black;
+}
 .heart {
     position: absolute;
     right: 5%;
     top: 5%;
     border-radius: 50%;
-    width: 4rem;
-    height: 4rem;
-    background-color: white;
-    border: 1px solid white;
-    box-shadow: rgba(0, 0, 0, 0.1) 0 2px 0 0, rgba(0, 0, 0, 0.04) 0 0 0 0.5px;
-/*    -webkit-transition-duration: 0.3s;*/
-    -webkit-transition-property: -webkit-transform;
-    transition-property: transform, visibility;
-    -webkit-transform: translateZ(0);
-    -ms-transform: translateZ(0);
-    transform: translateZ(0);
-    visibility: hidden;
-}
-.heart:hover {
-    -webkit-transform: scale(1.07);
-    -ms-transform: scale(1.07);
-    transform: scale(1.07);
-}
-.heart.visible {
-    visibility: visible;
-    opacity: 1;
-    box-shadow: none;
-    right: 0;
-    top: 0;
+    width: 3.2rem;
+    height: 3.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .hearted {
-    fill:#FF5A5F; 
-    fill-opacity:1;
-    stroke:#FF5A5F; 
-    height: 2.4rem; 
-    width: 2.4rem; 
-    overflow: visible;
-    stroke-width:2;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-top: -1.2rem;
-    margin-left: -1.2rem;
-}
-.unhearted {
-    fill: none;
-    fill-opacity: 0;
-    stroke: #000;
-    height: 2.4rem; 
-    width: 2.4rem; 
-    stroke-width: 2;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-top: -1.2rem;
-    margin-left: -1.2rem;
+    fill:#FF5A5F !important; 
+    stroke:#FF5A5F !important; 
 }

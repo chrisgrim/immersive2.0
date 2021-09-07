@@ -1,98 +1,84 @@
 <template>
-    <div class="event-search">
+    <div 
+        :class="{ mobile : mobile }"
+        class="event-search">
         <template v-if="mobile">
             <div class="event-search__container">
-                <vue-search-map :events="eventList.data" />
-                <section class="spacer--div" />
-                <section 
-                    class="event__filter"
-                    @click="showEvents"
-                    :style="shiftDown">
-                    <div class="event-search-list">
-                        <div class="event__results">
-                            <div class="event__results--title">
-                                <template v-if="eventList.data && eventList.data.length">
-                                    <p>{{ eventList.total }} immersive events.</p>
-                                    <h2>{{ url.city }}</h2>
-                                </template>
-                                <template v-else>
-                                    <p>There are no location based events in {{ url.city }} with these filters.
-                                    <h2>{{ url.city }}</h2>
-                                </template>
-                            </div>
-                            <VueList :items="eventList.data" />
-                            <pagination
-                                :list="eventList"
-                                :limit="2"
-                                @selectpage="selectPage" />
-                        </div>
-                        <div>
-                            <div class="event__results--online">
-                                <div class="title">
-                                    <h3>Online events</h3>
-                                </div>
-                                <VueEventIndex 
-                                    :col="4"
-                                    :events="onlineEventList.data" />
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <SearchFilter
-                    @locationevents="updateEvents"
-                    @onlineevents="updateOnlineEvents"
-                    :events="searchedevents" 
+                <MobileSearchNav
+                    :map="map"
+                    @update="updateEvents"
+                    v-model="paginate"
+                    filter="location"
                     :tags="tags" 
                     :categories="categories" />
+                <MapSearch
+                    :mobile="true"
+                    @update="updateMap"
+                    :events="events.data" />
+                <template v-if="!fullMap">
+                    <div 
+                        @click="fullMap=true"
+                        class="gap" />
+                    <MobileSearchResults 
+                        :events="events" />
+                </template>
+                <template v-else>
+                    <div 
+                        @click="fullMap=false"
+                        class="search-results hidden">
+                        <div class="wrapper">
+                            <template v-if="events.data && events.data.length">
+                                <p>{{ events.total }} events</p>
+                            </template>
+                        </div>
+                    </div>
+                </template>
             </div>
         </template>
-
-
-        <template v-if="!mobile">
-            <div class="event-search__container">
-                <section class="event__filter">
-                    <div class="event__results--title">
-                        <template v-if="eventList.data && eventList.data.length">
-                            <p>{{ eventList.total }} immersive events.</p>
-                            <h2>{{ url.city }}</h2>
+        <template v-else>
+            <div 
+                :class="{ fullwidth : wideMap }"
+                class="event-search__container">
+                <section class="search__results">
+                    <div class="search__results--title">
+                        <template v-if="events.data && events.data.length">
+                            <p>{{ events.total }} immersive events.</p>
+                            <h2>{{ city }}</h2>
                         </template>
                         <template v-else>
-                            <p>There are no location based events in {{ url.city }} with these filters.
-                            <h2>{{ url.city }}</h2>
+                            <p>There are no location based events in {{ city }} with these filters.
+                            <h2>{{ city }}</h2>
                         </template>
                     </div>
                     <SearchFilter
-                        @locationevents="updateEvents"
-                        @onlineevents="updateOnlineEvents"
-                        :events="searchedevents" 
+                        :map="map"
+                        @update="updateEvents"
+                        v-model="paginate"
+                        filter="location"
                         :tags="tags" 
                         :categories="categories" />
                     <div class="event-search-list">     
                         <div class="event__results">
-                            <div>
-                                <template v-if="eventList.data.length">
-                                    <VueList :items="eventList.data" />
-                                </template>
-                            </div>
-                            <div>
-                                <pagination
-                                    :list="eventList"
-                                    :limit="2"
-                                    @selectpage="selectPage" />
-                            </div>
+                            <template v-if="events.data.length">
+                                <VueList :items="events.data" />
+                            </template>
+                            <pagination
+                                :list="events"
+                                :limit="2"
+                                @selectpage="selectPage" />
                             <template v-if="!mobile">
                                 <div class="event-search-list">
                                     <div class="title">
                                         <h3>Online Events</h3>
                                     </div>
-                                    <template v-if="onlineEventList.data">
+                                    <template v-if="onlineEvents.data">
                                         <VueEventIndex 
                                             col="three"
-                                            :events="onlineEventList.data" />
+                                            :events="onlineEvents.data" />
                                     </template>
                                     <div>
                                         <pagination 
-                                            :list="onlineEventList"
+                                            :list="onlineEvents"
                                             :limit="2"
                                             @selectpage="selectOnlinePage" />
                                     </div>
@@ -101,7 +87,11 @@
                         </div>
                     </div>
                 </section>
-                <vue-search-map :events="eventList.data" />
+                <MapSearch
+                    @update="updateMap"
+                    @wideMap="widenMap"
+                    :mobile="false"
+                    :events="events.data" />
             </div>
         </template>
     </div>
@@ -109,67 +99,63 @@
 
 <script>
     import SearchFilter  from './vue-search-filter-location.vue'
+    import MobileSearchNav  from './mobile-search-nav.vue'
+    import MobileSearchResults  from './components/mobile-search-results.vue'
     import VueList from './components/album-location-search.vue'
     import Pagination  from '../events/components/pagination.vue'
     import searchBasicsMixin from '../../mixins/search-basics-mixin'
     import VueEventIndex from '../events/components/index-item.vue'
-    import VueSearchMap from './components/vue-map.vue'
+    import MapSearch from './components/vue-map.vue'
 
     export default {
-        components: { SearchFilter, VueList, Pagination, VueEventIndex, VueSearchMap },
+        components: { SearchFilter, VueList, Pagination, VueEventIndex, MapSearch, MobileSearchNav, MobileSearchResults },
 
         mixins: [ searchBasicsMixin ],
 
-        props:['searchedevents','onlineevents','categories','user', 'tags', 'maxprice'],
-
-        computed: {
-            fullMap() {
-                return this.$store.state.map || this.$store.state.mobilelocation || this.$store.state.mobiledates || this.$store.state.filter;
-            },
-        }, 
+        props:['searchedevents','onlineevents','categories','user', 'tags'],
 
         data() {
             return {
-                eventList: this.searchedevents,
-                onlineEventList: this.onlineevents,
+                events: this.searchedevents,
+                onlineEvents: this.onlineevents,
                 mobile: window.innerWidth < 768,
+                fullMap: false,
+                wideMap: false,
+                onlinePaginate: 1,
+                paginate: 1,
                 shiftDown: `transform: translate3d(0px, 0px, 0px);`,
+                city: new URL(window.location.href).searchParams.get("city"),
+                map: null,
             }
         },
 
         methods: {
-
             updateEvents(value) {
-                this.eventList = value;
+                this.events = value;
                 this.pagination = value.current_page;
             },
-
-            updateOnlineEvents(value) {
-                this.onlineEventList = value;
-                this.onlinePagination = value.current_page;
+            updateMap(value) {
+                this.map = value
             },
-
+            widenMap() {
+                this.wideMap =! this.wideMap
+            },
+            // async nextOnline() {
+            //     await axios.post(`/api/search/online?page=${this.onlinePaginate}`)
+            //     .then(res => { 
+            //         this.onlineEvents = res.data;
+            //     })
+            // },
             selectPage (page) {
-                this.$store.commit('filterPagination', page)
+                this.paginate = page
             },
-
             selectOnlinePage (page) {
-                this.$store.commit('filterOnlinePagination', page)
+                this.onlinePaginate = page
             },
-
             showEvents() {
                 this.$store.commit('showmap', false);
             },
-
         },
-
-        watch: {
-            fullMap() {
-                this.fullMap ? this.shiftDown = `transform: translate3d(0, calc(var(--vh, 1vh) * 100 + -450px), 0);`  : this.shiftDown = `transform: translate3d(0px, 0px, 0px);` ;
-            }
-        },
-
-
 
     };
 </script>

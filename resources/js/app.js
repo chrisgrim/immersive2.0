@@ -14,8 +14,8 @@ import 'remixicon/fonts/remixicon.css'
 
 Vue.component('v-select', vSelect)
 window.axios = require('axios');
-// window.Vue = require('vue');
 Vue.use(Dayjs);
+
 Vue.use(Vuelidate);
 Vue.use(require('vue-cookies'));
 window.Vue = Vue;
@@ -73,12 +73,12 @@ Vue.component('vue-footer', () => import(/* webpackChunkName: "assets/lfo" */ '.
 Vue.component('index', () => import(/* webpackChunkName: "assets/ei" */ './pages/home/index.vue'));
 
 //Components
-Vue.component('favorite', () => import(/* webpackChunkName: "assets/lf" */ './pages/layouts/favorite.vue'));
+Vue.component('favorite', () => import(/* webpackChunkName: "assets/lf" */ './pages/profile/favorite-button.vue'));
 Vue.component('tabs', () => import(/* webpackChunkName: "assets/lts" */ './pages/layouts/tabs.vue'));
 Vue.component('tab', () => import(/* webpackChunkName: "assets/lt" */ './pages/layouts/tab.vue'));
 // Vue.component('image-upload', () => import(/* webpackChunkName: "assets/liu" */ './pages/layouts/image-upload.vue'));
 Vue.component('vue-alert', () => import(/* webpackChunkName: "assets/la" */ './pages/layouts/alert.vue'));
-Vue.component('vue-email-verify', () => import(/* webpackChunkName: "assets/lev" */ './pages/layouts/email-verified.vue'));
+Vue.component('vue-email-verify', () => import(/* webpackChunkName: "assets/lev" */ './pages/profile/components/email-verification-modal.vue'));
 
 //Create Events
 Vue.component('vue-create-nav', () => import(/* webpackChunkName: "assets/cn" */ './pages/create/nav.vue'));

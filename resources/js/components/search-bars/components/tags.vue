@@ -68,7 +68,7 @@ export default {
         onSelect() {
             this.saveSearchData();
             if (this.searchInput.type == 'c') window.location.href = `/index/search-all?category=${this.searchInput.id}`
-            if (this.searchInput.type == 'r')  window.location.href = `/index/search-all?remote=${this.searchInput.name}&id=${this.searchInput.id}`
+            // if (this.searchInput.type == 'r')  window.location.href = `/index/search-all?remote=${this.searchInput.name}&id=${this.searchInput.id}`
             if (this.searchInput.type == 't') window.location.href = `/index/search-all?tag=${this.searchInput.name}`
         },
 

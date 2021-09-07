@@ -29,7 +29,9 @@
                         <use :xlink:href="`/storage/website-files/icons.svg#ri-search-line`" />
                     </svg>
                 </div>
-                <v-select :placeholder="placeholder" />
+                <v-select 
+                    :class="{ active : placeholder!=='Start your search'}"
+                    :placeholder="placeholder" />
             </div>
         </template>
     </div>
@@ -52,7 +54,7 @@ export default {
             searchOptions: [],
             isLoading: false,
             cover: true,
-            placeholder: 'Start your search',
+            placeholder: new URL(window.location.href).searchParams.get("city") ? new URL(window.location.href).searchParams.get("city") : 'Start your search',
         }
     },
 

@@ -148,3 +148,14 @@
 .v-select.active input::placeholder {
     color: black;
 }
+.v-select .option__title {
+    padding-bottom:1rem;
+    height:2.4rem;
+    display: flex;
+}
+.v-select .option__title p {
+    font-size: 1.4rem;
+    padding-left: 2rem;
+    width: 100%;
+    white-space: nowrap;
+}

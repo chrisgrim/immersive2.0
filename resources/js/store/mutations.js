@@ -1,26 +1,28 @@
 let mutations = {
-        adduser(state, user) {
-          state.user = user
-        },
-        addsearchtype(state, searchtype) {
-          state.searchtype = searchtype
-        },
-        CREATE_EVENT(state, event) {
-            state.events.unshift(event)
-        },
-        FETCH_EVENTS(state, events) {
-            return state.events = events
-        },
-        FETCH_SEARCH(state, userSearchRequest) {
-            return state.userSearchRequest = userSearchRequest
-        },
-        SEARCH_EVENTS(state, events) {
-            return state.events = events
-        },
-        DELETE_EVENT(state, event) {
-            let index = state.events.findIndex(item => item.id === event.id)
-            state.events.splice(index, 1)
-        },
-
+    adduser (state, user) {
+        state.user = user;
+    },
+    ismobile (state, mobile) {
+        state.mobile = mobile
+    },
+    searchtype (state, searchtype) {
+        state.searchtype = searchtype
+    },
+    presearch (state, presearch) {
+        state.presearch = presearch
+    },
+    onnavurl (state, navurl) {
+        state.navurl = navurl
+    },
+    loginModal (state, loginModal) {
+        state.loginModal = loginModal
+    },
+    notifyModal (state, notifyModal) {
+        state.notifyModal = notifyModal
+    },
+    verifyModal (state, verifyModal) {
+        state.verifyModal = verifyModal
     }
-    export default mutations
+}
+
+export default mutations

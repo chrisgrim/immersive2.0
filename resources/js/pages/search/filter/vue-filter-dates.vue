@@ -1,6 +1,6 @@
 <template>
     <div 
-        class="button" 
+        class="col" 
         ref="dates">
         <button 
             @click="show('dates')" 

@@ -111,7 +111,7 @@
                 return this.navtype != 'create'
             },
             hideSearch() {
-                return this.navtype != 'create' && this.navtype !='onlinesearch' && this.navtype !='searchpage'
+                return this.navtype != 'create' && this.navtype != 'searchonline'
             },
         },
 

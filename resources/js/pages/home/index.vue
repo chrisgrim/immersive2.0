@@ -1,5 +1,10 @@
 <template>
     <div class="homepage">
+        <template v-if="mobile">
+            <MobileSearchNav
+                :tags="tags" 
+                :categories="categories" />
+        </template>
         <div>
             <section 
                 class="section-b" 
@@ -24,7 +29,6 @@
             <template v-if="community && community.name">
                 <section class="section-a">
                     <div class="section-a__wrapper">
-                        <h2>Discover More</h2>
                         <div class="header-a">
                             <div class="header-a__content">
                                 <div class="header-a__wrapper">
@@ -89,17 +93,17 @@
 </template>
 
 <script>
-    import SearchBar  from '../../components/search-bars/search-all.vue'
     import TopShelf from './sections/top-section.vue'
     import BottomShelf from './sections/bottom-section.vue'
     import Partners from './sections/partners.vue'
     import StaffPicks from './sections/staffpicks.vue'
+    import MobileSearchNav  from './sections/mobile-search-nav.vue'
 
     export default {
 
-        props:['categories', 'staffpicks', 'community'],
+        props:['categories', 'staffpicks', 'community', 'tags'],
 
-        components: { SearchBar, TopShelf, BottomShelf, Partners, StaffPicks },
+        components: { TopShelf, BottomShelf, Partners, StaffPicks, MobileSearchNav },
 
         computed: {
             sectionsWithListings() {
@@ -109,6 +113,7 @@
 
         data() {
             return {
+                mobile: window.innerWidth < 768,
             }
         },
 

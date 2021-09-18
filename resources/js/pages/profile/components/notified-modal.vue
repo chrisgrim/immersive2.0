@@ -2,7 +2,7 @@
     <div class="modal">
         <div class="wrapper">
             <div class="header">
-                <button @click="onClose">
+                <button @click="onSubmit">
                     <svg>
                         <use :xlink:href="`/storage/website-files/icons.svg#ri-close-line`" />
                     </svg>
@@ -36,7 +36,7 @@
             <div class="footer">
                 <button 
                     class="btn-borderless" 
-                    @click="onClose">
+                    @click="onSubmit">
                     Close
                 </button>
             </div>
@@ -46,7 +46,8 @@
 
 <script>    
     export default {
-
+        props: ['user'],
+        
         data() {
             return {
                 newsletter: false,
@@ -55,11 +56,10 @@
         },
 
         methods: {
-            onSubmit() {
-                this.$emit('update', this.newsletter);
-            },
-            onClose() {
-                this.$emit('close', true);
+            async onSubmit(value) {
+                this.$cookies.set("news", true, "Infinity");
+                await axios.patch(`/users/${this.user.id}`, { newsletter: value })
+                location.reload()
             },
         },
 

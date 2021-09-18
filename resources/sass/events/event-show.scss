@@ -48,15 +48,35 @@ iframe.youtube-iframe {
 \*------------------------------------ */
 
 .es__header--image img {
-    height: 50vh;
+    height: 43vh;
     width: 100%;
     object-fit: cover;
 }
-.es__mobile-nav {
-    height:6rem;
+.es__mobile-nav button.arrow {
+    position: absolute;
+    display: flex;
+    border-radius: 5rem;
+    padding: .2rem;
+    top: 2rem;
+    left: 2rem;
+    box-shadow: transparent 0px 0px 0px 1px, transparent 0px 0px 0px 4px, rgb(0 0 0 / 18%) 0px 2px 4px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
 }
-.es__mobile-nav--back {
-    display: inline-block;
+.es__mobile-nav .favorite-button button.heart-btn {
+    box-shadow: transparent 0px 0px 0px 1px, transparent 0px 0px 0px 4px, rgb(0 0 0 / 18%) 0px 2px 4px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 5rem;
+    padding: 1.8rem;
+    background: white;
+}
+.es__mobile-nav .favorite-button button.heart-btn svg {
+    height: 1.5rem;
+    width: 1.5rem;
+    stroke-width: 4;
+}
+.es__mobile-nav button.arrow svg {
+    height: 3rem;
+    width: 3rem;
 }
 .es__mobile-nav--button {
     width: 6rem;
@@ -85,8 +105,8 @@ iframe.youtube-iframe {
 }
 .es__favorite--mobile {
     position: absolute;
-    right: 3rem;
-    top: 3rem;
+    right: 2rem;
+    top: 2rem;
 }
 .es__admin--edit {
     position: absolute;
@@ -822,7 +842,7 @@ button.helpful:hover {
         padding: 1.6rem 5rem;
     }
     .es__header--image img {
-        height: 46rem;
+        height: 45rem;
     }
     .es__title--name h1 {
         font-size: 2.8rem;

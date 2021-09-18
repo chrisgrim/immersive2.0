@@ -66,10 +66,12 @@
             <index 
                 :categories="{{$categories}}" 
                 :community="{{$community}}"
+                :tags="{{$tags}}" 
                 :staffpicks="{{$staffpicks}}"/>
         @else
             <index 
                 :community="{{$community}}"
+                :tags="{{$tags}}" 
                 :categories="{{$categories}}"/>
         @endif
     </div>

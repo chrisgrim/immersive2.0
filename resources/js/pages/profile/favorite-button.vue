@@ -52,26 +52,20 @@
         methods: {
             toggle() {
                 if (this.canFavorite && this.hasCookie) { return this.isFavorited ? this.destroy() : this.create() }
-                if (this.canFavorite) { return this.notify = true }
-                if (this.user) { return this.isVerifyVisible = true }
-                return this.login = true;
+                if (this.canFavorite) { 
+                    this.$store.commit('notifyModal', true)
+                    return this.isFavorited ? this.destroy() : this.create();
+                }
+                if (this.user) { return this.$store.commit('verifyModal', true) }
+                return this.$store.commit('loginModal', true)
             },
             async create() {
-                console.log('test');
                 await axios.post(`/favorite/${this.event.slug}/favorites`);
                 this.isFavorited = true;
             },
             async destroy() {
                 await axios.delete(`/favorite/${this.event.slug}/favorites`);
                 this.isFavorited = false;
-            },
-            async updateNewsletter(value) {
-                this.$cookies.set("news", true, "Infinity");
-                await axios.patch(`/users/${this.user.id}`, { newsletter: value })
-                .then(res => {
-                    this.isFavorited ? this.destroy() : this.create();
-                    this.$nextTick(() => location.reload());
-                });
             },
         },
     }

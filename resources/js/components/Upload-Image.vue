@@ -18,13 +18,14 @@
             <svg>
                 <use :xlink:href="`/storage/website-files/icons.svg#ri-image-line`" />
             </svg>
+            <p v-if="text"> {{ text }} </p>
             <image-upload @loaded="loaded" />
             <CubeSpinner :loading="loading" />
         </label>
         <div v-if="$v.imageFile.$error" class="validation-error image">
             <p class="error" v-if="!$v.imageFile.fileSize">The image file size is over 10mb</p>
             <p class="error" v-if="!$v.imageFile.fileType">The image needs to be a JPG, PNG or GIF</p>
-            <p class="error" v-if="!$v.imageFile.imageRatio">The image needs to be at least {{width}} x {{height}}</p>
+            <p class="error" v-if="!$v.imageFile.imageRatio">The image needs to be at least {{ width }} x {{ height }}</p>
             <p class="error" v-if="!$v.imageFile.imageRequired">An Image is required</p>
         </div>
     </div>
@@ -62,6 +63,10 @@
             externalSubmit: {
                 type: Boolean,
                 default: false,
+            },
+            text: {
+                type: String,
+                default: null
             }
         },
 

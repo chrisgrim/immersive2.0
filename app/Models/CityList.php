@@ -33,8 +33,7 @@ class CityList extends Model
         return [
             "name" => $this->name,
             "population" => $this->population,
-            // "rank" => $this->rank,
-            "rank" => 10,
+            "rank" => $this->rank,
             'priority' => 1,
         ];
     }

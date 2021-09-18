@@ -34,7 +34,7 @@
                     class="create-button__forward"
                     v-if="next=='review'">
                     <button 
-                        :disabled="ready" 
+                        :disabled="!ready" 
                         class="create" 
                         @click.prevent="submit"> 
                         Review 

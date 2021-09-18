@@ -212,6 +212,23 @@ button.create[disabled]{
   transform: translateX(10px);
   opacity: 0;
 }
+.create-body select {
+    width: 100%;
+    position: relative;
+    color: #484848;
+    background-color: white;
+    transition: border-color 0.2s ease 0s;
+    padding: 1.3rem 1rem;
+    border: 1px solid #ebebeb;
+    font-size: 1.4rem;
+    border-radius: 5px;
+    font-family: "Montserrat", sans-serif;
+}
+.create-body select:focus-visible {
+    border: 1px solid #008489;
+    outline: 0;
+}
+
 
 @media (max-width: 768px) { 
     .create-menu {

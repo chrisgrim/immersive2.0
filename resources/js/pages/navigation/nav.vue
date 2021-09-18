@@ -6,11 +6,10 @@
                 :user="user"
                 :passedclass="{ 'fixed' : isFixed, 'absolute' : isAbsolute, 'narrow' : isNarrow, 'fullwidth' : isFullWidth }" />
         </template>
-        <template v-if="mobile && showMenu && !fullmap">
+        <template v-if="mobile && showMenu">
             <NavMobile
                 :navtype="navtype"
-                :user="user"
-                :fullmap="fullmap" />
+                :user="user" />
         </template>
         <template v-else>
             <nav />
@@ -29,9 +28,6 @@
         components: { NavDesktop, NavMobile },
 
         computed: {
-            fullmap() {
-                return this.$store.state.map || this.$store.state.mobilelocation || this.$store.state.mobiledates || this.$store.state.filter;
-            },
             showMenu() {
                 return this.navtype != 'show' && this.navtype != 'messageshow' 
             },

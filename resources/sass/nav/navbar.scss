@@ -111,6 +111,10 @@
     position: absolute;
     border:0;
     height: 0;
+    z-index: 2002;
+}
+header.hidden .nav {
+    display: none;
 }
 .nav.create {
     display: none;
@@ -222,9 +226,6 @@
     overflow-wrap: break-word;
     overflow: hidden;
     line-height: 1.5rem;
-}
-.nav.fixed .nav-menu-item a {
-    color: white;
 }
 .nav.absolute .nav-menu-item a {
     color: white;

@@ -74,6 +74,7 @@ Vue.component('index', () => import(/* webpackChunkName: "assets/ei" */ './pages
 
 //Components
 Vue.component('favorite', () => import(/* webpackChunkName: "assets/lf" */ './pages/profile/favorite-button.vue'));
+Vue.component('modal-wrapper', () => import(/* webpackChunkName: "assets/mw" */ './components/modals/modal-wrapper.vue'));
 Vue.component('tabs', () => import(/* webpackChunkName: "assets/lts" */ './pages/layouts/tabs.vue'));
 Vue.component('tab', () => import(/* webpackChunkName: "assets/lt" */ './pages/layouts/tab.vue'));
 // Vue.component('image-upload', () => import(/* webpackChunkName: "assets/liu" */ './pages/layouts/image-upload.vue'));

@@ -46,8 +46,8 @@ class ImageController extends Controller
      */
     public function addImage(Request $request, Event $event)
     {
-        $event->inProgress() ? MakeImage::saveNewImage($request, $event, 1280, 720, 'event') : MakeImage::updateImage($request, $event, 1280, 720, 'event');
+        $event->inProgress() ? MakeImage::saveNewImage($request, $event, 1200, 450, 'event') : MakeImage::updateImage($request, $event, 1200, 450, 'event');
         $event->updateEventStatus(8, $request);
-        return $event;
+        return $event->fresh();
     }
 }

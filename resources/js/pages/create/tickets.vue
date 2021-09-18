@@ -98,15 +98,16 @@
                                     <div v-if="ticket.type.type == 'f' || ticket.type.type == 'p'" />
                                     <template v-else>
                                         <div class="field">
-                                            <v-select 
+                                            <select 
                                                 v-model="currency" 
-                                                :options="ticketCurrencyOptions"
-                                                :clearable="false"
-                                                :searchable="false"
-                                                @search:blur="active = null"
-                                                @search:focus="active = 'currency'"
-                                                @input="$v.selected.$touch"
-                                                :class="{ active: active == 'currency' }" />
+                                                @change="$v.selected.$touch"
+                                                placeholder="Leave blank for default Rank of 5 (1 being most important)">
+                                                <option 
+                                                    v-for="option in ticketCurrencyOptions"
+                                                    :key="option">
+                                                    {{ option }}
+                                                </option>
+                                            </select>
                                         </div>
                                     </template>
                                     <div 

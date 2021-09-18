@@ -26,7 +26,7 @@
     display: inline-block;
     width: 100%;
 }
-.filter__block .button {
+.filter__block .col {
     margin-top: 1rem;
     display: inline-block;
 }
@@ -165,7 +165,7 @@ button.borderless {
 }
 
 .filter__dropdown {
-    position: absolute;
+    position: inherit;
     margin-left: auto;
     margin-right: auto;
     left: 0;

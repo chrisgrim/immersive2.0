@@ -17,6 +17,12 @@
 
 @section('content')
     <div id="bodyArea">
+        @auth
+            <modal-wrapper :user= "{{auth()->user()}}"></modal-wrapper>
+        @endauth
+        @guest
+            <modal-wrapper></modal-wrapper>
+        @endguest
         <vue-user-favorited :events="{{ $events }}" :loaduser="{{ auth()->user() }}" v-cloak></vue-user-favorited> 
     </div>
 @endsection

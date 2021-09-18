@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use App\Models\CityList;
 use App\Models\Category;
+use App\Models\Genre;
 use App\Models\Organizer;
 use App\Models\StaffPick;
 use App\Models\Curated\Community;
@@ -48,15 +49,14 @@ class EventController extends Controller
             ->get();
 
         if ( Community::first()) {
-            $community = Community::first()->load('sections.publicFeatured');
+            $community = Community::find(1)->load('sections.publicFeatured');
         } else {
             $community = 'test';
         }
 
-        $categories = Category::orderBy('rank', 'desc')
-            ->limit(14)
-            ->get();
-        return view('home.index', compact('categories', 'staffpicks', 'community'));
+        $categories = Category::all();
+        $tags = Genre::where('admin', 1)->orderBy('rank', 'desc')->get();
+        return view('home.index', compact('categories', 'staffpicks', 'community', 'tags'));
     }
 
     /**

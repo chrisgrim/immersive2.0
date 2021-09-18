@@ -7,176 +7,29 @@
     padding-top: 9rem;
     width:100%;
 }
-
 .event-create-image {
     width: 100%;
-    margin:0;
-    padding: 0% 5% 0% 5%;
+    margin: auto;
+    padding: 0 8rem;
+    max-width: 1280px;
 }
-
-.image-loader {
-    width: 800px;
-    height: 450px;
-    border-radius: 1rem;
-    position: relative;
-    text-align: center;
-}
-
-.image-loader__label {
+.event-create__image .default__image-upload-container {
+    width: 100%;
     height: 100%;
-    width:100%;
-    display: inline-block;
-    background-size: cover;
+    position: relative;
+    margin-bottom: 10rem;
+}
+.event-create__image .default__image-upload {
+    width: 100%;
+    height: 46rem;
+    display: flex;
+    background: #ffd9d9;
     background-repeat: no-repeat;
-    border-radius: .5rem;
-    border: dashed 2px #dadada;
+    background-size: cover;
     background-position: center;
 }
 
-.add-image-button {
-    cursor: pointer;
-    display: inline-grid;
-    grid-template-columns: auto 1fr;
-    grid-gap: 0 !important;
-    width: 20rem;
-    align-items: center;
-    background: $default-color;
-    padding: 1.3rem 1rem 1.3rem 2rem;
-    border-radius: .5rem;
-    color: white;
-    font-size: 1.6rem;
-}
 
-.image-display-example {
-    position: relative;
-    max-width: 800px;
-}
 
-.iphone-example {
-    width: 31%;
-    display: inline-block;
-    position: relative;
-    height: 20rem;
-    margin-bottom: 20rem;
-    margin-top: 5rem;
-}
 
-.computer-example {
-    width: 68%;
-    display: inline-block;
-    position: relative;
-    height: 20rem;
-    margin-top: 5rem;
-    margin-bottom: 20rem;
-}
 
-.image-display-example img.overlay {
-    position: absolute;
-    width: 100%;
-}
-
-.image-display-example .iphone-example img.underlay {
-    position: absolute;
-    top: 107px;
-    width: 212px;
-    left: 19px;
-    height: 197px;
-    object-fit: cover;
-}
-
-.image-display-example .computer-example img.underlay {
-    position: absolute;
-    width: 323px;
-    left: 205px;
-    object-fit: cover;
-    top: 44px;
-    height: 173px;
-}
-
-.image-loader__label-body {
-    display: inline-block;
-    width: 100%;
-    height: 100%;
-    padding: 1rem;
-    & .box {
-        height: 100%;
-        position: relative;
-        & .in {
-            margin: auto;
-            position: absolute;
-            height: 10rem;
-            top: 50%;
-            margin-top: -3.5rem;
-            width: 100%;
-            & .b {
-                fill: white;
-            }
-        }
-    }
-    &.over{
-        opacity: 0;
-        border-radius: .5rem;
-        &:hover {
-            background: #ffffffba;
-            opacity: 1;
-        }
-        & .box {
-            border: none;
-        }
-    }
-    &.load {
-        background: black;
-        opacity: .8;
-        border-radius: .5rem;
-        & .box {
-            border: none;
-        }
-    }
-}
-
-.fileinput {
-  display: none !important;
-}
-
-@media (max-width: 1130px) { 
-    .image-loader {
-        width: 400px;
-        height: 225px;
-    }
-
-    .image-display-example {
-        max-width: 425px;
-    }
-
-    .iphone-example {
-        width: 100%;
-        height:35rem;
-    }
-
-    .computer-example {
-        width: 100%;
-    }
-
-    .image-display-example .iphone-example img.underlay {
-        position: absolute;
-        left: 32px;
-        top: 183px;
-        height: 271px;
-        width: 364px;
-    }
-
-    .image-display-example .computer-example img.underlay {
-        position: absolute;
-        top: 34px;
-        left: 160px;
-        width: 253px;
-        height: 136px;
-    }
-}
-
-@media (max-width: 768px) { 
-    .image-loader {
-        width: 100%;
-        height: 200px;
-    }
-}

@@ -4,13 +4,11 @@
 // Events
 @import 'events/event-edit';
 
-@import 'events/components/search-filters';
 
 // search
 @import 'components/search-filter';
-@import 'search/components/mobile-search-nav';
-@import 'search/components/mobile-options';
 @import 'search/components/mobile-search-results';
+
 
 // categories
 @import 'categories/category-show';

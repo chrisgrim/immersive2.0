@@ -6,6 +6,7 @@
             <div class="event-search__container">
                 <MobileSearchNav
                     :map="map"
+                    ref="search"
                     @update="updateEvents"
                     v-model="paginate"
                     filter="location"
@@ -17,18 +18,21 @@
                     :events="events.data" />
                 <template v-if="!fullMap">
                     <div 
-                        @click="fullMap=true"
+                        @click="showFullMap"
                         class="gap" />
                     <MobileSearchResults 
                         :events="events" />
                 </template>
                 <template v-else>
                     <div 
-                        @click="fullMap=false"
+                        @click="hideFullMap"
                         class="search-results hidden">
                         <div class="wrapper">
                             <template v-if="events.data && events.data.length">
                                 <p>{{ events.total }} events</p>
+                            </template>
+                            <template v-else>
+                                <p>There are no events in {{ city }} for this search.</p>
                             </template>
                         </div>
                     </div>
@@ -52,6 +56,7 @@
                     </div>
                     <SearchFilter
                         :map="map"
+                        ref="search"
                         @update="updateEvents"
                         v-model="paginate"
                         filter="location"
@@ -126,6 +131,7 @@
                 shiftDown: `transform: translate3d(0px, 0px, 0px);`,
                 city: new URL(window.location.href).searchParams.get("city"),
                 map: null,
+                mapSearch: null,
             }
         },
 
@@ -136,9 +142,18 @@
             },
             updateMap(value) {
                 this.map = value
+                this.$nextTick(() =>  this.$refs.search.mapUpdate() )
             },
             widenMap() {
                 this.wideMap =! this.wideMap
+            },
+            showFullMap() {
+                this.fullMap = true
+                document.getElementById("header").classList.add("hidden");
+            },
+            hideFullMap() {
+                this.fullMap = false
+                document.getElementById("header").classList.remove("hidden");
             },
             // async nextOnline() {
             //     await axios.post(`/api/search/online?page=${this.onlinePaginate}`)
@@ -151,9 +166,6 @@
             },
             selectOnlinePage (page) {
                 this.onlinePaginate = page
-            },
-            showEvents() {
-                this.$store.commit('showmap', false);
             },
         },
 

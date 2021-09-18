@@ -1,33 +1,30 @@
 <template>
-    <div class="show-content">
+    <div class="event-create__review">
         <EventHeader 
             :user="user"
             :event="event" />
-        <div class="es__body">
-            <div class="es__body--left">
-                <EventAbout 
-                    :remaining="remaining"
-                    :event="event" />
-                <EventStaffpick
-                    v-if="event.staffpick"
-                    :event="event" />
-                <EventDates 
-                    v-if="isMobile"
-                    :event="event" />
-                <EventLocation :event="event" />
-                <EventDetails :event="event" />
-            </div>
-            <div class="es__body--right">
-                <div class="es__quickbuy--body">
-                    <EventQuickBuy
-                        :tickets="tickets"
+        <div class="lay-b">
+            <div class="lay-b__wrapper">
+                <div class="lay-b__left">
+                    <EventAbout :event="event" />
+                    <EventDates 
+                        v-if="isMobile"
                         :event="event" />
+                    <EventDetails :event="event" />
+                </div>
+                <div class="lay-b__right">
+                    <div class="es__quickbuy--body">
+                        <EventQuickBuy
+                            :tickets="tickets"
+                            :event="loadevent" />
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="es__widebody">
+        <div class="lay-b">
             <div class="es__line" />
-            <EventOrganizer :event="event" />
+            <EventLocation :event="loadevent" />
+            <EventOrganizer :event="loadevent" />
             <div style="height:10rem" />
         </div>
         <div>

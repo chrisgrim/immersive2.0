@@ -28,7 +28,7 @@ class EventController extends Controller
         if ($request->tag) { $request->request->add(['tag' => explode(",",$request->tag)]); }
         if ($request->price0) { $request->request->add(['price' => [$request->price0,$request->price1 ]]); }
         if ($request->start) { $request->request->add(['dates' => [$request->start, $request->end]]); }
-        if ($request->mapsearch) {$request->request->add([
+        if ($request->live) {$request->request->add([
             'mapboundary' => [
                 '_northEast' => [ 'lat' => $request->NElat,'lng' => $request->NElng ],
                 '_southWest' => [ 'lat' => $request->SWlat,'lng' => $request->SWlng ],

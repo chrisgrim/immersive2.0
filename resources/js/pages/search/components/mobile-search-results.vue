@@ -4,6 +4,9 @@
             <template v-if="events.data && events.data.length">
                 <p>{{ events.total }} events</p>
             </template>
+            <template v-else>
+                <p>There are no events in {{ city }} for this search.</p>
+            </template>
         </div>
         <VueEventIndex 
             align="vertical"

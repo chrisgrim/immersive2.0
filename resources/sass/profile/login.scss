@@ -10,7 +10,6 @@
 }
 .login-home.modal .wrapper {
     box-shadow: none;
-    border: 1px solid #B0B0B0;
     margin: 2rem 0;
 }
 
@@ -39,5 +38,11 @@
 
 /*-----------------------------------Register form------------------------------*/
 
+
+@media only screen and (min-width: 768px) {
+    .login-home.modal .wrapper {
+        border: 1px solid #B0B0B0;
+    }
+}
 
 

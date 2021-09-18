@@ -3,6 +3,6 @@
 @section('created')
     <div class="create-body">
         @include('create.nav')	
-        <create-image :event="{{$event}}" />
+        <create-image :loadevent="{{$event}}" />
     </div>
 @endsection

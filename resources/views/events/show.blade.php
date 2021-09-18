@@ -120,10 +120,12 @@
 
 @section('content')
     <div id="bodyArea" class="show">
-         @auth
+        @auth
+            <modal-wrapper :user= "{{auth()->user()}}"></modal-wrapper>
             <event-show :loadevent="{{$event}}" :tickets="{{$tickets}}" :user="{{auth()->user()}}">  
         @endauth
         @guest
+            <modal-wrapper></modal-wrapper>
             <event-show :loadevent="{{$event}}" :tickets="{{$tickets}}" user="{{auth()->id()}}">  
         @endguest
     </div>

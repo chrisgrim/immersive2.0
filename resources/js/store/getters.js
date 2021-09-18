@@ -1,9 +1,9 @@
     let getters = {
         events: state => {
-         return state.events
+            return state.events
         },
         userSearchRequest: state => {
-        	return state.userSearchRequest
+            return state.userSearchRequest
         },
         user: state => state.user,
         searchtype: state => state.searchtype,

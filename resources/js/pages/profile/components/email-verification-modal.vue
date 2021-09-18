@@ -46,13 +46,11 @@
                 await axios.post(`/email/verification-notification`)
                 .then(response => { this.onClose() })
             },
-
             onClickOutside(event) {
                 let panel =  this.$refs.verify;
                 if (!panel || panel.contains(event.target)) return;
                 this.onClose()
             },
-
             onClose() {
                 this.$emit('close');
             }

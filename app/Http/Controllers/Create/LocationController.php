@@ -55,7 +55,7 @@ class LocationController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(LocationStoreRequest $request, Event $event)
-    {
+    {   
         $request->remote ? Location::storeRemoteLocation($request, $event) : Location::storeEventLocation($request, $event);
         $event->updateEventStatus(2, $request);
     }

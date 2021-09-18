@@ -27,6 +27,12 @@
 .default__image-upload  input.fileinput {
     display: none;
 }
+.default__image-upload-container p {
+    color: black;
+}
 .default__image-upload-container .hoverImage svg{
     fill:white;
+}
+.default__image-upload-container .hoverImage p{
+    color: white;
 }

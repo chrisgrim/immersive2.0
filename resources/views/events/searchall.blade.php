@@ -17,6 +17,12 @@
 
 @section('content')
     <div id="bodyArea">
+        @auth
+            <modal-wrapper :user= "{{auth()->user()}}"></modal-wrapper>
+        @endauth
+        @guest
+            <modal-wrapper></modal-wrapper>
+        @endguest
         <vue-search-all user="{{ auth()->id() }}" :tags="{{ $tags }}" :allevents="{{ $allevents }}" :categories="{{ $categories }}">
     </div>
 @endsection

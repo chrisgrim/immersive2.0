@@ -47,9 +47,6 @@
                 get() { return this.value },
                 set(val) { this.$emit('input', val) }
             },
-            boundary() {
-                return this.map && this.map.currentBounds._northEast.lat ? this.map.currentBounds._northEast.lat : null;
-            }
         },
 
         data() {
@@ -67,6 +64,7 @@
                     lng: this.initilizeLongitude(),
                     zoom: this.initilizeZoom(),
                     center: this.initilizeCenter(),
+                    live: new URL(window.location.href).searchParams.get("live")
                 }
             }
         },
@@ -80,10 +78,17 @@
             },
             mapUpdate() {
                 this.data.mapboundary = this.map.currentBounds;
-                this.data.zoom = this.map.zoom;
-                this.data.center = this.map.center;
-                this.data.lat = null;
-                this.data.lng = null;
+                this.data.zoom = this.map.zoom
+                this.data.center = this.map.currentCenter
+                this.data.live = this.map.live
+                return this.debounce();
+            },
+            debounce() {
+                if (this.timeout) 
+                    clearTimeout(this.timeout); 
+                this.timeout = setTimeout(() => {
+                    this.submit()
+                }, 500);
             },
             initilizeCategory() {
                 let cat = new URL(window.location.href).searchParams.get("category")
@@ -128,29 +133,7 @@
                     }
                 }
             },
-            conditionalBodyClass(bool, className) {
-                if (bool) {
-                    document.body.classList.add(className)
-                    this.$store.commit('showmap', true);
-                } else {
-                    document.body.classList.remove(className)
-                    this.$store.commit('showmap', false);
-                }
-            },
         },
-
-        watch: {
-            active() {
-                return this.active == 'mobile' ? this.conditionalBodyClass(true, 'noscroll') : this.conditionalBodyClass(false, 'noscroll')
-            },
-            boundary() {
-                if (!this.boundary) { return }
-                this.mapUpdate();
-                return this.submit();
-            },
-        },
-
-
 }
     
 </script>

@@ -1,52 +1,65 @@
 <template>
-    <div 
-        class="button" 
-        ref="price">
-        <button 
-            @click="show" 
-            :class="{ active: hasPrice }" 
-            class="filter round">
-            <template v-if="hasPrice">
-                ${{ value[0] }} - ${{ value[1] }}
-            </template>
-            <template v-else>
-                Price
-            </template>
-        </button>
-        <template v-if="active">
+    <div class="col">
+        <div v-if="mobile">
             <div class="filter__price"> 
                 <div class="filter__dropdown">
-                    <div>
-                        <vue-slider
-                            v-model="inputVal"
-                            tooltip="always"
-                            v-bind="priceOptions"
-                            @drag-end="mobileSubmit"
-                            :tooltip-formatter="sliderFormat"
-                            :enable-cross="false" />
-                    </div>
-                    <div class="filter__dropdown--footer">
-                        <button 
-                            v-if="hasPrice" 
-                            @click="clear" 
-                            class="borderless">
-                            clear
-                        </button>
-                        <button 
-                            v-else
-                            @click="active = false;" 
-                            class="borderless">
-                            Cancel
-                        </button>
-                        <button 
-                            @click="submit" 
-                            class="filter round">
-                            Submit
-                        </button>
-                    </div>
+                    <vue-slider
+                        v-model="inputVal"
+                        tooltip="always"
+                        v-bind="priceOptions"
+                        :tooltip-formatter="sliderFormat"
+                        :enable-cross="false" />
                 </div>
             </div>
-        </template>
+        </div>
+        <div 
+            v-else 
+            ref="price">
+            <button 
+                @click="show" 
+                :class="{ active: hasPrice }" 
+                class="filter round">
+                <template v-if="hasPrice">
+                    ${{ value[0] }} - ${{ value[1] }}
+                </template>
+                <template v-else>
+                    Price
+                </template>
+            </button>
+            <template v-if="active">
+                <div class="filter__price"> 
+                    <div class="filter__dropdown">
+                        <div>
+                            <vue-slider
+                                v-model="inputVal"
+                                tooltip="always"
+                                v-bind="priceOptions"
+                                :tooltip-formatter="sliderFormat"
+                                :enable-cross="false" />
+                        </div>
+                        <div class="filter__dropdown--footer">
+                            <button 
+                                v-if="hasPrice" 
+                                @click="clear" 
+                                class="borderless">
+                                clear
+                            </button>
+                            <button 
+                                v-else
+                                @click="active = false;" 
+                                class="borderless">
+                                Cancel
+                            </button>
+                            <button 
+                                @click="submit" 
+                                class="filter round">
+                                Submit
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </template>
+        </div>
     </div>
 </template>
 
@@ -81,9 +94,6 @@
             submit() {
                 this.$emit('submit', true);
                 this.active = false;
-            },
-            mobileSubmit() {
-                this.$store.commit('filterPrice', this.price)
             },
             clear() {
                 this.inputVal = [0,100];

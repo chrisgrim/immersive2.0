@@ -17,10 +17,16 @@
 
 @section('content')
     <div id="bodyArea">
+        @auth
+            <modal-wrapper :user= "{{auth()->user()}}"></modal-wrapper>
+        @endauth
+        @guest
+            <modal-wrapper></modal-wrapper>
+        @endguest
         <vue-search-location user="{{ auth()->id() }}" :tags="{{ $tags }}" :searchedevents="{{ $searchedevents }}" :onlineevents="{{ $onlineevents }}" :categories="{{ $categories }}">
     </div>
 @endsection
 
 @section('footer')
-    <vue-footer></vue-footer>
+    <vue-footer :visible="false"></vue-footer>
 @endsection 

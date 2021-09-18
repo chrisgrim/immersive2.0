@@ -13,17 +13,9 @@
             @search:focus="debounce" 
             @input="onSelect">
             <template #option="{ model }">
-                <div 
-                    class="option__title" 
-                    style="padding-bottom:1rem;height:2.4rem;">
-                    <div style="display:inline-block;float: left;padding-left:1rem;">
-                        <svg>
-                            <use :xlink:href="`/storage/website-files/icons.svg#ri-map-pin-line`" />
-                        </svg>
-                    </div>
-                    <div style="font-size: 1.4rem;display:inline-block;float: left;padding-left:2rem;width: 90%;white-space: nowrap;">
-                        {{ model.name }}
-                    </div>
+                <div class="option__title">
+                    <svg><use :xlink:href="`/storage/website-files/icons.svg#ri-map-pin-line`" /></svg>
+                    <p>{{ model.name }}</p>{
                 </div>
             </template>
         </v-select>

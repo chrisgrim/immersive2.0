@@ -1,7 +1,7 @@
 <template>
     <nav 
         class="nav mobile" 
-        :class="{ fullmap: fullmap, active: bar }">
+        :class="{ active: bar }">
         <div class="nav-menu">
             <div v-if="!user" />
             <div class="nav-menu-item">
@@ -105,7 +105,7 @@
 
     export default {
 
-        props:['user', 'navtype', 'fullmap'],
+        props:['user', 'navtype'],
 
         components: { ProfileButton, },
 

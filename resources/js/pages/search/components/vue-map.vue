@@ -23,9 +23,9 @@
                         <label>
                             <span class="checkbox">
                                 <input 
-                                    @click="mapSearch = !mapSearch" 
+                                    @click="onMapSearch" 
                                     type="checkbox" 
-                                    v-model="mapSearch">
+                                    v-model="toggle">
                                 <span class="check" />
                             </span> 
                         </label>
@@ -46,7 +46,7 @@
             <div>
                 <l-map
                     :zoom="map.zoom"
-                    :center="map.center"
+                    :center="map.currentCenter"
                     @update:center="centerUpdate"
                     @update:bounds="boundsUpdate"
                     @update:zoom="zoomUpdate"
@@ -104,26 +104,25 @@
 
         data() {
             return {
-                map: this.initializeMapObject(),
+                map: this.initializeMapObjectB(),
+                toggle: new URL(window.location.href).searchParams.get("live") ? new URL(window.location.href).searchParams.get("live") : false,
                 wideMap: false,
-                mapSearch: new URL(window.location.href).searchParams.get("NElat") ? true : false,
             }
         },
 
         methods: {
             update() {
-                if (this.mapSearch && !this.mobile) { this.debounce() }
+                if (this.map.live && !this.mobile) { 
+                    this.$emit('update', this.map) 
+                }
+            },
+            onMapSearch() {
+                this.map.live =! this.map.live
+                this.$emit('update', this.map)
             },
             refresh() {
-                console.log('test');
-                this.debounce() 
-            },
-            debounce() {
-                if (this.timeout) 
-                    clearTimeout(this.timeout); 
-                this.timeout = setTimeout(() => {
-                    this.$emit('update', this.map)
-                }, 500);
+                this.map.live = true
+                this.$emit('update', this.map) 
             },
             showWideMap() {
                 this.$emit('wideMap');
@@ -131,15 +130,14 @@
                 this.$nextTick(() => this.$refs.map.mapObject.invalidateSize());
             },
             zoomUpdate(newZoom) {
-                this.map.zoom = newZoom;
-                this.update();
+                this.map.zoom = newZoom 
             },
             centerUpdate(center) {
-                this.map.currentCenter = center;
-                this.update();
+                this.map.currentCenter = center
             },
             boundsUpdate(bounds) {
-                this.map.currentBounds = bounds;
+                this.map.currentBounds = bounds
+                this.update()
             },
             initializeMapObject() {
                 return {
@@ -149,12 +147,35 @@
                     url: "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
                     attribution:
                     '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-                    currentCenter: new URL(window.location.href).searchParams.get("Clat") ? this.initializeCenterObject() : null,
+                    currentCenter: this.initializeCenterObject(),
                     currentBounds: new URL(window.location.href).searchParams.get("NElat") ? this.initializeBoundariesObject() : null,
-                    center: {
-                        lat: new URL(window.location.href).searchParams.get("lat") ? new URL(window.location.href).searchParams.get("lat") : new URL(window.location.href).searchParams.get("Clat"),
-                        lng: new URL(window.location.href).searchParams.get("lng") ? new URL(window.location.href).searchParams.get("lng") : new URL(window.location.href).searchParams.get("Clng"),
-                    }
+                    live: new URL(window.location.href).searchParams.get("live") ? new URL(window.location.href).searchParams.get("live") : false,
+                }
+            },
+            initializeMapObjectA() {
+                return {
+                    zoom:new URL(window.location.href).searchParams.get("zoom") ? parseFloat(new URL(window.location.href).searchParams.get("zoom")) : 11,
+                    max: 20,
+                    min: 10,
+                    url: "https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png",
+                    attribution:
+                    '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
+                    currentCenter: this.initializeCenterObject(),
+                    currentBounds: new URL(window.location.href).searchParams.get("NElat") ? this.initializeBoundariesObject() : null,
+                    live: new URL(window.location.href).searchParams.get("live") ? new URL(window.location.href).searchParams.get("live") : false,
+                }
+            },
+            initializeMapObjectB() {
+                return {
+                    zoom:new URL(window.location.href).searchParams.get("zoom") ? parseFloat(new URL(window.location.href).searchParams.get("zoom")) : 11,
+                    max: 20,
+                    min: 10,
+                    url: "https://{s}.tile.jawg.io/jawg-sunny/{z}/{x}/{y}{r}.png?access-token=5Pwt4rF8iefMU4hIcRqZJ0GXPqWi5l4NVjEn4owEBKOdGyuJVARXbYTBDO2or3cU",
+                    attribution:
+                    '<a href="http://jawg.io" title="Tiles Courtesy of Jawg Maps" target="_blank">&copy; <b>Jawg</b>Maps</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                    currentCenter: this.initializeCenterObject(),
+                    currentBounds: new URL(window.location.href).searchParams.get("NElat") ? this.initializeBoundariesObject() : null,
+                    live: new URL(window.location.href).searchParams.get("live") ? new URL(window.location.href).searchParams.get("live") : false,
                 }
             },
             initializeBoundariesObject() {
@@ -170,9 +191,15 @@
                 }
             },
             initializeCenterObject() {
+                if (new URL(window.location.href).searchParams.get("Clat")) {
+                    return {
+                        lat: parseFloat(new URL(window.location.href).searchParams.get("Clat")),
+                        lng: parseFloat(new URL(window.location.href).searchParams.get("Clng"))
+                    }
+                }
                 return {
-                    lat: parseFloat(new URL(window.location.href).searchParams.get("Clat")),
-                    lng: parseFloat(new URL(window.location.href).searchParams.get("Clng"))
+                    lat: parseFloat(new URL(window.location.href).searchParams.get("lat")),
+                    lng: parseFloat(new URL(window.location.href).searchParams.get("lng"))
                 }
             }
 

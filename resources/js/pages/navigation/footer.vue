@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="visible">
         <div class="footer-content">
             <div class="footer-element">
                 <p>A project of HERE Institute, INC</p>
@@ -46,6 +46,13 @@
 
 <script>
     export default {
+
+        props: {
+            visible: {
+                type: Boolean,
+                default: true
+            },
+        },
 
         components: {
             

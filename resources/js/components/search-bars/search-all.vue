@@ -17,26 +17,20 @@
             @search:focus="debounce" 
             @input="onSelect">
             <template #option="{ model }">
-                <div 
-                    class="option__title" 
-                    style="padding-bottom:1rem;height:2.4rem;">
-                    <div style="display:inline-block;float: left;padding-left:1rem;">
-                        <svg v-if="model.type == 'c' || model.type == 'r' || model.type == 't'">
-                            <use :xlink:href="`/storage/website-files/icons.svg#ri-price-tag-3-line`" />
-                        </svg>
-                        <svg v-if="model.type == 'o'">
-                            <use :xlink:href="`/storage/website-files/icons.svg#ri-user-4-line`" />
-                        </svg>
-                        <svg v-if="model.call_to_action">
-                            <use :xlink:href="`/storage/website-files/icons.svg#ri-calendar-line`" />
-                        </svg>
-                        <svg v-if="model.latitude" >
-                            <use :xlink:href="`/storage/website-files/icons.svg#ri-map-pin-line`" />
-                        </svg>
-                    </div>
-                    <div style="font-size: 1.4rem;display:inline-block;float: left;padding-left:2rem;width: 90%;white-space: nowrap;">
-                        {{ model.name }}
-                    </div>
+                <div class="option__title">
+                    <svg v-if="model.type == 'c' || model.type == 'r' || model.type == 't'">
+                        <use :xlink:href="`/storage/website-files/icons.svg#ri-price-tag-3-line`" />
+                    </svg>
+                    <svg v-if="model.type == 'o'">
+                        <use :xlink:href="`/storage/website-files/icons.svg#ri-user-4-line`" />
+                    </svg>
+                    <svg v-if="model.call_to_action">
+                        <use :xlink:href="`/storage/website-files/icons.svg#ri-calendar-line`" />
+                    </svg>
+                    <svg v-if="model.latitude">
+                        <use :xlink:href="`/storage/website-files/icons.svg#ri-map-pin-line`" />
+                    </svg>
+                    <p> {{ model.name }} </p>
                 </div>
             </template>
         </v-select>

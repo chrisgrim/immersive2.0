@@ -55,6 +55,11 @@
 //Staffpicks
 @import 'staffpicks/staffpicks';
 
+//Search 
+@import 'events/components/search-filters';
+@import 'search/components/mobile-search-nav';
+@import 'search/components/mobile-options';
+
 //Home
 @import 'home/index';
 

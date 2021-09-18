@@ -1,6 +1,6 @@
 <template>
     <div 
-        class="button" 
+        class="col" 
         ref="cat">
         <button
             @click="show" 
@@ -11,6 +11,9 @@
                 <span v-if="value.length > 1">
                     +{{ value.length - 1 }}
                 </span>
+            </template>
+            <template v-else-if="mobile">
+                Show all categories
             </template>
             <template v-else>
                 Categories
@@ -37,25 +40,27 @@
                             </div>
                         </div>
                     </div>
-                    <div class="filter__dropdown--footer">
-                        <button 
-                            v-if="value.length" 
-                            @click="clear" 
-                            class="borderless">
-                            Clear
-                        </button>
-                        <button 
-                            v-else
-                            @click="active = false;" 
-                            class="borderless">
-                            Cancel
-                        </button>
-                        <button 
-                            @click="submit()"
-                            class="filter round">
-                            Submit
-                        </button>
-                    </div>
+                    <template v-if="!mobile">
+                        <div class="filter__dropdown--footer">
+                            <button 
+                                v-if="value.length" 
+                                @click="clear" 
+                                class="borderless">
+                                Clear
+                            </button>
+                            <button 
+                                v-else
+                                @click="active = false;" 
+                                class="borderless">
+                                Cancel
+                            </button>
+                            <button 
+                                @click="submit()"
+                                class="filter round">
+                                Submit
+                            </button>
+                        </div>
+                    </template>
                 </div>
             </div>
         </template>

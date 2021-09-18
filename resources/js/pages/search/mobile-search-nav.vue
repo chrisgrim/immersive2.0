@@ -13,12 +13,12 @@
                         </svg>
                     </button>
                     <div 
-                        @click="open=true"
+                        @click="showSearch"
                         class="location">
                         <p>{{ city }}</p>
                     </div>
                     <div 
-                        @click="open=true"
+                        @click="showSearch"
                         class="dates">
                         <template v-if="naturalDate">
                             <p>{{ naturalDate }}</p>
@@ -27,8 +27,9 @@
                             <p>Add dates</p>
                         </template>
                     </div>
-                    <button 
-                        @click="options=true"
+                    <button
+                        :class="{active : hasOptions}"
+                        @click="showOptions"
                         class="options svg">
                         <svg>
                             <use :xlink:href="`/storage/website-files/icons.svg#ri-settings-line`" />
@@ -40,7 +41,7 @@
                 <div class="actual">
                     <button 
                         class="svg close" 
-                        @click="open=false">
+                        @click="hideSearch">
                         <svg>
                             <use :xlink:href="`/storage/website-files/icons.svg#ri-close-line`" />
                         </svg>
@@ -49,8 +50,9 @@
                         Search
                     </div>
                     <button 
+                        :class="{active : hasOptions}"
                         class="svg options" 
-                        @click="options=true">
+                        @click="showOptions">
                         <svg>
                             <use :xlink:href="`/storage/website-files/icons.svg#ri-settings-line`" />
                         </svg>
@@ -67,7 +69,10 @@
         </div>
         <SearchOptions
             v-if="options"
-            @close="options=false" />
+            :categories="categories"
+            :tags="tags"
+            @update="updateOptions"
+            @close="hideOptions" />
     </div>
 </template>
 
@@ -77,16 +82,12 @@
     import mobile from '../../mixins/mobile'
     import SearchOptions from './components/mobile-options.vue'
     import VueFilterDates from './filter/vue-filter-dates.vue'
-    import VueFilterPrice from './filter/vue-filter-price.vue'
-    import VueFilterCategory from './filter/vue-filter-category.vue'
-    import VueFilterTag from './filter/vue-filter-tag.vue'
-
     
     export default {
 
-        props:['value', 'filter', 'categories', 'tags', 'map'],
+        props:['value', 'filter', 'categories', 'tags', 'map', 'mapSearch'],
 
-        components: { SearchBar, VueFilterDates, VueFilterPrice, VueFilterCategory, VueFilterTag, SearchOptions },
+        components: { SearchBar, VueFilterDates, SearchOptions },
 
         mixins: [ searchBasicsMixin, mobile ],
 
@@ -95,25 +96,27 @@
                 get() { return this.value },
                 set(val) { this.$emit('input', val) }
             },
-            boundary() {
-                return this.map && this.map.currentBounds._northEast.lat ? this.map.currentBounds._northEast.lat : null;
-            },
             naturalDate() {
                 if (this.data.dates && this.data.dates.length) {
                     return `${ this.$dayjs(this.data.dates[0]).format("MMM D") } - ${ this.$dayjs(this.data.dates[1]).format("MMM D") }`
                 }
                 return null
+            },
+            hasOptions() {
+                if (this.data.category.length) { return true }
+                if (this.data.tag.length) { return true }
+                if (this.data.price[0] !== 0 ||this.data.price[1] !== 100) { return true }
+                return false
             }
         },
 
         data() {
             return {
-                active:'',
                 open: false,
                 options: false,
                 scroll: false,
                 mobile: window.innerWidth < 768,
-                city: new URL(window.location.href).searchParams.get("city"),
+                city: new URL(window.location.href).searchParams.get("city") ? new URL(window.location.href).searchParams.get("city") : 'Start your search',
                 data: {
                     mapboundary: this.initilizeBoundaries(),
                     category: this.initilizeCategory(),
@@ -124,6 +127,7 @@
                     lng: this.initilizeLongitude(),
                     zoom: this.initilizeZoom(),
                     center: this.initilizeCenter(),
+                    live: new URL(window.location.href).searchParams.get("live")
                 }
             }
         },
@@ -137,18 +141,46 @@
                 this.addPushState()
             },
             onBack() {
-
+                window.history.back();
             },
-            handleScroll (event) {
-                console.log(window.pageYOffset);
-                this.scroll = window.pageYOffset > 10 ? true : false
+            handleScroll () {
+                this.scroll = window.pageYOffset > 10
             },
             mapUpdate() {
                 this.data.mapboundary = this.map.currentBounds;
+                this.data.center = this.map.currentCenter;
                 this.data.zoom = this.map.zoom;
-                this.data.center = this.map.center;
-                this.data.lat = null;
-                this.data.lng = null;
+                this.data.live = this.map.live;
+                this.debounce()
+            },
+            debounce() {
+                if (this.timeout) 
+                    clearTimeout(this.timeout); 
+                this.timeout = setTimeout(() => {
+                    this.submit()
+                }, 500);
+            },
+            showSearch() {
+                this.open = true
+            },
+            hideSearch() {
+                this.open = false
+            },
+            showOptions() {
+                this.options = true
+                this.open = false
+                document.body.classList.add('noscroll')
+            },
+            hideOptions() {
+                this.options = false
+                document.body.classList.remove('noscroll')
+            },
+            updateOptions(val) {
+                this.data.category = val.category
+                this.data.price = val.price
+                this.data.tag = val.tag
+                this.hideOptions()
+                this.debounce()
             },
             initilizeCategory() {
                 let cat = new URL(window.location.href).searchParams.get("category")
@@ -196,10 +228,9 @@
         },
 
         watch: {
-            boundary() {
-                if (!this.boundary) { return }
+            mapSearch() {
+                if (!this.map.live) { return }
                 this.mapUpdate();
-                return this.submit();
             },
         },
 

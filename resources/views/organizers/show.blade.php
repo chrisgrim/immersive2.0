@@ -61,9 +61,11 @@
 @section('content')
     <div id="bodyArea" class="org">
         @auth
+            <modal-wrapper :user= "{{auth()->user()}}"></modal-wrapper>
             <organizer-show :user="{{auth()->user()}}" :organizer="{{ $organizer }}"></organizer-show> 
         @endauth
         @guest
+            <modal-wrapper></modal-wrapper>
             <organizer-show :organizer="{{ $organizer }}"></organizer-show> 
         @endguest
     </div>

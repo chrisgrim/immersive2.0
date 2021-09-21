@@ -17,7 +17,7 @@
 @section('content')
 	<div id="bodyArea">
         @if ( session('submitted'))
-            <vue-alert message="{{ session('submitted') }}"></vue-alert>
+            <modal-wrapper :user= "{{auth()->user()}}" loadmessage="{{ session('submitted') }}"></modal-wrapper>
         @endif   
 		<vue-event-edit 
             :allevents="{{auth()->user()->events()->whereIn('status', ['p','e'])->get()}}"

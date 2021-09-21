@@ -3,11 +3,11 @@
         <div class="row">
             <div 
                 v-for="(element) in elements"
-                :key="element.featureable.id"
+                :key="element.id"
                 class="col">
                 <div class="card">
                     <a 
-                        :href="url(element)" 
+                        :href="`/communities/${community.slug}/${element.slug}`" 
                         class="card-url" />
                     <ImageArray 
                         :community="community"
@@ -16,12 +16,12 @@
                         <p 
                             v-if="title" 
                             class="card-title">
-                            {{ element.featureable.name }}
+                            {{ element.name }}
                         </p>
                         <p 
                             v-if="text"
                             class="card-text">
-                            {{ element.featureable.blurb }}
+                            {{ element.blurb }}
                         </p>
                     </div>
                 </div>
@@ -56,10 +56,6 @@
         },
 
         methods: {
-            url(element) {
-                if (element.type === 'e') { return `/events/${element.featureable.slug}` }
-                if (element.type === 'l') { return `/communities/${this.community.slug}/${element.featureable.slug}` }
-            }
         },
 
     }

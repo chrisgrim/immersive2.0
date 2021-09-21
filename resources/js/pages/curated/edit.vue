@@ -59,7 +59,7 @@
                                 </div>
                                 <button 
                                     class="add__listing"
-                                    @click="addSection">
+                                    @click="addShelf">
                                     Shelf
                                 </button>
                                 <a :href="`/listings/${community.slug}/create`">
@@ -70,20 +70,20 @@
                     </div>
                 </div>
                 <draggable
-                    v-model="sections"
+                    v-model="shelves"
                     @start="isDragging=true" 
                     @end="debounce">
                     <div 
                         class="shelves" 
-                        v-for="(section, index) in sections"
+                        v-for="(shelf, index) in shelves"
                         @mouseover="showDelete = index"
                         @mouseleave="showDelete = null"
-                        :key="section.id">
+                        :key="shelf.id">
                         <div 
-                            v-if="showDelete === index && sections.length > 1"
-                            class="delete">
+                            v-if="showDelete === index && shelf.listings_with_cards.length < 1"
+                            class="delete-btn">
                             <button 
-                                @click="deleteSection(section)"
+                                @click="deleteShelf(shelf)"
                                 class="btn-icon">
                                 <svg>
                                     <use :xlink:href="`/storage/website-files/icons.svg#ri-close-line`" />
@@ -93,7 +93,7 @@
                         <Shelf 
                             @updated="onUpdated"
                             :community="community"
-                            :loadshelf="section" />
+                            :loadshelf="shelf" />
                     </div>
                 </draggable>
             </div>
@@ -136,7 +136,7 @@
     import { required, maxLength } from 'vuelidate/lib/validators';
     export default {
         
-        props: [ 'loadcommunity', 'user', 'loadowner', 'loadsections'],
+        props: [ 'loadcommunity', 'user', 'loadowner', 'loadshelves'],
 
         mixins: [formValidationMixin],
 
@@ -153,7 +153,7 @@
 
         data() {
             return {
-                sections: this.loadsections,
+                shelves: this.loadshelves,
                 community: this.loadcommunity,
                 communityBeforeEdit: { ...this.loadcommunity },
                 headerImage: window.innerWidth < 768 ? this.loadcommunity.thumbImagePath : this.loadcommunity.largeImagePath,
@@ -184,29 +184,30 @@
                 this.community = { ...this.communityBeforeEdit }
                 this.$v.$reset();
             },
-            async addSection() {
-                await axios.post(`/sections/community/${this.community.slug}`)
+            async addShelf() {
+                await axios.post(`/shelves/${this.community.slug}`)
                 .then( res => { 
-                    this.sections = res.data 
+                    this.shelves = res.data 
                 });
                 this.clear();
             },
-            async updateSectionOrder() {
-                var list = this.sections.map(function(item, index){
+            async updateShelfOrder() {
+                var list = this.shelves.map(function(item, index){
                     item.order = index;
                     return item;
                 })
-                await axios.put(`/sections/order/reorder`, list)
+                console.log(list);
+                await axios.put(`/shelves/${this.community.slug}/order`, list)
                 .then( res => {
                     this.onUpdated();
                 })
             },
-            async deleteSection(section) {
-                if (this.sections.length <= 1) { return alert('Communities must have at least one shelf') }
-                if (section.featured.length) { return alert(`Can't delete shelf with posts`)}
-                await axios.delete(`/sections/${section.id}`)
+            async deleteShelf(shelf) {
+                if (this.shelves.length <= 1) { return alert('Communities must have at least one shelf') }
+                if (shelf.listings_with_cards.length) { return alert(`Can't delete shelf with posts`)}
+                await axios.delete(`/shelves/${shelf.id}`)
                 .then( res => { 
-                    this.sections = this.sections.filter( sec => sec.id !== section.id )
+                    this.shelves = res.data
                 });
                 this.$v.$reset();
             },
@@ -247,7 +248,7 @@
                 if (this.timeout) 
                     clearTimeout(this.timeout); 
                 this.timeout = setTimeout(() => {
-                    this.updateSectionOrder();
+                    this.updateShelfOrder();
                 }, 500); // delay
             },
         },

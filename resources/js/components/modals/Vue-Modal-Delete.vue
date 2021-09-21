@@ -47,10 +47,14 @@
     export default {
         props: ['item', 'strict', 'body'],
 
+        computed: {
+        },
+
         data() {
             return {
                 toDelete: null,
                 isDisabled: true,
+
             }
         },
 

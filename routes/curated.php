@@ -19,6 +19,14 @@ Route::POST('/communities/{community}/curators/owner', 'Curated\CommunityControl
 Route::GET('/create/communities/thanks', 'Curated\CommunityController@submitted');
 
 
+// ----------   Shelves -------
+Route::POST('/shelves/{community}', 'Curated\ShelfController@store')->middleware('can:update,community');
+Route::PUT('/shelves/{shelf}', 'Curated\ShelfController@update')->middleware('can:update,shelf');
+Route::PUT('/shelves/{community}/order', 'Curated\ShelfController@order')->middleware('can:update,community');
+Route::DELETE('/shelves/{shelf}', 'Curated\ShelfController@destroy')->middleware('can:destroy,shelf');
+Route::GET('/shelves/{shelf}/paginate', 'Curated\ShelfController@paginate');
+
+
 // ----------   Listings -------
 Route::GET('/listings/{community}/create', 'Curated\ListingController@create')->middleware('can:update,community');
 Route::POST('/listings/{community}/store', 'Curated\ListingController@store')->middleware('can:update,community');

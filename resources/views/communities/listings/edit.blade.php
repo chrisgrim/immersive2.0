@@ -19,13 +19,10 @@
     <div id="bodyArea">
 
         @if ( session()->exists( 'submitted' ))
-            <vue-alert 
-            message="submitted">
-            </vue-alert>
-        @endif
-    
+            <modal-wrapper :user= "{{auth()->user()}}" loadmessage="submitted"></modal-wrapper>
+        @else 
         <vue-listing-edit
-            :sections="{{ $community->sections }}"
+            :shelves="{{ $community->shelves }}"
             :community="{{ $community }}" 
             :owner="true"
             :value="{{ $listing }}" 

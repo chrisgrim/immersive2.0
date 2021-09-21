@@ -29,6 +29,14 @@ class Feature extends Model
     }
 
     /**
+     * Get the Dock that has this featured
+     */
+    public function docks()
+    {
+        return $this->belongsToMany(Dock::class);
+    }
+
+    /**
      * Get the model that has this featured
      */
     public function featureable()

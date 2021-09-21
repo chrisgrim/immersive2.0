@@ -21,9 +21,9 @@ class CreateFeaturesTable extends Migration
             $table->timestamps();
         });
 
-        Schema::create('feature_section', function(Blueprint $table) {
+        Schema::create('dock_feature', function(Blueprint $table) {
             $table->foreignId('feature_id');
-            $table->foreignId('section_id');
+            $table->foreignId('dock_id');
             $table->integer('order')->unsigned()->default(0);
             $table->timestamps();
         });

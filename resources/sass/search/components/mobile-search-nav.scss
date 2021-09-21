@@ -86,7 +86,7 @@
     font-weight: 700;
 }
 .search-nav .placeholder p {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
 }
 .search-nav button.svg {
     border:0;
@@ -129,6 +129,10 @@
 }
 .search-nav .wrapper .vs--single .vs__dropdown-toggle {
     border-radius: 1rem 1rem 0 0;
+}
+.search-nav button.svg.options {
+    border-left: 1px solid #e4e4e4;
+    border-radius: 0;
 }
 .search-nav button.filter.round.dates {
     border-radius: 0 0 1rem 1rem;

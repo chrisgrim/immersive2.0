@@ -50,7 +50,7 @@
                 :community="community"
                 :loadlistings="listings" />
             <div 
-                v-if="shelf.featured.length > 4 && paginate.next_page_url"
+                v-if="shelf.listings_with_cards.length > 4 && paginate.next_page_url"
                 class="loadmore">
                 <button @click="fetchListings">
                     Load More
@@ -80,7 +80,7 @@
             return {
                 shelf: this.loadshelf,
                 shelfBeforeEdit: { ...this.loadshelf },
-                listings:this.loadshelf.featured.slice(0,4),
+                listings:this.loadshelf.listings_with_cards.slice(0,4),
                 editName: false,
                 hover: false,
                 serverErrors: null,
@@ -91,7 +91,7 @@
         methods: {
             async patchShelf() {
                 if ( this.checkVuelidate()) { return }
-                await axios.put(`/sections/${this.shelf.id}`, this.shelf)
+                await axios.put(`/shelves/${this.shelf.id}`, this.shelf)
                 .then( res => {
                     this.shelf = res.data;
                     this.clear();

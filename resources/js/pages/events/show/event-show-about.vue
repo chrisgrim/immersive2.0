@@ -1,9 +1,6 @@
 <template>
     <section>
         <div class="es__about element">
-            <a :href="`/index/search-all?category=${event.category.id}`">
-                <span class="es__title--category"> {{ event.category.name }} </span>
-            </a>
             <span class="es__title--name"><h1> {{ event.name }} </h1></span>
             <span class="es__title--tag"><i> {{ event.tag_line }} </i></span>
             <div class="es__title--rating">

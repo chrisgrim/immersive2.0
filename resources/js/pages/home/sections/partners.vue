@@ -1,7 +1,7 @@
 <template>
     <div>
         <h3>Check out our partners</h3>
-        <div class="album four container">
+        <div class="album four image container">
             <div class="row">
                 <div class="col">
                     <div class="card">
@@ -14,8 +14,7 @@
                                 class="contributer--button" />
                         </a>
                     </div>
-                </div>
-                <div class="col">
+                </div><div class="col">
                     <div class="card">
                         <a 
                             target="_blank" 
@@ -26,8 +25,7 @@
                                 class="contributer--button" />
                         </a>
                     </div>
-                </div>
-                <div class="col">
+                </div><div class="col">
                     <div class="card">
                         <a 
                             target="_blank" 
@@ -38,15 +36,14 @@
                                 class="contributer--button" />
                         </a>
                     </div>
-                </div>
-                <div class="col">
+                </div><div class="col">
                     <div class="card">
                         <a 
                             target="_blank" 
                             rel="noopener noreferrer" 
-                            href="https://www.herefest.com/">
+                            href="http://immersiveexperience.org/">
                             <button 
-                                style="background: url('/storage/website-files/here-logo.png') center center / cover no-repeat;" 
+                                style="background: url('/storage/website-files/next-stage.jpg') center center / cover no-repeat;" 
                                 class="contributer--button" />
                         </a>
                     </div>

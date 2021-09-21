@@ -19,18 +19,18 @@
         @guest
             <vue-community-show 
                 :owner="false"
-                :sections="{{ $sections }}" 
+                :shelves="{{ $shelves }}" 
                 :value="{{ $community }}"/>
         @else
             @if ( $community->curators->contains('id', auth()->user()->id) )
                 <vue-community-show
                     :owner="true"
-                    :sections="{{ $sections }}" 
+                    :shelves="{{ $shelves }}" 
                     :value="{{ $community }}" />
             @else
                 <vue-community-show
                     :owner="false"
-                    :sections="{{ $sections }}" 
+                    :shelves="{{ $shelves }}" 
                     :value="{{ $community }}" />
             @endif
         @endauth

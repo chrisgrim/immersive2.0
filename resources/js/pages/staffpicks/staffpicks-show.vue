@@ -2,7 +2,7 @@
     <div class="staffpicks">
         <div class="section-a">
             <div class="section-a__wrapper">
-                <h2>StaffPicks for the week of {{ week }}</h2>
+                <h2> Current Staff Picks </h2>
                 <div class="album-a">
                     <a 
                         v-for="(card) in staffpicks" 

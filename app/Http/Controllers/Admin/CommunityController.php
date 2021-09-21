@@ -45,9 +45,9 @@ class CommunityController extends Controller
      */
     public function show(Community $community)
     {
-        $sections = $community->sections()->with('publicFeatured.featureable')->get();
+        $shelves = $community->shelves()->with('publicListingsWithCards')->get();
         $community->load('curators');
-        return view('adminArea.showcommunityapproval', compact('community', 'sections'));
+        return view('adminArea.showcommunityapproval', compact('community', 'shelves'));
     }
 
     /**

@@ -61,7 +61,8 @@ Vue.component('vue-community-admin-approval', () => import(/* webpackChunkName: 
 Vue.component('vue-community-approval-bar', () => import(/* webpackChunkName: "assets/vcab" */ './pages/adminArea/approve/community-approval-bar.vue'));
 
 
-
+//Docks
+Vue.component('dock-index', () => import(/* webpackChunkName: "assets/ds" */ './pages/featured/index.vue'));
 
 //Nav
 Vue.component('vue-nav', () => import(/* webpackChunkName: "assets/ls" */ './pages/navigation/nav.vue'));
@@ -78,7 +79,7 @@ Vue.component('modal-wrapper', () => import(/* webpackChunkName: "assets/mw" */ 
 Vue.component('tabs', () => import(/* webpackChunkName: "assets/lts" */ './pages/layouts/tabs.vue'));
 Vue.component('tab', () => import(/* webpackChunkName: "assets/lt" */ './pages/layouts/tab.vue'));
 // Vue.component('image-upload', () => import(/* webpackChunkName: "assets/liu" */ './pages/layouts/image-upload.vue'));
-Vue.component('vue-alert', () => import(/* webpackChunkName: "assets/la" */ './pages/layouts/alert.vue'));
+// Vue.component('vue-alert', () => import(/* webpackChunkName: "assets/la" */ './pages/layouts/alert.vue'));
 Vue.component('vue-email-verify', () => import(/* webpackChunkName: "assets/lev" */ './pages/profile/components/email-verification-modal.vue'));
 
 //Create Events

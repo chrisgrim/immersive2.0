@@ -154,15 +154,15 @@
                         <template v-if="showShelf">
                             <div class="component-body">
                                 <v-select
-                                    v-model="listing.section_id"
-                                    :reduce="section => section.id"
-                                    :options="sections"
-                                    :class="{ 'error': $v.listing.section_id.$error }"
+                                    v-model="listing.shelf_id"
+                                    :reduce="shelf => shelf.id"
+                                    :options="shelves"
+                                    :class="{ 'error': $v.listing.shelf_id.$error }"
                                     placeholder="Shelf"
                                     @input="patchListing"
                                     label="name" />
-                                <div v-if="$v.listing.section_id.$error" class="validation-error">
-                                    <p class="error" v-if="!$v.listing.section_id.required">Please select the shelf.</p>
+                                <div v-if="$v.listing.shelf_id.$error" class="validation-error">
+                                    <p class="error" v-if="!$v.listing.shelf_id.required">Please select the shelf.</p>
                                 </div>
                             </div>
                         </template>
@@ -258,7 +258,7 @@
     import { required, maxLength } from 'vuelidate/lib/validators';
     export default {
         
-        props: [ 'value', 'user', 'owner', 'community', 'sections'],
+        props: [ 'value', 'user', 'owner', 'community', 'shelves'],
 
         mixins: [formValidationMixin],
 
@@ -307,12 +307,8 @@
                 });
             },
             async deleteFeaturedImage() {
-                await axios.put(`/listings/${this.listing.slug}/update`, {name:this.listing.name,blurb:this.listing.blurb, deleteImage:true})
-                .then( res => {
-                    this.listing = res.data;
-                    this.onUpdated();
-                    this.clear();
-                })
+                this.formData.append('deleteImage', true)
+                this.patchListing()
             },
             async updateListOrder() {
                 var list = this.listing.cards.map(function(item, index){
@@ -350,7 +346,7 @@
                 this.formData.append('name', this.listing.name);
                 this.formData.append('blurb', this.listing.blurb);
                 this.formData.append('community_id', this.community.id);
-                this.formData.append('section_id', this.listing.section_id);
+                this.formData.append('shelf_id', this.listing.shelf_id);
                 this.formData.append('status', this.listing.status);
             },
             updateListing(value) {
@@ -376,6 +372,7 @@
                 this.blockType = null;
                 this.nameEdit = false;
                 this.tagEdit = false;
+                this.formData = new FormData()
             },
             clearErrors() {
                 this.serverErrors = null
@@ -391,7 +388,7 @@
                 blurb: {
                     maxLength: maxLength(255)
                 },
-                section_id: {
+                shelf_id: {
                     required
                 }
             },

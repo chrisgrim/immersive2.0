@@ -39,6 +39,7 @@
                                 :options="staff"
                                 label="name"
                                 placeholder="Select the staff Member"
+                                @search:focus="staffPick.staff=null"
                                 @input="$v.staffPick.staff.$touch"
                                 :class="{'error': $v.staffPick.event.$error}" />
                             <div v-if="$v.staffPick.event.$error" class="validation-error">

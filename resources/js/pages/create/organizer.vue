@@ -1,8 +1,5 @@
 <template>
     <div>
-        <vue-alert 
-            v-if="serverErrors.length" 
-            message="serverErrors" />
         <div class="event-create__organizer">
             <div class="title">
                 <h2>Organizer</h2>
@@ -20,7 +17,7 @@
                             <button 
                                 class="editTitle" 
                                 v-if="editButton" 
-                                @click.prevent="modal = true">
+                                @click.prevent="modal=true">
                                 Edit
                             </button>
                         </div>
@@ -192,20 +189,6 @@
                         </div>
                     </div>
                 </section>
-                <modal v-if="modal" @close="modal = false">
-                    <div slot="header">
-                        <div class="circle del">
-                            <p>?</p>
-                        </div>
-                    </div>
-                    <div slot="body"> 
-                        <h3>Changing the name?</h3>
-                        <p>Changing the organization name will break any links you have sent out. This is not advised.</p>
-                    </div>
-                    <div slot="footer">
-                        <button class="btn del" @click="onResubmit()">Change Anyways</button>
-                    </div>
-                </modal>
                 <div class="create-button__back">
                     <button v-if="this.loadorganizer" class="create" @click.prevent="goBack"> Back </button>
                 </div>
@@ -214,12 +197,17 @@
                 </div>
             </div>
         </div>
+        <RenameModal
+            v-if="modal"
+            @close="modal=false"
+            @onSubmit="onResubmit" />
     </div>
 </template>
 
 <script>
 import _ from 'lodash'
 import ImageUpload from '../layouts/image-upload.vue'
+import RenameModal from './components/modal-organizer.vue'
 import CubeSpinner  from '../layouts/loading.vue'
 import { required, minLength, maxLength, url, email } from 'vuelidate/lib/validators'
 import formValidationMixin from '../../mixins/form-validation-mixin'
@@ -229,7 +217,7 @@ export default {
     
     props: ['user', 'loadorganizer'],
 
-    components: { ImageUpload, CubeSpinner },
+    components: { ImageUpload, CubeSpinner, RenameModal },
 
     computed: {
         hasImage() {

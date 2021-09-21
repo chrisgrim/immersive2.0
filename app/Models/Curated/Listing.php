@@ -12,7 +12,7 @@ class Listing extends Model
 {
     use HasFactory;
 
-    protected $fillable = [ 'name', 'slug', 'blurb', 'thumbImagePath', 'largeImagePath', 'user_id', 'community_id', 'section_id', 'status', 'order' ];
+    protected $fillable = [ 'name', 'slug', 'blurb', 'thumbImagePath', 'shelf_id', 'largeImagePath', 'user_id', 'community_id', 'section_id', 'status', 'order' ];
 
     protected $with = ['limitedCards'];
 
@@ -41,6 +41,14 @@ class Listing extends Model
     public function community()
     {
         return $this->belongsTo(Community::class);
+    }
+
+    /**
+     * Get the Shelf that owns the Listing.
+     */
+    public function shelf()
+    {
+        return $this->belongsTo(Shelf::class);
     }
 
     /**
@@ -92,10 +100,10 @@ class Listing extends Model
             $listing->cards()->each(function($card) {
                 $card->destroyCard($card);
             });
-            $featured = $listing->featured()->first();
-            $ids = $featured->sections->map(function($section) { return $section->id; });
-            $featured->sections()->detach($ids);
-            $featured->delete();
+            // $featured = $listing->featured()->first();
+            // $ids = $featured->sections->map(function($section) { return $section->id; });
+            // $featured->sections()->detach($ids);
+            // $featured->delete();
         });
     }
 }

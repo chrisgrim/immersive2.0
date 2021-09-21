@@ -19,16 +19,10 @@ Route::RESOURCE('staffpicks', 'Admin\StaffPicksController');
 Route::RESOURCE('reviewevents', 'Admin\ReviewEventsController');
 Route::RESOURCE('interactivelevels', 'Admin\InteractiveLevelController');
 
-// ----------   Sections -------
-Route::PUT('/sections/{section}', 'Featured\SectionController@update');
-Route::PUT('/sections/order/reorder', 'Featured\SectionController@order');
-Route::DELETE('/sections/{section}', 'Featured\SectionController@destroy');
-
-Route::POST('/sections/community/{community}', 'Featured\SectionController@storeCommunity')->middleware('can:update,community');
-Route::DELETE('/sections/listing/{listing}', 'Featured\SectionController@deleteListing')->middleware('can:update,listing');
-
-// ----------   Featured -------
-Route::PUT('/featured/{section}/reorder', 'Featured\FeaturedController@order');
+// ----------   Docks -------
+Route::GET('/admin/docks', 'Featured\DockController@index');
+Route::GET('/admin/docks/search', 'Featured\DockController@search');
+Route::POST('/admin/docks/{dock}', 'Featured\DockController@store');
 
 // ----------   Search Page -------
 Route::POST('/search/storedata', 'Search\SearchDataController@store');

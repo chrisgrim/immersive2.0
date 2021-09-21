@@ -16,10 +16,8 @@
 @endsection
 @section('content')
     <div id="bodyArea">
-
         @if ( session('submitted'))
-            <vue-alert message="{{ session('submitted') }}">
-            </vue-alert>
+            <modal-wrapper :user= "{{auth()->user()}}" loadmessage="{{ session('submitted') }}"></modal-wrapper>
         @endif        
         <vue-community-index 
             :value="{{$communities}}"

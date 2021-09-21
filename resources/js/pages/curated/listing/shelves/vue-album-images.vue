@@ -1,59 +1,59 @@
 <template>
     <div 
-        :class="{'grid-image' : element.type === 'l'}"
+        :class="{'grid-image' : !hasFeatured}"
         class="card-img">
-        <template v-if="element.type === 'l'">
+        <template v-if="hasFeatured">
             <div class="single">
-                <picture v-if="imageArray && imageArray[0]">
+                <picture>
                     <source 
                         type="image/webp" 
-                        :srcset="`/storage/${imageArray[0]}`"> 
+                        :srcset="`/storage/${element.thumbImagePath}`"> 
                     <img 
                         style="object-fit:cover" 
                         loading="lazy" 
-                        :src="`/storage/${imageArray[0].slice(0, -4)}jpg`" 
+                        :src="`/storage/${element.thumbImagePath.slice(0, -4)}jpg`" 
+                        :alt="`${element.name}`">
+                </picture>
+            </div>
+        </template>
+        <template v-else>
+            <div class="single">
+                <picture v-if="cardImages && cardImages[0]">
+                    <source 
+                        type="image/webp" 
+                        :srcset="`/storage/${cardImages[0]}`"> 
+                    <img 
+                        style="object-fit:cover" 
+                        loading="lazy" 
+                        :src="`/storage/${cardImages[0].slice(0, -4)}jpg`" 
                         :alt="`${element.name}`">
                 </picture>
             </div>
             <div class="double">
                 <div class="img top">
-                    <picture v-if="imageArray && imageArray[1]">
+                    <picture v-if="cardImages && cardImages[1]">
                         <source 
                             type="image/webp" 
-                            :srcset="`/storage/${imageArray[1]}`"> 
+                            :srcset="`/storage/${cardImages[1]}`"> 
                         <img 
                             style="object-fit:cover" 
                             loading="lazy" 
-                            :src="`/storage/${imageArray[1].slice(0, -4)}jpg`" 
+                            :src="`/storage/${cardImages[1].slice(0, -4)}jpg`" 
                             :alt="`${element.name}`">
                     </picture>
                 </div>
                 <div class="img">
-                    <picture v-if="imageArray && imageArray[2]">
+                    <picture v-if="cardImages && cardImages[2]">
                         <source 
                             type="image/webp" 
-                            :srcset="`/storage/${imageArray[2]}`"> 
+                            :srcset="`/storage/${cardImages[2]}`"> 
                         <img 
                             style="object-fit:cover" 
                             loading="lazy" 
-                            :src="`/storage/${imageArray[2].slice(0, -4)}jpg`" 
+                            :src="`/storage/${cardImages[2].slice(0, -4)}jpg`" 
                             :alt="`${element.name}`">
                     </picture>
                 </div>
-            </div>
-        </template>
-        <template v-if="element.type === 'e'">
-            <div class="single">
-                <picture v-if="imageArray && imageArray[0]">
-                    <source 
-                        type="image/webp" 
-                        :srcset="`/storage/${imageArray[0]}`"> 
-                    <img 
-                        style="object-fit:cover" 
-                        loading="lazy" 
-                        :src="`/storage/${imageArray[0].slice(0, -4)}jpg`" 
-                        :alt="`${element.name}`">
-                </picture>
             </div>
         </template>
     </div>
@@ -65,10 +65,13 @@
         props: ['element', 'community'],
 
         computed: {
-            imageArray() {
-                if( this.element.type === 'l' ) {return [this.element.featureable.thumbImagePath].concat(this.element.featureable.limited_cards.map( e => e.thumbImagePath)).filter(e => e != null)}
-                return [this.element.featureable.thumbImagePath]
-            }
+            hasFeatured() {
+                return this.element.thumbImagePath
+            },
+            cardImages() {
+                return this.element.limited_cards.map( e => e.event && !e.thumbImagePath ? e.event.thumbImagePath : e.thumbImagePath )
+                .filter(e => e != null)
+            },
         },
 
         data() {

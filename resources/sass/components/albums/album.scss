@@ -16,6 +16,7 @@
     white-space: nowrap;
     overflow: visible;
     width: 100%;
+    margin: 2rem -0.8rem 0 -0.8rem;
 }
 .album .col {
     padding: 0 0.8rem;
@@ -117,6 +118,14 @@
 .album .card-body .price p {
     font-size: 1.5rem;
     font-weight: 800;
+    font-size: 1.6rem;
+    font-weight: 800;
+    -webkit-transform: scale(1,1.1); 
+    -moz-transform: scale(1,1.1);
+    -ms-transform: scale(1,1.1);
+    -o-transform: scale(1,1.1);
+    transform: scale(1,1.1);
+    color:black;
 }
 .album .favorite-button button.heart-btn svg{
     fill: rgba(0, 0, 0, 0.5);

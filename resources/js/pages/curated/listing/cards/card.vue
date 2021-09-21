@@ -3,26 +3,26 @@
         :class="{event: card.name}"
         class="body">
         <a 
-            v-if="card.url"
+            v-if="hasUrl"
             target="_blank" 
             rel="noopener noreferrer nofollow"
-            :href="card.url"
+            :href="hasUrl"
             class="card-url" />
-        <template v-if="card.thumbImagePath">
+        <template v-if="hasImage">
             <div class="listing__card-image">
                 <picture>
                     <source 
                         type="image/webp" 
-                        :srcset="`/storage/${card.thumbImagePath}`"> 
+                        :srcset="`/storage/${hasImage}`"> 
                     <img 
-                        :src="`/storage/${card.thumbImagePath.slice(0, -4)}`" 
+                        :src="`/storage/${hasImage.slice(0, -4)}`" 
                         :alt="`${card.name}`">
                 </picture>
             </div>
         </template>
-        <template v-if="card.name">
+        <template v-if="hasName">
             <div class="card-name">
-                <h3>{{ card.name }}</h3>
+                <h3>{{ hasName }}</h3>
             </div>
         </template>
         <template v-if="card.event_id">
@@ -35,9 +35,9 @@
                 <p v-html="card.blurb" />
             </div>
         </template>
-        <template v-if="card.url">
+        <template v-if="hasUrl">
             <div class="card-out">
-                <a target="_blank" rel="noopener noreferrer nofollow" :href="card.url">
+                <a target="_blank" rel="noopener noreferrer nofollow" :href="hasUrl">
                     <button class="black">Check it out</button>
                 </a>
             </div>
@@ -55,6 +55,18 @@
 <script>
     export default {
         props: [ 'card', 'owner' ],
+
+        computed: {
+            hasImage() {
+                return this.card.event && !this.card.thumbImagePath ? this.card.event.thumbImagePath : this.card.thumbImagePath
+            },
+            hasName() {
+                return this.card.event && !this.card.name ? this.card.event.name : this.card.name
+            },
+            hasUrl() {
+                return this.card.event && !this.card.url ?`/events/${this.card.event.slug}` : this.card.url
+            }
+        },
 
         data() {
             return {

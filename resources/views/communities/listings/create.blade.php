@@ -19,12 +19,10 @@
     <div id="bodyArea">
 
         @if ( session()->exists( 'submitted' ))
-            <vue-alert 
-            message="submitted">
-            </vue-alert>
+            <modal-wrapper message="submitted"></modal-wrapper>
         @endif
         <vue-listing-create 
-            :sections="{{ $community->sections }}"
+            :shelves="{{ $community->shelves }}"
             :community="{{ $community }}"
             :user="{{ auth()->user() }}"/>    
     </div>

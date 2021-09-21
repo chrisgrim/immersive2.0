@@ -128,6 +128,9 @@ button.noBox {
 .admin-interactive-levels .data-grid__row {
     grid-template-columns: 1fr 1fr 1fr 5rem;
 }
+.admin-docks .data-grid__row {
+    grid-template-columns: 1fr 1fr 1fr;
+}
 .users .data-grid__row {
     grid-template-columns: 1fr 1fr 1.5fr 5rem;
 }

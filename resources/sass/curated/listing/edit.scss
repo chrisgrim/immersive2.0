@@ -21,13 +21,13 @@
     top: -1rem;
     z-index: 1;
 }
-.listing-edit .default__image-upload {
-    margin-bottom: 0
-}
 .listing-card.edit {
     margin: 2rem 0 0 0;
     position: relative;
     padding: 1rem;
+}
+.listing-card .default__image-upload-container {
+    margin-bottom: 1rem;
 }
 .edit-block .delete {
     position: absolute;

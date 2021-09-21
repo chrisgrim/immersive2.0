@@ -1,7 +1,7 @@
 <template>
     <div class="shelf">
         <div class="name">
-            <h3>{{ section.name }}</h3>
+            <h3>{{ shelf.name }}</h3>
         </div>
         <div 
             v-if="listings && listings.length"
@@ -9,7 +9,7 @@
             <ListingAlbum
                 :title="true"
                 :text="true"
-                :section="section"
+                :shelf="shelf"
                 :community="community"
                 v-model="listings" />
         </div>
@@ -20,7 +20,7 @@
     import ListingAlbum from './vue-album-show.vue'
     export default {
         
-        props: [ 'section', 'owner', 'community' ],
+        props: [ 'shelf', 'owner', 'community' ],
 
         components: { ListingAlbum },
 
@@ -30,7 +30,7 @@
 
         data() {
             return {
-                listings:this.section.public_featured,
+                listings:this.shelf.public_listings_with_cards,
             }
         },
 

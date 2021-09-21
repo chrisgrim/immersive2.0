@@ -74,7 +74,7 @@ class ListingController extends Controller
      */
     public function edit(Community $community, Listing $listing)
     {
-        $listing->load('cards', 'user', 'section');
+        $listing->load('cards', 'user', 'shelf');
         return view('communities.listings.edit', compact('listing','community'));
     }
 

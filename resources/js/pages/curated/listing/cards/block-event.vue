@@ -2,16 +2,15 @@
     <div class="listing-card edit">
         <div class="header">
             <CardImage
-                :image="`/storage/${card.thumbImagePath}`"
+                :image="thumbImagePath"
                 @addImage="addImage" />
             <div class="div">
                 <div class="field">
                     <v-select
                         v-model="searchInput"
                         :options="searchOptions"
-                        placeholder="Event Name"
+                        placeholder="Select event"
                         label="name"
-                        taggable
                         @search="debounce" 
                         @input="selectEvent"
                         @search:focus="debounce" />
@@ -21,7 +20,7 @@
                         type="text" 
                         v-model="card.name"
                         :class="{ 'error': $v.card.name.$error }"
-                        placeholder="Title">
+                        :placeholder="name">
                     <div v-if="$v.card.name.$error" class="validation-error">
                         <p class="error" v-if="!$v.card.name.maxLength">The name is too long.</p>
                     </div>
@@ -30,7 +29,12 @@
                     <input 
                         type="text" 
                         v-model="card.url"
-                        placeholder="Url (Optional)">
+                        :placeholder="url">
+                </div>
+                <div 
+                    v-if="searchInput"
+                    class="field">
+                    <p> Closing Date: {{ cleanDate(searchInput.closingDate) }} </p>
                 </div>
             </div>
         </div>
@@ -61,6 +65,15 @@
         components: { Tiptap, CardImage },
 
         computed: {
+            url() {
+                return this.searchInput ? `/events/${this.searchInput.slug}` : `Url (Optional)`
+            },
+            name() {
+                return this.searchInput ? this.searchInput.name : `Event name`
+            },
+            thumbImagePath() {
+                return this.searchInput ? `/storage/${this.searchInput.thumbImagePath}` : null
+            }
 
         },
 
@@ -92,8 +105,8 @@
             },
             addCardData() {
                 this.formData.append('blurb', this.card.blurb);
-                this.formData.append('url', this.card.url);
-                this.formData.append('name', this.card.name);
+                this.card.url ? this.formData.append('url', this.card.url) : null;
+                this.card.name ? this.formData.append('name', this.card.name) : null;
                 this.card.event_id ? this.formData.append('event_id', this.card.event_id) : ''
                 this.card.thumbImagePath ? this.formData.append('thumbImagePath', this.card.thumbImagePath) : null;
             },
@@ -103,6 +116,8 @@
                     thumbImagePath: null,
                     listing_id: this.listing.id,
                     event_id: null,
+                    url: null,
+                    name: null
                 }
             },
             debounce(query) {
@@ -119,12 +134,12 @@
                 })
             },
             selectEvent() {
-                this.card.name = this.searchInput.name
                 this.card.event_id = this.searchInput.id
                 this.card.blurb = this.searchInput.tag_line
-                this.card.url = `/events/${this.searchInput.slug}`
-                this.card.thumbImagePath = this.searchInput.largeImagePath
             },
+            cleanDate(data) {
+                return this.$dayjs(data).format("dddd, MMMM D YYYY");
+            }
         },
 
         validations: {

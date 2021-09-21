@@ -2,23 +2,24 @@
     <div class="album four grid-image container">
         <div>
             <draggable
+                v-if="listings"
                 class="row"
-                v-model="featured"
+                v-model="listings"
                 draggable=".drag"
                 @start="isDragging=true" 
                 @end="debounce">
                 <div 
-                    v-for="(feature, index) in featured"
-                    :key="feature.featureable.id"
+                    v-for="(post, index) in listings"
+                    :key="post.id"
                     @mouseover="showDelete = index"
                     @mouseleave="showDelete = null"
                     :class="{ drag: draggable}"
                     class="col">
                     <div 
                         v-if="showDelete === index"
-                        class="delete">
+                        class="delete-btn">
                         <button 
-                            @click="deleteListing(feature.featureable)"
+                            @click="selectedModal=post"
                             class="btn-icon">
                             <svg>
                                 <use :xlink:href="`/storage/website-files/icons.svg#ri-close-line`" />
@@ -27,26 +28,26 @@
                     </div>
                     <div class="card">
                         <a 
-                            :href="url(feature)" 
+                            :href="`/communities/${community.slug}/${post.slug}/edit`" 
                             class="card-url" />
                         <ImageArray 
                             :community="community"
-                            :element="feature" />
+                            :element="post" />
                         <div class="card-body">
                             <p 
                                 v-if="title" 
                                 class="card-title">
-                                {{ feature.featureable.name }}
-                                <span v-if="feature.featureable.status === 'd'">(Not Live)</span>
+                                {{ post.name }}
+                                <span v-if="post.status === 'd'">(Not Live)</span>
                             </p>
                             <p 
                                 v-if="text"
                                 class="card-text">
-                                {{ feature.featureable.description }}
+                                {{ post.description }}
                             </p>
                             <a 
                                 v-if="edit"
-                                :href="`/communities/${community.slug}/${feature.featureable.slug}`">
+                                :href="`/communities/${community.slug}/${post.slug}`">
                                 <button>view</button>
                             </a>
                         </div>
@@ -54,17 +55,25 @@
                 </div>
             </draggable>
         </div>
+        <VueDeleteModal 
+            v-if="selectedModal"
+            :item="selectedModal"
+            :strict="true"
+            body="You are deleting the Listings. Please be sure you know what you are doing."
+            @close="selectedModal=null"
+            @ondelete="onDelete" />
     </div>
 </template>
 
 <script>
     import Draggable from "vuedraggable";
     import ImageArray from './vue-album-images.vue'
+    import VueDeleteModal from '../../../../components/modals/Vue-Modal-Delete'
     export default {
 
         props: ['loadlistings', 'title', 'text', 'link', 'community', 'edit', 'draggable', 'shelf'],
 
-        components: { Draggable, ImageArray },
+        components: { Draggable, ImageArray, VueDeleteModal },
 
         computed: {
         
@@ -74,25 +83,25 @@
             return {
                 isDisabled: false,
                 showDelete: null,
-                listings: this.loadlistings.map(feat => feat.featureable),
-                featured: this.loadlistings,
+                listings: this.loadlistings,
+                selectedModal: null,
             }
         },
 
         methods: {
-            async deleteListing(listing) {
-                await axios.delete(`/listings/${listing.slug}`)
+            async onDelete() {
+                await axios.delete(`/listings/${this.selectedModal.slug}`)
                 .then( res => { 
-                    console.log(res.data);
-                    // this.$emit('update', res.data);
+                    this.listings = this.listings.filter( list => list.id !== this.selectedModal.id)
+                    this.selectedModal = null
                 });
             },
-            async updateListOrder() {
-                var list = this.featured.map(function(item, index){
-                    item.pivot.order = index;
+            async updateShelfOrder() {
+                var list = this.listings.map(function(item, index){
+                    item.order = index;
                     return item;
                 })
-                await axios.put(`/featured/${this.featured[0].pivot.section_id}/reorder`, list)
+                await axios.put(`/listings/${this.community.slug}/order`, list)
                 .then( res => {
                     this.$emit('updated')
                 })
@@ -101,13 +110,9 @@
                 if (this.timeout) 
                     clearTimeout(this.timeout); 
                 this.timeout = setTimeout(() => {
-                    this.updateListOrder()
+                    this.updateShelfOrder()
                 }, 500); // delay
             },
-            url(element) {
-                if (element.type === 'e') { return `/events/${element.featureable.slug}` }
-                if (element.type === 'l') { return `/communities/${this.community.slug}/${element.featureable.slug}/edit` }
-            }
         },
 
     }

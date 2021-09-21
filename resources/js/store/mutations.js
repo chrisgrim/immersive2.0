@@ -22,7 +22,7 @@ let mutations = {
     },
     verifyModal (state, verifyModal) {
         state.verifyModal = verifyModal
-    }
+    },
 }
 
 export default mutations

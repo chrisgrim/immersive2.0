@@ -19,7 +19,7 @@ class CreateListingsTable extends Migration
             $table->string('name')->nullable();
             $table->string('blurb')->nullable();
             $table->foreignId('community_id');
-            $table->foreignId('section_id');
+            $table->foreignId('shelf_id');
             $table->foreignId('user_id');
             $table->string('largeImagePath')->nullable();
             $table->string('thumbImagePath')->nullable();

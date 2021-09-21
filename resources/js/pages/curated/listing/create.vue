@@ -29,14 +29,14 @@
                     </div>
                     <div class="field">
                         <v-select
-                            v-model="listing.section_id"
-                            :reduce="section => section.id"
-                            :options="sections"
-                            :class="{ 'error': $v.listing.section_id.$error }"
+                            v-model="listing.shelf_id"
+                            :reduce="shelf => shelf.id"
+                            :options="shelves"
+                            :class="{ 'error': $v.listing.shelf_id.$error }"
                             placeholder="Shelf"
                             label="name" />
-                        <div v-if="$v.listing.section_id.$error" class="validation-error">
-                            <p class="error" v-if="!$v.listing.section_id.required">Please select the shelf.</p>
+                        <div v-if="$v.listing.shelf_id.$error" class="validation-error">
+                            <p class="error" v-if="!$v.listing.shelf_id.required">Please select the shelf.</p>
                         </div>
                     </div>
                     <br>
@@ -72,7 +72,7 @@
     import { required, maxLength } from 'vuelidate/lib/validators';
     export default {
         
-        props: [ 'community', 'user', 'sections' ],
+        props: [ 'community', 'user', 'shelves' ],
 
         mixins: [formValidationMixin],
 
@@ -105,7 +105,7 @@
                     name: null,
                     blurb: null,
                     community_id: this.community.id,
-                    section_id: null,
+                    shelf_id: null,
                 }
             },
         },
@@ -120,7 +120,7 @@
                     required,
                     maxLength: maxLength(100)
                 },
-                section_id: {
+                shelf_id: {
                     required,
                 }
             },

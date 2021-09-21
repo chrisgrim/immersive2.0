@@ -78,7 +78,17 @@
                     Edit Events
                 </button>
             </a>
-            
+
+            <a 
+                v-if="admin" 
+                href="/admin/docks">
+                <button 
+                    :class="{active: active == 'docks'}" 
+                    class="admin-menu__item">
+                    Docks
+                </button>
+            </a>
+
             <a 
                 v-if="admin" 
                 href="/admin/boneyard">
@@ -249,6 +259,7 @@
                 let path = new URL(window.location.href).pathname;
                 path == '/categories/create' ? this.active = 'categories' : '';
                 path == '/genres/create' ? this.active = 'tags' : '';
+                path == '/admin/docks' ? this.active = 'docks' : '';
                 path == '/contactlevels/create' ? this.active = 'contact' : '';
                 path == '/remotelocations/create' ? this.active = 'remote' : '';
                 path == '/contentadvisories/create' ? this.active = 'content' : '';

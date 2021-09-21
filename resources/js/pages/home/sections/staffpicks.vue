@@ -1,14 +1,12 @@
 <template>
     <div>
-        <h2>Staff Picks</h2>
-        <p>Our experienced staff is dedicated to finding you the best shows and events available.</p>
-        <div>
+        <div class="flex align">
+            <h2>Staff Picks</h2>
             <a href="/staffpicks/current">
-                <button>
-                    See all
-                </button>
+                <button> See all </button>
             </a>
         </div>
+        <p>Our experienced staff is dedicated to finding you the best shows and events available.</p>
         <div class="album four image container">
             <div class="row">
                 <div 

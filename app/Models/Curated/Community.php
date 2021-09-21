@@ -5,14 +5,42 @@ namespace App\Models\Curated;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\ImageFile;
 use App\Models\User;
+use App\Models\Featured\Feature;
+use Laravel\Scout\Searchable;
+use ElasticScoutDriverPlus\QueryDsl;
 use App\Models\Featured\Section;
 use Illuminate\Database\Eloquent\Model;
 
 class Community extends Model
 {
     use HasFactory;
+    use QueryDsl;
+    use Searchable;
 
     protected $fillable = [ 'name', 'user_id', 'slug', 'blurb', 'thumbImagePath', 'largeImagePath', 'instagramHandle', 'twitterHandle', 'facebookHandle', 'patreon', 'status' ];
+
+    /**
+    * What events should be searchable for scout elastic search
+    *
+    * @return \Illuminate\Database\Eloquent\Relations\belongsTo
+    */
+    public function shouldBeSearchable()
+    {
+        return $this->status === 'p';
+    }
+
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array
+     */
+    public function toSearchableArray()
+    {
+        return [
+            'name' => $this->name,
+            'status' => $this->status,
+        ];
+    }
 
     /**
      * Delete any listings with the community
@@ -54,11 +82,19 @@ class Community extends Model
     }
 
     /**
-     * Get all of the post's comments.
+     * Returns community Shelves.
      */
-    public function sections()
+    public function shelves()
     {
-        return $this->morphMany(Section::class, 'container')->orderBy('order', 'ASC');
+        return $this->hasMany(Shelf::class)->orderBy('order', 'ASC');
+    }
+
+    /**
+     * Returns community Shelves.
+     */
+    public function limitedShelves()
+    {
+        return $this->hasMany(Shelf::class)->orderBy('order', 'ASC')->limit(3);
     }
 
     /**
@@ -77,10 +113,12 @@ class Community extends Model
         return $this->belongsToMany(User::class);
     }
 
-    public function notify() 
+    /**
+     * Get all of the listings featureds.
+     */
+    public function featured()
     {
-        //
+        return $this->morphOne(Feature::class, 'featureable');
     }
-
 
 }

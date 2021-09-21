@@ -61,9 +61,10 @@ class CommunityController extends Controller
      */
     public function show(Community $community)
     {
-        $sections = $community->sections()->with('publicFeatured.featureable')->get();
+        // $sections = $community->sections()->with('publicFeatured.featureable')->get();
+        $shelves = $community->shelves()->with('publicListingsWithCards')->limit(3)->get();
         $community->load('curators');
-        return view('communities.show', compact('community', 'sections'));
+        return view('communities.show', compact('community', 'shelves'));
     }
 
     /**
@@ -74,8 +75,9 @@ class CommunityController extends Controller
      */
     public function edit(Community $community)
     {
-        $sections = $community->sections()->with('featured')->get();
-        return view('communities.edit', compact('community', 'sections'));
+        $shelves = $community->shelves()->with('listingsWithCards')->get();
+        // $sections = $community->sections()->with('featured')->get();
+        return view('communities.edit', compact('community', 'shelves'));
     }
 
     /**

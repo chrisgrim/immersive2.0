@@ -129,7 +129,9 @@ iframe.youtube-iframe {
 /* ------------------------------------*\
   Title
 \*------------------------------------ */
-
+.lay-b .es__about.element {
+    padding: 1.5rem 2rem 2rem 2rem;
+}
 .es__title--category {
     text-transform: uppercase;
     font-size: 1.2rem;
@@ -146,7 +148,7 @@ iframe.youtube-iframe {
 }
 .es__title--tag {
     font-size: 1.6rem;
-    margin-bottom: 0.8rem;
+    margin: 1.2rem 0;
     display: block;
 }
 .es__title--rating p {
@@ -591,11 +593,6 @@ iframe.youtube-iframe {
   StaffPicks
 \*------------------------------------ */
 
-section.es__staffpick {
-    border: 1px solid #000000;
-    padding: 2rem;
-    border-radius: 1rem;
-}
 .es__staffpick--title {
     display: grid;
     grid-template-columns: 6rem 1fr;
@@ -793,10 +790,12 @@ button.helpful:hover {
     .es__header--image img {
         border-radius: 1rem;
     }
+    .lay-b .es__about.element {
+        padding: 1.5rem 0 2rem 0;
+    }
     .es__map .leaflet-top {
         top: -1.5rem;
     }
-
     .es__map .leaflet-control-zoom {
         position: absolute;
         top: 3rem;

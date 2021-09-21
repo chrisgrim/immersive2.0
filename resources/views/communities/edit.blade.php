@@ -17,15 +17,14 @@
 @endsection
 @section('content')
     <div id="bodyArea">
-
         @if ( session()->exists( 'submitted' ))
-            <vue-alert 
-            message="submitted">
-            </vue-alert>
+            <modal-wrapper :user= "{{auth()->user()}}" loadmessage="submitted"></modal-wrapper>
+        @else 
+            <modal-wrapper :user= "{{auth()->user()}}"></modal-wrapper>
         @endif
         <vue-community-edit
             :loadowner="{{$community->owner()->first()}}"
-            :loadsections="{{ $sections }}" 
+            :loadshelves="{{ $shelves }}" 
             :loadcommunity="{{ $community }}" 
             :user="{{ auth()->user() }}"/>
     </div>

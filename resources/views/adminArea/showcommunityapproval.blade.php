@@ -11,7 +11,7 @@
         <div class="com">
             <vue-community-show 
                 :owner="false"
-                :sections="{{ $sections }}" 
+                :shelves="{{ $shelves }}" 
                 :value="{{ $community }}"/>    
         </div>
         <div class="admin-approval__space">

@@ -65,12 +65,12 @@
         @if($staffpicks)
             <index 
                 :categories="{{$categories}}" 
-                :community="{{$community}}"
+                :dock="{{$dock}}"
                 :tags="{{$tags}}" 
                 :staffpicks="{{$staffpicks}}"/>
         @else
             <index 
-                :community="{{$community}}"
+                :dock="{{$dock}}"
                 :tags="{{$tags}}" 
                 :categories="{{$categories}}"/>
         @endif

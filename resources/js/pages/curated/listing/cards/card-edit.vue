@@ -6,20 +6,20 @@
             @mouseleave="hover = false"
             class="block">
 
-            <template v-if="card.thumbImagePath || onEdit && card.url">
+            <template v-if="hasImage || onEdit && card.url">
                 <CardImage
-                    :image="`/storage/${card.thumbImagePath}`"
+                    :image="`/storage/${hasImage}`"
                     @addImage="addImageSubmit" />
             </template>
 
-            <template v-if="card.name || cardBeforeEdit.name">
+            <template v-if="hasName || cardBeforeEdit.name">
                 <template v-if="onEdit">
                     <div class="field h3">
                         <input 
                             type="text" 
                             v-model="card.name"
                             :class="{ 'error': $v.card.name.$error }"
-                            placeholder="Name (optional)">
+                            :placeholder="hasName">
                         <div v-if="$v.card.name.$error" class="validation-error">
                             <p class="error" v-if="!$v.card.name.maxLength">The name is too long.</p>
                         </div>
@@ -29,19 +29,19 @@
                     <div 
                         @click="onEdit=true"
                         class="card-name">
-                        <h2>{{ card.name }}</h2>
+                        <h2>{{ hasName }}</h2>
                     </div>
                 </template>
             </template>
 
-            <template v-if="card.url || cardBeforeEdit.url">
+            <template v-if="hasUrl || cardBeforeEdit.url">
                 <template v-if="onEdit">
                     <div class="field h3">
                         <input 
                             type="text" 
                             v-model="card.url"
                             :class="{ 'error': $v.card.url.$error }"
-                            placeholder="Url">
+                            :placeholder="hasUrl">
                         <div v-if="$v.card.url.$error" class="validation-error">
                             <p class="error" v-if="!$v.card.url.maxLength">The url is too long.</p>
                         </div>
@@ -69,7 +69,7 @@
                     <div 
                         @click="onEdit=true"
                         class="card-blurb">
-                        <div v-html="card.blurb" />
+                        <p v-html="card.blurb" />
                     </div>
                 </template>
             </template>
@@ -110,7 +110,15 @@
         components: { Tiptap, CardImage },
 
         computed: {
-
+            hasImage() {
+                return this.card.event && !this.card.thumbImagePath ? this.card.event.thumbImagePath : this.card.thumbImagePath
+            },
+            hasName() {
+                return this.card.event && !this.card.name ? this.card.event.name : this.card.name
+            },
+            hasUrl() {
+                return this.card.event && !this.card.url ?`/events/${this.card.event.slug}` : this.card.url
+            }
         },
 
         data() {

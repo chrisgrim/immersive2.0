@@ -31,11 +31,11 @@
             <div class="li-listing">
                 <div 
                     class="shelves" 
-                    v-for="(section, index) in sectionsWithListings"
-                    :key="section.id">
+                    v-for="shelf in shelvesWithListings"
+                    :key="shelf.id">
                     <Shelf 
                         :community="community"
-                        :section="section" />
+                        :shelf="shelf" />
                 </div>
             </div>
             <div class="com-curators">
@@ -65,13 +65,13 @@
     import Shelf from './listing/shelves/shelf-show.vue'
     export default {
         
-        props: [ 'value', 'sections', 'owner' ],
+        props: [ 'value', 'shelves', 'owner' ],
 
         components: { Shelf },
 
         computed: {
-            sectionsWithListings() {
-                return this.sections.filter( section => section.public_featured.length)
+            shelvesWithListings() {
+                return this.shelves.filter( shelf => shelf.public_listings_with_cards.length)
             }
         },
 

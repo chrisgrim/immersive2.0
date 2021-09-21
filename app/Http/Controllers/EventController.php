@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Genre;
 use App\Models\Organizer;
 use App\Models\StaffPick;
+use App\Models\Featured\Dock;
 use App\Models\Curated\Community;
 use Session;
 use Carbon\Carbon;
@@ -48,15 +49,11 @@ class EventController extends Controller
             ->limit(4)
             ->get();
 
-        if ( Community::first()) {
-            $community = Community::find(1)->load('sections.publicFeatured');
-        } else {
-            $community = 'test';
-        }
+        $dock = Dock::find(1)->load('featured.featureable.limitedShelves.publicListingsWithCards');
 
         $categories = Category::all();
         $tags = Genre::where('admin', 1)->orderBy('rank', 'desc')->get();
-        return view('home.index', compact('categories', 'staffpicks', 'community', 'tags'));
+        return view('home.index', compact('categories', 'staffpicks', 'dock', 'tags'));
     }
 
     /**

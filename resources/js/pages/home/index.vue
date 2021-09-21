@@ -16,12 +16,12 @@
                 </div>
             </section>
 
-            <template v-if="community && community.name && sectionsWithListings[0]">
+            <template v-if="community && community.name && shelvesWithListings[0]">
                 <section class="section-a">
                     <div class="section-a__wrapper">
                         <TopShelf 
                             :community="community"
-                            :section="sectionsWithListings[0]" />
+                            :shelf="shelvesWithListings[0]" />
                     </div>
                 </section>
             </template>
@@ -38,6 +38,11 @@
                                     <div class="header-a__blurb">
                                         <p>{{ community.blurb }}</p>
                                     </div>
+                                    <a :href="`/communities/${community.slug}`">
+                                        <button>
+                                            Check it out
+                                        </button>
+                                    </a>
                                 </div>
                             </div>
                             <div class="header-a__image">
@@ -55,12 +60,12 @@
                 </section>
             </template>
 
-            <template v-if="community && community.name">
+            <template v-if="community && community.name && shelvesWithListings[1]">
                 <section class="section-a">
                     <div class="section-a__wrapper">
                         <BottomShelf 
                             :community="community"
-                            :section="sectionsWithListings[1]" />
+                            :shelf="shelvesWithListings[1]" />
                     </div>
                 </section>
             </template>
@@ -101,14 +106,17 @@
 
     export default {
 
-        props:['categories', 'staffpicks', 'community', 'tags'],
+        props:['categories', 'staffpicks', 'dock', 'tags'],
 
         components: { TopShelf, BottomShelf, Partners, StaffPicks, MobileSearchNav },
 
         computed: {
-            sectionsWithListings() {
-                return this.community && this.community.name ? this.community.sections.filter( section => section.public_featured.length) : ''
+            shelvesWithListings() {
+                return this.community && this.community.name ? this.community.limited_shelves.filter( shelf => shelf.public_listings_with_cards.length) : ''
             },
+            community() {
+                return this.dock.featured ? this.dock.featured[0].featureable: null
+            }
         },
 
         data() {

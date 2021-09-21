@@ -6,17 +6,16 @@ use ElasticAdapter\Indices\Settings;
 use ElasticMigrations\Facades\Index;
 use ElasticMigrations\MigrationInterface;
 
-final class CreateCategoriesIndex implements MigrationInterface
+final class CreateCommunitiesIndex implements MigrationInterface
 {
     /**
      * Run the migration.
      */
     public function up(): void
     {
-        Index::create('categories', function (Mapping $mapping, Settings $settings) {
+        Index::create('communities', function (Mapping $mapping, Settings $settings) {
             $mapping->text('name', ['analyzer' => 'rebuilt_english']);
-            $mapping->integer('rank');
-            $mapping->integer('priority');
+            $mapping->keyword('status');
             $settings->analysis([
                 'filter' => [
                     'english_stop' => [
@@ -53,6 +52,6 @@ final class CreateCategoriesIndex implements MigrationInterface
      */
     public function down(): void
     {
-        Index::dropIfExists('categories');
+        Index::dropIfExists('communities');
     }
 }

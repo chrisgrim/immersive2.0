@@ -43,14 +43,14 @@ class Community extends Model
     }
 
     /**
-     * Delete any listings with the community
+     * Delete any posts with the community
      */
     public static function boot() {
         parent::boot();
         self::deleting(function($community) { 
-            $community->listings()->each(function($listing) {
-                ImageFile::deletePreviousImages($listing);
-                $listing->delete();
+            $community->posts()->each(function($post) {
+                ImageFile::deletePreviousImages($post);
+                $post->delete();
             });
         });
     }
@@ -66,19 +66,19 @@ class Community extends Model
     }
 
     /**
-     * Get the listings for the community .
+     * Get the posts for the community .
      */
-    public function listings()
+    public function posts()
     {
-        return $this->hasMany(Listing::class)->orderBy('order', 'ASC');
+        return $this->hasMany(Post::class)->orderBy('order', 'ASC');
     }
 
     /**
-     * Returns limited listings for the community .
+     * Returns limited posts for the community .
      */
-    public function limitedListings()
+    public function limitedPosts()
     {
-        return $this->hasMany(Listing::class)->orderBy('order', 'ASC')->limit(3);
+        return $this->hasMany(Post::class)->orderBy('order', 'ASC')->limit(3);
     }
 
     /**
@@ -114,7 +114,7 @@ class Community extends Model
     }
 
     /**
-     * Get all of the listings featureds.
+     * Get all of the communities featureds.
      */
     public function featured()
     {

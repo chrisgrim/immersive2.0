@@ -15,7 +15,7 @@ class CreateCardsTable extends Migration
     {
         Schema::create('cards', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('listing_id');
+            $table->foreignId('post_id');
             $table->foreignId('event_id')->nullable();
             $table->string('name')->nullable();
             $table->mediumText('blurb')->nullable();

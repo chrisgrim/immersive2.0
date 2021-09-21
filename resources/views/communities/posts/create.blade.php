@@ -2,6 +2,7 @@
 
 @section('meta')
     <title>{{config('app.name')}}</title>
+    <link href="{{ mix('/assets/app-create.css') }}" rel="stylesheet">
     <link href="{{ mix('/assets/app-lite.css') }}" rel="stylesheet">
     <link href="{{ mix('/assets/app.css') }}" rel="stylesheet">
 @endsection 
@@ -17,20 +18,13 @@
 @section('content')
     <div id="bodyArea">
 
-        @guest
-            <vue-listing-show
-                :community="{{ $community }}" 
-                :owner="false"
-                :value="{{ $listing }}" />
-        @endguest
-
-        @auth
-            <vue-listing-show
-                :community="{{ $community }}" 
-                :owner="{{ $community->curators->contains('id', auth()->user()->id) ? 'true' : 'false' }}"
-                :value="{{ $listing }}" />
-        @endauth
-
+        @if ( session()->exists( 'submitted' ))
+            <modal-wrapper message="submitted"></modal-wrapper>
+        @endif
+        <vue-post-create 
+            :shelves="{{ $community->shelves }}"
+            :community="{{ $community }}"
+            :user="{{ auth()->user() }}"/>    
     </div>
 @endsection
 

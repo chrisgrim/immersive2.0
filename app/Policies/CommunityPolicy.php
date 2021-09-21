@@ -26,7 +26,7 @@ class CommunityPolicy
      * Determine whether the user can see the community.
      *
      * @param  \App\User  $user
-     * @param  \App\listing  $listing
+     * @param  \App\Community  $Community
      * @return mixed
      */
     public function preview(?User $user, Community $community)
@@ -44,7 +44,7 @@ class CommunityPolicy
      * Determine whether the user can see the community.
      *
      * @param  \App\User  $user
-     * @param  \App\listing  $listing
+     * @param  \App\community  $community
      * @return mixed
      */
     public function locked(?User $user, Community $community)

@@ -12,7 +12,7 @@ class Card extends Model
 {
     use HasFactory;
 
-    protected $fillable = [ 'name', 'blurb', 'url', 'thumbImagePath', 'order', 'listing_id', 'event_id' ];
+    protected $fillable = [ 'name', 'blurb', 'url', 'thumbImagePath', 'order', 'post_id', 'event_id' ];
 
     /**
     * The relations to eager load on every query. I am adding shows here because I need to filter by dates for the search
@@ -22,11 +22,11 @@ class Card extends Model
     protected $with = ['event'];
 
     /**
-     * Get the Collection that owns the Card.
+     * Get the post that owns the Card.
      */
-    public function listing()
+    public function post()
     {
-        return $this->belongsTo(Listing::class);
+        return $this->belongsTo(Post::class);
     }
 
     /**

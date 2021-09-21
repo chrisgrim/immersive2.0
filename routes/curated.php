@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::RESOURCE('communities', 'Curated\CommunityController');
-Route::RESOURCE('listings', 'Curated\ListingController');
+Route::RESOURCE('posts', 'Curated\PostController');
 Route::RESOURCE('cards', 'Curated\CardController');
 
 
@@ -27,17 +27,17 @@ Route::DELETE('/shelves/{shelf}', 'Curated\ShelfController@destroy')->middleware
 Route::GET('/shelves/{shelf}/paginate', 'Curated\ShelfController@paginate');
 
 
-// ----------   Listings -------
-Route::GET('/listings/{community}/create', 'Curated\ListingController@create')->middleware('can:update,community');
-Route::POST('/listings/{community}/store', 'Curated\ListingController@store')->middleware('can:update,community');
-Route::GET('/communities/{community}/{listing}', 'Curated\ListingController@show')->middleware('can:preview,listing');
-Route::GET('/communities/{community}/{listing}/edit', 'Curated\ListingController@edit')->middleware('can:update,listing');
-Route::PUT('/communities/{community}/{listing}/update', 'Curated\ListingController@update')->middleware('can:update,listing');
-Route::DELETE('/listings/{listing}', 'Curated\ListingController@destroy')->middleware('can:destroy,listing');
-Route::PUT('/listings/{community}/order', 'Curated\ListingController@order')->middleware('can:update,community');
+// ----------   Posts -------
+Route::GET('/posts/{community}/create', 'Curated\PostController@create')->middleware('can:update,community');
+Route::POST('/posts/{community}/store', 'Curated\PostController@store')->middleware('can:update,community');
+Route::GET('/communities/{community}/{post}', 'Curated\PostController@show')->middleware('can:preview,post');
+Route::GET('/communities/{community}/{post}/edit', 'Curated\PostController@edit')->middleware('can:update,post');
+Route::PUT('/communities/{community}/{post}/update', 'Curated\PostController@update')->middleware('can:update,post');
+Route::DELETE('/posts/{post}', 'Curated\PostController@destroy')->middleware('can:destroy,post');
+Route::PUT('/posts/{community}/order', 'Curated\PostController@order')->middleware('can:update,community');
 
 // ----------   Cards  -------
 Route::POST('/cards/{card}', 'Curated\CardController@update')->middleware('can:destroy,card');
-Route::POST('/cards/{listing}/create', 'Curated\CardController@store')->middleware('can:update,listing');
-Route::PUT('/cards/{listing}/order', 'Curated\CardController@order')->middleware('can:update,listing');
+Route::POST('/cards/{post}/create', 'Curated\CardController@store')->middleware('can:update,post');
+Route::PUT('/cards/{post}/order', 'Curated\CardController@order')->middleware('can:update,post');
 Route::DELETE('/cards/{card}', 'Curated\CardController@destroy')->middleware('can:destroy,card');

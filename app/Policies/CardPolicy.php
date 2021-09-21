@@ -19,7 +19,7 @@ class CardPolicy
      */
     public function update(User $user, Card $card)
     {
-        return $card->listing->community->curators->contains('id', $user->id) || $user->type == 'a' || $user->type == 'm';
+        return $card->post->community->curators->contains('id', $user->id) || $user->type == 'a' || $user->type == 'm';
     }
 
     /**
@@ -31,6 +31,6 @@ class CardPolicy
      */
     public function destroy(User $user, Card $card)
     {
-        return $card->listing->community->curators->contains('id', $user->id) || $user->type == 'a' || $user->type == 'm';
+        return $card->post->community->curators->contains('id', $user->id) || $user->type == 'a' || $user->type == 'm';
     }
 }

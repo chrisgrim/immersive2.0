@@ -43,7 +43,7 @@
     import { required, maxLength } from 'vuelidate/lib/validators';
     export default {
         
-        props: [ 'listing' ],
+        props: [ 'post' ],
 
         mixins: [formValidationMixin],
 
@@ -67,7 +67,7 @@
             async saveCard() {
                 if ( this.checkVuelidate()) { return }
                 this.addCardData();
-                await axios.post(`/card/${this.listing.slug}/create`, this.formData)
+                await axios.post(`/card/${this.post.slug}/create`, this.formData)
                 .then( res => {
                     this.$emit('update', res.data)
                 })
@@ -106,7 +106,7 @@
                     blurb: null,
                     url: null,
                     thumbImagePath: null,
-                    listing_id: this.listing.id,
+                    post_id: this.post.id,
                 }
             }
         },

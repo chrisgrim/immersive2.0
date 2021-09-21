@@ -62,30 +62,25 @@ class DockController extends Controller
     }
 
     /**
-     * Destroys an existing section
+     * Destroys an existing dock
      *
      * @param  array  $input
-     * @return \App\Models\Curated\Listing
+     * @return \App\Models\Curated\Dock
      */
-    public function destroy(Section $section)
+    public function destroy(Dock $dock)
     {
-        if (count($section->featured)) { return; }
-        $section->delete();
+        //
     }
 
     /**
-     * Update the order for sections
+     * Update the order for Docks
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function order(Request $request, Community $community)
     {
-        foreach ($request->all() as $list) {
-            Section::find($list['id'])->update([
-                'order' => $list['order'],
-            ]);
-        }
+        //
     }
 
     /**

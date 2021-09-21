@@ -18,10 +18,10 @@
 @import 'curated/create';
 @import 'curated/show';
 @import 'curated/edit';
-@import 'curated/listing/show';
-@import 'curated/listing/edit';
-@import 'curated/listing/index';
-@import 'curated/listing/create';
+@import 'curated/post/show';
+@import 'curated/post/edit';
+@import 'curated/post/index';
+@import 'curated/post/create';
 
 // organizer
 @import 'organizer/show';

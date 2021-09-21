@@ -2,27 +2,35 @@
     width: 100%;
     margin: initial;
 }
-.album .card-img.grid-image{
-    grid-template-columns: 1fr 0.5fr;
-}
 .grid-image .single {
     width: 100%;
     padding-top: 100%;
     position: relative;
     border-right: 1px solid white;
 }
-.grid-image .double {
-    width: 100%;
-    grid-template-rows: 1fr 1fr;
-    position: relative;
+.album .card-img.grid-image{
+    padding-top: 100%;
+    background: #dedede;
+}
+.grid-image .first img {
+    margin-left: -30%;
+    border-radius: 1rem;
+    border: 1px solid white;
+}
+.grid-image .second img {
+    margin-left: -15%;
+    border-radius: 1rem;
+    border: 1px solid white;
+}
+.grid-image .third img {
+    margin-left: 0%;
+    border-radius: 1rem;
+    border: 1px solid white;
 }
 .album .img {
     position: relative;
     height: 50%;
     background: #e6e6e6;
-}
-.grid-image .img.top {
-    border-bottom: 1px solid white;
 }
 .album .grid-image .card img {
     -o-object-fit: cover;

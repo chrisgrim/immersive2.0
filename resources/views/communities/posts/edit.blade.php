@@ -20,12 +20,12 @@
 
         @if ( session()->exists( 'submitted' ))
             <modal-wrapper :user= "{{auth()->user()}}" loadmessage="submitted"></modal-wrapper>
-        @else 
-        <vue-listing-edit
+        @endif 
+        <vue-post-edit
             :shelves="{{ $community->shelves }}"
             :community="{{ $community }}" 
             :owner="true"
-            :value="{{ $listing }}" 
+            :value="{{ $post }}" 
             :user="{{ auth()->user() }}"/>
     </div>
 @endsection

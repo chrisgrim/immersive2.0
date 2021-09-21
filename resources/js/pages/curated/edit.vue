@@ -1,5 +1,5 @@
 <template>
-    <div class="listing-index">
+    <div class="post-index">
         <div class="header-a">
             <div class="header-a__edit">
                 <a :href="`/communities/${community.slug}`">
@@ -41,7 +41,7 @@
             </div>
         </div>
         <div class="li-content">
-            <div class="li-listing">
+            <div class="li-post">
                 <div class="add">
                     <div class="add-button">
                         <button 
@@ -58,12 +58,12 @@
                                     <p>Add New</p>
                                 </div>
                                 <button 
-                                    class="add__listing"
+                                    class="add__post"
                                     @click="addShelf">
                                     Shelf
                                 </button>
-                                <a :href="`/listings/${community.slug}/create`">
-                                    Listing
+                                <a :href="`/posts/${community.slug}/create`">
+                                    Post
                                 </a>
                             </div>
                         </template>
@@ -80,7 +80,7 @@
                         @mouseleave="showDelete = null"
                         :key="shelf.id">
                         <div 
-                            v-if="showDelete === index && shelf.listings_with_cards.length < 1"
+                            v-if="showDelete === index && shelf.posts_with_cards.length < 1"
                             class="delete-btn">
                             <button 
                                 @click="deleteShelf(shelf)"
@@ -130,8 +130,8 @@
 
 <script>
     import CardImage from '../../components/Upload-Image.vue'
-    import Curators from './listing/curators.vue'
-    import Shelf from './listing/shelves/shelf-edit.vue'
+    import Curators from './posts/curators.vue'
+    import Shelf from './posts/shelves/shelf-edit.vue'
     import formValidationMixin from '../../mixins/form-validation-mixin'
     import { required, maxLength } from 'vuelidate/lib/validators';
     export default {
@@ -144,10 +144,10 @@
 
         computed: {
             getStatus() {
-                return listing => this.status(listing)
+                return post => this.status(post)
             },
             getStatusCircle() {
-                return listing => this.statusCircle(listing)
+                return post => this.statusCircle(post)
             },
         },
 
@@ -196,7 +196,6 @@
                     item.order = index;
                     return item;
                 })
-                console.log(list);
                 await axios.put(`/shelves/${this.community.slug}/order`, list)
                 .then( res => {
                     this.onUpdated();
@@ -204,20 +203,20 @@
             },
             async deleteShelf(shelf) {
                 if (this.shelves.length <= 1) { return alert('Communities must have at least one shelf') }
-                if (shelf.listings_with_cards.length) { return alert(`Can't delete shelf with posts`)}
+                if (shelf.posts_with_cards.length) { return alert(`Can't delete shelf with posts`)}
                 await axios.delete(`/shelves/${shelf.id}`)
                 .then( res => { 
                     this.shelves = res.data
                 });
                 this.$v.$reset();
             },
-            status(listing) {
-                if (listing.status === 'p') return 'live';
+            status(post) {
+                if (post.status === 'p') return 'live';
                 return 'draft'
             },
-            statusCircle(listing) {
-                if (listing.status === 'p') return `background: rgb(27, 187, 27)`;
-                if (listing.status === 'd') return `background: rgb(255 194 21)`;
+            statusCircle(post) {
+                if (post.status === 'p') return `background: rgb(27, 187, 27)`;
+                if (post.status === 'd') return `background: rgb(255 194 21)`;
             },
             addImage(image) {
                 this.formData.append('image', image);

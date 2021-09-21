@@ -6,31 +6,22 @@
         <div class="album three image container">
             <div class="row">
                 <div 
-                    v-for="listing in listings"
-                    :key="listing.id"
+                    v-for="post in posts"
+                    :key="post.id"
                     class="col">
                     <div class="card">
                         <a 
-                            :href="`/communities/${community.slug}/${listing.slug}`" 
+                            :href="`/communities/${community.slug}/${post.slug}`" 
                             class="card-url" />
-                        <div class="card-img single">
-                            <picture>
-                                <source 
-                                    type="image/webp" 
-                                    :srcset="`/storage/${listing.thumbImagePath}`"> 
-                                <img 
-                                    style="object-fit:cover" 
-                                    loading="lazy" 
-                                    :src="`/storage/${listing.thumbImagePath.slice(0, -4)}jpg`" 
-                                    :alt="`${listing.name}`">
-                            </picture>
-                        </div>
+                        <ImageArray 
+                            :community="community"
+                            :element="post" />
                         <div class="card-body">
                             <div class="name">
-                                <p>{{ listing.name }}</p>
+                                <p>{{ post.name }}</p>
                             </div>
                             <div class="blurb">
-                                <p>{{ listing.blurb }}</p>
+                                <p>{{ post.blurb }}</p>
                             </div>
                         </div>
                     </div>
@@ -41,18 +32,19 @@
 </template>
 
 <script>
+    import ImageArray from '../../curated/posts/shelves/vue-album-images.vue'
     export default {
         
         props: [ 'shelf', 'community'],
 
-        components: {  },
+        components: { ImageArray },
 
         computed: {
         },
 
         data() {
             return {
-                listings:this.shelf ? this.shelf.public_listings_with_cards : null,
+                posts:this.shelf ? this.shelf.public_posts_with_cards : null,
             }
         },
 

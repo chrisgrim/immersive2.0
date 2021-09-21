@@ -68,7 +68,7 @@
             },
 
             onEdit() {
-                this.redirect(`/index/${this.community.slug}/listing`)
+                this.redirect(`/index/${this.community.slug}/post`)
             },
 
             onBack() {

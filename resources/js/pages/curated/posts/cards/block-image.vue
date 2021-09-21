@@ -1,5 +1,5 @@
 <template>
-    <div class="listing-card edit">
+    <div class="post-card edit">
         <div class="header">
             <CardImage
                 @addImage="addImage" />
@@ -12,7 +12,7 @@
     import formValidationMixin from '../../../../mixins/form-validation-mixin'
     export default {
         
-        props: [ 'listing' ],
+        props: [ 'post' ],
 
         mixins: [formValidationMixin],
 
@@ -30,7 +30,7 @@
 
         methods: {
             async saveCard() {
-                await axios.post(`/cards/${this.listing.slug}/create`, this.formData)
+                await axios.post(`/cards/${this.post.slug}/create`, this.formData)
                 .then( res => {
                     this.$emit('update', res.data)
                 })

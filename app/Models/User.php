@@ -15,7 +15,7 @@ use Laravel\Cashier\Billable;
 use Illuminate\Support\Str;
 use App\Models\Events\EventRequest;
 use App\Models\Curated\Community;
-use App\Models\Curated\Listing;
+use App\Models\Curated\Post;
 use DB;
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -220,9 +220,9 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @return \Illuminate\Database\Eloquent\Relations\hasMany
      */
-    public function listings() 
+    public function posts() 
     {
-        return $this->hasMany(Listing::class);
+        return $this->hasMany(Post::class);
     }
 
     /**

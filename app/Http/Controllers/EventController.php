@@ -49,7 +49,7 @@ class EventController extends Controller
             ->limit(4)
             ->get();
 
-        $dock = Dock::find(1)->load('featured.featureable.limitedShelves.publicListingsWithCards');
+        $dock = Dock::find(1)->load('featured.featureable.limitedShelves.publicPostsWithCards');
 
         $categories = Category::all();
         $tags = Genre::where('admin', 1)->orderBy('rank', 'desc')->get();

@@ -53,9 +53,9 @@ Vue.component('vue-community-show', () => import(/* webpackChunkName: "assets/vc
 Vue.component('vue-community-create', () => import(/* webpackChunkName: "assets/vcc" */ './pages/curated/create.vue'));
 Vue.component('vue-community-edit', () => import(/* webpackChunkName: "assets/vce" */ './pages/curated/edit.vue'));
 
-Vue.component('vue-listing-show', () => import(/* webpackChunkName: "assets/vls" */ './pages/curated/listing/show.vue'));
-Vue.component('vue-listing-edit', () => import(/* webpackChunkName: "assets/vle" */ './pages/curated/listing/edit.vue'));
-Vue.component('vue-listing-create', () => import(/* webpackChunkName: "assets/vlc" */ './pages/curated/listing/create.vue'));
+Vue.component('vue-post-show', () => import(/* webpackChunkName: "assets/vps" */ './pages/curated/posts/show.vue'));
+Vue.component('vue-post-edit', () => import(/* webpackChunkName: "assets/vpe" */ './pages/curated/posts/edit.vue'));
+Vue.component('vue-post-create', () => import(/* webpackChunkName: "assets/vpc" */ './pages/curated/posts/create.vue'));
 
 Vue.component('vue-community-admin-approval', () => import(/* webpackChunkName: "assets/vcaa" */ './pages/adminArea/approve/community-approval-list.vue'));
 Vue.component('vue-community-approval-bar', () => import(/* webpackChunkName: "assets/vcab" */ './pages/adminArea/approve/community-approval-bar.vue'));

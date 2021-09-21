@@ -21,8 +21,10 @@
                         <p>{{ dock.name }}</p>
                     </div>
                     <div>
-                        <p>{{ dock.featured[0].featureable.name }}</p>
+                        <p v-if="dock.featured && dock.featured.length"> {{ dock.featured[0].featureable.name }} </p>
+                        <p v-else> Name Here </p>
                     </div>
+
                     <div>
                         <v-select 
                             v-model="feature"

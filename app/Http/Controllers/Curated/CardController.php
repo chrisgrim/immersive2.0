@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Curated;
 
 use Illuminate\Http\Request;
 use App\Models\Curated\Card;
-use App\Models\Curated\Listing;
+use App\Models\Curated\Post;
 use App\Http\Requests\CardStoreRequest;
 use App\Actions\Curated\CardActions;
 use Illuminate\Support\Facades\Storage;
@@ -23,9 +23,9 @@ class CardController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Listing $listing, CardActions $cardActions)
+    public function store(Request $request, Post $post, CardActions $cardActions)
     {
-        return $cardActions->create($request, $listing);
+        return $cardActions->create($request, $post);
     }
 
     /**
@@ -65,10 +65,10 @@ class CardController extends Controller
     /**
      * Order the specified resource.
      *
-     * @param  \App\Curated\Listing  $listing
+     * @param  \App\Curated\card  $card
      * @return \Illuminate\Http\Response
      */
-    public function order(Request $request, Listing $listing, CardActions $cardActions)
+    public function order(Request $request, Post $post, CardActions $cardActions)
     {
         $cardActions->reorder($request);
     }

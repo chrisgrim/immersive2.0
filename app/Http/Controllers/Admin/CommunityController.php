@@ -45,7 +45,7 @@ class CommunityController extends Controller
      */
     public function show(Community $community)
     {
-        $shelves = $community->shelves()->with('publicListingsWithCards')->get();
+        $shelves = $community->shelves()->with('publicPostsWithCards')->get();
         $community->load('curators');
         return view('adminArea.showcommunityapproval', compact('community', 'shelves'));
     }

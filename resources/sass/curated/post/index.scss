@@ -1,4 +1,4 @@
-.listing-index {
+.post-index {
     padding: 0 8rem 8rem 8rem;
     max-width: 1600px;
     margin: auto;
@@ -8,17 +8,17 @@
     grid-template-columns: 1fr 30rem;
     grid-gap: 2rem;
 }
-.li-content .add-new-listing-card {
+.li-content .add-new-post-card {
     margin-top: 0; 
 }
-.li-listing {
+.li-post {
     border-radius: 1rem;
     position: relative;
 }
-.li-listing h3 {
+.li-post h3 {
     margin-bottom: 2rem;
 }
-.li-listing .delete-btn {
+.li-post .delete-btn {
     position: absolute;
     right: -1rem;
     top: -1rem;

@@ -5,7 +5,7 @@ namespace App\Actions\Curated;
 use Illuminate\Http\Request;
 use App\Models\ImageFile;
 use App\Models\Curated\Card;
-use App\Models\Curated\Listing;
+use App\Models\Curated\Post;
 use App\Models\Curated\Shelf;
 use App\Models\Curated\Community;
 use Illuminate\Support\Str;
@@ -22,7 +22,7 @@ class ShelfActions
     public function create(Request $request, Community $community)
     {
         $community->shelves()->create(['user_id' => auth()->id()]);
-        return $community->shelves()->with('listingsWithCards')->get();
+        return $community->shelves()->with('postsWithCards')->get();
     }
 
     /**
@@ -34,23 +34,23 @@ class ShelfActions
     public function update(Request $request, Shelf $shelf)
     {
         $shelf->update(['name' => $request->name]);
-        return $shelf->load('listingsWithCards');
+        return $shelf->load('postsWithCards');
     }
 
     /**
      * Destroys an existing Shelf
      *
      * @param  array  $input
-     * @return \App\Models\Curated\Listing
+     * @return \App\Models\Curated\Shelf
      */
     public function destroy(Shelf $shelf)
     {
         $shelf->delete();
-        return $shelf->community->shelves()->with('listingsWithCards')->get();
+        return $shelf->community->shelves()->with('postsWithCards')->get();
     }
 
     /**
-     * Destroys an existing shelf
+     * Reorders an existing shelf
      *
      * @param  array  $input
      * @return \App\Models\Curated\Shelf

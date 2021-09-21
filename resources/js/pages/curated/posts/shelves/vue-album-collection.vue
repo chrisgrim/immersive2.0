@@ -2,14 +2,14 @@
     <div class="album four grid-image container">
         <div>
             <draggable
-                v-if="listings"
+                v-if="posts"
                 class="row"
-                v-model="listings"
+                v-model="posts"
                 draggable=".drag"
                 @start="isDragging=true" 
                 @end="debounce">
                 <div 
-                    v-for="(post, index) in listings"
+                    v-for="(post, index) in posts"
                     :key="post.id"
                     @mouseover="showDelete = index"
                     @mouseleave="showDelete = null"
@@ -59,7 +59,7 @@
             v-if="selectedModal"
             :item="selectedModal"
             :strict="true"
-            body="You are deleting the Listings. Please be sure you know what you are doing."
+            body="You are deleting the Post. Please be sure you know what you are doing."
             @close="selectedModal=null"
             @ondelete="onDelete" />
     </div>
@@ -71,7 +71,7 @@
     import VueDeleteModal from '../../../../components/modals/Vue-Modal-Delete'
     export default {
 
-        props: ['loadlistings', 'title', 'text', 'link', 'community', 'edit', 'draggable', 'shelf'],
+        props: ['loadposts', 'title', 'text', 'link', 'community', 'edit', 'draggable', 'shelf'],
 
         components: { Draggable, ImageArray, VueDeleteModal },
 
@@ -83,25 +83,25 @@
             return {
                 isDisabled: false,
                 showDelete: null,
-                listings: this.loadlistings,
+                posts: this.loadposts,
                 selectedModal: null,
             }
         },
 
         methods: {
             async onDelete() {
-                await axios.delete(`/listings/${this.selectedModal.slug}`)
+                await axios.delete(`/posts/${this.selectedModal.slug}`)
                 .then( res => { 
-                    this.listings = this.listings.filter( list => list.id !== this.selectedModal.id)
+                    this.posts = this.posts.filter( post => post.id !== this.selectedModal.id)
                     this.selectedModal = null
                 });
             },
             async updateShelfOrder() {
-                var list = this.listings.map(function(item, index){
+                var list = this.posts.map(function(item, index){
                     item.order = index;
                     return item;
                 })
-                await axios.put(`/listings/${this.community.slug}/order`, list)
+                await axios.put(`/posts/${this.community.slug}/order`, list)
                 .then( res => {
                     this.$emit('updated')
                 })

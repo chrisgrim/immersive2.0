@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Curated\Community;
 use App\Models\Featured\Section;
 use App\Models\Featured\Feature;
-use App\Models\Curated\Listing;
+use App\Models\Curated\Post;
 use App\Models\Event;
 use Illuminate\Validation\ValidationException;
 use App\Http\Requests\CommunityStoreRequest;
@@ -62,7 +62,7 @@ class CommunityController extends Controller
     public function show(Community $community)
     {
         // $sections = $community->sections()->with('publicFeatured.featureable')->get();
-        $shelves = $community->shelves()->with('publicListingsWithCards')->limit(3)->get();
+        $shelves = $community->shelves()->with('publicPostsWithCards')->limit(3)->get();
         $community->load('curators');
         return view('communities.show', compact('community', 'shelves'));
     }
@@ -75,7 +75,7 @@ class CommunityController extends Controller
      */
     public function edit(Community $community)
     {
-        $shelves = $community->shelves()->with('listingsWithCards')->get();
+        $shelves = $community->shelves()->with('postsWithCards')->get();
         // $sections = $community->sections()->with('featured')->get();
         return view('communities.edit', compact('community', 'shelves'));
     }

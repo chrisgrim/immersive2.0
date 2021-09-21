@@ -28,10 +28,10 @@
             </div>
         </div>
         <div class="com-intro">
-            <div class="li-listing">
+            <div class="li-post">
                 <div 
                     class="shelves" 
-                    v-for="shelf in shelvesWithListings"
+                    v-for="shelf in shelvesWithPosts"
                     :key="shelf.id">
                     <Shelf 
                         :community="community"
@@ -62,7 +62,7 @@
 </template>
 
 <script>
-    import Shelf from './listing/shelves/shelf-show.vue'
+    import Shelf from './posts/shelves/shelf-show.vue'
     export default {
         
         props: [ 'value', 'shelves', 'owner' ],
@@ -70,8 +70,8 @@
         components: { Shelf },
 
         computed: {
-            shelvesWithListings() {
-                return this.shelves.filter( shelf => shelf.public_listings_with_cards.length)
+            shelvesWithPosts() {
+                return this.shelves.filter( shelf => shelf.public_posts_with_cards.length)
             }
         },
 

@@ -39,8 +39,8 @@
             </div>
         </template>
         <div 
-            v-if="listings && listings.length"
-            class="listings">
+            v-if="posts && posts.length"
+            class="posts">
             <CollectionAlbum
                 @update="updateShelf"
                 :edit="true"
@@ -48,11 +48,11 @@
                 :draggable="true"
                 :shelf="shelf"
                 :community="community"
-                :loadlistings="listings" />
+                :loadposts="posts" />
             <div 
-                v-if="shelf.listings_with_cards.length > 4 && paginate.next_page_url"
+                v-if="shelf.posts_with_cards.length > 4 && paginate.next_page_url"
                 class="loadmore">
-                <button @click="fetchListings">
+                <button @click="fetchPosts">
                     Load More
                 </button>
             </div>
@@ -80,7 +80,7 @@
             return {
                 shelf: this.loadshelf,
                 shelfBeforeEdit: { ...this.loadshelf },
-                listings:this.loadshelf.listings_with_cards.slice(0,4),
+                posts:this.loadshelf.posts_with_cards.slice(0,4),
                 editName: false,
                 hover: false,
                 serverErrors: null,
@@ -101,11 +101,11 @@
                     this.onErrors(err);
                 });
             },
-            async fetchListings() {
+            async fetchPosts() {
                 await axios.get(this.paginate.next_page_url)
                 .then( res => {
                     this.paginate = res.data
-                    this.listings = this.listings.concat(res.data.data);
+                    this.posts = this.posts.concat(res.data.data);
                 })
             },
             resetShelf() {
@@ -114,7 +114,7 @@
             },
             updateShelf(value) {
                 this.shelf = value;
-                this.listings = value.listings_with_cards
+                this.posts = value.posts_with_cards
             },
             clear() {
                 this.editName = false;

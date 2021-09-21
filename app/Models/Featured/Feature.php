@@ -3,7 +3,7 @@
 namespace App\Models\Featured;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use App\Models\Curated\Listing;
+use App\Models\Curated\Post;
 use App\Models\Event;
 use Illuminate\Database\Eloquent\Model;
 

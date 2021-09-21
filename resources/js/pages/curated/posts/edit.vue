@@ -1,76 +1,76 @@
 <template>
-    <div class="listing-edit lay-a">
+    <div class="post-edit lay-a">
         <div class="breadcrumbs">
             <p v-if="owner">
-                <a :href="`/communities/${community.slug}/edit`">{{community.name}}</a> > {{listing.name}}
+                <a :href="`/communities/${community.slug}/edit`">{{community.name}}</a> > {{post.name}}
             </p>
             <p v-else>
-                <a :href="`/communities/${community.slug}`">{{community.name}}</a> > {{listing.name}}
+                <a :href="`/communities/${community.slug}`">{{community.name}}</a> > {{post.name}}
             </p>
         </div>
         <div class="wrapper">
             <div class="content">
-                <div class="edit-listing__body grid">
+                <div class="edit-post__body grid">
                     <template v-if="nameEdit">
                         <div class="field h3">
                             <input 
                                 type="text" 
-                                v-model="listing.name"
+                                v-model="post.name"
                                 @input="clearErrors"
-                                :class="{ 'error': $v.listing.name.$error }"
+                                :class="{ 'error': $v.post.name.$error }"
                                 placeholder="Collection Name">
-                            <div v-if="$v.listing.name.$error" class="validation-error">
-                                <p class="error" v-if="!$v.listing.name.required">Please add a name.</p>
-                                <p class="error" v-if="!$v.listing.name.maxLength">The name is too long.</p>
+                            <div v-if="$v.post.name.$error" class="validation-error">
+                                <p class="error" v-if="!$v.post.name.required">Please add a name.</p>
+                                <p class="error" v-if="!$v.post.name.maxLength">The name is too long.</p>
                             </div>
                         </div>
                         <div class="editor__footer borderless">
-                            <button class="outline" @click="resetListing">Cancel</button>
-                            <button @click="patchListing">Save</button>
+                            <button class="outline" @click="resetPost">Cancel</button>
+                            <button @click="patchPost">Save</button>
                         </div>
                     </template>
                     <template v-else>
                         <div 
                             @click="nameEdit=true"
-                            class="listing-name">
-                            <h2>{{ listing.name }}</h2>
+                            class="post-name">
+                            <h2>{{ post.name }}</h2>
                         </div>
                     </template>
                     <template v-if="tagEdit">
                         <div class="field">
                             <input 
                                 type="text"
-                                @blur="patchListing"
-                                v-model="listing.blurb"
-                                :class="{ 'error': $v.listing.blurb.$error }"
+                                @blur="patchPost"
+                                v-model="post.blurb"
+                                :class="{ 'error': $v.post.blurb.$error }"
                                 placeholder="Collection tag line">
-                            <div v-if="$v.listing.blurb.$error" class="validation-error">
-                                <p class="error" v-if="!$v.listing.blurb.maxLength">The name is too long.</p>
+                            <div v-if="$v.post.blurb.$error" class="validation-error">
+                                <p class="error" v-if="!$v.post.blurb.maxLength">The name is too long.</p>
                             </div>
                         </div>
                         <div class="editor__footer borderless">
-                            <button class="outline" @click="resetListing">Cancel</button>
-                            <button @click="patchListing">Save</button>
+                            <button class="outline" @click="resetPost">Cancel</button>
+                            <button @click="patchPost">Save</button>
                         </div>
                     </template>
                     <template v-else>
                         <div 
                             @click="tagEdit=true"
-                            class="listing-blurb blurb">
-                            <p>{{ listing.blurb }}</p>
+                            class="post-blurb blurb">
+                            <p>{{ post.blurb }}</p>
                         </div>
                     </template>
                     <draggable
-                        v-model="listing.cards" 
+                        v-model="post.cards" 
                         @start="isDragging=true" 
                         @end="debounce">
                         <div 
-                            v-for="card in listing.cards"
+                            v-for="card in post.cards"
                             :key="card.id"
-                            class="listing-card">
+                            class="post-card">
                             <div class="edit-block">
                                 <EditCard 
-                                    @update="updateListing"
+                                    @update="updatePost"
                                     :parent-card="card" />
                             </div>
                         </div>
@@ -78,18 +78,18 @@
                     <EventBlock 
                         v-if="blockType==='e'"
                         @cancel="clear"
-                        @update="patchListing"
-                        :listing="listing" />
+                        @update="patchPost"
+                        :post="post" />
                     <ImageBlock 
                         v-if="blockType==='i'"
-                        @update="patchListing"
-                        :listing="listing" />
+                        @update="patchPost"
+                        :post="post" />
                     <TextBlock 
                         v-if="blockType==='t'"
                         @cancel="clear"
-                        @update="patchListing"
-                        :listing="listing" />
-                    <div class="add-new-listing-card">
+                        @update="patchPost"
+                        :post="post" />
+                    <div class="add-new-post-card">
                         <button 
                             @click="showAddButtonOptions"
                             class="main">
@@ -137,7 +137,7 @@
                                 <div class="flex btw">
                                     <p>Visibility:</p>
                                     <button @click="updateStatus">
-                                        {{ listingStatus }}
+                                        {{ postStatus }}
                                     </button>
                                 </div>
                             </div>
@@ -154,15 +154,15 @@
                         <template v-if="showShelf">
                             <div class="component-body">
                                 <v-select
-                                    v-model="listing.shelf_id"
+                                    v-model="post.shelf_id"
                                     :reduce="shelf => shelf.id"
                                     :options="shelves"
-                                    :class="{ 'error': $v.listing.shelf_id.$error }"
+                                    :class="{ 'error': $v.post.shelf_id.$error }"
                                     placeholder="Shelf"
-                                    @input="patchListing"
+                                    @input="patchPost"
                                     label="name" />
-                                <div v-if="$v.listing.shelf_id.$error" class="validation-error">
-                                    <p class="error" v-if="!$v.listing.shelf_id.required">Please select the shelf.</p>
+                                <div v-if="$v.post.shelf_id.$error" class="validation-error">
+                                    <p class="error" v-if="!$v.post.shelf_id.required">Please select the shelf.</p>
                                 </div>
                             </div>
                         </template>
@@ -177,8 +177,8 @@
                         </button>
                         <template v-if="showFeatured">
                             <div class="component-body">
-                                <div class="listing-image">
-                                    <template v-if="listing.thumbImagePath">
+                                <div class="post-image">
+                                    <template v-if="post.thumbImagePath">
                                         <div class="delete">
                                             <button 
                                                 @click="deleteFeaturedImage"
@@ -192,7 +192,7 @@
                                     <CardImage
                                         :width="600"
                                         :height="300"
-                                        :image="`/storage/${listing.thumbImagePath}`"
+                                        :image="`/storage/${post.thumbImagePath}`"
                                         @addImage="addImage" />
                                 </div>
                             </div>
@@ -209,11 +209,11 @@
                         <template v-if="showOrder">
                             <div class="component-body">
                                 <draggable
-                                    v-model="listing.cards" 
+                                    v-model="post.cards" 
                                     @start="isDragging=true" 
                                     @end="debounce">
                                     <div 
-                                        v-for="(card) in listing.cards"
+                                        v-for="card in post.cards"
                                         :key="`list${card.id}`"
                                         class="nav-card__item">
                                         <span v-if="card.name">event</span>
@@ -265,16 +265,16 @@
         components: { CardImage, EventBlock, Draggable, EditCard, ImageBlock, TextBlock },
 
         computed: {
-            listingStatus() {
-                if (this.listing.status === 'p') { return 'live'}
+            postStatus() {
+                if (this.post.status === 'p') { return 'live'}
                 return 'Draft'
             }
         },
 
         data() {
             return {
-                listing: this.value,
-                listingBeforeEdit: { ...this.value },
+                post: this.value,
+                postBeforeEdit: { ...this.value },
                 onEdit: false,
                 buttonOptions:false,
                 blockType:null,
@@ -292,13 +292,13 @@
 
         methods: {
 
-            async patchListing() {
+            async patchPost() {
                 if ( this.checkVuelidate()) { return }
-                this.addListingData();
-                await axios.post(`/communities/${this.community.slug}/${this.listing.slug}/update`, this.formData)
+                this.addPostData();
+                await axios.post(`/communities/${this.community.slug}/${this.post.slug}/update`, this.formData)
                 .then( res => {
                     window.history.pushState(null, null, "/communities" + `/${this.community.slug}/${res.data.slug}/edit`);
-                    this.listing = res.data;
+                    this.post = res.data;
                     this.onUpdated();
                     this.clear();
                 })
@@ -308,50 +308,50 @@
             },
             async deleteFeaturedImage() {
                 this.formData.append('deleteImage', true)
-                this.patchListing()
+                this.patchPost()
             },
-            async updateListOrder() {
-                var list = this.listing.cards.map(function(item, index){
+            async updatePostOrder() {
+                var list = this.post.cards.map(function(item, index){
                     item.order = index;
                     return item;
                 })
-                await axios.put(`/cards/${this.listing.slug}/order`, list)
+                await axios.put(`/cards/${this.post.slug}/order`, list)
                 this.onUpdated();
             },
-            resetListing() {
-                this.listing = { ...this.listingBeforeEdit }
+            resetPost() {
+                this.post = { ...this.postBeforeEdit }
                 this.clear();
             },
             updateStatus() {
-                if (this.listing.status === 'd') {
-                    this.listing.status = 'p'
+                if (this.post.status === 'd') {
+                    this.post.status = 'p'
                 } else {
-                    this.listing.status = 'd'
+                    this.post.status = 'd'
                 }
-                this.patchListing();
+                this.patchPost();
             },
             debounce() {
                 if (this.timeout) 
                     clearTimeout(this.timeout); 
                 this.timeout = setTimeout(() => {
-                    this.updateListOrder();
+                    this.updatePostOrder();
                 }, 500); // delay
             },
             addImage(image) {
                 this.formData.append('image', image);
-                this.patchListing();
+                this.patchPost();
             },
-            addListingData() {
+            addPostData() {
                 this.formData.append('_method', 'PUT');
-                this.formData.append('name', this.listing.name);
-                this.formData.append('blurb', this.listing.blurb);
+                this.formData.append('name', this.post.name);
+                this.formData.append('blurb', this.post.blurb);
                 this.formData.append('community_id', this.community.id);
-                this.formData.append('shelf_id', this.listing.shelf_id);
-                this.formData.append('status', this.listing.status);
+                this.formData.append('shelf_id', this.post.shelf_id);
+                this.formData.append('status', this.post.status);
             },
-            updateListing(value) {
+            updatePost(value) {
                 this.clear()
-                this.listing = value
+                this.post = value
                 this.onUpdated();
             },
             onUpdated() {
@@ -380,7 +380,7 @@
         },
 
         validations: {
-            listing: {
+            post: {
                 name: {
                     required,
                     maxLength: maxLength(80),

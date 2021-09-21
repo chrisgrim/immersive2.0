@@ -1,5 +1,5 @@
 <template>
-    <div class="listing-card edit">
+    <div class="post-card edit">
         <tiptap 
             @cancel="cancelCard"
             @save="saveCard"
@@ -18,7 +18,7 @@
     import { required, maxLength } from 'vuelidate/lib/validators';
     export default {
         
-        props: [ 'listing' ],
+        props: [ 'post' ],
 
         mixins: [formValidationMixin],
 
@@ -37,7 +37,7 @@
         methods: {
             async saveCard() {
                 if ( this.checkVuelidate()) { return }
-                await axios.post(`/cards/${this.listing.slug}/create`, this.card)
+                await axios.post(`/cards/${this.post.slug}/create`, this.card)
                 .then( res => {
                     this.$emit('update', res.data)
                 })
@@ -48,7 +48,7 @@
             initializeCardObject() {
                 return {
                     blurb: null,
-                    listing_id: this.listing.id,
+                    post_id: this.post.id,
                 }
             },
         },

@@ -4,7 +4,7 @@ namespace App\Models\Featured;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Curated\Listing;
+use App\Models\Curated\Post;
 use App\Models\Event;
 
 class Section extends Model
@@ -35,7 +35,7 @@ class Section extends Model
     {
         return $this->belongsToMany(Feature::class)->withPivot('order')->orderBy('order', 'ASC')->whereHasMorph(
             'featureable',
-            [Listing::class, Event::class],
+            [Post::class, Event::class],
             function ($query) {
                 $query->where('status', 'like', 'p');
             }

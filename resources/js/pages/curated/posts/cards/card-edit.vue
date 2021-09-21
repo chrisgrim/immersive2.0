@@ -50,7 +50,15 @@
             </template>
 
             <template v-if="card.event_id">
-                <p>Closing Date: {{ cleanDate(card.event.closingDate) }}</p>
+                <div 
+                    style="display:flex;" 
+                    @click="onEdit=true">
+                    <p>Closing Date: {{ cleanDate(card.event.closingDate) }}</p>
+                    <template v-if="onEdit">
+                        <a target="_blank" :href="`/create/${card.event.slug}/shows`"><button>Edit dates</button></a>
+                        <a target="_blank" :href="`${card.event.ticketUrl}`"><button>Check Event</button></a>
+                    </template>
+                </div>
             </template>
 
             <template v-if="card.blurb">
@@ -90,7 +98,7 @@
             <div 
                 v-if="updated" 
                 class="updated-notifcation">
-                <p>Your listing has been updated.</p>
+                <p>Your Post has been updated.</p>
             </div>
         </transition>
     </div>

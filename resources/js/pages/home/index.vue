@@ -16,12 +16,12 @@
                 </div>
             </section>
 
-            <template v-if="community && community.name && shelvesWithListings[0]">
+            <template v-if="community && community.name && shelvesWithPosts[0]">
                 <section class="section-a">
                     <div class="section-a__wrapper">
                         <TopShelf 
                             :community="community"
-                            :shelf="shelvesWithListings[0]" />
+                            :shelf="shelvesWithPosts[0]" />
                     </div>
                 </section>
             </template>
@@ -60,12 +60,12 @@
                 </section>
             </template>
 
-            <template v-if="community && community.name && shelvesWithListings[1]">
+            <template v-if="community && community.name && shelvesWithPosts[1]">
                 <section class="section-a">
                     <div class="section-a__wrapper">
                         <BottomShelf 
                             :community="community"
-                            :shelf="shelvesWithListings[1]" />
+                            :shelf="shelvesWithPosts[1]" />
                     </div>
                 </section>
             </template>
@@ -111,11 +111,11 @@
         components: { TopShelf, BottomShelf, Partners, StaffPicks, MobileSearchNav },
 
         computed: {
-            shelvesWithListings() {
-                return this.community && this.community.name ? this.community.limited_shelves.filter( shelf => shelf.public_listings_with_cards.length) : ''
+            shelvesWithPosts() {
+                return this.community && this.community.name ? this.community.limited_shelves.filter( shelf => shelf.public_posts_with_cards.length) : ''
             },
             community() {
-                return this.dock.featured ? this.dock.featured[0].featureable: null
+                return this.dock.featured && this.dock.featured.length ? this.dock.featured[0].featureable: null
             }
         },
 

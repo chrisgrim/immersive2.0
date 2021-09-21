@@ -1,4 +1,4 @@
-.edit-listing__body {
+.edit-post__body {
     margin: 2rem 0;
 }
 .nav-card__item {
@@ -10,23 +10,23 @@
     line-height: 1.2rem;
     cursor: pointer;
 }
-.listing-edit .listing-image {
+.post-edit .post-image {
     height: 20rem;
     position: relative;
     border-radius: 1rem;
 }
-.listing-edit .listing-image .delete{
+.post-edit .post-image .delete{
     position: absolute;
     right: -1rem;
     top: -1rem;
     z-index: 1;
 }
-.listing-card.edit {
+.post-card.edit {
     margin: 2rem 0 0 0;
     position: relative;
     padding: 1rem;
 }
-.listing-card .default__image-upload-container {
+.post-card .default__image-upload-container {
     margin-bottom: 1rem;
 }
 .edit-block .delete {
@@ -34,7 +34,7 @@
     top: -1rem;
     right: -1rem;
 }
-.listing-card.edit .header {
+.post-card.edit .header {
     display: grid;
     grid-template-columns: 26rem 1fr;
 }
@@ -47,10 +47,10 @@
     border:1px solid black;
     border-radius: 1rem;
 }
-.li-listing .add {
+.li-post .add {
     position: relative;
 }
-.add-new-listing-card {
+.add-new-post-card {
     border: 1px solid #d4d4d4;
     padding: 1rem;
     border-radius: 1rem;
@@ -59,23 +59,23 @@
     display: flex;
     flex-direction: column;
 }
-.add-new-listing-card button.main {
+.add-new-post-card button.main {
     font-weight: 700;
     font-size: 1.4rem;
     display: flex;
     align-items: center;
     height: 4rem;
 }
-.add-new-listing-card button.main svg {
+.add-new-post-card button.main svg {
     width:15%;
     margin-left: 0.5rem;
 }
-.add-new-listing-card button {
+.add-new-post-card button {
     border: 0;
     font-size: 1.2rem;
     text-align: left;
 }
-.add-new-listing-card button.sub:hover {
+.add-new-post-card button.sub:hover {
     background: blue;
     color: white;
 }

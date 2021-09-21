@@ -29,11 +29,11 @@ class Shelf extends Model
     }
 
     /**
-     * Get the listings for the community .
+     * Get the posts for the shelf .
      */
-    public function listings()
+    public function posts()
     {
-        return $this->hasMany(Listing::class)->orderBy('order', 'ASC');
+        return $this->hasMany(Post::class)->orderBy('order', 'ASC');
     }
 
     /**
@@ -44,13 +44,13 @@ class Shelf extends Model
         return $this->belongsTo(Community::class);
     }
 
-    public function listingsWithCards()
+    public function postsWithCards()
     {
-        return $this->hasMany(Listing::class)->orderBy('order', 'ASC')->with('limitedCards')->limit(5);
+        return $this->hasMany(Post::class)->orderBy('order', 'ASC')->with('limitedCards')->limit(5);
     }
 
-    public function publicListingsWithCards()
+    public function publicPostsWithCards()
     {
-        return $this->hasMany(Listing::class)->where('status', 'p')->orderBy('order', 'ASC')->with('limitedCards')->limit(5);
+        return $this->hasMany(Post::class)->where('status', 'p')->orderBy('order', 'ASC')->with('limitedCards')->limit(5);
     }
 }

@@ -17,7 +17,31 @@
             </div>
         </template>
         <template v-else>
-            <div class="single">
+            <div class="third">
+                <picture v-if="cardImages && cardImages[2]">
+                    <source 
+                        type="image/webp" 
+                        :srcset="`/storage/${cardImages[2]}`"> 
+                    <img 
+                        style="object-fit:cover" 
+                        loading="lazy" 
+                        :src="`/storage/${cardImages[2].slice(2, -4)}jpg`" 
+                        :alt="`${element.name}`">
+                </picture>
+            </div>
+            <div class="second">
+                <picture v-if="cardImages && cardImages[1]">
+                    <source 
+                        type="image/webp" 
+                        :srcset="`/storage/${cardImages[1]}`"> 
+                    <img 
+                        style="object-fit:cover" 
+                        loading="lazy" 
+                        :src="`/storage/${cardImages[1].slice(0, -4)}jpg`" 
+                        :alt="`${element.name}`">
+                </picture>
+            </div>
+            <div class="first">
                 <picture v-if="cardImages && cardImages[0]">
                     <source 
                         type="image/webp" 
@@ -28,32 +52,6 @@
                         :src="`/storage/${cardImages[0].slice(0, -4)}jpg`" 
                         :alt="`${element.name}`">
                 </picture>
-            </div>
-            <div class="double">
-                <div class="img top">
-                    <picture v-if="cardImages && cardImages[1]">
-                        <source 
-                            type="image/webp" 
-                            :srcset="`/storage/${cardImages[1]}`"> 
-                        <img 
-                            style="object-fit:cover" 
-                            loading="lazy" 
-                            :src="`/storage/${cardImages[1].slice(0, -4)}jpg`" 
-                            :alt="`${element.name}`">
-                    </picture>
-                </div>
-                <div class="img">
-                    <picture v-if="cardImages && cardImages[2]">
-                        <source 
-                            type="image/webp" 
-                            :srcset="`/storage/${cardImages[2]}`"> 
-                        <img 
-                            style="object-fit:cover" 
-                            loading="lazy" 
-                            :src="`/storage/${cardImages[2].slice(0, -4)}jpg`" 
-                            :alt="`${element.name}`">
-                    </picture>
-                </div>
             </div>
         </template>
     </div>

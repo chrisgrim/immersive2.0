@@ -9,7 +9,7 @@
             :href="hasUrl"
             class="card-url" />
         <template v-if="hasImage">
-            <div class="listing__card-image">
+            <div class="post__card-image">
                 <picture>
                     <source 
                         type="image/webp" 

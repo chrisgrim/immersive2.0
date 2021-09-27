@@ -9,7 +9,7 @@ class Dock extends Model
 {
     use HasFactory;
 
-    protected $fillable = [ 'user_id', 'name' ];
+    protected $fillable = [ 'user_id', 'name', 'type' ];
 
     /**
      * Get the featured for the section .

@@ -110,7 +110,7 @@ input.form-control.flatpickr-input {
     display: none;
 }
 span.flatpickr-day.selected {
-    background: rgb(0, 166, 153);
+    background: rgb(0, 166, 153) !important;
     border-color: rgb(0, 166, 153) !important;
 }
 .flatpickr-calendar {

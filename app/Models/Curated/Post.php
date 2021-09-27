@@ -14,7 +14,7 @@ class Post extends Model
 
     protected $fillable = [ 'name', 'slug', 'blurb', 'thumbImagePath', 'shelf_id', 'largeImagePath', 'user_id', 'community_id', 'section_id', 'status', 'order' ];
 
-    protected $with = ['limitedCards'];
+    // protected $with = ['limitedCards'];
 
     /**
     * Sets the Route Key to slug instead of ID
@@ -76,11 +76,11 @@ class Post extends Model
     }
 
     /**
-     * Get the cards for the post .
+     * Get the cards for the collection .
      */
     public function limitedCards()
     {
-        return $this->hasMany(Card::class)->orderBy('order', 'ASC');
+        return $this->hasMany(Card::class)->orderBy('order', 'ASC')->limit(3);
     }
 
     /**

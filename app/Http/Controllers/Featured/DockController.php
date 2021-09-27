@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Featured;
 use Illuminate\Http\Request;
 use App\Models\Featured\Dock;
 use App\Models\Curated\Community;
+use App\Models\Curated\Shelf;
 use App\Models\Organizer;
 use App\Http\Controllers\Controller;
 
@@ -34,16 +35,30 @@ class DockController extends Controller
      */
     public function store(Request $request, Dock $dock)
     {
-        // Need to create different ones of these for different type of models
-        $community = Community::find($request->id);
-        if ($community->featured()->where('featureable_id', $community->id)->exists()) {
-            $featured = $community->featured()->where('featureable_id', $community->id)->first();
-        } else {
-            $featured = $community->featured()->create([
-                'user_id' => auth()->id(),
-                'type' => 'c'
-            ]);
+        if ($dock->type === 'c') {
+            $community = Community::find($request->id);
+            if ($community->featured()->where('featureable_id', $community->id)->exists()) {
+                $featured = $community->featured()->where('featureable_id', $community->id)->first();
+            } else {
+                $featured = $community->featured()->create([
+                    'user_id' => auth()->id(),
+                    'type' => 'c'
+                ]);
+            }
         }
+
+        if ($dock->type === 's') {
+            $shelf = Shelf::find($request->id);
+            if ($shelf->featured()->where('featureable_id', $shelf->id)->exists()) {
+                $featured = $shelf->featured()->where('featureable_id', $shelf->id)->first();
+            } else {
+                $featured = $shelf->featured()->create([
+                    'user_id' => auth()->id(),
+                    'type' => 's'
+                ]);
+            }
+        }
+
         $dock->featured()->detach();
         $featured->docks()->attach($dock->id);
         return Dock::all()->load('featured');
@@ -83,26 +98,4 @@ class DockController extends Controller
         //
     }
 
-    /**
-     * Update the order for sections
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function search(Request $request)
-    {
-        if ($request->keywords) {
-            $val = Community::multiMatchSearch()
-                ->fields(['name'])
-                ->query($request->keywords)
-                ->type('bool_prefix')
-                ->size(6)
-                ->execute();
-            return $val->matches();
-        }
-        $val = Community::matchAllSearch()
-        ->size(6)
-        ->execute();
-        return $val->matches();
-    }
 }

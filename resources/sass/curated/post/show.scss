@@ -70,7 +70,7 @@
     margin-bottom: 1rem;
 }
 .post-show .post__card-image {
-    height: 40rem;
+    height: 20rem;
     position: relative;
     border-radius: 1rem;
     overflow: hidden;
@@ -90,3 +90,10 @@
 .post-card .seperator .a.b{
     margin-right: 0px;
 }
+
+@media (min-width: 768px) {
+    .post-show .post__card-image {
+        height: 36rem;
+    }
+}
+

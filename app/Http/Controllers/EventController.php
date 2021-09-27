@@ -10,6 +10,7 @@ use App\Models\Organizer;
 use App\Models\StaffPick;
 use App\Models\Featured\Dock;
 use App\Models\Curated\Community;
+use App\Models\Curated\Shelf;
 use Session;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
@@ -48,12 +49,13 @@ class EventController extends Controller
             ->with('event.category')
             ->limit(4)
             ->get();
-
-        $dock = Dock::find(1)->load('featured.featureable.limitedShelves.publicPostsWithCards');
-
+        $dock1 = Dock::find(1)->load('featured.featureable.publishedPosts');
+        $dock2 = Dock::find(2)->load('featured.featureable.publishedPosts');
+        $dock3 = Dock::find(3)->load('featured.featureable');
+        $dock4 = Dock::find(4)->load('featured.featureable.publishedPosts');
         $categories = Category::all();
         $tags = Genre::where('admin', 1)->orderBy('rank', 'desc')->get();
-        return view('home.index', compact('categories', 'staffpicks', 'dock', 'tags'));
+        return view('home.index', compact('categories', 'staffpicks', 'dock1', 'dock2', 'dock3', 'dock4', 'tags'));
     }
 
     /**

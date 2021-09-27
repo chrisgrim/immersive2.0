@@ -12,6 +12,8 @@ use App\Models\Organizer;
 use App\Models\CityList;
 use App\Models\SearchData;
 use App\Models\RemoteLocation;
+use App\Models\Curated\Community;
+use App\Models\Curated\Shelf;
 use DB;
 use Carbon\Carbon;
 use Session;
@@ -181,4 +183,44 @@ class SearchController extends Controller
             return $organizers;
         };
     }    
+    /*
+     * Update the order for sections
+    */
+    public function community(Request $request)
+    {
+        if ($request->keywords) {
+            $val = Community::multiMatchSearch()
+                ->fields(['name'])
+                ->query($request->keywords)
+                ->type('bool_prefix')
+                ->size(6)
+                ->execute();
+            return $val->matches();
+        }
+        $val = Community::matchAllSearch()
+        ->size(6)
+        ->execute();
+        return $val->matches();
+    }
+    /*
+     * Update the order for sections
+    */
+    public function shelf(Request $request)
+    {
+        if ($request->keywords) {
+            $val = Shelf::multiMatchSearch()
+                ->fields(['name'])
+                ->query($request->keywords)
+                ->type('bool_prefix')
+                ->size(6)
+                ->load(['community'])
+                ->execute();
+            return $val->matches();
+        }
+        $val = Shelf::matchAllSearch()
+        ->size(6)
+        ->load(['community'])
+        ->execute();
+        return $val->matches();
+    }
 }

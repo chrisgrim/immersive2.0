@@ -28,6 +28,22 @@
     background-size: cover;
     background-position: center;
 }
+.c-youtube {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.c-youtube .inputs {
+    width: 65%;
+    display: inline-block;
+}
+.c-youtube .inputs #cover {
+    margin-bottom: 2rem;
+}
+.c-youtube .c-video {
+    width: 29%;
+    display: inline-block;
+}
 
 
 

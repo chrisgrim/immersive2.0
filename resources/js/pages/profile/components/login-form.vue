@@ -1,6 +1,7 @@
 <template>
     <div class="login-form">
         <div class="field">
+            <h4>Welcome to Everything Immersive.</h4>
             <input 
                 id="email" 
                 type="email" 

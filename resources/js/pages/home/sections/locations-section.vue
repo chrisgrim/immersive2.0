@@ -3,7 +3,7 @@
         <div class="name">
             <h2>{{ shelf.name }}</h2>
         </div>
-        <div class="album four image container">
+        <div class="album-b">
             <div class="row">
                 <div 
                     v-for="post in posts.slice(0,4)"
@@ -42,7 +42,7 @@
         data() {
             return {
                 posts:this.shelf ? this.shelf.published_posts : null,
-                community: this.shelf.community ? this.shelf.community : null,
+                community: this.shelf.community ? this.shelf.community : null
             }
         },
 

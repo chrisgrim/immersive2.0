@@ -80,7 +80,7 @@
                         @mouseleave="showDelete = null"
                         :key="shelf.id">
                         <div 
-                            v-if="showDelete === index && shelf.posts_with_cards.length < 1"
+                            v-if="showDelete === index && shelf.posts.length < 1"
                             class="delete-btn">
                             <button 
                                 @click="deleteShelf(shelf)"
@@ -203,7 +203,7 @@
             },
             async deleteShelf(shelf) {
                 if (this.shelves.length <= 1) { return alert('Communities must have at least one shelf') }
-                if (shelf.posts_with_cards.length) { return alert(`Can't delete shelf with posts`)}
+                if (shelf.posts.length) { return alert(`Can't delete shelf with posts`)}
                 await axios.delete(`/shelves/${shelf.id}`)
                 .then( res => { 
                     this.shelves = res.data

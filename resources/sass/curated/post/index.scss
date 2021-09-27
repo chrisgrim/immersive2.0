@@ -1,5 +1,5 @@
 .post-index {
-    padding: 0 8rem 8rem 8rem;
+    padding: 2rem;
     max-width: 1600px;
     margin: auto;
 }
@@ -30,4 +30,9 @@
     border-radius: 1rem;
     margin: 1rem 0;
     position: relative;
+}
+@media screen and (min-width: 1280px) {
+    .post-index {
+        padding: 0 8rem 8rem 8rem;
+    }
 }

@@ -46,16 +46,9 @@
                 :edit="true"
                 :title="true"
                 :draggable="true"
-                :shelf="shelf"
+                v-model="shelf"
                 :community="community"
                 :loadposts="posts" />
-            <div 
-                v-if="shelf.posts_with_cards.length > 4 && paginate.next_page_url"
-                class="loadmore">
-                <button @click="fetchPosts">
-                    Load More
-                </button>
-            </div>
         </div>
     </div>
 </template>
@@ -80,11 +73,10 @@
             return {
                 shelf: this.loadshelf,
                 shelfBeforeEdit: { ...this.loadshelf },
-                posts:this.loadshelf.posts_with_cards.slice(0,4),
+                posts:this.loadshelf.posts.data,
                 editName: false,
                 hover: false,
                 serverErrors: null,
-                paginate: this.generatePaginateObject(),
             }
         },
 
@@ -101,31 +93,18 @@
                     this.onErrors(err);
                 });
             },
-            async fetchPosts() {
-                await axios.get(this.paginate.next_page_url)
-                .then( res => {
-                    this.paginate = res.data
-                    this.posts = this.posts.concat(res.data.data);
-                })
-            },
             resetShelf() {
                 this.shelf = { ...this.shelfBeforeEdit }
                 this.clear();
             },
             updateShelf(value) {
                 this.shelf = value;
-                this.posts = value.posts_with_cards
+                this.posts = value.posts
             },
             clear() {
                 this.editName = false;
                 this.hover = false;
             },
-            generatePaginateObject() {
-                return {
-                    to: 2,
-                    next_page_url: `/shelves/${this.loadshelf.id}/paginate?page=2`
-                }
-            }
         },
 
         validations: {

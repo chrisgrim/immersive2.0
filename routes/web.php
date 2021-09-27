@@ -21,7 +21,6 @@ Route::RESOURCE('interactivelevels', 'Admin\InteractiveLevelController');
 
 // ----------   Docks -------
 Route::GET('/admin/docks', 'Featured\DockController@index');
-Route::GET('/admin/docks/search', 'Featured\DockController@search');
 Route::POST('/admin/docks/{dock}', 'Featured\DockController@store');
 
 // ----------   Search Page -------

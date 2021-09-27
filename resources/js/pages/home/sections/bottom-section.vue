@@ -6,7 +6,7 @@
         <div class="album three image container">
             <div class="row">
                 <div 
-                    v-for="post in posts"
+                    v-for="post in posts.slice(0,3)"
                     :key="post.id"
                     class="col">
                     <div class="card">
@@ -35,7 +35,7 @@
     import ImageArray from '../../curated/posts/shelves/vue-album-images.vue'
     export default {
         
-        props: [ 'shelf', 'community'],
+        props: [ 'shelf'],
 
         components: { ImageArray },
 
@@ -44,7 +44,8 @@
 
         data() {
             return {
-                posts:this.shelf ? this.shelf.public_posts_with_cards : null,
+                posts:this.shelf ? this.shelf.published_posts : null,
+                community: this.shelf.community ? this.shelf.community : null
             }
         },
 

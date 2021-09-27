@@ -4,8 +4,10 @@ namespace App\Models\Curated;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Featured\Feature;
 use Laravel\Scout\Searchable;
 use ElasticScoutDriverPlus\QueryDsl;
+
 
 class Shelf extends Model
 {
@@ -13,7 +15,9 @@ class Shelf extends Model
     use QueryDsl;
     use Searchable;
 
-    protected $fillable = [ 'name', 'order', 'user_id', 'community_id', 'parent_id'];
+    protected $fillable = [ 'name', 'order', 'user_id', 'community_id', 'parent_id', 'status'];
+
+    protected $with = ['community'];
 
     /**
      * Get the indexable data array for the model.
@@ -44,13 +48,19 @@ class Shelf extends Model
         return $this->belongsTo(Community::class);
     }
 
-    public function postsWithCards()
+    /**
+     * Show the posts that are published
+     */
+    public function publishedPosts()
     {
-        return $this->hasMany(Post::class)->orderBy('order', 'ASC')->with('limitedCards')->limit(5);
+        return $this->hasMany(Post::class)->orderBy('order', 'ASC')->where('status', 'p');
     }
 
-    public function publicPostsWithCards()
+    /**
+     * Get all of the communities featureds.
+     */
+    public function featured()
     {
-        return $this->hasMany(Post::class)->where('status', 'p')->orderBy('order', 'ASC')->with('limitedCards')->limit(5);
+        return $this->morphOne(Feature::class, 'featureable');
     }
 }

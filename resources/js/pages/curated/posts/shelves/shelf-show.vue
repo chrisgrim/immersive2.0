@@ -30,7 +30,7 @@
 
         data() {
             return {
-                posts:this.shelf.public_posts_with_cards,
+                posts:this.shelf.published_posts.data,
             }
         },
 

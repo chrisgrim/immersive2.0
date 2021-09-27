@@ -62,6 +62,13 @@
             body="You are deleting the Post. Please be sure you know what you are doing."
             @close="selectedModal=null"
             @ondelete="onDelete" />
+        <div 
+            v-if="value && value.posts && value.posts.next_page_url"
+            class="loadmore">
+            <button @click="fetchPosts">
+                Load More
+            </button>
+        </div>
     </div>
 </template>
 
@@ -71,12 +78,15 @@
     import VueDeleteModal from '../../../../components/modals/Vue-Modal-Delete'
     export default {
 
-        props: ['loadposts', 'title', 'text', 'link', 'community', 'edit', 'draggable', 'shelf'],
+        props: ['loadposts', 'title', 'text', 'link', 'community', 'edit', 'draggable', 'value'],
 
         components: { Draggable, ImageArray, VueDeleteModal },
 
         computed: {
-        
+            inputVal: {
+                get() { return this.value },
+                set(val) { this.$emit('input', val) }
+            },
         },
 
         data() {
@@ -104,6 +114,13 @@
                 await axios.put(`/posts/${this.community.slug}/order`, list)
                 .then( res => {
                     this.$emit('updated')
+                })
+            },
+            async fetchPosts() {
+                await axios.get(`/shelves/${this.value.id}/paginate?page=${this.value.posts.next_page_url.slice(-1)}`)
+                .then( res => {
+                    this.inputVal.posts = res.data
+                    this.posts = this.posts.concat(res.data.data);
                 })
             },
             debounce() {

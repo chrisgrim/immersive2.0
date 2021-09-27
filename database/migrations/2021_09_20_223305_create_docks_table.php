@@ -16,6 +16,7 @@ class CreateDocksTable extends Migration
         Schema::create('docks', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
+            $table->char('type', 1)->default('c');
             $table->string('name', 50)->nullable();
             $table->timestamps();
         });

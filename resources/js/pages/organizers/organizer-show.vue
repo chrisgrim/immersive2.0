@@ -48,7 +48,7 @@
                     <p>{{ organizer.description }}</p>
                 </div>
                 <template v-if="events">
-                    <div>
+                    <div class="listings">
                         <h4>Events by {{ organizer.name }}</h4>
                         <Album 
                             align="vertical"

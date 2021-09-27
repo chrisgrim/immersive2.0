@@ -7,44 +7,39 @@
 .header-a {
     position: relative;
     width: 100%;
-    display: grid;
-    grid-template-columns: .4fr .6fr;
-    height:45rem;
-    border-radius: 1rem;
+    display: block;
+    height: 100%;
+    border-radius: 2rem;
     overflow: hidden;
     margin-bottom: 2rem;
 }
 .header-a__content {
-    background: black;
-    padding: 0 6rem;
+    background: #1f1f1f;
     display: flex;
     align-items: center;
-}
-.header-a__name {
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
 }
 .header-a__name h2{
     color:white;
-    line-height: initial;
+    font-size: 3rem;
+    line-height: 3rem;
 }
 .header-a__blurb {
     height: 100%;
     margin-top: 1rem
 }
 .header-a__blurb p {
-    color:#989898;
+    color: #f1f1f1;
+    font-size: 1.7rem;
+    line-height: 2.2rem;
 }
 .header-a__image {
     position:relative;
     display:inline-block;
     background: #d4d4d4;
-}
-.header-a__image:after {
-  content:'';
-  position:absolute;
-  left:0; top:0;
-  width:100%; height:100%;
-  display:inline-block;
-  background: linear-gradient(to right, black 0%, rgb(255 255 255 / 0%) 50%);
+    width: 100%;
 }
 .header-a .default__image-upload {
     width: 100%;
@@ -76,6 +71,36 @@
     font-size: 1.5rem;
     font-weight: 500;
     margin-top: 2rem;
-    padding: 1.4rem 2rem;
+    padding: 1rem 1rem;
     border-radius: 1rem;
+}
+@media only screen and (min-width: 768px) {
+    .header-a {
+        display: grid;
+        grid-template-columns: .4fr .6fr;
+        height:45rem;
+        border-radius: 1rem;
+    }
+    .header-a__content {
+        padding: 0 6rem;
+        background: black;
+        justify-content: flex-start;
+        text-align: left;
+    }
+    .header-a__name h2{
+        font-size: 4.2rem;
+        line-height: 4.2rem;
+    }
+    .header-a__image:after {
+        content:'';
+        position:absolute;
+        left:0; top:0;
+        width:100%; height:100%;
+        display:inline-block;
+        background: linear-gradient(to right, black 0%, rgb(255 255 255 / 0%) 50%);
+    }
+    .header-a button {
+        margin-top: 4rem;
+        padding: 1.4rem 2rem;
+    }
 }

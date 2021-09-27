@@ -64,7 +64,7 @@
         </div>
 
         <template v-if="event.video">
-            <div class="video">
+            <div class="es__video">
                 <VideoPlayer
                     :alt="`${event.name} Immersive Event`"
                     :src="`https://www.youtube.com/embed/${event.video}`" />

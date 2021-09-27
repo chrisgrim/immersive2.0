@@ -1,5 +1,5 @@
 .community-show {
-    padding: 0 8rem 8rem 8rem;
+    padding: 2rem;
     max-width: 1600px;
     margin: auto;
 }
@@ -54,4 +54,9 @@
     border-width: 0px 5px;
     max-width: 25%;
     flex: 0 0 25%;
+}
+@media screen and (min-width: 1280px) {
+    .community-show {
+        padding: 0 8rem 8rem 8rem;
+    }
 }

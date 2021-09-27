@@ -52,7 +52,7 @@ class ShelfController extends Controller
      */
     public function paginate(Request $request, Shelf $shelf, ShelfActions $shelfActions)
     {
-        return $shelf->postsWithCards()->paginate(4);
+        return $shelf->posts()->paginate(4);
     }
 
     /**

@@ -19,6 +19,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::GET('search/events', 'Search\EventController@list');
+Route::GET('search/community', 'Search\SearchController@community');
+Route::GET('search/shelf', 'Search\SearchController@shelf');
 Route::GET('search/navbar', 'Search\SearchController@nav');
 Route::GET('search/navbar/location', 'Search\SearchController@location');
 Route::GET('search/navbar/events', 'Search\SearchController@events');

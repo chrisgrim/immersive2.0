@@ -1,6 +1,6 @@
 <template>
     <div class="login-popup modal">
-        <div class="wrapper">
+        <div class="wrapper" ref="wrapper">
             <div class="header">
                 <button @click="closeWindow">
                     <svg>
@@ -57,7 +57,7 @@
                 this.alerts = false;
             },
             onClickOutside(event) {
-                let arr =  this.$refs.myDiv;
+                let arr =  this.$refs.wrapper;
                 if (!arr || arr.contains(event.target)) return;
                 this.$emit('close', false);
             },

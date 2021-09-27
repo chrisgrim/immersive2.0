@@ -26,18 +26,20 @@
     display: flex;
     flex-direction: column;
     margin-bottom: 2rem;
+    padding: 1rem;
 }
 .organizer-show .social a {
     display: flex;
     align-items: center;
+    margin-bottom: 0.5rem;
 }
 .organizer-show .social a svg{
-    width: 3.7rem;
-    height: 3.7rem;
-    margin: 1.5rem;
+    width: 2.7rem;
+    height: 2.7rem;
+    margin: 0.5rem;
 }
 .organizer-show .social a span{
-    font-size: 2rem;
+    font-size: 1.4rem;
     font-weight: 500;
 }
 .organizer-show .intro {
@@ -51,7 +53,12 @@
 }
 .organizer-show .description {
     white-space: pre-line;
-    margin-bottom: 2rem
+    margin-bottom: 2rem;
+    padding: 0 2rem;
+}
+.organizer-show .listings {
+    margin-bottom: 2rem;
+    padding: 0 2rem;
 }
 .organizer-show .patreon {
     margin-bottom: 2rem
@@ -80,5 +87,11 @@
     .organizer-show .social a span{
         font-size: 1.5rem;
         font-weight: 400;
+    }
+    .organizer-show .description {
+        padding: 0;
+    }
+    .organizer-show .listings {
+        padding: 0;
     }
 }

@@ -18,7 +18,7 @@
                                     taggable
                                     :options="ticketOptionslive"
                                     :clearable="false"
-                                    placeholder="Ticket class (type here to create your own)"
+                                    placeholder="Ticket class (type here to create your own. Max 20 chars)"
                                     :create-option="ticket => ({ name: ticket, type: this.initializeTypeObject() })"
                                     @search:blur="active = null"
                                     @search:focus="active = 'newTicket'"
@@ -390,7 +390,7 @@ export default {
                 if (tic.type.type == 'f' || tic.type.type == 'p') {
                     tic.ticket_price = 0.00;
                 }
-                if (tic.name.length > 18) {
+                if (tic.name.length > 20) {
                     tic.errors.nameLength = true;
                         return false;
                 }

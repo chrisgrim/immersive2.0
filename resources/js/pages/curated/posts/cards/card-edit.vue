@@ -5,10 +5,11 @@
             @mouseover="hover = true"
             @mouseleave="hover = false"
             class="block">
-
             <template v-if="hasImage || onEdit && card.url">
                 <CardImage
-                    :image="`/storage/${hasImage}`"
+                    :image="`/storage/${image}`"
+                    :can-delete="card.type==='e'"
+                    @onDelete="hideImage"
                     @addImage="addImageSubmit" />
             </template>
 
@@ -119,7 +120,12 @@
 
         computed: {
             hasImage() {
-                return this.card.event && !this.card.thumbImagePath ? this.card.event.thumbImagePath : this.card.thumbImagePath
+                return this.card.type === 'i' || this.card.type === 'e' || this.card.type === 'h'
+            },
+            image() {
+                if (this.card.type === 'i') { return this.card.thumbImagePath }
+                if (this.card.type === 'h' || this.card.type === 't') { return }
+                return this.card.type === 'e' && !this.card.thumbImagePath ? this.card.event.thumbImagePath : this.card.thumbImagePath
             },
             hasName() {
                 return this.card.event && !this.card.name ? this.card.event.name : this.card.name
@@ -135,8 +141,6 @@
                 cardBeforeEdit: { ...this.parentCard },
                 onEdit: false,
                 formData: new FormData(),
-                image: null,
-                onAdd: null,
                 hover: false,
                 updated: false,
             }
@@ -165,19 +169,21 @@
                     this.$emit('update', res.data)
                 })
             },
+            hideImage() {
+                if (this.card.type === 'e') {
+                    this.formData.append('type', 'h')
+                    this.updateCard()
+                }
+            },
             appendCardData() {
                 this.formData.append('_method', 'PUT');
                 this.card.name ? this.formData.append('name', this.card.name) : null;
                 this.card.url ? this.formData.append('url', this.card.url) : null;
                 this.card.blurb ? this.formData.append('blurb', this.card.blurb) : null
             },
-            addImage(image, src) {
-                this.formData.append('image', image);
-                this.image = src;
-            },
             addImageSubmit(image, src) {
                 this.formData.append('image', image);
-                this.image = src;
+                this.card.type === 'h' ? this.formData.append('type', 'e') : null
                 this.updateCard();
             },
             clear() {

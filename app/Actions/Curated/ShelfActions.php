@@ -22,7 +22,9 @@ class ShelfActions
     public function create(Request $request, Community $community)
     {
         $community->shelves()->create(['user_id' => auth()->id()]);
-        return $community->shelves()->with('postsWithCards')->get();
+        return $community->shelves()->limit(3)->get()->map(function ($shelf, $key) {
+            return $shelf->setRelation('posts', $shelf->posts()->paginate(4));
+        });
     }
 
     /**
@@ -34,7 +36,7 @@ class ShelfActions
     public function update(Request $request, Shelf $shelf)
     {
         $shelf->update(['name' => $request->name]);
-        return $shelf->load('postsWithCards');
+        return $shelf->setRelation('posts', $shelf->posts()->paginate(4));
     }
 
     /**
@@ -46,7 +48,9 @@ class ShelfActions
     public function destroy(Shelf $shelf)
     {
         $shelf->delete();
-        return $shelf->community->shelves()->with('postsWithCards')->get();
+        return $shelf->community->shelves()->limit(3)->get()->map(function ($shelf, $key) {
+            return $shelf->setRelation('posts', $shelf->posts()->paginate(4));
+        });
     }
 
     /**

@@ -36,3 +36,9 @@
 .default__image-upload-container .hoverImage p{
     color: white;
 }
+.default__image-upload-container .delete-btn {
+    position: absolute;
+    right: -1rem;
+    top: -1rem;
+    z-index: 5;
+}

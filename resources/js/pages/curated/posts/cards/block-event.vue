@@ -107,6 +107,7 @@
                 this.formData.append('blurb', this.card.blurb);
                 this.card.url ? this.formData.append('url', this.card.url) : null;
                 this.card.name ? this.formData.append('name', this.card.name) : null;
+                this.card.type ? this.formData.append('type', this.card.type) : null;
                 this.card.event_id ? this.formData.append('event_id', this.card.event_id) : ''
                 this.card.thumbImagePath ? this.formData.append('thumbImagePath', this.card.thumbImagePath) : null;
             },
@@ -117,7 +118,8 @@
                     post_id: this.post.id,
                     event_id: null,
                     url: null,
-                    name: null
+                    name: null,
+                    type: 'e'
                 }
             },
             debounce(query) {

@@ -49,6 +49,7 @@
                 return {
                     blurb: null,
                     post_id: this.post.id,
+                    type: 't'
                 }
             },
         },

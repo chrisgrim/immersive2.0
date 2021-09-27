@@ -24,6 +24,7 @@ class CardActions
             'url' => $request->url ? $request->url : null,
             'event_id' => $request->event_id ? $request->event_id : null,
             'post_id' => $post->id,
+            'type' => $request->type ? $request->type : 'b',
             'order' => $post->cards()->exists() ? $post->cards->last()->order + 1 : 0
         ]);
 

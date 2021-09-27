@@ -37,6 +37,7 @@
             },
             addImage(image) {
                 this.formData.append('image', image);
+                this.formData.append('type', 'i');
                 this.saveCard();
             },
         },

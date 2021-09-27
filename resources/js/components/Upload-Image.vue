@@ -4,6 +4,17 @@
         @mouseleave="overImage = false"
         :class="{ hoverImage: overImage }"
         class="default__image-upload-container">
+        <template v-if="canDelete && overImage">
+            <div class="delete-btn">
+                <button 
+                    @click="onDelete"
+                    class="btn-icon">
+                    <svg>
+                        <use :xlink:href="`/storage/website-files/icons.svg#ri-close-line`" />
+                    </svg>
+                </button>
+            </div>
+        </template>
         <!-- <template v-if="hover">
             <div class="hover">
                 <svg>
@@ -67,6 +78,10 @@
             text: {
                 type: String,
                 default: null
+            },
+            canDelete: {
+                type: Boolean,
+                default: false,
             }
         },
 
@@ -97,7 +112,9 @@
                 if (this.$v.$invalid) { return }
                 this.$emit('addImage', this.imageFile.file, this.imageFile.src)
             },
-
+            onDelete() {
+                this.$emit('onDelete')
+            },
             onToggle() {
                 this.loading = !this.loading;
                 this.disabled = !this.disabled;

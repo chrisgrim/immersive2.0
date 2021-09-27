@@ -12,6 +12,9 @@
     overflow: visible;
     width: 100%;
     margin: 2rem -0.8rem 0 -0.8rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 2rem;
 }
 .album-b .col {
     width: 80%;
@@ -21,10 +24,11 @@
     display: inline-block;
 }
 .album-b .card {
-    width: 100%;
-    display: flex;
+    width: 70vw;
+    display: grid;
     align-items: center;
     position: relative;
+    grid-template-columns: 7rem 1fr
 }
 .album-b .card-img {
     height: 7rem;
@@ -48,8 +52,17 @@
     font-size: 1.7rem;
 }
 
-@media screen and (min-width: 1280px) {
+@media screen and (min-width: 768px) {
+    .album-b .card {
+        width:100%;
+    }
+}
+
+@media screen and (min-width: 1128px) {
     .album-b .col {
         width: 25%;
+    }
+    .album-b .row {
+        display: inline-block;
     }
 }

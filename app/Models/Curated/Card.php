@@ -12,7 +12,7 @@ class Card extends Model
 {
     use HasFactory;
 
-    protected $fillable = [ 'name', 'blurb', 'url', 'thumbImagePath', 'order', 'post_id', 'event_id' ];
+    protected $fillable = [ 'name', 'blurb', 'url', 'thumbImagePath', 'order', 'post_id', 'event_id', 'type' ];
 
     /**
     * The relations to eager load on every query. I am adding shows here because I need to filter by dates for the search

@@ -80,7 +80,7 @@
                         @mouseleave="showDelete = null"
                         :key="shelf.id">
                         <div 
-                            v-if="showDelete === index && shelf.posts.length < 1"
+                            v-if="showDelete === index && shelf.posts.data.length < 1"
                             class="delete-btn">
                             <button 
                                 @click="deleteShelf(shelf)"

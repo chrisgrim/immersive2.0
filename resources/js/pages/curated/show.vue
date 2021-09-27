@@ -71,6 +71,7 @@
 
         computed: {
             shelvesWithPosts() {
+                if (!this.shelves[0].published_posts.data) { return }
                 return this.shelves.filter( shelf => shelf.published_posts.data.length)
             }
         },

@@ -178,20 +178,11 @@
                         <template v-if="showFeatured">
                             <div class="component-body">
                                 <div class="post-image">
-                                    <template v-if="post.thumbImagePath">
-                                        <div class="delete">
-                                            <button 
-                                                @click="deleteFeaturedImage"
-                                                class="icon">
-                                                <svg>
-                                                    <use :xlink:href="`/storage/website-files/icons.svg#ri-close-line`" />
-                                                </svg>
-                                            </button>
-                                        </div>
-                                    </template>
                                     <CardImage
                                         :width="600"
                                         :height="300"
+                                        @onDelete="deleteFeaturedImage"
+                                        :can-delete="true"
                                         :image="`/storage/${post.thumbImagePath}`"
                                         @addImage="addImage" />
                                 </div>

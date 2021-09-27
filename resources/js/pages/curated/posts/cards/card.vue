@@ -58,7 +58,9 @@
 
         computed: {
             hasImage() {
-                return this.card.event && !this.card.thumbImagePath ? this.card.event.thumbImagePath : this.card.thumbImagePath
+                if (this.card.type === 'i') { return this.card.thumbImagePath }
+                if (this.card.type === 'h' || this.card.type === 't') { return }
+                return this.card.type === 'e' && !this.card.thumbImagePath ? this.card.event.thumbImagePath : this.card.thumbImagePath
             },
             hasName() {
                 return this.card.event && !this.card.name ? this.card.event.name : this.card.name

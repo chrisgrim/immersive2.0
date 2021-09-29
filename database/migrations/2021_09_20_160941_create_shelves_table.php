@@ -19,6 +19,7 @@ class CreateShelvesTable extends Migration
             $table->foreignId('user_id');
             $table->integer('parent_id')->unsigned()->nullable();
             $table->string('name', 50)->nullable();
+            $table->string('blurb')->nullable();
             $table->char('status', 1)->default('d');
             $table->integer('order')->unsigned()->default(0);
             $table->timestamps();

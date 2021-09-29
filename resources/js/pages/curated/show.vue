@@ -1,5 +1,10 @@
 <template>
     <div class="community-show">
+        <div class="breadcrumbs">
+            <p>
+                <a :href="`/`">Everything Immersive</a> > {{ community.name }} Community
+            </p>
+        </div>
         <div class="header-a">
             <div v-if="owner" class="header-a__edit">
                 <a :href="`/communities/${community.slug}/edit`">
@@ -38,23 +43,29 @@
                         :shelf="shelf" />
                 </div>
             </div>
-            <div class="com-curators">
-                <h4>Meet your curators</h4>
-                <div 
-                    v-for="curator in community.curators"
-                    :key="curator.id"
-                    class="curator">
-                    <template v-if="curator && curator.thumbImagePath">
-                        <picture>
-                            <source 
-                                type="image/webp" 
-                                :srcset="`/storage/${curator.thumbImagePath}`"> 
-                            <img 
-                                :src="`/storage/${curator.thumbImagePath.slice(0, -4)}`" 
-                                :alt="`${curator.name} Community`">
-                        </picture>
-                    </template>
-                    {{ curator.name }}
+            <div class="sidebar">
+                <div class="com-curators">
+                    <h4>Meet your curators</h4>
+                    <div 
+                        v-for="curator in community.curators"
+                        :key="curator.id"
+                        class="curator">
+                        <template v-if="curator && curator.thumbImagePath">
+                            <picture>
+                                <source 
+                                    type="image/webp" 
+                                    :srcset="`/storage/${curator.thumbImagePath}`"> 
+                                <img 
+                                    :src="`/storage/${curator.thumbImagePath.slice(0, -4)}`" 
+                                    :alt="`${curator.name} Community`">
+                            </picture>
+                        </template>
+                        <p>{{ curator.name }}</p>
+                    </div>
+                </div>
+                <h4>About {{ value.name }}</h4>
+                <div class="com-description">
+                    <p> {{value.description}} </p>
                 </div>
             </div>
         </div>

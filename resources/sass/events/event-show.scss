@@ -183,6 +183,7 @@ iframe.youtube-iframe {
     position: absolute;
     left: -3rem;
     top: -3.5rem;
+    transform: rotate(58deg);
 }
 .es__description img {
     width: 5rem;
@@ -226,7 +227,7 @@ iframe.youtube-iframe {
     width: 100%;
     border: 1px solid #ccbebe;
     border-radius: 1rem;
-    background: #ececec;
+    background: #f5f5f5;
     padding: 2rem;
     max-width: 45rem;
 }
@@ -245,11 +246,14 @@ iframe.youtube-iframe {
     padding-top: 2rem;
     padding-bottom: 1rem;
 }
+.es__details .first h3 {
+    padding-top: 0rem;
+}
 .es__details p {
     font-size: 1.5rem;
 }
 .es__details ul {
-    margin-left: 2rem;
+    margin-left: 4rem;
 }
 .es__tags--element {
     display: inline-block;
@@ -292,24 +296,22 @@ iframe.youtube-iframe {
     display: none;
 }
 .es__tickets--title {
-    padding: 2rem;
+    padding: 1rem;
     border-bottom: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 .es__tickets--title h4 {
-    text-align: center;
     font-size: 1.5rem;
     font-weight: 800;
 }
 .es__tickets--title button {
-    position: absolute;
     padding: 0;
     border: 0;
     z-index: 10;
-    width: 4.5rem;
-    height: 4.5rem;
-    top: 1rem;
-    left: 2rem;
-
+    width: 3.5rem;
+    height: 3.5rem;
 }
 .es__tickets--title path {
     fill: black !important;
@@ -332,7 +334,7 @@ iframe.youtube-iframe {
 }
 .es__ticket--element {
     border-bottom: 1px solid #DDDDDD;
-    padding: 3rem 2rem;
+    padding: 2rem 1rem;
 }
 .es__ticket--element:last-child {
     border-bottom: 0;
@@ -396,6 +398,8 @@ iframe.youtube-iframe {
     z-index: 100;
     position: relative;
     margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
 }
 .es__dates--body {
     border: 1px solid #DDDDDD;
@@ -405,6 +409,8 @@ iframe.youtube-iframe {
     text-align: left;
     z-index: 100;
     position: relative;
+    display: flex;
+    flex-direction: column;
 }
 .es__dates-button:hover {
     background: black;
@@ -520,11 +526,11 @@ iframe.youtube-iframe {
 .es__week--day.active h4 {
     color: white;
 }
-.es__week--days {
+/*.es__week--days {
     padding: 1rem 0;
-}
+}*/
 .es__dates--description {
-    padding-bottom: 2rem;
+    padding-bottom: 0.4rem 0;
     overflow: hidden;
 }
 .es__dates--description p {
@@ -593,6 +599,17 @@ iframe.youtube-iframe {
 .es__organizer--rating p {
     font-size:1.4rem;
 }
+/* ------------------------------------*\
+  Reviews
+\*------------------------------------ */
+
+.es__reviews a {
+    display: flex;
+    align-items: center;
+}
+.event-show-review__right--name {
+    margin-left: 1rem;
+}
 
 /* ------------------------------------*\
   StaffPicks
@@ -601,7 +618,6 @@ iframe.youtube-iframe {
 .es__staffpick--title {
     display: grid;
     grid-template-columns: 6rem 1fr;
-    padding-bottom: 2rem;
 }
 .es__staffpick--title img {
     width: 5rem;
@@ -783,15 +799,7 @@ button.helpful:hover {
 }
 
 
-
-
-
-
-
 @media (min-width: 768px) {
-    .es__description p {
-        margin-top: 2rem;
-    }
     .es__header--image img {
         border-radius: 1rem;
     }

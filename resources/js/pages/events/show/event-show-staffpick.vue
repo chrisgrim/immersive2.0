@@ -18,6 +18,7 @@
         </div>
         <div class="es__staffpick--description">
             <ShowMore 
+                :blockquote="true"
                 :text="event.staffpick.comments"
                 :limit="100" />
         </div>

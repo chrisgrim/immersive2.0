@@ -17,7 +17,7 @@ class Community extends Model
     use QueryDsl;
     use Searchable;
 
-    protected $fillable = [ 'name', 'user_id', 'slug', 'blurb', 'thumbImagePath', 'largeImagePath', 'instagramHandle', 'twitterHandle', 'facebookHandle', 'patreon', 'status' ];
+    protected $fillable = [ 'name', 'user_id', 'slug', 'blurb', 'description', 'thumbImagePath', 'largeImagePath', 'instagramHandle', 'twitterHandle', 'facebookHandle', 'patreon', 'status' ];
 
     /**
     * What events should be searchable for scout elastic search

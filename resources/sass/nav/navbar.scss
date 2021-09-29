@@ -40,7 +40,7 @@
     transition: 150ms opacity ease;
 }
 .nav::after {
-    /*box-shadow: rgb(0 0 0 / 8%) 0px 1px 12px;*/
+    box-shadow: rgb(0 0 0 / 8%) 0px 1px 12px;
     -webkit-transform-origin: 50% 0%;
     -ms-transform-origin: 50% 0%;
     transform-origin: 50% 0%;
@@ -339,7 +339,7 @@ header.hidden .nav {
 
 @media only screen and (min-width: 768px) {
     .nav .nav__bar {
-        padding: 0 8rem;
+        padding: 0 3rem;
     }
     .nav.fullwidth .nav__bar {
         padding: 0;
@@ -347,6 +347,9 @@ header.hidden .nav {
 }
 
 @media only screen and (min-width: 1160px) {
+    .nav .nav__bar {
+        padding: 0 8rem;
+    }
     .nav.narrow .nav__bar {
         max-width: 1280px;
         padding: 0 8rem;

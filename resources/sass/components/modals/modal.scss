@@ -101,6 +101,9 @@
 }
 
 @media only screen and (min-width: 768px) {
+    .modal {
+        align-items: center;
+    }
     .modal .wrapper {
         width: 55rem;
         align-items: center;

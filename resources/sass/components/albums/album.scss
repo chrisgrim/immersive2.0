@@ -80,7 +80,7 @@
     font-weight: 500;
 }
 .album .card-body .blurb {
-    margin-top: 0.5rem;
+    margin-top: 0.2rem;
     line-height: 1.5rem;
     max-height: 4rem;
     overflow: hidden;
@@ -91,6 +91,7 @@
 }
 .album .card-body .blurb p {
     font-size: 1.5rem;
+    color: #6c6c6c;
 }
 .album .card-body .org {
     margin-top: 0.5rem;
@@ -117,9 +118,7 @@
 }
 .album .card-body .price p {
     font-size: 1.5rem;
-    font-weight: 800;
-    font-size: 1.6rem;
-    font-weight: 800;
+    font-weight: 600;
     -webkit-transform: scale(1,1.1); 
     -moz-transform: scale(1,1.1);
     -ms-transform: scale(1,1.1);

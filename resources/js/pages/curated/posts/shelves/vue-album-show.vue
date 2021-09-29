@@ -13,16 +13,16 @@
                         :community="community"
                         :element="element" />
                     <div class="card-body">
-                        <p 
-                            v-if="title" 
-                            class="card-title">
-                            {{ element.name }}
-                        </p>
-                        <p 
+                        <div 
+                            v-if="title"
+                            class="name">
+                            <p> {{ element.name }} </p>
+                        </div>
+                        <div 
                             v-if="text"
-                            class="card-text">
-                            {{ element.blurb }}
-                        </p>
+                            class="blurb">
+                            <p> {{ element.blurb }} </p>
+                        </div>
                     </div>
                 </div>
             </div>

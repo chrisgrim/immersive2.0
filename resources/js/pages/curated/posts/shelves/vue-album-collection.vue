@@ -34,17 +34,16 @@
                             :community="community"
                             :element="post" />
                         <div class="card-body">
-                            <p 
-                                v-if="title" 
-                                class="card-title">
-                                {{ post.name }}
-                                <span v-if="post.status === 'd'">(Not Live)</span>
-                            </p>
-                            <p 
+                            <div 
+                                v-if="title"
+                                class="name">
+                                <p> {{ post.name }} <span v-if="post.status === 'd'">(Not Live)</span></p>
+                            </div>
+                            <div 
                                 v-if="text"
-                                class="card-text">
-                                {{ post.description }}
-                            </p>
+                                class="blurb">
+                                <p> {{ post.description }} </p>
+                            </div>
                             <a 
                                 v-if="edit"
                                 :href="`/communities/${community.slug}/${post.slug}`">

@@ -37,7 +37,7 @@ header.lay-b {
         grid-column-gap: 9rem;
     }
     header.lay-b {
-        padding: 0 8rem;
+        padding: 0rem 3rem;
     }
     .lay-b .element {
         padding: 4rem 0;
@@ -48,5 +48,8 @@ header.lay-b {
     .lay-b {
         padding: 0 8rem;
         max-width: 1280px;
+    }
+    header.lay-b {
+        padding: 0 8rem;
     }
 }

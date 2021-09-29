@@ -1,7 +1,7 @@
 <template>
     <section class="es__details element">
         <div>
-            <div class="title">
+            <div class="title first">
                 <h3>Audience Role</h3>
             </div>      
             <ShowMore 

@@ -4,7 +4,6 @@
         class="body">
         <a 
             v-if="hasUrl"
-            target="_blank" 
             rel="noopener noreferrer nofollow"
             :href="hasUrl"
             class="card-url" />
@@ -37,7 +36,7 @@
         </template>
         <template v-if="hasUrl">
             <div class="card-out">
-                <a target="_blank" rel="noopener noreferrer nofollow" :href="hasUrl">
+                <a rel="noopener noreferrer nofollow" :href="hasUrl">
                     <button class="black">Check it out</button>
                 </a>
             </div>

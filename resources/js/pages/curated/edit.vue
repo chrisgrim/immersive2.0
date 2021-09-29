@@ -1,5 +1,10 @@
 <template>
     <div class="post-index">
+        <div class="breadcrumbs">
+            <p>
+                <a :href="`/`">Everything Immersive</a> > {{ community.name }} Community
+            </p>
+        </div>
         <div class="header-a">
             <div class="header-a__edit">
                 <a :href="`/communities/${community.slug}`">
@@ -97,12 +102,34 @@
                     </div>
                 </draggable>
             </div>
-            <div class="com-curators">
-                <Curators
-                    @update="updateCurators"
-                    :community="community"
-                    :loadowner="owner"
-                    :loadcurators="curators" />
+            <div class="sidebar">
+                <div class="com-curators">
+                    <Curators
+                        @update="updateCurators"
+                        :community="community"
+                        :loadowner="owner"
+                        :loadcurators="curators" />
+                </div>
+                <div class="com-description">
+                    <div class="field">
+                        <textarea 
+                            type="text"
+                            v-model="community.description" 
+                            placeholder="Community description."
+                            :class="{ 'error': $v.community.description.$error }"
+                            @input="$v.community.description.$touch"
+                            rows="6" />
+                        <div v-if="$v.community.description.$error" class="validation-error">
+                            <p class="error" v-if="!$v.community.description.maxLength">Description is too long</p>
+                        </div>
+                    </div>
+                    <div 
+                        v-if="$v.$anyDirty"
+                        class="buttons">
+                        <button @click="patchCommunity">Save</button>
+                        <button @click="resetCommunity">Cancel</button>
+                    </div>
+                </div>
             </div>
         </div>
         <transition name="slide-fade">
@@ -226,6 +253,7 @@
                 this.formData.append('_method', 'PUT');
                 this.formData.append('name', this.community.name);
                 this.formData.append('blurb', this.community.blurb);
+                this.formData.append('description', this.community.description);
             },
             onUpdated() {
                 this.$v.$reset();
@@ -256,7 +284,10 @@
             community: {
                 blurb: {
                     required,
-                    maxLength: maxLength(500)
+                    maxLength: maxLength(254)
+                },
+                description: {
+                    maxLength: maxLength(5000)
                 },
             },
         },

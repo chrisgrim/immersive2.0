@@ -2,9 +2,6 @@
 .post-owner p {
     font-size: 1.2rem;
 }
-.post-show .sidebar .sticky{
-    top:12rem;
-}
 .post-show .sidebar .sticky h3{
     font-size: 1.5rem;
     color: black;
@@ -14,6 +11,15 @@
 }
 .post-header {
     position: relative;
+    width: 100%;
+    height: 40rem;
+    overflow: hidden;
+    border-radius: 1rem;
+}
+.post-header img{
+    -o-object-fit: cover;
+    object-fit: cover;
+    height: 100%;
     width: 100%;
 }
 .post-image img, .post__card-image img {
@@ -30,7 +36,7 @@
 }
 .post-content {
     width: 100%;
-    margin: 4rem auto;
+    margin: 3rem auto;
     max-width: 800px;
 }
 .post-blurb {

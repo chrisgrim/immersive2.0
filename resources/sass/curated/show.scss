@@ -11,20 +11,32 @@
     column-gap: 1.6rem;
 }
 .com-curators {
-    border: 1px solid #d4d4d4;
-    padding: 1rem;
-    border-radius: 1rem;
     margin-bottom: 2rem;
 }
+.com-curators h4 {
+    margin-top: 2rem;
+}
 .curator {
-    padding: 1rem;
-    display: grid;
-    grid-template-columns: 5rem 1fr;
+    padding: 2rem;
+    border: 1px solid #d4d4d4;
+    border-radius: 1rem;
+    display: flex;
     align-items: center;
+    height: 9rem;
+    margin-top: 2rem;
+}
+.curator p {
+    margin-left: 1rem;
 }
 .curator img {
     width: 4rem;
     border-radius: 5rem;
+}
+.com-description {
+    padding: 2rem;
+    border-radius: 1rem;
+    margin: 2rem 0;
+    border: 1px solid #d4d4d4;
 }
 .community-show .posts {
     position: relative;

@@ -23,6 +23,7 @@ class CommunityActions
     {
         $community = Community::create([
             'blurb' => $request->blurb,
+            'description' => $request->description ? $request->description : null,
             'name' => $request->name,
             'user_id' => auth()->id(),
             'slug' => Str::slug($request->name),

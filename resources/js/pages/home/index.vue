@@ -1,21 +1,11 @@
 <template>
-    <div class="homepage">
+    <div>
         <template v-if="mobile">
             <MobileSearchNav
                 :tags="tags" 
                 :categories="categories" />
         </template>
         <div>
-            <section 
-                class="section-b" 
-                style="background: url('/storage/website-files/header-image.jpg') center center / cover no-repeat;height:53vh;">
-                <div class="intro">
-                    <div class="name">
-                        <h3> Welcome to immersive theater</h3>
-                    </div>
-                </div>
-            </section>
-
             <template v-if="hasDock1()">
                 <section class="section-a">
                     <div class="section-a__wrapper">
@@ -26,7 +16,7 @@
 
             <template v-if="hasDock2()">
                 <section class="section-a">
-                    <div class="section-a__wrapper">
+                    <div class="section-a__wrapper" style="margin-bottom:0rem;">
                         <TopShelf :shelf="dock2.featured[0].featureable" />
                     </div>
                 </section>
@@ -39,6 +29,7 @@
                             <div class="header-a__content">
                                 <div class="header-a__wrapper">
                                     <div class="header-a__name">
+                                        <p>Featured Community: </p>
                                         <h2>{{ dock3.featured[0].featureable.name }}</h2>
                                     </div>
                                     <div class="header-a__blurb">
@@ -91,10 +82,12 @@
 
             <section class="section-a">
                 <div class="section-a__wrapper">
-                    <h3>Read The 2020 Immersive Entertainment Industry Annual Report</h3>
-                    <p>Discover The Strength of Immersive Entertainment!</p>
-                    <br>
-                    <p><a href="/storage/website-files/documents/2020 Immersive Entertainment Industry Annual Report.pdf"><button class="black">Check out the report here</button></a></p>
+                    <div class="annual-report">
+                        <h3>Read The 2020 Immersive Entertainment Industry Annual Report</h3>
+                        <p>Discover The Strength of Immersive Entertainment!</p>
+                        <br>
+                        <a href="/storage/website-files/documents/2020 Immersive Entertainment Industry Annual Report.pdf"><button class="black">Check out the report here</button></a>
+                    </div>
                 </div>
             </section>
         </div>

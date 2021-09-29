@@ -186,6 +186,12 @@
                                         :image="`/storage/${post.thumbImagePath}`"
                                         @addImage="addImage" />
                                 </div>
+                                <div class="flex btw">
+                                    <p>Featured visible:</p>
+                                    <button @click="updateType">
+                                        {{ postType }}
+                                    </button>
+                                </div>
                             </div>
                         </template>
                     </div>
@@ -257,8 +263,12 @@
 
         computed: {
             postStatus() {
-                if (this.post.status === 'p') { return 'live'}
+                if (this.post.status === 'p') { return 'Live'}
                 return 'Draft'
+            },
+            postType() {
+                if (this.post.type === 'h') { return 'Hidden'}
+                return 'Visible'
             }
         },
 
@@ -321,6 +331,14 @@
                 }
                 this.patchPost();
             },
+            updateType() {
+                if (this.post.type === 's') {
+                    this.post.type = 'h'
+                } else {
+                    this.post.type = 's'
+                }
+                this.patchPost();
+            },
             debounce() {
                 if (this.timeout) 
                     clearTimeout(this.timeout); 
@@ -339,6 +357,7 @@
                 this.formData.append('community_id', this.community.id);
                 this.formData.append('shelf_id', this.post.shelf_id);
                 this.formData.append('status', this.post.status);
+                this.formData.append('type', this.post.type);
             },
             updatePost(value) {
                 this.clear()
@@ -377,7 +396,7 @@
                     maxLength: maxLength(80),
                 },
                 blurb: {
-                    maxLength: maxLength(255)
+                    maxLength: maxLength(100)
                 },
                 shelf_id: {
                     required

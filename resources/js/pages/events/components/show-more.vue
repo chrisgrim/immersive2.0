@@ -1,15 +1,28 @@
 <template>
-    <p class="text">
-        <span :style="`white-space: ${whiteSpace};`">{{ adjustedText }}</span>
-        <span 
-            v-show="showMore" 
-            @click="showMore = false">... <span class="show-text"><br>Show More</span>
-        </span>
-        <span 
-            v-show="lessButton && !showMore && this.text.split(' ').length >= this.limit"
-            @click="showMore = true"><span class="show-text"><br>Show Less</span>
-        </span>
-    </p>
+    <div>
+        <blockquote v-if="blockquote">
+            <span :style="`white-space: ${whiteSpace};`">"{{ adjustedText }}"</span>
+            <span 
+                v-show="showMore" 
+                @click="showMore = false">... <span class="show-text"><br>Show More</span>
+            </span>
+            <span 
+                v-show="lessButton && !showMore && this.text.split(' ').length >= this.limit"
+                @click="showMore = true"><span class="show-text"><br>Show Less</span>
+            </span>
+        </blockquote>
+        <p class="text" v-else>
+            <span :style="`white-space: ${whiteSpace};`">{{ adjustedText }}</span>
+            <span 
+                v-show="showMore" 
+                @click="showMore = false">... <span class="show-text"><br>Show More</span>
+            </span>
+            <span 
+                v-show="lessButton && !showMore && this.text.split(' ').length >= this.limit"
+                @click="showMore = true"><span class="show-text"><br>Show Less</span>
+            </span>
+        </p>
+    </div>
 </template>
 
 <script>
@@ -32,7 +45,11 @@ export default {
         lessButton: {
             type: Boolean,
             default: true
-        }
+        }, 
+        blockquote: {
+            type: Boolean,
+            default: false
+        }, 
     },
 
     computed: {

@@ -26,9 +26,11 @@
                         <div class="card-body">
                             <template v-if="card.category">
                                 <div class="category">
-                                    <button class="btn btn-outline caps rounded">
-                                        {{ card.category.name }}
-                                    </button>
+                                    <a :href="`/index/search-all?&category=${card.category.id}`">
+                                        <button class="btn btn-outline caps rounded">
+                                            {{ card.category.name }}
+                                        </button>
+                                    </a>
                                 </div>
                             </template>
                             <div class="heart">
@@ -37,10 +39,13 @@
                                     :event="card" />
                             </div>
                             <template v-if="card.name">
-                                <div class="name">
-                                    <p>{{ card.name }}</p>
-                                </div>
+                                <a :href="url(card)">
+                                    <div class="name">
+                                        <p>{{ card.name }}</p>
+                                    </div>
+                                </a>
                             </template>
+
                             <template v-if="card.blurb">
                                 <div class="blurb">
                                     <p>{{ card.tag_line }}</p>

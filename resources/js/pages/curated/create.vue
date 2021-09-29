@@ -21,12 +21,25 @@
                             name="description" 
                             @input="$v.community.blurb.$touch;"
                             v-model="community.blurb" 
-                            placeholder="Please write a tweets worth of text summarizing what people can find in this community. Examples: New to VR? Unsure of what to play or experience next? Check these great options out., While I love Sleep No More, when I’m in NYC, these are the companies and shows I’m checking out."
+                            placeholder="Who is this community for?"
                             :class="{ 'error': $v.community.blurb.$error }"
-                            rows="6" />
+                            rows="2" />
                         <div v-if="$v.community.blurb.$error" class="validation-error">
                             <p class="error" v-if="!$v.community.blurb.required">Must provide a short description</p>
                             <p class="error" v-if="!$v.community.blurb.maxLength">Description is too long</p>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <textarea 
+                            type="text"
+                            name="description" 
+                            @input="$v.community.description.$touch;"
+                            v-model="community.description" 
+                            placeholder="Short community description (optional)"
+                            :class="{ 'error': $v.community.description.$error }"
+                            rows="6" />
+                        <div v-if="$v.community.description.$error" class="validation-error">
+                            <p class="error" v-if="!$v.community.description.maxLength">Description is too long</p>
                         </div>
                     </div>
                     <div 
@@ -111,6 +124,7 @@
                 return this.community = {
                     name: null,
                     blurb: null,
+                    description: null,
                 }
             },
             addImage(image) {
@@ -125,10 +139,12 @@
             addCommunityData() {
                 this.formData.append('name', this.community.name);
                 this.formData.append('blurb', this.community.blurb);
+                this.formData.append('description', this.community.description);
             },
             clearErrors() {
                 this.$v.community.name.$touch();
                 this.$v.community.blurb.$touch();
+                this.$v.community.description.$touch();
             }
         },
 
@@ -140,7 +156,10 @@
                 },
                 blurb: {
                     required,
-                    maxLength: maxLength(500)
+                    maxLength: maxLength(254)
+                },
+                description: {
+                    maxLength: maxLength(5000)
                 },
             },
         },

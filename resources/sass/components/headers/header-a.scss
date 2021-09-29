@@ -13,6 +13,9 @@
     overflow: hidden;
     margin-bottom: 2rem;
 }
+.header-a__wrapper {
+    width:100%;
+}
 .header-a__content {
     background: #1f1f1f;
     display: flex;
@@ -25,6 +28,12 @@
     color:white;
     font-size: 3rem;
     line-height: 3rem;
+}
+.header-a__name p {
+    color: #b1b1b1;
+    font-size: 1.6rem;
+    line-height: 1.6rem;
+    margin-bottom: 1rem;
 }
 .header-a__blurb {
     height: 100%;
@@ -76,8 +85,7 @@
 }
 @media only screen and (min-width: 768px) {
     .header-a {
-        display: grid;
-        grid-template-columns: .4fr .6fr;
+        display: flex;
         height:45rem;
         border-radius: 1rem;
     }
@@ -86,6 +94,12 @@
         background: black;
         justify-content: flex-start;
         text-align: left;
+        height:45rem;
+        width:40%;
+    }
+    .header-a__image {
+        height:45rem;
+        width:60%;
     }
     .header-a__name h2{
         font-size: 4.2rem;

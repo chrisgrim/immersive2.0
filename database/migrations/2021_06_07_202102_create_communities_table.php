@@ -18,7 +18,8 @@ class CreateCommunitiesTable extends Migration
             $table->string('slug')->unique();
             $table->string('name')->nullable();
             $table->foreignId('user_id');
-            $table->text('blurb')->nullable();
+            $table->string('blurb')->nullable();
+            $table->text('description')->nullable();
             $table->string('largeImagePath')->nullable();
             $table->string('thumbImagePath')->nullable();
             $table->string('instagramHandle')->nullable();

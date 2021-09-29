@@ -7,14 +7,20 @@
     height: 100%;
 }
 .section-a__wrapper {
-    margin-top: 4rem;
-    margin-bottom: 4rem;
+    margin: 2rem 0;
 }
 
 @media screen and (min-width: 768px) {
     .section-a {
+        padding:0 3rem;
+    }
+    .section-a__wrapper {
+        margin: 4rem 0 6rem 0;
+    }
+}
+@media only screen and (min-width: 1160px) {
+    .section-a {
         max-width: 1760px;
-        padding-right: 8rem;
-        padding-left: 8rem;
+        padding: 0 8rem;
     }
 }

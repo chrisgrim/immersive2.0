@@ -50,16 +50,16 @@
     height: 1.4rem;
 }
 
-.lay-a .content h2, .lay-a .content h3, .lay-a .content h4  {
+.lay-a .post-content h2, .lay-a .post-content h3, .lay-a .post-content h4  {
     min-height: 0.1rem;
     margin-top: 2rem;
 }
-.lay-a .content p  {
+.lay-a .post-content p  {
     margin-top: 1rem;
     min-height: 0.1rem;
 }
 
-.lay-a .content ul {
+.lay-a .post-content ul {
     margin: inherit;
     padding-inline-start: 4rem;
 }
@@ -92,6 +92,6 @@
     .lay-a .sidebar {
         width: 33%;
         display: inline-block;
-        padding: 0 2rem;
+        padding: 2rem;
     }
 }

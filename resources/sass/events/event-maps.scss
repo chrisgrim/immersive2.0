@@ -36,7 +36,7 @@
 }
 .update-box .wrapper {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     width: 24rem;
     height: 4rem;
@@ -47,6 +47,7 @@
 .update-box .wrapper p {
     font-size:1.3rem;
     font-weight: 700;
+    width: 100%
 }
 .update-box .show-more {
     position: absolute;

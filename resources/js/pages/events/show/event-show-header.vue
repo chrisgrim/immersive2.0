@@ -15,6 +15,13 @@
                 :event="event" />
         </nav>
         <div class="es__header--content">
+            <template v-if="!isMobile">
+                <div class="breadcrumbs">
+                    <p>
+                        <a :href="`/`">Everything Immersive</a> > <a :href="`/index/search-all?&category=${event.category.id}`">{{event.category.name}}</a> > {{event.name}}
+                    </p>
+                </div>
+            </template>
             <div class="es__header--image">   
                 <picture>
                     <source 
@@ -60,7 +67,7 @@
 
         methods: {
             onBack() {
-                window.history.back();
+                document.referrer == "" ? window.location.href = '/' : window.history.back()
             }
         }
 

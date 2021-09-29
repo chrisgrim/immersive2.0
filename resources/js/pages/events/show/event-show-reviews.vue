@@ -2,7 +2,7 @@
     <section v-if="event.eventreviews ? event.eventreviews.length : null">
         <div class="element">
             <div 
-                class="box" 
+                class="box es__reviews" 
                 v-for="review in event.eventreviews"
                 :key="review.id">
                 <a 
@@ -24,11 +24,11 @@
                         rel="noreferrer" 
                         target="_blank" 
                         :href="review.url">                 
-                        <i 
+                        <blockquote 
                             style="white-space: pre-wrap;"
                             class="text"> {{ review.review.substring(0,300) }}...<span class="show-text"> Read More
                             </span>
-                        </i>
+                        </blockquote>
                     </a>
                 </div>
             </div>

@@ -39,12 +39,13 @@
                                         class="btn-borderless"> 
                                         Listings
                                     </button>
-                                    <button 
-                                        @click="searchOpen='t'"
-                                        :class="{active : searchOpen==='t'}"
-                                        class="btn-borderless"> 
-                                        Tags 
-                                    </button>
+                                    <a href="/index/search-online">
+                                        <button
+                                            :class="{active : searchOpen==='t'}"
+                                            class="btn-borderless"> 
+                                            Online Listings 
+                                        </button>
+                                    </a>
                                 </div>
                             </div>
                         </template>
@@ -111,7 +112,7 @@
                 return this.navtype != 'create'
             },
             hideSearch() {
-                return this.navtype != 'create' && this.navtype != 'searchonline'
+                return this.navtype != 'create'
             },
         },
 

@@ -36,6 +36,11 @@ textarea:focus {
     box-sizing: border-box;
     -ms-flex: 0 1 auto;
 }
+blockquote {
+    font-style: italic;
+    margin-inline-start: 2rem;
+    margin-inline-end: 2rem;
+}
 .noscroll {
     overflow: hidden;
 }
@@ -282,18 +287,17 @@ button.patreon {
     text-decoration: underline;
 }
  .breadcrumbs {
-    padding: 1rem 0;
+    padding: 3rem 0;
 }
 .breadcrumbs a {
-    text-transform: uppercase;
-    font-size: 1.2rem;
-    font-weight: 500;
-    color: #969696;
+    font-size: 1.34rem;
+    font-weight: 400;
+    color: black;
+    text-decoration: underline;
 }
 .breadcrumbs p {
-    text-transform: uppercase;
-    font-size: 1.2rem;
-    font-weight: 500;
+    font-size: 1.34rem;
+    font-weight: 400;
     color: black;
 }
 .add {

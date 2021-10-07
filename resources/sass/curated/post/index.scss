@@ -1,29 +1,4 @@
-.post-index {
-    padding: 2rem;
-    max-width: 1600px;
-    margin: auto;
-}
-.li-content {
-    display: grid;
-    grid-template-columns: 1fr 30rem;
-    grid-gap: 2rem;
-}
-.li-content .add-new-post-card {
-    margin-top: 0; 
-}
-.li-post {
-    border-radius: 1rem;
-    position: relative;
-}
-.li-post h3 {
-    margin-bottom: 2rem;
-}
-.li-post .delete-btn {
-    position: absolute;
-    right: -1rem;
-    top: -1rem;
-    z-index: 1;
-}
+
 .curator-table {
     background: gainsboro;
     padding: 1rem;
@@ -32,7 +7,5 @@
     position: relative;
 }
 @media screen and (min-width: 1280px) {
-    .post-index {
-        padding: 0 8rem 8rem 8rem;
-    }
+
 }

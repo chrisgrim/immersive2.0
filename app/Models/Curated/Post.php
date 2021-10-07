@@ -10,11 +10,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
+    use \Staudenmeir\EloquentEagerLimit\HasEagerLimit;
     use HasFactory;
 
-    protected $fillable = [ 'name', 'slug', 'blurb', 'thumbImagePath', 'shelf_id', 'largeImagePath', 'user_id', 'community_id', 'section_id', 'status', 'type', 'order' ];
+    protected $fillable = [ 'name', 'slug', 'blurb', 'thumbImagePath', 'shelf_id', 'largeImagePath', 'user_id', 'community_id', 'section_id', 'status', 'type', 'image_type', 'order' ];
 
-    // protected $with = ['limitedCards'];
+    protected $with = ['community'];
 
     /**
     * Sets the Route Key to slug instead of ID
@@ -49,6 +50,14 @@ class Post extends Model
     public function shelf()
     {
         return $this->belongsTo(Shelf::class);
+    }
+
+    /**
+     * Get the Docks of the Posts.
+     */
+    public function docks()
+    {
+        return $this->morphToMany('\App\Models\Featured\Dock', 'association')->using('App\Models\Featured\Association');
     }
 
     /**

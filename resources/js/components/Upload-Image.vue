@@ -2,7 +2,7 @@
     <div 
         @mouseover="overImage = true"
         @mouseleave="overImage = false"
-        :class="{ hoverImage: overImage }"
+        :class="{ hoverImage: overImage && !locked }"
         class="default__image-upload-container">
         <template v-if="canDelete && overImage">
             <div class="delete-btn">
@@ -15,23 +15,18 @@
                 </button>
             </div>
         </template>
-        <!-- <template v-if="hover">
-            <div class="hover">
-                <svg>
-                    <use :xlink:href="`/storage/website-files/icons.svg#ri-image-line`" />
-                </svg>
-            </div>
-        </template> -->
         <label 
-            :class="{ hoverImage: overImage }"
+            :class="{ hoverImage: overImage, pointer: !locked }"
             class="default__image-upload" 
             :style="backgroundImage">
-            <svg>
-                <use :xlink:href="`/storage/website-files/icons.svg#ri-image-line`" />
-            </svg>
-            <p v-if="text"> {{ text }} </p>
-            <image-upload @loaded="loaded" />
-            <CubeSpinner :loading="loading" />
+            <template v-if="!locked">
+                <svg v-if="!hasImage || overImage">
+                    <use :xlink:href="`/storage/website-files/icons.svg#ri-image-line`" />
+                </svg>
+                <p v-if="text && !image"> {{ text }} </p>
+                <image-upload @loaded="loaded" />
+                <CubeSpinner :loading="loading" />
+            </template>
         </label>
         <div v-if="$v.imageFile.$error" class="validation-error image">
             <p class="error" v-if="!$v.imageFile.fileSize">The image file size is over 10mb</p>
@@ -82,6 +77,10 @@
             canDelete: {
                 type: Boolean,
                 default: false,
+            },
+            locked: {
+                type: Boolean,
+                default: false,
             }
         },
 
@@ -90,6 +89,7 @@
                 return this.image || this.imageFile.src ? true : false;
             },
             backgroundImage() {
+                if (!this.hasImage) { return }
                 return `backgroundImage: url('${this.imageFile.src && !this.$v.imageFile.$error ? this.imageFile.src : this.image}')`
             },
         },
@@ -114,6 +114,7 @@
             },
             onDelete() {
                 this.$emit('onDelete')
+                this.imageFile = ''
             },
             onToggle() {
                 this.loading = !this.loading;

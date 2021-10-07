@@ -20,7 +20,7 @@ class CreateShelvesTable extends Migration
             $table->integer('parent_id')->unsigned()->nullable();
             $table->string('name', 50)->nullable();
             $table->string('blurb')->nullable();
-            $table->char('status', 1)->default('d');
+            $table->char('status', 1)->default('p');
             $table->integer('order')->unsigned()->default(0);
             $table->timestamps();
         });

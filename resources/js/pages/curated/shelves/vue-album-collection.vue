@@ -16,7 +16,7 @@
                     :class="{ drag: draggable}"
                     class="col">
                     <div 
-                        v-if="showDelete === index"
+                        v-if="showDelete === index && value.id !== archived.id"
                         class="delete-btn">
                         <button 
                             @click="selectedModal=post"
@@ -44,23 +44,18 @@
                                 class="blurb">
                                 <p> {{ post.description }} </p>
                             </div>
-                            <a 
-                                v-if="edit"
-                                :href="`/communities/${community.slug}/${post.slug}`">
-                                <button>view</button>
-                            </a>
                         </div>
                     </div>
                 </div>
             </draggable>
         </div>
-        <VueDeleteModal 
+        <VueArchiveModal 
             v-if="selectedModal"
             :item="selectedModal"
             :strict="true"
-            body="You are deleting the Post. Please be sure you know what you are doing."
+            body="You are archiving the Post"
             @close="selectedModal=null"
-            @ondelete="onDelete" />
+            @archive="onArchive" />
         <div 
             v-if="value && value.posts && value.posts.next_page_url"
             class="loadmore">
@@ -74,12 +69,12 @@
 <script>
     import Draggable from "vuedraggable";
     import ImageArray from './vue-album-images.vue'
-    import VueDeleteModal from '../../../../components/modals/Vue-Modal-Delete'
+    import VueArchiveModal from '../../../components/modals/Vue-Modal-Archive'
     export default {
 
-        props: ['loadposts', 'title', 'text', 'link', 'community', 'edit', 'draggable', 'value'],
+        props: ['loadposts', 'title', 'text', 'link', 'community', 'edit', 'draggable', 'value', 'archived'],
 
-        components: { Draggable, ImageArray, VueDeleteModal },
+        components: { Draggable, ImageArray, VueArchiveModal },
 
         computed: {
             inputVal: {
@@ -98,11 +93,16 @@
         },
 
         methods: {
-            async onDelete() {
-                await axios.delete(`/posts/${this.selectedModal.slug}`)
+            async onArchive() {
+                this.selectedModal.shelf_id = this.archived.id
+                this.update()
+            },
+            async update() {
+                await axios.put(`/communities/${this.community.slug}/${this.selectedModal.slug}/update`, this.selectedModal)
                 .then( res => { 
-                    this.posts = this.posts.filter( post => post.id !== this.selectedModal.id)
-                    this.selectedModal = null
+                    location.reload()
+                    // this.posts = this.posts.filter( post => post.id !== this.selectedModal.id)
+                    // this.selectedModal = null
                 });
             },
             async updateShelfOrder() {

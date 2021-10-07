@@ -24,8 +24,8 @@ class DockController extends Controller
      */
     public function index()
     {
-        $docks = Dock::all()->load('featured');
-        return view('featured.index', compact('docks'));
+        $docks = Dock::with(['posts', 'shelves', 'communities'])->orderBy('order', 'DESC')->get();
+        return view('adminArea.featured.index', compact('docks'));
     }
     /**
      * Store a section for a community
@@ -33,35 +33,10 @@ class DockController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Dock $dock)
+    public function store()
     {
-        if ($dock->type === 'c') {
-            $community = Community::find($request->id);
-            if ($community->featured()->where('featureable_id', $community->id)->exists()) {
-                $featured = $community->featured()->where('featureable_id', $community->id)->first();
-            } else {
-                $featured = $community->featured()->create([
-                    'user_id' => auth()->id(),
-                    'type' => 'c'
-                ]);
-            }
-        }
-
-        if ($dock->type === 's') {
-            $shelf = Shelf::find($request->id);
-            if ($shelf->featured()->where('featureable_id', $shelf->id)->exists()) {
-                $featured = $shelf->featured()->where('featureable_id', $shelf->id)->first();
-            } else {
-                $featured = $shelf->featured()->create([
-                    'user_id' => auth()->id(),
-                    'type' => 's'
-                ]);
-            }
-        }
-
-        $dock->featured()->detach();
-        $featured->docks()->attach($dock->id);
-        return Dock::all()->load('featured');
+        $dock = auth()->user()->docks()->create();
+        return Dock::with(['posts', 'shelves', 'communities'])->orderBy('order', 'DESC')->get();
     }
 
     /**
@@ -70,10 +45,55 @@ class DockController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Section $section)
+    public function update(Request $request, Dock $dock)
     {
-        $section->update(['name' => $request->name]);
-        return $section;
+        $dock->update($request->all());
+        return Dock::with(['posts', 'shelves', 'communities'])->orderBy('order', 'DESC')->get();
+    }
+
+    /**
+     * update an existing model with associated models
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function addShelf(Request $request, Dock $dock, Shelf $shelf)
+    {
+        $dock->communities()->detach();
+        $dock->posts()->detach();
+        $dock->shelves()->detach();
+        $shelf->docks()->attach($dock);
+        return Dock::with(['posts', 'shelves', 'communities'])->orderBy('order', 'DESC')->get();
+    }
+
+     /**
+     * update an existing model with associated models
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function addCommunity(Request $request, Dock $dock, Community $community)
+    {
+        $dock->communities()->detach();
+        $dock->posts()->detach();
+        $dock->shelves()->detach();
+        $community->docks()->attach($dock);
+        return Dock::with(['posts', 'shelves', 'communities'])->orderBy('order', 'DESC')->get();
+    }
+
+     /**
+     * update an existing model with associated models
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function addPost(Request $request, Dock $dock, Post $post)
+    {
+        $dock->communities()->detach();
+        $dock->posts()->detach();
+        $dock->shelves()->detach();
+        return $post->docks()->attach($dock);
+        return Dock::with(['posts', 'shelves', 'communities'])->orderBy('order', 'DESC')->get();
     }
 
     /**
@@ -84,7 +104,10 @@ class DockController extends Controller
      */
     public function destroy(Dock $dock)
     {
-        //
+        $dock->posts()->detach();
+        $dock->shelves()->detach();
+        $dock->delete();
+        return Dock::with(['posts', 'shelves', 'communities'])->orderBy('order', 'DESC')->get();
     }
 
     /**

@@ -9,13 +9,21 @@ class Dock extends Model
 {
     use HasFactory;
 
-    protected $fillable = [ 'user_id', 'name', 'type' ];
+    protected $fillable = [ 'user_id', 'name', 'type', 'location', 'order' ];
 
-    /**
-     * Get the featured for the section .
-     */
-    public function featured()
+    public function shelves()
     {
-        return $this->belongsToMany(Feature::class)->withPivot('order')->orderBy('order', 'ASC');
+        return $this->morphedByMany('App\Models\Curated\Shelf', 'association')->using('App\Models\Featured\Association');
     }
+
+    public function posts()
+    {
+        return $this->morphedByMany('App\Models\Curated\Post', 'association')->using('App\Models\Featured\Association');
+    }
+
+    public function communities()
+    {
+        return $this->morphedByMany('App\Models\Curated\Community', 'association')->using('App\Models\Featured\Association');
+    }
+
 }

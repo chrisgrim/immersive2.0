@@ -33,6 +33,15 @@ Route::GET('admin/communities/{community}/show', 'Admin\CommunityController@show
 Route::POST('admin/communities/{community}/approve', 'Admin\CommunityController@approve');
 Route::POST('admin/communities/{community}/reject', 'Admin\CommunityController@reject');
 
+// ----------   Docks -------
+Route::GET('/admin/docks', 'Featured\DockController@index');
+Route::POST('/admin/docks', 'Featured\DockController@store');
+Route::POST('/admin/docks/{dock}', 'Featured\DockController@update');
+Route::POST('/admin/docks/{dock}/shelf/{shelf}', 'Featured\DockController@addShelf');
+Route::POST('/admin/docks/{dock}/community/{community}', 'Featured\DockController@addCommunity');
+Route::POST('/admin/docks/{dock}/post/{post}', 'Featured\DockController@addPost');
+Route::DELETE('/admin/docks/{dock}', 'Featured\DockController@destroy');
+
 //Admin Users
 Route::GET('/admin/users', 'Admin\UsersController@index');
 Route::PATCH('/admin/users/{user}', 'Admin\UsersController@update');

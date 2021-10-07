@@ -59,14 +59,6 @@ export default {
     },
 
     methods: {
-
-
     },
-
-    mounted() {
-        this.$store.dispatch("getContent"); 
-    },
-
-
 };
 </script>

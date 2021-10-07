@@ -120,7 +120,7 @@
             return {
                 mobile: false,
                 page: this.navtype,
-                searchOpen: this.navtype == 'homepage' ? 'l' : false,
+                searchOpen: false,
                 navClass:this.passedclass
             };
         },

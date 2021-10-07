@@ -3,7 +3,6 @@
         class="nav mobile" 
         :class="{ active: bar }">
         <div class="nav-menu">
-            <div v-if="!user" />
             <div class="nav-menu-item">
                 <a href="/">
                     <div class="nav-icon">

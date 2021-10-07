@@ -1,134 +1,142 @@
 <template>
     <div class="post-index">
-        <div class="breadcrumbs">
-            <p>
-                <a :href="`/`">Everything Immersive</a> > {{ community.name }} Community
-            </p>
-        </div>
-        <div class="header-a">
-            <div class="header-a__edit">
-                <a :href="`/communities/${community.slug}`">
-                    <button>View Community</button>
-                </a>
+        <div class="lay-a wide">
+            <div class="breadcrumbs">
+                <p>
+                    <a :href="`/`">Everything Immersive</a> > {{ community.name }} Community
+                </p>
             </div>
-            <div class="header-a__content">
-                <div class="header-a__wrapper">
-                    <div class="header-a__name">
-                        <h2>{{ community.name }}</h2>
-                    </div>
-                    <div class="field">
-                        <textarea 
-                            type="text"
-                            v-model="community.blurb" 
-                            placeholder="Community description."
-                            :class="{ 'error': $v.community.blurb.$error }"
-                            @input="$v.community.blurb.$touch"
-                            rows="6" />
-                        <div v-if="$v.community.blurb.$error" class="validation-error">
-                            <p class="error" v-if="!$v.community.blurb.required">Must provide a short description</p>
-                            <p class="error" v-if="!$v.community.blurb.maxLength">Description is too long</p>
+            <div class="header-a">
+                <div class="header-a__edit">
+                    <a :href="`/communities/${community.slug}`">
+                        <button>View Community</button>
+                    </a>
+                </div>
+                <div class="header-a__content">
+                    <div class="header-a__wrapper">
+                        <div class="header-a__name">
+                            <h2>{{ community.name }}</h2>
+                        </div>
+                        <div class="field">
+                            <textarea 
+                                type="text"
+                                v-model="community.blurb" 
+                                placeholder="Community description."
+                                :class="{ 'error': $v.community.blurb.$error }"
+                                @input="$v.community.blurb.$touch"
+                                rows="6" />
+                            <div v-if="$v.community.blurb.$error" class="validation-error">
+                                <p class="error" v-if="!$v.community.blurb.required">Must provide a short description</p>
+                                <p class="error" v-if="!$v.community.blurb.maxLength">Description is too long</p>
+                            </div>
+                        </div>
+                        <div 
+                            v-if="$v.$anyDirty"
+                            class="buttons">
+                            <button @click="patchCommunity">Save</button>
+                            <button @click="resetCommunity">Cancel</button>
                         </div>
                     </div>
-                    <div 
-                        v-if="$v.$anyDirty"
-                        class="buttons">
-                        <button @click="patchCommunity">Save</button>
-                        <button @click="resetCommunity">Cancel</button>
-                    </div>
                 </div>
-            </div>
-            <div class="header-a__image">
-                <CardImage
-                    :height="500"
-                    :width="800"
-                    :image="`/storage/${headerImage}`"
-                    @addImage="addImage" />
+                <div class="header-a__image">
+                    <CardImage
+                        :height="500"
+                        :width="800"
+                        :image="`/storage/${headerImage}`"
+                        @addImage="addImage" />
+                </div>
             </div>
         </div>
-        <div class="li-content">
-            <div class="li-post">
-                <div class="add">
-                    <div class="add-button">
-                        <button 
-                            @click="onAdd=!onAdd"
-                            class="add__icon" 
-                            :class="{active: onAdd}">
-                            <svg>
-                                <use :xlink:href="`/storage/website-files/icons.svg#ri-add-fill`" />
-                            </svg>
-                        </button>
-                        <template v-if="onAdd">
-                            <div class="options">
-                                <div class="title">
-                                    <p>Add New</p>
+        <div class="lay-a">
+            <div class="wrapper">
+                <div class="sidebar left">
+                    <div class="sticky">
+                        <div class="com-curators">
+                            <Curators
+                                @update="updateCurators"
+                                :community="community"
+                                :loadowner="owner"
+                                :loadcurators="curators" />
+                        </div>
+                        <div class="com-description">
+                            <div class="field">
+                                <textarea 
+                                    type="text"
+                                    v-model="community.description" 
+                                    placeholder="Community description."
+                                    :class="{ 'error': $v.community.description.$error }"
+                                    @input="$v.community.description.$touch"
+                                    rows="6" />
+                                <div v-if="$v.community.description.$error" class="validation-error">
+                                    <p class="error" v-if="!$v.community.description.maxLength">Description is too long</p>
                                 </div>
-                                <button 
-                                    class="add__post"
-                                    @click="addShelf">
-                                    Shelf
-                                </button>
-                                <a :href="`/posts/${community.slug}/create`">
-                                    Post
-                                </a>
                             </div>
-                        </template>
+                            <div 
+                                v-if="$v.$anyDirty"
+                                class="buttons">
+                                <button @click="patchCommunity">Save</button>
+                                <button @click="resetCommunity">Cancel</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <draggable
-                    v-model="shelves"
-                    @start="isDragging=true" 
-                    @end="debounce">
-                    <div 
-                        class="shelves" 
-                        v-for="(shelf, index) in shelves"
-                        @mouseover="showDelete = index"
-                        @mouseleave="showDelete = null"
-                        :key="shelf.id">
-                        <div 
-                            v-if="showDelete === index && shelf.posts.data.length < 1"
-                            class="delete-btn">
+                <div class="content">
+                    <div class="add">
+                        <div class="add-button">
                             <button 
-                                @click="deleteShelf(shelf)"
-                                class="btn-icon">
+                                @click="toggleButton"
+                                ref="addButton"
+                                class="add__icon" 
+                                :class="{active: onAdd}">
                                 <svg>
-                                    <use :xlink:href="`/storage/website-files/icons.svg#ri-close-line`" />
+                                    <use :xlink:href="`/storage/website-files/icons.svg#ri-add-fill`" />
                                 </svg>
+                                <template v-if="onAdd">
+                                    <div class="options">
+                                        <div class="title">
+                                            <p>Add New</p>
+                                        </div>
+                                        <button 
+                                            class="add__post"
+                                            @click="addShelf">
+                                            Shelf
+                                        </button>
+                                        <a :href="`/posts/${community.slug}/create`">
+                                            Post
+                                        </a>
+                                    </div>
+                                </template>
                             </button>
                         </div>
-                        <Shelf 
-                            @updated="onUpdated"
-                            :community="community"
-                            :loadshelf="shelf" />
                     </div>
-                </draggable>
-            </div>
-            <div class="sidebar">
-                <div class="com-curators">
-                    <Curators
-                        @update="updateCurators"
-                        :community="community"
-                        :loadowner="owner"
-                        :loadcurators="curators" />
-                </div>
-                <div class="com-description">
-                    <div class="field">
-                        <textarea 
-                            type="text"
-                            v-model="community.description" 
-                            placeholder="Community description."
-                            :class="{ 'error': $v.community.description.$error }"
-                            @input="$v.community.description.$touch"
-                            rows="6" />
-                        <div v-if="$v.community.description.$error" class="validation-error">
-                            <p class="error" v-if="!$v.community.description.maxLength">Description is too long</p>
+                    <draggable
+                        v-model="shelves"
+                        @start="isDragging=true" 
+                        @end="debounce">
+                        <div 
+                            class="shelves" 
+                            v-for="(shelf, index) in shelves"
+                            @mouseover="showDelete = index"
+                            @mouseleave="showDelete = null"
+                            :key="shelf.id">
+                            <div 
+                                v-if="showDelete === index && shelf.posts.data.length < 1 && shelf.name !== 'Archived'"
+                                class="delete-btn">
+                                <button 
+                                    @click="deleteShelf(shelf)"
+                                    class="btn-icon">
+                                    <svg>
+                                        <use :xlink:href="`/storage/website-files/icons.svg#ri-close-line`" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <Shelf 
+                                :archived="archived"
+                                @updated="onUpdated"
+                                :community="community"
+                                :loadshelf="shelf" />
                         </div>
-                    </div>
-                    <div 
-                        v-if="$v.$anyDirty"
-                        class="buttons">
-                        <button @click="patchCommunity">Save</button>
-                        <button @click="resetCommunity">Cancel</button>
-                    </div>
+                    </draggable>
                 </div>
             </div>
         </div>
@@ -158,7 +166,7 @@
 <script>
     import CardImage from '../../components/Upload-Image.vue'
     import Curators from './posts/curators.vue'
-    import Shelf from './posts/shelves/shelf-edit.vue'
+    import Shelf from './shelves/shelf-edit.vue'
     import formValidationMixin from '../../mixins/form-validation-mixin'
     import { required, maxLength } from 'vuelidate/lib/validators';
     export default {
@@ -176,6 +184,9 @@
             getStatusCircle() {
                 return post => this.statusCircle(post)
             },
+            archived() {
+                return this.loadshelves.find( shelf => shelf.status === 'a')
+            }
         },
 
         data() {
@@ -229,6 +240,7 @@
                 })
             },
             async deleteShelf(shelf) {
+                if (shelf.name === 'Archived') { return alert('Cannot delete archived shelf') }
                 if (this.shelves.length <= 1) { return alert('Communities must have at least one shelf') }
                 if (shelf.posts.length) { return alert(`Can't delete shelf with posts`)}
                 await axios.delete(`/shelves/${shelf.id}`)
@@ -236,6 +248,9 @@
                     this.shelves = res.data
                 });
                 this.$v.$reset();
+            },
+            toggleButton() {
+                this.onAdd =! this.onAdd
             },
             status(post) {
                 if (post.status === 'p') return 'live';
@@ -278,6 +293,11 @@
                     this.updateShelfOrder();
                 }, 500); // delay
             },
+            onClickOutside(event) {
+                let arr =  this.$refs.addButton;
+                if (!arr || arr.contains(event.target)) return
+                this.onAdd = false
+            },
         },
 
         validations: {
@@ -290,6 +310,14 @@
                     maxLength: maxLength(5000)
                 },
             },
+        },
+
+        mounted() {
+            setTimeout(() => document.addEventListener("click", this.onClickOutside), 200)
+        },
+
+        destroyed() {
+            document.removeEventListener("click", this.onClickOutside)
         },
 
     }

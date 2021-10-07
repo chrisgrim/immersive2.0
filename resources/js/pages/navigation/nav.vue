@@ -35,13 +35,10 @@
                 return this.navtype ==='searchlocation'
             },
             isAbsolute() {
-                return this.navtype == 'homepage' || this.navtype == 'create'
+                return this.navtype == 'create'
             },
             isNarrow() {
-                return this.navtype == 'show' || this.navtype == 'org'
-            },
-            logoColor() {
-                return this.navtype == 'homepage' ? 'white' : '#404040'
+                return this.navtype == 'show' || this.navtype == 'org' || this.navtype == 'post'
             },
             isFullWidth() {
                 return this.navtype ==='searchlocation'

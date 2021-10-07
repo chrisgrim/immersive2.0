@@ -25,8 +25,8 @@
                             :class="{ 'error': $v.community.blurb.$error }"
                             rows="2" />
                         <div v-if="$v.community.blurb.$error" class="validation-error">
-                            <p class="error" v-if="!$v.community.blurb.required">Must provide a short description</p>
-                            <p class="error" v-if="!$v.community.blurb.maxLength">Description is too long</p>
+                            <p class="error" v-if="!$v.community.blurb.required">Must provide a short tag line</p>
+                            <p class="error" v-if="!$v.community.blurb.maxLength">Tag line is too long</p>
                         </div>
                     </div>
                     <div class="field">
@@ -45,7 +45,9 @@
                     <div 
                         v-if="$v.$anyDirty"
                         class="buttons">
-                        <button @click="submitCommunity">
+                        <button 
+                            :disabled="disabled" 
+                            @click="submitCommunity">
                             Submit
                         </button>
                     </div>
@@ -128,6 +130,7 @@
                 }
             },
             addImage(image) {
+                this.disabled = false
                 this.formData.append('image', image);
             },
             checkForImage() {
@@ -135,17 +138,13 @@
                     this.checkImage = true;
                     return true
                 }
+                this.disabled = false
             },
             addCommunityData() {
                 this.formData.append('name', this.community.name);
                 this.formData.append('blurb', this.community.blurb);
                 this.formData.append('description', this.community.description);
             },
-            clearErrors() {
-                this.$v.community.name.$touch();
-                this.$v.community.blurb.$touch();
-                this.$v.community.description.$touch();
-            }
         },
 
         validations: {

@@ -8,10 +8,10 @@
 
 @section('nav')
     @auth
-        <vue-nav :user= "{{auth()->user()}}"></vue-nav>
+        <vue-nav navtype="post" :user= "{{auth()->user()}}"></vue-nav>
     @endauth
     @guest
-        <vue-nav></vue-nav>
+        <vue-nav navtype="post"></vue-nav>
     @endguest
 @endsection
 @section('content')

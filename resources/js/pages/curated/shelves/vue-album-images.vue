@@ -7,18 +7,21 @@
                 <picture>
                     <source 
                         type="image/webp" 
-                        :srcset="`/storage/${element.thumbImagePath}`"> 
+                        :srcset="`/storage/${hasFeatured}`"> 
                     <img 
                         style="object-fit:cover" 
                         loading="lazy" 
-                        :src="`/storage/${element.thumbImagePath.slice(0, -4)}jpg`" 
+                        :src="`/storage/${hasFeatured.slice(0, -4)}jpg`" 
                         :alt="`${element.name}`">
                 </picture>
             </div>
         </template>
         <template v-else>
-            <div class="third">
-                <picture v-if="cardImages && cardImages[2]">
+            <div 
+                :class="imageTotal"
+                v-if="imageTotal === 'three'"
+                class="third">
+                <picture>
                     <source 
                         type="image/webp" 
                         :srcset="`/storage/${cardImages[2]}`"> 
@@ -29,8 +32,11 @@
                         :alt="`${element.name}`">
                 </picture>
             </div>
-            <div class="second">
-                <picture v-if="cardImages && cardImages[1]">
+            <div 
+                :class="imageTotal"
+                v-if="imageTotal === 'two' || imageTotal === 'three'"
+                class="second">
+                <picture>
                     <source 
                         type="image/webp" 
                         :srcset="`/storage/${cardImages[1]}`"> 
@@ -41,7 +47,10 @@
                         :alt="`${element.name}`">
                 </picture>
             </div>
-            <div class="first">
+            <div
+                :class="imageTotal"
+                v-if="imageTotal === 'one' || imageTotal === 'two' || imageTotal === 'three'"
+                class="first">
                 <picture v-if="cardImages && cardImages[0]">
                     <source 
                         type="image/webp" 
@@ -60,16 +69,36 @@
 <script>
     export default {
 
-        props: ['element', 'community'],
+        props: {
+            element: {
+                type: Object,
+                default: null
+            },
+            community: {
+                type: Object,
+                default: null
+            },
+            quality: {
+                type: String,
+                default: 'thumb'
+            },
+        },
 
         computed: {
             hasFeatured() {
-                return this.element.thumbImagePath
+                return this.quality === 'thumb' ? this.element.thumbImagePath : this.element.largeImagePath
             },
             cardImages() {
-                return this.element.limited_cards.map( e => e.event && !e.thumbImagePath ? e.event.thumbImagePath : e.thumbImagePath )
+                if (this.element.limited_cards) { return this.element.limited_cards.map( e => e.event && !e.thumbImagePath ? e.event.thumbImagePath : e.thumbImagePath ) }
+                return this.element.cards.map( e => e.event && !e.thumbImagePath ? e.event.thumbImagePath : e.thumbImagePath )
                 .filter(e => e != null)
             },
+            imageTotal() {
+                if (this.cardImages && this.cardImages[2]) {return 'three'}
+                if (this.cardImages && this.cardImages[1]) {return 'two'}
+                if (this.cardImages && this.cardImages[0]) {return 'one'}
+                return null
+            }
         },
 
         data() {

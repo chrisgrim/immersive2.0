@@ -22,7 +22,7 @@
             <modal-wrapper message="submitted"></modal-wrapper>
         @endif
         <vue-post-create 
-            :shelves="{{ $community->shelves }}"
+            :shelves="{{ $community->shelves()->where('status', '!=', 'a')->get() }}"
             :community="{{ $community }}"
             :user="{{ auth()->user() }}"/>    
     </div>

@@ -30,7 +30,7 @@
 
         data() {
             return {
-                posts:this.shelf.published_posts.data,
+                posts:this.shelf.published_posts,
             }
         },
 

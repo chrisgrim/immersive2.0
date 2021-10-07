@@ -21,6 +21,7 @@
 .nav.absolute {
     position: absolute;
     border: 0;
+    top:0;
 }
 .nav::before {
     background-image: -webkit-linear-gradient(to bottom, #000, rgba(0, 0, 0, 0));
@@ -146,9 +147,9 @@ header.hidden .nav {
     font-weight: 900;
     left: 2.5rem;
 }
-.nav.absolute .nav-logo svg {
+/*.nav.absolute .nav-logo svg {
     fill:white;
-}
+}*/
 
 /* ------------------------------------*\ #Search \*------------------------------------ */
 .nav-search {
@@ -187,8 +188,8 @@ header.hidden .nav {
     z-index: 1001;
     height: 7rem;
     border-top: 0.1rem solid #ebebeb;
-    display: grid;
-    grid-template-columns: repeat(5, 20%);
+    display: flex;
+    justify-content: space-evenly;
     -webkit-box-align: center;
     align-items: center;
     text-align: center;
@@ -199,7 +200,12 @@ header.hidden .nav {
     margin-left: 2rem;
 }
 .mobile .nav-menu-item {
-    margin: 0
+    margin: 0;
+    width: 6rem;
+    height: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .nav-icon {
     display: flex;

@@ -58,7 +58,8 @@
 }
 .organizer-show .listings {
     margin-bottom: 2rem;
-    padding: 0 2rem;
+    padding: 2rem;
+    border-top: solid 1px #dddddd;
 }
 .organizer-show .patreon {
     margin-bottom: 2rem
@@ -93,5 +94,6 @@
     }
     .organizer-show .listings {
         padding: 0;
+        border:0;
     }
 }

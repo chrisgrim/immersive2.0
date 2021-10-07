@@ -11,7 +11,7 @@
         <div class="wrapper">
             <div class="content">
                 <div class="edit-post__body grid">
-                    <template v-if="nameEdit">
+                    <template v-if="postEdit">
                         <div class="field h3">
                             <input 
                                 type="text" 
@@ -21,26 +21,13 @@
                                 placeholder="Collection Name">
                             <div v-if="$v.post.name.$error" class="validation-error">
                                 <p class="error" v-if="!$v.post.name.required">Please add a name.</p>
+                                <p class="error" v-if="!$v.post.name.serverError">Your community already has a post with a similar name</p>
                                 <p class="error" v-if="!$v.post.name.maxLength">The name is too long.</p>
                             </div>
                         </div>
-                        <div class="editor__footer borderless">
-                            <button class="outline" @click="resetPost">Cancel</button>
-                            <button @click="patchPost">Save</button>
-                        </div>
-                    </template>
-                    <template v-else>
-                        <div 
-                            @click="nameEdit=true"
-                            class="post-name">
-                            <h2>{{ post.name }}</h2>
-                        </div>
-                    </template>
-                    <template v-if="tagEdit">
                         <div class="field">
                             <input 
                                 type="text"
-                                @blur="patchPost"
                                 v-model="post.blurb"
                                 :class="{ 'error': $v.post.blurb.$error }"
                                 placeholder="Collection tag line">
@@ -55,7 +42,12 @@
                     </template>
                     <template v-else>
                         <div 
-                            @click="tagEdit=true"
+                            @click="postEdit=true"
+                            class="post-name">
+                            <h2>{{ post.name }}</h2>
+                        </div>
+                        <div 
+                            @click="postEdit=true"
                             class="post-blurb blurb">
                             <p>{{ post.blurb }}</p>
                         </div>
@@ -113,115 +105,15 @@
                     </div>
                 </div>
             </div>
-            <div class="sidebar">
-                <div class="sticky">
-                    <template>
-                        <div class="menu">
-                            <a :href="`/communities/${community.slug}/${value.slug}`">
-                                <button class="outline">
-                                    view
-                                </button>
-                            </a>
-                        </div>
-                    </template>
-                    <div class="menu">
-                        <button 
-                            @click="showStatus=!showStatus"
-                            class="component-title">
-                            <p>Status</p>
-                            <svg v-if="showStatus"><use :xlink:href="`/storage/website-files/icons.svg#ri-arrow-up-s-line`" /></svg>
-                            <svg v-else><use :xlink:href="`/storage/website-files/icons.svg#ri-arrow-down-s-line`" /></svg>
-                        </button>
-                        <template v-if="showStatus">
-                            <div class="component-body">
-                                <div class="flex btw">
-                                    <p>Visibility:</p>
-                                    <button @click="updateStatus">
-                                        {{ postStatus }}
-                                    </button>
-                                </div>
-                            </div>
-                        </template>
-                    </div>
-                    <div class="menu">
-                        <button 
-                            @click="showShelf=!showShelf"
-                            class="component-title">
-                            <p>Shelf</p>
-                            <svg v-if="showShelf"><use :xlink:href="`/storage/website-files/icons.svg#ri-arrow-up-s-line`" /></svg>
-                            <svg v-else><use :xlink:href="`/storage/website-files/icons.svg#ri-arrow-down-s-line`" /></svg>
-                        </button>
-                        <template v-if="showShelf">
-                            <div class="component-body">
-                                <v-select
-                                    v-model="post.shelf_id"
-                                    :reduce="shelf => shelf.id"
-                                    :options="shelves"
-                                    :class="{ 'error': $v.post.shelf_id.$error }"
-                                    placeholder="Shelf"
-                                    @input="patchPost"
-                                    label="name" />
-                                <div v-if="$v.post.shelf_id.$error" class="validation-error">
-                                    <p class="error" v-if="!$v.post.shelf_id.required">Please select the shelf.</p>
-                                </div>
-                            </div>
-                        </template>
-                    </div>
-                    <div class="menu">
-                        <button 
-                            @click="showFeatured=!showFeatured"
-                            class="component-title">
-                            <p>Featured Image</p>
-                            <svg v-if="showFeatured"><use :xlink:href="`/storage/website-files/icons.svg#ri-arrow-up-s-line`" /></svg>
-                            <svg v-else><use :xlink:href="`/storage/website-files/icons.svg#ri-arrow-down-s-line`" /></svg>
-                        </button>
-                        <template v-if="showFeatured">
-                            <div class="component-body">
-                                <div class="post-image">
-                                    <CardImage
-                                        :width="600"
-                                        :height="300"
-                                        @onDelete="deleteFeaturedImage"
-                                        :can-delete="true"
-                                        :image="`/storage/${post.thumbImagePath}`"
-                                        @addImage="addImage" />
-                                </div>
-                                <div class="flex btw">
-                                    <p>Featured visible:</p>
-                                    <button @click="updateType">
-                                        {{ postType }}
-                                    </button>
-                                </div>
-                            </div>
-                        </template>
-                    </div>
-                    <div class="menu">
-                        <button 
-                            @click="showOrder=!showOrder"
-                            class="component-title">
-                            <p>Card Order</p>
-                            <svg v-if="showOrder"><use :xlink:href="`/storage/website-files/icons.svg#ri-arrow-up-s-line`" /></svg>
-                            <svg v-else><use :xlink:href="`/storage/website-files/icons.svg#ri-arrow-down-s-line`" /></svg>
-                        </button>
-                        <template v-if="showOrder">
-                            <div class="component-body">
-                                <draggable
-                                    v-model="post.cards" 
-                                    @start="isDragging=true" 
-                                    @end="debounce">
-                                    <div 
-                                        v-for="card in post.cards"
-                                        :key="`list${card.id}`"
-                                        class="nav-card__item">
-                                        <span v-if="card.name">event</span>
-                                        <span v-else> {{ card.blurb ? `text` : `image` }} </span>
-                                    </div>
-                                </draggable>
-                            </div>
-                        </template>
-                    </div>
-                </div>
-            </div>
+            <SideBar 
+                @update="patchPost"
+                @deleteImage="deleteImage"
+                @addImage="addImage"
+                @addEventFeaturedImage="addEventFeaturedImage"
+                @reOrder="debounce"
+                :community="community"
+                :shelves="shelves"
+                v-model="post" />
         </div>
         <transition name="slide-fade">
             <div 
@@ -249,7 +141,7 @@
     import EventBlock from './cards/block-event.vue'
     import ImageBlock from './cards/block-image.vue'
     import TextBlock from './cards/block-text.vue'
-    import CardImage from '../../../components/Upload-Image.vue'
+    import SideBar from './components/post-sidebar.vue'
     import Draggable from "vuedraggable";
     import formValidationMixin from '../../../mixins/form-validation-mixin'
     import { required, maxLength } from 'vuelidate/lib/validators';
@@ -259,18 +151,7 @@
 
         mixins: [formValidationMixin],
 
-        components: { CardImage, EventBlock, Draggable, EditCard, ImageBlock, TextBlock },
-
-        computed: {
-            postStatus() {
-                if (this.post.status === 'p') { return 'Live'}
-                return 'Draft'
-            },
-            postType() {
-                if (this.post.type === 'h') { return 'Hidden'}
-                return 'Visible'
-            }
-        },
+        components: { EventBlock, Draggable, EditCard, ImageBlock, TextBlock, SideBar },
 
         data() {
             return {
@@ -281,18 +162,12 @@
                 blockType:null,
                 formData: new FormData(),
                 serverErrors: null,
-                showStatus: false,
-                showFeatured: false,
-                showOrder: false,
-                showShelf: false,
                 updated: false,
-                nameEdit: false,
-                tagEdit: false,
+                postEdit: false,
             }
         },
 
         methods: {
-
             async patchPost() {
                 if ( this.checkVuelidate()) { return }
                 this.addPostData();
@@ -300,16 +175,13 @@
                 .then( res => {
                     window.history.pushState(null, null, "/communities" + `/${this.community.slug}/${res.data.slug}/edit`);
                     this.post = res.data;
+                    this.postBeforeEdit = { ...res.data }
                     this.onUpdated();
                     this.clear();
                 })
                 .catch(err => {
                     this.onErrors(err);
                 });
-            },
-            async deleteFeaturedImage() {
-                this.formData.append('deleteImage', true)
-                this.patchPost()
             },
             async updatePostOrder() {
                 var list = this.post.cards.map(function(item, index){
@@ -323,22 +195,6 @@
                 this.post = { ...this.postBeforeEdit }
                 this.clear();
             },
-            updateStatus() {
-                if (this.post.status === 'd') {
-                    this.post.status = 'p'
-                } else {
-                    this.post.status = 'd'
-                }
-                this.patchPost();
-            },
-            updateType() {
-                if (this.post.type === 's') {
-                    this.post.type = 'h'
-                } else {
-                    this.post.type = 's'
-                }
-                this.patchPost();
-            },
             debounce() {
                 if (this.timeout) 
                     clearTimeout(this.timeout); 
@@ -348,7 +204,18 @@
             },
             addImage(image) {
                 this.formData.append('image', image);
+                this.post.image_type = 'u'
                 this.patchPost();
+            },
+            addEventFeaturedImage(event) {
+                this.formData.append('largeImagePath', event.largeImagePath);
+                this.formData.append('thumbImagePath', event.thumbImagePath);
+                this.post.image_type = 'e'
+                this.patchPost();
+            },
+            deleteImage() {
+                this.formData.append('deleteImage', true)
+                this.patchPost()
             },
             addPostData() {
                 this.formData.append('_method', 'PUT');
@@ -358,6 +225,7 @@
                 this.formData.append('shelf_id', this.post.shelf_id);
                 this.formData.append('status', this.post.status);
                 this.formData.append('type', this.post.type);
+                this.formData.append('image_type', this.post.image_type);
             },
             updatePost(value) {
                 this.clear()
@@ -380,8 +248,7 @@
             clear() {
                 this.onEdit = false;
                 this.blockType = null;
-                this.nameEdit = false;
-                this.tagEdit = false;
+                this.postEdit = false;
                 this.formData = new FormData()
             },
             clearErrors() {
@@ -393,14 +260,14 @@
             post: {
                 name: {
                     required,
-                    maxLength: maxLength(80),
+                    maxLength: maxLength(100),
+                    serverError() {
+                        return this.serverErrors && this.serverErrors.name ? false : true
+                    }
                 },
                 blurb: {
                     maxLength: maxLength(100)
                 },
-                shelf_id: {
-                    required
-                }
             },
         },
 

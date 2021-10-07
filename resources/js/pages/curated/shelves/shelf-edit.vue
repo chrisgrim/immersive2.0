@@ -1,6 +1,6 @@
 <template>
     <div class="shelf hover">
-        <template v-if="editName">
+        <template v-if="editName && shelf.status !== 'a'">
             <div class="field h3">
                 <input 
                     type="text" 
@@ -27,9 +27,9 @@
                     <h3>{{ shelf.name }}</h3>
                 </template>
                 <template v-else>
-                    <h3>Add Name</h3>
+                    <h3>Edit Name</h3>
                 </template>
-                <template v-if="!editName && hover">
+                <template v-if="!editName && hover && shelf.status !== 'a'">
                     <button class="btn-icon noBox">
                         <svg>
                             <use :xlink:href="`/storage/website-files/icons.svg#ri-pencil-line`" />
@@ -47,6 +47,7 @@
                 :title="true"
                 :draggable="true"
                 v-model="shelf"
+                :archived="archived"
                 :community="community"
                 :loadposts="posts" />
         </div>
@@ -55,11 +56,11 @@
 
 <script>
     import CollectionAlbum from './vue-album-collection.vue'
-    import formValidationMixin from '../../../../mixins/form-validation-mixin'
+    import formValidationMixin from '../../../mixins/form-validation-mixin'
     import { required, maxLength } from 'vuelidate/lib/validators';
     export default {
         
-        props: [ 'loadshelf', 'owner', 'community' ],
+        props: [ 'loadshelf', 'owner', 'community', 'archived' ],
 
         mixins: [formValidationMixin],
 

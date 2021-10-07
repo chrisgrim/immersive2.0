@@ -25,6 +25,7 @@ class CreatePostsTable extends Migration
             $table->string('thumbImagePath')->nullable();
             $table->char('status', 1)->default('d');
             $table->char('type', 1)->default('s');
+            $table->char('image_type', 1)->default('u');
             $table->integer('order')->unsigned()->default(0);
             $table->timestamps();
         });

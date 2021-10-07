@@ -104,7 +104,7 @@
 
         data() {
             return {
-                map: this.initializeMapObjectB(),
+                map: this.initializeMapObject(),
                 toggle: new URL(window.location.href).searchParams.get("live") ? new URL(window.location.href).searchParams.get("live") : false,
                 wideMap: false,
             }
@@ -140,32 +140,6 @@
                 this.update()
             },
             initializeMapObject() {
-                return {
-                    zoom:new URL(window.location.href).searchParams.get("zoom") ? parseFloat(new URL(window.location.href).searchParams.get("zoom")) : 11,
-                    max: 18,
-                    min: 10,
-                    url: "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
-                    attribution:
-                    '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-                    currentCenter: this.initializeCenterObject(),
-                    currentBounds: new URL(window.location.href).searchParams.get("NElat") ? this.initializeBoundariesObject() : null,
-                    live: new URL(window.location.href).searchParams.get("live") ? new URL(window.location.href).searchParams.get("live") : false,
-                }
-            },
-            initializeMapObjectA() {
-                return {
-                    zoom:new URL(window.location.href).searchParams.get("zoom") ? parseFloat(new URL(window.location.href).searchParams.get("zoom")) : 11,
-                    max: 20,
-                    min: 10,
-                    url: "https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png",
-                    attribution:
-                    '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
-                    currentCenter: this.initializeCenterObject(),
-                    currentBounds: new URL(window.location.href).searchParams.get("NElat") ? this.initializeBoundariesObject() : null,
-                    live: new URL(window.location.href).searchParams.get("live") ? new URL(window.location.href).searchParams.get("live") : false,
-                }
-            },
-            initializeMapObjectB() {
                 return {
                     zoom:new URL(window.location.href).searchParams.get("zoom") ? parseFloat(new URL(window.location.href).searchParams.get("zoom")) : 11,
                     max: 20,

@@ -16,6 +16,7 @@ use Illuminate\Support\Str;
 use App\Models\Events\EventRequest;
 use App\Models\Curated\Community;
 use App\Models\Curated\Post;
+use App\Models\Featured\Dock;
 use DB;
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -155,6 +156,16 @@ class User extends Authenticatable implements MustVerifyEmail
     public function messages()
     {
         return $this->hasMany(Message::class);
+    }
+
+    /**
+     * The User has many docks
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     */
+    public function docks()
+    {
+        return $this->hasMany(Dock::class);
     }
 
      /**

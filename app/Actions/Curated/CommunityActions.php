@@ -30,6 +30,7 @@ class CommunityActions
         ]);
         if ($request->image) { ImageFile::saveImage($request, $community, 800, 500, 'community'); }
         $community->shelves()->create(['user_id' => auth()->id()]);
+        $community->shelves()->create(['user_id' => auth()->id(), 'name' => 'Archived', 'status' => 'a']);
         $community->curators()->attach(auth()->user()->id);
         return $community; 
     }

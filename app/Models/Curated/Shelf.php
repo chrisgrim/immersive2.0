@@ -11,6 +11,7 @@ use ElasticScoutDriverPlus\QueryDsl;
 
 class Shelf extends Model
 {
+    use \Staudenmeir\EloquentEagerLimit\HasEagerLimit;
     use HasFactory;
     use QueryDsl;
     use Searchable;
@@ -41,6 +42,14 @@ class Shelf extends Model
     }
 
     /**
+     * Get the docks for the shelf .
+     */
+    public function docks()
+    {
+        return $this->morphToMany('\App\Models\Featured\Dock', 'association')->using('App\Models\Featured\Association');
+    }
+
+    /**
      * Get the Community that owns the Shelf.
      */
     public function community()
@@ -53,7 +62,7 @@ class Shelf extends Model
      */
     public function publishedPosts()
     {
-        return $this->hasMany(Post::class)->orderBy('order', 'ASC')->where('status', 'p');
+        return $this->hasMany(Post::class)->orderBy('order', 'ASC')->where('status', 'p')->limit(4);
     }
 
     /**

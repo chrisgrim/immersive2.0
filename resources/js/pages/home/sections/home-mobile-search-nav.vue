@@ -5,21 +5,15 @@
             class="search-nav">
             <template v-if="!open">
                 <div class="placeholder">
-                    <div />
+                    <div class="icon">
+                        <svg>
+                            <use :xlink:href="`/storage/website-files/icons.svg#ri-search-line`" />
+                        </svg>
+                    </div>
                     <div 
                         @click="showSearch"
                         class="location">
                         <p>{{ city }}</p>
-                    </div>
-                    <div 
-                        @click="showSearch"
-                        class="dates">
-                        <template v-if="naturalDate">
-                            <p>{{ naturalDate }}</p>
-                        </template>
-                        <template v-else>
-                            <p>Add dates</p>
-                        </template>
                     </div>
                 </div>
             </template>
@@ -38,10 +32,6 @@
                 </div>
                 <div class="wrapper">
                     <SearchBar />
-                    <VueFilterDates
-                        :mobile="true"
-                        v-model="dates"
-                        @submit="submit" />
                 </div>
             </template>
         </div>
@@ -51,13 +41,12 @@
 <script>
     import SearchBar from '../../../components/search-bars/search-location.vue'
     import searchBasicsMixin from '../../../mixins/search-basics-mixin'
-    import VueFilterDates from '../../search/filter/vue-filter-dates.vue'
     
     export default {
 
         props:[ 'filter', 'categories', 'tags'],
 
-        components: { SearchBar, VueFilterDates },
+        components: { SearchBar },
 
         mixins: [ searchBasicsMixin  ],
 

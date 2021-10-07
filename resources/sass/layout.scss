@@ -316,8 +316,10 @@ button.patreon {
     box-shadow: 0 0 8px rgb(0 0 0 / 15%);
     position: absolute;
     top: 115%;
+    right: 0;
     padding: 1rem 2rem;
     background: white;
+    text-align: left;
 }
 .add-button .options .title{
     margin: 0.5rem 0 0 0;
@@ -363,6 +365,7 @@ button.patreon {
 }
 .add-button button.add__icon.active svg {
     fill: white;
+    transform: rotate(45deg);
 }
 .add-button button.add__icon:hover {
     background: #dedede;

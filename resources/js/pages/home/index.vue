@@ -4,67 +4,34 @@
             <MobileSearchNav
                 :tags="tags" 
                 :categories="categories" />
+            <div style="height:8rem;" />
+        </template>
+        <template v-if="docks && docks.length">
+            <div 
+                :key="dock.id"
+                v-for="dock in docks">
+                <template v-if="dock.type === 'h'">
+                    <Hero :dock="dock" />
+                </template>
+                <template v-if="dock.type === 'i'">
+                    <Icons :dock="dock" />
+                </template>
+                <template v-if="dock.type === 'f'">
+                    <Album 
+                        number="four"
+                        :dock="dock" />
+                </template>
+                <template v-if="dock.type === 't'">
+                    <Album 
+                        number="three"
+                        :dock="dock" />
+                </template>
+                <template v-if="dock.type === 's'">
+                    <Spotlight :dock="dock" />
+                </template>
+            </div>
         </template>
         <div>
-            <template v-if="hasDock1()">
-                <section class="section-a">
-                    <div class="section-a__wrapper">
-                        <Locations :shelf="dock1.featured[0].featureable" />
-                    </div>
-                </section>
-            </template>
-
-            <template v-if="hasDock2()">
-                <section class="section-a">
-                    <div class="section-a__wrapper" style="margin-bottom:0rem;">
-                        <TopShelf :shelf="dock2.featured[0].featureable" />
-                    </div>
-                </section>
-            </template>
-
-            <template v-if="hasDock3()">
-                <section class="section-a">
-                    <div class="section-a__wrapper">
-                        <div class="header-a">
-                            <div class="header-a__content">
-                                <div class="header-a__wrapper">
-                                    <div class="header-a__name">
-                                        <p>Featured Community: </p>
-                                        <h2>{{ dock3.featured[0].featureable.name }}</h2>
-                                    </div>
-                                    <div class="header-a__blurb">
-                                        <p>{{ dock3.featured[0].featureable.blurb }}</p>
-                                    </div>
-                                    <a :href="`/communities/${dock3.featured[0].featureable.slug}`">
-                                        <button>
-                                            Check it out
-                                        </button>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="header-a__image">
-                                <picture>
-                                    <source 
-                                        type="image/webp" 
-                                        :srcset="`/storage/${dock3.featured[0].featureable.thumbImagePath}`"> 
-                                    <img 
-                                        :src="`/storage/${dock3.featured[0].featureable.thumbImagePath.slice(0, -4)}jpg`" 
-                                        :alt="`${dock3.featured[0].featureable.name} Community`">
-                                </picture>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </template>
-
-            <template v-if="hasDock4()">
-                <section class="section-a">
-                    <div class="section-a__wrapper">
-                        <BottomShelf :shelf="dock4.featured[0].featureable" />
-                    </div>
-                </section>
-            </template>
-
             <section 
                 id="staffpicks" 
                 class="section-a" 
@@ -95,18 +62,19 @@
 </template>
 
 <script>
-    import Locations from './sections/locations-section.vue'
-    import TopShelf from './sections/top-section.vue'
-    import BottomShelf from './sections/bottom-section.vue'
+    import Hero from './sections/hero-section.vue'
+    import Icons from './sections/icons-section.vue'
+    import Album from './sections/album-section.vue'
+    import Spotlight from './sections/spotlight-section.vue'
     import Partners from './sections/partners.vue'
     import StaffPicks from './sections/staffpicks.vue'
-    import MobileSearchNav  from './sections/mobile-search-nav.vue'
+    import MobileSearchNav  from './sections/home-mobile-search-nav.vue'
 
     export default {
 
-        props:['categories', 'staffpicks', 'dock1', 'dock2', 'dock3', 'dock4', 'tags'],
+        props:['categories', 'staffpicks', 'docks', 'tags'],
 
-        components: { TopShelf, BottomShelf, Partners, StaffPicks, MobileSearchNav, Locations },
+        components: { Album, Partners, StaffPicks, MobileSearchNav, Icons, Hero, Spotlight },
 
         computed: {
 
@@ -119,18 +87,7 @@
         },
 
         methods: {
-            hasDock1() {
-                return this.dock1 && this.dock1.featured[0] && this.dock1.featured[0].featureable
-            },
-            hasDock2() {
-                return this.dock2 && this.dock2.featured[0] && this.dock2.featured[0].featureable
-            },
-            hasDock3() {
-                return this.dock3 && this.dock3.featured[0] && this.dock3.featured[0].featureable
-            },
-            hasDock4() {
-                return this.dock4 && this.dock4.featured[0] && this.dock4.featured[0].featureable
-            }
+            
         },
 
     };

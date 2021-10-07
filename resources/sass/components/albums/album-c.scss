@@ -1,0 +1,157 @@
+/*simple album-c*/
+
+.album-c {
+    white-space: nowrap;
+    overflow-y: hidden;
+    overflow-x: auto;
+    scrollbar-width: none;
+    grid-column-gap: 1.4rem;
+    height: calc(1.25 * (100vw - 8rem));
+}
+.album-c .row {
+    scroll-snap-type: x mandatory;
+    overflow-x: auto;
+    display: flex;
+    scroll-padding: 2.4rem;
+    height: calc(1.25 * (100vw - 5rem));
+}
+.album-c .col {
+    margin-left: 1.6rem;
+    flex: 1 0 calc(100% - 8rem);
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+}
+.album-c .col.first {
+    flex: 1 0 calc(100% - 8rem);
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    margin-left: 0px;
+    padding-left: 2rem;
+}
+.album-c .col.last {
+    margin-left: 1.6rem;
+    flex: 1 0 calc(100% - 8rem);
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    padding-right: 2rem;
+    }
+.album-c .card-url {
+    cursor: pointer;
+    position: relative;
+    border-radius: 1rem;
+    outline: none;
+    background: transparent;
+    border: none;
+    display: block;
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+    width: 100%;
+}
+.album-c .card {
+    display: block;
+    border-radius: 1rem;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    height: calc(1.25 * (100vw - 8rem));
+}
+.album-c .card-img{
+    position: absolute;
+    inset: -1px;
+}
+.album-c .card img {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    object-fit: cover;
+    vertical-align: bottom;
+}
+.album-c .card-body {
+    position: relative;
+    height: 100%;
+    width: 22rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 2.4rem;
+}
+.album-c .card-body .wrapper {
+    -webkit-flex: 1;
+    -ms-flex: 1 1 0%;
+    flex: 1;
+}
+.album-c .card-body .name {
+    font-size: 2.2rem;
+    line-height: 2.6rem;
+    font-weight: 500;
+    letter-spacing: -0.2px;
+    color: white;
+    margin-top: 0.8rem;
+    white-space: normal;
+}
+.album-c .card-body .blurb {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: white;
+    font-weight: 300;
+    font-size: 1.2rem;
+    line-height: 1.2rem;
+}
+.album-c .card-body button {
+    font-size: 1.4rem;
+    line-height: 1.8rem;
+    font-weight: 600;
+    border-radius: 1rem;
+    padding-left: 1.6rem;
+    padding-right: 1.6rem;
+    border: none;
+    color: #222222;
+}
+
+@media screen and (min-width: 744px) {
+    .album-c {
+        height: 33rem;
+    }
+    .album-c .row {
+        height: initial;
+    }
+    .album-c .col {
+        flex: 1 0 calc(50% - 9rem);
+        min-width: 48rem;
+        max-width: 59rem;
+    }
+    .album-c .col.first {
+        min-width: calc(48rem + 4rem);
+        flex: 1 0 calc(50% - 1rem);
+        padding-left: 8rem;
+    }
+    .album-c .col.last {
+        min-width: calc(48rem + 4rem);
+    }
+    .album-c .card {
+        height: 33rem;
+    }
+    .album-c .card-body .wrapper {
+        width: 30rem;
+    }
+}
+
+@media screen and (min-width: 1128px) {
+    .album-c .col {
+        flex: 1 0 calc(50% - 9rem);
+    }
+    .album-c .col.first {
+        max-width: calc(60rem + max(8rem, calc((100vw - 160rem) / 2)));
+        flex: 1 0 calc(50% - 1rem);
+        padding-left: 8rem;
+    }
+    .album-c .col.last {
+        max-width: calc(60rem + max(8rem, calc((100vw - 160rem) / 2)));
+        flex: 1 0 calc(50% - 1rem);
+        padding-right: 8rem;
+    }
+    .album-c .card-body .wrapper {
+        width: 23.5rem;
+    }
+}

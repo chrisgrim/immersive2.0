@@ -29,7 +29,7 @@ class CardActions
         ]);
 
         if ($request->thumbImagePath) { $card->update(['thumbImagePath' => $request->thumbImagePath]); }
-        if ($request->image) { ImageFile::saveCardImage($request, $card, 800, 500, 'card'); }
+        if ($request->image) { ImageFile::saveCardImage($request, $card, 800, 450, 'card'); }
 
         return $post->load('cards', 'user');
     }
@@ -43,7 +43,7 @@ class CardActions
     public function update(Request $request, Card $card)
     {
         $card->update($request->except(['image']));
-        if ($request->image) { ImageFile::replaceCardImage($request, $card, 800, 500, 'card'); }
+        if ($request->image) { ImageFile::replaceCardImage($request, $card, 800, 450, 'card'); }
         return $card;
     }
 

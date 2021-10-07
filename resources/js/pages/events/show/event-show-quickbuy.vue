@@ -1,5 +1,5 @@
 <template>
-    <section>
+    <div class="es__quickbuy--body">
         <div 
             v-if="!ticketsVisible"
             class="es__tickets subtext">
@@ -168,7 +168,7 @@
                 </button>
             </a>
         </div>
-    </section>
+    </div>
 </template>
 
 <script>

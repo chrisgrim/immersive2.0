@@ -1,0 +1,37 @@
+.hero-section {
+    margin: 0px auto;
+    position: relative;
+    height: 100%;
+}
+.hero-section__wrapper {
+    margin: 2rem 0;
+}
+.hero-section .title {
+    padding: 0 2rem;
+    margin: 2rem 0;
+}
+.hero-section .title h2 {
+    font-size: 2.2rem;
+}
+
+@media screen and (min-width: 768px) {
+    .hero-section {
+        padding:0 3rem;
+    }
+    .hero-section__wrapper {
+        margin: 4rem 0 6rem 0;
+    }
+}
+@media only screen and (min-width: 1160px) {
+    .hero-section {
+        max-width: 1760px;
+        padding: 0
+    }
+    .hero-section__wrapper {
+        margin: 4rem 0 6rem 0;
+    }
+    .hero-section .title {
+        padding: 0 8rem;
+        margin: 3rem 0;
+    }
+}

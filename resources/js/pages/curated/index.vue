@@ -40,12 +40,19 @@
                                     <div class="header-a__blurb">
                                         <p>{{ community.blurb }}</p>
                                     </div>
-                                    <a :href="`/communities/${community.slug}/edit`">
-                                        <button> Edit </button>
-                                    </a>
-                                    <a :href="`/communities/${community.slug}`">
-                                        <button> View </button>
-                                    </a>
+                                    <template v-if="isPublic(community)">
+                                        <a :href="`/communities/${community.slug}/edit`">
+                                            <button> Edit </button>
+                                        </a>
+                                        <a :href="`/communities/${community.slug}`">
+                                            <button> View </button>
+                                        </a>
+                                    </template>
+                                    <template v-else>
+                                        <div class="header-a__blurb">
+                                            <p>-- Community under review --</p>
+                                        </div>
+                                    </template>
                                 </div>
                             </div>
                             <div class="header-a__image">
@@ -72,20 +79,6 @@
         
         props: ['user', 'value' ],
 
-        components: {  },
-
-        computed: {
-            locked() {
-                return community => this.isLocked(community)
-            },
-            getStatus() {
-                return community => this.status(community)
-            },
-            getStatusCircle() {
-                return community => this.statusCircle(community)
-            },
-        },
-
         data() {
             return {
                 communities: this.value,
@@ -94,29 +87,14 @@
         },
 
         methods: {
-            async deleteCommunity(community) {
-                await axios.delete(`/communities/${community.slug}`)
-                .then( res => {
-                    console.log(res.data);
-                })
-            },
-            status(community) {
-                if (community.status === 'p') return 'approved';
-                if (community.status === 'r') return 'under review';
-                if (community.status === 'n') return 'revise and resubmit';
-                return '-'
-            },
-            statusCircle(community) {
-                if (community.status === 'p') return `background: rgb(27, 187, 27)`;
-                if (community.status === 'r') return `background: black`;
-                if (community.status === 'n') return `background: rgb(255 194 21)`;
-                return `background: #bf1515`;
-            },
-            isLocked(community) {
-                if (community.status === 'r') return true;
-            },
-            cleanDate(data) {
-                return this.$dayjs(data).format("MMM DD, YYYY");
+            // async deleteCommunity(community) {
+            //     await axios.delete(`/communities/${community.slug}`)
+            //     .then( res => {
+            //         console.log(res.data);
+            //     })
+            // },
+            isPublic(community) {
+                if (community.status === 'p') return true;
             },
         }
 

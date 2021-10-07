@@ -14,11 +14,13 @@
     margin-bottom: 2rem;
     display: flex;
     justify-content: center;
-    cursor: pointer;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     align-items: center;
+}
+.default__image-upload.pointer {
+    cursor: pointer;
 }
 .default__image-upload svg {
     width: 16% !important;

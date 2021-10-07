@@ -61,9 +61,7 @@ class CommunityController extends Controller
      */
     public function show(Community $community)
     {
-        $shelves =  $community->shelves()->limit(3)->get()->map(function ($shelf, $key) {
-            return $shelf->setRelation('published_posts', $shelf->publishedPosts()->with('limitedCards')->paginate(4));
-        });
+        $shelves = $community->shelves()->with(['publishedPosts.limitedCards'])->limit(3)->get();
         $community->load('curators');
         return view('communities.show', compact('community', 'shelves'));
     }
@@ -77,7 +75,7 @@ class CommunityController extends Controller
     public function edit(Community $community)
     {
         $shelves = $community->shelves()->limit(3)->get()->map(function ($shelf, $key) {
-            return $shelf->setRelation('posts', $shelf->posts()->with('limitedCards')->paginate(4));
+            return $shelf->setRelation('posts', $shelf->posts()->with('cards')->paginate(4));
         });
         return view('communities.edit', compact('community', 'shelves'));
     }
@@ -106,7 +104,7 @@ class CommunityController extends Controller
     }
 
     /**
-     * Returns user back to homepage with a submitted popup
+     * Returns user back to community index with a submitted popup
      *
      * @param  \App\Event  $event
      * @return \Illuminate\Http\Response

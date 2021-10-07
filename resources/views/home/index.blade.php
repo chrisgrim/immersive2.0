@@ -63,30 +63,15 @@
             @if ( session()->exists( 'verifiy' )) 
                 <vue-email-verify :user="{{auth()->user()}}" message="verify"></vue-email-verify>
             @endif
-            <section 
-                class="section-b" 
-                style="background: url('/storage/website-files/header-image.jpg') center center / cover no-repeat;height:53vh;">
-                <div class="intro">
-                    <div class="name">
-                        <h3> Welcome to immersive theater</h3>
-                    </div>
-                </div>
-            </section>
             @if($staffpicks)
                 <index 
                     :categories="{{$categories}}" 
-                    :dock1="{{$dock1}}"
-                    :dock2="{{$dock2}}"
-                    :dock3="{{$dock3}}"
-                    :dock4="{{$dock4}}"
+                    :docks="{{$docks}}"
                     :tags="{{$tags}}" 
                     :staffpicks="{{$staffpicks}}"/>
             @else
                 <index 
-                    :dock1="{{$dock1}}"
-                    :dock2="{{$dock2}}"
-                    :dock3="{{$dock3}}"
-                    :dock4="{{$dock4}}"
+                    :docks="{{$docks}}"
                     :tags="{{$tags}}" 
                     :categories="{{$categories}}"/>
             @endif

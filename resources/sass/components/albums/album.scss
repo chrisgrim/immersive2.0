@@ -14,6 +14,8 @@
 }
 .album .row {
     white-space: nowrap;
+    scroll-snap-type: x mandatory;
+    scroll-padding: 2.4rem;
     overflow: visible;
     width: 100%;
     margin: 2rem -0.8rem 0 -0.8rem;
@@ -25,6 +27,9 @@
     width: 100%;
     flex: 0 0 auto;
     display: inline-block;
+/*    flex: 1 0 calc(100% - 8rem);*/
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
 }
 .album.three .col {
     width: 80%;

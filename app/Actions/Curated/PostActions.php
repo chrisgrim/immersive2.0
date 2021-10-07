@@ -29,7 +29,7 @@ class PostActions
             'shelf_id' => $request->shelf_id,
         ]);
 
-        if ($request->image) { ImageFile::saveImage($request, $post, 800, 500, 'post'); }
+        if ($request->image) { ImageFile::saveImage($request, $post, 900, 500, 'post'); }
 
         return $post;
     }
@@ -50,10 +50,12 @@ class PostActions
         $post->update($request->except(['image']));
         $post->update(['slug' => Str::slug($request->name) . '-' . $post->community->id]);
 
-        if ($request->image) { ImageFile::replaceImage($request, $post, 800, 500, 'post'); }
+        if ($request->image) { ImageFile::replaceImage($request, $post, 900, 500, 'post'); }
 
         if ($request->deleteImage) { 
-            ImageFile::deletePreviousImages($post); 
+            if ($post->image_type === 'u') {
+                ImageFile::deletePreviousImages($post); 
+            }
             ImageFile::clearImagePaths($post); 
         }
         

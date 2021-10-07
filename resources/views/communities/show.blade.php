@@ -22,7 +22,7 @@
                 :shelves="{{ $shelves }}" 
                 :value="{{ $community }}"/>
         @else
-            @if ( $community->curators->contains('id', auth()->user()->id) )
+            @can('update', $community)
                 <vue-community-show
                     :owner="true"
                     :shelves="{{ $shelves }}" 
@@ -32,7 +32,7 @@
                     :owner="false"
                     :shelves="{{ $shelves }}" 
                     :value="{{ $community }}" />
-            @endif
+            @endcan
         @endauth
     </div>
 @endsection

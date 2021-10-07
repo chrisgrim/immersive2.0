@@ -13,14 +13,27 @@
     background: #dedede;
 }
 .grid-image .first img {
-    margin-left: -30%;
     border-radius: 1rem;
     border: 1px solid white;
 }
-.grid-image .second img {
+.grid-image .first.one img {
+    margin-left: -0%;
+}
+.grid-image .first.two img {
     margin-left: -15%;
+}
+.grid-image .first.three img {
+    margin-left: -30%;
+}
+.grid-image .second img {
     border-radius: 1rem;
     border: 1px solid white;
+}
+.grid-image .second.two img {
+    margin-left: 0%;
+}
+.grid-image .second.three img {
+    margin-left: -15%;
 }
 .grid-image .third img {
     margin-left: 0%;

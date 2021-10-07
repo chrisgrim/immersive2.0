@@ -16,8 +16,8 @@ class ImageFile extends Model
     {
         $name = ImageFile::generateName($collection);
         $fileName = ImageFile::generateFileName($request, $name);
-        ImageFile::storeLargeImage($request, $collection, $name, $fileName, $width, $height, $type);
         ImageFile::storeSmallImage($request, $collection, $name, $fileName, $width/2, $height/2, $type);
+        ImageFile::storeLargeImage($request, $collection, $name, $fileName, $width, $height, $type);
         ImageFile::updateLargeImagePath($collection, $name, $type);
         ImageFile::updateThumbImagePath($collection, $name, $type);
     }
@@ -27,8 +27,8 @@ class ImageFile extends Model
         ImageFile::deletePreviousImages($collection);
         $name = ImageFile::generateName($collection);
         $fileName = ImageFile::generateFileName($request, $name);
-        ImageFile::storeLargeImage($request, $collection, $name, $fileName, $width, $height, $type);
         ImageFile::storeSmallImage($request, $collection, $name, $fileName, $width/2, $height/2, $type);
+        ImageFile::storeLargeImage($request, $collection, $name, $fileName, $width, $height, $type);
         ImageFile::updateLargeImagePath($collection, $name, $type);
         ImageFile::updateThumbImagePath($collection, $name, $type);
     }
@@ -45,9 +45,7 @@ class ImageFile extends Model
     public static function replaceCardImage($request, $collection, $width, $height, $type)
     {
         if ($collection->thumbImagePath) {
-            if (!Str::contains($collection->thumbImagePath, 'event-images')) { 
-                ImageFile::deletePreviousImages($collection);
-            }
+            ImageFile::deletePreviousImages($collection);
         }
         $name = ImageFile::generateName($collection);
         $fileName = ImageFile::generateFileName($request, $name);
@@ -58,6 +56,10 @@ class ImageFile extends Model
 
     public static function generateName($collection)
     {
+        if ($collection->event_id) {
+            $event = Event::find($collection->event_id);
+            return Str::slug($collection->name ? $collection->name . '-' . $collection->id : $event->name . '-' . $collection->id);
+        }
         return Str::slug($collection->name ? $collection->name . '-' . $collection->id : $collection->id);
     }
 

@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 
 class Card extends Model
 {
+    use \Staudenmeir\EloquentEagerLimit\HasEagerLimit;
     use HasFactory;
 
     protected $fillable = [ 'name', 'blurb', 'url', 'thumbImagePath', 'order', 'post_id', 'event_id', 'type' ];

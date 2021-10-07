@@ -74,6 +74,14 @@ class Community extends Model
     }
 
     /**
+     * Get the Docks of the Communities.
+     */
+    public function docks()
+    {
+        return $this->morphToMany('\App\Models\Featured\Dock', 'association')->using('App\Models\Featured\Association');
+    }
+
+    /**
      * Returns limited posts for the community .
      */
     public function limitedPosts()
@@ -87,6 +95,14 @@ class Community extends Model
     public function shelves()
     {
         return $this->hasMany(Shelf::class)->orderBy('order', 'ASC');
+    }
+
+    /**
+     * Returns community Shelves.
+     */
+    public function publishedShelves()
+    {
+        return $this->hasMany(Shelf::class)->orderBy('order', 'ASC')->where('status', 'p');
     }
 
     /**

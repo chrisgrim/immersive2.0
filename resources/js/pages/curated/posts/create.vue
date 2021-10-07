@@ -7,11 +7,12 @@
                         <input 
                             type="text" 
                             v-model="post.name"
-                            input="clearError"
+                            @input="clearError"
                             :class="{ 'error': $v.post.name.$error }"
                             placeholder="Post Name... ie: Top 20 Horror Events">
                         <div v-if="$v.post.name.$error" class="validation-error">
                             <p class="error" v-if="!$v.post.name.required">Please add a name.</p>
+                            <p class="error" v-if="!$v.post.name.serverError">Your community already has a post with a similar name</p>
                             <p class="error" v-if="!$v.post.name.maxLength">The name is too long.</p>
                         </div>
                     </div>
@@ -19,7 +20,7 @@
                         <input 
                             type="text" 
                             v-model="post.blurb"
-                            input="clearError"
+                            @input="clearError"
                             :class="{ 'error': $v.post.blurb.$error }"
                             placeholder="Tag Line">
                         <div v-if="$v.post.blurb.$error" class="validation-error">
@@ -34,6 +35,7 @@
                             :options="shelves"
                             :class="{ 'error': $v.post.shelf_id.$error }"
                             placeholder="Shelf"
+                            @input="clearError"
                             label="name" />
                         <div v-if="$v.post.shelf_id.$error" class="validation-error">
                             <p class="error" v-if="!$v.post.shelf_id.required">Please select the shelf.</p>
@@ -108,13 +110,20 @@
                     shelf_id: null,
                 }
             },
+            clearError() {
+                this.$v.post.touch
+                this.serverErrors = null
+            }
         },
 
         validations: {
             post: {
                 name: {
                     required,
-                    maxLength: maxLength(100)
+                    maxLength: maxLength(100),
+                    serverError() {
+                        return this.serverErrors && this.serverErrors.name ? false : true
+                    }
                 },
                 blurb: {
                     required,

@@ -7,6 +7,9 @@
             class="block">
             <template v-if="hasImage || onEdit && card.url">
                 <CardImage
+                    text="Image must be at least 800px by 450px"
+                    :height="450"
+                    :width="800"
                     :image="`/storage/${image}`"
                     :can-delete="card.type==='e'"
                     @onDelete="hideImage"

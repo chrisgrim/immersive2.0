@@ -22,7 +22,7 @@
             <modal-wrapper :user= "{{auth()->user()}}" loadmessage="submitted"></modal-wrapper>
         @endif 
         <vue-post-edit
-            :shelves="{{ $community->shelves }}"
+            :shelves="{{ $community->shelves()->where('status' , '!=' , 'a')->get() }}"
             :community="{{ $community }}" 
             :owner="true"
             :value="{{ $post }}" 

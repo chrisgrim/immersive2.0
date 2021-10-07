@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDocksTable extends Migration
+class CreateAssociationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreateDocksTable extends Migration
      */
     public function up()
     {
-        Schema::create('docks', function (Blueprint $table) {
+        Schema::create('associations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
-            $table->string('name', 50)->nullable();
-            $table->string('location', 50)->nullable();
-            $table->char('type', 1)->default('f');
-            $table->integer('order')->unsigned()->default(0);
+            $table->string('association_type');
+            $table->integer('association_id');
+            $table->integer('dock_id');
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ class CreateDocksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('docks');
+        Schema::dropIfExists('associations');
     }
 }

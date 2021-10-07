@@ -2,6 +2,9 @@
     <div class="post-card edit">
         <div class="header">
             <CardImage
+                text="Image must be at least 800px by 450px"
+                :height="450"
+                :width="800"
                 @addImage="addImage" />
         </div>
     </div>

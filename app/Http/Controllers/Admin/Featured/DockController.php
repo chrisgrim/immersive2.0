@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Featured;
+namespace App\Http\Controllers\Admin\Featured;
 
 use Illuminate\Http\Request;
 use App\Models\Featured\Dock;
 use App\Models\Curated\Community;
 use App\Models\Curated\Shelf;
 use App\Models\Organizer;
+use App\Actions\Admin\Featured\DockActions;
+use App\Http\Requests\Admin\DockUpdateRequest;
 use App\Http\Controllers\Controller;
 
 class DockController extends Controller
@@ -14,6 +16,7 @@ class DockController extends Controller
     public function __construct()
     {
         $this->middleware(['auth', 'verified'])->except('show');
+        $this->middleware('moderator');
     }
 
     /**
@@ -45,7 +48,7 @@ class DockController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Dock $dock)
+    public function update(DockUpdateRequest $request, Dock $dock)
     {
         $dock->update($request->all());
         return Dock::with(['posts', 'shelves', 'communities'])->orderBy('order', 'DESC')->get();
@@ -57,12 +60,9 @@ class DockController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function addShelf(Request $request, Dock $dock, Shelf $shelf)
+    public function addShelf(Dock $dock, Shelf $shelf, DockActions $dockActions)
     {
-        $dock->communities()->detach();
-        $dock->posts()->detach();
-        $dock->shelves()->detach();
-        $shelf->docks()->attach($dock);
+        $dockActions->addShelf($dock, $shelf);
         return Dock::with(['posts', 'shelves', 'communities'])->orderBy('order', 'DESC')->get();
     }
 
@@ -72,12 +72,9 @@ class DockController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function addCommunity(Request $request, Dock $dock, Community $community)
+    public function addCommunity(Dock $dock, Community $community, DockActions $dockActions)
     {
-        $dock->communities()->detach();
-        $dock->posts()->detach();
-        $dock->shelves()->detach();
-        $community->docks()->attach($dock);
+        $dockActions->addCommunity($dock, $community);
         return Dock::with(['posts', 'shelves', 'communities'])->orderBy('order', 'DESC')->get();
     }
 
@@ -87,12 +84,9 @@ class DockController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function addPost(Request $request, Dock $dock, Post $post)
+    public function addPost(Dock $dock, Post $post, DockActions $dockActions)
     {
-        $dock->communities()->detach();
-        $dock->posts()->detach();
-        $dock->shelves()->detach();
-        return $post->docks()->attach($dock);
+        $dockActions->addPost($dock, $post);
         return Dock::with(['posts', 'shelves', 'communities'])->orderBy('order', 'DESC')->get();
     }
 
@@ -102,11 +96,9 @@ class DockController extends Controller
      * @param  array  $input
      * @return \App\Models\Curated\Dock
      */
-    public function destroy(Dock $dock)
+    public function destroy(Dock $dock, DockActions $dockActions)
     {
-        $dock->posts()->detach();
-        $dock->shelves()->detach();
-        $dock->delete();
+        $dockActions->destroy($dock);
         return Dock::with(['posts', 'shelves', 'communities'])->orderBy('order', 'DESC')->get();
     }
 

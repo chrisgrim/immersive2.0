@@ -23,7 +23,12 @@
         @guest
             <modal-wrapper></modal-wrapper>
         @endguest
-        <vue-search-location user="{{ auth()->id() }}" :tags="{{ $tags }}" :searchedevents="{{ $searchedevents }}" :onlineevents="{{ $onlineevents }}" :categories="{{ $categories }}">
+        <vue-search-location 
+            user="{{ auth()->id() }}" 
+            :tags="{{ $tags }}" 
+            :searchedevents="{{ $searchedevents }}" 
+            :docks="{{ $docks }}" 
+            :categories="{{ $categories }}">
     </div>
 @endsection
 

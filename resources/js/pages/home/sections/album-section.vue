@@ -1,35 +1,33 @@
 <template>
-    <section class="section-a">
-        <div class="section-a__wrapper" style="margin-bottom:0rem;">
-            <div class="name">
-                <h2>{{ name }}</h2>
-            </div>
-            <div 
-                :class="number"
-                class="album image container">
-                <div class="row">
-                    <div 
-                        v-for="element in elements"
-                        :key="element.id"
-                        class="col">
-                        <div class="card">
-                            <a 
-                                :href="url(element)" 
-                                class="card-url" />
-                            <ImageArray 
-                                :community="element.community"
-                                :element="element" />
-                            <div class="card-body">
-                                <div class="name">
-                                    <p>{{ element.name }}</p>
-                                </div>
+    <div class="section-a__wrapper" style="margin-bottom:0rem;">
+        <div class="name">
+            <h2>{{ name }}</h2>
+        </div>
+        <div 
+            :class="number"
+            class="album image container">
+            <div class="row">
+                <div 
+                    v-for="element in elements.slice(0, count)"
+                    :key="element.id"
+                    class="col">
+                    <div class="card">
+                        <a 
+                            :href="url(element)" 
+                            class="card-url" />
+                        <ImageArray 
+                            :community="element.community"
+                            :element="element" />
+                        <div class="card-body">
+                            <div class="name">
+                                <p>{{ element.name }}</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 </template>
 
 <script>
@@ -69,6 +67,7 @@
                 shelf: this.dock.shelves.length,
                 community: this.dock.communities.length,
                 post: this.dock.posts.length,
+                count: this.number === 'four' ? 4 : 3
             }
         },
 

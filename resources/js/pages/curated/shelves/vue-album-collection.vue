@@ -1,5 +1,5 @@
 <template>
-    <div class="album four grid-image container">
+    <div class="album four grid-image vertical container">
         <div>
             <draggable
                 v-if="posts"
@@ -100,6 +100,7 @@
             async update() {
                 await axios.put(`/communities/${this.community.slug}/${this.selectedModal.slug}/update`, this.selectedModal)
                 .then( res => { 
+                    console.log(res.data);
                     location.reload()
                     // this.posts = this.posts.filter( post => post.id !== this.selectedModal.id)
                     // this.selectedModal = null

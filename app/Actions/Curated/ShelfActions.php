@@ -22,7 +22,7 @@ class ShelfActions
     public function create(Request $request, Community $community)
     {
         $community->shelves()->create(['user_id' => auth()->id()]);
-        return $community->shelves()->limit(3)->get()->map(function ($shelf, $key) {
+        return $community->shelves()->orderBy('status', 'DESC')->orderBy('order', 'DESC')->get()->map(function ($shelf, $key) {
             return $shelf->setRelation('posts', $shelf->posts()->paginate(4));
         });
     }

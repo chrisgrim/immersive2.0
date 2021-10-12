@@ -1,24 +1,6 @@
 @extends('layouts.master')
 
 @section('meta')
-    <script type="application/ld+json">
-        {
-        "@context":"http://schema.org",
-        "@type":"Organization",
-        "description": "{{$organizer->description}}",
-        "name": "{{$organizer->name}} {{ '- ' . \Illuminate\Support\Str::limit($organizer->description, 80)}}",
-        "sameAs": @json($organizer->getHandles()),
-        @if ($organizer->website) 
-            "url":"{{$organizer->website}}",
-        @else 
-            "url":"{{ url('/') }}/organizer/{{$organizer->slug}}",
-        @endif
-        @if ($organizer->largeImagePath) 
-            "logo":"{{ url('/') }}/storage/{{$organizer->largeImagePath}}"}
-        @else
-            "logo":"{{ url('/') }}/storage/website-files/schema-organizer.png"}
-        @endif
-    </script>
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:description" content="{{$organizer->description}}" />
@@ -42,8 +24,8 @@
         <meta property="og:image:secure_url" content="{{ url('/') }}/storage/{{$organizer->largeImagePath}}" />
         <meta name="twitter:image" content="{{ url('/') }}/storage/{{$organizer->largeImagePath}}" />
     @endif
-
     <title>{{$organizer->name}}</title>
+    <script type="application/ld+json">{"@context":"http://schema.org", "@type":"Organization", "description": "{{$organizer->description}}", "name": "{{$organizer->name}}{{'- ' . \Illuminate\Support\Str::limit($organizer->description, 80)}}", "sameAs": @json($organizer->getHandles()), @if ($organizer->website) "url":"{{$organizer->website}}", @else "url":"{{url('/')}}/organizer/{{$organizer->slug}}", @endif @if ($organizer->largeImagePath) "logo":"{{url('/')}}/storage/{{$organizer->largeImagePath}}"}@else "logo":"{{url('/')}}/storage/website-files/schema-organizer.png"}@endif </script>
     <script> window.myToken =  <?php echo json_encode(['csrfToken' => csrf_token()]); ?></script>
     <link href="{{ mix('/assets/app.css') }}" rel="stylesheet" onload="this.media='all'; this.onload=null;">
     <link href="{{ mix('/assets/app-lite.css') }}" rel="stylesheet" onload="this.media='all'; this.onload=null;">

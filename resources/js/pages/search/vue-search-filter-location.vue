@@ -26,7 +26,6 @@
 </template>
 
 <script>
-    import SearchBar from '../../components/search-bars/search-location.vue'
     import searchBasicsMixin from '../../mixins/search-basics-mixin'
     import mobile from '../../mixins/mobile'
     import VueFilterDates from './filter/vue-filter-dates.vue'
@@ -38,7 +37,7 @@
 
         props:['value', 'filter', 'categories', 'tags', 'map'],
 
-        components: { SearchBar, VueFilterDates, VueFilterPrice, VueFilterCategory, VueFilterTag },
+        components: { VueFilterDates, VueFilterPrice, VueFilterCategory, VueFilterTag },
 
         mixins: [ searchBasicsMixin, mobile ],
 

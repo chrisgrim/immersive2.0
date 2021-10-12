@@ -13,11 +13,9 @@
                     <EventDetails :event="event" />
                 </div>
                 <div class="lay-b__right">
-                    <div class="es__quickbuy--body">
-                        <EventQuickBuy
-                            :tickets="tickets"
-                            :event="loadevent" />
-                    </div>
+                    <EventQuickBuy
+                        :tickets="tickets"
+                        :event="loadevent" />
                 </div>
             </div>
         </div>

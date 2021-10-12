@@ -15,6 +15,9 @@
     height: 22rem;
     overflow: hidden;
 }
+.post-header.empty {
+    height: 6rem;
+}
 .post-header img{
     -o-object-fit: cover;
     object-fit: cover;

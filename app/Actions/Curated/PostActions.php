@@ -42,11 +42,6 @@ class PostActions
      */
     public function update(Request $request, Post $post)
     {
-        // if ($post->section_id !== $request->section_id) {
-        //     $post->featured()->first()->sections()->detach($post->section_id);
-        //     $post->featured()->first()->sections()->attach($request->section_id);
-        // }
-
         $post->update($request->except(['image']));
         $post->update(['slug' => Str::slug($request->name) . '-' . $post->community->id]);
 
@@ -54,7 +49,9 @@ class PostActions
 
         if ($request->deleteImage) { 
             if ($post->image_type === 'u') {
-                ImageFile::deletePreviousImages($post); 
+                if (!Str::contains($post->thumbImagePath, 'event-images')) { 
+                    ImageFile::deletePreviousImages($post); 
+                }
             }
             ImageFile::clearImagePaths($post); 
         }

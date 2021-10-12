@@ -1,36 +1,34 @@
 <template>
-    <section class="section-a">
-        <div class="section-a__wrapper">
-            <div class="header-a">
-                <div class="header-a__content">
-                    <div class="header-a__wrapper">
-                        <div class="header-a__name">
-                            <p>Spotlight: </p>
-                            <h2>{{ name }}</h2>
-                        </div>
-                        <div class="header-a__blurb">
-                            <p>{{ element.blurb }}</p>
-                        </div>
-                        <a :href="url()">
-                            <button>
-                                Check it out
-                            </button>
-                        </a>
+    <div class="section-a__wrapper">
+        <div class="header-a">
+            <div class="header-a__content">
+                <div class="header-a__wrapper">
+                    <div class="header-a__name">
+                        <p>Spotlight: </p>
+                        <h2>{{ name }}</h2>
                     </div>
-                </div>
-                <div class="header-a__image">
-                    <picture>
-                        <source 
-                            type="image/webp" 
-                            :srcset="`/storage/${element.thumbImagePath}`"> 
-                        <img 
-                            :src="`/storage/${element.thumbImagePath.slice(0, -4)}jpg`" 
-                            :alt="`${element.name} Community`">
-                    </picture>
+                    <div class="header-a__blurb">
+                        <p>{{ element.blurb }}</p>
+                    </div>
+                    <a :href="url()">
+                        <button>
+                            Check it out
+                        </button>
+                    </a>
                 </div>
             </div>
+            <div class="header-a__image">
+                <picture>
+                    <source 
+                        type="image/webp" 
+                        :srcset="`/storage/${element.thumbImagePath}`"> 
+                    <img 
+                        :src="`/storage/${element.thumbImagePath.slice(0, -4)}jpg`" 
+                        :alt="`${element.name} Community`">
+                </picture>
+            </div>
         </div>
-    </section>
+    </div>
 </template>
 
 <script>

@@ -143,10 +143,7 @@ export default {
         },
 
         updateEvent(value) {
-            console.log(this.editEvent);
-            console.log(value);
             this.editEvent = value;
-            console.log(this.editEvent);
         },
 
         changeShowType() {

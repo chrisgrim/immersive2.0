@@ -95,7 +95,6 @@
                 .then( res => { 
                     this.$emit('update', res.data);
                 })
-                .catch(err => { this.onErrors(err) });
             },
             async onSearch (query) {
                 await axios.get(`/api/search/${this.type}`, { params: { keywords: query } })

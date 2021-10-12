@@ -73,20 +73,31 @@
                                 @selectpage="selectPage" />
                             <template v-if="!mobile">
                                 <div class="event-search-list">
-                                    <div class="title">
-                                        <h3>Online Events</h3>
-                                    </div>
-                                    <template v-if="onlineEvents.data">
-                                        <VueEventIndex 
-                                            col="three"
-                                            :events="onlineEvents.data" />
+                                    <template v-if="docks && docks.length">
+                                        <div 
+                                            :key="dock.id"
+                                            v-for="dock in docks">
+                                            <template v-if="dock.type === 'h'">
+                                                <Hero :dock="dock" />
+                                            </template>
+                                            <template v-if="dock.type === 'i'">
+                                                <Icons :dock="dock" />
+                                            </template>
+                                            <template v-if="dock.type === 'f'">
+                                                <Album 
+                                                    number="four"
+                                                    :dock="dock" />
+                                            </template>
+                                            <template v-if="dock.type === 't'">
+                                                <Album 
+                                                    number="three"
+                                                    :dock="dock" />
+                                            </template>
+                                            <template v-if="dock.type === 's'">
+                                                <Spotlight :dock="dock" />
+                                            </template>
+                                        </div>
                                     </template>
-                                    <div>
-                                        <pagination 
-                                            :list="onlineEvents"
-                                            :limit="2"
-                                            @selectpage="selectOnlinePage" />
-                                    </div>
                                 </div>
                             </template>
                         </div>
@@ -109,20 +120,22 @@
     import VueList from './components/album-location-search.vue'
     import Pagination  from '../events/components/pagination.vue'
     import searchBasicsMixin from '../../mixins/search-basics-mixin'
-    import VueEventIndex from '../events/components/index-item.vue'
     import MapSearch from './components/vue-map.vue'
+    import Hero from '../home/sections/hero-section.vue'
+    import Icons from '../home/sections/icons-section.vue'
+    import Album from '../home/sections/album-section.vue'
+    import Spotlight from '../home/sections/spotlight-section.vue'
 
     export default {
-        components: { SearchFilter, VueList, Pagination, VueEventIndex, MapSearch, MobileSearchNav, MobileSearchResults },
+        components: { Hero, Icons, Album, Spotlight,SearchFilter, VueList, Pagination , MapSearch, MobileSearchNav, MobileSearchResults },
 
         mixins: [ searchBasicsMixin ],
 
-        props:['searchedevents','onlineevents','categories','user', 'tags'],
+        props:['searchedevents','docks','categories','user', 'tags'],
 
         data() {
             return {
                 events: this.searchedevents,
-                onlineEvents: this.onlineevents,
                 mobile: window.innerWidth < 768,
                 fullMap: false,
                 wideMap: false,
@@ -155,12 +168,6 @@
                 this.fullMap = false
                 document.getElementById("header").classList.remove("hidden");
             },
-            // async nextOnline() {
-            //     await axios.post(`/api/search/online?page=${this.onlinePaginate}`)
-            //     .then(res => { 
-            //         this.onlineEvents = res.data;
-            //     })
-            // },
             selectPage (page) {
                 this.paginate = page
             },

@@ -46,7 +46,11 @@
 
         methods: {
             update(val) {
-                this.isLogin = val === 'login' ? true : false
+                if (this.timeout) 
+                    clearTimeout(this.timeout); 
+                this.timeout = setTimeout(() => {
+                    this.isLogin = val === 'login' ? true : false
+                }, 200); // delay
             },
             closeWindow() {
                 document.body.classList.remove('noscroll')
@@ -58,7 +62,7 @@
             },
             onClickOutside(event) {
                 let arr =  this.$refs.wrapper;
-                if (!arr || arr.contains(event.target)) return;
+                if (!arr || arr.contains(event.target)) return 
                 this.$emit('close', false);
             },
 

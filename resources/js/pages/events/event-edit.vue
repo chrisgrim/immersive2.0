@@ -52,7 +52,9 @@
                     </div>
                 </div>
 
-                <div class="data-grid">
+                <div 
+                    v-if="organizer.events.length"
+                    class="data-grid">
                     <div class="data-grid__row header">
                         <p>Status</p>
                         <p>Event</p>

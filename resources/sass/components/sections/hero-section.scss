@@ -13,13 +13,22 @@
 .hero-section .title h2 {
     font-size: 2.2rem;
 }
+.hero-section .title .nav-scroll {
+    display: none;
+}
 
 @media screen and (min-width: 768px) {
-    .hero-section {
-        padding:0 3rem;
+    .hero-section .title {
+        padding: 0 3rem;
+        margin: 2rem 0;
+        display: flex;
+        justify-content: space-between;
     }
     .hero-section__wrapper {
         margin: 4rem 0 6rem 0;
+    }
+    .hero-section .title .nav-scroll {
+        display: inline-block;
     }
 }
 @media only screen and (min-width: 1160px) {

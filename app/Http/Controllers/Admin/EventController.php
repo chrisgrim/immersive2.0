@@ -16,7 +16,6 @@ use App\Mail\EventApproved;
 use App\Mail\EventRejected;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\DB;
-
 use Illuminate\Http\Request;
 
 class EventController extends Controller
@@ -131,15 +130,11 @@ class EventController extends Controller
     public function approve(Event $event)
     {
         $event = $event->load('user', 'timezone','organizer');
-
         if ($event->organizer->status != 'p') {
             $event->organizer->update(['status' => 'p']);
         }
-        
         $slug = Event::finalSlug($event);
-        
         MakeImage::finalize($event, $slug, 'event', null);
-
         if ($event->embargo_date && $event->embargo_date > Carbon::now()) {
             $event->update([
                 'status' => 'e',
@@ -160,12 +155,10 @@ class EventController extends Controller
                 Message::eventnotification($event, 'Thanks, your event has been approved!', $slug);
             }
         }
-
         if(auth()->id() != $event->user->id ) {
             Mail::to($event->user)->send(new EventApproved($event));
         }
-
-        AdminArea::storeAirtable($event);
+        // AdminArea::storeAirtable($event);
     }
 
     /**

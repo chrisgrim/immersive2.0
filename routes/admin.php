@@ -34,13 +34,13 @@ Route::POST('admin/communities/{community}/approve', 'Admin\CommunityController@
 Route::POST('admin/communities/{community}/reject', 'Admin\CommunityController@reject');
 
 // ----------   Docks -------
-Route::GET('/admin/docks', 'Featured\DockController@index');
-Route::POST('/admin/docks', 'Featured\DockController@store');
-Route::POST('/admin/docks/{dock}', 'Featured\DockController@update');
-Route::POST('/admin/docks/{dock}/shelf/{shelf}', 'Featured\DockController@addShelf');
-Route::POST('/admin/docks/{dock}/community/{community}', 'Featured\DockController@addCommunity');
-Route::POST('/admin/docks/{dock}/post/{post}', 'Featured\DockController@addPost');
-Route::DELETE('/admin/docks/{dock}', 'Featured\DockController@destroy');
+Route::GET('/admin/docks', 'Admin\Featured\DockController@index');
+Route::POST('/admin/docks', 'Admin\Featured\DockController@store');
+Route::POST('/admin/docks/{dock}', 'Admin\Featured\DockController@update');
+Route::POST('/admin/docks/{dock}/shelf/{shelf}', 'Admin\Featured\DockController@addShelf');
+Route::POST('/admin/docks/{dock}/community/{community}', 'Admin\Featured\DockController@addCommunity');
+Route::POST('/admin/docks/{dock}/post/{post}', 'Admin\Featured\DockController@addPost');
+Route::DELETE('/admin/docks/{dock}', 'Admin\Featured\DockController@destroy');
 
 //Admin Users
 Route::GET('/admin/users', 'Admin\UsersController@index');

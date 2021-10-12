@@ -71,7 +71,7 @@
                                     :locked="inputVal.thumbImagePath ? true :false"
                                     @onDelete="deleteImage"
                                     :can-delete="true"
-                                    :image="inputVal.thumbImagePath ? `/storage/${inputVal.thumbImagePath}` : null"
+                                    :image="value.thumbImagePath ? `/storage/${inputVal.thumbImagePath}` : null"
                                     @addImage="addImage" />
                             </template>
                         </div>
@@ -81,7 +81,7 @@
                                 {{ postType }}
                             </button>
                         </div>
-                        <div>
+                        <div v-if="!value.thumbImagePath">
                             Use Event Image
                             <v-select
                                 v-model="searchInput"

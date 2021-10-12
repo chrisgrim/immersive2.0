@@ -23,7 +23,11 @@
         @guest
             <modal-wrapper></modal-wrapper>
         @endguest
-        <vue-search-online user="{{ auth()->id() }}" :tags="{{ $tags }}" :onlineevents="{{ $onlineevents }}" :categories="{{ $categories }}">
+        <vue-search-online 
+            user="{{ auth()->id() }}" 
+            :tags="{{ $tags }}" 
+            :onlineevents="{{ $onlineevents }}" 
+            :categories="{{ $categories }}">
     </div>
 @endsection
 

@@ -9,20 +9,27 @@
     overflow: auto;
 }
 .nav-search__options .header {
-    display: grid;
+    display: flex;
+    justify-content: space-between;
     width: 100%;
-    height: 6rem;
-    grid-template-columns: 5rem auto 8rem;
+    height: 7.5rem;
     align-items: center;
     border-bottom: 1px solid rgb(235, 235, 235);
     text-align: center;
+    padding: 2rem;
 }
 .nav-search__options button.svg {
     border: 0;
     padding: 1rem 0;
+    width: 5rem;
+    height: 5rem;
     display: flex;
     justify-content: center;
+    align-items: center;
     background: 0;
+}
+.nav-search__options button.svg.close {
+    margin-left: -1rem;
 }
 .nav-search__options svg {
     width: 2rem;

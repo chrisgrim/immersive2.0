@@ -13,6 +13,7 @@
     overflow-x: auto;
     display: flex;
     scroll-padding: 2.4rem;
+    scroll-behavior: smooth;
     height: calc(1.25 * (100vw - 5rem));
 }
 .album-c .col {
@@ -109,25 +110,27 @@
     color: #222222;
 }
 
-@media screen and (min-width: 744px) {
+@media screen and (min-width: 768px) {
     .album-c {
         height: 33rem;
     }
     .album-c .row {
         height: initial;
+        scroll-padding:3rem;
     }
     .album-c .col {
         flex: 1 0 calc(50% - 9rem);
         min-width: 48rem;
-        max-width: 59rem;
+        max-width: 68rem;
     }
     .album-c .col.first {
         min-width: calc(48rem + 4rem);
         flex: 1 0 calc(50% - 1rem);
-        padding-left: 8rem;
+        padding-left: 3rem;
     }
     .album-c .col.last {
         min-width: calc(48rem + 4rem);
+        padding-right: 3rem;
     }
     .album-c .card {
         height: 33rem;
@@ -137,18 +140,20 @@
     }
 }
 
-@media screen and (min-width: 1128px) {
+@media screen and (min-width: 1160px) {
+    .album-c .row {
+        scroll-padding:8rem;
+    }
     .album-c .col {
-        flex: 1 0 calc(50% - 9rem);
+        flex: 1 0 calc(47% - 9rem);
     }
     .album-c .col.first {
-        max-width: calc(60rem + max(8rem, calc((100vw - 160rem) / 2)));
-        flex: 1 0 calc(50% - 1rem);
+        flex: 1 0 calc(47% - 1rem);
         padding-left: 8rem;
     }
     .album-c .col.last {
-        max-width: calc(60rem + max(8rem, calc((100vw - 160rem) / 2)));
-        flex: 1 0 calc(50% - 1rem);
+        /*max-width: calc(60rem + max(8rem, calc((100vw - 160rem) / 2)));*/
+        flex: 1 0 calc(47% - 1rem);
         padding-right: 8rem;
     }
     .album-c .card-body .wrapper {

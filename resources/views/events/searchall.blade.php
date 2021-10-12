@@ -23,7 +23,11 @@
         @guest
             <modal-wrapper></modal-wrapper>
         @endguest
-        <vue-search-all user="{{ auth()->id() }}" :tags="{{ $tags }}" :allevents="{{ $allevents }}" :categories="{{ $categories }}">
+        <vue-search-all 
+            user="{{ auth()->id() }}" 
+            :tags="{{ $tags }}" 
+            :allevents="{{ $allevents }}" 
+            :categories="{{ $categories }}">
     </div>
 @endsection
 

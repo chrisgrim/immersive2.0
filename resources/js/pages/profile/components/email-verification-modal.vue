@@ -1,5 +1,7 @@
 <template>
-    <div class="email-verification modal">
+    <div 
+        v-if="visible"
+        class="email-verification modal">
         <div ref="verify" class="wrapper">
             <div class="header">
                 <button @click="onClose">
@@ -38,13 +40,14 @@
 
         data() {
             return {
+                visible: true
             }
         },
 
         methods: {
             async resend() {
                 await axios.post(`/email/verification-notification`)
-                .then(response => { this.onClose() })
+                .then( setTimeout(() => this.onClose(), 300) )
             },
             onClickOutside(event) {
                 let panel =  this.$refs.verify;
@@ -52,7 +55,7 @@
                 this.onClose()
             },
             onClose() {
-                this.$emit('close');
+                this.visible = false
             }
         },
 

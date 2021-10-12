@@ -64,6 +64,13 @@ section.event-enter-showdates {
     grid-column-end: 3;
 }
 
+section.event-enter-showdates .week-calendar__day {
+    height: 7rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 section.ticket-section {
     padding-bottom: 5rem;
 }

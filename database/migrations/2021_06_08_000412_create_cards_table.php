@@ -17,6 +17,7 @@ class CreateCardsTable extends Migration
             $table->id();
             $table->foreignId('post_id');
             $table->foreignId('event_id')->nullable();
+            $table->foreignId('organizer_id')->nullable();
             $table->string('name')->nullable();
             $table->mediumText('blurb')->nullable();
             $table->string('url')->nullable();

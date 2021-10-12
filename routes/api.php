@@ -26,7 +26,7 @@ Route::GET('search/navbar/location', 'Search\SearchController@location');
 Route::GET('search/navbar/events', 'Search\SearchController@events');
 Route::GET('search/navbar/tags', 'Search\SearchController@tags');
 Route::POST('search/mapboundary', 'Search\EventController@mapBoundary');
-Route::POST('search/online', 'Search\OnlineSearchController@fetch');
+Route::POST('search/online', 'Search\EventController@online');
 Route::POST('search/all', 'Search\EventController@fetch');
 
 

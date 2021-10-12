@@ -1,8 +1,33 @@
+.btn {
+    padding: 0;
+}
 .btn.rounded {
     border-radius: 5rem;
 }
+.btn.round.five {
+    width:5rem;
+    height:5rem;
+    border-radius: 5rem;
+}
+.btn.round.four {
+    width:4rem;
+    height:4rem;
+    border-radius: 5rem;
+}
+.btn.round.three {
+    width:3rem;
+    height:3rem;
+    border-radius: 5rem;
+}
+.btn.brd-grey {
+    border-color: rgb(221, 221, 221)
+}
 .btn.caps{
     text-transform: uppercase;
+}
+.btn svg {
+    width: 50%;
+    height: 100%;
 }
 .btn-borderless {
     border:0;

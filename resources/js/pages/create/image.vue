@@ -48,7 +48,7 @@
                     text="Image must be at least 1200px by 450px"
                     :height="450"
                     :width="1200"
-                    :image="`/storage/${event.largeImagePath}`"
+                    :image="event.largeImagePath ? `/storage/${event.largeImagePath}` : null"
                     :external-submit="checkImage"
                     @addImage="addImage" />
             </div>

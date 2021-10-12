@@ -8,34 +8,34 @@
     grid-column-gap: 1.4rem;
     -webkit-overflow-scrolling: touch;
     -ms-overflow-style: none;
+    margin-top: 2rem;
 }
 .album.container {
     width: 100%
 }
 .album .row {
-    white-space: nowrap;
+    scroll-behavior: smooth;
     scroll-snap-type: x mandatory;
-    scroll-padding: 2.4rem;
-    overflow: visible;
+    scroll-padding: 1rem;
+    overflow: auto;
     width: 100%;
     margin: 2rem -0.8rem 0 -0.8rem;
+    display: flex;
 }
 .album .col {
     padding: 0 0.8rem;
     position: relative;
     display: flex;
     width: 100%;
-    flex: 0 0 auto;
-    display: inline-block;
-/*    flex: 1 0 calc(100% - 8rem);*/
+    flex: 1 0 calc(100% - 6rem);
     scroll-snap-align: start;
     scroll-snap-stop: always;
 }
 .album.three .col {
-    width: 80%;
+    width: 100%;
 }
 .album.four .col {
-    width: 80%;
+    width: 100%;
 }
 .album .card {
     position: relative;
@@ -141,15 +141,19 @@
         width: 100%;
         overflow: visible;
         white-space: inherit;
+        margin-top: 3rem;
     }
     .album .row {
+        display: flex;
         white-space: inherit;
     }
     .album.three .col {
         width: 50%;
+        flex: 0 1 50%;
     }
     .album.four .col {
         width: 33.3333333333%;
+        flex: 0 1 33.3333333333%;
     }
     .album .card:hover div.heart {
         visibility: visible;
@@ -160,8 +164,10 @@
 @media screen and (min-width: 1280px) {
     .album.three .col {
         width: 33.3333333333%;
+        flex: 0 1 33.3333333333%;
     }
     .album.four .col {
         width: 25%;
+        flex: 0 1 25%;
     }
 }

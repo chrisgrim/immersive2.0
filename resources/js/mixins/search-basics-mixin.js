@@ -38,7 +38,9 @@ export default {
             if (this.filter === 'all') {
                 return history.pushState(null, null,`/index/search-all?${content}`)
             }
-            return history.pushState(null, null,`/index/search-online?${content}`)
+            if (this.filter === 'online') {
+                return history.pushState(null, null,`/index/search-online?${content}`)
+            }
         },
     }
 }

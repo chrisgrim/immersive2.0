@@ -1,0 +1,51 @@
+.online.search {
+    margin-top: 9rem;
+}
+.online .search-nav .placeholder {
+    background: white;
+    border-radius: 0;
+    width: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: none;
+    border-color: rgba(0, 0, 0, 0.04);
+    align-items: center;
+    padding: 2rem;
+    height: 7.5rem;
+}
+.online .search-nav::after {
+    box-shadow: rgb(0 0 0 / 8%) 0px 1px 12px;
+    background: rgb(255, 255, 255);
+    z-index: -3;
+    box-shadow: rgb(0 0 0 / 8%) 0px 1px 0px;
+}
+.online .search-nav.open::after {
+    transform: scaleY(2);
+}
+.online .search-nav .placeholder .dates  {
+    position: absolute;
+    left: 7rem;
+    text-decoration: underline;
+}
+.online .search-nav .placeholder p {
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+.online .search-nav button.filter.round.dates {
+    border-radius: 1rem;
+}
+.online .search-nav .wrapper {
+    margin: 1rem 2rem;
+}
+.online .search-nav button.svg.arrow {
+    margin-left: -1rem;
+}
+.online .search-nav button.svg.options {
+    margin-right: -1rem;
+}
+@media screen and (min-width: 768px) {
+    .online.search {
+        margin-top: 0;
+    }
+}

@@ -8,6 +8,7 @@ use App\Models\Featured\Section;
 use App\Models\Featured\Feature;
 use App\Models\Curated\Post;
 use App\Models\Event;
+use App\Models\User;
 use Illuminate\Validation\ValidationException;
 use App\Http\Requests\CommunityStoreRequest;
 use App\Actions\Curated\CommunityActions;
@@ -74,7 +75,7 @@ class CommunityController extends Controller
      */
     public function edit(Community $community)
     {
-        $shelves = $community->shelves()->limit(3)->get()->map(function ($shelf, $key) {
+        $shelves = $community->shelves()->orderBy('status', 'DESC')->orderBy('order', 'DESC')->get()->map(function ($shelf, $key) {
             return $shelf->setRelation('posts', $shelf->posts()->with('cards')->paginate(4));
         });
         return view('communities.edit', compact('community', 'shelves'));
@@ -122,7 +123,9 @@ class CommunityController extends Controller
      */
     public function addCurator(Request $request, Community $community,  CommunityActions $communityActions)
     {
-        return $communityActions->addCurator($request, $community);
+        $curator =  User::where('email', '=', $request->email)->first();
+        if (!$curator) { throw ValidationException::withMessages(['user' => 'No User exists with that email']);}
+        return $communityActions->addCurator($request, $community, $curator);
     }
 
     /**

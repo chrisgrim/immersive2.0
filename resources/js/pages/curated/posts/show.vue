@@ -34,6 +34,9 @@
                     </picture>
                 </div>
             </template>
+            <template v-else>
+                <div class="post-header empty" />
+            </template>
         </div>
         <div class="lay-a">
             <div class="wrapper">

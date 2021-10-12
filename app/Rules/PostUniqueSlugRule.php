@@ -5,6 +5,7 @@ namespace App\Rules;
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Support\Str;
 Use App\Models\Curated\Post;
+Use App\Models\Curated\Community;
 use Illuminate\Support\Facades\Log;
 
 class PostUniqueSlugRule implements Rule
@@ -30,9 +31,9 @@ class PostUniqueSlugRule implements Rule
      */
     public function passes($attribute, $value)
     {
-        if (Post::where('slug', '=', Str::slug($this->name . '-' . $this->community->id))->exists()) {
+        if (Post::where('slug', '=', Str::slug($this->name . '-' . $this->community['id']))->exists()) {
             if (!$this->post) { return false; }
-            if (Post::where('slug', '=', Str::slug($this->name . '-' . $this->community->id))->first()->id === $this->post->id) {
+            if (Post::where('slug', '=', Str::slug($this->name . '-' . $this->community['id']))->first()->id === $this->post->id) {
                 return true;
             } else {
                 return false;

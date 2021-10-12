@@ -11,23 +11,33 @@
                 :key="dock.id"
                 v-for="dock in docks">
                 <template v-if="dock.type === 'h'">
-                    <Hero :dock="dock" />
+                    <div class="hero-section">
+                        <Hero :dock="dock" />
+                    </div>
                 </template>
                 <template v-if="dock.type === 'i'">
-                    <Icons :dock="dock" />
+                    <div class="section-a">
+                        <Icons :dock="dock" />
+                    </div>
                 </template>
                 <template v-if="dock.type === 'f'">
-                    <Album 
-                        number="four"
-                        :dock="dock" />
+                    <div class="section-a">
+                        <Album 
+                            number="four"
+                            :dock="dock" />
+                    </div>
                 </template>
                 <template v-if="dock.type === 't'">
-                    <Album 
-                        number="three"
-                        :dock="dock" />
+                    <div class="section-a">
+                        <Album 
+                            number="three"
+                            :dock="dock" />
+                    </div>
                 </template>
                 <template v-if="dock.type === 's'">
-                    <Spotlight :dock="dock" />
+                    <div class="section-a">
+                        <Spotlight :dock="dock" />
+                    </div>
                 </template>
             </div>
         </template>
@@ -87,8 +97,8 @@
         },
 
         methods: {
-            
         },
+
 
     };
 </script>

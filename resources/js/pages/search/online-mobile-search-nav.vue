@@ -14,11 +14,6 @@
                     </button>
                     <div 
                         @click="showSearch"
-                        class="location">
-                        <p>{{ city }}</p>
-                    </div>
-                    <div 
-                        @click="showSearch"
                         class="dates">
                         <template v-if="naturalDate">
                             <p>{{ naturalDate }}</p>
@@ -59,7 +54,6 @@
                     </button>
                 </div>
                 <div class="wrapper">
-                    <SearchBar :icon="true" />
                     <VueFilterDates
                         :mobile="isMobile()"
                         v-model="data.dates"
@@ -77,7 +71,6 @@
 </template>
 
 <script>
-    import SearchBar from '../../components/search-bars/search-location.vue'
     import searchBasicsMixin from '../../mixins/search-basics-mixin'
     import mobile from '../../mixins/mobile'
     import SearchOptions from './components/mobile-options.vue'
@@ -85,9 +78,9 @@
     
     export default {
 
-        props:['value', 'filter', 'categories', 'tags', 'map', 'mapSearch'],
+        props:['value', 'filter', 'categories', 'tags'],
 
-        components: { SearchBar, VueFilterDates, SearchOptions },
+        components: { VueFilterDates, SearchOptions },
 
         mixins: [ searchBasicsMixin, mobile ],
 
@@ -116,18 +109,11 @@
                 options: false,
                 scroll: false,
                 mobile: window.innerWidth < 768,
-                city: new URL(window.location.href).searchParams.get("city") ? new URL(window.location.href).searchParams.get("city") : 'Start your search',
                 data: {
-                    mapboundary: this.initilizeBoundaries(),
                     category: this.initilizeCategory(),
                     dates: this.initilizeDates(),
                     price: this.initilizePrice(),
                     tag: this.initilizeTag(),
-                    lat: this.initilizeLatitude(),
-                    lng: this.initilizeLongitude(),
-                    zoom: this.initilizeZoom(),
-                    center: this.initilizeCenter(),
-                    live: new URL(window.location.href).searchParams.get("live")
                 }
             }
         },
@@ -135,24 +121,15 @@
         methods: {
             async submit() {
                 this.inputVal = 1
-                await axios.post(`/api/search/mapboundary?page=${this.value}`, this.data)
-                .then( res => { this.$emit('update', res.data) })
+                await axios.post(`/api/search/online?page=${this.value}`, this.data)
+                .then( res => {
+                    this.$emit('update', res.data) 
+                })
                 this.open = false
                 this.addPushState()
             },
             onBack() {
                 document.referrer == "" ? window.location.href = '/' : window.history.back()
-            },
-            handleScroll () {
-                this.scroll = window.pageYOffset > 10
-                if (this.open) { this.open = false }
-            },
-            mapUpdate() {
-                this.data.mapboundary = this.map.currentBounds;
-                this.data.center = this.map.currentCenter;
-                this.data.zoom = this.map.zoom;
-                this.data.live = this.map.live;
-                this.debounce()
             },
             debounce() {
                 if (this.timeout) 
@@ -166,6 +143,10 @@
             },
             hideSearch() {
                 this.open = false
+            },
+            handleScroll () {
+                this.scroll = window.pageYOffset > 10
+                if (this.open) { this.open = false }
             },
             showOptions() {
                 this.options = true
@@ -197,52 +178,13 @@
             initilizeDates() {
                 return new URL(window.location.href).searchParams.get("start") ? [new URL(window.location.href).searchParams.get("start"), new URL(window.location.href).searchParams.get("end")] : []
             },
-            initilizeLatitude() {
-                return new URL(window.location.href).searchParams.get("lat") ? new URL(window.location.href).searchParams.get("lat") : null
-            },
-            initilizeLongitude() {
-                return new URL(window.location.href).searchParams.get("lng") ? new URL(window.location.href).searchParams.get("lng") : null
-            },
-            initilizeZoom() {
-                return new URL(window.location.href).searchParams.get("zoom") ? new URL(window.location.href).searchParams.get("zoom") : null
-            },
-            initilizeCenter() {
-                if (!new URL(window.location.href).searchParams.get("Clat")) { return null }
-                return {
-                    lat: parseFloat(new URL(window.location.href).searchParams.get("Clat")),
-                    lng: parseFloat(new URL(window.location.href).searchParams.get("Clng"))
-                }
-            },
-            initilizeBoundaries() {
-                if (!new URL(window.location.href).searchParams.get("NElat")) { return null }
-                return {
-                    _northEast: {
-                        lat: parseFloat(new URL(window.location.href).searchParams.get("NElat")),
-                        lng: parseFloat(new URL(window.location.href).searchParams.get("NElng"))
-                    },
-                    _southWest: {
-                        lat: parseFloat(new URL(window.location.href).searchParams.get("SWlat")),
-                        lng: parseFloat(new URL(window.location.href).searchParams.get("SWlng"))
-                    }
-                }
-            },
         },
-
-        watch: {
-            mapSearch() {
-                if (!this.map.live) { return }
-                this.mapUpdate();
-            },
-        },
-
         created () {
             window.addEventListener('scroll', this.handleScroll);
         },
         destroyed () {
             window.removeEventListener('scroll', this.handleScroll);
         }
-
-
 }
     
 </script>

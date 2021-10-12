@@ -184,7 +184,7 @@ class SearchController extends Controller
         };
     }    
     /*
-     * Update the order for sections
+     * Search for communities
     */
     public function community(Request $request)
     {
@@ -203,7 +203,7 @@ class SearchController extends Controller
         return $val->matches();
     }
     /*
-     * Update the order for sections
+     * search for shelves
     */
     public function shelf(Request $request)
     {

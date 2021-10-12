@@ -17,7 +17,7 @@ class CreateDocksTable extends Migration
             $table->id();
             $table->foreignId('user_id');
             $table->string('name', 50)->nullable();
-            $table->string('location', 50)->nullable();
+            $table->string('location', 50)->default('none');
             $table->char('type', 1)->default('f');
             $table->integer('order')->unsigned()->default(0);
             $table->timestamps();

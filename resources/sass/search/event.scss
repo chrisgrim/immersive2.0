@@ -13,14 +13,13 @@
 }
 
 
-
 @media (min-width: 768px) {
     .search {
         min-height: calc(100vh - 7rem);
     }
 
     .online.search .results {
-        padding: 0 8rem;
+        padding: 2rem 8rem;
     }
 
     .online.search div.pagination {

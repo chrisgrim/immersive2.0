@@ -40,9 +40,7 @@
 
         <div class="es__description element">
             <h2>Experience hosted by 
-                <a 
-                    target="_blank" 
-                    :href="`/organizer/${event.organizer.slug}`">
+                <a :href="`/organizer/${event.organizer.slug}`">
                     {{ event.organizer.name }}
                 </a>
             </h2>

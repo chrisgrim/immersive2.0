@@ -1,10 +1,12 @@
 <template>
     <div class="dropdown all">
-        <div class="icon">
-            <svg>
-                <use :xlink:href="`/storage/website-files/icons.svg#ri-search-line`" />
-            </svg>
-        </div>
+        <template v-if="icon">
+            <div class="icon">
+                <svg>
+                    <use :xlink:href="`/storage/website-files/icons.svg#ri-search-line`" />
+                </svg>
+            </div>
+        </template>
         <v-select
             v-model="searchInput"
             label="searchInput.model"
@@ -13,8 +15,9 @@
             :filterable="false"
             :get-option-label="searchInput => searchInput.model.name"
             :reduce="searchInput => searchInput.model"
-            @search="debounce" 
-            @search:focus="debounce" 
+            @search="debounce"
+            :data-hide-options="!searchInput && !searchOptions.length"
+            @search:focus="prefill ? debounce : null" 
             @input="onSelect">
             <template #option="{ model }">
                 <div class="option__title">
@@ -30,27 +33,38 @@
 
 export default {
 
-    props: ['page'],
+    props: {
+        page: {
+            type: Object,
+            default: null
+        },
+        icon: {
+            type: Boolean,
+            default: false
+        },
+        prefill: {
+            type:Boolean,
+            default: true
+        },
+        text: {
+            type:String,
+            default: 'Location Search'
+        }
+    },
 
     computed: {
         placeholder() {
             if (new URL(window.location.href).searchParams.get("city")) {
                 return new URL(window.location.href).searchParams.get("city");
             }
-            return 'Location Search';
+            return this.text;
         }
     },
 
     data() {
         return {
             searchInput: null,
-            searchOptions: [
-                // {
-                //     model: {
-                //         name: 'Loading List...'
-                //     }
-                // }
-            ],
+            searchOptions: [],
             isLoading: false,
         }
     },
@@ -68,7 +82,7 @@ export default {
         async generateSearchList (query) {
             await axios.get('/api/search/navbar/location', { params: { keywords: query } })
             .then( res => {
-                this.searchOptions = res.data;
+                this.searchOptions = res.data
             })
         },
 

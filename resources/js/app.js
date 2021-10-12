@@ -91,7 +91,6 @@ Vue.component('create-category', () => import(/* webpackChunkName: "assets/cc" *
 Vue.component('create-organizer', () => import(/* webpackChunkName: "assets/co" */ './pages/create/organizer.vue'));
 Vue.component('create-title', () => import(/* webpackChunkName: "assets/ct" */ './pages/create/title.vue'));
 Vue.component('create-image', () => import(/* webpackChunkName: "assets/ci" */ './pages/create/image.vue'));
-Vue.component('create-date-picker', () => import(/* webpackChunkName: "assets/cd" */ './pages/create/datepicker.vue'));
 Vue.component('create-shows', () => import(/* webpackChunkName: "assets/cs" */ './pages/create/shows.vue'));
 Vue.component('vue-create-tickets', () => import(/* webpackChunkName: "assets/ct" */ './pages/create/tickets.vue'));
 Vue.component('show-listing', () => import(/* webpackChunkName: "assets/csl" */ './pages/create/show-listing.vue'));

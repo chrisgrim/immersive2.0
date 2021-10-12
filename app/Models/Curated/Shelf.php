@@ -21,6 +21,25 @@ class Shelf extends Model
     protected $with = ['community'];
 
     /**
+    * What events should be searchable for scout elastic search
+    *
+    * @return \Illuminate\Database\Eloquent\Relations\belongsTo
+    */
+    public function shouldBeSearchable()
+    {
+        return $this->status === 'p';
+    }
+
+    /**
+    * Helpful command to see published listings
+    *
+    * @return bool
+    */
+    public function isPublished() {
+        return $this->status === 'p';
+    }
+
+    /**
      * Get the indexable data array for the model.
      *
      * @return array

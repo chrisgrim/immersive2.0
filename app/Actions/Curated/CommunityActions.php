@@ -9,6 +9,8 @@ use App\Models\Curated\Post;
 use App\Models\Curated\Community;
 use Illuminate\Support\Str;
 use App\Models\User;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Validation\ValidationException;
 
 class CommunityActions
 {
@@ -67,15 +69,10 @@ class CommunityActions
      * @param  array  $input
      * @return \App\Models\Curated\Community
      */
-    public function addCurator(Request $request, Community $community)
+    public function addCurator(Request $request, Community $community, $curator)
     {
-        $curator =  User::where('email', '=', $request->email)->first();
-        if ($curator) {
-            $community->curators()->attach($curator->id);
-            return $community->fresh()->load('curators', 'owner');
-        } else {
-            throw ValidationException::withMessages(['user' => 'No User exists with that email']);
-        }
+        $community->curators()->attach($curator->id);
+        return $community->fresh()->load('curators', 'owner');
     }
 
     /**

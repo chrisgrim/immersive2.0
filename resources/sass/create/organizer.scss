@@ -32,6 +32,7 @@
         display: inline-block;
         background-size: cover;
         background-repeat: no-repeat;
+        cursor: pointer;
         background-position: center;
         border-radius: .5rem;
         border: 1px solid #d2d2d2;
@@ -53,6 +54,9 @@
             border-radius: 50%;
         }
     }
+}
+.add-organzation-image__card input{
+    display: none;
 }
 .add-organzation-image__dotted {
     border: 2px dashed #dadada;

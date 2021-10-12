@@ -35,6 +35,7 @@
                 class="footer-element" 
                 style="float:right">
                 <a 
+                    rel="noreferrer noopener" 
                     target="_blank" 
                     href="https://likelyrain.com/">
                     <p>Site by Likely Rain.</p>

@@ -1,7 +1,18 @@
 <template>
     <section class="organizer-show lay-a">
         <div class="wrapper">
-            <template v-if="!mobile">
+            <template v-if="mobile">
+                <nav class="es__mobile-nav">
+                    <button 
+                        @click="onBack"
+                        class="arrow svg">
+                        <svg>
+                            <use :xlink:href="`/storage/website-files/icons.svg#ri-arrow-left-s-line`" />
+                        </svg>
+                    </button>
+                </nav>
+            </template>
+            <template v-else>
                 <div class="sidebar">
                     <div class="sticky">
                         <template v-if="organizer.largeImagePath">
@@ -98,6 +109,9 @@
             },
             cleanDate(data) {
                 return this.$dayjs(data).format("YYYY");
+            },
+            onBack() {
+                document.referrer == "" ? window.location.href = '/' : window.history.back()
             }
         },
 

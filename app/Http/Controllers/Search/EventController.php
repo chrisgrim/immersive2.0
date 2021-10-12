@@ -13,6 +13,7 @@ use App\Models\CityList;
 use App\Models\SearchData;
 use App\Models\Search;
 use App\Models\RemoteLocation;
+use App\Models\Featured\Dock;
 use DB;
 use Carbon\Carbon;
 use Session;
@@ -90,39 +91,13 @@ class EventController extends Controller
 
         if ($request->lat) { $showNumber = 6; } else {$showNumber = 8;}
 
-        $online = Event::boolSearch()
-        ->must('range', ['closingDate' => [ 'gte' => 'now/d']])
-        ->must('match', ['hasLocation' => false])
-        ->when($request->category, function ($builder) use ($request) {
-            return $builder->filter('terms', ['category_id' => $request->category]);
-        })
-        ->when($request->tag, function ($builder) use ($request) {
-            return $builder->filter('terms', ['genres.name' => $request->tag]);
-        })
-        ->when($request->price, function ($builder) use ($request) {
-            return $builder->must('range', ['priceranges.price' => [ 'gte' => $request->price[0],'lte' => $request->price[1]]]);
-        })
-        ->when($request->dates, function ($builder) use ($request) {
-            return $builder->should('range', ['shows.date' => [ 'gte' => $request->dates[0],'lte' => $request->dates[1]]])
-                ->should('term', ['showtype' => 'a'])
-                ->minimumShouldMatch(1);
-        })
-        ->sortRaw(['published_at' => 'desc'])
-        ->load(['genres', 'category'])
-        ->paginate($showNumber);
+        $docks = Dock::where('location', 'search')->with(['posts.limitedCards', 'shelves.publishedPosts.limitedCards', 'communities'])->orderBy('order', 'DESC')->get();
 
-        $content = tap($online->toArray(), function (array &$content) {
-            $content['data'] = Arr::pluck($content['data'], 'model');
-        });
-
-        $onlineevents = json_encode($content);
-
-        return view('events.search',compact('searchedevents', 'onlineevents', 'categories', 'maxprice', 'tags'));
+        return view('events.search',compact('searchedevents', 'docks', 'categories', 'maxprice', 'tags'));
     }
 
     public function mapBoundary(Request $request)
     {
-
         $eventFilter = Event::boolSearch()
         ->must('range', ['closingDate' => [ 'gte' => 'now/d']])
         ->must('match', ['hasLocation' => true])
@@ -214,6 +189,38 @@ class EventController extends Controller
 
         $events = Event::boolSearch()
         ->must('range', ['closingDate' => [ 'gte' => 'now/d']])
+        ->when($request->price, function ($builder) use ($request) {
+            return $builder->must('range', ['priceranges.price' => [ 'gte' => $request->price[0],'lte' => $request->price[1]]]);
+        })
+        ->when($request->category, function ($builder) use ($request) {
+            return $builder->filter('terms', ['category_id' => $request->category]);
+        })
+        ->when($request->tag, function ($builder) use ($request) {
+            return $builder->filter('terms', ['genres.name' => $request->tag]);
+        })
+        ->when($request->dates, function ($builder) use ($request) {
+            return $builder->should('range', ['shows.date' => [ 'gte' => $request->dates[0],'lte' => $request->dates[1]]])
+                ->should('term', ['showtype' => 'a'])
+                ->minimumShouldMatch(1);
+        })
+        ->sortRaw(['published_at' => 'desc'])
+        ->load(['genres', 'category'])
+        ->paginate(12);
+
+        $content = tap($events->toArray(), function (array &$content) {
+            $content['data'] = Arr::pluck($content['data'], 'model');
+        });
+
+        return json_encode($content);
+    }
+
+    public function online(Request $request)
+    {
+        $request = Search::convertUrl($request);
+
+        $events = Event::boolSearch()
+        ->must('range', ['closingDate' => [ 'gte' => 'now/d']])
+        ->must('match', ['hasLocation' => false])
         ->when($request->price, function ($builder) use ($request) {
             return $builder->must('range', ['priceranges.price' => [ 'gte' => $request->price[0],'lte' => $request->price[1]]]);
         })

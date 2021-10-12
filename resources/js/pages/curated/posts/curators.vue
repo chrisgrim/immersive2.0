@@ -101,6 +101,7 @@
                 })
                 .catch(err => {
                     this.onErrors(err);
+                    setTimeout(() => this.serverErrors = null, 10000)
                 });
             },
             async updateOwner(curator) {

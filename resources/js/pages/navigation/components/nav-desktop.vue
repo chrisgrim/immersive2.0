@@ -8,7 +8,9 @@
                 :class="{ open : searchOpen}"
                 class="nav__bar">
                 <div class="nav-logo">
-                    <a href="/">
+                    <a 
+                        aria-label="Home Button"
+                        href="/">
                         <svg viewBox="0 0 256 256">
                             <path 
                                 id="EI" 

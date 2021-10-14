@@ -519,6 +519,15 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "resources/sass/organizer/show.scss",
+			"settings":
+			{
+				"buffer_size": 2108,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -670,9 +679,8 @@
 		"/Users/chrisgrim/code/ei/resources/js/pages/navigation",
 		"/Users/chrisgrim/code/ei/resources/js/pages/navigation/components",
 		"/Users/chrisgrim/code/ei/resources/sass",
-		"/Users/chrisgrim/code/ei/resources/sass/components",
-		"/Users/chrisgrim/code/ei/resources/sass/components/shelves",
-		"/Users/chrisgrim/code/ei/resources/sass/nav"
+		"/Users/chrisgrim/code/ei/resources/sass/nav",
+		"/Users/chrisgrim/code/ei/resources/sass/organizer"
 	],
 	"file_history":
 	[
@@ -949,6 +957,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"patreon",
 			"contributer",
 			"onRefresh",
 			"},\n",
@@ -1075,8 +1084,7 @@
 			"slice",
 			"posts",
 			"limitedCards",
-			"published_posts",
-			"text"
+			"published_posts"
 		],
 		"highlight": false,
 		"in_selection": false,
@@ -1094,8 +1102,40 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "resources/sass/organizer/show.scss",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2108,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1365,
+								1365
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/CSS/CSS.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 1132.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		}
 	],

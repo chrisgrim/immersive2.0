@@ -3,6 +3,7 @@
         :class="{event: card.name}"
         class="body">
         <a 
+            aria-label="Visit Listing"
             v-if="hasUrl"
             rel="noopener noreferrer nofollow"
             :href="hasUrl"

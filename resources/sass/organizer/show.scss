@@ -62,7 +62,8 @@
     border-top: solid 1px #dddddd;
 }
 .organizer-show .patreon {
-    margin-bottom: 2rem
+    margin-bottom: 2rem;
+    margin-left: 1rem;
 }
 
 
@@ -88,6 +89,9 @@
     .organizer-show .social a span{
         font-size: 1.5rem;
         font-weight: 400;
+    }
+    .organizer-show .patreon {
+        margin-left: 0;
     }
     .organizer-show .description {
         padding: 0;

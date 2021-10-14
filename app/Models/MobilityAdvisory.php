@@ -44,8 +44,8 @@ class MobilityAdvisory extends Model
     */
     public static function saveAdvisories($event, $request)
     {
-        if ($request->has('mobilities')) {
-            foreach ($request['mobilities'] as $content) {
+        if ($request->has('mobilityAdvisory')) {
+            foreach ($request['mobilityAdvisory'] as $content) {
                 MobilityAdvisory::firstOrCreate([
                     'slug' => Str::slug($content)
                 ],
@@ -54,7 +54,7 @@ class MobilityAdvisory extends Model
                     'mobilities' => $content
                 ]);
             };
-            $newSync = MobilityAdvisory::whereIn('slug', collect($request->mobilities)->map(function ($item) {
+            $newSync = MobilityAdvisory::whereIn('slug', collect($request->mobilityAdvisory)->map(function ($item) {
                 return Str::slug($item);
             })->toArray())->get();
             $event->mobilityadvisories()->sync($newSync);

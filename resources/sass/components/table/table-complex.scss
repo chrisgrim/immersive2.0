@@ -1,0 +1,148 @@
+.v-table {
+    width:100%;
+    position: relative;
+    overflow: auto;
+    border: 1px solid hsl(0,0%,82%);
+    border-radius: 1rem;
+}
+.v-header-pane {
+    width:100%;
+    position: absolute;
+    top:0;
+}
+.v-header-pane .v-cell {
+    position: absolute;
+    top: 0;
+    vertical-align: top;
+    display: inline-block;
+    background-color: #f5f5f5;
+    border-bottom: 1px solid hsl(0,0%,82%);
+    border-top: none;
+    border-left: 1px solid hsl(202,10%,88%);
+}
+.v-header-pane .v-cell p {
+    font-weight: 700;
+}
+.v-resize {
+    position: absolute;
+    top: -1px;
+    margin-left:-16px;
+    width: 32px;
+    height: 31px;
+    z-index: 2;
+    cursor: ew-resize;
+    display: flex;
+    justify-content: center;
+}
+.v-resize.active {
+    width: 100px;
+    height: 100px;
+    margin-left: -50px;
+}
+.v-resize:hover .v-bar {
+   opacity: 1;
+}
+.v-resize .v-bar {
+    display: block;
+    position: relative;
+    top: 5px;
+    width: 3px;
+    border-radius: 2px;
+    height: 26px;
+    background-color: blue;
+    opacity: 0;
+}
+.v-data-pane {
+    top:32px;
+    position: absolute;
+    width:100%;
+    bottom:0;
+}
+.v-table .v-pane {
+   
+}
+.v-row {
+    display: block;
+    position: absolute;
+    left: 0;
+    margin-bottom: 0;
+    opacity: 1;
+    width: 100%;
+    height:32px;
+}
+.v-cell {
+    border-bottom: 1px solid hsl(202,10%,88%);
+    border-left: 1px solid hsl(202,10%,88%);
+    border-right: none;
+    border-top: none;
+    top: 0;
+    overflow: visible;
+    border-left-color: #f3f3f3;
+    padding:0.5rem;
+    position: absolute;
+    font-size: 13px;
+    height: 32px;
+    margin: 0;
+    vertical-align: top;
+    background: white;
+    color: #111111;
+    cursor: default;
+    outline: none;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+.v-cell:first-child {
+    border-left: 0;
+}
+.v-table .v-cell p {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    padding: 0;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 1.4rem;
+    color: black;
+}
+.v-table .v-cell input {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    padding: 0;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 1.4rem !important;
+    color: black;
+}
+.v-table .v-cell input:focus {
+    color:blue;
+}
+.v-table .v-cell:focus-within {
+    border: 2px solid blue;
+    border-radius: 0.5rem;
+}
+.v-table .v-cell select {
+    margin: 0;
+    border: 0;
+    background: #a9edce;
+    display: inline-block;
+    padding: 0 1rem;
+    border-radius: 1rem;
+}
+.v-table .v-cell button.delete {
+    border: 0;
+    padding: 0;
+}
+.v-table .v-cell svg {
+    width: 2rem;
+    height: 2rem;
+}

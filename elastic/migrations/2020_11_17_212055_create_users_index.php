@@ -15,7 +15,7 @@ final class CreateUsersIndex implements MigrationInterface
     {
         Index::create('users', function (Mapping $mapping, Settings $settings) {
             $mapping->text('name', ['analyzer' => 'rebuilt_english']);
-            $mapping->keyword('email');
+            $mapping->text('email', ['analyzer' => 'rebuilt_english']);
             $settings->analysis([
                 'filter' => [
                     'english_stop' => [

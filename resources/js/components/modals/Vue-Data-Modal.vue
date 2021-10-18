@@ -15,6 +15,7 @@
                         v-model="data"
                         label="name"
                         placeholder="Enter Name"
+                        :filterable="false"
                         @search="onSearch"
                         @search:focus="onSearch"
                         :options="options" />

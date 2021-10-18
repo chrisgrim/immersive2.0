@@ -95,7 +95,7 @@ class SearchController extends Controller
         if (! $request->keywords) return User::paginate(10);
 
         $users = User::multiMatchSearch()
-            ->fields(['name', 'name._2gram','name._3gram'])
+            ->fields(['name', 'email'])
             ->query($request->keywords)
             ->type('bool_prefix')
             ->paginate(10);

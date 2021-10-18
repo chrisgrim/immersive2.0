@@ -57,20 +57,16 @@
             <div class="es__remote">
                 <div 
                     class="es__remote--element" 
-                    v-for="location in event.remotelocations"
-                    :key="location.id">
-                    <h4>
-                        {{ location.name }}
-                    </h4>
-                    <p>
-                        {{ location.description }}
-                    </p>
+                    v-for="remote in event.remotelocations"
+                    :key="remote.id">
+                    <h3> {{ remote.name }} </h3>
+                    <p> {{ remote.description }} </p>
                 </div>
             </div>
             <div 
                 class="es__remote--element user"
                 v-if="event.remote_description">
-                <h4>Additional Instructions</h4>
+                <h3>Additional Instructions</h3>
                 <p style="white-space: pre-wrap;">{{ event.remote_description }}</p>
             </div>
         </template>

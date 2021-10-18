@@ -11,76 +11,87 @@
                 v-model="organizer"
                 placeholder="Filter by organization name" 
                 class="general"
-                @keyup="onSearchOrganizers(organizer)"
+                @keyup="debounce(organizer, 'org')"
                 type="text">
         </div>
-        <template v-if="organizers && organizers.length">
-            <div class="data-grid">
-                <div class="data-grid__row header">
-                    <p></p>
-                    <p>Organization</p>
-                    <p>Owner</p>
-                    <p>Email</p>
-                    <p>Members</p>
-                    <p></p>
+        <template>
+            <div 
+                ref="table"
+                class="v-table">
+                <div class="v-header-pane v-pane">
+                    <div 
+                        :style="columns"
+                        class="v-header v-row">
+                        <div 
+                            :key="col.id"
+                            v-for="col in cols"
+                            class="v-cell">
+                            <p>{{ col.field }}</p>
+                        </div>
+                    </div>
                 </div>
-                <div 
-                    class="data-grid__row"
-                    v-for="(org) in organizers"
-                    :key="org.id">
-                    <div class="edit">
-                        <a :href="`/organizer/${org.slug}/edit`">
-                            <IconSvg type="edit" />
-                        </a>
-                    </div>
-                    <div>
-                        <img :src="`/storage/${org.thumbImagePath}`">
-                        <p>{{ org.name }}</p>
-                    </div>
-
-                    <template v-if="org.user">
-                        <div>
+                <template v-if="organizers && organizers.length">
+                    <div
+                        :style="columns"
+                        class="v-row"
+                        v-for="(org) in organizers"
+                        :key="org.id">
+                        <div class="v-cell">
+                            <p>{{org.id}}</p>
+                        </div>
+                        <div class="v-cell">
+                            <div class="edit">
+                                <a :href="`/organizer/${org.slug}/edit`">
+                                    <svg>
+                                        <use :xlink:href="`/storage/website-files/icons.svg#ri-edit-2-line`" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="v-cell">
+                            <img :src="`/storage/${org.thumbImagePath}`">
+                            <p>{{ org.name }}</p>
+                        </div>
+                        <div class="v-cell">
                             <button 
+                                v-if="org.user"
                                 class="noBox" 
                                 @click.prevent="showModal(org, 'changeOwner')">
-                                <p style="text-decoration: underline;">{{ org.user.name }}</p>
+                                <p style="text-decoration: underline;">{{ org.user ? org.user.name : 'No User' }}</p>
                             </button>
                         </div>
-                        <div v-if="org.user">
-                            <p>{{ org.user.email }}</p>
+                        <div class="v-cell">
+                            <p>{{ org.user ? org.user.email : 'No User' }}</p>
                         </div>
-                    </template>
-
-                    <template v-else>
-                        <div>
+                        <div class="v-cell">
+                            <v-select 
+                                v-model="org.users"
+                                label="name"
+                                placeholder="Members"
+                                multiple
+                                :append-to-body="true"
+                                @search="debounce($event, 'user')"
+                                @input="addNewMember($event, org)"
+                                :filterable="false"
+                                :options="users.length ? users : org.users">
+                                <template #option="option" class="test">
+                                    <div class="v-dropcell">
+                                        <p>{{ option.name }} ({{option.email}}) </p>
+                                    </div>
+                                </template>
+                            </v-select>
+                        </div>
+                        <div class="v-cell">
                             <button 
-                                class="noBox" 
-                                @click.prevent="showModal( org, 'changeOwner')">
-                                <p style="text-decoration: underline;"> No User</p>
+                                @click.prevent="showModal(org, 'deleteOrg')" 
+                                class="delete">
+                                <svg>
+                                    <use :xlink:href="`/storage/website-files/icons.svg#ri-close-line`" />
+                                </svg>
                             </button>
                         </div>
-                        <div v-if="org.user">
-                            <p> No User </p>
-                        </div>
-                    </template>
-
-                    <div>
-                        <v-select 
-                            v-model="org.users"
-                            label="name"
-                            placeholder="Members"
-                            multiple
-                            @search="onSearchUsers"
-                            @input="addNewMember($event, org)"
-                            :clearable="false"
-                            :options="users.length ? users : org.users" />
                     </div>
-                    <button 
-                        @click.prevent="showModal(org, 'deleteOrg')" 
-                        class="delete">
-                        <IconSvg type="delete" />
-                    </button>
-                </div>
+                </template>
             </div>
         </template>
         <VueDeleteModal 
@@ -103,14 +114,12 @@
 </template>
 
 <script>
-    
-    import IconSvg from '../../components/Svg-icon'
     import VueDeleteModal from '../../components/modals/Vue-Modal-Delete'
     import VueDataModal from '../../components/modals/Vue-Data-Modal'
 
     export default {
 
-        components: { IconSvg, VueDeleteModal, VueDataModal },
+        components: { VueDeleteModal, VueDataModal },
 
         data() {
             return {
@@ -124,6 +133,16 @@
                 user: '',
                 users:[],
                 showEdit: false,
+                cols: [
+                    { id:0, field: 'id'},
+                    { id:1, field: 'edit'},
+                    { id:2, field: 'Organization' },
+                    { id:3, field: 'Owner' },
+                    { id:4, field: 'Email' },
+                    { id:5, field: 'Members' },
+                    { id:6, field: '' },
+                ],
+                columns: `grid-auto-columns: 5rem 5rem minmax(15rem, 40rem) minmax(10rem, 40rem) minmax(20rem, 40rem) minmax(20rem, 1fr) 5rem;`,
             }
         },
 
@@ -154,20 +173,21 @@
                     console.log(res.data);
                 })
             },
-
             onSearchOrganizers (query) {
                 axios.get('/api/admin/organizer/search', { params: { keywords: query } })
                 .then( res => { this.organizers = res.data.data });
             },
-
-            onSearchUsers (query) {
+            onSearchUsers(query) {
                 axios.get('/api/admin/users/search', { params: { keywords: query } })
-                .then(  res => { 
-                    this.users = res.data.data 
-                    console.log(res.data.data);
-                });
+                .then( res => { this.users = res.data.data })
             },
-
+            debounce(query, type) {
+                if (this.timeout) 
+                    clearTimeout(this.timeout); 
+                this.timeout = setTimeout(() => {
+                    type === 'org' ? this.onSearchOrganizers(query) : this.onSearchUsers(query);
+                }, 200); // delay
+            },
         },
 
         created() {

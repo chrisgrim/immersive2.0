@@ -29,6 +29,7 @@
                         </button>
                         <div class="search">
                             <v-select
+                                auto-focus="true"
                                 v-model="searchInput"
                                 label="searchInput.model"
                                 placeholder="Enter Location"

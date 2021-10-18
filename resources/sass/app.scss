@@ -9,7 +9,6 @@
 @import 'components/search-filter';
 @import 'search/components/mobile-search-results';
 
-
 // categories
 @import 'categories/category-show';
 
@@ -37,6 +36,9 @@
 
 //Plugins
 @import 'plugins/tiptap';
+
+//Tables
+@import 'components/table/table';
 
 //Components 
 @import 'components/tab';

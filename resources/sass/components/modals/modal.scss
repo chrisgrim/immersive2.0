@@ -17,7 +17,6 @@
     border-radius: 2rem 2rem 0 0;
     width: 100%;
     box-shadow: rgb(0 0 0 / 28%) 0px 8px 28px;
-    overflow: auto;
     height: 100%;
     margin-top: 2rem;
     height: calc(100% - 2rem);
@@ -82,7 +81,7 @@
     margin-bottom: 2rem;
 }
 .modal .body .input {
-    height: 4rem;
+    height: 5rem;
     position: relative;
     display: flex;
 }

@@ -13,6 +13,7 @@
                         <img 
                             width="33px" 
                             height="33px" 
+                            :alt="review.reviewer_name"
                             :src="review.image_path">
                     </div>
                     <div class="event-show-review__right--name">
@@ -37,12 +38,9 @@
 </template>
 
 <script>
-    import ShowMore  from '../components/show-more.vue'
     export default {
 
         props: [ 'event'],
-
-        components: { ShowMore },
 
         data() {
             return {

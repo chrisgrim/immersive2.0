@@ -30,7 +30,9 @@
             </div>
            
             <template v-if="event.staffpick && !isMobile">
-                <a href="#staffpick">
+                <a 
+                    aria-label="Staff Pick"
+                    href="#staffpick">
                     <div class="es__staffpick--award">
                         <IconSvg type="award" />
                     </div>

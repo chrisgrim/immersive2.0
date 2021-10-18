@@ -2,7 +2,11 @@
     <div class="favorite-button">
         <div :class="inputclass">
             <template :class="isApproved">
-                <button class="heart-btn" @click.prevent="toggle">
+                <button 
+                    aria-label="favorite"
+                    type="button"
+                    class="heart-btn" 
+                    @click.prevent="toggle">
                     <svg 
                         viewBox="0 0 32 32" 
                         :class="{ hearted : isFavorited }">

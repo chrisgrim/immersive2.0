@@ -88,9 +88,6 @@ class EventController extends Controller
 
         $searchedevents = json_encode($eventContent);
 
-
-        if ($request->lat) { $showNumber = 6; } else {$showNumber = 8;}
-
         $docks = Dock::where('location', 'search')->with(['posts.limitedCards', 'shelves.publishedPosts.limitedCards', 'communities'])->orderBy('order', 'DESC')->get();
 
         return view('events.search',compact('searchedevents', 'docks', 'categories', 'maxprice', 'tags'));

@@ -2,7 +2,7 @@
     <div v-if="visible">
         <div class="footer-content">
             <div class="footer-element">
-                <p>A project of HERE Institute, INC</p>
+                <p>A project of The Immersive Experience Institute Inc.</p>
             </div>
             <span>&#183;</span>
             <div class="footer-element">

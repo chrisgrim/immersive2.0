@@ -4,6 +4,8 @@
             v-if="isMobile"
             class="es__mobile-nav">
             <button 
+                aria-label="back button"
+                type="button"
                 @click="onBack"
                 class="arrow svg">
                 <svg>

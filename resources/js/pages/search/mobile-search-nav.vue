@@ -140,6 +140,12 @@
                 this.open = false
                 this.addPushState()
             },
+            async next() {
+                await axios.post(`/api/search/mapboundary?page=${this.value}`, this.data)
+                .then( res => { this.$emit('update', res.data) })
+                this.open = false
+                this.addPushState()
+            },
             onBack() {
                 document.referrer == "" ? window.location.href = '/' : window.history.back()
             },
@@ -233,6 +239,9 @@
                 if (!this.map.live) { return }
                 this.mapUpdate();
             },
+            value() {
+                this.next()
+            }
         },
 
         created () {

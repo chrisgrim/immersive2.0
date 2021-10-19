@@ -78,7 +78,7 @@
     
     export default {
 
-        props:['value', 'filter', 'categories', 'tags'],
+        props:['value', 'filter', 'categories', 'tags', 'type'],
 
         components: { VueFilterDates, SearchOptions },
 
@@ -121,9 +121,17 @@
         methods: {
             async submit() {
                 this.inputVal = 1
-                await axios.post(`/api/search/online?page=${this.value}`, this.data)
+                await axios.post(`/api/search/${this.type}?page=${this.value}`, this.data)
                 .then( res => {
-                    this.$emit('update', res.data) 
+                    this.$emit('update', res) 
+                })
+                this.open = false
+                this.addPushState()
+            },
+            async next() {
+                await axios.post(`/api/search/${this.type}?page=${this.value}`, this.data)
+                .then( res => {
+                    this.$emit('update', res) 
                 })
                 this.open = false
                 this.addPushState()
@@ -178,6 +186,11 @@
             initilizeDates() {
                 return new URL(window.location.href).searchParams.get("start") ? [new URL(window.location.href).searchParams.get("start"), new URL(window.location.href).searchParams.get("end")] : []
             },
+        },
+        watch: {
+            value() {
+                this.next()
+            }
         },
         created () {
             window.addEventListener('scroll', this.handleScroll);

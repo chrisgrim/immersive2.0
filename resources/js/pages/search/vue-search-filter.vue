@@ -35,7 +35,7 @@
     
     export default {
 
-        props:['value','categories', 'tags', 'filter'],
+        props:['value','categories', 'tags', 'filter', 'type'],
 
         components: { VueFilterDates, VueFilterPrice, VueFilterCategory, VueFilterTag },
 
@@ -62,12 +62,12 @@
         methods: {
             async submit() {
                 this.inputVal = 1
-                await axios.post(`/api/search/all?page=${this.value}`, this.data)
+                await axios.post(`/api/search/${this.type}?page=${this.value}`, this.data)
                 .then(data => { this.$emit('update', data) })
                 this.addPushState();
             },
             async next() {
-                await axios.post(`/api/search/all?page=${this.value}`, this.data)
+                await axios.post(`/api/search/${this.type}?page=${this.value}`, this.data)
                 .then( data => { this.$emit('update', data) })
                 this.addPushState();
             },

@@ -3,6 +3,7 @@
         <template v-if="mobile">
             <MobileSearchNav
                 ref="search"
+                type="online"
                 @update="updateEvents"
                 v-model="paginate"
                 filter="online"
@@ -12,6 +13,7 @@
         <template v-else>
             <SearchFilter
                 @update="updateEvents"
+                type="online"
                 :tags="tags"
                 filter="online"
                 v-model="paginate"
@@ -23,7 +25,7 @@
                     <h3>Online Events</h3>
                 </div>
                 <SearchAlbum 
-                    :items="events" 
+                    :items="events.data" 
                     :vertical="true" />
                 <pagination 
                     :limit="1"
@@ -47,7 +49,7 @@
 
         data() {
             return {
-                events: this.onlineevents.data,
+                events: this.onlineevents,
                 paginate: 1,
                 mobile: window.innerWidth < 768,
             }

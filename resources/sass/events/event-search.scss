@@ -42,6 +42,7 @@
     .search__results {
         width: 59%;
         margin-top: 8rem;
+        min-height: calc(100vh - 8rem)
     }
     .fullwidth .search__results{
         width:0;

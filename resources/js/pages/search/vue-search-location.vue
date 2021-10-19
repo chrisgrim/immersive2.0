@@ -22,6 +22,10 @@
                         class="gap" />
                     <MobileSearchResults 
                         :events="events" />
+                    <pagination
+                        :list="events"
+                        :limit="2"
+                        @selectpage="selectPage" />
                 </template>
                 <template v-else>
                     <div 
@@ -171,10 +175,6 @@
             selectPage (page) {
                 this.paginate = page
             },
-            selectOnlinePage (page) {
-                this.onlinePaginate = page
-            },
         },
-
     };
 </script>

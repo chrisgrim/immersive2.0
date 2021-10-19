@@ -75,6 +75,11 @@
                 .then( res => { this.$emit('update', res.data) })
                 this.addPushState();
             },
+            async next() {
+                await axios.post(`/api/search/mapboundary?page=${this.value}`, this.data)
+                .then( res => { this.$emit('update', res.data) })
+                this.addPushState();
+            },
             mapUpdate() {
                 this.data.mapboundary = this.map.currentBounds;
                 this.data.zoom = this.map.zoom
@@ -133,6 +138,12 @@
                 }
             },
         },
-}
+
+        watch: {
+            value() {
+                this.next()
+            }
+        },
+    }
     
 </script>

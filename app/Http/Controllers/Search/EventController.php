@@ -88,7 +88,7 @@ class EventController extends Controller
 
         $searchedevents = json_encode($eventContent);
 
-        $docks = Dock::where('location', 'search')->with(['posts.limitedCards', 'shelves.publishedPosts.limitedCards', 'communities'])->orderBy('order', 'DESC')->get();
+        $docks = Dock::where('location', 'search')->with(['posts.limitedCards', 'shelves.publishedPosts.limitedCards', 'communities'])->orderBy('order', 'ASC')->get();
 
         return view('events.search',compact('searchedevents', 'docks', 'categories', 'maxprice', 'tags'));
     }

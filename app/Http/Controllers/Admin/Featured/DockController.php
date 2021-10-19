@@ -27,7 +27,7 @@ class DockController extends Controller
      */
     public function index()
     {
-        $docks = Dock::with(['posts', 'shelves', 'communities'])->orderBy('order', 'DESC')->get();
+        $docks = Dock::with(['posts', 'shelves', 'communities'])->orderBy('order', 'ASC')->get();
         return view('adminArea.featured.index', compact('docks'));
     }
     /**
@@ -39,7 +39,7 @@ class DockController extends Controller
     public function store()
     {
         $dock = auth()->user()->docks()->create();
-        return Dock::with(['posts', 'shelves', 'communities'])->orderBy('order', 'DESC')->get();
+        return Dock::with(['posts', 'shelves', 'communities'])->orderBy('order', 'ASC')->get();
     }
 
     /**
@@ -51,7 +51,7 @@ class DockController extends Controller
     public function update(DockUpdateRequest $request, Dock $dock)
     {
         $dock->update($request->all());
-        return Dock::with(['posts', 'shelves', 'communities'])->orderBy('order', 'DESC')->get();
+        return Dock::with(['posts', 'shelves', 'communities'])->orderBy('order', 'ASC')->get();
     }
 
     /**
@@ -63,7 +63,7 @@ class DockController extends Controller
     public function addShelf(Dock $dock, Shelf $shelf, DockActions $dockActions)
     {
         $dockActions->addShelf($dock, $shelf);
-        return Dock::with(['posts', 'shelves', 'communities'])->orderBy('order', 'DESC')->get();
+        return Dock::with(['posts', 'shelves', 'communities'])->orderBy('order', 'ASC')->get();
     }
 
      /**
@@ -75,7 +75,7 @@ class DockController extends Controller
     public function addCommunity(Dock $dock, Community $community, DockActions $dockActions)
     {
         $dockActions->addCommunity($dock, $community);
-        return Dock::with(['posts', 'shelves', 'communities'])->orderBy('order', 'DESC')->get();
+        return Dock::with(['posts', 'shelves', 'communities'])->orderBy('order', 'ASC')->get();
     }
 
      /**
@@ -87,7 +87,7 @@ class DockController extends Controller
     public function addPost(Dock $dock, Post $post, DockActions $dockActions)
     {
         $dockActions->addPost($dock, $post);
-        return Dock::with(['posts', 'shelves', 'communities'])->orderBy('order', 'DESC')->get();
+        return Dock::with(['posts', 'shelves', 'communities'])->orderBy('order', 'ASC')->get();
     }
 
     /**
@@ -99,7 +99,7 @@ class DockController extends Controller
     public function destroy(Dock $dock, DockActions $dockActions)
     {
         $dockActions->destroy($dock);
-        return Dock::with(['posts', 'shelves', 'communities'])->orderBy('order', 'DESC')->get();
+        return Dock::with(['posts', 'shelves', 'communities'])->orderBy('order', 'ASC')->get();
     }
 
     /**

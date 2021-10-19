@@ -34,7 +34,7 @@
                 <div 
                     v-if="searchInput"
                     class="field">
-                    <p> Closing Date: {{ cleanDate(searchInput.closingDate) }} </p>
+                    <p> Booking Through: {{ cleanDate(searchInput.closingDate) }} </p>
                 </div>
             </div>
         </div>

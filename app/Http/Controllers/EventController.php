@@ -50,7 +50,7 @@ class EventController extends Controller
             ->with('event.category')
             ->limit(4)
             ->get();
-        $docks = Dock::where('location', 'home')->with(['posts.limitedCards', 'shelves.publishedPosts.limitedCards', 'communities'])->orderBy('order', 'DESC')->get();
+        $docks = Dock::where('location', 'home')->with(['posts.limitedCards', 'shelves.publishedPosts.limitedCards', 'communities'])->orderBy('order', 'ASC')->get();
         $categories = Category::all();
         $tags = Genre::where('admin', 1)->orderBy('rank', 'desc')->get();
         return view('home.index', compact('categories', 'staffpicks', 'docks', 'tags'));

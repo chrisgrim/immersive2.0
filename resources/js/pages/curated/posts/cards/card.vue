@@ -5,7 +5,7 @@
         <a 
             aria-label="Visit Listing"
             v-if="hasUrl"
-            rel="noopener noreferrer nofollow"
+            :rel="internalUrl"
             :href="hasUrl"
             class="card-url" />
         <template v-if="hasImage">
@@ -27,7 +27,7 @@
         </template>
         <template v-if="card.event_id">
             <div class="card-blurb">
-                <p> Closing Date: {{ cleanDate(card.event.closingDate) }} </p>
+                <p> Booking Through: {{ cleanDate(card.event.closingDate) }} </p>
             </div>
         </template>
         <template v-if="card.blurb">
@@ -37,7 +37,7 @@
         </template>
         <template v-if="hasUrl">
             <div class="card-out">
-                <a rel="noopener noreferrer nofollow" :href="hasUrl">
+                <a :rel="internalUrl" :href="hasUrl">
                     <button class="black">Check it out</button>
                 </a>
             </div>
@@ -67,6 +67,9 @@
             },
             hasUrl() {
                 return this.card.event && !this.card.url ?`/events/${this.card.event.slug}` : this.card.url
+            },
+            internalUrl() {
+                return this.card.event && !this.card.url ? '' : 'noopener noreferrer nofollow'
             }
         },
 

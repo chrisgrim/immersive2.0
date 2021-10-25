@@ -168,6 +168,16 @@ class Event extends Model
         return $this->belongsTo(User::class);
     }
 
+    /**
+    * Each event belongs to One User
+    *
+    * @return \Illuminate\Database\Eloquent\Relations\belongsTo
+    */
+    public function owners() 
+    {
+        return $this->organizer->allUsers();
+    }
+
 
     // *
     // * Each event has multiple comments

@@ -19,7 +19,7 @@ class EventPolicy
      */
     public function update(User $user, Event $event)
     {
-        return $event->user_id == $user->id && $event->status !== 'r' || $user->type == 'a' || $user->type == 'm';
+        return $event->owners()->contains('id', $user->id) && $event->status !== 'r' || $user->type == 'a' || $user->type == 'm';
     }
 
 

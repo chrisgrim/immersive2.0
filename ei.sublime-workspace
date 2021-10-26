@@ -520,10 +520,10 @@
 	"buffers":
 	[
 		{
-			"file": "composer.json",
+			"file": "resources/js/pages/adminArea/admin-user.vue",
 			"settings":
 			{
-				"buffer_size": 2177,
+				"buffer_size": 5162,
 				"line_ending": "Unix"
 			}
 		}
@@ -668,16 +668,19 @@
 		"/Users/chrisgrim/code/ei/resources",
 		"/Users/chrisgrim/code/ei/resources/js",
 		"/Users/chrisgrim/code/ei/resources/js/pages",
-		"/Users/chrisgrim/code/ei/resources/views",
-		"/Users/chrisgrim/code/ei/resources/views/errors",
-		"/Users/chrisgrim/code/ei/routes"
+		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea",
+		"/Users/chrisgrim/code/ei/resources/sass",
+		"/Users/chrisgrim/code/ei/resources/sass/components",
+		"/Users/chrisgrim/code/ei/resources/sass/components/table"
 	],
 	"file_history":
 	[
+		"/Users/chrisgrim/code/ei/resources/js/components/search-bars/components/tags.vue",
+		"/Users/chrisgrim/code/ei/app/Http/Controllers/EventController.php",
+		"/Users/chrisgrim/code/ei/app/Policies/EventPolicy.php",
+		"/Users/chrisgrim/code/ei/app/Models/Event.php",
 		"/Users/chrisgrim/code/ei/resources/views/errors/503.blade.php",
 		"/Users/chrisgrim/code/ei/sftp-config.json",
-		"/Users/chrisgrim/code/ei/app/Models/Event.php",
-		"/Users/chrisgrim/code/ei/app/Http/Controllers/EventController.php",
 		"/Users/chrisgrim/code/ei/.env",
 		"/Users/chrisgrim/code/ei/config/scout.php",
 		"/Users/chrisgrim/code/ei/app/Http/Controllers/Admin/Featured/DockController.php",
@@ -799,9 +802,7 @@
 		"/Users/chrisgrim/code/ei/app/Rules/PostUniqueSlugRule.php",
 		"/Users/chrisgrim/code/ei/resources/views/organizers/show.blade.php",
 		"/Users/chrisgrim/Downloads/robots.txt",
-		"/Users/chrisgrim/code/ei/resources/views/events/show.blade.php",
-		"/Users/chrisgrim/code/ei/resources/views/communities/posts/show.blade.php",
-		"/Users/chrisgrim/code/ei/resources/views/layouts/meta.blade.php"
+		"/Users/chrisgrim/code/ei/resources/views/events/show.blade.php"
 	],
 	"find":
 	{
@@ -812,6 +813,9 @@
 		"height": 164.0,
 		"where_history":
 		[
+			"/Users/chrisgrim/code/ei/resources/js",
+			"/Users/chrisgrim/code/ei",
+			"/Users/chrisgrim/code/ei/resources",
 			"/Users/chrisgrim/code/ei/routes",
 			"/Users/chrisgrim/code/ei/resources/sass",
 			"/Users/chrisgrim/code/ei/resources/js",
@@ -936,10 +940,7 @@
 			"/Users/chrisgrim/code/ei/resources/js/pages",
 			"/Users/chrisgrim/code/ei/resources/sass",
 			"/Users/chrisgrim/code/ei/resources/js/pages",
-			"/Users/chrisgrim/code/ei/resources/sass/components",
-			"/Users/chrisgrim/code/ei/resources/sass",
-			"/Users/chrisgrim/code/ei/resources/js/pages",
-			"/Users/chrisgrim/code/ei/resources/js"
+			"/Users/chrisgrim/code/ei/resources/sass/components"
 		]
 	},
 	"find_state":
@@ -947,6 +948,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"data-hide-options",
+			"ri",
+			"owners",
 			"OnlineSearchController",
 			"scout",
 			"DESC",
@@ -1071,10 +1075,7 @@
 			"User",
 			"user",
 			"User",
-			"ValidationException",
-			"vertical",
-			"three",
-			"2"
+			"ValidationException"
 		],
 		"highlight": false,
 		"in_selection": false,
@@ -1097,19 +1098,19 @@
 			[
 				{
 					"buffer": 0,
-					"file": "composer.json",
+					"file": "resources/js/pages/adminArea/admin-user.vue",
 					"semi_transient": true,
 					"settings":
 					{
-						"buffer_size": 2177,
+						"buffer_size": 5162,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								1714,
+								2284
 							]
 						],
 						"settings":
@@ -1117,10 +1118,10 @@
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
-							"syntax": "Packages/JavaScript/JSON.sublime-syntax"
+							"syntax": "Packages/Vuejs Complete Package/vue.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1012.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,

@@ -4,6 +4,9 @@
     position: relative;
     z-index: 100;
 }
+.nav-search .dropdown {
+    display: block;
+}
 .dropdown .icon {
     position: absolute;
     z-index: 10;

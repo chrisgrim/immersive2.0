@@ -98,7 +98,7 @@
                                 placeholder="Select date"               
                                 name="dates" />
                             <div v-else>
-                                Shows are every day for {{ event.name }}
+                                Shows are every day for {{ staffPick.event.name }}
                             </div>
                             <div v-if="$v.staffPick.dates.$error" class="validation-error">
                                 <p class="error" v-if="!$v.staffPick.dates.required"> Please add at least 1 show date </p>

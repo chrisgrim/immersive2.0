@@ -40,7 +40,8 @@ class StaffPicksController extends Controller
      */
     public function create()
     {
-        $staff = StaffPick::staffWithPicks();
+        $staff = User::whereIn('type', ['a', 'm'])->get();
+        // $staff = StaffPick::staffWithPicks();
         return view('adminArea.staffpicks', compact('staff'));
     }
 

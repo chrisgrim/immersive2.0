@@ -520,38 +520,10 @@
 	"buffers":
 	[
 		{
-			"file": "resources/sass/nav/navbar.scss",
+			"file": "resources/js/pages/events/show/event-show-dates.vue",
 			"settings":
 			{
-				"buffer_size": 8018,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"contents": "Searching 102 files for \"dropdown\" (regex)\n\n/Users/chrisgrim/code/ei/resources/sass/app-lite.scss:\n   46  @import 'components/shelves/shelf';\n   47  \n   48: //Dropdowns\n   49: @import 'components/dropdowns/v-select';\n   50: @import 'components/dropdowns/nav-dropdown';\n   51: @import 'components/dropdowns/create-dropdown';\n   52  \n   53  //Modals\n\n/Users/chrisgrim/code/ei/resources/sass/components/dropdowns/create-dropdown.scss:\n    1: #create .vs__dropdown-toggle input {\n    2      width: 0;\n    3      padding: 0;\n\n/Users/chrisgrim/code/ei/resources/sass/components/dropdowns/nav-dropdown.scss:\n    1: .nav .vs__dropdown-toggle {\n    2      background: white;\n    3      padding: 1rem;\n    .\n   10      justify-content: center;\n   11  }\n   12: .nav .dropdown .search-bar {\n   13      width: 100%;\n   14      max-width: 80rem;\n   ..\n   17      position: relative;\n   18  }\n   19: .nav .dropdown .icon {\n   20      right: 1rem;\n   21      left: inherit;\n   ..\n   29      align-items: center;\n   30  }\n   31: .dropdown.all.open {\n   32      top: 0px;\n   33      margin-top: 8rem;\n   ..\n   44      transition: -ms-transform 150ms ease 0s, -webkit-transform 150ms ease 0s, transform 150ms ease 0s, opacity 50ms ease 20ms, visibility 0ms ease 25ms !important;\n   45  }\n   46: .dropdown__wrapper {\n   47      padding-bottom: 16px !important;\n   48      position: relative !important;\n   49      z-index: 1 !important;\n   50  }\n   51: .nav .dropdown .tabs {\n   52      width: 100%;\n   53      display: flex;\n   54      height: 6rem;\n   55  }\n   56: .nav .dropdown [data-hide-options='true'] ul[role='listbox'] {\n   57      display: none !important;\n   58  }\n   59: .nav .dropdown .vs__dropdown-menu {\n   60      border-radius: 3rem;\n   61      padding: 2rem 1rem;\n   ..\n   63      overflow: hidden;\n   64  }\n   65: .nav .dropdown .vs__dropdown-option {\n   66      padding: 11px 20px 7px 20px;\n   67      width: 110%;\n   68      margin-left: -1rem;\n   69  }\n   70: .nav .dropdown.open .vs__dropdown-toggle {\n   71      padding: 1.5rem;\n   72      box-shadow: none;\n   73  }\n   74: .nav .dropdown.open .vs__dropdown-toggle:hover {\n   75      box-shadow: 0px 1px 2px rgb(0 0 0 / 8%), 0px 4px 12px rgb(0 0 0 / 15%);\n   76  }\n   77: .nav .dropdown.open .vs--open .vs__dropdown-toggle {\n   78      border-radius: 5rem; \n   79      box-shadow: 0px 1px 2px rgb(0 0 0 / 8%), 0px 4px 12px rgb(0 0 0 / 15%);\n   ..\n  105      background: 0;\n  106  }\n  107: .nav.absolute .dropdown .tabs button.active {\n  108      border-bottom: 1px solid white;\n  109      background: 0;\n\n/Users/chrisgrim/code/ei/resources/sass/components/dropdowns/v-select.scss:\n    1: .dropdown {\n    2      height: 100%;\n    3      /*display: flex;*/\n    .\n    5      z-index: 100;\n    6  }\n    7: .dropdown .icon {\n    8      position: absolute;\n    9      z-index: 10;\n   ..\n   13      left: 1rem;\n   14  }\n   15: .dropdown svg {\n   16      width: 2rem;\n   17      height: 2rem;\n   ..\n   22      width: 100%;\n   23  }\n   24: .vs--searchable .vs__dropdown-toggle {\n   25      cursor: text;\n   26  }\n   ..\n   29      border-color: transparent;\n   30  }\n   31: .vs--single .vs__dropdown-toggle {\n   32      border-radius: 5rem;\n   33  }\n   34: .vs__dropdown-toggle {\n   35      -webkit-appearance: none;\n   36      -moz-appearance: none;\n   ..\n   46      min-height: 5rem;\n   47  }\n   48: .vs--open .vs__dropdown-toggle {\n   49      border-radius: 2rem 2rem 0 0;\n   50      outline: none !important;\n   ..\n   81      height: inherit;\n   82  }\n   83: .v-select .vs__dropdown-toggle {\n   84      padding: 0.5rem;\n   85  }\n   ..\n  113      display: none;\n  114  }\n  115: .vs__dropdown-menu {\n  116      display: block;\n  117      box-sizing: border-box;\n  ...\n  135      background: #fff;\n  136  }\n  137: .vs__dropdown-option {\n  138      line-height: 1.42857143;\n  139      display: block;\n  ...\n  143      white-space: nowrap;\n  144  }\n  145: .vs__dropdown-option:hover {\n  146      background:#76c4f3;\n  147  }\n\n/Users/chrisgrim/code/ei/resources/sass/components/modals/modal.scss:\n   91      min-width: inherit;\n   92  }\n   93: .modal .body .input .vs__dropdown-toggle {\n   94      height: 4rem;\n   95      border-radius: 1rem 0 0 1rem;\n\n/Users/chrisgrim/code/ei/resources/sass/components/table/table.scss:\n   85      border-radius: 1rem;\n   86  }\n   87: .v-table .v-cell .vs__dropdown-toggle {\n   88      min-height: inherit; \n   89  }\n\n/Users/chrisgrim/code/ei/resources/sass/create/pricing.scss:\n    1: .event-create__shows .vs__dropdown-menu {\n    2      min-width: 50px;\n    3  }\n\n/Users/chrisgrim/code/ei/resources/sass/create/shows.scss:\n   46  }\n   47  \n   48: .event-create__shows .vs__dropdown-option h3 {\n   49      margin:0;\n   50      font-size:1.6rem;\n   51  }\n   52  \n   53: .event-create__shows .vs__dropdown-option em {\n   54      font-size:1.4rem;\n   55      color:#909090;\n   56  }\n   57  \n   58: .event-create__shows .vs__dropdown-option.vs__dropdown-option--highlight em {\n   59      color:white;\n   60  }\n   ..\n  113      display: none;\n  114  }\n  115: .create-shows__ticket-box .vs__dropdown-toggle {\n  116      height: 4.8rem;\n  117  }\n\n/Users/chrisgrim/code/ei/resources/sass/events/components/search-filters.scss:\n  165  }\n  166  \n  167: .filter__dropdown {\n  168      position: inherit;\n  169      margin-left: auto;\n  ...\n  179  }\n  180  \n  181: .filter__dropdown .element{\n  182      overflow: hidden auto;\n  183      max-height: calc(100vh - 33rem);\n  184  }\n  185  \n  186: .filter__dropdown--footer {\n  187          padding: 1rem 3rem;\n  188          width: 100%;\n  ...\n  192      }\n  193  \n  194: .filter__dropdown .grid {\n  195      display: grid;\n  196      grid-template-columns: 1fr;\n  ...\n  202  \n  203  \n  204: .filter__dropdown .form-control.input {\n  205      display: none;\n  206  }\n  ...\n  417          width: inherit;\n  418      }\n  419:     .filter__category .filter__dropdown {\n  420          left: 8rem;\n  421      }\n  422:     .filter__tag .filter__dropdown {\n  423          left: 8rem;\n  424      }\n  425:     .filter__dropdown .element{\n  426          max-height: calc(100vh - 30rem);\n  427      }\n  428:     .filter__dropdown .grid {\n  429          grid-template-columns: 1fr 1fr;\n  430      }\n\n/Users/chrisgrim/code/ei/resources/sass/events/event-show.scss:\n  454      color: rgb(8 8 8 / 79%);\n  455  }\n  456: .es__dates .flatpickr-current-month .flatpickr-monthDropdown-months {\n  457      font-weight: 800;\n  458      font-size: 1.6rem;\n\n/Users/chrisgrim/code/ei/resources/sass/home/index.scss:\n   33      width:100%;\n   34  }\n   35: .homepage .vs__dropdown-toggle {\n   36      border:0;\n   37  }\n   38: .homepage .vs__dropdown-menu {\n   39      display: none;\n   40  }\n\n/Users/chrisgrim/code/ei/resources/sass/nav/navbar.scss:\n  239  \n  240  /* ------------------------------------*\\ #Profile Button \\*------------------------------------ */\n  241: .mobile .nav-dropdown {\n  242      position: absolute;\n  243      border-radius: 50%;\n  ...\n  247      margin-top: 0;\n  248  }\n  249: .nav-dropdown--icon {\n  250      border-radius: 50%;\n  251      width: 3.2rem;\n  ...\n  257      align-items: center;\n  258  }\n  259: .nav-dropdown--icon.active {\n  260      box-shadow: 0px 1px 7px rgb(0 0 0 / 50%);\n  261  }\n  262: .nav-dropdown--icon:hover {\n  263      box-shadow: 0px 1px 7px rgb(0 0 0 / 50%);\n  264  }\n  265: .nav-dropdown--icon h2{\n  266      color: white;\n  267      font-size: 1.5rem;\n  ...\n  269      line-height: 1.5rem;\n  270  }\n  271: .mobile .nav-dropdown--icon h2{\n  272      color: white;\n  273      font-size: 1.5rem;\n  274  }\n  275: .nav-dropdown--icon picture {\n  276      width: 100%;\n  277      height: 100%;\n  278  }\n  279: .nav-dropdown--icon img {\n  280      width: 100%;\n  281      height: 100%;\n  282  }\n  283: .nav-dropdown--icon svg {\n  284      fill:white;\n  285      width: 2.5rem;\n  286      height: 2.5rem;\n  287  }\n  288: .nav-menu-item ul.sub-dropdown  {\n  289      background: rgb(255, 255, 255);\n  290      list-style-type: none;\n  ...\n  304      overflow: hidden;\n  305  }\n  306: .nav-menu-item ul.sub-dropdown li a {\n  307      -webkit-box-align: center;\n  308      -ms-flex-align: center;\n  ...\n  338      align-items: center;\n  339  }\n  340: .nav-menu-item ul.sub-dropdown li a:hover {\n  341      background: #eaeaea;\n  342  }\n\n/Users/chrisgrim/code/ei/resources/sass/plugins/flatpickr.scss:\n  479    pointer-events: none;\n  480  }\n  481: .flatpickr-current-month .flatpickr-monthDropdown-months {\n  482    appearance: menulist;\n  483    background: transparent;\n  ...\n  502    width: auto;\n  503  }\n  504: .flatpickr-current-month .flatpickr-monthDropdown-months:focus,\n  505: .flatpickr-current-month .flatpickr-monthDropdown-months:active {\n  506    outline: none;\n  507  }\n  508: .flatpickr-current-month .flatpickr-monthDropdown-months:hover {\n  509    background: rgba(0,0,0,0.05);\n  510  }\n  511: .flatpickr-current-month .flatpickr-monthDropdown-months .flatpickr-monthDropdown-month {\n  512    background-color: transparent;\n  513    outline: none;\n\n/Users/chrisgrim/code/ei/resources/sass/search/components/mobile-options.scss:\n   59      border: 0;\n   60  }\n   61: .nav-search__options .filter__dropdown {\n   62      position: relative;\n   63      box-shadow: none;\n   ..\n   66      margin-top: 2rem;\n   67  }\n   68: .nav-search__options .filter__dropdown .grid {\n   69      padding: 0;\n   70  }\n   71: .nav-search__options .filter__dropdown .grid  button {\n   72      padding: 1rem 0;\n   73  }\n   74: .nav-search__options .filter__dropdown .element {\n   75      overflow: visible;\n   76      max-height: 100%;\n\n/Users/chrisgrim/code/ei/resources/sass/search/components/mobile-search-nav.scss:\n  139      padding: 0 0 0 2.5rem;\n  140  }\n  141: .search-nav .wrapper .vs--single .vs__dropdown-toggle {\n  142      border-radius: 1rem 1rem 0 0;\n  143  }\n\n79 matches across 15 files\n",
-			"settings":
-			{
-				"buffer_size": 9837,
-				"line_ending": "Unix",
-				"name": "Find Results",
-				"scratch": true
-			}
-		},
-		{
-			"file": "resources/sass/components/dropdowns/nav-dropdown.scss",
-			"settings":
-			{
-				"buffer_size": 2691,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "resources/sass/components/dropdowns/v-select.scss",
-			"settings":
-			{
-				"buffer_size": 3512,
-				"encoding": "UTF-8",
+				"buffer_size": 6531,
 				"line_ending": "Unix"
 			}
 		}
@@ -692,23 +664,26 @@
 	"expanded_folders":
 	[
 		"/Users/chrisgrim/code/ei",
-		"/Users/chrisgrim/code/ei/app",
 		"/Users/chrisgrim/code/ei/resources",
 		"/Users/chrisgrim/code/ei/resources/js",
 		"/Users/chrisgrim/code/ei/resources/js/pages",
 		"/Users/chrisgrim/code/ei/resources/js/pages/curated",
-		"/Users/chrisgrim/code/ei/resources/js/pages/curated/posts",
-		"/Users/chrisgrim/code/ei/resources/js/pages/curated/posts/components",
+		"/Users/chrisgrim/code/ei/resources/js/pages/events",
+		"/Users/chrisgrim/code/ei/resources/js/pages/events/show",
 		"/Users/chrisgrim/code/ei/resources/sass",
 		"/Users/chrisgrim/code/ei/resources/sass/nav"
 	],
 	"file_history":
 	[
+		"/Users/chrisgrim/code/ei/node_modules/leaflet/src/map/handler/Map.Tap.js",
+		"/Users/chrisgrim/code/ei/node_modules/leaflet/dist/leaflet-src.esm.js.map",
+		"/Users/chrisgrim/code/ei/config/scout.php",
+		"/Users/chrisgrim/code/ei/resources/sass/nav/navbar.scss",
 		"/Users/chrisgrim/code/ei/resources/sass/components/dropdowns/nav-dropdown.scss",
+		"/Users/chrisgrim/code/ei/resources/sass/components/dropdowns/v-select.scss",
 		"/Users/chrisgrim/code/ei/app/Http/Controllers/EventController.php",
 		"/Users/chrisgrim/code/ei/vendor/laravel/scout/src/Searchable.php",
 		"/Users/chrisgrim/code/ei/composer.json",
-		"/Users/chrisgrim/code/ei/config/scout.php",
 		"/Users/chrisgrim/code/ei/resources/js/components/Vue-List.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/admin-event-reviews.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/profile/components/register-form.vue",
@@ -741,7 +716,6 @@
 		"/Users/chrisgrim/code/ei/resources/js/pages/events/show/event-show-location.vue",
 		"/Users/chrisgrim/code/ei/resources/sass/app-create.scss",
 		"/Users/chrisgrim/code/ei/resources/sass/create/pricing.scss",
-		"/Users/chrisgrim/code/ei/resources/sass/components/dropdowns/v-select.scss",
 		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/admin-user.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/admin-organizer.vue",
 		"/Users/chrisgrim/code/ei/resources/sass/components/table/table.scss",
@@ -827,11 +801,8 @@
 		"/Users/chrisgrim/code/ei/resources/js/pages/events/event-edit.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/curated/posts/components/post-sidebar.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/profile/login-modal.vue",
-		"/Users/chrisgrim/code/ei/resources/sass/nav/navbar.scss",
 		"/Users/chrisgrim/code/ei/resources/sass/profile/profile.scss",
-		"/Users/chrisgrim/code/ei/resources/sass/create/organizer.scss",
-		"/Users/chrisgrim/code/ei/routes/curated.php",
-		"/Users/chrisgrim/code/ei/resources/js/pages/home/sections/icons-section.vue"
+		"/Users/chrisgrim/code/ei/resources/sass/create/organizer.scss"
 	],
 	"find":
 	{
@@ -842,6 +813,8 @@
 		"height": 164.0,
 		"where_history":
 		[
+			"/Users/chrisgrim/code/ei/node_modules/leaflet",
+			"/Users/chrisgrim/code/ei",
 			"/Users/chrisgrim/code/ei/resources/sass",
 			"/Users/chrisgrim/code/ei/resources/js/pages",
 			"/Users/chrisgrim/code/ei/resources/js/pages/adminArea",
@@ -967,9 +940,7 @@
 			"/Users/chrisgrim/code/ei/resources",
 			"/Users/chrisgrim/code/ei/resources/js",
 			"/Users/chrisgrim/code/ei",
-			"/Users/chrisgrim/code/ei/app",
-			"/Users/chrisgrim/code/ei/resources/sass",
-			"/Users/chrisgrim/code/ei/resources/js/pages"
+			"/Users/chrisgrim/code/ei/app"
 		]
 	},
 	"find_state":
@@ -977,6 +948,11 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"isOwner",
+			"!Browser.pointer",
+			"browser",
+			"addInitHook",
+			"leaflet",
 			"dropdown",
 			".dropdown",
 			"dropdown",
@@ -1099,12 +1075,7 @@
 			"city",
 			"back",
 			"filter",
-			"onlineevents",
-			"online",
-			".online.search",
-			"scroll",
-			"Scroll",
-			"scroll"
+			"onlineevents"
 		],
 		"highlight": false,
 		"in_selection": false,
@@ -1122,24 +1093,24 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "resources/sass/nav/navbar.scss",
-					"semi_transient": false,
+					"file": "resources/js/pages/events/show/event-show-dates.vue",
+					"semi_transient": true,
 					"settings":
 					{
-						"buffer_size": 8018,
+						"buffer_size": 6531,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5515,
-								5515
+								4297,
+								4489
 							]
 						],
 						"settings":
@@ -1147,434 +1118,10 @@
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
-							"syntax": "Packages/CSS/CSS.sublime-syntax"
+							"syntax": "Packages/Vuejs Complete Package/vue.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 9837,
-						"regions":
-						{
-							"match":
-							{
-								"flags": 112,
-								"regions":
-								[
-									[
-										159,
-										167
-									],
-									[
-										196,
-										204
-									],
-									[
-										244,
-										252
-									],
-									[
-										258,
-										266
-									],
-									[
-										296,
-										304
-									],
-									[
-										313,
-										321
-									],
-									[
-										452,
-										460
-									],
-									[
-										618,
-										626
-									],
-									[
-										756,
-										764
-									],
-									[
-										891,
-										899
-									],
-									[
-										1013,
-										1021
-									],
-									[
-										1277,
-										1285
-									],
-									[
-										1439,
-										1447
-									],
-									[
-										1553,
-										1561
-									],
-									[
-										1669,
-										1677
-									],
-									[
-										1683,
-										1691
-									],
-									[
-										1819,
-										1827
-									],
-									[
-										1833,
-										1841
-									],
-									[
-										1968,
-										1976
-									],
-									[
-										1987,
-										1995
-									],
-									[
-										2084,
-										2092
-									],
-									[
-										2103,
-										2111
-									],
-									[
-										2232,
-										2240
-									],
-									[
-										2261,
-										2269
-									],
-									[
-										2458,
-										2466
-									],
-									[
-										2643,
-										2651
-									],
-									[
-										2757,
-										2765
-									],
-									[
-										2875,
-										2883
-									],
-									[
-										3006,
-										3014
-									],
-									[
-										3135,
-										3143
-									],
-									[
-										3206,
-										3214
-									],
-									[
-										3361,
-										3369
-									],
-									[
-										3522,
-										3530
-									],
-									[
-										3630,
-										3638
-									],
-									[
-										3764,
-										3772
-									],
-									[
-										3904,
-										3912
-									],
-									[
-										4111,
-										4119
-									],
-									[
-										4335,
-										4343
-									],
-									[
-										4490,
-										4498
-									],
-									[
-										4653,
-										4661
-									],
-									[
-										4774,
-										4782
-									],
-									[
-										4900,
-										4908
-									],
-									[
-										4920,
-										4928
-									],
-									[
-										5064,
-										5072
-									],
-									[
-										5231,
-										5239
-									],
-									[
-										5341,
-										5349
-									],
-									[
-										5471,
-										5479
-									],
-									[
-										5596,
-										5604
-									],
-									[
-										5716,
-										5724
-									],
-									[
-										5870,
-										5878
-									],
-									[
-										5954,
-										5962
-									],
-									[
-										6025,
-										6033
-									],
-									[
-										6125,
-										6133
-									],
-									[
-										6371,
-										6379
-									],
-									[
-										6560,
-										6568
-									],
-									[
-										6630,
-										6638
-									],
-									[
-										6874,
-										6882
-									],
-									[
-										7000,
-										7008
-									],
-									[
-										7133,
-										7141
-									],
-									[
-										7231,
-										7239
-									],
-									[
-										7328,
-										7336
-									],
-									[
-										7469,
-										7477
-									],
-									[
-										7564,
-										7572
-									],
-									[
-										7659,
-										7667
-									],
-									[
-										7750,
-										7758
-									],
-									[
-										7885,
-										7893
-									],
-									[
-										8047,
-										8055
-									],
-									[
-										8212,
-										8220
-									],
-									[
-										8428,
-										8436
-									],
-									[
-										8596,
-										8604
-									],
-									[
-										8667,
-										8675
-									],
-									[
-										8773,
-										8781
-									],
-									[
-										8893,
-										8901
-									],
-									[
-										8925,
-										8933
-									],
-									[
-										9154,
-										9162
-									],
-									[
-										9306,
-										9314
-									],
-									[
-										9392,
-										9400
-									],
-									[
-										9491,
-										9499
-									],
-									[
-										9741,
-										9749
-									]
-								],
-								"scope": ""
-							}
-						},
-						"selection":
-						[
-							[
-								1022,
-								1022
-							]
-						],
-						"settings":
-						{
-							"detect_indentation": false,
-							"incomplete_sync": null,
-							"line_numbers": false,
-							"output_tag": 1,
-							"remote_loading": false,
-							"result_base_dir": "",
-							"result_file_regex": "^([^ \t].*):$",
-							"result_line_regex": "^ +([0-9]+):",
-							"scroll_past_end": true,
-							"synced": false,
-							"syntax": "Packages/Default/Find Results.hidden-tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 383.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "resources/sass/components/dropdowns/nav-dropdown.scss",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2691,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								650,
-								631
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/CSS/CSS.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "resources/sass/components/dropdowns/v-select.scss",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3512,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								138,
-								93
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/CSS/CSS.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 2228.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -1656,16 +1203,16 @@
 		"selected_items":
 		[
 			[
+				"scout",
+				"config/scout.php"
+			],
+			[
 				"searchab",
 				"vendor/laravel/scout/src/Searchable.php"
 			],
 			[
 				"Searchable",
 				"vendor/laravel/scout/src/Searchable.php"
-			],
-			[
-				"scout",
-				"config/scout.php"
 			],
 			[
 				"icons",

@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 
-Route::RESOURCE('communities', 'Curated\CommunityController');
+Route::RESOURCE('communities', 'Curated\CommunityController')->middleware('curator');
 Route::RESOURCE('posts', 'Curated\PostController');
 Route::RESOURCE('cards', 'Curated\CardController');
 

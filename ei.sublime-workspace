@@ -520,41 +520,6 @@
 	"buffers":
 	[
 		{
-			"file": ".env",
-			"settings":
-			{
-				"buffer_size": 1542,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"contents": "Searching 196 files for \"log\" (regex)\n\n/Users/chrisgrim/code/ei/app/Console/Commands/KathNewsCommand.php:\n    8  use App\\Models\\Event;\n    9  use App\\Mail\\Newsletter;\n   10: use Log;\n   11  \n   12  class KathNewsCommand extends Command\n   ..\n   47          // Mail::to('noah@noproscenium.com')->send(new Newsletter($events));\n   48          Mail::to('kathryn@noproscenium.com')->send(new Newsletter($events));\n   49:         Log::info('Sent Newsletter');\n   50      }\n   51  }\n\n/Users/chrisgrim/code/ei/app/Console/Commands/NewsletterCommand.php:\n    8  use App\\Models\\Event;\n    9  use App\\Mail\\Newsletter;\n   10: use Log;\n   11  \n   12  class NewsletterCommand extends Command\n   ..\n   47          Mail::to('noah@noproscenium.com')->send(new Newsletter($events));\n   48          // Mail::to('kathryn@noproscenium.com')->send(new Newsletter($events));\n   49:         Log::info('Sent Newsletter');\n   50      }\n   51  }\n\n/Users/chrisgrim/code/ei/app/Http/Controllers/Auth/AuthenticatedSessionController.php:\n    4  \n    5  use App\\Http\\Controllers\\Controller;\n    6: use App\\Http\\Requests\\Auth\\LoginRequest;\n    7  use App\\Providers\\RouteServiceProvider;\n    8  use Illuminate\\Http\\Request;\n    .\n   12  {\n   13      /**\n   14:      * Display the login view.\n   15       *\n   16       * @return \\Illuminate\\View\\View\n   ..\n   18      public function create()\n   19      {\n   20:         return view('auth.login');\n   21      }\n   22  \n   ..\n   24       * Handle an incoming authentication request.\n   25       *\n   26:      * @param  \\App\\Http\\Requests\\Auth\\LoginRequest  $request\n   27       * @return \\Illuminate\\Http\\RedirectResponse\n   28       */\n   29:     public function store(LoginRequest $request)\n   30      {\n   31          $request->authenticate();\n   ..\n   44      public function destroy(Request $request)\n   45      {\n   46:         Auth::guard('web')->logout();\n   47  \n   48          $request->session()->invalidate();\n\n/Users/chrisgrim/code/ei/app/Http/Controllers/Auth/NewPasswordController.php:\n   57          // redirect them back to where they came from with their error message.\n   58          return $status == Password::PASSWORD_RESET\n   59:                     ? redirect()->route('login')->with('status', __($status))\n   60                      : back()->withInput($request->only('email'))\n   61                              ->withErrors(['email' => __($status)]);\n\n/Users/chrisgrim/code/ei/app/Http/Controllers/Auth/RegisteredUserController.php:\n   39          ]);\n   40  \n   41:         Auth::login($user = User::create([\n   42              'name' => $request->name,\n   43              'email' => $request->email,\n\n/Users/chrisgrim/code/ei/app/Http/Controllers/Data/UserBehaviorController.php:\n    7  use Illuminate\\Http\\Request;\n    8  use Illuminate\\Support\\Facades\\Auth;\n    9: use Illuminate\\Support\\Facades\\Log;\n   10  \n   11  class UserBehaviorController extends Controller\n\n/Users/chrisgrim/code/ei/app/Http/Controllers/FavoritesController.php:\n   29          $event->unfavorite();\n   30      }\n   31:     public function loginToFavorite()\n   32      {\n   33          return back();\n\n/Users/chrisgrim/code/ei/app/Http/Middleware/Authenticate.php:\n   16      {\n   17          if (! $request->expectsJson()) {\n   18:             return route('login');\n   19          }\n   20      }\n\n/Users/chrisgrim/code/ei/app/Http/Requests/Auth/LoginRequest.php:\n   10  use Illuminate\\Validation\\ValidationException;\n   11  \n   12: class LoginRequest extends FormRequest\n   13  {\n   14      /**\n   ..\n   58  \n   59      /**\n   60:      * Ensure the login request is not rate limited.\n   61       *\n   62       * @return void\n\n/Users/chrisgrim/code/ei/app/Http/Responses/LoginResponse.php:\n    6  use Illuminate\\Http\\JsonResponse;\n    7  use Illuminate\\Http\\Response;\n    8: use Laravel\\Fortify\\Contracts\\LoginResponse as LoginResponseContract;\n    9: use Illuminate\\Support\\Facades\\Log;\n   10  \n   11: class LoginResponse implements LoginResponseContract\n   12  {\n   13      protected $user;\n\n/Users/chrisgrim/code/ei/app/Providers/RouteServiceProvider.php:\n   14       * The path to the \"home\" route for your application.\n   15       *\n   16:      * This is used by Laravel authentication to redirect users after login.\n   17       *\n   18       * @var string\n\n/Users/chrisgrim/code/ei/app/Rules/PostUniqueSlugRule.php:\n    7  Use App\\Models\\Curated\\Post;\n    8  Use App\\Models\\Curated\\Community;\n    9: use Illuminate\\Support\\Facades\\Log;\n   10  \n   11  class PostUniqueSlugRule implements Rule\n\n24 matches across 12 files\n",
-			"settings":
-			{
-				"buffer_size": 4546,
-				"line_ending": "Unix",
-				"name": "Find Results",
-				"scratch": true
-			}
-		},
-		{
-			"file": "app/Console/Commands/KathNewsCommand.php",
-			"settings":
-			{
-				"buffer_size": 1201,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "app/Models/Event.php",
-			"settings":
-			{
-				"buffer_size": 13801,
-				"line_ending": "Unix"
-			}
-		},
-		{
 			"file": "resources/sass/create/image.scss",
 			"settings":
 			{
@@ -564,11 +529,19 @@
 			}
 		},
 		{
-			"file": "resources/sass/events/event-show.scss",
+			"file": "resources/sass/nav/navbar.scss",
 			"settings":
 			{
-				"buffer_size": 18511,
+				"buffer_size": 8018,
 				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/Models/User.php",
+			"settings":
+			{
+				"buffer_size": 7821,
 				"line_ending": "Unix"
 			}
 		}
@@ -711,14 +684,16 @@
 		"/Users/chrisgrim/code/ei",
 		"/Users/chrisgrim/code/ei/app",
 		"/Users/chrisgrim/code/ei/app/Http",
-		"/Users/chrisgrim/code/ei/app/Models",
+		"/Users/chrisgrim/code/ei/app/Http/Middleware",
 		"/Users/chrisgrim/code/ei/resources",
-		"/Users/chrisgrim/code/ei/resources/sass",
-		"/Users/chrisgrim/code/ei/resources/sass/events"
+		"/Users/chrisgrim/code/ei/resources/js"
 	],
 	"file_history":
 	[
+		"/Users/chrisgrim/code/ei/resources/sass/events/event-show.scss",
+		"/Users/chrisgrim/code/ei/.env",
 		"/Users/chrisgrim/code/ei/sftp-config.json",
+		"/Users/chrisgrim/code/ei/app/Console/Commands/KathNewsCommand.php",
 		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/components/add-staff-pick.vue",
 		"/Users/chrisgrim/code/ei/app/Models/StaffPick.php",
 		"/Users/chrisgrim/code/ei/app/Http/Controllers/Admin/StaffPicksController.php",
@@ -739,7 +714,6 @@
 		"/Users/chrisgrim/code/ei/app/Policies/EventPolicy.php",
 		"/Users/chrisgrim/code/ei/app/Models/Event.php",
 		"/Users/chrisgrim/code/ei/resources/views/errors/503.blade.php",
-		"/Users/chrisgrim/code/ei/.env",
 		"/Users/chrisgrim/code/ei/app/Http/Controllers/Admin/Featured/DockController.php",
 		"/Users/chrisgrim/code/ei/app/Http/Controllers/Search/EventController.php",
 		"/Users/chrisgrim/code/ei/resources/js/pages/curated/posts/cards/card.vue",
@@ -758,7 +732,6 @@
 		"/Users/chrisgrim/code/ei/resources/js/pages/profile/favorite-button.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/events/show/event-show-about.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/events/show/event-show-reviews.vue",
-		"/Users/chrisgrim/code/ei/resources/sass/events/event-show.scss",
 		"/Users/chrisgrim/code/ei/resources/js/pages/events/show/event-show-location.vue",
 		"/Users/chrisgrim/code/ei/resources/sass/app-create.scss",
 		"/Users/chrisgrim/code/ei/resources/sass/create/pricing.scss",
@@ -831,7 +804,6 @@
 		"/Users/chrisgrim/code/ei/resources/js/pages/home/sections/album-section.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/profile/components/email-verification-modal.vue",
 		"/Users/chrisgrim/code/ei/resources/js/components/Upload-Image.vue",
-		"/Users/chrisgrim/code/ei/app/Console/Commands/KathNewsCommand.php",
 		"/Users/chrisgrim/code/ei/resources/js/pages/create/review-event.vue",
 		"/Users/chrisgrim/code/ei/resources/sass/create/review.scss",
 		"/Users/chrisgrim/code/ei/resources/views/adminArea/showapproval.blade.php",
@@ -991,6 +963,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"nav__bar",
+			"header",
 			"log",
 			"header",
 			"slug",
@@ -1116,9 +1090,7 @@
 			"\ndata-hide-options\ndata-hide-options",
 			"data-hide-options",
 			"SearchBar",
-			"search-location",
-			"search",
-			"nav-search__options"
+			"search-location"
 		],
 		"highlight": false,
 		"in_selection": false,
@@ -1136,246 +1108,11 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 2,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": ".env",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1542,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								971,
-								971
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4546,
-						"regions":
-						{
-							"match":
-							{
-								"flags": 112,
-								"regions":
-								[
-									[
-										178,
-										181
-									],
-									[
-										425,
-										428
-									],
-									[
-										619,
-										622
-									],
-									[
-										868,
-										871
-									],
-									[
-										1094,
-										1097
-									],
-									[
-										1247,
-										1250
-									],
-									[
-										1405,
-										1408
-									],
-									[
-										1558,
-										1561
-									],
-									[
-										1685,
-										1688
-									],
-									[
-										1869,
-										1872
-									],
-									[
-										2209,
-										2212
-									],
-									[
-										2523,
-										2526
-									],
-									[
-										2842,
-										2845
-									],
-									[
-										3059,
-										3062
-									],
-									[
-										3278,
-										3281
-									],
-									[
-										3459,
-										3462
-									],
-									[
-										3570,
-										3573
-									],
-									[
-										3825,
-										3828
-									],
-									[
-										3842,
-										3845
-									],
-									[
-										3903,
-										3906
-									],
-									[
-										3929,
-										3932
-									],
-									[
-										3954,
-										3957
-									],
-									[
-										4235,
-										4238
-									],
-									[
-										4457,
-										4460
-									]
-								],
-								"scope": ""
-							}
-						},
-						"selection":
-						[
-							[
-								61,
-								61
-							]
-						],
-						"settings":
-						{
-							"detect_indentation": false,
-							"incomplete_sync": null,
-							"line_numbers": false,
-							"output_tag": 1,
-							"remote_loading": false,
-							"result_base_dir": "",
-							"result_file_regex": "^([^ \t].*):$",
-							"result_line_regex": "^ +([0-9]+):",
-							"scroll_past_end": true,
-							"synced": false,
-							"syntax": "Packages/Default/Find Results.hidden-tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "app/Console/Commands/KathNewsCommand.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1201,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1192,
-								1163
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/PHP/PHP.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 638.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "app/Models/Event.php",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 13801,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/PHP/PHP.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 2791.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
 					"file": "resources/sass/create/image.scss",
 					"semi_transient": false,
 					"settings":
@@ -1402,24 +1139,24 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
-					"buffer": 5,
-					"file": "resources/sass/events/event-show.scss",
+					"buffer": 1,
+					"file": "resources/sass/nav/navbar.scss",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 18511,
+						"buffer_size": 8018,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								17510,
-								17510
+								3161,
+								3161
 							]
 						],
 						"settings":
@@ -1430,10 +1167,41 @@
 							"syntax": "Packages/CSS/CSS.sublime-syntax"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 2465.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "app/Models/User.php",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 7821,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								6588,
+								6588
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/PHP/PHP.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 5969.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
 					"type": "text"
 				}
 			]

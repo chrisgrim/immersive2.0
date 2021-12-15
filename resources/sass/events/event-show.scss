@@ -42,11 +42,15 @@ iframe.youtube-iframe {
     padding: 1.5rem 2rem;
     display: flex;
 }
-
+.show-content .lay-b__left {
+    min-height: 600px;
+}
 /* ------------------------------------*\
   Header
 \*------------------------------------ */
-
+.es__header--content {
+    min-height: 200px;
+}
 .es__header--image img {
     height: 43vh;
     width: 100%;

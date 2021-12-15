@@ -51,7 +51,7 @@
                         Inbox
                     </a>
                 </li>
-                <li v-if="isModerator">
+                <li v-if="isCurator">
                     <a href="/communities">
                         Communities
                     </a>
@@ -113,6 +113,7 @@
                 avatar: this.user && this.user.thumbImagePath ? `/storage/${this.user.thumbImagePath}` : null,
                 onToggle:false,
                 isModerator: this.user && this.user.type == 'a' || this.user && this.user.type == 'm',
+                isCurator: this.user && this.user.type == 'c' || this.user && this.user.type == 'a' || this.user && this.user.type == 'm',
                 login: false,
                 loginType: 'register',
                 hex: this.user ? this.user.hexColor : `#717171`,

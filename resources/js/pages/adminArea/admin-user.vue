@@ -60,6 +60,9 @@
                             <option value="m">
                                 Moderator
                             </option>
+                            <option value="c">
+                                Curator
+                            </option>
                             <option value="g">
                                 Guest
                             </option>

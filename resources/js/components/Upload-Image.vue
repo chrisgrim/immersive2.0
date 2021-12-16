@@ -81,6 +81,10 @@
             locked: {
                 type: Boolean,
                 default: false,
+            },
+            submit: {
+                type: String,
+                default: null
             }
         },
 
@@ -110,8 +114,18 @@
                 this.imageFile = image;
                 if (this.validate) { this.checkValidation() }
                 if (this.$v.$invalid) { return }
+                // if (this.submit) { 
+                //     this.formData.append('image', image);
+                //     return this.onSubmit() 
+                // }
                 this.$emit('addImage', this.imageFile.file, this.imageFile.src)
             },
+            // async onSubmit() {
+            //     await axios.post(this.submit, this.formData)
+            //     .then( res => {
+            //         this.$emit('update', res.data)
+            //     })
+            // },
             onDelete() {
                 this.$emit('onDelete')
                 this.imageFile = ''

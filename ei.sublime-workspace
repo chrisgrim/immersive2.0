@@ -519,32 +519,6 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "resources/sass/create/image.scss",
-			"settings":
-			{
-				"buffer_size": 937,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "resources/sass/nav/navbar.scss",
-			"settings":
-			{
-				"buffer_size": 8018,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "app/Models/User.php",
-			"settings":
-			{
-				"buffer_size": 7821,
-				"line_ending": "Unix"
-			}
-		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -683,15 +657,25 @@
 	[
 		"/Users/chrisgrim/code/ei",
 		"/Users/chrisgrim/code/ei/app",
-		"/Users/chrisgrim/code/ei/app/Http",
-		"/Users/chrisgrim/code/ei/app/Http/Middleware",
+		"/Users/chrisgrim/code/ei/config",
 		"/Users/chrisgrim/code/ei/resources",
-		"/Users/chrisgrim/code/ei/resources/js"
+		"/Users/chrisgrim/code/ei/resources/js",
+		"/Users/chrisgrim/code/ei/resources/js/pages",
+		"/Users/chrisgrim/code/ei/resources/js/pages/navigation",
+		"/Users/chrisgrim/code/ei/resources/js/pages/navigation/components",
+		"/Users/chrisgrim/code/ei/routes"
 	],
 	"file_history":
 	[
-		"/Users/chrisgrim/code/ei/resources/sass/events/event-show.scss",
+		"/Users/chrisgrim/code/ei/config/debugbar.php",
+		"/Users/chrisgrim/code/ei/resources/sass/create/image.scss",
+		"/Users/chrisgrim/code/ei/resources/sass/nav/navbar.scss",
 		"/Users/chrisgrim/code/ei/.env",
+		"/Users/chrisgrim/code/ei/app/Http/Middleware/isCurator.php",
+		"/Users/chrisgrim/code/ei/resources/js/pages/navigation/components/profile-button.vue",
+		"/Users/chrisgrim/code/ei/routes/curated.php",
+		"/Users/chrisgrim/code/ei/app/Http/Kernel.php",
+		"/Users/chrisgrim/code/ei/resources/sass/events/event-show.scss",
 		"/Users/chrisgrim/code/ei/sftp-config.json",
 		"/Users/chrisgrim/code/ei/app/Console/Commands/KathNewsCommand.php",
 		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/components/add-staff-pick.vue",
@@ -700,7 +684,6 @@
 		"/Users/chrisgrim/code/ei/node_modules/leaflet/src/map/handler/Map.Tap.js",
 		"/Users/chrisgrim/code/ei/node_modules/leaflet/dist/leaflet-src.esm.js.map",
 		"/Users/chrisgrim/code/ei/config/scout.php",
-		"/Users/chrisgrim/code/ei/resources/sass/nav/navbar.scss",
 		"/Users/chrisgrim/code/ei/resources/sass/components/dropdowns/nav-dropdown.scss",
 		"/Users/chrisgrim/code/ei/resources/sass/components/dropdowns/v-select.scss",
 		"/Users/chrisgrim/code/ei/app/Http/Controllers/EventController.php",
@@ -811,13 +794,7 @@
 		"/Users/chrisgrim/code/ei/resources/sass/create/shows.scss",
 		"/Users/chrisgrim/code/ei/resources/sass/curated/post/show.scss",
 		"/Users/chrisgrim/code/ei/resources/js/pages/create/shows/vue-limited-run.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/create/shows.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/events/show/event-show-quickbuy.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/admin-staff-picks.vue",
-		"/Users/chrisgrim/code/ei/resources/js/app.js",
-		"/Users/chrisgrim/code/ei/resources/js/pages/events/event-edit.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/curated/posts/components/post-sidebar.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/profile/login-modal.vue"
+		"/Users/chrisgrim/code/ei/resources/js/pages/create/shows.vue"
 	],
 	"find":
 	{
@@ -828,6 +805,7 @@
 		"height": 164.0,
 		"where_history":
 		[
+			"/Users/chrisgrim/code/ei",
 			"/Users/chrisgrim/code/ei/app",
 			"/Users/chrisgrim/code/ei/node_modules/leaflet",
 			"/Users/chrisgrim/code/ei",
@@ -954,8 +932,7 @@
 			"/Users/chrisgrim/code/ei/resources/sass",
 			"/Users/chrisgrim/code/ei/resources/js/pages/events",
 			"/Users/chrisgrim/code/ei/resources",
-			"/Users/chrisgrim/code/ei/resources/js",
-			"/Users/chrisgrim/code/ei"
+			"/Users/chrisgrim/code/ei/resources/js"
 		]
 	},
 	"find_state":
@@ -963,6 +940,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"isModerator",
+			"redis",
 			"nav__bar",
 			"header",
 			"log",
@@ -1088,9 +1067,7 @@
 			"onSelect",
 			"data-hide-options",
 			"\ndata-hide-options\ndata-hide-options",
-			"data-hide-options",
-			"SearchBar",
-			"search-location"
+			"data-hide-options"
 		],
 		"highlight": false,
 		"in_selection": false,
@@ -1108,102 +1085,8 @@
 	"groups":
 	[
 		{
-			"selected": 2,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "resources/sass/create/image.scss",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 937,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								503,
-								503
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/CSS/CSS.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "resources/sass/nav/navbar.scss",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 8018,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3161,
-								3161
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/CSS/CSS.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 2465.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "app/Models/User.php",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 7821,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								6588,
-								6588
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/PHP/PHP.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 5969.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				}
 			]
 		}
 	],

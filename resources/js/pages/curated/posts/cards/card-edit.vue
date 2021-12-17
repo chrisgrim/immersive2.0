@@ -10,6 +10,7 @@
                     text="Image must be at least 800px by 450px"
                     :height="450"
                     :width="800"
+                    :loading="disabled"
                     :image="`/storage/${image}`"
                     :can-delete="card.type==='e'"
                     @onDelete="hideImage"
@@ -143,6 +144,7 @@
                 card: this.parentCard,
                 cardBeforeEdit: { ...this.parentCard },
                 onEdit: false,
+                disabled: false,
                 formData: new FormData(),
                 hover: false,
                 updated: false,
@@ -185,13 +187,15 @@
                 this.card.blurb ? this.formData.append('blurb', this.card.blurb) : null
             },
             addImageSubmit(image, src) {
+                this.disabled = true
                 this.formData.append('image', image);
                 this.card.type === 'h' ? this.formData.append('type', 'e') : null
                 this.updateCard();
             },
             clear() {
-                this.onEdit = false;
+                this.onEdit = false
                 this.hover = false
+                this.disabled = false
             },
             onUpdated() {
                 this.$v.$reset();

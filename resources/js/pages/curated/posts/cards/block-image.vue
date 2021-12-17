@@ -5,6 +5,7 @@
                 text="Image must be at least 800px by 450px"
                 :height="450"
                 :width="800"
+                :loading="disabled"
                 @addImage="addImage" />
         </div>
     </div>
@@ -28,6 +29,7 @@
         data() {
             return {
                 formData: new FormData(),
+                disabled: false,
             }
         },
 
@@ -36,9 +38,11 @@
                 await axios.post(`/cards/${this.post.slug}/create`, this.formData)
                 .then( res => {
                     this.$emit('update', res.data)
+                    this.disabled = false
                 })
             },
             addImage(image) {
+                this.disabled = true
                 this.formData.append('image', image);
                 this.formData.append('type', 'i');
                 this.saveCard();

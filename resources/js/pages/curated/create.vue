@@ -57,6 +57,7 @@
                 <CardImage
                     :height="500"
                     :width="800"
+                    :loading="disabled"
                     text="The image must be at least 800px x 500px"
                     :external-submit="checkImage"
                     @addImage="addImage" />

@@ -519,6 +519,15 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "resources/js/pages/adminArea/admin-user.vue",
+			"settings":
+			{
+				"buffer_size": 5287,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -657,16 +666,19 @@
 	[
 		"/Users/chrisgrim/code/ei",
 		"/Users/chrisgrim/code/ei/app",
-		"/Users/chrisgrim/code/ei/config",
+		"/Users/chrisgrim/code/ei/app/Http",
+		"/Users/chrisgrim/code/ei/app/Http/Controllers",
+		"/Users/chrisgrim/code/ei/app/Http/Controllers/Admin",
 		"/Users/chrisgrim/code/ei/resources",
 		"/Users/chrisgrim/code/ei/resources/js",
 		"/Users/chrisgrim/code/ei/resources/js/pages",
-		"/Users/chrisgrim/code/ei/resources/js/pages/navigation",
-		"/Users/chrisgrim/code/ei/resources/js/pages/navigation/components",
+		"/Users/chrisgrim/code/ei/resources/js/pages/events",
 		"/Users/chrisgrim/code/ei/routes"
 	],
 	"file_history":
 	[
+		"/Users/chrisgrim/code/ei/sftp-config.json",
+		"/Users/chrisgrim/code/ei/resources/js/components/Upload-Image.vue",
 		"/Users/chrisgrim/code/ei/config/debugbar.php",
 		"/Users/chrisgrim/code/ei/resources/sass/create/image.scss",
 		"/Users/chrisgrim/code/ei/resources/sass/nav/navbar.scss",
@@ -676,7 +688,6 @@
 		"/Users/chrisgrim/code/ei/routes/curated.php",
 		"/Users/chrisgrim/code/ei/app/Http/Kernel.php",
 		"/Users/chrisgrim/code/ei/resources/sass/events/event-show.scss",
-		"/Users/chrisgrim/code/ei/sftp-config.json",
 		"/Users/chrisgrim/code/ei/app/Console/Commands/KathNewsCommand.php",
 		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/components/add-staff-pick.vue",
 		"/Users/chrisgrim/code/ei/app/Models/StaffPick.php",
@@ -786,7 +797,6 @@
 		"/Users/chrisgrim/code/ei/resources/sass/components/buttons/button.scss",
 		"/Users/chrisgrim/code/ei/resources/js/pages/home/sections/album-section.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/profile/components/email-verification-modal.vue",
-		"/Users/chrisgrim/code/ei/resources/js/components/Upload-Image.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/create/review-event.vue",
 		"/Users/chrisgrim/code/ei/resources/sass/create/review.scss",
 		"/Users/chrisgrim/code/ei/resources/views/adminArea/showapproval.blade.php",
@@ -940,6 +950,11 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"loaded",
+			"FormData",
+			"formData",
+			"addImage",
+			"CardImage",
 			"isModerator",
 			"redis",
 			"nav__bar",
@@ -1062,12 +1077,7 @@
 			"homepage",
 			"handle",
 			"search",
-			"this.searchInput",
-			"onClose",
-			"onSelect",
-			"data-hide-options",
-			"\ndata-hide-options\ndata-hide-options",
-			"data-hide-options"
+			"this.searchInput"
 		],
 		"highlight": false,
 		"in_selection": false,
@@ -1085,8 +1095,40 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "resources/js/pages/adminArea/admin-user.vue",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5287,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2214,
+								2214
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Vuejs Complete Package/vue.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 1613.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		}
 	],

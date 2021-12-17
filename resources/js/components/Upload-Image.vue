@@ -82,9 +82,9 @@
                 type: Boolean,
                 default: false,
             },
-            submit: {
-                type: String,
-                default: null
+            loading: {
+                type: Boolean,
+                default: false,
             }
         },
 
@@ -101,7 +101,6 @@
         
         data() {
             return {
-                loading: false,
                 imageFile: '',
                 formData: new FormData(),
                 updated: false,
@@ -111,31 +110,18 @@
 
         methods: {
             loaded(image) {
-                this.imageFile = image;
-                if (this.validate) { this.checkValidation() }
-                if (this.$v.$invalid) { return }
-                // if (this.submit) { 
-                //     this.formData.append('image', image);
-                //     return this.onSubmit() 
-                // }
+                this.imageFile = image
+                if (this.validate) { this.$v.$touch() }
+                if (this.$v.$invalid) { return this.inProcess = !this.inProcess }
                 this.$emit('addImage', this.imageFile.file, this.imageFile.src)
             },
-            // async onSubmit() {
-            //     await axios.post(this.submit, this.formData)
-            //     .then( res => {
-            //         this.$emit('update', res.data)
-            //     })
-            // },
             onDelete() {
                 this.$emit('onDelete')
                 this.imageFile = ''
             },
             onToggle() {
-                this.loading = !this.loading;
+                this.inProcess = !this.inProcess;
                 this.disabled = !this.disabled;
-            },
-            checkValidation() {
-                this.$v.$touch(); 
             },
             reset() {
                 this.imageFile = '';
@@ -144,7 +130,7 @@
 
         watch: {
             externalSubmit() {
-                this.checkValidation()
+                this.$v.$touch(); 
             },
             image() {
                 if (this.image === `/storage/null`) {this.reset()}

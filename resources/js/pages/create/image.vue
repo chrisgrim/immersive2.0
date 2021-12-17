@@ -48,6 +48,7 @@
                     text="Image must be at least 1200px by 450px"
                     :height="450"
                     :width="1200"
+                    :loading="disabled"
                     :image="event.largeImagePath ? `/storage/${event.largeImagePath}` : null"
                     :external-submit="checkImage"
                     @addImage="addImage" />
@@ -96,7 +97,6 @@
         data() {
             return {
                 event: this.loadevent,
-                loading: false,
                 disabled: false,
                 isPublished: this.loadevent.status == 'p' || this.loadevent.status == 'e',
                 checkImage: false,

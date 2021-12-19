@@ -74,12 +74,12 @@
 </template>
 
 <script>
-    import {LMap, LTileLayer, LMarker, LPopup, LIcon} from 'vue2-leaflet'
+    import {LMap, LTileLayer, LMarker, LIcon} from 'vue2-leaflet'
     export default {
 
         props: [ 'event' ],
 
-        components: { LMap, LTileLayer, LMarker, LPopup, LIcon },
+        components: { LMap, LTileLayer, LMarker, LIcon },
 
         data() {
             return {

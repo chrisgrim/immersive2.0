@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"load",
+				"loading"
+			],
+			[
 				"inl",
 				"inline-block\tdisplay"
 			],
@@ -376,10 +380,6 @@
 				"section"
 			],
 			[
-				"load",
-				"loadsections"
-			],
-			[
 				"vue-comm",
 				"vue-community-show"
 			],
@@ -520,10 +520,10 @@
 	"buffers":
 	[
 		{
-			"file": "resources/js/pages/adminArea/admin-user.vue",
+			"file": "resources/sass/layout.scss",
 			"settings":
 			{
-				"buffer_size": 5287,
+				"buffer_size": 9401,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -666,19 +666,22 @@
 	[
 		"/Users/chrisgrim/code/ei",
 		"/Users/chrisgrim/code/ei/app",
-		"/Users/chrisgrim/code/ei/app/Http",
-		"/Users/chrisgrim/code/ei/app/Http/Controllers",
-		"/Users/chrisgrim/code/ei/app/Http/Controllers/Admin",
 		"/Users/chrisgrim/code/ei/resources",
-		"/Users/chrisgrim/code/ei/resources/js",
-		"/Users/chrisgrim/code/ei/resources/js/pages",
-		"/Users/chrisgrim/code/ei/resources/js/pages/events",
-		"/Users/chrisgrim/code/ei/routes"
+		"/Users/chrisgrim/code/ei/resources/sass",
+		"/Users/chrisgrim/code/ei/resources/views",
+		"/Users/chrisgrim/code/ei/resources/views/events",
+		"/Users/chrisgrim/code/ei/resources/views/layouts"
 	],
 	"file_history":
 	[
 		"/Users/chrisgrim/code/ei/sftp-config.json",
+		"/Users/chrisgrim/code/ei/resources/js/pages/create/image.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/curated/posts/cards/block-image.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/curated/posts/cards/card-edit.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/curated/create.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/create/components/submit-buttons.vue",
 		"/Users/chrisgrim/code/ei/resources/js/components/Upload-Image.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/admin-user.vue",
 		"/Users/chrisgrim/code/ei/config/debugbar.php",
 		"/Users/chrisgrim/code/ei/resources/sass/create/image.scss",
 		"/Users/chrisgrim/code/ei/resources/sass/nav/navbar.scss",
@@ -729,7 +732,6 @@
 		"/Users/chrisgrim/code/ei/resources/js/pages/events/show/event-show-location.vue",
 		"/Users/chrisgrim/code/ei/resources/sass/app-create.scss",
 		"/Users/chrisgrim/code/ei/resources/sass/create/pricing.scss",
-		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/admin-user.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/admin-organizer.vue",
 		"/Users/chrisgrim/code/ei/resources/sass/components/table/table.scss",
 		"/Users/chrisgrim/code/ei/resources/sass/components/modals/modal.scss",
@@ -758,7 +760,6 @@
 		"/Users/chrisgrim/code/ei/resources/sass/curated/index.css",
 		"/Users/chrisgrim/code/ei/resources/js/pages/curated/shelves/vue-album-collection.vue",
 		"/Users/chrisgrim/code/ei/resources/sass/components/shelves/shelf.scss",
-		"/Users/chrisgrim/code/ei/resources/js/pages/curated/create.vue",
 		"/Users/chrisgrim/code/ei/resources/sass/components/albums/vertical-album.scss",
 		"/Users/chrisgrim/code/ei/resources/js/pages/featured/index.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/featured/components/dock-grid.vue",
@@ -800,11 +801,7 @@
 		"/Users/chrisgrim/code/ei/resources/js/pages/create/review-event.vue",
 		"/Users/chrisgrim/code/ei/resources/sass/create/review.scss",
 		"/Users/chrisgrim/code/ei/resources/views/adminArea/showapproval.blade.php",
-		"/Users/chrisgrim/code/ei/resources/js/pages/create/image.vue",
-		"/Users/chrisgrim/code/ei/resources/sass/create/shows.scss",
-		"/Users/chrisgrim/code/ei/resources/sass/curated/post/show.scss",
-		"/Users/chrisgrim/code/ei/resources/js/pages/create/shows/vue-limited-run.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/create/shows.vue"
+		"/Users/chrisgrim/code/ei/resources/sass/create/shows.scss"
 	],
 	"find":
 	{
@@ -815,6 +812,7 @@
 		"height": 164.0,
 		"where_history":
 		[
+			"/Users/chrisgrim/code/ei/resources/sass",
 			"/Users/chrisgrim/code/ei",
 			"/Users/chrisgrim/code/ei/app",
 			"/Users/chrisgrim/code/ei/node_modules/leaflet",
@@ -941,8 +939,7 @@
 			"/Users/chrisgrim/code/ei",
 			"/Users/chrisgrim/code/ei/resources/sass",
 			"/Users/chrisgrim/code/ei/resources/js/pages/events",
-			"/Users/chrisgrim/code/ei/resources",
-			"/Users/chrisgrim/code/ei/resources/js"
+			"/Users/chrisgrim/code/ei/resources"
 		]
 	},
 	"find_state":
@@ -950,6 +947,20 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"main",
+			"bodyArea",
+			"clear",
+			"addImageSubmit",
+			"appendCardData",
+			"disabled",
+			"addImage",
+			"disabled",
+			"loading",
+			"disabled",
+			"ready",
+			"disabled",
+			"checkValidation",
+			"loading",
 			"loaded",
 			"FormData",
 			"formData",
@@ -1063,21 +1074,7 @@
 			"contributer",
 			"onRefresh",
 			"},\n",
-			"onRefresh",
-			"emit",
-			"emiy",
-			"Name",
-			"name",
-			"onRefresh",
-			"onSelect",
-			"important",
-			"calc",
-			"<button",
-			"query",
-			"homepage",
-			"handle",
-			"search",
-			"this.searchInput"
+			"onRefresh"
 		],
 		"highlight": false,
 		"in_selection": false,
@@ -1100,19 +1097,19 @@
 			[
 				{
 					"buffer": 0,
-					"file": "resources/js/pages/adminArea/admin-user.vue",
+					"file": "resources/sass/layout.scss",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5287,
+						"buffer_size": 9401,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2214,
-								2214
+								2293,
+								2293
 							]
 						],
 						"settings":
@@ -1120,10 +1117,10 @@
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
-							"syntax": "Packages/Vuejs Complete Package/vue.tmLanguage"
+							"syntax": "Packages/CSS/CSS.sublime-syntax"
 						},
 						"translation.x": 0.0,
-						"translation.y": 1613.0,
+						"translation.y": 602.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,

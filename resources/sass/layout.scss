@@ -41,6 +41,10 @@ blockquote {
     margin-inline-start: 2rem;
     margin-inline-end: 2rem;
 }
+main {
+    display: block;
+    min-height: 100vh;
+}
 .noscroll {
     overflow: hidden;
 }
@@ -68,10 +72,6 @@ blockquote {
 
 .bspin {
     cursor: wait;
-}
-main {
-    display: block;
-    /*min-height: 100vh;*/
 }
 
 .grid {

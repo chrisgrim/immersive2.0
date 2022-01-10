@@ -81,12 +81,12 @@
             </template>
             <template v-else>
                 <li>
-                    <a @click="onSubmit('register')">
+                    <a href="#" @click="onSubmit('register')">
                         Register
                     </a>
                 </li>
                 <li>
-                    <a @click="onSubmit('login')">
+                    <a href="#" @click="onSubmit('login')">
                         Login
                     </a>
                 </li>

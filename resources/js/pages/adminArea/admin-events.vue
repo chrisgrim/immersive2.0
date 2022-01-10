@@ -16,7 +16,7 @@
                 v-model="eventList"
                 placeholder="Filter by event name" 
                 class="general"
-                @keyup="onSearch(eventList)"
+                @keyup="debounce(eventList)"
                 type="text">
         </div>
         <div class="data-grid">
@@ -24,6 +24,8 @@
                 <p />
                 <p>Name</p>
                 <p>Organization</p>
+                <p>Location</p>
+                <p>Category</p>
                 <p>Sum.</p>
                 <p>Status</p>
                 <p>Clicks</p>
@@ -55,6 +57,13 @@
                         @click.prevent="showModal(event, 'changeOrganizer')">
                         {{ event.organizer.name }}
                     </button>
+                </div>
+                <div class="center">
+                    <p v-if="event.hasLocation">{{ event.location.city ? event.location.city : event.location.region }}, {{ event.location.country }}</p>
+                    <p v-else>Online</p>
+                </div>
+                <div class="center">
+                    <p>{{ event.category.name }}</p>
                 </div>
                 <div class="center">
                     <a 
@@ -119,44 +128,43 @@
         },
 
         methods: {
-            onLoad(page) {
-                console.log(this.dateFilter);
-                axios.get(`/admin/events/fetch?page=${page}&date=${this.dateFilter}`)
+            async onLoad(page) {
+                await axios.get(`/admin/events/fetch?page=${page}&date=${this.dateFilter}`)
                 .then( res => { 
-                    console.log(res.data);
                     this.events = res.data 
                 })
             },
-
-            onSearch(events) {
-                axios.get('/api/admin/events/search', { params: { keywords: events } })
+            async onSearch(events) {
+                await axios.get('/api/admin/events/search', { params: { keywords: events } })
                 .then( res => { this.events = res.data });
             },
-
-            searchOrganizers(value) {
-                axios.get('/api/admin/organizer/search', { params: { keywords: value } })
+            async searchOrganizers(value) {
+                await axios.get('/api/admin/organizer/search', { params: { keywords: value } })
                 .then( res => { this.organizers = res.data });
             },
-
             async changeEventOrganization(value) {
                 await axios.post(`/admin/event/${this.modalData.slug}/change-organizer`, value)
                 this.reset();
             },
-
             showModal(event, arr) {
                 this.modalData = event;
                 this.modal = arr;
             },
-
             reset() {
                 this.onLoad();
                 this.modalData = null
                 this.modal = false
             },
-
             cleanDate(data) {
                 return this.$dayjs(data).format("dddd, MMMM D YYYY");
-            }
+            },
+            debounce(query) {
+                if (this.timeout) 
+                    clearTimeout(this.timeout); 
+                this.timeout = setTimeout(() => {
+                    this.onSearch(query)
+                }, 200); // delay
+            },
         },
 
         created() {

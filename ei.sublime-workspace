@@ -520,11 +520,20 @@
 	"buffers":
 	[
 		{
-			"file": "resources/sass/layout.scss",
+			"contents": "Searching 206 files for \"window.location\" (regex)\n\n/Users/chrisgrim/code/ei/resources/js/components/search-bars/components/events.vue:\n   65          onSelect() {\n   66              this.saveSearchData();\n   67:             if (this.searchInput.type == 'o') window.location.href = `/organizer/${this.searchInput.slug}`\n   68:             if (this.searchInput.call_to_action) window.location.href = `/events/${this.searchInput.slug}`\n   69          },\n   70  \n\n/Users/chrisgrim/code/ei/resources/js/components/search-bars/components/location.vue:\n   31      computed: {\n   32          placeholder() {\n   33:             if (new URL(window.location.href).searchParams.get(\"city\")) {\n   34:                 return new URL(window.location.href).searchParams.get(\"city\");\n   35              }\n   36              return 'Location Search';\n   ..\n   65          onSelect() {\n   66              this.saveSearchData();\n   67:             window.location.href = `/index/search?city=${this.searchInput.name}&lat=${this.searchInput.latitude}&lng=${this.searchInput.longitude}`;\n   68          },\n   69  \n\n/Users/chrisgrim/code/ei/resources/js/components/search-bars/components/tags.vue:\n   60          onSelect() {\n   61              this.saveSearchData();\n   62:             if (this.searchInput.type == 'c') window.location.href = `/index/search-all?category=${this.searchInput.id}`\n   63:             // if (this.searchInput.type == 'r')  window.location.href = `/index/search-all?remote=${this.searchInput.name}&id=${this.searchInput.id}`\n   64:             if (this.searchInput.type == 't') window.location.href = `/index/search-all?tag=${this.searchInput.name}`\n   65          },\n   66  \n\n/Users/chrisgrim/code/ei/resources/js/components/search-bars/search-all.vue:\n   78          onSelect() {\n   79              this.saveSearchData();\n   80:             if (this.searchInput.type == 'c') window.location.href = `/index/search-online?category=${this.searchInput.id}`\n   81:             if (this.searchInput.type == 'r')  window.location.href = `/index/search-online?remote=${this.searchInput.name}&id=${this.searchInput.id}`\n   82:             if (this.searchInput.type == 't') window.location.href = `/index/search-online?tag=${this.searchInput.name}`\n   83:             if (this.searchInput.type == 'o') window.location.href = `/organizer/${this.searchInput.slug}`\n   84:             if (this.searchInput.call_to_action) window.location.href = `/events/${this.searchInput.slug}`\n   85              if (this.searchInput.latitude) this.globalSearch()\n   86          },\n   ..\n   95  \n   96          globalSearch() {\n   97:             window.location.href = `/index/search?city=${this.searchInput.name}&lat=${this.searchInput.latitude}&lng=${this.searchInput.longitude}`;\n   98          },\n   99  \n\n/Users/chrisgrim/code/ei/resources/js/components/search-bars/search-dropdown.vue:\n   55              isLoading: false,\n   56              cover: true,\n   57:             placeholder: new URL(window.location.href).searchParams.get(\"city\") ? new URL(window.location.href).searchParams.get(\"city\") : 'Start your search',\n   58          }\n   59      },\n\n/Users/chrisgrim/code/ei/resources/js/components/search-bars/search-events.vue:\n   78          onSelect() {\n   79              this.saveSearchData();\n   80:             window.location.href = `/events/${this.searchInput.slug}`\n   81          },\n   82  \n\n/Users/chrisgrim/code/ei/resources/js/components/search-bars/search-location.vue:\n   55      computed: {\n   56          placeholder() {\n   57:             if (new URL(window.location.href).searchParams.get(\"city\")) {\n   58:                 return new URL(window.location.href).searchParams.get(\"city\");\n   59              }\n   60              return this.text;\n   ..\n   89          onSelect() {\n   90              this.saveSearchData();\n   91:             window.location.href = `/index/search?city=${this.searchInput.name}&lat=${this.searchInput.latitude}&lng=${this.searchInput.longitude}`;\n   92          },\n   93  \n\n/Users/chrisgrim/code/ei/resources/js/mixins/form-validation-mixin.js:\n   30  \n   31          onBackInitial() {\n   32:             return window.location.href = `/create/events/edit`;\n   33          },\n   34  \n   35          onBack(value) {\n   36:             return value == 'exit' ?  this.onBackInitial() :  window.location.href = `/create/${this.event.slug}/${value}`\n   37          },\n   38  \n   ..\n   42              \n   43          onForward(value) {\n   44:             window.location.href = `/create/${this.event.slug}/${value}`;\n   45              this.disabled = false;\n   46          },\n   47  \n   48          onRegistered() {\n   49:             return window.location.href = '/verify-email';\n   50          },\n   51  \n   52          onFinishOrganizer(value) {\n   53:             return window.location.href = value;\n   54          },\n   55  \n\n/Users/chrisgrim/code/ei/resources/js/pages/adminArea/admin-stats.vue:\n   98  \n   99              submit(value) {\n  100:                 window.location.href = `/admin/events/show/${value.slug}`;\n  101              },\n  102  \n\n/Users/chrisgrim/code/ei/resources/js/pages/adminArea/approve/approval-bar.vue:\n  122  \n  123              redirect(value) {\n  124:                 window.location.href = value;\n  125              },\n  126          },\n\n/Users/chrisgrim/code/ei/resources/js/pages/adminArea/approve/community-approval-bar.vue:\n   77  \n   78              redirect(value) {\n   79:                 window.location.href = value;\n   80              },\n   81          },\n\n/Users/chrisgrim/code/ei/resources/js/pages/adminArea/approve/org-approval-bar.vue:\n   58  \n   59              redirect(value) {\n   60:                 window.location.href = value;\n   61              },\n   62          },\n\n/Users/chrisgrim/code/ei/resources/js/pages/adminArea/nav.vue:\n  257  \n  258              onLoad() {\n  259:                 let path = new URL(window.location.href).pathname;\n  260                  path == '/categories/create' ? this.active = 'categories' : '';\n  261                  path == '/genres/create' ? this.active = 'tags' : '';\n\n/Users/chrisgrim/code/ei/resources/js/pages/create/nav-bottom-bar.vue:\n   18          data() {\n   19              return {\n   20:                 isReview: this.event ? window.location.pathname == `/create/${this.event.slug}/review` ? true : false : '',\n   21              }\n   22          },\n\n/Users/chrisgrim/code/ei/resources/js/pages/create/nav.vue:\n  133                  onAdvisories: false,\n  134                  onImage: false,\n  135:                 url: window.location.pathname,\n  136                  hover: '',\n  137                  pageHeight:'',\n  138:                 isNotReview: window.location.pathname == `/create/${this.event.slug}/review` ? false : true,\n  139:                 isOrganizer: window.location.pathname == `/organizer/create` ? true : false,\n  140                  readyToSubmit: false,\n  141                  cantReview: this.event.status == 'p' || this.event.status == 'e' ? false : true,\n\n/Users/chrisgrim/code/ei/resources/js/pages/create/organizer-admin.vue:\n  284              axios.post(`${this.eventUrl}/organizer`, params, headers)\n  285              .then(response => { \n  286:                 window.location.href = `${this.eventUrl}/title`; \n  287              })\n  288              .catch(error => {         \n  ...\n  295              axios.post(`${this.eventUrl}/${this.organizer.id}/organizer`, params, headers)\n  296              .then(response => { \n  297:                 window.location.href = `${this.eventUrl}/title`; \n  298              })\n  299              .catch(error => {            \n\n/Users/chrisgrim/code/ei/resources/js/pages/create/organizer.vue:\n  321  \n  322          goBack() {\n  323:             window.location.href = '/create/events/edit';\n  324          },\n  325  \n\n/Users/chrisgrim/code/ei/resources/js/pages/create/review-event.vue:\n  120                  axios.get(`/create/${this.event.slug}/submit`)\n  121                  .then(res => {\n  122:                    window.location.href = `/create/${this.event.slug}/thankyou`;\n  123                  })\n  124                  .catch(err => { this.onErrors(err) });\n\n/Users/chrisgrim/code/ei/resources/js/pages/curated/create.vue:\n  118                  await axios.post(`/communities`, this.formData)\n  119                  .then( res => {\n  120:                     window.location.href = `/create/communities/thanks`\n  121                  })\n  122                  .catch(err => {\n\n/Users/chrisgrim/code/ei/resources/js/pages/curated/posts/create.vue:\n   97                  await axios.post(`/posts/${this.community.slug}/store`, this.post)\n   98                  .then( res => {\n   99:                     window.location.href = `/communities/${this.community.slug}/${res.data.slug}/edit`\n  100                  })\n  101                  .catch(err => {\n\n/Users/chrisgrim/code/ei/resources/js/pages/curated/posts/show.vue:\n  100          methods: {\n  101              onBack() {\n  102:                 document.referrer == \"\" ? window.location.href = '/' : window.history.back()\n  103              }\n  104          },\n\n/Users/chrisgrim/code/ei/resources/js/pages/curated/show.vue:\n  120          methods: {\n  121              onBack() {\n  122:                 document.referrer == \"\" ? window.location.href = '/' : window.history.back()\n  123              }\n  124          },\n\n/Users/chrisgrim/code/ei/resources/js/pages/events/components/event-edit-item.vue:\n  227                  axios.post(`/events`, organizer)\n  228                  .then(response => { \n  229:                     window.location.href = `/create/${response.data.slug}/title`; \n  230                  })\n  231                  .catch(error => { this.serverErrors = error.response.data.errors; });\n\n/Users/chrisgrim/code/ei/resources/js/pages/events/event-edit.vue:\n  252                  await axios.post(`/events`, this.organizer)\n  253                  .then(res => { \n  254:                     window.location.href = `/create/${res.data.slug}/title`; \n  255                  })\n  256                  .catch(error => { this.serverErrors = error.response.data.errors; });\n\n/Users/chrisgrim/code/ei/resources/js/pages/events/show/event-show-header.vue:\n   70          methods: {\n   71              onBack() {\n   72:                 document.referrer == \"\" ? window.location.href = '/' : window.history.back()\n   73              }\n   74          }\n\n/Users/chrisgrim/code/ei/resources/js/pages/home/sections/home-mobile-search-nav.vue:\n  153                  this.searchInput = val\n  154                  // this.saveSearchData();\n  155:                 window.location.href = `/index/search?city=${val.model.name}&lat=${val.model.latitude}&lng=${val.model.longitude}`;\n  156              },\n  157              handleScroll () {\n\n/Users/chrisgrim/code/ei/resources/js/pages/navigation/components/profile-button.vue:\n  134              toggle() {\n  135                  if (this.mobile) {\n  136:                     return window.location.href = `/account-settings`;\n  137                  }\n  138                  return this.onToggle = !this.onToggle;\n\n/Users/chrisgrim/code/ei/resources/js/pages/organizers/organizer-show.vue:\n  112              },\n  113              onBack() {\n  114:                 document.referrer == \"\" ? window.location.href = '/' : window.history.back()\n  115              }\n  116          },\n\n/Users/chrisgrim/code/ei/resources/js/pages/profile/login.vue:\n   28              return {\n   29                  isLogin: location.pathname == '/login' ? true : false,\n   30:                 createEvent: new URL(window.location.href).searchParams.get(\"create\"),\n   31              }\n   32          },\n\n/Users/chrisgrim/code/ei/resources/js/pages/profile/profile-index.vue:\n  200                      then(response => {\n  201                          if (response.status === 302 || 401) {\n  202:                             window.location.href = '/';\n  203                          } else {\n  204                          // throw error and go to catch block\n\n/Users/chrisgrim/code/ei/resources/js/pages/read/popup-content.vue:\n   28          return {\n   29              image: '',\n   30:             name: new URL(window.location.href).searchParams.get(\"name\"),\n   31:             lat: new URL(window.location.href).searchParams.get(\"lat\"),\n   32:             lng: new URL(window.location.href).searchParams.get(\"lng\"),\n   33          }\n   34      },\n\n/Users/chrisgrim/code/ei/resources/js/pages/search/components/mobile-options.vue:\n   82              },\n   83              initilizeCategory() {\n   84:                 let cat = new URL(window.location.href).searchParams.get(\"category\")\n   85                  return cat ? cat.split(',').map(Number) : []\n   86              },\n   87              initilizeTag() {\n   88:                 let tag = new URL(window.location.href).searchParams.get(\"tag\")\n   89                  return tag ? tag.split(',') : []\n   90              },\n   91              initilizePrice() {\n   92:                 return new URL(window.location.href).searchParams.get(\"price0\") ? [Number(new URL(window.location.href).searchParams.get(\"price0\")), Number(new URL(window.location.href).searchParams.get(\"price1\"))] : [0,100]\n   93              },\n   94          },\n\n/Users/chrisgrim/code/ei/resources/js/pages/search/components/vue-map.vue:\n  106              return {\n  107                  map: this.initializeMapObject(),\n  108:                 toggle: new URL(window.location.href).searchParams.get(\"live\") ? new URL(window.location.href).searchParams.get(\"live\") : false,\n  109                  wideMap: false,\n  110              }\n  ...\n  142              initializeMapObject() {\n  143                  return {\n  144:                     zoom:new URL(window.location.href).searchParams.get(\"zoom\") ? parseFloat(new URL(window.location.href).searchParams.get(\"zoom\")) : 11,\n  145                      max: 20,\n  146                      min: 10,\n  ...\n  149                      '<a href=\"http://jawg.io\" title=\"Tiles Courtesy of Jawg Maps\" target=\"_blank\">&copy; <b>Jawg</b>Maps</a> &copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a> contributors',\n  150                      currentCenter: this.initializeCenterObject(),\n  151:                     currentBounds: new URL(window.location.href).searchParams.get(\"NElat\") ? this.initializeBoundariesObject() : null,\n  152:                     live: new URL(window.location.href).searchParams.get(\"live\") ? new URL(window.location.href).searchParams.get(\"live\") : false,\n  153                  }\n  154              },\n  ...\n  156                  return {\n  157                      _northEast: {\n  158:                         lat: parseFloat(new URL(window.location.href).searchParams.get(\"NElat\")),\n  159:                         lng: parseFloat(new URL(window.location.href).searchParams.get(\"NElng\"))\n  160                      },\n  161                      _southWest: {\n  162:                         lat: parseFloat(new URL(window.location.href).searchParams.get(\"SWlat\")),\n  163:                         lng: parseFloat(new URL(window.location.href).searchParams.get(\"SWlng\"))\n  164                      }\n  165                  }\n  166              },\n  167              initializeCenterObject() {\n  168:                 if (new URL(window.location.href).searchParams.get(\"Clat\")) {\n  169                      return {\n  170:                         lat: parseFloat(new URL(window.location.href).searchParams.get(\"Clat\")),\n  171:                         lng: parseFloat(new URL(window.location.href).searchParams.get(\"Clng\"))\n  172                      }\n  173                  }\n  174                  return {\n  175:                     lat: parseFloat(new URL(window.location.href).searchParams.get(\"lat\")),\n  176:                     lng: parseFloat(new URL(window.location.href).searchParams.get(\"lng\"))\n  177                  }\n  178              }\n\n/Users/chrisgrim/code/ei/resources/js/pages/search/mobile-search-nav.vue:\n  117                  scroll: false,\n  118                  mobile: window.innerWidth < 768,\n  119:                 city: new URL(window.location.href).searchParams.get(\"city\") ? new URL(window.location.href).searchParams.get(\"city\") : 'Start your search',\n  120                  data: {\n  121                      mapboundary: this.initilizeBoundaries(),\n  ...\n  128                      zoom: this.initilizeZoom(),\n  129                      center: this.initilizeCenter(),\n  130:                     live: new URL(window.location.href).searchParams.get(\"live\")\n  131                  }\n  132              }\n  ...\n  148              },\n  149              onBack() {\n  150:                 document.referrer == \"\" ? window.location.href = '/' : window.history.back()\n  151              },\n  152              handleScroll () {\n  ...\n  191              },\n  192              initilizeCategory() {\n  193:                 let cat = new URL(window.location.href).searchParams.get(\"category\")\n  194                  return cat ? cat.split(',').map(Number) : []\n  195              },\n  196              initilizeTag() {\n  197:                 let tag = new URL(window.location.href).searchParams.get(\"tag\")\n  198                  return tag ? tag.split(',') : []\n  199              },\n  200              initilizePrice() {\n  201:                 return new URL(window.location.href).searchParams.get(\"price0\") ? [Number(new URL(window.location.href).searchParams.get(\"price0\")), Number(new URL(window.location.href).searchParams.get(\"price1\"))] : [0,100]\n  202              },\n  203              initilizeDates() {\n  204:                 return new URL(window.location.href).searchParams.get(\"start\") ? [new URL(window.location.href).searchParams.get(\"start\"), new URL(window.location.href).searchParams.get(\"end\")] : []\n  205              },\n  206              initilizeLatitude() {\n  207:                 return new URL(window.location.href).searchParams.get(\"lat\") ? new URL(window.location.href).searchParams.get(\"lat\") : null\n  208              },\n  209              initilizeLongitude() {\n  210:                 return new URL(window.location.href).searchParams.get(\"lng\") ? new URL(window.location.href).searchParams.get(\"lng\") : null\n  211              },\n  212              initilizeZoom() {\n  213:                 return new URL(window.location.href).searchParams.get(\"zoom\") ? new URL(window.location.href).searchParams.get(\"zoom\") : null\n  214              },\n  215              initilizeCenter() {\n  216:                 if (!new URL(window.location.href).searchParams.get(\"Clat\")) { return null }\n  217                  return {\n  218:                     lat: parseFloat(new URL(window.location.href).searchParams.get(\"Clat\")),\n  219:                     lng: parseFloat(new URL(window.location.href).searchParams.get(\"Clng\"))\n  220                  }\n  221              },\n  222              initilizeBoundaries() {\n  223:                 if (!new URL(window.location.href).searchParams.get(\"NElat\")) { return null }\n  224                  return {\n  225                      _northEast: {\n  226:                         lat: parseFloat(new URL(window.location.href).searchParams.get(\"NElat\")),\n  227:                         lng: parseFloat(new URL(window.location.href).searchParams.get(\"NElng\"))\n  228                      },\n  229                      _southWest: {\n  230:                         lat: parseFloat(new URL(window.location.href).searchParams.get(\"SWlat\")),\n  231:                         lng: parseFloat(new URL(window.location.href).searchParams.get(\"SWlng\"))\n  232                      }\n  233                  }\n\n/Users/chrisgrim/code/ei/resources/js/pages/search/online-mobile-search-nav.vue:\n  138              },\n  139              onBack() {\n  140:                 document.referrer == \"\" ? window.location.href = '/' : window.history.back()\n  141              },\n  142              debounce() {\n  ...\n  174              },\n  175              initilizeCategory() {\n  176:                 let cat = new URL(window.location.href).searchParams.get(\"category\")\n  177                  return cat ? cat.split(',').map(Number) : []\n  178              },\n  179              initilizeTag() {\n  180:                 let tag = new URL(window.location.href).searchParams.get(\"tag\")\n  181                  return tag ? tag.split(',') : []\n  182              },\n  183              initilizePrice() {\n  184:                 return new URL(window.location.href).searchParams.get(\"price0\") ? [Number(new URL(window.location.href).searchParams.get(\"price0\")), Number(new URL(window.location.href).searchParams.get(\"price1\"))] : [0,100]\n  185              },\n  186              initilizeDates() {\n  187:                 return new URL(window.location.href).searchParams.get(\"start\") ? [new URL(window.location.href).searchParams.get(\"start\"), new URL(window.location.href).searchParams.get(\"end\")] : []\n  188              },\n  189          },\n\n/Users/chrisgrim/code/ei/resources/js/pages/search/vue-search-filter-location.vue:\n   53                  active:'',\n   54                  mobile: window.innerWidth < 768,\n   55:                 city: new URL(window.location.href).searchParams.get(\"city\"),\n   56                  data: {\n   57                      mapboundary: this.initilizeBoundaries(),\n   ..\n   64                      zoom: this.initilizeZoom(),\n   65                      center: this.initilizeCenter(),\n   66:                     live: new URL(window.location.href).searchParams.get(\"live\")\n   67                  }\n   68              }\n   ..\n   96              },\n   97              initilizeCategory() {\n   98:                 let cat = new URL(window.location.href).searchParams.get(\"category\")\n   99                  return cat ? cat.split(',').map(Number) : []\n  100              },\n  101              initilizeTag() {\n  102:                 let tag = new URL(window.location.href).searchParams.get(\"tag\")\n  103                  return tag ? tag.split(',') : []\n  104              },\n  105              initilizePrice() {\n  106:                 return new URL(window.location.href).searchParams.get(\"price0\") ? [Number(new URL(window.location.href).searchParams.get(\"price0\")), Number(new URL(window.location.href).searchParams.get(\"price1\"))] : [0,100]\n  107              },\n  108              initilizeDates() {\n  109:                 return new URL(window.location.href).searchParams.get(\"start\") ? [new URL(window.location.href).searchParams.get(\"start\"), new URL(window.location.href).searchParams.get(\"end\")] : []\n  110              },\n  111              initilizeLatitude() {\n  112:                 return new URL(window.location.href).searchParams.get(\"lat\") ? new URL(window.location.href).searchParams.get(\"lat\") : null\n  113              },\n  114              initilizeLongitude() {\n  115:                 return new URL(window.location.href).searchParams.get(\"lng\") ? new URL(window.location.href).searchParams.get(\"lng\") : null\n  116              },\n  117              initilizeZoom() {\n  118:                 return new URL(window.location.href).searchParams.get(\"zoom\") ? new URL(window.location.href).searchParams.get(\"zoom\") : null\n  119              },\n  120              initilizeCenter() {\n  121:                 if (!new URL(window.location.href).searchParams.get(\"Clat\")) { return null }\n  122                  return {\n  123:                     lat: parseFloat(new URL(window.location.href).searchParams.get(\"Clat\")),\n  124:                     lng: parseFloat(new URL(window.location.href).searchParams.get(\"Clng\"))\n  125                  }\n  126              },\n  127              initilizeBoundaries() {\n  128:                 if (!new URL(window.location.href).searchParams.get(\"NElat\")) { return null }\n  129                  return {\n  130                      _northEast: {\n  131:                         lat: parseFloat(new URL(window.location.href).searchParams.get(\"NElat\")),\n  132:                         lng: parseFloat(new URL(window.location.href).searchParams.get(\"NElng\"))\n  133                      },\n  134                      _southWest: {\n  135:                         lat: parseFloat(new URL(window.location.href).searchParams.get(\"SWlat\")),\n  136:                         lng: parseFloat(new URL(window.location.href).searchParams.get(\"SWlng\"))\n  137                      }\n  138                  }\n\n/Users/chrisgrim/code/ei/resources/js/pages/search/vue-search-filter.vue:\n   73              },\n   74              initilizeCategory() {\n   75:                 let cat = new URL(window.location.href).searchParams.get(\"category\")\n   76                  return cat ? cat.split(',').map(Number) : []\n   77              },\n   78              initilizeTag() {\n   79:                 let tag = new URL(window.location.href).searchParams.get(\"tag\")\n   80                  return tag ? tag.split(',') : []\n   81              },\n   82              initilizePrice() {\n   83:                 return new URL(window.location.href).searchParams.get(\"price0\") ? [Number(new URL(window.location.href).searchParams.get(\"price0\")), Number(new URL(window.location.href).searchParams.get(\"price1\"))] : [0,100]\n   84              },\n   85              initilizeDates() {\n   86:                 return new URL(window.location.href).searchParams.get(\"start\") ? [new URL(window.location.href).searchParams.get(\"start\"), new URL(window.location.href).searchParams.get(\"end\")] : []\n   87              },\n   88          },\n\n/Users/chrisgrim/code/ei/resources/js/pages/search/vue-search-location.vue:\n  147                  paginate: 1,\n  148                  shiftDown: `transform: translate3d(0px, 0px, 0px);`,\n  149:                 city: new URL(window.location.href).searchParams.get(\"city\"),\n  150                  map: null,\n  151                  mapSearch: null,\n\n142 matches across 38 files\n",
 			"settings":
 			{
-				"buffer_size": 9401,
-				"encoding": "UTF-8",
+				"buffer_size": 25941,
+				"line_ending": "Unix",
+				"name": "Find Results",
+				"scratch": true
+			}
+		},
+		{
+			"file": "resources/js/pages/create/nav.vue",
+			"settings":
+			{
+				"buffer_size": 8501,
 				"line_ending": "Unix"
 			}
 		}
@@ -666,14 +675,24 @@
 	[
 		"/Users/chrisgrim/code/ei",
 		"/Users/chrisgrim/code/ei/app",
+		"/Users/chrisgrim/code/ei/app/Http",
 		"/Users/chrisgrim/code/ei/resources",
-		"/Users/chrisgrim/code/ei/resources/sass",
+		"/Users/chrisgrim/code/ei/resources/js",
+		"/Users/chrisgrim/code/ei/resources/js/pages",
+		"/Users/chrisgrim/code/ei/resources/js/pages/curated",
 		"/Users/chrisgrim/code/ei/resources/views",
-		"/Users/chrisgrim/code/ei/resources/views/events",
-		"/Users/chrisgrim/code/ei/resources/views/layouts"
+		"/Users/chrisgrim/code/ei/resources/views/create",
+		"/Users/chrisgrim/code/ei/routes"
 	],
 	"file_history":
 	[
+		"/Users/chrisgrim/code/ei/resources/js/mixins/form-validation-mixin.js",
+		"/Users/chrisgrim/code/ei/resources/js/components/modals/alert.vue",
+		"/Users/chrisgrim/code/ei/resources/sass/layout.scss",
+		"/Users/chrisgrim/code/ei/resources/js/app.js",
+		"/Users/chrisgrim/code/ei/resources/js/pages/navigation/components/profile-button.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/events/event-show.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/events/show/event-show-location.vue",
 		"/Users/chrisgrim/code/ei/sftp-config.json",
 		"/Users/chrisgrim/code/ei/resources/js/pages/create/image.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/curated/posts/cards/block-image.vue",
@@ -687,7 +706,6 @@
 		"/Users/chrisgrim/code/ei/resources/sass/nav/navbar.scss",
 		"/Users/chrisgrim/code/ei/.env",
 		"/Users/chrisgrim/code/ei/app/Http/Middleware/isCurator.php",
-		"/Users/chrisgrim/code/ei/resources/js/pages/navigation/components/profile-button.vue",
 		"/Users/chrisgrim/code/ei/routes/curated.php",
 		"/Users/chrisgrim/code/ei/app/Http/Kernel.php",
 		"/Users/chrisgrim/code/ei/resources/sass/events/event-show.scss",
@@ -729,7 +747,6 @@
 		"/Users/chrisgrim/code/ei/resources/js/pages/profile/favorite-button.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/events/show/event-show-about.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/events/show/event-show-reviews.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/events/show/event-show-location.vue",
 		"/Users/chrisgrim/code/ei/resources/sass/app-create.scss",
 		"/Users/chrisgrim/code/ei/resources/sass/create/pricing.scss",
 		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/admin-organizer.vue",
@@ -796,12 +813,7 @@
 		"/Users/chrisgrim/code/ei/database/migrations/2021_06_08_000412_create_cards_table.php",
 		"/Users/chrisgrim/code/ei/resources/sass/components/albums/album-c.scss",
 		"/Users/chrisgrim/code/ei/resources/sass/components/buttons/button.scss",
-		"/Users/chrisgrim/code/ei/resources/js/pages/home/sections/album-section.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/profile/components/email-verification-modal.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/create/review-event.vue",
-		"/Users/chrisgrim/code/ei/resources/sass/create/review.scss",
-		"/Users/chrisgrim/code/ei/resources/views/adminArea/showapproval.blade.php",
-		"/Users/chrisgrim/code/ei/resources/sass/create/shows.scss"
+		"/Users/chrisgrim/code/ei/resources/js/pages/home/sections/album-section.vue"
 	],
 	"find":
 	{
@@ -812,6 +824,8 @@
 		"height": 164.0,
 		"where_history":
 		[
+			"/Users/chrisgrim/code/ei/resources/js",
+			"/Users/chrisgrim/code/ei/resources",
 			"/Users/chrisgrim/code/ei/resources/sass",
 			"/Users/chrisgrim/code/ei",
 			"/Users/chrisgrim/code/ei/app",
@@ -937,9 +951,7 @@
 			"/Users/chrisgrim/code/ei/resources/sass",
 			"/Users/chrisgrim/code/ei/resources/js",
 			"/Users/chrisgrim/code/ei",
-			"/Users/chrisgrim/code/ei/resources/sass",
-			"/Users/chrisgrim/code/ei/resources/js/pages/events",
-			"/Users/chrisgrim/code/ei/resources"
+			"/Users/chrisgrim/code/ei/resources/sass"
 		]
 	},
 	"find_state":
@@ -947,6 +959,16 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"window.location",
+			"wrapper",
+			"click",
+			"dayjs",
+			"timeout",
+			"ri-",
+			"LPopup",
+			"center",
+			"/events",
+			"/event",
 			"main",
 			"bodyArea",
 			"clear",
@@ -1064,17 +1086,7 @@
 			"addevent",
 			"style=\"width:200px;left:0px;\"",
 			"v-col",
-			"col",
-			"overflow",
-			"width=\"100px\"",
-			"field",
-			"';\n",
-			"mobilityAdvisories",
-			"patreon",
-			"contributer",
-			"onRefresh",
-			"},\n",
-			"onRefresh"
+			"col"
 		],
 		"highlight": false,
 		"in_selection": false,
@@ -1092,24 +1104,638 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "resources/sass/layout.scss",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 9401,
+						"buffer_size": 25941,
+						"regions":
+						{
+							"match":
+							{
+								"flags": 112,
+								"regions":
+								[
+									[
+										258,
+										273
+									],
+									[
+										375,
+										390
+									],
+									[
+										631,
+										646
+									],
+									[
+										719,
+										734
+									],
+									[
+										928,
+										943
+									],
+									[
+										1297,
+										1312
+									],
+									[
+										1429,
+										1444
+									],
+									[
+										1583,
+										1598
+									],
+									[
+										1882,
+										1897
+									],
+									[
+										2014,
+										2029
+									],
+									[
+										2171,
+										2186
+									],
+									[
+										2299,
+										2314
+									],
+									[
+										2416,
+										2431
+									],
+									[
+										2627,
+										2642
+									],
+									[
+										2982,
+										2997
+									],
+									[
+										3039,
+										3054
+									],
+									[
+										3310,
+										3325
+									],
+									[
+										3562,
+										3577
+									],
+									[
+										3650,
+										3665
+									],
+									[
+										3851,
+										3866
+									],
+									[
+										4153,
+										4168
+									],
+									[
+										4325,
+										4340
+									],
+									[
+										4491,
+										4506
+									],
+									[
+										4679,
+										4694
+									],
+									[
+										4813,
+										4828
+									],
+									[
+										5007,
+										5022
+									],
+									[
+										5245,
+										5260
+									],
+									[
+										5474,
+										5489
+									],
+									[
+										5697,
+										5712
+									],
+									[
+										5911,
+										5926
+									],
+									[
+										6277,
+										6292
+									],
+									[
+										6573,
+										6588
+									],
+									[
+										6707,
+										6722
+									],
+									[
+										6823,
+										6838
+									],
+									[
+										7249,
+										7264
+									],
+									[
+										7534,
+										7549
+									],
+									[
+										7775,
+										7790
+									],
+									[
+										8051,
+										8066
+									],
+									[
+										8403,
+										8418
+									],
+									[
+										8747,
+										8762
+									],
+									[
+										9069,
+										9084
+									],
+									[
+										9327,
+										9342
+									],
+									[
+										9628,
+										9643
+									],
+									[
+										10011,
+										10026
+									],
+									[
+										10373,
+										10388
+									],
+									[
+										10667,
+										10682
+									],
+									[
+										11035,
+										11050
+									],
+									[
+										11343,
+										11358
+									],
+									[
+										11647,
+										11662
+									],
+									[
+										11958,
+										11973
+									],
+									[
+										12250,
+										12265
+									],
+									[
+										12330,
+										12345
+									],
+									[
+										12409,
+										12424
+									],
+									[
+										12674,
+										12689
+									],
+									[
+										12892,
+										12907
+									],
+									[
+										13092,
+										13107
+									],
+									[
+										13159,
+										13174
+									],
+									[
+										13225,
+										13240
+									],
+									[
+										13525,
+										13540
+									],
+									[
+										13582,
+										13597
+									],
+									[
+										13819,
+										13834
+									],
+									[
+										13887,
+										13902
+									],
+									[
+										14364,
+										14379
+									],
+									[
+										14497,
+										14512
+									],
+									[
+										14554,
+										14569
+									],
+									[
+										14791,
+										14806
+									],
+									[
+										14896,
+										14911
+									],
+									[
+										15071,
+										15086
+									],
+									[
+										15176,
+										15191
+									],
+									[
+										15382,
+										15397
+									],
+									[
+										15523,
+										15538
+									],
+									[
+										15627,
+										15642
+									],
+									[
+										15812,
+										15827
+									],
+									[
+										15911,
+										15926
+									],
+									[
+										16210,
+										16225
+									],
+									[
+										16267,
+										16282
+									],
+									[
+										16597,
+										16612
+									],
+									[
+										16797,
+										16812
+									],
+									[
+										17017,
+										17032
+									],
+									[
+										17235,
+										17250
+									],
+									[
+										17435,
+										17450
+									],
+									[
+										17502,
+										17517
+									],
+									[
+										17568,
+										17583
+									],
+									[
+										17727,
+										17742
+									],
+									[
+										17786,
+										17801
+									],
+									[
+										17843,
+										17858
+									],
+									[
+										17996,
+										18011
+									],
+									[
+										18052,
+										18067
+									],
+									[
+										18207,
+										18222
+									],
+									[
+										18263,
+										18278
+									],
+									[
+										18413,
+										18428
+									],
+									[
+										18470,
+										18485
+									],
+									[
+										18621,
+										18636
+									],
+									[
+										18768,
+										18783
+									],
+									[
+										18868,
+										18883
+									],
+									[
+										19042,
+										19057
+									],
+									[
+										19235,
+										19250
+									],
+									[
+										19340,
+										19355
+									],
+									[
+										19515,
+										19530
+									],
+									[
+										19620,
+										19635
+									],
+									[
+										19906,
+										19921
+									],
+									[
+										20121,
+										20136
+									],
+									[
+										20339,
+										20354
+									],
+									[
+										20539,
+										20554
+									],
+									[
+										20606,
+										20621
+									],
+									[
+										20672,
+										20687
+									],
+									[
+										20831,
+										20846
+									],
+									[
+										20890,
+										20905
+									],
+									[
+										20947,
+										20962
+									],
+									[
+										21250,
+										21265
+									],
+									[
+										21558,
+										21573
+									],
+									[
+										21761,
+										21776
+									],
+									[
+										21979,
+										21994
+									],
+									[
+										22179,
+										22194
+									],
+									[
+										22246,
+										22261
+									],
+									[
+										22312,
+										22327
+									],
+									[
+										22471,
+										22486
+									],
+									[
+										22530,
+										22545
+									],
+									[
+										22587,
+										22602
+									],
+									[
+										22740,
+										22755
+									],
+									[
+										22796,
+										22811
+									],
+									[
+										22951,
+										22966
+									],
+									[
+										23007,
+										23022
+									],
+									[
+										23157,
+										23172
+									],
+									[
+										23214,
+										23229
+									],
+									[
+										23365,
+										23380
+									],
+									[
+										23512,
+										23527
+									],
+									[
+										23612,
+										23627
+									],
+									[
+										23786,
+										23801
+									],
+									[
+										23979,
+										23994
+									],
+									[
+										24084,
+										24099
+									],
+									[
+										24259,
+										24274
+									],
+									[
+										24364,
+										24379
+									],
+									[
+										24646,
+										24661
+									],
+									[
+										24864,
+										24879
+									],
+									[
+										25064,
+										25079
+									],
+									[
+										25131,
+										25146
+									],
+									[
+										25197,
+										25212
+									],
+									[
+										25356,
+										25371
+									],
+									[
+										25415,
+										25430
+									],
+									[
+										25472,
+										25487
+									],
+									[
+										25790,
+										25805
+									]
+								],
+								"scope": ""
+							}
+						},
+						"selection":
+						[
+							[
+								6586,
+								6586
+							]
+						],
+						"settings":
+						{
+							"detect_indentation": false,
+							"incomplete_sync": null,
+							"line_numbers": false,
+							"output_tag": 1,
+							"remote_loading": false,
+							"result_base_dir": "",
+							"result_file_regex": "^([^ \t].*):$",
+							"result_line_regex": "^ +([0-9]+):",
+							"scroll_past_end": true,
+							"synced": false,
+							"syntax": "Packages/Default/Find Results.hidden-tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 3402.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "resources/js/pages/create/nav.vue",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 8501,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2293,
-								2293
+								6546,
+								6516
 							]
 						],
 						"settings":
@@ -1117,10 +1743,10 @@
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
-							"syntax": "Packages/CSS/CSS.sublime-syntax"
+							"syntax": "Packages/Vuejs Complete Package/vue.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 602.0,
+						"translation.y": 2951.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,

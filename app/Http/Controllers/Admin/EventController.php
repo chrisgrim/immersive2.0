@@ -63,7 +63,7 @@ class EventController extends Controller
         // return Event::where('status','p')->paginate(30);
         return Event::where('status','p')
             ->orWhere('status','e')
-            ->with('user','clicks')
+            ->with('user','clicks','category', 'location', 'remotelocations')
             ->when(request('date') === 'published', function ($q) {
                 return $q->orderByDesc('published_at');
             })

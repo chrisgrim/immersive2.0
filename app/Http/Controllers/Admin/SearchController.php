@@ -68,13 +68,14 @@ class SearchController extends Controller
      */
     public function events(Request $request)
     {
-        if (! $request->keywords) return Event::where('status','p')->paginate(10);
+        if (! $request->keywords) return Event::where('status','p')->with('user','clicks','category', 'location', 'remotelocations')->paginate(10);
 
         $events = Event::multiMatchSearch()
             ->fields(['name', 'name._2gram','name._3gram'])
             ->query($request->keywords)
             ->type('bool_prefix')
             ->sort('rank', 'desc')
+            ->load(['user','clicks','category', 'location', 'remotelocations'])
             ->paginate(10);
 
         $filter = tap($events->toArray(), function (array &$content) {

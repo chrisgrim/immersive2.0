@@ -60,7 +60,6 @@ class EventController extends Controller
      */
     public function fetch(Request $request)
     {
-        // return Event::where('status','p')->paginate(30);
         return Event::where('status','p')
             ->orWhere('status','e')
             ->with('user','clicks','category', 'location', 'remotelocations')

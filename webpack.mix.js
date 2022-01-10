@@ -16,7 +16,7 @@ mix.sass('resources/sass/app-create.scss', 'public/assets')
     .sass('resources/sass/app-lite.scss', 'public/assets')
     .sass('resources/sass/app.scss', 'public/assets')
     .js('resources/js/app.js', 'public/assets')
-    .extract(['vue','leaflet','vue-cookies'])
+    .extract(['vue'])
     .webpackConfig({
         output: {
             chunkFilename: '[name].js?id=[chunkhash]',

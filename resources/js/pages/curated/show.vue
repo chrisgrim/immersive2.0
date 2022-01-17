@@ -39,9 +39,9 @@
                     <picture>
                         <source 
                             type="image/webp" 
-                            :srcset="`/storage/${headerImage}`"> 
+                            :srcset="`/storage/${headerImage}?timestamp=${community.updated_at}`"> 
                         <img 
-                            :src="`/storage/${headerImage.slice(0, -4)}jpg`" 
+                            :src="`/storage/${headerImage.slice(0, -4)}jpg?timestamp=${community.updated_at}`" 
                             :alt="`${community.name} Community`">
                     </picture>
                 </div>

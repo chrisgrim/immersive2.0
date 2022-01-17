@@ -87,6 +87,26 @@ class Organizer extends Model
     {
         return $this->hasMany(Event::class)->orderByDesc('updated_at');
     }
+
+    /**
+    * Each Organizer can have many un archived events
+    *
+    * @return \Illuminate\Database\Eloquent\Relations\HasMany
+    */
+    public function listedEvents() 
+    {
+        return $this->hasMany(Event::class)->orderByDesc('updated_at')->where('archived', false);
+    }
+
+    /**
+    * Each Organizer can have many un archived events
+    *
+    * @return \Illuminate\Database\Eloquent\Relations\HasMany
+    */
+    public function archivedEvents() 
+    {
+        return $this->hasMany(Event::class)->orderByDesc('updated_at')->where('archived', true);
+    }
     
     /**
      * The Organizer belongs to one user
@@ -193,10 +213,7 @@ class Organizer extends Model
         $organizers = auth()->user()->allOrganizers();
 
         foreach ($organizers as $organizer) {
-            $organizer->load('events');
-            // $organizer->setRelation('pastEvents', $organizer->pastEvents()->paginate(7));
-            // $organizer->setRelation('inProgressEvents', $organizer->inProgressEvents()->paginate(7));
-            // $organizer->setRelation('all', $organizer->events()->paginate(10));
+            $organizer->load('listedEvents', 'archivedEvents');
         }
 
         return $organizers;

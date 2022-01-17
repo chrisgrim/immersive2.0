@@ -94,7 +94,8 @@
             },
             backgroundImage() {
                 if (!this.hasImage) { return }
-                return `backgroundImage: url('${this.imageFile.src && !this.$v.imageFile.$error ? this.imageFile.src : this.image}')`
+                if (this.imageFile.src && !this.$v.imageFile.$error) { return `backgroundImage: url('${this.imageFile.src}')` }
+                return `backgroundImage: url('${this.image.slice(0, -4)}jpg?timestamp=${new Date().getTime()}')`
             },
         },
 

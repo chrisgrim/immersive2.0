@@ -59,9 +59,9 @@
                                 <picture>
                                     <source 
                                         type="image/webp" 
-                                        :srcset="`/storage/${community.thumbImagePath}`"> 
+                                        :srcset="`/storage/${community.thumbImagePath}?timestamp=${community.updated_at}`"> 
                                     <img 
-                                        :src="`/storage/${community.thumbImagePath.slice(0, -4)}jpg`" 
+                                        :src="`/storage/${community.thumbImagePath.slice(0, -4)}jpg?timestamp=${community.updated_at}`" 
                                         :alt="`${community.name} Community`">
                                 </picture>
                             </div>
@@ -96,7 +96,8 @@
             isPublic(community) {
                 if (community.status === 'p') return true;
             },
-        }
+        },
+
 
     }
 </script>

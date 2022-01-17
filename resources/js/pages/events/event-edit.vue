@@ -39,10 +39,24 @@
                                 Preview Organizer
                             </button>
                         </a>
+                        <div v-if="archived">
+                            <button 
+                                @click="archived=false"
+                                class="outline">
+                                Show Listed
+                            </button>
+                        </div>
+                        <div v-else>
+                            <button 
+                                @click="archived=true"
+                                class="outline">
+                                Show Archived
+                            </button>
+                        </div>
                         <a :href="`/organizer/${organizer.slug}/edit`">
                             <button class="outline">Edit</button>
                         </a>
-                        <template v-if="!organizer.events.length">
+                        <template v-if="!organizer.listed_events.length">
                             <button                   
                                 @click.prevent="selectedModal=organizer" 
                                 class="outline">
@@ -53,7 +67,7 @@
                 </div>
 
                 <div 
-                    v-if="organizer.events.length"
+                    v-if="events.length"
                     class="data-grid">
                     <div class="data-grid__row header">
                         <p>Status</p>
@@ -65,7 +79,7 @@
                     <div
                         :class="{'is-past': isShowing(event)}"
                         class="data-grid__row"
-                        v-for="(event, index) in organizer.events"
+                        v-for="(event, index) in events"
                         :key="event.id">
                         <div class="center">
                             <div
@@ -162,6 +176,18 @@
                         <div>
                             <p>{{ cleanDate(event.updated_at) }}</p>
                         </div>
+                        <div>
+                            <button 
+                                v-if="!event.archived"
+                                @click="onArchive(event)">
+                                Archive event
+                            </button>
+                            <button 
+                                v-if="event.archived"
+                                @click="offArchive(event)">
+                                Un Archive event
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -223,6 +249,9 @@
             isShowing() {
                 return event => event.status === 'p' && !event.isShowing
             },
+            events() {
+                return this.archived ? this.organizer.archived_events : this.organizer.listed_events
+            }
         },
 
         data() {
@@ -233,6 +262,7 @@
                 limited: false,
                 newUserLimited: false,
                 selectedModal: null,
+                archived: false,
             }
         },
 
@@ -242,6 +272,18 @@
                 .then(res => {
                     this.organizers = res.data;
                     this.organizer = this.displayCurrentOrganizer(res.data);
+                })
+            },
+            async onArchive(event) {
+                await axios.post(`/edit/event/${event.slug}/onArchive`)
+                .then(res => {
+                    this.organizer = res.data
+                })
+            },
+            async offArchive(event) {
+                await axios.post(`/edit/event/${event.slug}/offArchive`)
+                .then(res => {
+                    this.organizer = res.data
                 })
             },
             async selectOrganizer(organizer) {
@@ -299,7 +341,6 @@
                 if (event.status === 'e') return `event live at ${this.cleanDate(event.embargo_date)}`;
                 return '-'
             },
-
             statusDetail(event) {
                 if (this.isShowing(event)) return 'expiring soon';
                 if (event.status === '0') return 'In progress';
@@ -317,7 +358,6 @@
                 if (event.status === 'e') return `Visible on EI at ${this.cleanDate(event.embargo_date)}`;
                 return '-'
             },
-
             url(event) {
                 if (event.status === '0') return `/create/${event.slug}/title`;
                 if (event.status === '1') return `/create/${event.slug}/location`;

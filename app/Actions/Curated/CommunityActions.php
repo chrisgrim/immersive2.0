@@ -46,7 +46,10 @@ class CommunityActions
     public function update(Request $request, Community $community)
     {
         $community->update($request->except(['image']));
-        if ($request->image) { ImageFile::replaceImage($request, $community, 800, 500, 'community'); }
+        if ($request->image) { 
+            ImageFile::replaceImage($request, $community, 800, 500, 'community'); 
+            $community->touch();
+        }
         return $community->load('curators');
     }
 

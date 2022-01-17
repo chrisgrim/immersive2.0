@@ -42,6 +42,30 @@ class EventController extends Controller
     }
 
     /**
+     * Updates the event to be archived
+     *
+     * @param  \App\Event  $event
+     * @return \Illuminate\Http\Response
+     */
+    public function onArchive(Request $request, Event $event)
+    {
+        $event->update(['archived' => true]);
+        return $event->organizer->load('listedEvents', 'archivedEvents');
+    }
+
+    /**
+     * Updates the event to be archived
+     *
+     * @param  \App\Event  $event
+     * @return \Illuminate\Http\Response
+     */
+    public function offArchive(Request $request, Event $event)
+    {
+        $event->update(['archived' => false]);
+        return $event->organizer->load('listedEvents', 'archivedEvents');
+    }
+
+    /**
      * Returns Review Page in Creation Process
      *
      * @param  \App\Event  $event

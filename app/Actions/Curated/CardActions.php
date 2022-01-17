@@ -43,7 +43,10 @@ class CardActions
     public function update(Request $request, Card $card)
     {
         $card->update($request->except(['image']));
-        if ($request->image) { ImageFile::replaceCardImage($request, $card, 800, 450, 'card'); }
+        if ($request->image) { 
+            ImageFile::replaceCardImage($request, $card, 800, 450, 'card'); 
+            $card->touch();
+        }
         return $card;
     }
 

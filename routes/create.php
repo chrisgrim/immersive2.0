@@ -44,3 +44,6 @@ Route::GET('/create/{event}/review', 'Create\EventController@review');
 //Submit Event
 Route::GET('/create/{event}/submit', 'Create\EventController@submit');
 Route::GET('/create/{event}/thankyou', 'Create\EventController@completed');
+
+Route::POST('/edit/event/{event}/onArchive', 'Create\EventController@onArchive');
+Route::POST('/edit/event/{event}/offArchive', 'Create\EventController@offArchive');

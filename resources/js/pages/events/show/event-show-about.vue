@@ -1,70 +1,47 @@
 <template>
     <section>
-        <div class="es__about element">
-            <span class="es__title--name"><h1> {{ event.name }} </h1></span>
-            <span class="es__title--tag"><i> {{ event.tag_line }} </i></span>
-            <div class="es__title--rating">
-                <a 
-                    href="#reviews" 
-                    v-if="false">
-                    <template v-if="event.ratingAmount">
-                        <span class="es__star active"><IconSvg type="star" /></span><span style="font-weight:700;font-size:1.5rem"> {{ event.averageRating }} </span> <span>({{ event.ratingAmount }})</span>
-                    </template>
-                    <template v-else>
-                        <span class="es__star"><IconSvg type="star" /></span><span style="font-weight:700;font-size:1.5rem"> (No Ratings) </span>
-                    </template>
-                </a>
-                <template v-if="event.hasLocation">
-                    <a href="#location">
-                        <template v-if="event.location.city">
-                            <p> {{ event.location.city }}</p><p v-if="event.location.region">,</p>
-                        </template>
-                        <template v-if="event.location.region">
-                            <p> {{ event.location.region }} </p>
-                        </template>
-                    </a>
-                </template>
-                <template v-else>
-                    <p>Available anywhere</p>
-                </template>
-            </div>
-           
-            <template v-if="event.staffpick && !isMobile">
-                <a 
-                    aria-label="Staff Pick"
-                    href="#staffpick">
-                    <div class="es__staffpick--award">
-                        <IconSvg type="award" />
-                    </div>
-                </a>
-            </template>
+        <div class="border-b py-8 px-8 md:py-8 md:px-0 md:py-12">
+            <h1 class="mb-4 leading-[3rem]"> {{ event.name }} </h1>
+            <p class="mb-4 italic"> {{ event.tag_line }} </p>
+            <a 
+                v-if="event.hasLocation"
+                class="flex underline text-xl font-semibold"
+                href="#location">
+                <span v-if="event.location.city"> {{ event.location.city }}</span>
+                <span v-if="event.location.region">, {{ event.location.region }} </span>
+            </a>
+            <p v-else> Available anywhere </p>
         </div>
 
-        <div class="es__description element">
-            <h2>Experience hosted by 
-                <a :href="`/organizer/${event.organizer.slug}`">
-                    {{ event.organizer.name }}
+        <div class="py-12 px-8 md:py-16 md:px-0 border-b">
+            <div class="flex gap-4 justify-between items-center mb-4">
+                <h2 class="inline-block text-3xl md:text-4xl">Experience hosted by 
+                    <a :href="`/organizer/${event.organizer.slug}`">
+                        {{ event.organizer.name }}
+                    </a>
+                </h2>
+                <a 
+                    v-if="event.organizer.thumbImagePath"
+                    class="min-w-[5rem]" 
+                    :href="`/organizer/${event.organizer.slug}`">
+                    <picture>
+                        <source 
+                            type="image/webp" 
+                            :srcset="`/storage/${event.organizer.thumbImagePath}`"> 
+                        <img 
+                            class="w-20 h-20 rounded-full float-right"
+                            :src="`/storage/${event.organizer.thumbImagePath.slice(0, -4)}jpg`" 
+                            :alt="`Logo of ${event.organizer.name}`">
+                    </picture>
                 </a>
-            </h2>
-            <a 
-                v-if="event.organizer.thumbImagePath"
-                :href="`/organizer/${event.organizer.slug}`">
-                <picture>
-                    <source 
-                        type="image/webp" 
-                        :srcset="`/storage/${event.organizer.thumbImagePath}`"> 
-                    <img 
-                        :src="`/storage/${event.organizer.thumbImagePath.slice(0, -4)}jpg`" 
-                        :alt="`Logo of ${event.organizer.name}`">
-                </picture>
-            </a>
+            </div>
             <ShowMore 
                 :text="event.description"
                 :limit="100" />
         </div>
 
         <template v-if="event.video">
-            <div class="es__video">
+            <div class="w-full p-8 md:py-16 md:px-0">
                 <VideoPlayer
                     :alt="`${event.name} Immersive Event`"
                     :src="`https://www.youtube.com/embed/${event.video}`" />
@@ -74,20 +51,13 @@
 </template>
 
 <script>
-    import ShowMore  from '../components/show-more.vue'
-    import IconSvg from '../../../components/Svg-icon'
+    import ShowMore  from '../../../components/ShowMore.vue'
     import VideoPlayer  from './VideoPlayer.vue'
     export default {
 
         props: [ 'event'],
 
-        components: { ShowMore, IconSvg, VideoPlayer },
-
-        data() {
-            return {
-                isMobile: window.innerWidth < 768 ? true : false,
-            }
-        },
+        components: { ShowMore, VideoPlayer },
 
     }
 </script>

@@ -1,69 +1,58 @@
 <template>
-    <header class="lay-b">
-        <nav 
-            v-if="isMobile"
-            class="es__mobile-nav">
+    <header class="min-h-[200px] relative w-full m-auto p-0 md:px-12 lg:px-32 lg:max-w-screen-xl">
+        <!--  -->
+        <!-- For mobile -->
+        <nav v-if="mobile">
             <button 
                 aria-label="back button"
                 type="button"
                 @click="onBack"
-                class="arrow svg">
-                <svg>
+                class="absolute flex top-8 left-8 z-10 p-1 rounded-full shadow-lg bg-white">
+                <svg class="h-12 w-12">
                     <use :xlink:href="`/storage/website-files/icons.svg#ri-arrow-left-s-line`" />
                 </svg>
             </button>
             <favorite 
-                :inputclass="showEventMobileClass" 
-                :event="event" />
+                :mobile="mobile"
+                :event="event" 
+                :user="user" />
         </nav>
-        <div class="es__header--content">
-            <template v-if="!isMobile">
-                <div class="breadcrumbs">
-                    <p>
-                        <a :href="`/`">Everything Immersive</a> > <a :href="`/index/search-all?&category=${event.category.id}`">{{event.category.name}}</a> > {{event.name}}
-                    </p>
-                </div>
-            </template>
-            <div class="es__header--image">   
-                <picture>
-                    <source 
-                        type="image/webp" 
-                        :srcset="`/storage/${isMobile ? event.thumbImagePath : event.largeImagePath}`"> 
-                    <img 
-                        :src="`/storage/${isMobile ? event.thumbImagePath.slice(0, -4) : event.largeImagePath.slice(0, -4)}jpg`" 
-                        :alt="`${event.name} Immersive Event`">
-                </picture>
-            </div>
-            <div v-if="!isMobile">
-                <div 
-                    v-if="user && user.type == 'a'" 
-                    class="es__admin--edit">
-                    <a :href="`/create/${event.slug}/title`">
-                        <p>Edit</p>
-                    </a>
-                </div>
+
+        <!-- For desktop -->
+        <nav v-else>
+            <div class="py-6 flex items-center justify-between">
+                <p class="text-xl">
+                    <a :href="`/`" class="underline">Everything Immersive</a> > <a :href="`/index/search-all?&category=${event.category.id}`" class="underline">{{event.category.name}}</a> > {{event.name}}
+                </p>
                 <favorite 
-                    :inputclass="showEventClass" 
+                    :mobile="mobile"
+                    :user="user" 
                     :event="event" />
-            </div>
-        </div>
+            </div> 
+        </nav>
+        <picture>
+            <source 
+                type="image/webp" 
+                :srcset="`/storage/${mobile ? event.thumbImagePath : event.largeImagePath}`"> 
+            <img 
+                class="min-h-[200px] h-[43vh] w-full object-cover md:rounded-xl md:h-[40rem]"
+                :src="`/storage/${mobile ? event.thumbImagePath.slice(0, -4) : event.largeImagePath.slice(0, -4)}jpg`" 
+                :alt="`${event.name} Immersive Event`">
+        </picture>
     </header>
 </template>
 
 <script>
+    import Favorite from './Components/event-favorite'
     export default {
         
-        props: [ 'event', 'user' ],
+        props: [ 'event', 'user', 'mobile' ],
 
-        computed: {
-
-        },
+        components: { Favorite },
 
         data() {
             return {
-                showEventClass: 'es__favorite',
-                showEventMobileClass: 'es__favorite--mobile',
-                isMobile: window.innerWidth < 768 ? true : false,
+                userCanEdit:  true
             }
         },
 

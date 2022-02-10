@@ -8,25 +8,25 @@
 @endsection 
 
 @section('nav')
-    @auth
-        <vue-nav :user= "{{auth()->user()}}"></vue-nav>
-    @endauth
-    @guest
-        <vue-nav></vue-nav>
-    @endguest
+    @if (Browser::isMobile())
+        <vue-nav-mobile navtype="postedit" :user= "{{ auth()->user() ? auth()->user() : 'null' }}" />
+    @else
+        <vue-nav navtype="postedit" :user= "{{ auth()->user() ? auth()->user() : 'null' }}" />
+    @endif
 @endsection
+
 @section('content')
     <div id="bodyArea">
-
-        @if ( session()->exists( 'submitted' ))
-            <modal-wrapper :user= "{{auth()->user()}}" loadmessage="submitted"></modal-wrapper>
-        @endif 
+        <modal-wrapper 
+            :user="{{ auth()->user() ? auth()->user() : 'null' }}"
+            loadmessage="{{ session('submitted') ? 'submitted' : '' }}"></modal-wrapper>
         <vue-post-edit
+            :mobile="{{ Browser::isMobile() ? Browser::isMobile() : 'null' }}"
             :shelves="{{ $community->shelves()->where('status' , '!=' , 'a')->get() }}"
             :community="{{ $community }}" 
-            :owner="true"
+            :curator="{{ auth()->user() ? auth()->user()->can('update', $community) ? 'true' : 'false' : 'null' }}"
             :value="{{ $post }}" 
-            :user="{{ auth()->user() }}"/>
+            :user="{{ auth()->user() ? auth()->user() : 'null' }}"/>
     </div>
 @endsection
 

@@ -7,16 +7,18 @@
 @endsection 
 
 @section('nav')
-    @auth
-        <vue-nav navtype="profile" :user= "{{auth()->user()}}"></vue-nav>
-    @endauth
-    @guest
-        <vue-nav></vue-nav>
-    @endguest
+    @if (Browser::isMobile())
+        <vue-nav-mobile navtype="profile" :user= "{{ auth()->user() ? auth()->user() : 'null' }}" />
+    @else
+        <vue-nav navtype="profile" :user= "{{ auth()->user() ? auth()->user() : 'null' }}" />
+    @endif
 @endsection
 
 @section('content')
     <div id="bodyArea">
-        <vue-user-notifications :user="{{ auth()->user() }}" v-cloak></vue-user-notifications> 
+        <vue-user-notifications 
+            :mobile="{{ Browser::isMobile() ? Browser::isMobile() : 'null' }}"
+            :user= "{{ auth()->user() ? auth()->user() : 'null' }}"
+            v-cloak>
     </div>
 @endsection

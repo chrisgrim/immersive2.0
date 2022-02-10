@@ -24,27 +24,10 @@
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
 }
-.ProseMirror {
+/*.ProseMirror {
     min-height: 15rem;
-}
-.editor__footer {
-    display: flex;
-    justify-content: space-between;
-    border-top: 1px solid #d4d4d4;
-    color: #0d0d0d;
-}
-.editor__footer button {
-    border: 0;
-    background: black;
-    color: white;
-    border-radius: 0.6rem;
-    margin: 0.5rem;
-}
-.editor__footer button.outline {
-    background: white;
-    border: 1px solid black;
-    color: black;
-}
+}*/
+
 .menu-item {
   width: 2.5rem;
   height: 2.5rem;
@@ -66,7 +49,8 @@
   }
 }
 .tiptap-editor h2, .tiptap-editor h3, .tiptap-editor p  {
-    margin-top: 1rem;
+/*    margin-top: 1rem;*/
+    margin-left:1px;
 }
 .tiptap-editor ul {
     margin: inherit;

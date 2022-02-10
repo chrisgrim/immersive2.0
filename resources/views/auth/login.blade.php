@@ -7,12 +7,16 @@
 @endsection
 
 @section('nav')
-    <vue-nav navtype="entry"></vue-nav>
-@endsection 
+    @if (Browser::isMobile())
+        <vue-nav-mobile navtype="entry" :user= "{{ auth()->user() ? auth()->user() : 'null' }}" />
+    @else
+        <vue-nav navtype="entry" :user= "{{ auth()->user() ? auth()->user() : 'null' }}" />
+    @endif
+@endsection
 
 @section('content')
     <div id="bodyArea">
-        <vue-register></vue-register>
+        <vue-login :mobile="{{ Browser::isMobile() ? Browser::isMobile() : 'null' }}">
     </div>
 @endsection
 

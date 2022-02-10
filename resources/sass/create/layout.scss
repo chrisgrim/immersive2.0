@@ -107,7 +107,7 @@ p.create-menu-text {
     position: fixed;
     bottom: 0;
     height: 7rem;
-    z-index: 1001;
+    z-index: 1002;
     display: grid;
     grid-template-columns: 23rem 1fr;
     &.review {
@@ -201,17 +201,7 @@ button.create[disabled]{
 .updated-notifcation p {
     color:white;
 }
-.slide-fade-enter-active {
-  transition: all .3s ease;
-}
-.slide-fade-leave-active {
-  transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
-}
-.slide-fade-enter, .slide-fade-leave-to
-/* .slide-fade-leave-active below version 2.1.8 */ {
-  transform: translateX(10px);
-  opacity: 0;
-}
+
 .create-body select {
     width: 100%;
     position: relative;

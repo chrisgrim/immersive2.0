@@ -8,12 +8,11 @@
 
 @section('content')
     <div id="bodyArea">
-        <div class="org">
-            <organizer-show :loadorganizer="{{ $organizer }}"></organizer-show> 
-        </div>
-        <div class="admin-approval__space">
-            
-        </div>
+        <organizer-show 
+            :user="{{ auth()->user() ? auth()->user() : 'null' }}" 
+            :mobile="{{ Browser::isMobile() ? Browser::isMobile() : 'null' }}"
+            :organizer="{{ $organizer }}"></organizer-show>
+        <div class="h-80" />
         <vue-org-approval-bar :loadorganizer="{{$organizer}}">
     </div>
 @endsection

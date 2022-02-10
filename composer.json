@@ -17,6 +17,7 @@
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
+        "hisorange/browser-detect": "^4.4",
         "intervention/image": "^2.5",
         "laravel/cashier": "^12.6",
         "laravel/framework": "^8.12",

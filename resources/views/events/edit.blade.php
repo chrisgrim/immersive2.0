@@ -14,6 +14,7 @@
         <vue-nav></vue-nav>
     @endguest
 @endsection
+
 @section('content')
 	<div id="bodyArea">
         @if ( session('submitted'))

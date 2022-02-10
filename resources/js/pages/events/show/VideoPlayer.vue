@@ -1,7 +1,7 @@
 <template>
-    <div class="youtube">
+    <div class="relative w-full pb-[56.25%]">
         <iframe 
-            class="youtube-iframe" 
+            class="w-full absolute top-0 left-0 h-full rounded-lg" 
             :src="src"
             title="YouTube video player" 
             frameborder="0" 

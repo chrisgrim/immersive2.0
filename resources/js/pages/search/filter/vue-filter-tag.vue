@@ -1,11 +1,9 @@
 <template>
-    <div 
-        class="col" 
-        ref="tag">
+    <div v-click-outside="hide">
         <button 
             @click="show" 
-            :class="{ active : value.length }" 
-            class="filter round">
+            :class="{ 'text-white bg-default-red border-default-red' : value.length }" 
+            class="absolute right-0 top-0 px-8 h-14 rounded-full w-auto bg-white whitespace-nowrap hover:text-white hover:bg-default-red hover:border-default-red md:relative">
             <template v-if="value.length && !mobile">
                 <span> {{ tagList[0].name }} </span>
                 <span v-if="value.length > 1">
@@ -19,55 +17,53 @@
                 Tags
             </template>
         </button>
-        <template v-if="active">
-            <div class="filter__tag"> 
-                <div class="filter__dropdown">
-                    <div class="element">
-                        <div class="grid">
-                            <div 
-                                v-for="(item) in tags" 
-                                :key="item.id" 
-                                class="filter__category--element" 
-                                @click="push(item)">
-                                <button class="borderless">
-                                    <span>
-                                        <div 
-                                            :class="{ active: value.includes(item.name) }"
-                                            class="checkbox" />
-                                    </span>
-                                    <span>{{ item.name }}</span>
-                                </button>
-                            </div>
+        <div 
+            v-if="active"
+            class="relative mt-8 left-0 w-full md:left-32 md:max-w-5xl md:absolute">
+            <div class="m-auto text-center bg-white top-6 overflow-hidden md:shadow-custom-1 md:rounded-5xl">
+                <div class="w-full overflow-y-auto overflow-x-hidden md:max-h-[calc(100vh-24rem)]">
+                    <div class="grid bg-white gap-8 md:p-12 md:grid-cols-2">
+                        <div 
+                            v-for="(item) in tags" 
+                            :key="item.id" 
+                            @click="push(item)">
+                            <button class="border-none flex items-center">
+                                <div 
+                                    :class="{ 'border-8' : value.includes(item.name) }"
+                                    class="border-2 border-black h-10 w-10 bg-white overflow-hidden rounded-full mr-4" />
+                                <p class="text-xl">{{ item.name }}</p>
+                            </button>
                         </div>
                     </div>
-                    <template v-if="!mobile">
-                        <div class="filter__dropdown--footer">
-                            <button 
-                                v-if="value.length" 
-                                @click="clear" 
-                                class="borderless">
-                                Clear
-                            </button>
-                            <button 
-                                v-else
-                                @click="active = false;" 
-                                class="borderless">
-                                Cancel
-                            </button>
-                            <button 
-                                @click="submit()"
-                                class="filter round">
-                                Submit
-                            </button>
-                        </div>
-                    </template>
                 </div>
+                <template v-if="!mobile">
+                    <div class="py-4 px-12 w-full border-t justify-between flex">
+                        <button 
+                            v-if="value.length" 
+                            @click="clear" 
+                            class="border-none flex items-center">
+                            Clear
+                        </button>
+                        <button 
+                            v-else
+                            @click="active = false;" 
+                            class="border-none flex items-center">
+                            Cancel
+                        </button>
+                        <button 
+                            @click="submit()"
+                            class="px-8 h-14 rounded-full w-auto bg-white whitespace-nowrap text-white bg-default-red border-default-red">
+                            Submit
+                        </button>
+                    </div>
+                </template>
             </div>
-        </template>
+        </div>
     </div>
 </template>
 
 <script>
+    import clickOutside from '../../../Directives/clickOutside' 
     export default {
 
         props: ['value', 'tags', 'mobile'],
@@ -108,14 +104,9 @@
             },
             show() {
                 this.active =! this.active;
-                setTimeout(() => document.addEventListener('click', this.onClickOutside), 200);
             },
-            onClickOutside(event) {
-                if (this.active === false) {return}
-                let tag = this.$refs.tag;
-                if (!tag || tag.contains(event.target)) return;
+            hide() {
                 this.active = false;
-                if (this.value.length) this.submit();
             },
         },
     }

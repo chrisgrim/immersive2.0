@@ -33,10 +33,9 @@ class OrganizerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Event $event)
+    public function create()
     {
-        $event->load('organizer');
-        return view('create.organizer',compact('event'));
+        return view('organizers.create');
     }
 
     /**
@@ -87,7 +86,7 @@ class OrganizerController extends Controller
      */
     public function edit(Organizer $organizer)
     {
-        return view('organizers.edit', compact('organizer'));
+        return view('organizers.create', compact('organizer'));
     }
 
     /**

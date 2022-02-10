@@ -26,8 +26,17 @@ class ConversationsController extends Controller
      */
     public function index()
     {
-        $messages = auth()->user()->conversations()->with('users')->paginate(10);
-        return view('messages.index', compact('messages'));
+        // $convos = Conversation::all();
+        // foreach ($convos as $convo) {
+        //     if ($convo->event) {
+        //         $convo->update([
+        //             'event_name' => $convo->event->name
+        //         ]);
+        //     }
+        // }
+        // return 'finished';
+        $events = auth()->user()->eventconversations()->limit(20)->get();
+        return view('messages.index', compact('events'));
     }
 
     /**
@@ -39,9 +48,9 @@ class ConversationsController extends Controller
     public function show(Conversation $conversation)
     {
         $this->authorize('update', $conversation);
-        $conversation = $conversation->load('event');
         auth()->user()->update(['unread' => null]);
-        return view('messages.show', compact('conversation'));
+        return $conversation->load('event', 'messages');
+        // return view('messages.show', compact('conversation'));
     }
 
     /**
@@ -55,12 +64,22 @@ class ConversationsController extends Controller
     {   
         $this->authorize('update', $conversation);
         $receiver = $conversation->users->where('id', '!=' , auth()->id())->first();
+        $latest = $conversation->latestMessages()->first();
+        $start = $latest->created_at;
+        $end = Carbon::parse($latest->created_at)->addMinutes(1);
 
-        $ModeratorComment = Message::create([
-            'conversation_id' => $conversation->id,
-            'message' => $request->message,
-            'user_id' => auth()->id(),
-        ]);
+        if ( Carbon::now()->between($start, $end) && $latest->user->id === auth()->id() ) {
+            $latest->update([
+                'message' => $latest->message . $request->message
+            ]);
+        } else {
+            Message::create([
+                'conversation_id' => $conversation->id,
+                'message' => $request->message,
+                'user_id' => auth()->id(),
+            ]);
+        }
+
         $attributes = [
             'email' => $receiver ? $receiver->email : '',
             'receiver' => $receiver ? $receiver->name : '',
@@ -69,15 +88,16 @@ class ConversationsController extends Controller
             'event' => $request->event ? $request->event['name'] : null
         ];
 
-        if ($request->type == 'message') {
+        if (!$receiver->unread) {
+             // Let the receiver know they have an unread message
             $receiver ? $receiver->update(['unread' => 'm']) : '';
-        } else {
-            $receiver ? $receiver->update(['unread' => 'e']) : '';
+            // send an email to the reciever
+            $receiver ? Mail::to($receiver->email)->send(new NewMessage($attributes)) : '';
         }
 
+        //update the conversation
         $conversation->touch();
-
-        $receiver ? Mail::to($receiver->email)->send(new NewMessage($attributes)) : '';
+        return $conversation->load('event', 'messages');
         
     }
 
@@ -96,8 +116,10 @@ class ConversationsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function fetcheventmessages()
+    public function fetcheventmessages(Request $request)
     {
-        return auth()->user()->eventconversations()->with('users', 'event')->paginate(10);
+        if (! $request->search) return auth()->user()->eventconversations()->limit(20)->get();
+
+        return auth()->user()->eventconversations()->where('event_name', 'LIKE', "%$request->search%")->limit(10)->get();
     }
 }

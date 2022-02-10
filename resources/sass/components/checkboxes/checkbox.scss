@@ -1,0 +1,27 @@
+.map-checkbox {
+    width: 2.4rem;
+    height: 2.4rem;
+    background: #f64747;
+    position: relative;
+    border-radius: 0.5rem;
+    display: inline-block;
+    margin: 1rem;
+    input:checked + .check {
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        width: 8px;
+        height: 14px;
+        border-width: 0 2px 2px 0;
+        border-style: solid;
+        border-color: #fff;
+        transform: rotate(45deg);
+        margin-left: -4px;
+        margin-top: -7px;
+    }
+    input[type="checkbox"] {
+        -webkit-appearance: none;
+        appearance: none;
+        border:0;
+    }
+}

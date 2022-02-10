@@ -1,8 +1,8 @@
 <template>
-    <div class="com-create">
-        <div class="header-a">
-            <div class="header-a__content">
-                <div class="header-a__wrapper">
+    <div class="mx-auto w-full my-16 md:px-12 md:py-8 lg:py-0 lg:px-32 max-w-screen-xl">
+        <div class="relative block h-full overflow-hidden mb-8 rounded-2xl w-full md:flex md:h-[45rem]">
+            <div class="bg-black flex items-center justify-center p-8 md:px-24 md:py-0 md:justify-start md:h-[45rem] md:w-2/5">
+                <div class="w-full">
                     <div class="field h3">
                         <input 
                             type="text" 
@@ -46,6 +46,7 @@
                         v-if="$v.$anyDirty"
                         class="buttons">
                         <button 
+                            class="bg-white py-2 px-4 border-white"
                             :disabled="disabled" 
                             @click="submitCommunity">
                             Submit
@@ -53,12 +54,13 @@
                     </div>
                 </div>
             </div>
-            <div class="header-a__image">
+            <div class="relative inline-block bg-black w-full md:h-[45rem] md:w-3/5">
+                <p 
+                    v-if="checkImage"
+                    class="w-80 text-red-500 absolute h-28 mt-16 inset-0 m-auto">An Image is required </p>
                 <CardImage
-                    :height="500"
-                    :width="800"
-                    :loading="disabled"
-                    text="The image must be at least 800px x 500px"
+                    :image="null"
+                    :loading="loading"
                     :external-submit="checkImage"
                     @addImage="addImage" />
             </div>
@@ -86,7 +88,7 @@
 </template>
 
 <script>
-    import CardImage from '../../components/Upload-Image.vue'
+    import CardImage from './Components/add-image.vue'
     import formValidationMixin from '../../mixins/form-validation-mixin'
     import { required, maxLength } from 'vuelidate/lib/validators';
     export default {
@@ -108,6 +110,7 @@
                 checkImage: false,
                 serverErrors: null,
                 disabled: false,
+                loading: false,
             }
         },
 
@@ -132,17 +135,21 @@
                 }
             },
             addImage(image) {
+                this.loading = false
                 this.disabled = false
+                this.checkImage = false
                 this.formData.append('image', image);
             },
             checkForImage() {
                 if (!this.formData.has('image')) {
-                    this.checkImage = true;
+                    this.checkImage = true
+                    this.loading = false
                     return true
                 }
                 this.disabled = false
             },
             addCommunityData() {
+                this.loading = true
                 this.formData.append('name', this.community.name);
                 this.formData.append('blurb', this.community.blurb);
                 this.formData.append('description', this.community.description);

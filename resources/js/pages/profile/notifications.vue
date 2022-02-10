@@ -1,63 +1,68 @@
 <template>
-    <div class="account-notifications">
-        <div class="account-notifications_header">
-            <div class="account-notifications_breadcrumbs"><a href="/account-settings">Account</a> > Notifications</div>
-            <h2>Notifications</h2>
-        </div>
-        <section class="notifications grid">
-            <div class="notifications_element">
-                <h4>Subscribe to monthly newsletter</h4>
-                <p>Get our monthly newsletters about the latest and greatest immersive events.</p>
-            </div>
-            <div class="item">
-                <div class="field">
+    <div class="max-w-screen-2xl relative">
+        <section class="my-8 md:mt-16 md:mb-24">
+            <div class="px-8 my-8 md:px-12 lg:px-32 lg:my-12">
+                <h2>Notifications</h2>
+                <section class="w-2/3 flex justify-between items-center gap-12 border-b my-4">
+                    <div class="py-8">
+                        <h4 class="text-2xl font-medium mb-2">Subscribe to monthly newsletter</h4>
+                        <p class="text-2xl text-gray-500">Get our monthly newsletters about the latest and greatest immersive events.</p>
+                    </div>
                     <div id="cover">
-                        <input v-model="monthly" type="checkbox" id="checkbox">
+                        <input 
+                            v-model="options.monthly" 
+                            type="checkbox"
+                            id="checkbox">
                         <div id="bar"></div>
                         <div id="knob">
-                            <p v-if="monthly">Yes</p>
+                            <p v-if="options.monthly">Yes</p>
                             <p v-else>No</p>
                         </div>
                     </div>
-                </div>
-            </div>
-        </section>
-        <section class="notifications grid">
-            <div class="notifications_element">
-                <h4>Subscribe to event update newsletters</h4>
-                <p>Get the latest updates about the organizations and events you have liked on EI.</p>
-            </div>
-            <div class="item">
-                 <div class="field">
+                </section>
+                <section class="w-2/3 flex justify-between items-center gap-12 border-b my-4">
+                    <div class="py-8">
+                        <h4 class="text-2xl font-medium mb-2">Subscribe to event update newsletters</h4>
+                        <p class="text-2xl text-gray-500">Get the latest updates about the organizations and events you have liked on EI.</p>
+                    </div>
                     <div id="cover">
-                        <input v-model="updates" type="checkbox" id="checkbox">
+                        <input 
+                            v-model="options.updates" 
+                            type="checkbox" 
+                            id="checkbox">
                         <div id="bar"></div>
                         <div id="knob">
-                            <p v-if="updates">Yes</p>
+                            <p v-if="options.updates">Yes</p>
                             <p v-else>No</p>
                         </div>
                     </div>
-                </div>
-            </div>
-        </section>
-        <section class="notifications grid">
-            <div class="notifications_element">
-                <h4>Messages</h4>
-                <p>Get an email whenever a user or admin sends you a message</p>
-            </div>
-            <div class="item">
-                 <div class="field">
+                </section>
+                <section class="w-2/3 flex justify-between items-center gap-12 border-b my-4">
+                    <div class="py-8">
+                        <h4 class="text-2xl font-medium mb-2">Messages</h4>
+                        <p class="text-2xl text-gray-500">Get an email whenever a user or admin sends you a message</p>
+                    </div>
                     <div id="cover">
-                        <input v-model="messages" type="checkbox" id="checkbox">
+                        <input 
+                            v-model="options.messages" 
+                            type="checkbox" 
+                            id="checkbox">
                         <div id="bar"></div>
                         <div id="knob">
-                            <p v-if="messages">Yes</p>
+                            <p v-if="options.messages">Yes</p>
                             <p v-else>No</p>
                         </div>
                     </div>
-                </div>
+                </section>
             </div>
         </section>
+        <transition name="slide-fade">
+            <div 
+                v-if="updated" 
+                class="fixed top-16 right-16 z-[2003] rounded-2xl bg-green-500 p-8">
+                <p class="text-white">Your notifications have been updated.</p>
+            </div>
+        </transition>
     </div>
 </template>
 <script>
@@ -66,75 +71,40 @@
 
     export default {
 
-        props: ['user'],
-
-        components: {
-            
-        },
-
-        computed: {
-            
-        },
+        props: ['user', 'mobile'],
 
         data() {
             return {
-                monthly: true,
-                updates: true,
-                messages: true,
+                options: this.initializeOptions(),
+                updated: false,
             }
         },
 
         methods: {
-            submit() {
-                let data = {
-                    monthly: this.monthly ? this.monthly : '',
-                    updates: this.updates ? this.updates : '',
-                    messages: this.messages ? this.messages : '',
-                };
-                axios.patch(`/users/${this.user.id}`, data)
-                .then(response => {
-                    console.log(response.data);
-                
+            async submit() {
+                await axios.put(`/users/${this.user.id}`, this.options)
+                .then( res => {
+                    this.updated = true
+                    setTimeout(() => this.updated = false, 3000)
                 })
-                .catch(error => { 
-                    console.log(error.response.data);
-                });
             },
-            updateNews() {
-                if (this.user.newsletter_type == 'n') {
-                    this.monthly = false; this.updates = false;
-                };
-                if (this.user.newsletter_type == 'a') {
-                    this.monthly = true; this.updates = true;
-                }
-                if (this.user.newsletter_type == 'm') {
-                    this.monthly = true; this.updates = false;
-                }
-                if (this.user.newsletter_type == 'u') {
-                    this.monthly = false; this.updates = true;
-                }
-                if (this.user.silence == 'y') {
-                    this.messages = false;
+            initializeOptions() {
+                return {
+                    monthly: this.user.newsletter_type == 'n' || this.user.newsletter_type == 'u' ? false : true,
+                    updates: this.user.newsletter_type == 'a' || this.user.newsletter_type == 'u' ? true : false,
+                    messages: this.user.silence == 'y' ? false : true,
                 }
             }
-            
         },
 
         watch: {
-            monthly() {
-                this.submit();
-            },
-            updates() {
-                this.submit();
-            },
-            messages() {
-                this.submit();
+            options: {
+                handler() {
+                    this.submit()
+                },
+                deep: true
             }
-        },
-
-        mounted() {
-            this.updateNews();
-        },
+        }
 
     };
 </script>

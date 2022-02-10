@@ -89,7 +89,7 @@ class Post extends Model
      */
     public function limitedCards()
     {
-        return $this->hasMany(Card::class)->orderBy('order', 'ASC')->limit(3);
+        return $this->hasMany(Card::class)->orderBy('order', 'ASC')->limit(5);
     }
 
     /**

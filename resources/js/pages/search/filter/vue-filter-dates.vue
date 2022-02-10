@@ -1,11 +1,26 @@
 <template>
-    <div 
-        class="col" 
-        ref="dates">
+    <div v-click-outside="hide">
+        <!-- mobile -->
+        <div 
+            v-if="mobile"
+            class="w-full py-4 px-8">
+            <button 
+                @click="show('dates')" 
+                :class="[ displayDate || active ? 'text-white bg-default-red border-default-red' : '' ]" 
+                class="rounded-2xl shadow-custom-1 w-full overflow-hidden h-16 whitespace-nowrap">
+                <template v-if="displayDate">
+                    {{ naturalDate[0] }}{{ naturalDate[1] ? ' — ' + naturalDate[1] : '' }}
+                </template>
+                <template v-else>
+                    Dates
+                </template>
+            </button>
+        </div>
         <button 
+            v-else
             @click="show('dates')" 
-            :class="{ active : naturalDate.length }" 
-            class="filter round dates">
+            :class="[ displayDate || active ? 'text-white bg-default-red border-default-red' : '', type === 'location-mobile' ? 'border-none' : 'border' ]" 
+            class="px-8 h-14 rounded-full w-auto bg-white whitespace-nowrap hover:text-white hover:bg-default-red hover:border-default-red">
             <template v-if="displayDate">
                 {{ naturalDate[0] }}{{ naturalDate[1] ? ' — ' + naturalDate[1] : '' }}
             </template>
@@ -13,46 +28,47 @@
                 Dates
             </template>
         </button>
-        <template v-if="active">
-            <div class="filter__dates">
-                <div class="filter__dropdown">
-                    <div class="element">
-                        <flat-pickr
-                            v-model="dates"
-                            :config="calendarConfig"                                         
-                            placeholder="Select date"               
-                            name="dates" />
-                    </div>
-                    <div class="filter__dropdown--footer">
-                        <button 
-                            v-if="naturalDate.length" 
-                            @click="clear" 
-                            class="borderless">
-                            Clear
-                        </button>
-                        <button 
-                            v-if="!naturalDate.length" 
-                            @click="active = false" 
-                            class="borderless">
-                            Cancel
-                        </button>
-                        <button 
-                            class="filter round" 
-                            @click="submit()">
-                            Search
-                        </button>
-                    </div>
+        <div 
+            v-if="active"
+            class="absolute mt-8 left-0 w-full md:left-32 md:max-w-5xl">
+            <div class="m-auto text-center bg-white shadow-custom-1 rounded-5xl top-6 overflow-hidden">
+                <div class="w-full overflow-y-auto overflow-x-hidden max-h-[calc(100vh-24rem)] input-hidden shadow-hidden">
+                    <flat-pickr
+                        v-model="dates"
+                        :config="calendarConfig"                                         
+                        placeholder="Select date"               
+                        name="dates" />
+                </div>
+                <div class="py-4 px-12 w-full border-t justify-between flex">
+                    <button 
+                        v-if="naturalDate.length" 
+                        @click="clear" 
+                        class="border-none flex items-center">
+                        Clear
+                    </button>
+                    <button 
+                        v-if="!naturalDate.length" 
+                        @click="active = false" 
+                        class="border-none flex items-center">
+                        Cancel
+                    </button>
+                    <button 
+                        class="px-8 h-14 rounded-full w-auto bg-white whitespace-nowrap text-white bg-default-red border-default-red" 
+                        @click="submit()">
+                        Search
+                    </button>
                 </div>
             </div>
-        </template>
+        </div>
     </div>
 </template>
 
 <script>
     import flatPickr from 'vue-flatpickr-component'
+    import clickOutside from '../../../Directives/clickOutside'
     export default {
 
-        props: ['value','url', 'mobile'],
+        props: ['value', 'url', 'mobile', 'type'],
 
         components: { flatPickr },
 
@@ -90,7 +106,6 @@
             },
             show() {
                 this.active =! this.active;
-                setTimeout(() => document.addEventListener('click', this.onClickOutside), 200);
             },
             dateFunc() {
                 const that = this;
@@ -115,12 +130,8 @@
             initializeNaturalDate() {
                 return this.value.length ? [this.$dayjs(this.value[0]).format("MMM D"), this.$dayjs(this.value[1]).format("MMM D")] : []
             },
-            onClickOutside(event) {
-                if (this.active == false) {return}
-                let dates = this.$refs.dates;
-                if (!dates || dates.contains(event.target)) return;
+            hide() {
                 this.active = false;
-                this.submit();
             },
         },
     }

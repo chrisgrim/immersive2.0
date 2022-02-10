@@ -1,11 +1,11 @@
 <template>
-    <div class="shelf">
-        <div class="name">
-            <h3>{{ shelf.name }}</h3>
+    <div class="rounded-2xl mb-8">
+        <div class="flex">
+            <h3 class="text-4xl font-semibold">{{ shelf.name }}</h3>
         </div>
         <div 
             v-if="posts && posts.length"
-            class="posts">
+            class="relative w-full inline-block">
             <PostAlbum
                 :title="true"
                 :text="true"
@@ -17,7 +17,7 @@
 </template>
 
 <script>
-    import PostAlbum from './vue-album-show.vue'
+    import PostAlbum from './Components/vue-album-show.vue'
     export default {
         
         props: [ 'shelf', 'owner', 'community' ],

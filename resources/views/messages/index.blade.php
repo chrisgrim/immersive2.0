@@ -7,15 +7,19 @@
 @endsection
 
 @section('nav')
-    <vue-nav navtype="message" :user= "{{auth()->user()}}"></vue-nav>
+    @if (Browser::isMobile())
+        <vue-nav-mobile navtype="message" :user= "{{ auth()->user() ? auth()->user() : 'null' }}" />
+    @else
+        <vue-nav navtype="message" :user= "{{ auth()->user() ? auth()->user() : 'null' }}" />
+    @endif
 @endsection
+
 
 @section('content')
     <div id="bodyArea">
-        <message-index :loaduser="{{ auth()->user() }}"></message-index> 
+        <message-index 
+            :user="{{ auth()->user() ? auth()->user() : 'null' }}" 
+            :mobile="{{ Browser::isMobile() ? Browser::isMobile() : 'null' }}"
+            :events="{{ $events }}" >
     </div>
 @endsection
-
-@section('footer')
-    <vue-footer></vue-footer>
-@endsection 

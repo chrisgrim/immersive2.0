@@ -1,5 +1,5 @@
 <template>
-    <div class="post-card edit">
+    <div class="mt-8 relative p-4">
         <tiptap 
             @cancel="cancelCard"
             @save="saveCard"
@@ -13,7 +13,7 @@
 </template>
 
 <script>
-    import Tiptap from '../../../../components/Tiptap.vue'
+    import Tiptap from './Components/Tiptap.vue'
     import formValidationMixin from '../../../../mixins/form-validation-mixin'
     import { required, maxLength } from 'vuelidate/lib/validators';
     export default {

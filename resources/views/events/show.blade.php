@@ -32,27 +32,25 @@
         <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Event", "name": "{{$event->name}}{{$event->tag_line ? '- ' . \Illuminate\Support\Str::limit($event->tag_line, 80) : '- ' . \Illuminate\Support\Str::limit($event->description, 80)}}", @if($event->shows->isEmpty()) "startDate":{{\Carbon\Carbon::parse($event->created_at)->toIso8601String()}}, @else "startDate":"{{\Carbon\Carbon::parse($event->shows[0]->date)->toIso8601String()}}", @endif "endDate": "{{\Carbon\Carbon::parse($event->closingDate)->toIso8601String()}}", "eventStatus": "https://schema.org/EventScheduled", "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode", "location":{"@type": "VirtualLocation", "url": "{{$event->websiteUrl ? $event->websiteUrl : ($event->ticketUrl ? $event->ticketUrl : Request::url())}}"}, "image":"/storage/{{$event->largeImagePath}}", "description": "{{$event->tag_line ? $event->tag_line : $event->description}}", "offers":{"@type": "Offer", "url": "{{$event->ticketUrl ? $event->ticketUrl : ($event->websiteUrl ? $event->websiteUrl : Request::url())}}", "price": "{{$event->priceranges[0]->price}}", "priceCurrency": "USD", "availability": "https://schema.org/InStock", "validFrom": "{{$event->priceranges[0]->created_at}}"}, "organizer":{"@type": "Organization", "name": "{{$event->organizer->name}}", "url": "{{$event->organizer->website ? $event->organizer->website : Request::root() .'/organizer/' . $event->organizer->slug}}"}}</script>
     @endif
     <link href="{{ mix('/assets/app-lite.css') }}" rel="stylesheet" media="print" onload="this.media='all'; this.onload=null;">
+    <link href="{{ mix('/assets/app.css') }}" rel="stylesheet" media="print" onload="this.media='all'; this.onload=null;">
 @endsection
 
 @section('nav')
-    @auth
-        <vue-nav navtype="show" :user= "{{auth()->user()}}"></vue-nav>
-    @endauth
-    @guest
-        <vue-nav navtype="show"></vue-nav>
-    @endguest
+    @if (Browser::isMobile())
+        <vue-nav-mobile navtype="show" :user= "{{ auth()->user() ? auth()->user() : 'null' }}" />
+    @else
+        <vue-nav navtype="show" :user= "{{ auth()->user() ? auth()->user() : 'null' }}" />
+    @endif
 @endsection
 
 @section('content')
     <div id="bodyArea" class="show">
-        @auth
-            <modal-wrapper :user= "{{auth()->user()}}"></modal-wrapper>
-            <event-show :loadevent="{{$event}}" :tickets="{{$tickets}}" :user="{{auth()->user()}}">  
-        @endauth
-        @guest
-            <modal-wrapper></modal-wrapper>
-            <event-show :loadevent="{{$event}}" :tickets="{{$tickets}}" user="{{auth()->id()}}">  
-        @endguest
+        <modal-wrapper :user= "{{ auth()->user() ? auth()->user() : 'null' }}"></modal-wrapper>
+        <event-show 
+            :loadevent="{{$event}}" 
+            :tickets="{{$tickets}}" 
+            :mobile="{{ Browser::isMobile() ? Browser::isMobile() : 'null' }}"
+            :user="{{ auth()->user() ? auth()->user() : 'null' }}" />  
     </div>
 @endsection
 

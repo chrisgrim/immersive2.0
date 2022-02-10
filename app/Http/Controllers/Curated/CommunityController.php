@@ -62,7 +62,7 @@ class CommunityController extends Controller
      */
     public function show(Community $community)
     {
-        $shelves = $community->shelves()->with(['publishedPosts.limitedCards'])->limit(3)->get();
+        $shelves = $community->publishedShelves()->with(['publishedPosts.limitedCards'])->limit(3)->get();
         $community->load('curators');
         return view('communities.show', compact('community', 'shelves'));
     }
@@ -76,7 +76,7 @@ class CommunityController extends Controller
     public function edit(Community $community)
     {
         $shelves = $community->shelves()->orderBy('status', 'DESC')->orderBy('order', 'DESC')->get()->map(function ($shelf, $key) {
-            return $shelf->setRelation('posts', $shelf->posts()->with('cards')->paginate(4));
+            return $shelf->setRelation('posts', $shelf->posts()->with('limitedCards')->paginate(4));
         });
         return view('communities.edit', compact('community', 'shelves'));
     }

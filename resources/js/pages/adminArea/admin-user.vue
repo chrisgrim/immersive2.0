@@ -1,13 +1,6 @@
 <template>
-    <div 
-        ref="table"
-        style="width:100%"
-        class="users">
-        <div class="">
-            <div class="title">
-                <h1>Users</h1>
-            </div>
-        </div>
+    <div>
+        <h2 class="mb-8">Users</h2>
         <div class="field">
             <input 
                 v-model="userList"
@@ -16,67 +9,70 @@
                 @keyup="debounce(userList)"
                 type="text">
         </div>
-
-        <div class="v-table">
-            <div class="v-header-pane v-pane">
-                <div 
-                    :style="columns"
-                    class="v-header v-row">
-                    <div 
-                        :key="col.id"
-                        v-for="col in cols"
-                        class="v-cell">
-                        <p>{{ col.field }}</p>
-                    </div>
-                </div>
-            </div>
-            <div class="v-data-pane v-pane">
-                <div 
-                    class="v-row"
-                    :key="user.id"
-                    :style="columns"
-                    v-for="user in users.data">
-                    <div class="v-cell">
-                        <p>{{user.id}}</p>
-                    </div>
-                    <div class="v-cell">
-                        <input 
-                            type="text" 
-                            v-model="user.name" 
-                            placeholder="User Name"
-                            @change="onUpdate(user)">
-                    </div>
-                    <div class="v-cell">
-                        <p>{{ user.email }}</p>
-                    </div>
-                    <div class="v-cell">
-                        <select 
-                            v-model="user.type" 
-                            placeholder="User Type"
-                            @change="onUpdate(user)">
-                            <option value="a">
-                                Admin
-                            </option>
-                            <option value="m">
-                                Moderator
-                            </option>
-                            <option value="c">
-                                Curator
-                            </option>
-                            <option value="g">
-                                Guest
-                            </option>
-                        </select>
-                    </div>
-                    <div class="v-cell">
-                        <button 
-                            @click.prevent="selectedModal=user" 
-                            class="delete">
-                            <svg>
-                                <use :xlink:href="`/storage/website-files/icons.svg#ri-close-line`" />
-                            </svg>
-                        </button>
-                    </div>
+        <div class="not-prose relative bg-slate-50 rounded-xl overflow-hidden dark:bg-slate-800/25">
+            <div class="relative rounded-xl overflow-auto border">
+                <div class="shadow-sm overflow-hidden my-8">
+                    <table class="table-auto border-collapse w-full text-sm">
+                        <thead>
+                            <tr>
+                                <th 
+                                    :key="col.id"
+                                    class="border-b dark:border-slate-600 font-medium p-4 pl-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left" 
+                                    v-for="col in cols">
+                                    <p>{{ col.field }}</p>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white dark:bg-slate-800">
+                            <tr 
+                                :key="user.id"
+                                v-for="user in users.data">
+                                <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">
+                                    <p>{{user.id}}</p>
+                                </td>
+                                <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">
+                                    <input 
+                                        type="text" 
+                                        v-model="user.name" 
+                                        class="text-xl px-4 py-2 rounded-xl hover:bg-slate-500 hover:text-white" 
+                                        placeholder="User Name"
+                                        @change="onUpdate(user)">
+                                </td>
+                                <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400 truncate">
+                                    <p class="text-xl">{{ user.email }}</p>
+                                </td>
+                                <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">
+                                    <select 
+                                        class="text-xl px-4 py-2 rounded-xl hover:bg-slate-500 hover:text-white" 
+                                        v-model="user.type" 
+                                        placeholder="User Type"
+                                        @change="onUpdate(user)">
+                                        <option value="a">
+                                            Admin
+                                        </option>
+                                        <option value="m">
+                                            Moderator
+                                        </option>
+                                        <option value="c">
+                                            Curator
+                                        </option>
+                                        <option value="g">
+                                            Guest
+                                        </option>
+                                    </select>
+                                </td>
+                                <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">
+                                    <button 
+                                        @click.prevent="selectedModal=user" 
+                                        class="rounded-full p-2 hover:bg-black hover:border-black">
+                                        <svg class="w-8 h-8 hover:fill-white">
+                                            <use :xlink:href="`/storage/website-files/icons.svg#ri-close-line`" />
+                                        </svg>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

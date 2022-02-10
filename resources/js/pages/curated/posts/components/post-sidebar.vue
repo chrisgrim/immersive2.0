@@ -1,28 +1,32 @@
 <template>
-    <div class="sidebar">
-        <div class="sticky">
+    <div class="w-full inline-block md:w-4/12 md:py-8 md:pr-8">
+        <div class="sticky top-16">
             <template>
-                <div class="menu">
+                <div class="">
                     <a :href="`/communities/${community.slug}/${value.slug}`">
-                        <button class="outline">
-                            view
+                        <button class="bg-black px-4 py-2 rounded-full text-white hover:bg-white hover:text-black mb-4">
+                            View Post {{ inputVal.status !== 'p' ? `(Draft)` : ''}}
                         </button>
                     </a>
                 </div>
             </template>
-            <div class="menu">
+            <div class="">
                 <button 
                     @click="showStatus=!showStatus"
-                    class="component-title">
+                    class="flex justify-between h-16 p-4 items-center w-full border mb-4">
                     <p>Status</p>
-                    <svg v-if="showStatus"><use :xlink:href="`/storage/website-files/icons.svg#ri-arrow-up-s-line`" /></svg>
-                    <svg v-else><use :xlink:href="`/storage/website-files/icons.svg#ri-arrow-down-s-line`" /></svg>
+                    <svg class="w-6 h-6">
+                        <use v-if="showStatus" :xlink:href="`/storage/website-files/icons.svg#ri-arrow-up-s-line`" />
+                        <use v-else :xlink:href="`/storage/website-files/icons.svg#ri-arrow-down-s-line`" />
+                    </svg>
                 </button>
                 <template v-if="showStatus">
-                    <div class="component-body">
-                        <div class="flex btw">
+                    <div class="w-full h-full p-8">
+                        <div class="flex justify-between items-center">
                             <p>Visibility:</p>
-                            <button @click="updateStatus">
+                            <button 
+                                class="bg-black rounded-full px-4 py-2 text-white hover:bg-white hover:text-black"
+                                @click="updateStatus">
                                 {{ postStatus }}
                             </button>
                         </div>
@@ -32,13 +36,15 @@
             <div class="menu">
                 <button 
                     @click="showShelf=!showShelf"
-                    class="component-title">
+                    class="flex justify-between h-16 p-4 items-center w-full border mb-4">
                     <p>Shelf</p>
-                    <svg v-if="showShelf"><use :xlink:href="`/storage/website-files/icons.svg#ri-arrow-up-s-line`" /></svg>
-                    <svg v-else><use :xlink:href="`/storage/website-files/icons.svg#ri-arrow-down-s-line`" /></svg>
+                    <svg class="w-6 h-6">
+                        <use v-if="showShelf" :xlink:href="`/storage/website-files/icons.svg#ri-arrow-up-s-line`" />
+                        <use v-else :xlink:href="`/storage/website-files/icons.svg#ri-arrow-down-s-line`" />
+                    </svg>
                 </button>
                 <template v-if="showShelf">
-                    <div class="component-body">
+                    <div class="w-full h-full p-8">
                         <v-select
                             v-model="inputVal.shelf_id"
                             :reduce="shelf => shelf.id"
@@ -52,32 +58,33 @@
             <div class="menu">
                 <button 
                     @click="showFeatured=!showFeatured"
-                    class="component-title">
+                    class="flex justify-between h-16 p-4 items-center w-full border mb-4">
                     <p>Featured Image</p>
-                    <svg v-if="showFeatured"><use :xlink:href="`/storage/website-files/icons.svg#ri-arrow-up-s-line`" /></svg>
-                    <svg v-else><use :xlink:href="`/storage/website-files/icons.svg#ri-arrow-down-s-line`" /></svg>
+                    <svg class="w-6 h-6">
+                        <use v-if="showFeatured" :xlink:href="`/storage/website-files/icons.svg#ri-arrow-up-s-line`" />
+                        <use v-else :xlink:href="`/storage/website-files/icons.svg#ri-arrow-down-s-line`" />
+                    </svg>
                 </button>
                 <template v-if="showFeatured">
-                    <div class="component-body">
-                        <div class="post-image">
+                    <div class="w-full h-full p-8">
+                        <div class="h-64 relative rounded-2xl">
                             <template v-if="imageType === 'e'">
                                 event
                             </template>
                             <template v-else>
                                 <CardImage
-                                    text="Image must be at least 900px by 500px"
-                                    :height="500"
-                                    :width="900"
                                     :locked="inputVal.thumbImagePath ? true :false"
                                     @onDelete="deleteImage"
-                                    :can-delete="true"
+                                    :loading="disabled"
                                     :image="value.thumbImagePath ? `/storage/${inputVal.thumbImagePath}` : null"
                                     @addImage="addImage" />
                             </template>
                         </div>
-                        <div class="flex btw">
+                        <div class="flex justify-between items-center">
                             <p>Featured visible:</p>
-                            <button @click="updateType">
+                            <button 
+                                class="bg-black px-4 py-2 rounded-full text-white hover:bg-white hover:text-black mb-4"
+                                @click="updateType">
                                 {{ postType }}
                             </button>
                         </div>
@@ -98,13 +105,15 @@
             <div class="menu">
                 <button 
                     @click="showOrder=!showOrder"
-                    class="component-title">
+                    class="flex justify-between h-16 p-4 items-center w-full border mb-4">
                     <p>Card Order</p>
-                    <svg v-if="showOrder"><use :xlink:href="`/storage/website-files/icons.svg#ri-arrow-up-s-line`" /></svg>
-                    <svg v-else><use :xlink:href="`/storage/website-files/icons.svg#ri-arrow-down-s-line`" /></svg>
+                    <svg class="w-6 h-6">
+                        <use v-if="showOrder" :xlink:href="`/storage/website-files/icons.svg#ri-arrow-up-s-line`" />
+                        <use v-else :xlink:href="`/storage/website-files/icons.svg#ri-arrow-down-s-line`" />
+                    </svg>
                 </button>
                 <template v-if="showOrder">
-                    <div class="component-body">
+                    <div class="component-body overflow-auto max-h-screen">
                         <draggable
                             v-model="inputVal.cards" 
                             @start="isDragging=true" 
@@ -112,10 +121,16 @@
                             <div 
                                 v-for="card in inputVal.cards"
                                 :key="`list${card.id}`"
-                                class="nav-card__item">
-                                <span v-if="card.type==='e'">event block</span>
-                                <span v-else-if="card.type==='i'">image block</span>
-                                <span v-else>text block</span>
+                                class="border mb-2 p-2 w-full truncate cursor-pointer">
+                                <span 
+                                    v-if="card.type==='e'"
+                                    class="text-xl"><b>event block </b> ({{ card.event.name}})</span>
+                                <span 
+                                    v-else-if="card.type==='i'"
+                                    class="text-xl">image block</span>
+                                <span 
+                                    v-else
+                                    class="text-xl"><b>text block</b> (<span v-html="card.blurb"></span>)</span>
                             </div>
                         </draggable>
                     </div>
@@ -126,11 +141,11 @@
 </template>
 
 <script>
-    import CardImage from '../../../../components/Upload-Image.vue'
+    import CardImage from './vue-add-image.vue'
     import formValidationMixin from '../../../../mixins/form-validation-mixin'
     export default {
         
-        props: [ 'value', 'user', 'community', 'shelves'],
+        props: [ 'value', 'user', 'community', 'shelves', 'mobile'],
 
         mixins: [formValidationMixin],
 
@@ -165,6 +180,7 @@
                 showOrder: false,
                 showShelf: false,
                 updated: false,
+                disabled: false,
             }
         },
 

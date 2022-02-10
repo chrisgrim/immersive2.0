@@ -178,7 +178,7 @@
 </template>
 
 <script>
-    import CubeSpinner  from '../layouts/loading.vue'
+    import CubeSpinner  from '../../components/Spinner.vue'
     import googleLocationMixin from './components/google-location-mixin'
     import formValidationMixin from '../../mixins/form-validation-mixin'
     import { maxLength } from 'vuelidate/lib/validators'

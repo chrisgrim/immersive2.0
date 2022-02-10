@@ -63,7 +63,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $appends = [
-        'hasCreatedOrganizers', 'hasMessages', 'hexColor'
+        'hasCreatedOrganizers', 'hasMessages', 'hexColor', 'isCurator', 'isAdmin', 'isModerator', 'isUser'
     ];
 
     /**
@@ -279,6 +279,15 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
+    * Determine if the current user is the profile user
+    *
+    * @return bool
+    */
+    public function getIsUserAttribute() {
+        return $this->id === auth()->id();
+    }
+
+    /**
     * Determine if the current user has created events
     *
     * @return bool
@@ -310,6 +319,36 @@ class User extends Authenticatable implements MustVerifyEmail
             ->where('user_one', $this->id)
             ->orWhere('user_two', $this->id)
             ->count() ? true : false;
+    }
+
+    /**
+    * Determine if the current user has messages 
+    *
+    * @return bool
+    */
+    public function getisCuratorAttribute()
+    {
+        return $this->type === 'c' || $this->type === 'm' || $this->type === 'a';
+    }
+
+    /**
+    * Determine if the current user has messages 
+    *
+    * @return bool
+    */
+    public function getisAdminAttribute()
+    {
+        return $this->type === 'a';
+    }
+
+    /**
+    * Determine if the current user has messages 
+    *
+    * @return bool
+    */
+    public function getisModeratorAttribute()
+    {
+        return $this->type === 'm' || $this->type === 'a';
     }
 
 

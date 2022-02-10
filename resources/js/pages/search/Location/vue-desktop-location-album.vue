@@ -1,0 +1,82 @@
+<template>
+    <div>
+        <div 
+            v-for="(card) in items" 
+            :key="card.id">
+            <div class="flex border-b pb-4 mb-4">
+                <div class="w-[29rem] relative">
+                    <a 
+                        :href="url(card)" 
+                        class="absolute h-full w-full left-0 top-0 rounded-2xl z-20" />
+                    <div class="rounded-2xl h-64 w-96 relative overflow-hidden">                            
+                        <picture v-if="card.thumbImagePath">
+                            <source 
+                                type="image/webp" 
+                                :srcset="`/storage/${card.thumbImagePath}`"> 
+                            <img 
+                                loading="lazy" 
+                                class="h-full w-full absolute left-0 right-0 top-0 bottom-0 object-cover"
+                                :src="`/storage/${card.thumbImagePath.slice(0, -4)}jpg`" 
+                                :alt="`${card.name} Immersive Event`">
+                        </picture>
+                    </div>
+                </div>
+                <div class="relative m-4 w-full">
+                    <div 
+                        v-if="card.category"
+                        class="category">
+                        <a :href="`/index/search-all?&category=${card.category.id}`">
+                            <button class="py-3 px-4 mb-4 rounded-full uppercase text-lg">
+                                {{ card.category.name }}
+                            </button>
+                        </a>
+                    </div>
+
+                    <favorite 
+                        :user="user"
+                        :event="card" />
+
+                    <a  
+                        v-if="card.name"
+                        :href="url(card)">
+                        <p class="font-medium">{{ card.name }}</p>
+                    </a>
+
+                    <ul class="m-0">
+                        <li 
+                            class="inline-block mt-2" 
+                            v-for="(itemTag, index) in eventTags(card)" 
+                            :key="itemTag.id">
+                            {{ itemTag.name }}<span v-if="index != '2'">•</span>
+                        </li>
+                    </ul>
+                    <div class="absolute right-0 bottom-0 text-right font-extrabold">
+                        {{ fixedprice(card) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+    import Favorite  from './Components/event-favorite.vue'
+    export default {
+        props: ['items', 'user'],
+
+        components: { Favorite },
+
+        computed: {
+            url() {
+                return card => this.loadurl == 'admin' ? `/admin/events/${card.slug}/finalize` : `/events/${card.slug}`
+            },
+            eventTags() {
+                return item => item.genres.slice(0, 3);
+            },
+            fixedprice() {
+                return event => event.price_range.replace(/\d+(\.\d{1,2})?/g, dec => parseInt(dec));
+            },
+        },
+
+    };
+</script>

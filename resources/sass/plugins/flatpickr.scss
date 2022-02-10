@@ -1,3 +1,14 @@
+/*Search page*/
+.input-hidden .form-control.input {
+    display: none;
+}
+.shadow-hidden .flatpickr-calendar {
+    box-shadow: none !important;
+}
+
+
+/*other*/
+
 .lockedcalendar .flatpickr-calendar {
     box-shadow: none;
 }

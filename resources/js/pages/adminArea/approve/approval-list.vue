@@ -4,25 +4,19 @@
             <h2>Event Approval</h2>
             <p>These are the events that need approval</p>
         </div>
-        
         <section>
-            <div class="padded-width">
-                <vue-event-index 
-                    favorite="hidden" 
-                    loadurl="admin" 
-                    :events="eventsLoaded" />
-            </div>
+            <Album :items="eventsLoaded" />
         </section>
     </div>
 </template>
 
 <script>
 
-    import vueEventIndex from '../../events/components/index-item.vue'
+    import Album from './Components/albums.vue'
 
     export default {
 
-        components: { vueEventIndex },
+        components: { Album },
 
         props:[ 'user' ],
 

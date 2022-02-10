@@ -7,24 +7,19 @@
 @endsection 
 
 @section('nav')
-    @auth
-        <vue-nav navtype="searchlocation" :user= "{{auth()->user()}}"></vue-nav>
-    @endauth
-    @guest
-        <vue-nav navtype="searchlocation"></vue-nav>
-    @endguest
+    @if (Browser::isMobile())
+        <vue-nav-mobile navtype="searchlocation" :user= "{{ auth()->user() ? auth()->user() : 'null' }}" />
+    @else
+        <vue-nav navtype="searchlocation" :user= "{{ auth()->user() ? auth()->user() : 'null' }}" />
+    @endif
 @endsection
 
 @section('content')
     <div id="bodyArea">
-        @auth
-            <modal-wrapper :user= "{{auth()->user()}}"></modal-wrapper>
-        @endauth
-        @guest
-            <modal-wrapper></modal-wrapper>
-        @endguest
+        <modal-wrapper :user= "{{ auth()->user() ? auth()->user() : 'null' }}"></modal-wrapper>
         <vue-search-location 
-            user="{{ auth()->id() }}" 
+            :user="{{ auth()->user() ? auth()->user() : 'null' }}" 
+            :mobile="{{ Browser::isMobile() ? Browser::isMobile() : 'null' }}"
             :tags="{{ $tags }}" 
             :searchedevents="{{ $searchedevents }}" 
             :docks="{{ $docks }}" 

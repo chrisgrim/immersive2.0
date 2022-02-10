@@ -1,3 +1,58 @@
+.mobile-search-nav::before {
+    background-image: -webkit-linear-gradient(to bottom, #000, rgba(0, 0, 0, 0));
+    background-image: -moz-linear-gradient(to bottom, #000, rgba(0, 0, 0, 0));
+    background-image: linear-gradient(to bottom, #000, rgba(0, 0, 0, 0));
+    content: "";
+    height: 140%;
+    left: 0px;
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    z-index: -1;
+    -webkit-transition: 150ms opacity ease;
+    -moz-transition: 150ms opacity ease;
+    transition: 150ms opacity ease;
+}
+.mobile-search-nav::after {
+    -webkit-transform-origin: 50% 0%;
+    -ms-transform-origin: 50% 0%;
+    transform-origin: 50% 0%;
+    -webkit-transition-duration: 150ms;
+    transition-duration: 150ms;
+    -webkit-transition-property: opacity, -webkit-transform, transform;
+    -moz-transition-property: opacity, transform;
+    transition-property: opacity, -ms-transform, -webkit-transform, transform;
+    -webkit-transition-timing-function: ease;
+    transition-timing-function: ease;
+    content: "";
+    height: 100%;
+    left: 0px;
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    z-index: -1;
+    opacity: 1;
+}
+.mobile-search-nav.scroll::after {
+    box-shadow: rgb(0 0 0 / 8%) 0px 1px 12px;
+    background: rgb(255, 255, 255);
+    z-index: -3;
+    box-shadow: rgb(0 0 0 / 8%) 0px 1px 0px;
+}
+.mobile-search-nav.open::after {
+    box-shadow: rgb(0 0 0 / 8%) 0px 1px 12px;
+    background: rgb(255, 255, 255);
+    z-index: -3;
+    transform: scaleY(2.5);
+    box-shadow: rgb(0 0 0 / 8%) 0px 1px 0px;
+}
+
+
+
+
+
 .search-nav {
     position: fixed;
     width: 100%;

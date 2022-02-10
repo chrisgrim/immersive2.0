@@ -1,26 +1,27 @@
 <template>
     <div class="event-create__review">
         <EventHeader 
+            :mobile="mobile"
             :user="user"
-            :event="event" />
-        <div class="lay-b">
-            <div class="lay-b__wrapper">
-                <div class="lay-b__left">
-                    <EventAbout :event="event" />
+            :event="loadevent" />
+        <div class="relative w-full m-auto p-0 md:px-12 lg:px-32 lg:max-w-screen-xl">
+            <div class="md:flex md:gap-36 border-b">
+                <div class="relative inline-block">
+                    <EventAbout :event="loadevent" />
                     <EventDates 
-                        v-if="isMobile"
-                        :event="event" />
-                    <EventDetails :event="event" />
+                        v-if="mobile"
+                        :event="loadevent" />
+                    <EventDetails :event="loadevent" />
                 </div>
-                <div class="lay-b__right">
+                <div class="w-full relative inline-block md:w-[37rem] md:min-w-[37rem]">
                     <EventQuickBuy
+                        :mobile="mobile"
                         :tickets="tickets"
                         :event="loadevent" />
                 </div>
             </div>
         </div>
-        <div class="lay-b">
-            <div class="es__line" />
+        <div class="relative w-full m-auto p-0 md:px-12 lg:px-32 lg:max-w-screen-xl">
             <EventLocation :event="loadevent" />
             <EventOrganizer :event="loadevent" />
             <div style="height:10rem" />
@@ -47,26 +48,24 @@
     });
     import formValidationMixin from '../../mixins/form-validation-mixin'
     import {LMap, LTileLayer, LMarker, LPopup} from 'vue2-leaflet'
-    import ShowMore  from '../events/components/show-more.vue'
-    import EventHeader  from '../events/show/event-show-header.vue'
-    import EventDetails  from '../events/show/event-show-details.vue'
-    import EventAbout  from '../events/show/event-show-about.vue'
-    import EventTickets  from '../events/show/event-show-tickets.vue'
-    import EventDates  from '../events/show/event-show-dates.vue'
-    import EventOrganizer  from '../events/show/event-show-organizer.vue'
-    import EventLocation  from '../events/show/event-show-location.vue'
-    import EventStaffpick  from '../events/show/event-show-staffpick.vue'
-    import EventReviews  from '../events/show/event-show-reviews.vue'
-    import EventQuickBuy  from '../events/show/event-show-quickbuy.vue'
-    import EventRatings  from '../events/show/event-show-ratings.vue'
+    import ShowMore  from '../../components/ShowMore.vue'
+    import EventHeader  from '../Events/Show/event-show-header.vue'
+    import EventDetails  from '../Events/Show/event-show-details.vue'
+    import EventAbout  from '../Events/Show/event-show-about.vue'
+    import EventDates  from '../Events/Show/event-show-dates.vue'
+    import EventOrganizer  from '../Events/Show/event-show-organizer.vue'
+    import EventLocation  from '../Events/Show/event-show-location.vue'
+    import EventStaffpick  from '../Events/Show/event-show-staffpick.vue'
+    import EventReviews  from '../Events/Show/event-show-reviews.vue'
+    import EventQuickBuy  from '../Events/Show/event-show-quickbuy.vue'
 
     export default {
 
-        props: ['loadevent', 'user', 'tickets'],
+        props: ['loadevent', 'user', 'tickets', 'mobile'],
 
         mixins: [ formValidationMixin ],
 
-        components: { LMap, LTileLayer, LMarker, LPopup, ShowMore, EventHeader, EventAbout, EventDetails, EventTickets, EventDates, EventOrganizer, EventLocation, EventStaffpick, EventReviews, EventQuickBuy, EventRatings },
+        components: { LMap, LTileLayer, LMarker, LPopup, ShowMore, EventHeader, EventAbout, EventDetails, EventDates, EventOrganizer, EventLocation, EventStaffpick, EventReviews, EventQuickBuy },
 
         computed: {
             locationPlaceholder() {
@@ -103,7 +102,6 @@
                 config: this.initializeCalendarObject(),
                 titleFontSize: '',
                 hover: null,
-                isMobile: window.innerWidth < 768 ? true : false,
                 disabled: false,
 
             }

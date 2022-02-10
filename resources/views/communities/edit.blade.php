@@ -8,25 +8,24 @@
 @endsection 
 
 @section('nav')
-    @auth
-        <vue-nav :user= "{{auth()->user()}}"></vue-nav>
-    @endauth
-    @guest
-        <vue-nav></vue-nav>
-    @endguest
+    @if (Browser::isMobile())
+        <vue-nav-mobile navtype="comedit" :user= "{{ auth()->user() ? auth()->user() : 'null' }}" />
+    @else
+        <vue-nav navtype="comedit" :user= "{{ auth()->user() ? auth()->user() : 'null' }}" />
+    @endif
 @endsection
+
 @section('content')
     <div id="bodyArea">
-        @if ( session()->exists( 'submitted' ))
-            <modal-wrapper :user= "{{auth()->user()}}" loadmessage="submitted"></modal-wrapper>
-        @else 
-            <modal-wrapper :user= "{{auth()->user()}}"></modal-wrapper>
-        @endif
+        <modal-wrapper 
+            :user="{{ auth()->user() ? auth()->user() : 'null' }}"
+            loadmessage="{{ session('submitted') ? session('submitted') : '' }}"></modal-wrapper>
         <vue-community-edit
+            :mobile="{{ Browser::isMobile() ? Browser::isMobile() : 'null' }}"
             :loadowner="{{$community->owner()->first()}}"
             :loadshelves="{{ $shelves }}" 
             :loadcommunity="{{ $community }}" 
-            :user="{{ auth()->user() }}"/>
+            :user="{{ auth()->user() ? auth()->user() : 'null' }}"/>
     </div>
 @endsection
 

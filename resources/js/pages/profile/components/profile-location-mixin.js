@@ -1,7 +1,5 @@
 export default {
     methods: {
-
-
         setPlace() {
             let place = this.autocomplete.getPlace();
             this.updateLats(place);

@@ -2,57 +2,45 @@
     <div class="pagination">
         <ul 
             v-if="total > perPage"
-            class="pagination">
-            <li v-if="prevPageUrl">
+            class="text-center flex pb-8 justify-center items-center">
+            <li class="inline p-2 mt-2">
                 <button
-                    class="paginate__arrows"
+                    class="border-none rounded-full p-2 inline-flex items-center justify-center font-medium"
+                    :class="[ !prevPageUrl ? 'shadow-custom-3' : 'shadow-custom-1 hover:bg-black' ]"
                     :tabindex="!prevPageUrl && -1" 
+                    :disabled="!prevPageUrl"
                     @click="previousPage">
-                    <template>
-                        <svg 
-                            viewBox="0 0 32 32" 
-                            xmlns="http://www.w3.org/2000/svg" 
-                            style="display:block;fill:none;height:16px;width:16px;stroke:currentColor;stroke-width:4;overflow:visible" 
-                            aria-hidden="true" 
-                            role="presentation" 
-                            focusable="false">
-                            <g fill="none">
-                                <path d="m20 28-11.29289322-11.2928932c-.39052429-.3905243-.39052429-1.0236893 0-1.4142136l11.29289322-11.2928932" />
-                            </g>
-                        </svg>
-                    </template>
+                    <svg 
+                        :class="[ !prevPageUrl ? 'fill-gray-300' : 'hover:fill-white' ]"
+                        class="w-10 h-10">
+                        <use :xlink:href="`/storage/website-files/icons.svg#ri-arrow-left-s-line`" />
+                    </svg>
                 </button>
             </li>
 
             <li 
                 v-for="(page, key) in pageRange" 
-                :key="key" 
-                :class="{ 'active': page == currentPage }">
-                <button @click="selectPage(page)">
+                :key="key">
+                <button 
+                    @click="selectPage(page)"
+                    :class="{ 'bg-black text-white': page === currentPage }"
+                    class="w-12 h-12 rounded-full items-center justify-center inline-flex bg-white border-none font-medium">
                     {{ page }}
                 </button>
             </li>
 
-            <li 
-                :class="{'disabled': !nextPageUrl}" 
-                v-if="nextPageUrl">
+            <li>
                 <button
-                    class="paginate__arrows"
+                    :disabled="!nextPageUrl"
+                    class="border-none shadow-custom-1 rounded-full p-2 inline-flex items-center justify-center font-medium"
+                    :class="[ !nextPageUrl ? 'shadow-custom-3' : 'shadow-custom-1 hover:bg-black' ]"
                     :tabindex="!nextPageUrl && -1" 
                     @click="nextPage">
-                    <slot name="next-nav">
-                        <svg 
-                            viewBox="0 0 32 32" 
-                            xmlns="http://www.w3.org/2000/svg" 
-                            style="display:block;fill:none;height:16px;width:16px;stroke:currentColor;stroke-width:4;overflow:visible" 
-                            aria-hidden="true" 
-                            role="presentation" 
-                            focusable="false">
-                            <g fill="none">
-                                <path d="m12 4 11.2928932 11.2928932c.3905243.3905243.3905243 1.0236893 0 1.4142136l-11.2928932 11.2928932" />
-                            </g>
-                        </svg>
-                    </slot>
+                    <svg 
+                        :class="[ !nextPageUrl ? 'fill-gray-300' : 'hover:fill-white' ]"
+                        class="w-10 h-10">
+                        <use :xlink:href="`/storage/website-files/icons.svg#ri-arrow-right-s-line`" />
+                    </svg>
                 </button>
             </li>
         </ul>

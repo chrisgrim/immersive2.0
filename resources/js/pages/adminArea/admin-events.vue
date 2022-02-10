@@ -1,16 +1,12 @@
 <template>
-    <div class="admin-events">
-        <div class="">
-            <div class="title">
-                <h1>Events</h1>
-                <select 
-                    v-model="dateFilter"
-                    id="dates">
-                    <option value="published">Published At</option>
-                    <option value="updated">Updated At</option>
-                </select>
-            </div>
-        </div>
+    <div>
+        <h2 class="mb-8">Events</h2>
+        <select 
+            v-model="dateFilter"
+            id="dates">
+            <option value="published">Published At</option>
+            <option value="updated">Updated At</option>
+        </select>
         <div class="field">
             <input 
                 v-model="eventList"
@@ -19,73 +15,93 @@
                 @keyup="debounce(eventList)"
                 type="text">
         </div>
-        <div class="data-grid">
-            <div class="data-grid__row header">
-                <p />
-                <p>Name</p>
-                <p>Organization</p>
-                <p>Location</p>
-                <p>Category</p>
-                <p>Sum.</p>
-                <p>Status</p>
-                <p>Clicks</p>
-            </div>
-            <div 
-                class="data-grid__row" 
-                :key="event.id"
-                v-for="event in events.data">
-                <div class="edit">
-                    <a 
-                        target="_blank"
-                        :href="`/create/${event.slug}/title`">
-                        <IconSvg type="edit" />
-                    </a>
-                </div>
-                <div class="lg">
-                    <a 
-                        target="_blank"
-                        :href="`/events/${event.slug}`">
-                        <img 
-                            v-if="event.thumbImagePath"
-                            :src="`/storage/${event.thumbImagePath}`">
-                        <p>{{ event.name }}</p>
-                    </a>
-                </div>
-                <div>
-                    <button 
-                        class="noBox" 
-                        @click.prevent="showModal(event, 'changeOrganizer')">
-                        {{ event.organizer.name }}
-                    </button>
-                </div>
-                <div class="center">
-                    <p v-if="event.hasLocation">{{ event.location.city ? event.location.city : event.location.region }}, {{ event.location.country }}</p>
-                    <p v-else>Online</p>
-                </div>
-                <div class="center">
-                    <p>{{ event.category.name }}</p>
-                </div>
-                <div class="center">
-                    <a 
-                        target="_blank"
-                        :href="`/admin/events/show/${event.slug}`">
-                        <IconSvg type="book" />
-                    </a>
-                </div>
-                <div class="center">
-                    <template v-if="event.status === 'p'">
-                        <a 
-                            target="_blank"
-                            :href="`/events/${event.slug}`">
-                            <p style="text-decoration: underline;">Live</p>
-                        </a>
-                    </template>
-                    <template v-if="event.status === 'e'">
-                        <p style="text-decoration: underline;">Embargoed <br> (goes live {{ cleanDate(event.embargo_date) }})</p>
-                    </template>
-                </div>
-                <div class="center">
-                    <p v-if="event.clicks">{{ event.clicks.length }}</p>
+
+        <div class="not-prose relative bg-slate-50 rounded-xl overflow-hidden dark:bg-slate-800/25">
+            <div class="relative rounded-xl overflow-auto border">
+                <div class="shadow-sm overflow-hidden my-8">
+                    <table class="table-auto border-collapse w-full">
+                        <thead>
+                            <tr>
+                                <th 
+                                    :key="col.id"
+                                    v-for="col in cols"
+                                    class="border-b dark:border-slate-600 font-medium p-4 pl-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
+                                    <p 
+                                        class="text-xl" 
+                                        :class="col.class">{{ col.field }}</p>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white dark:bg-slate-800">
+                            <tr
+                                :key="event.id"
+                                v-for="event in events.data">
+                                <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">
+                                    <a 
+                                        target="_blank"
+                                        class="rounded-full w-12 h-12 block flex items-center justify-center hover:bg-black" 
+                                        :href="`/create/${event.slug}/title`">
+                                        <svg class="w-8 h-8 hover:fill-white">
+                                            <use :xlink:href="`/storage/website-files/icons.svg#ri-edit-2-line`" />
+                                        </svg>
+                                    </a>
+                                </td>
+                                <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">
+                                    <a 
+                                        class="flex flex-col items-center" 
+                                        target="_blank"
+                                        :href="`/events/${event.slug}`">
+                                        <img 
+                                            class="w-32 rounded-2xl" 
+                                            v-if="event.thumbImagePath"
+                                            :src="`/storage/${event.thumbImagePath}`">
+                                        <p class="text-xl text-center">{{ event.name }}</p>
+                                    </a>
+                                </td>
+                                <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">
+                                    <p 
+                                        class="underline text-xl"
+                                        @click.prevent="showModal(event, 'changeOrganizer')">
+                                        {{ event.organizer.name }}
+                                    </p>
+                                </td>
+                                <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">
+                                    <p 
+                                        class="text-xl" 
+                                        v-if="event.hasLocation">{{ event.location.city ? event.location.city : event.location.region }}, {{ event.location.country }}</p>
+                                    <p 
+                                        class="text-xl" 
+                                        v-else>Online</p>
+                                </td>
+                                <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">
+                                    <p class="text-xl">{{ event.category.name }}</p>
+                                </td>
+                                <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">
+                                    <a 
+                                        target="_blank"
+                                        class="text-xl" 
+                                        :href="`/admin/events/show/${event.slug}`">
+                                        <IconSvg type="book" />
+                                    </a>
+                                </td>
+                                <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">
+                                    <a 
+                                        v-if="event.status === 'p'"
+                                        target="_blank"
+                                        :href="`/events/${event.slug}`">
+                                        <p style="text-decoration: underline;">Live</p>
+                                    </a>
+                                    <p 
+                                        v-if="event.status === 'e'"
+                                        style="text-decoration: underline;">Embargoed <br> (goes live {{ cleanDate(event.embargo_date) }})
+                                    </p>
+                                </td>
+                                <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">
+                                    <p v-if="event.clicks">{{ event.clicks.length }}</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -123,7 +139,17 @@
                 modalData: null,
                 modal: '',
                 page:1,
-                dateFilter: 'published'
+                dateFilter: 'published',
+                cols: [
+                    { id:0, field: '', class:''},
+                    { id:1, field: 'Name', class:'text-center'},
+                    { id:2, field: 'Organization', class:''},
+                    { id:3, field: 'Location', class:'' },
+                    { id:4, field: 'Category', class:''},
+                    { id:5, field: 'Sum.',class:'' },
+                    { id:6, field: 'Status', class:'' },
+                    { id:7, field: 'Clicks', class:'' },
+                ],
             }
         },
 

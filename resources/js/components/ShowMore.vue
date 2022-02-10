@@ -1,7 +1,9 @@
 <template>
     <div>
         <blockquote v-if="blockquote">
-            <span :style="`white-space: ${whiteSpace};`">"{{ adjustedText }}"</span>
+            <span 
+                :class="bodyClass"
+                :style="`white-space: ${whiteSpace};`">"{{ adjustedText }}"</span>
             <span 
                 v-show="showMore" 
                 @click="showMore = false">... <span class="show-text"><br>Show More</span>
@@ -12,7 +14,9 @@
             </span>
         </blockquote>
         <p class="text" v-else>
-            <span :style="`white-space: ${whiteSpace};`">{{ adjustedText }}</span>
+            <span 
+                :class="bodyClass"
+                :style="`white-space: ${whiteSpace};`">{{ adjustedText }}</span>
             <span 
                 v-show="showMore" 
                 @click="showMore = false">... <span class="show-text"><br>Show More</span>
@@ -31,6 +35,10 @@ export default {
 
     props : {
         text: {
+            type: String,
+            default: ''
+        },
+        bodyClass: {
             type: String,
             default: ''
         },

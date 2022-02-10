@@ -1,11 +1,12 @@
 <template>
-    <div class="post-card edit">
-        <div class="header">
+    <div class="mt-8 relative p-4">
+        <div class="flex gap-8">
             <CardImage
                 :image="thumbImagePath"
+                :loading="disabled"
                 @addImage="addImage" />
-            <div class="div">
-                <div class="field">
+            <div class="w-full">
+                <div class="field mb-4">
                     <v-select
                         v-model="searchInput"
                         :options="searchOptions"
@@ -15,7 +16,7 @@
                         @input="selectEvent"
                         @search:focus="debounce" />
                 </div>
-                <div class="field h3">
+                <div class="field">
                     <input 
                         type="text" 
                         v-model="card.name"
@@ -32,8 +33,8 @@
                         :placeholder="url">
                 </div>
                 <div 
-                    v-if="searchInput"
-                    class="field">
+                    class="mb-4" 
+                    v-if="searchInput">
                     <p> Booking Through: {{ cleanDate(searchInput.closingDate) }} </p>
                 </div>
             </div>
@@ -52,8 +53,8 @@
 </template>
 
 <script>
-    import Tiptap from '../../../../components/Tiptap.vue'
-    import CardImage from '../../../../components/Upload-Image.vue'
+    import Tiptap from './Components/Tiptap.vue'
+    import CardImage from './Components/vue-add-image.vue'
     import formValidationMixin from '../../../../mixins/form-validation-mixin'
     import { required, maxLength, url } from 'vuelidate/lib/validators';
     export default {
@@ -127,7 +128,7 @@
                     clearTimeout(this.timeout); 
                 this.timeout = setTimeout(() => {
                     this.generateSearchList(query);
-                }, 500); // delay
+                }, 300); // delay
             },
             async generateSearchList (query) {
                 await axios.get('/api/search/events', { params: { keywords: query } })

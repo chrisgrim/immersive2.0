@@ -78,7 +78,7 @@
     import Submit  from './components/submit-buttons.vue'
     import formValidationMixin from '../../mixins/form-validation-mixin'
     import CardImage from '../../components/Upload-Image.vue'
-    import VideoPlayer  from '../events/show/VideoPlayer.vue'
+    import VideoPlayer  from '../Events/Show/VideoPlayer.vue'
 
     export default {
 

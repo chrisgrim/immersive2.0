@@ -1,18 +1,13 @@
 <template>
-    <div class="post-card edit">
-        <div class="header">
-            <CardImage
-                text="Image must be at least 800px by 450px"
-                :height="450"
-                :width="800"
-                :loading="disabled"
-                @addImage="addImage" />
-        </div>
+    <div class="mt-8 relative p-4">
+        <CardImage
+            :loading="disabled"
+            @addImage="addImage" />
     </div>
 </template>
 
 <script>
-    import CardImage from '../../../../components/Upload-Image.vue'
+    import CardImage from './Components/vue-add-image.vue'
     import formValidationMixin from '../../../../mixins/form-validation-mixin'
     export default {
         

@@ -8,23 +8,24 @@
 @endsection 
 
 @section('nav')
-    @auth
-        <vue-nav :user= "{{auth()->user()}}"></vue-nav>
-    @endauth
-    @guest
-        <vue-nav></vue-nav>
-    @endguest
+    @if (Browser::isMobile())
+        <vue-nav-mobile navtype="postcreate" :user= "{{ auth()->user() ? auth()->user() : 'null' }}" />
+    @else
+        <vue-nav navtype="postcreate" :user= "{{ auth()->user() ? auth()->user() : 'null' }}" />
+    @endif
 @endsection
+
 @section('content')
     <div id="bodyArea">
 
-        @if ( session()->exists( 'submitted' ))
-            <modal-wrapper message="submitted"></modal-wrapper>
-        @endif
+        <modal-wrapper 
+            :user="{{ auth()->user() ? auth()->user() : 'null' }}"
+            message="{{ session('submitted') ? 'submitted' : '' }}"></modal-wrapper>
         <vue-post-create 
+            :mobile="{{ Browser::isMobile() ? Browser::isMobile() : 'null' }}"
             :shelves="{{ $community->shelves()->where('status', '!=', 'a')->get() }}"
             :community="{{ $community }}"
-            :user="{{ auth()->user() }}"/>    
+            :user="{{ auth()->user() ? auth()->user() : 'null' }}"/>    
     </div>
 @endsection
 

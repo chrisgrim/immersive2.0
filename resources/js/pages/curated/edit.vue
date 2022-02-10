@@ -1,21 +1,21 @@
 <template>
-    <div class="post-index">
-        <div class="lay-a wide">
-            <div class="breadcrumbs">
-                <p>
-                    <a :href="`/`">Everything Immersive</a> > {{ community.name }} Community
+    <div>
+        <div class="m-auto w-full md:px-12 md:py-8 lg:py-0 lg:px-32 max-w-screen-xl">
+            <div class="py-12">
+                <p class="text-1xl">
+                    <a class="underline" :href="`/`">Everything Immersive</a> > {{ community.name }} Community
                 </p>
             </div>
-            <div class="header-a">
-                <div class="header-a__edit">
+            <div class="relative overflow-hidden mb-8 rounded-2xl block h-full w-full md:flex md:h-[45rem]">
+                <div class="absolute right-20 bottom-20 z-10">
                     <a :href="`/communities/${community.slug}`">
-                        <button>View Community</button>
+                        <button class="border-none bg-white rounded-2xl mt-16 py-6 px-8">View Community</button>
                     </a>
                 </div>
-                <div class="header-a__content">
-                    <div class="header-a__wrapper">
-                        <div class="header-a__name">
-                            <h2>{{ community.name }}</h2>
+                <div class="p-8 items-center justify-center flex bg-black text-center md:justify-start md:text-left md:w-5/12 md:h-[45rem] md:px-24">
+                    <div class="w-full">
+                        <div>
+                            <h2 class="text-white text-6xl mb-4">{{ community.name }}</h2>
                         </div>
                         <div class="field">
                             <textarea 
@@ -33,32 +33,36 @@
                         <div 
                             v-if="$v.$anyDirty"
                             class="buttons">
-                            <button @click="patchCommunity">Save</button>
-                            <button @click="resetCommunity">Cancel</button>
+                            <button 
+                                class="border-black bg-white rounded-2xl mt-16 py-4 px-6 hover:bg-black hover:text-white hover:border-white" 
+                                @click="patchCommunity">Save</button>
+                            <button 
+                                class="border-black bg-white rounded-2xl mt-16 py-4 px-6 hover:bg-black hover:text-white hover:border-white" 
+                                @click="resetCommunity">Cancel</button>
                         </div>
                     </div>
                 </div>
-                <div class="header-a__image">
+                <div class="relative inline-block bg-slate-400 md:h-[45rem] md:w-7/12">
                     <CardImage
-                        :height="500"
-                        :width="800"
                         :image="`/storage/${headerImage}`"
+                        :loading="loading"
                         @addImage="addImage" />
                 </div>
             </div>
         </div>
-        <div class="lay-a">
-            <div class="wrapper">
-                <div class="sidebar left">
-                    <div class="sticky">
-                        <div class="com-curators">
+        <div class="m-auto w-full md:px-12 md:py-8 lg:py-0 lg:px-32 max-w-screen-xl">
+            <div class="flex flex-col md:flex-row">
+                <div class="w-full inline-block md:w-4/12 md:py-8 md:pr-8">
+                    <div class="sticky top-16">
+                        <div class="mb-8">
                             <Curators
                                 @update="updateCurators"
-                                :community="community"
                                 :loadowner="owner"
+                                :user="user"
+                                :community="community"
                                 :loadcurators="curators" />
                         </div>
-                        <div class="com-description">
+                        <div class="p-8 rounded-2xl my-8 border">
                             <div class="field">
                                 <textarea 
                                     type="text"
@@ -74,34 +78,42 @@
                             <div 
                                 v-if="$v.$anyDirty"
                                 class="buttons">
-                                <button @click="patchCommunity">Save</button>
-                                <button @click="resetCommunity">Cancel</button>
+                                <button 
+                                    class="px-4 py-2 hover:bg-black hover:text-white" 
+                                    @click="patchCommunity">Save</button>
+                                <button 
+                                    class="px-4 py-2 hover:bg-black hover:text-white"
+                                    @click="resetCommunity">Cancel</button>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="content">
-                    <div class="add">
-                        <div class="add-button">
+                <div class="inline-block w-full md:w-8/12">
+                    <div class="relative top-[-1rem]">
+                        <div class="flex justify-end relative z-50">
                             <button 
                                 @click="toggleButton"
                                 ref="addButton"
-                                class="add__icon" 
-                                :class="{active: onAdd}">
-                                <svg>
+                                class="border-none w-20 h-20 flex p-0 rounded-full justify-center items-center hover:bg-slate-300" 
+                                :class="{'bg-black hover:bg-slate-300': onAdd}">
+                                <svg 
+                                    :class="{'fill-white rotate-45': onAdd}"
+                                    class="w-16 h-16">
                                     <use :xlink:href="`/storage/website-files/icons.svg#ri-add-fill`" />
                                 </svg>
                                 <template v-if="onAdd">
-                                    <div class="options">
-                                        <div class="title">
-                                            <p>Add New</p>
+                                    <div class="p-4 rounded-2xl shadow-custom-1 absolute right-0 flex flex-col  bg-white min-w-[20rem] top-[115%]">
+                                        <div class="mt-2 px-4 py-2">
+                                            <p class="text-lg w-full text-left">Add New</p>
                                         </div>
                                         <button 
-                                            class="add__post"
+                                            class="w-full text-left border-none px-4 py-2 font-semibold text-3xl block rounded-xl hover:bg-gray-400 hover:text-white"
                                             @click="addShelf">
                                             Shelf
                                         </button>
-                                        <a :href="`/posts/${community.slug}/create`">
+                                        <a 
+                                            class="w-full text-left px-4 py-2 font-semibold text-3xl block rounded-xl hover:bg-gray-400 hover:text-white"
+                                            :href="`/posts/${community.slug}/create`">
                                             Post
                                         </a>
                                     </div>
@@ -114,22 +126,19 @@
                         @start="isDragging=true" 
                         @end="debounce">
                         <div 
-                            class="shelves" 
+                            class="relative" 
                             v-for="(shelf, index) in shelves"
                             @mouseover="showDelete = index"
                             @mouseleave="showDelete = null"
                             :key="shelf.id">
-                            <div 
+                            <button 
                                 v-if="showDelete === index && shelf.posts.data.length < 1 && shelf.name !== 'Archived'"
-                                class="delete-btn">
-                                <button 
-                                    @click="deleteShelf(shelf)"
-                                    class="btn-icon">
-                                    <svg>
-                                        <use :xlink:href="`/storage/website-files/icons.svg#ri-close-line`" />
-                                    </svg>
-                                </button>
-                            </div>
+                                @click="deleteShelf(shelf)"
+                                class="items-center justify-center rounded-full p-0 w-12 h-12 flex border-2 bg-white border-black absolute top-[-1rem] right-[-1rem] hover:bg-black hover:fill-white">
+                                <svg class="w-12 h-12">
+                                    <use :xlink:href="`/storage/website-files/icons.svg#ri-close-line`" />
+                                </svg>
+                            </button>
                             <Shelf 
                                 :archived="archived"
                                 @updated="onUpdated"
@@ -164,14 +173,14 @@
 </template>
 
 <script>
-    import CardImage from '../../components/Upload-Image.vue'
-    import Curators from './posts/curators.vue'
-    import Shelf from './shelves/shelf-edit.vue'
+    import CardImage from './Components/add-image.vue'
+    import Curators from './Posts/curators.vue'
+    import Shelf from './Shelves/shelf-edit.vue'
     import formValidationMixin from '../../mixins/form-validation-mixin'
     import { required, maxLength } from 'vuelidate/lib/validators';
     export default {
         
-        props: [ 'loadcommunity', 'user', 'loadowner', 'loadshelves'],
+        props: [ 'loadcommunity', 'user', 'loadshelves', 'loadowner', 'mobile'],
 
         mixins: [formValidationMixin],
 
@@ -194,7 +203,7 @@
                 shelves: this.loadshelves,
                 community: this.loadcommunity,
                 communityBeforeEdit: { ...this.loadcommunity },
-                headerImage: window.innerWidth < 768 ? this.loadcommunity.thumbImagePath : this.loadcommunity.largeImagePath,
+                headerImage: this.mobile ? this.loadcommunity.thumbImagePath : this.loadcommunity.largeImagePath,
                 active: null,
                 formData: new FormData(),
                 serverErrors: null,
@@ -202,6 +211,7 @@
                 owner: this.loadowner,
                 curators: this.loadcommunity.curators.filter(u => u.id !== this.loadowner.id),
                 onAdd: false,
+                loading: false,
                 showDelete: null,
             }
         },
@@ -214,7 +224,6 @@
                     this.onUpdated();
                 })
                 .catch(err => {
-                    console.log(err.response.data.errors);
                     this.onErrors(err);
                 });
             },

@@ -1,33 +1,33 @@
 <template>
     <div>
         <div
-            :class="{open : open, scroll: scroll}"
-            class="search-nav">
+            :class="[ open ? 'open' : null, scroll ? 'scroll' : null ]"
+            class="search-nav fixed w-full bg-transparent h-[7rem] m-auto z-[2002] top-0">
             <template v-if="!open">
-                <div class="placeholder">
-                    <div class="icon">
-                        <svg>
+                <div 
+                    :class="[ scroll ? 'my-4' : 'shadow-custom-1 my-8' ]"
+                    class="rounded-full w-11/12 h-[5.5rem] mx-auto g-white flex justify-center items-center transition-all">
+                    <div class="flex mr-4 fill-default-red">
+                        <svg class="w-8 h-8">
                             <use :xlink:href="`/storage/website-files/icons.svg#ri-search-line`" />
                         </svg>
                     </div>
-                    <div 
-                        @click="showSearch"
-                        class="location">
-                        <p>Start your search</p>
+                    <div @click="showSearch">
+                        <p class="font-medium text-2xl">Start your search</p>
                     </div>
                 </div>
             </template>
             <template v-else>
-                <div class="nav-search__options">
-                    <div class="header">
+                <div class="fixed w-full inset-0 z-[2003] bg-white overflow-auto">
+                    <div class="px-8 pt-8 pb-4 h-20 flex justify-between w-full items-center">
                         <button 
-                            class="svg close" 
+                            class="ml-[-1rem] border-none w-20 h-20 items-center justify-center flex py-4" 
                             @click="hideSearch">
-                            <svg>
+                            <svg class="w-8 h-8">
                                 <use :xlink:href="`/storage/website-files/icons.svg#ri-arrow-left-s-line`" />
                             </svg>
                         </button>
-                        <div class="search">
+                        <div class="relative w-full border-none">
                             <v-select
                                 auto-focus="true"
                                 v-model="searchInput"
@@ -42,15 +42,17 @@
                         </div>
                     </div>
                     <template v-if="query">
-                        <div class="search-list">
-                            <ul class="list-box">
+                        <div class="w-full overflow-auto block border-t h-[calc(100%-5.5rem)]">
+                            <ul class="m-0 p-0">
                                 <li
                                     @click="onSelect(option)"
-                                    class="city"
+                                    class="flex items-center border-none cursor-pointer w-full px-8 py-4 mt-2"
                                     :key="option.model.id"
                                     v-for="option in searchOptions">
-                                    <span class="loc">
-                                        <svg><use :xlink:href="`/storage/website-files/icons.svg#ri-map-pin-line`" /></svg>
+                                    <span class="border rounded-xl mr-8 flex h-16 w-16 items-center justify-center">
+                                        <svg class="w-8 h-8">
+                                            <use :xlink:href="`/storage/website-files/icons.svg#ri-map-pin-line`" />
+                                        </svg>
                                     </span>
                                     <p>{{option.model.name}}</p>
                                 </li>
@@ -58,31 +60,31 @@
                         </div>
                     </template>
                     <template v-else>
-                        <div class="body">
-                            <div class="item online">
-                                <h4>Online Events</h4>
+                        <div class="flex flex-col p-12 h-[calc(100%-5.5rem)]">
+                            <div class="relative my-4 pb-4">
+                                <h4 class="uppercase font-semibold text-xl">Online Events</h4>
                                 <a href="/index/search-online">
-                                    <div class="list-placeholder">
-                                        <div class="location">
+                                    <div class="flex my-8 mx-auto justify-around min-h-[5.5rem] w-11/12 rounded-full p-2 shadow-custom-1 items-center">
+                                        <div>
                                             <p>Search online events</p>
                                         </div>
-                                        <div class="icon">
-                                            <svg>
+                                        <div class="flex mr-4 fill-default-red">
+                                            <svg class="w-8 h-8">
                                                 <use :xlink:href="`/storage/website-files/icons.svg#ri-arrow-right-s-line`" />
                                             </svg>
                                         </div>
                                     </div>
                                 </a>
                             </div>
-                            <div class="item all">
-                                <h4>All Events</h4>
+                            <div class="relative my-4 pb-4">
+                                <h4 class="uppercase font-semibold text-xl">All Events</h4>
                                 <a href="/index/search-all">
-                                    <div class="list-placeholder">
-                                        <div class="location">
+                                    <div class="flex my-8 mx-auto justify-around min-h-[5.5rem] w-11/12 rounded-full p-2 shadow-custom-1 items-center">
+                                        <div>
                                             <p>Search all events</p>
                                         </div>
                                         <div class="icon">
-                                            <svg>
+                                            <svg class="w-8 h-8 fill-default-red">
                                                 <use :xlink:href="`/storage/website-files/icons.svg#ri-arrow-right-s-line`" />
                                             </svg>
                                         </div>

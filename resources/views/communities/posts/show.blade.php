@@ -31,30 +31,21 @@
 @endsection 
 
 @section('nav')
-    @auth
-        <vue-nav navtype="post" :user= "{{auth()->user()}}"></vue-nav>
-    @endauth
-    @guest
-        <vue-nav navtype="post"></vue-nav>
-    @endguest
+    @if (Browser::isMobile())
+        <vue-nav-mobile navtype="post" :user= "{{ auth()->user() ? auth()->user() : 'null' }}" />
+    @else
+        <vue-nav navtype="post" :user= "{{ auth()->user() ? auth()->user() : 'null' }}" />
+    @endif
 @endsection
+
 @section('content')
     <div id="bodyArea">
-
-        @guest
-            <vue-post-show
-                :community="{{ $community }}" 
-                :owner="false"
-                :value="{{ $post }}" />
-        @endguest
-
-        @auth
-            <vue-post-show
-                :community="{{ $community }}" 
-                :owner="{{ $community->curators->contains('id', auth()->user()->id) ? 'true' : 'false' }}"
-                :value="{{ $post }}" />
-        @endauth
-
+        <vue-post-show
+            :mobile="{{ Browser::isMobile() ? Browser::isMobile() : 'null' }}"
+            :community="{{ $community }}" 
+            :curator="{{ auth()->user() ? auth()->user()->can('update', $community) ? 'true' : 'false' : 'null' }}"
+            :user="{{ auth()->user() ? auth()->user() : 'null' }}"
+            :value="{{ $post }}" />
     </div>
 @endsection
 

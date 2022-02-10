@@ -74,7 +74,8 @@ class Message extends Model
             $conversation = Conversation::create([
                 'event_id' => $event->id, 
                 'user_one' => auth()->id(), 
-                'user_two' => $event->user_id 
+                'user_two' => $event->user_id,
+                'event_name' => $event->name
             ]);
             $conversation->users()->sync($ids);
             $message = Message::create([

@@ -1,120 +1,120 @@
 <template>
-    <div class="message-index">
-        <div class="message-index__title mobile">
-            <h3>Inbox</h3>
+    <div class="w-full grid grid-cols-5 md:h-[calc(100vh-8rem)]">
+        <div class="bg-slate-700 overflow-auto">
+            <div class="my-8">
+                <div 
+                    @click="eventsOpen =! eventsOpen"
+                    class="flex items-center cursor-pointer">
+                    <svg 
+                        :class="{ 'rotate-[-90deg]' : !eventsOpen }"
+                        class="w-8 h-8 mx-4 fill-white">
+                        <use :xlink:href="`/storage/website-files/icons.svg#ri-arrow-down-s-line`" />
+                    </svg>
+                    <p class="text-white text-xl">Events</p>
+                </div>
+                <div 
+                    class="mt-4" 
+                    v-if="eventsOpen">
+                    <div class="px-8 py-2">
+                        <input 
+                            @input="searchEvents"
+                            v-model="eventSearch"
+                            class="p-2 bg-slate-600 text-white text-opacity-50 rounded-lg" 
+                            placeholder="Filter by name" 
+                            type="text">
+                    </div>
+                    <div 
+                        @click="fetchConversation(eventConvo.id)"
+                        :key="eventConvo.id"
+                        class="flex cursor-pointer items-center px-8 py-2 hover:bg-slate-800 relative" 
+                        v-for="eventConvo in eventList">
+                        <div class="relative">
+                            <svg class="w-6 h-6 fill-white">
+                                <use :xlink:href="`/storage/website-files/icons.svg#ri-ticket-line`" />
+                            </svg>
+                        </div>
+                        <span 
+                            :class="eventConvo.id == url ? 'text-opacity-100' : 'text-opacity-50' "
+                            class="mr-auto ml-2 whitespace-nowrap overflow-hidden text-ellipsis text-white text-xl">{{eventConvo.event_name}}</span>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="listing-details-block">
-            <tabs>
-                <tab 
-                    v-if="conversations && conversations.length" 
-                    title="Messages" 
-                    :notification="user.unread=='m'"  
-                    class="tab-events">
-                    <div>
-                        <div 
-                            :key="conversation.id"
-                            v-for="conversation in conversations">
-                            <MessageIndexTab 
-                                :conversation="conversation" 
-                                :loaduser="loaduser" />
-                        </div>
-                    </div>
-                    <load-more @intersect="intersected('message')" /> 
-                </tab>
-                <tab 
-                    v-if="eventConversations && eventConversations.length" 
-                    title="Events" 
-                    :notification="user.unread=='e'" 
-                    class="tab-events" 
-                    :active="true">
-                    <div>
-                        <div 
-                            v-for="conversation in eventConversations"
-                            :key="conversation.id">
-                            <ModMessageIndexTab 
-                                :conversation="conversation" 
-                                :loaduser="loaduser" /> 
-                        </div>
-                    </div>
-                    <load-more @intersect="intersected('event')" /> 
-                </tab>
-            </tabs>
+        <div class="flex flex-col col-span-4 relative h-full">
+            <Conversation 
+                v-if="conversation"
+                :user="user"
+                :mobile="mobile"
+                v-model="conversation" />
         </div>
     </div>
 </template>
 
 <script>
-    import LoadMore  from '../../components/LoadMore.js'
-    import MessageIndexTab from '../messages/components/message-index-tab.vue'
-    import ModMessageIndexTab from '../messages/components/modmessage-index-tab.vue'
+    import Conversation from './message-show'
     export default {
 
-        props: ['loaduser'],
+        props: ['user', 'mobile', 'events'],
 
-        components: { MessageIndexTab, ModMessageIndexTab, LoadMore },
+        components: { Conversation },
 
         computed: {
         },
 
         data() {
             return {
-                user: this.loaduser ? this.loaduser : '',
-                conversations: [],
-                eventConversations: [],
-                messagePagination: '',
-                eventMessagePagination: '',
-                messagePage: 1,
-                eventMessagePage: 1,
-                limit: 10,
-
+                eventList: this.events,
+                messageList: this.messages,
+                conversation: null,
+                messagesOpen: false,
+                eventsOpen: true,
+                eventSearch: null,
+                messageSearch: null,
+                url: new URL(window.location.href).searchParams.get("event")
             }
         },
 
         methods: {
-            intersected(value) {
-                if( this.messagePagination.last_page < this.messagePage && value == 'message' ) { return }
-                if( this.eventMessagePagination.last_page < this.eventMessagePage && value == 'event') { return }
-                this.onLoadMore(value);
-     
+            async fetchConversation(convo) {
+                this.url = convo
+                await axios.get(`/conversations/${convo}`)
+                .then( res => {
+                    this.conversation = res.data
+                    history.pushState(null, null,`/messages?event=${convo}`)
+                })
+
             },
-            onLoad() {
-                axios.get('/conversations/fetch/messages')
-                .then(res => {
-                    this.conversations = res.data.data;
-                    this.messagePagination = res.data;
-                    this.messagePage = res.data.current_page + 1;
-                });
-                axios.get('/conversations/fetch/eventmessages')
-                .then(res => {
-                    this.eventConversations = res.data.data;
-                    this.eventMessagePagination = res.data;
-                    this.eventMessagePage = res.data.current_page + 1;
-                });
+            searchEvents() {
+                if (this.timeout) 
+                    clearTimeout(this.timeout); 
+                this.timeout = setTimeout(() => {
+                    this.fetchEvents();
+                }, 300); // delay
+            },
+            searchMessages() {
+                if (this.timeout) 
+                    clearTimeout(this.timeout); 
+                this.timeout = setTimeout(() => {
+                    this.fetchMessages();
+                }, 300); // delay
+            },
+            async fetchEvents() {
+                await axios.post(`/conversations/fetch/eventmessages`, {search: this.eventSearch})
+                .then( res => {
+                    this.eventList = res.data
+                })
+            },
+            async fetchMessages() {
+                await axios.post(`/conversations/fetch/messages`, {search: this.messageSearch})
+                .then( res => {
+                    this.messageList = res.data
+                })
             },
 
-            onLoadMore(value) {
-                let url = value == 'event' ? `/conversations/fetch/eventmessages?page=${this.eventMessagePage}` : `/conversations/fetch/messages?page=${this.messagePage}`
-                axios.get(url)
-                .then(res => {
-                    if (value == 'event') {
-                        this.eventConversations = this.eventConversations.concat(res.data.data);
-                        this.eventMessagePagination = res.data;
-                        this.eventMessagePage = res.data.current_page + 1;
-                    }
-                    if (value == 'message') {
-                        this.conversations = this.conversations.concat(res.data.data);
-                        this.messagePagination = res.data;
-                        this.messagePage = res.data.current_page + 1;
-                    }
-                })
-                .catch(errorResponse => { 
-                   console.log(errorResponse.data);
-                });
-            },
         },
 
-        created() {
-            this.onLoad();
+        mounted() {
+            this.url ? this.fetchConversation(this.url) : null
         },
 
         validations: {

@@ -24,6 +24,7 @@ select {
 input { font-family: 'Montserrat', sans-serif; }
 input:focus {
     outline: none !important;
+    border-radius: 0.5rem;
     border:1px solid #008489;
 }
 textarea:focus {
@@ -43,7 +44,6 @@ blockquote {
 }
 main {
     display: block;
-    min-height: 100vh;
 }
 .noscroll {
     overflow: hidden;
@@ -76,7 +76,6 @@ main {
 
 .grid {
     display: grid;
-    grid-column-gap: 3rem;
 }
 .flex {
     display: flex;
@@ -164,13 +163,6 @@ input.general {
     border-radius: .5rem;
     border: 1px solid #969696;
     font-size: 1.4rem;
-}
-input {
-    color: #484848;
-    border-radius: 5px;
-    border: 1px solid #ebebeb;
-    padding: 1rem;
-    font-size: 1.5rem;
 }
 input::placeholder {
     color: #adadad;
@@ -382,12 +374,7 @@ button.patreon {
     right: -0.3rem;
     top: -0.3rem;
 }
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .5s;
-}
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-  opacity: 0;
-}
+
 
 @media (max-width: 768px) {
     html { font-size: 62.5%; font-family: 'Montserrat', sans-serif; height:100%;} 

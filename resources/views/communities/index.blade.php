@@ -7,21 +7,22 @@
 @endsection 
 
 @section('nav')
-    @auth
-        <vue-nav :user= "{{auth()->user()}}"></vue-nav>
-    @endauth
-    @guest
-        <vue-nav></vue-nav>
-    @endguest
+    @if (Browser::isMobile())
+        <vue-nav-mobile navtype="comindex" :user= "{{ auth()->user() ? auth()->user() : 'null' }}" />
+    @else
+        <vue-nav navtype="comindex" :user= "{{ auth()->user() ? auth()->user() : 'null' }}" />
+    @endif
 @endsection
+
 @section('content')
     <div id="bodyArea">
-        @if ( session('submitted'))
-            <modal-wrapper :user= "{{auth()->user()}}" loadmessage="{{ session('submitted') }}"></modal-wrapper>
-        @endif        
+        <modal-wrapper 
+            :user="{{ auth()->user() ? auth()->user() : 'null' }}"
+            loadmessage="{{ session('submitted') ? session('submitted') : '' }}"></modal-wrapper>   
         <vue-community-index 
+            :mobile="{{ Browser::isMobile() ? Browser::isMobile() : 'null' }}"
             :value="{{$communities}}"
-            :user="{{auth()->user()}}"/>
+            :user="{{ auth()->user() ? auth()->user() : 'null' }}"/>
     </div>
 @endsection
 

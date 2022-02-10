@@ -1,54 +1,28 @@
-// Variables
-@import 'variables';
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
-// Events
-@import 'events/event-edit';
-
-
-// search
-@import 'components/search-filter';
-@import 'search/components/mobile-search-results';
-
-// categories
-@import 'categories/category-show';
-
-// curated
-@import 'curated/index';
-@import 'curated/create';
-@import 'curated/show';
-@import 'curated/edit';
-@import 'curated/post/show';
-@import 'curated/post/edit';
-@import 'curated/post/index';
-@import 'curated/post/create';
-
-// organizer
-@import 'organizer/show';
-
-// auth
-@import 'auth/error-pages';
-
-// Profile
-@import 'profile/profile';
-@import 'profile/account';
-@import 'profile/notifications';
-@import 'profile/favorited';
-
-//Plugins
-@import 'plugins/tiptap';
-
-//Tables
-@import 'components/table/table';
-
-//Components 
-@import 'components/tab';
-@import 'messages/messages-index';
-@import 'messages/messages-show';
-
-@import 'components/spinner';
-@import 'components/grid-data-component';
-@import 'components/imageupload';
-@import 'components/table';
-
+@layer base {
+  h1 {
+    @apply font-bold;
+    @apply text-4xl;
+    @apply md:text-5xl;
+  }
+  h2 {
+    @apply font-semibold;
+    @apply text-4xl;
+    @apply md:text-5xl;
+  }
+  h3 {
+    @apply font-medium;
+    @apply text-3xl;
+  }
+  h4 {
+    @apply text-2xl;
+  }
+  h5 {
+    @apply text-xl;
+  }
+}
 
 

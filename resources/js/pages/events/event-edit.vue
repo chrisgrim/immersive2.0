@@ -1,195 +1,89 @@
 <template>
-    <div class="event-edit">
-        <div class="organizer--select">
-            <v-select 
-                v-model="organizer"
-                label="name"
-                @input="selectOrganizer"
-                placeholder="Organizations"
-                :clearable="false"
-                :options="organizers" />
+    <div class="event-edit py-8 px-12 md:py-20 md:px-32">
+        <div class="flex w-full items-center">
+            <div class="w-full mr-8 md:w-4/12 relative">
+                <v-select 
+                    v-model="organizer"
+                    label="name"
+                    @input="selectOrganizer"
+                    placeholder="Organizations"
+                    :clearable="false"
+                    :options="organizers" />
+                <svg class="w-12 h-12 right-4 top-4 z-100 absolute">
+                    <use :xlink:href="`/storage/website-files/icons.svg#ri-arrow-down-s-line`" />
+                </svg>
+            </div>
+            <a 
+                @mouseover="hover = true" 
+                @mouseleave="hover = false"
+                href="/organizer/create"
+                class="flex rounded-full mr-8 justify-center items-center w-20 h-20 hover:bg-slate-200">
+                <svg class="w-20 h-20">
+                    <use :xlink:href="`/storage/website-files/icons.svg#ri-add-fill`" />
+                </svg>
+            </a>
+            <p 
+                class="border p-4 rounded-2xl" 
+                v-if="hover">Add another organization</p>
         </div>
-        <a href="/organizer/create">
-            <button style="height:3.9rem;" class="outline"> Add another organization </button>
-        </a>
         <template v-if="organizer">
-            <div class="event-edit__organizer">
-                <div class="organizer-card grid">
-                    <div 
-                        class="organizer-card__image" 
-                        :style="organizer.thumbImagePath ? `background-image:url('/storage/${organizer.thumbImagePath.slice(0, -4)}jpg')` : `background:${organizer.hexColor}`">
+            <div class="mt-28">
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center">
                         <div 
-                            class="organizer-card__image-icontext" 
-                            v-if="!organizer.thumbImagePath">
-                            <h2>{{ organizer.name.charAt(0) }}</h2>
+                            class="mr-8 w-20 h-20 bg-cover bg-no-repeat rounded-full flex items-end justify-center mr-8" 
+                            :style="organizer.thumbImagePath ? `background-image:url('/storage/${organizer.thumbImagePath.slice(0, -4)}jpg')` : `background:${organizer.hexColor}`">
+                            <p 
+                                class="text-5xl text-white font-extrabold m-auto" 
+                                v-if="!organizer.thumbImagePath">{{ organizer.name.charAt(0) }}
+                            </p>
+                        </div>
+                        <div class="organizer-card__title">
+                            {{ organizer.name }}
                         </div>
                     </div>
-                    <div class="organizer-card__title">
-                        {{ organizer.name }}
-                    </div>
-                    <div class="organizer-card__nav">           
+                    <div class="flex items-center gap-4">           
                         <button 
                             @click.prevent="newEvent" 
-                            class="solid"> Add Event </button>
+                            class="px-6 py-2 text-white float-right bg-gradient-to-r from-button-red-1 via-button-red-2 to-button-red-3 border-none"> 
+                            Add Event 
+                        </button>
                         <a 
                             v-if="organizer.status === 'p'" 
                             target="_blank" 
+                            class="px-6 py-2 border hover:bg-slate-200"
                             :href="`/organizer/${organizer.slug}`">
-                            <button class="outline">
-                                Preview Organizer
-                            </button>
+                            Preview Organizer
                         </a>
-                        <div v-if="archived">
-                            <button 
-                                @click="archived=false"
-                                class="outline">
-                                Show Listed
-                            </button>
-                        </div>
-                        <div v-else>
-                            <button 
-                                @click="archived=true"
-                                class="outline">
-                                Show Archived
-                            </button>
-                        </div>
-                        <a :href="`/organizer/${organizer.slug}/edit`">
-                            <button class="outline">Edit</button>
+                        <button 
+                            v-if="archived"
+                            @click="archived = false"
+                            class="px-6 py-2 border hover:bg-slate-200">
+                            Show Listed
+                        </button>
+                        <button 
+                            v-if="!archived && organizer.archived_events.length"
+                            @click="archived=true"
+                            class="px-6 py-2 border hover:bg-slate-200">
+                            Show Archived
+                        </button>
+                        <a 
+                            class="px-6 py-2 border hover:bg-slate-200"
+                            :href="`/organizer/${organizer.slug}/edit`">
+                            Edit Organizer
                         </a>
-                        <template v-if="!organizer.listed_events.length">
-                            <button                   
-                                @click.prevent="selectedModal=organizer" 
-                                class="outline">
-                                Delete
-                            </button>
-                        </template>
+                        <button      
+                            v-if="!organizer.listed_events.length && !organizer.archived_events.length"             
+                            @click.prevent="selectedModal=organizer" 
+                            class="px-6 py-2 border hover:bg-slate-200">
+                            Delete
+                        </button>
                     </div>
                 </div>
-
-                <div 
-                    v-if="events.length"
-                    class="data-grid">
-                    <div class="data-grid__row header">
-                        <p>Status</p>
-                        <p>Event</p>
-                        <p class="center">To Do</p>
-                        <p class="center">Show Dates Remaining</p>
-                        <p>Last Modified</p>
-                    </div>
-                    <div
-                        :class="{'is-past': isShowing(event)}"
-                        class="data-grid__row"
-                        v-for="(event, index) in events"
-                        :key="event.id">
-                        <div class="center">
-                            <div
-                                @mouseover="active = index" 
-                                @mouseleave="active = ''"
-                                :style="getStatusCircle(event)"
-                                class="status-circle" />
-                            <div 
-                                v-if="active === index"
-                                class="hover-box">
-                                <p>{{ getStatusDetail(event) }}</p>
-                            </div>
-                        </div>
-                        <div class="lg">
-                            <template v-if="locked(event)">
-                                <img 
-                                    v-if="event.thumbImagePath"
-                                    :src="`/storage/${event.thumbImagePath}`">
-                                <p v-if="event.name">{{ event.name }}</p>
-                                <p v-else>New Event</p>
-                            </template>
-                            <template v-else>
-                                <a 
-                                    target="_blank"
-                                    :href="`/create/${event.slug}/title`">
-                                    <img 
-                                        v-if="event.thumbImagePath"
-                                        :src="`/storage/${event.thumbImagePath}`">
-                                    <p v-if="event.name">{{ event.name }} 
-                                        <span 
-                                            style="text-decoration: underline;" 
-                                            v-if="event.status === 'p'">
-                                            (edit live event)
-                                        </span>
-                                    </p>
-                                    <p v-else>New Event</p>
-                                </a>
-                            </template>
-                        </div>
-                        <div class="center">
-                            <p v-if="event.status === 'r'">
-                                {{ getStatus(event) }}
-                            </p>
-                            <a 
-                                v-else
-                                target="_blank"
-                                :href="getUrl(event)">
-                                <button class="noBox">
-                                    {{ getStatus(event) }}
-                                </button>
-                            </a>
-                        </div>
-                        <div class="remaining center">
-                            <template v-if="locked(event)">
-                                <div v-if="event.status > '3'">
-                                    <template v-if="event.showtype === 'a' || event.showtype === 'o'">
-                                        <p>Ongoing</p>
-                                    </template>
-                                    <template v-else>
-                                        <p>{{ datesRemaining(event).length }}</p>
-                                    </template>
-                                </div>
-                                <p v-else>
-                                    -
-                                </p>
-                            </template>
-                            <template v-else>
-                                <a 
-                                    v-if="event.status > '3'"
-                                    :href="`/create/${event.slug}/shows`">
-                                    <template v-if="event.showtype === 'a' || event.showtype === 'o'">
-                                        <template v-if="isShowing(event)">
-                                            <button class="noBox">
-                                                Add more time
-                                            </button>
-                                        </template>
-                                        <template v-else>
-                                            <button class="noBox">
-                                                Ongoing
-                                            </button>
-                                        </template>
-                                    </template>
-                                    <template v-else>
-                                        <button class="noBox">
-                                            {{ datesRemaining(event).length }}
-                                        </button>
-                                    </template>
-                                </a>
-                                <p v-else>
-                                    -
-                                </p>
-                            </template>
-                        </div>
-                        <div>
-                            <p>{{ cleanDate(event.updated_at) }}</p>
-                        </div>
-                        <div>
-                            <button 
-                                v-if="!event.archived"
-                                @click="onArchive(event)">
-                                Archive event
-                            </button>
-                            <button 
-                                v-if="event.archived"
-                                @click="offArchive(event)">
-                                Un Archive event
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                <EditTable 
+                    @update="updateOrganizer"
+                    :archived="archived"
+                    :events="events" />
             </div>
         </template>
         <VueModalAccept 
@@ -221,34 +115,14 @@
 <script>
     import VueModalAccept from '../../components/modals/Vue-Modal-Accept'
     import VueModalDelete from '../../components/modals/Vue-Modal-Delete'
+    import EditTable from './Edit/event-edit-table'
     export default {
 
         props: ['user', 'published', 'unpublished'],
 
-        components: { VueModalAccept, VueModalDelete },
+        components: { VueModalAccept, VueModalDelete, EditTable },
 
         computed: {
-            datesRemaining() {
-                return event => event.shows.filter( show => this.$dayjs().subtract(1, 'day').format('YYYY-MM-DD 23:59:00') < show.date )
-            },
-            getStatus() {
-                return event => this.status(event)
-            },
-            getStatusDetail() {
-                return event => this.statusDetail(event)
-            },
-            getUrl() {
-                return event => this.url(event)
-            },
-            getStatusCircle() {
-                return event => this.statusCircle(event)
-            },
-            locked() {
-                return event => this.isLocked(event)
-            },
-            isShowing() {
-                return event => event.status === 'p' && !event.isShowing
-            },
             events() {
                 return this.archived ? this.organizer.archived_events : this.organizer.listed_events
             }
@@ -263,6 +137,7 @@
                 newUserLimited: false,
                 selectedModal: null,
                 archived: false,
+                hover: false,
             }
         },
 
@@ -272,18 +147,6 @@
                 .then(res => {
                     this.organizers = res.data;
                     this.organizer = this.displayCurrentOrganizer(res.data);
-                })
-            },
-            async onArchive(event) {
-                await axios.post(`/edit/event/${event.slug}/onArchive`)
-                .then(res => {
-                    this.organizer = res.data
-                })
-            },
-            async offArchive(event) {
-                await axios.post(`/edit/event/${event.slug}/offArchive`)
-                .then(res => {
-                    this.organizer = res.data
                 })
             },
             async selectOrganizer(organizer) {
@@ -300,6 +163,9 @@
             async deleteOrganizer() {
                 await axios.delete(`/organizer/${this.selectedModal.slug}`, this.selectedModal)
                 location.reload();
+            },
+            updateOrganizer(val) {
+                this.organizer = val
             },
             displayCurrentOrganizer(organizers) {
                 if (this.user.current_team_id) {
@@ -318,82 +184,6 @@
                     return true;
                 }
                 return false;
-            },
-
-            cleanDate(data) {
-                return this.$dayjs(data).format("MMM DD, YYYY");
-            },
-
-            status(event) {
-                if (this.isShowing(event)) return 'expiring soon';
-                if (event.status === '0') return 'add event title';
-                if (event.status === '1') return 'add physical/remote location';
-                if (event.status === '2') return 'add category';
-                if (event.status === '3') return 'add show dates';
-                if (event.status === '4') return 'add pricing';
-                if (event.status === '5') return 'add show description';
-                if (event.status === '6') return 'add advisories';
-                if (event.status === '7') return 'add image';
-                if (event.status === '8') return 'submit event';
-                if (event.status === 'p') return 'approved';
-                if (event.status === 'r') return 'under moderator review';
-                if (event.status === 'n') return 'revise and resubmit';
-                if (event.status === 'e') return `event live at ${this.cleanDate(event.embargo_date)}`;
-                return '-'
-            },
-            statusDetail(event) {
-                if (this.isShowing(event)) return 'expiring soon';
-                if (event.status === '0') return 'In progress';
-                if (event.status === '1') return 'In progress';
-                if (event.status === '2') return 'In progress';
-                if (event.status === '3') return 'In progress';
-                if (event.status === '4') return 'In progress';
-                if (event.status === '5') return 'In progress';
-                if (event.status === '6') return 'In progress';
-                if (event.status === '7') return 'In progress';
-                if (event.status === '8') return 'In progress';
-                if (event.status === 'p') return 'Approved';
-                if (event.status === 'r') return 'Under review';
-                if (event.status === 'n') return 'Fix moderator notes';
-                if (event.status === 'e') return `Visible on EI at ${this.cleanDate(event.embargo_date)}`;
-                return '-'
-            },
-            url(event) {
-                if (event.status === '0') return `/create/${event.slug}/title`;
-                if (event.status === '1') return `/create/${event.slug}/location`;
-                if (event.status === '2') return `/create/${event.slug}/category`;
-                if (event.status === '3') return `/create/${event.slug}/shows`;
-                if (event.status === '4') return `/create/${event.slug}/tickets`;
-                if (event.status === '5') return `/create/${event.slug}/description`;
-                if (event.status === '6') return `/create/${event.slug}/advisories`;
-                if (event.status === '7') return `/create/${event.slug}/images`;
-                if (event.status === '8') return `/create/${event.slug}/review`;
-                if (event.status === 'p') return `/events/${event.slug}`;
-                if (event.status === 'e') return `/create/${event.slug}/title`;
-                if (event.status === 'n') return `/create/${event.slug}/title`;
-                return `/create/${event.slug}/title`
-            },
-
-            statusCircle(event) {
-                if (this.isShowing(event)) return `background: rgb(228 230 147)`;
-                if (event.status === '0') return `background: #ffc215`;
-                if (event.status === '1') return `background: #ffc215`;
-                if (event.status === '2') return `background: #ffc215`;
-                if (event.status === '3') return `background: #ffc215`;
-                if (event.status === '4') return `background: #ffc215`;
-                if (event.status === '5') return `background: #ffc215`;
-                if (event.status === '6') return `background: #ffc215`;
-                if (event.status === '7') return `background: #ffc215`;
-                if (event.status === '8') return `background: #ffc215`;
-                if (event.status === 'p') return `background: #1bbb1b`;
-                if (event.status === 'e') return `background: #1bbb1b`;
-                if (event.status === 'r') return `background: black`;
-                if (event.status === 'n') return `background: #bf1515`;
-                return `background: #bf1515`;
-            },
-
-            isLocked(event) {
-                if (event.status === 'r') return true;
             },
         },
 

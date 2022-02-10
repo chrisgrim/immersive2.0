@@ -1,67 +1,54 @@
 <template>
     <div class="show-content">
         <EventHeader 
+            :mobile="mobile"
             :user="user"
             :event="loadevent" />
-        <div class="lay-b">
-            <div class="lay-b__wrapper">
-                <div class="lay-b__left">
+        <div class="relative w-full m-auto p-0 md:px-12 lg:px-32 lg:max-w-screen-xl">
+            <div class="md:flex md:gap-36 border-b">
+                <div class="relative inline-block">
                     <EventAbout :event="loadevent" />
                     <EventDates 
-                        v-if="isMobile"
+                        v-if="mobile"
                         :event="loadevent" />
                     <EventStaffpick
                         v-if="loadevent.staffpick"
                         :event="loadevent" />
                     <EventDetails :event="loadevent" />
                 </div>
-                <div class="lay-b__right">
+                <div class="w-full relative inline-block md:w-[37rem] md:min-w-[37rem]">
                     <EventQuickBuy
+                        :mobile="mobile"
                         :tickets="tickets"
                         :event="loadevent" />
                 </div>
             </div>
         </div>
-        <div class="lay-b">
-            <div class="es__line" />
+        <div class="relative w-full m-auto p-0 md:px-12 lg:px-32 lg:max-w-screen-xl">
             <EventReviews :event="loadevent" />
             <EventLocation :event="loadevent" />
             <EventOrganizer :event="loadevent" />
-            <!--
-            <EventRatings 
-                :user="user"
-                :event="loadevent" />
-            -->
         </div>
     </div>
 </template>
 
 <script>
-    import EventHeader  from './show/event-show-header.vue'
-    import EventDetails  from './show/event-show-details.vue'
-    import EventAbout  from './show/event-show-about.vue'
-    import EventDates  from './show/event-show-dates.vue'
-    import EventOrganizer  from './show/event-show-organizer.vue'
-    import EventLocation  from './show/event-show-location.vue'
-    import EventStaffpick  from './show/event-show-staffpick.vue'
-    import EventReviews  from './show/event-show-reviews.vue'
-    import EventQuickBuy  from './show/event-show-quickbuy.vue'
-    import EventRatings  from './show/event-show-ratings.vue'
+    import EventHeader  from './Show/event-show-header.vue'
+    import EventDetails  from './Show/event-show-details.vue'
+    import EventAbout  from './Show/event-show-about.vue'
+    import EventDates  from './Show/event-show-dates.vue'
+    import EventOrganizer  from './Show/event-show-organizer.vue'
+    import EventLocation  from './Show/event-show-location.vue'
+    import EventStaffpick  from './Show/event-show-staffpick.vue'
+    import EventReviews  from './Show/event-show-reviews.vue'
+    import EventQuickBuy  from './Show/event-show-quickbuy.vue'
 
     export default {
 
-        props: ['loadevent', 'user', 'tickets'],
+        props: ['loadevent', 'user', 'tickets', 'mobile'],
 
-        components: { EventHeader, EventAbout, EventDetails, EventDates, EventOrganizer, EventLocation, EventStaffpick, EventReviews, EventQuickBuy, EventRatings },
+        components: { EventHeader, EventAbout, EventDetails, EventDates, EventOrganizer, EventLocation, EventStaffpick, EventReviews, EventQuickBuy },
 
-        data() {
-            return {
-                isMobile: window.innerWidth < 768 ? true : false,
-            }
-        },
 
-        methods: {
-
-        },
     };
 </script>

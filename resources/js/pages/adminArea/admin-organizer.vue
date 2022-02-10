@@ -1,11 +1,6 @@
 <template>
-    <div class="admin-organizers">
-        <div class="">
-            <div class="title">
-                <h1>Organizers</h1>
-            </div>
-        </div>
-
+    <div>
+        <h2 class="mb-8">Organizers</h2>
         <div class="field">
             <input 
                 v-model="organizer"
@@ -14,86 +9,92 @@
                 @keyup="debounce(organizer, 'org')"
                 type="text">
         </div>
-        <template>
-            <div 
-                ref="table"
-                class="v-table">
-                <div class="v-header-pane v-pane">
-                    <div 
-                        :style="columns"
-                        class="v-header v-row">
-                        <div 
-                            :key="col.id"
-                            v-for="col in cols"
-                            class="v-cell">
-                            <p>{{ col.field }}</p>
-                        </div>
-                    </div>
+        <div class="not-prose relative bg-slate-50 rounded-xl overflow-hidden dark:bg-slate-800/25">
+            <div class="relative rounded-xl overflow-auto border">
+                <div class="shadow-sm overflow-hidden my-8">
+                    <table class="table-auto border-collapse w-full">
+                        <thead>
+                            <tr>
+                                <th 
+                                    :key="col.id"
+                                    v-for="col in cols"
+                                    class="border-b dark:border-slate-600 font-medium p-4 pl-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
+                                    <p 
+                                        class="text-xl" 
+                                        :class="col.class">{{ col.field }}</p>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white dark:bg-slate-800">
+                            <template v-if="organizers && organizers.length">
+                                <tr
+                                    v-for="(org) in organizers"
+                                    :key="org.id">
+                                    <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">
+                                        <p class="text-xl">{{org.id}}</p>
+                                    </td>
+                                    <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">       
+                                        <a 
+                                            class="rounded-full w-12 h-12 block flex items-center justify-center hover:bg-black" 
+                                            :href="`/organizer/${org.slug}/edit`">
+                                            <svg class="w-8 h-8 hover:fill-white">
+                                                <use :xlink:href="`/storage/website-files/icons.svg#ri-edit-2-line`" />
+                                            </svg>
+                                        </a>
+                                    </td>
+                                    <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">
+                                        <div class="flex flex-col items-center">
+                                            <img 
+                                                :src="`/storage/${org.thumbImagePath}`"
+                                                class="w-12 rounded-full">
+                                            <p class="text-xl">{{ org.name }}</p>
+                                        </div>
+                                    </td>
+                                    <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">
+                                        <p 
+                                            v-if="org.user"
+                                            @click.prevent="showModal(org, 'changeOwner')"
+                                            class="underline text-xl">
+                                            {{ org.user ? org.user.name : 'No User' }}
+                                        </p>
+                                    </td>
+                                    <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">
+                                        <p class="text-xl">{{ org.user ? org.user.email : 'No User' }}</p>
+                                    </td>
+                                    <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">
+                                        <v-select 
+                                            v-model="org.users"
+                                            label="name"
+                                            placeholder="Members"
+                                            multiple
+                                            :append-to-body="true"
+                                            @search="debounce($event, 'user')"
+                                            @input="addNewMember($event, org)"
+                                            :filterable="false"
+                                            :options="users.length ? users : org.users">
+                                            <template #option="option" class="test">
+                                                <div class="v-dropcell">
+                                                    <p>{{ option.name }} ({{option.email}}) </p>
+                                                </div>
+                                            </template>
+                                        </v-select>
+                                    </td>
+                                    <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">
+                                        <button 
+                                            @click.prevent="showModal(org, 'deleteOrg')" 
+                                            class="rounded-full p-2 hover:bg-black hover:border-black">
+                                            <svg class="w-8 h-8 hover:fill-white">
+                                                <use :xlink:href="`/storage/website-files/icons.svg#ri-close-line`" />
+                                            </svg>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
                 </div>
-                <template v-if="organizers && organizers.length">
-                    <div
-                        :style="columns"
-                        class="v-row"
-                        v-for="(org) in organizers"
-                        :key="org.id">
-                        <div class="v-cell">
-                            <p>{{org.id}}</p>
-                        </div>
-                        <div class="v-cell">
-                            <div class="edit">
-                                <a :href="`/organizer/${org.slug}/edit`">
-                                    <svg>
-                                        <use :xlink:href="`/storage/website-files/icons.svg#ri-edit-2-line`" />
-                                    </svg>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="v-cell">
-                            <img :src="`/storage/${org.thumbImagePath}`">
-                            <p>{{ org.name }}</p>
-                        </div>
-                        <div class="v-cell">
-                            <button 
-                                v-if="org.user"
-                                class="noBox" 
-                                @click.prevent="showModal(org, 'changeOwner')">
-                                <p style="text-decoration: underline;">{{ org.user ? org.user.name : 'No User' }}</p>
-                            </button>
-                        </div>
-                        <div class="v-cell">
-                            <p>{{ org.user ? org.user.email : 'No User' }}</p>
-                        </div>
-                        <div class="v-cell">
-                            <v-select 
-                                v-model="org.users"
-                                label="name"
-                                placeholder="Members"
-                                multiple
-                                :append-to-body="true"
-                                @search="debounce($event, 'user')"
-                                @input="addNewMember($event, org)"
-                                :filterable="false"
-                                :options="users.length ? users : org.users">
-                                <template #option="option" class="test">
-                                    <div class="v-dropcell">
-                                        <p>{{ option.name }} ({{option.email}}) </p>
-                                    </div>
-                                </template>
-                            </v-select>
-                        </div>
-                        <div class="v-cell">
-                            <button 
-                                @click.prevent="showModal(org, 'deleteOrg')" 
-                                class="delete">
-                                <svg>
-                                    <use :xlink:href="`/storage/website-files/icons.svg#ri-close-line`" />
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                </template>
             </div>
-        </template>
+        </div>
         <VueDeleteModal 
             v-if="modal == 'deleteOrg'"
             :item="selectedModal"
@@ -134,13 +135,13 @@
                 users:[],
                 showEdit: false,
                 cols: [
-                    { id:0, field: 'id'},
-                    { id:1, field: 'edit'},
-                    { id:2, field: 'Organization' },
-                    { id:3, field: 'Owner' },
-                    { id:4, field: 'Email' },
-                    { id:5, field: 'Members' },
-                    { id:6, field: '' },
+                    { id:0, field: 'id', class:''},
+                    { id:1, field: 'edit', class:''},
+                    { id:2, field: 'Organization', class:'text-center' },
+                    { id:3, field: 'Owner', class:''},
+                    { id:4, field: 'Email',class:'' },
+                    { id:5, field: 'Members', class:'' },
+                    { id:6, field: '', class:'' },
                 ],
                 columns: `grid-auto-columns: 5rem 5rem minmax(15rem, 40rem) minmax(10rem, 40rem) minmax(20rem, 40rem) minmax(20rem, 1fr) 5rem;`,
             }
@@ -151,27 +152,21 @@
                 this.selectedModal = event;
                 this.modal = arr;
             },
-
             async onDelete() {
                 await axios.delete(`/organizer/${this.selectedModal.slug}`)
                 location.reload()
             },
-
             onLoad() {
                 axios.get(`/admin/organizer/fetch?timestamp=${new Date().getTime()}`)
                 .then( res => { this.organizers = res.data.data });
             },
-
             async onChangeOwner(value) {
                 await axios.post(`/admin/organizer/${this.selectedModal.slug}/changeUser`, value)
                 location.reload()
             },
-
             async addNewMember(value, organization) {
                 await axios.post(`/admin/organizer/${organization.slug}/addTeamMember`, value)
-                .then( res => {
-                    console.log(res.data);
-                })
+
             },
             onSearchOrganizers (query) {
                 axios.get('/api/admin/organizer/search', { params: { keywords: query } })

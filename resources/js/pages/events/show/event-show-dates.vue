@@ -1,10 +1,11 @@
 <template>
-    <div class="es__dates element">
-        <h2>Show Dates</h2>
-        <template v-if="event.showtype == 's' || event.showtype == 'l'">
+    <div class="py-12 px-8 border-b border-t border-slate-200">
+        <h2 class="text-3xl mb-4">Show Dates</h2>
+        <template v-if="hasSpecificDates">
             <button 
                 @click="datesVisible =! datesVisible"
-                class="es__dates-button subtext">
+                :class="{ 'bg-black div-text-white' : datesVisible }"
+                class="mb-4 z-50 flex flex-col relative w-full rounded-2xl p-4 border text-left">
                 <h3>{{ showDateRange }}</h3>
                 <p 
                     v-if="remaining && remaining.length > 1 ? remaining.length : ''" 
@@ -15,17 +16,15 @@
                 <p 
                     v-else 
                     class="header__show-info bold">no dates remaining</p>
-                <div class="es__dates-button--arrow">
-                    <IconSvg 
-                        v-if="datesVisible"
-                        type="delete" />
-                    <IconSvg 
-                        v-else
-                        type="back" />
-                </div>
+                <svg 
+                    :class="{ 'fill-white' : datesVisible }"
+                    class="w-12 h-12 right-8 top-8 z-100 absolute">
+                    <use v-if="!datesVisible" :xlink:href="`/storage/website-files/icons.svg#ri-arrow-down-s-line`" />
+                    <use v-else :xlink:href="`/storage/website-files/icons.svg#ri-close-line`" />
+                </svg>
             </button>
             <template v-if="datesVisible">
-                <div class="es__dates--popup">
+                <div class="relative m-0 border border-black p-4 rounded-2xl shadow-hidden">
                     <flat-pickr
                         v-model="dates"
                         :config="config"                                  
@@ -33,7 +32,7 @@
                         placeholder="Select date"
                         ref="datePicker"             
                         name="dates" />
-                    <div class="es__dates--description">
+                    <div class="overflow-hidden">
                         <ShowMore 
                             :text="event.show_times"
                             :limit="20" />
@@ -42,12 +41,13 @@
             </template>
         </template>
 
-        <template v-if="event.showtype == 'o'">
+        <template v-if="hasOngoingDates">
             <button 
                 @click="datesVisible =! datesVisible"
-                class="es__dates-button subtext">
+                :class="{ 'bg-black div-text-white' : datesVisible }"
+                class="mb-4 z-50 flex flex-col relative w-full rounded-2xl p-4 border text-left">
                 <h3>Week Days</h3>  
-                <div class="es__week--days">
+                <div class="flex gap-1">
                     <p v-if="event.show_on_going.mon"><b>M</b></p>
                     <p v-else>M</p>
                     <p v-if="event.show_on_going.tue"><b>T</b></p>
@@ -63,17 +63,15 @@
                     <p v-if="event.show_on_going.sun"><b>S</b></p>
                     <p v-else>S</p>
                 </div>   
-                <div class="es__dates-button--arrow">
-                    <IconSvg 
-                        v-if="datesVisible"
-                        type="delete" />
-                    <IconSvg 
-                        v-else
-                        type="back" />
-                </div>
+                <svg 
+                    :class="{ 'fill-white' : datesVisible }"
+                    class="w-12 h-12 right-8 top-8 z-100 absolute">
+                    <use v-if="!datesVisible" :xlink:href="`/storage/website-files/icons.svg#ri-arrow-down-s-line`" />
+                    <use v-else :xlink:href="`/storage/website-files/icons.svg#ri-close-line`" />
+                </svg>
             </button>
             <template v-if="datesVisible">
-                <div class="es__dates--popup">
+                <div class="relative m-0 border border-black p-4 rounded-2xl shadow-hidden">
                     <flat-pickr
                         v-model="dates"
                         :config="config"                                  
@@ -90,10 +88,10 @@
             </template>
         </template>
 
-        <template v-if="event.showtype == 'a'">
-            <div class="es__dates--body subtext">
+        <template v-if="hasAllDates">
+            <div class="flex flex-col relative w-full rounded-2xl p-4 border text-left">
                 <h3>Available Anytime</h3>
-                <div class="es__dates--description">
+                <div class="overflow-hidden">
                     <ShowMore 
                         :text="event.show_times"
                         :limit="20" />
@@ -104,14 +102,13 @@
 </template>
 
 <script>
-    import IconSvg from '../../../components/Svg-icon'
-    import ShowMore  from '../components/show-more.vue'
+    import ShowMore  from '../../../components/ShowMore.vue'
     import flatPickr from 'vue-flatpickr-component'
     export default {
 
         props: [ 'event', ],
 
-        components: { ShowMore, flatPickr, IconSvg },
+        components: { ShowMore, flatPickr },
 
         computed: {
             showDateRange() {
@@ -130,6 +127,9 @@
                 remaining: [],
                 visible: false,
                 datesVisible: false,
+                hasSpecificDates: this.event.showtype == 's' || this.event.showtype == 'l',
+                hasOngoingDates: this.event.showtype == 'o',
+                hasAllDates: this.event.showtype == 'a'
             }
         },
 

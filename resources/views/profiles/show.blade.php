@@ -8,16 +8,18 @@
 @endsection
 
 @section('nav')
-    @auth
-        <vue-nav navtype="profile" :user="{{auth()->user()}}"></vue-nav>
-    @endauth
-    @guest
-        <vue-nav navtype="profile"></vue-nav>
-    @endguest
+    @if (Browser::isMobile())
+        <vue-nav-mobile navtype="profile" :user= "{{ auth()->user() ? auth()->user() : 'null' }}" />
+    @else
+        <vue-nav navtype="profile" :user= "{{ auth()->user() ? auth()->user() : 'null' }}" />
+    @endif
 @endsection
 
 @section('content')
     <div id="bodyArea">
-        <user-profile :events="{{ $events }}" :loaduser="{{ $user }}" auth="{{auth()->id()}}" v-cloak></user-profile>   
+        <user-profile 
+            :mobile="{{ Browser::isMobile() ? Browser::isMobile() : 'null' }}"
+            :loaduser="{{ $user }}" 
+            v-cloak>   
     </div>
 @endsection

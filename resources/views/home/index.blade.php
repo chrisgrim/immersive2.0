@@ -23,36 +23,36 @@
     <meta name="twitter:creator" content="@everythingimmersive" />
     <script type="application/ld+json">{"@context":"http://schema.org", "@type":"Organization", "address":{"@type":"PostalAddress", "addressLocality":"Petaluma", "addressRegion":"SF", "postalCode":"94952", "streetAddress":"600 East D St"}, "description": "Your resource for immersive and interactive theatre, art, virtual reality, escape rooms, dance and more.", "logo":"https://everythingimmersive.com/storage/website-files/ei-logo.png", "name":"Everything Immersive", "sameAs":[ "https://www.facebook.com/EverythingImmersive/", "https://www.linkedin.com/company/everythingimmersive", "https://www.instagram.com/everythingimmersive/", "https://twitter.com/everythingimmersive", "https://plus.google.com/+everythingimmersive", "https://en.wikipedia.org/wiki/everythingimmersive"], "url":"https://everythingimmersive.com"}</script>
     <link href="{{ mix('/assets/app-lite.css') }}" rel="stylesheet" media="print" onload="this.media='all'; this.onload=null;">
+    <link href="{{ mix('/assets/app.css') }}" rel="stylesheet" media="print" onload="this.media='all'; this.onload=null;">
 @endsection 
 
 @section('nav')
-    @auth
-        <vue-nav navtype="homepage" :user= "{{auth()->user()}}"></vue-nav>
-    @endauth
-    @guest
-        <vue-nav navtype="homepage"></vue-nav>
-    @endguest
+    @if (Browser::isMobile())
+        <vue-nav-mobile navtype="homepage" :user= "{{ auth()->user() ? auth()->user() : 'null' }}" />
+    @else
+        <vue-nav navtype="homepage" :user= "{{ auth()->user() ? auth()->user() : 'null' }}" />
+    @endif
 @endsection
 
 @section('content')
-    <div id="bodyArea">
-        <div class="homepage">
-            @if ( session()->exists( 'verifiy' )) 
-                <vue-email-verify :user="{{auth()->user()}}" message="verify"></vue-email-verify>
-            @endif
-            @if($staffpicks)
-                <index 
-                    :categories="{{$categories}}" 
-                    :docks="{{$docks}}"
-                    :tags="{{$tags}}" 
-                    :staffpicks="{{$staffpicks}}"/>
-            @else
-                <index 
-                    :docks="{{$docks}}"
-                    :tags="{{$tags}}" 
-                    :categories="{{$categories}}"/>
-            @endif
-        </div>
+    <div class="homepage" id="bodyArea">
+        @if ( session()->exists( 'verifiy' )) 
+            <vue-email-verify :user="{{auth()->user()}}" message="verify"></vue-email-verify>
+        @endif
+        @if($staffpicks)
+            <index 
+                :mobile="{{ Browser::isMobile() ? Browser::isMobile() : 'null' }}"
+                :categories="{{$categories}}" 
+                :docks="{{$docks}}"
+                :tags="{{$tags}}" 
+                :staffpicks="{{$staffpicks}}"/>
+        @else
+            <index 
+                :mobile="{{ Browser::isMobile() ? Browser::isMobile() : 'null' }}"
+                :docks="{{$docks}}"
+                :tags="{{$tags}}" 
+                :categories="{{$categories}}"/>
+        @endif
     </div>
 @endsection
 

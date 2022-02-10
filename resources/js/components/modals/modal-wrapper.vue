@@ -17,9 +17,9 @@
 </template>
 
 <script>
-    import EmailVerification from '../../pages/profile/components/email-verification-modal.vue'
-    import Login from '../../pages/profile/login-modal'
-    import Notified from '../../pages/profile/components/notified-modal'
+    import EmailVerification from './Components/email-verify-modal.vue'
+    import Login from './Components/login-modal'
+    import Notified from './Components/notify-modal'
     import Alert from './alert'
 
     export default {

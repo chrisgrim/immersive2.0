@@ -31,9 +31,10 @@ class ProfilesController extends Controller
 
     public function show(User $user)
     {
-        $events = $user->favouritedEvents()->get()->load('organizer');
-        $user->load('location');
-        return view('profiles.show', compact('user', 'events'));
+        $user
+        ->load('location', 'favouritedEvents')
+        ->makeHidden(['newsletter_type', 'type', 'hasMessages', 'hasCreatedOrganizers', 'current_team_id', 'card_brand', 'card_last_four', 'email', 'stripe_id']);
+        return view('profiles.show', compact('user'));
     }
 
     public function account()
@@ -46,12 +47,6 @@ class ProfilesController extends Controller
         return view('profiles.notifications');
     }
 
-    public function favorited()
-    {
-        $events = json_encode(auth()->user()->favouritedEvents()->with('organizer')->paginate(8));
-        return view('profiles.favorited', compact('events'));
-    }
-
     /**
      * Store a newly created resource in storage. 
      *
@@ -62,7 +57,7 @@ class ProfilesController extends Controller
     {
         $this->authorize('update', $user);
     	if($request->image) {
-            MakeImage::saveUserImage($request,$user, 600, 600, 'user');
+            MakeImage::saveUserImage($request,$user, 400, 400, 'user');
     	}
         if ($request->name) {
             $user->update([ 'name' => $request->name ]);

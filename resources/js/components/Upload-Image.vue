@@ -9,18 +9,20 @@
                 <button 
                     @click="onDelete"
                     class="btn-icon">
-                    <svg>
+                    <svg class="w-16 h-16">
                         <use :xlink:href="`/storage/website-files/icons.svg#ri-close-line`" />
                     </svg>
                 </button>
             </div>
         </template>
         <label 
-            :class="{ hoverImage: overImage, pointer: !locked }"
-            class="default__image-upload" 
+            :class="[ overImage ? 'before:bg-[#fffefe5c] before:absolute before:w-full before:h-full' : '', !locked ? 'cursor-pointer' : '']"
+            class="default__image-upload justify-center items-center" 
             :style="backgroundImage">
             <template v-if="!locked">
-                <svg v-if="!hasImage || overImage">
+                <svg 
+                    class="w-16 h-16 fill-white"
+                    v-if="!hasImage || overImage">
                     <use :xlink:href="`/storage/website-files/icons.svg#ri-image-line`" />
                 </svg>
                 <p v-if="text && !image"> {{ text }} </p>
@@ -38,8 +40,8 @@
 </template>
 
 <script>
-    import CubeSpinner  from '../pages/layouts/loading.vue'
-    import ImageUpload from '../pages/layouts/image-upload.vue'
+    import CubeSpinner  from './Spinner.vue'
+    import ImageUpload from './image-upload.vue'
 
     export default {
 

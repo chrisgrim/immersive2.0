@@ -24,7 +24,7 @@
                         v-model="toDelete"
                         type="text">
                     <button
-                        class="btn-borderless btn-login"
+                        class="border-none bg-gradient-to-r from-button-red-1 via-button-red-2 to-button-red-3 text-white"
                         @click="onDelete"
                         :disabled='isDisabled'>
                         DELETE
@@ -33,7 +33,7 @@
             </div>
             <div class="footer">
                 <button 
-                    class="btn-borderless" 
+                    class="border-none" 
                     @click="onClose">
                     Close
                 </button>

@@ -1,32 +1,22 @@
 <template>
     <section 
         id="organizer" 
-        class="es__organizer element">  
+        class="py-12 px-8 md:py-16 md:px-0">  
         <a :href="`/organizer/${event.organizer.slug}`">
-            <div class="es__organizer--details">
+            <div class="flex mb-8">
                 <div 
                     :style="image"
-                    class="es__organizer--image">
-                    <template v-if="!event.organizer.thumbImagePath">
-                        <p> {{ event.organizer.name.charAt(0) }} </p>
-                    </template>
+                    class="mr-4 w-20 h-20 rounded-full flex justify-center items-end border bg-no-repeat bg-cover overflow-hidden">
+                    <p 
+                        v-if="!event.organizer.thumbImagePath" 
+                        class="text-5xl text-white font-extrabold m-auto"> {{ event.organizer.name.charAt(0) }} </p>
                 </div>
-                <div class="es__organizer--name subtext">
+                <div>
                     <h3> {{ event.organizer.name }} </h3>
-                    <p> Hosting immersive events on EI since {{ cleanDate(event.organizer.created_at) }}</p>
+                    <p class="text-2xl md:text-xl text-gray-500"> Hosting immersive events on EI since {{ cleanDate(event.organizer.created_at) }}</p>
                 </div>
             </div>
         </a>
-        <div 
-            v-if="event.organizer.showRating.count"
-            class="es__organizer--rating">
-            <template v-if="event.organizer.showRating.count > 1">
-                <p> {{ event.organizer.showRating.count }} Event reviews</p>
-            </template>
-            <template v-else-if="event.organizer.showRating.count === 1">
-                <p> {{ event.organizer.showRating.count }} Event review</p>
-            </template>
-        </div>
         <ShowMore 
             :text="event.organizer.description"
             :limit="100" />
@@ -34,7 +24,7 @@
 </template>
 
 <script>
-    import ShowMore  from '../components/show-more.vue'
+    import ShowMore  from '../../../components/ShowMore.vue'
     export default {
 
         props: [ 'event' ],

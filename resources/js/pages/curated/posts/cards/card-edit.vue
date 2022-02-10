@@ -1,17 +1,14 @@
 <template>
-    <div>
+    <div class="relative">
         <div 
-            :class="{ hover: hover && !onEdit}"
+            :class="{ 'cursor-pointer border-black': hover && !onEdit}"
             @mouseover="hover = true"
             @mouseleave="hover = false"
-            class="block">
+            class="block p-8 rounded-2xl border-white border">
             <template v-if="hasImage || onEdit && card.url">
                 <CardImage
-                    text="Image must be at least 800px by 450px"
-                    :height="450"
-                    :width="800"
                     :loading="disabled"
-                    :image="`/storage/${image}`"
+                    :image="image"
                     :can-delete="card.type==='e'"
                     @onDelete="hideImage"
                     @addImage="addImageSubmit" />
@@ -88,11 +85,11 @@
             </template>
 
             <template v-if="hover && !onEdit">
-                <div class="delete">
+                <div class="absolute top-[-1rem] right-[-1rem]">
                     <button 
                         @click="deleteCard"
-                        class="btn-icon">
-                        <svg>
+                        class="w-12 h-12 flex rounded-full justify-center items-center border-2 bg-white">
+                        <svg class="w-12 h-12">
                             <use :xlink:href="`/storage/website-files/icons.svg#ri-close-line`" />
                         </svg>
                     </button>
@@ -110,8 +107,8 @@
 </template>
 
 <script>
-    import Tiptap from '../../../../components/Tiptap.vue'
-    import CardImage from '../../../../components/Upload-Image.vue'
+    import Tiptap from './Components/Tiptap.vue'
+    import CardImage from './Components/vue-add-image.vue'
     import formValidationMixin from '../../../../mixins/form-validation-mixin'
     import { maxLength } from 'vuelidate/lib/validators';
     export default {
@@ -127,9 +124,9 @@
                 return this.card.type === 'i' || this.card.type === 'e' || this.card.type === 'h'
             },
             image() {
-                if (this.card.type === 'i') { return this.card.thumbImagePath }
+                if (this.card.type === 'i') { return `/storage/${this.card.thumbImagePath}` }
                 if (this.card.type === 'h' || this.card.type === 't') { return }
-                return this.card.type === 'e' && !this.card.thumbImagePath ? this.card.event.thumbImagePath : this.card.thumbImagePath
+                return this.card.type === 'e' && !this.card.thumbImagePath ? `/storage/${this.card.event.thumbImagePath}` : `/storage/${this.card.thumbImagePath}`
             },
             hasName() {
                 return this.card.event && !this.card.name ? this.card.event.name : this.card.name

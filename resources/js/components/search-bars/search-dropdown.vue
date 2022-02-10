@@ -1,7 +1,7 @@
 <template>
     <div 
         :class="{open : open}"
-        class="dropdown all">
+        class="h-full flex relative z-50">
         <template v-if="open">
             <div class="dropdown__wrapper">
                 <div class="search-bar">

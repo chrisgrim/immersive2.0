@@ -20,7 +20,7 @@
                         @search:focus="onSearch"
                         :options="options" />
                     <button 
-                        class="btn-login btn-borderless" 
+                        class="border-none bg-gradient-to-r from-button-red-1 via-button-red-2 to-button-red-3 text-white"
                         @click="onSubmit"
                         :disabled='disabled'>
                         Submit
@@ -29,7 +29,7 @@
             </div>
             <div class="footer">
                 <button 
-                    class="btn-borderless" 
+                    class="border-none" 
                     @click="onClose">
                     Close
                 </button>

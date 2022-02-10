@@ -1,54 +1,15 @@
-@import 'variables';
 
-//Full Page 
-@import 'layouts/full-page';
-@import 'layouts/lay-b';
-@import 'layouts/lay-c';
+@import 'variables';
+@import 'layout';
 
 // Nav
-@import 'nav/navbar';
-@import 'nav/footer';
+@import 'Nav/navbar';
 
-//Headers
-@import 'components/headers/header-a';
-@import 'components/headers/header-b';
+// Custom
+@import 'Custom/custom';
 
-//Sections
-@import 'components/sections/hero-section';
-@import 'components/sections/section-a';
-@import 'components/sections/section-b';
-
-//Albums
-@import 'components/albums/album';
-@import 'components/albums/vertical-album';
-@import 'components/albums/album-a';
-@import 'components/albums/album-b';
-@import 'components/albums/album-c';
-@import 'components/albums/album-d';
-@import 'components/albums/favorite';
-@import 'components/albums/grid-image';
-@import 'components/albums/image';
-
-//Features
-@import 'components/features/feature-a';
-
-//Notifications
-@import 'components/notifications/notifications';
-
-//Pagination
-@import 'components/pagination/pagination';
-
-//Buttons
-@import 'components/buttons/button';
-@import 'components/buttons/button-outline';
-
-//Shelves
-@import 'components/shelves/shelf';
-
-//Dropdowns
-@import 'components/dropdowns/v-select';
-@import 'components/dropdowns/nav-dropdown';
-@import 'components/dropdowns/create-dropdown';
+//Checkbox
+@import 'components/checkboxes/checkbox';
 
 //Modals
 @import 'components/modals/modal';
@@ -56,38 +17,153 @@
 //Maps
 @import 'components/map/leaflet';
 
-//Staffpicks
-@import 'staffpicks/staffpicks';
+//Dropdowns
+@import 'components/dropdowns/v-select';
 
-//Search 
-@import 'events/components/search-filters';
-@import 'search/components/mobile-search-nav';
-@import 'search/components/online-mobile-search-nav';
-@import 'search/components/mobile-options';
-
-//Home
-@import 'home/index';
-
-//Profile
-@import 'profile/login';
-
-// Layout
-
-@import 'events/event-show';
-@import 'events/event-search';
-@import 'events/event-maps';
-
-@import 'search/event';
-
-@import 'slowlayout';
+//Transitions
+@import 'components/transitions/vue-transitions';
 
 //plugins
 @import 'plugins/flatpickr';
 @import 'plugins/leaflet';
+@import 'plugins/tiptap';
 
-@import 'components/vue-list';
-
+//Slider Button
 @import 'components/sliderbutton';
-@import 'components/grid';
 
-@import 'layout';
+//Spinner
+@import 'components/spinner';
+
+//Admin
+@import 'components/grid-data-component';
+@import 'components/table';
+
+@import 'slowlayout';
+
+// curated
+@import 'curated/index';
+@import 'curated/create';
+@import 'curated/show';
+@import 'curated/edit';
+@import 'curated/post/show';
+@import 'curated/post/edit';
+@import 'curated/post/index';
+@import 'curated/post/create';
+
+
+//Full Page 
+/*@import 'layouts/full-page';
+@import 'layouts/lay-b';
+@import 'layouts/lay-c';*/
+//Headers
+/*@import 'components/headers/header-a';
+@import 'components/headers/header-b';*/
+
+//Sections
+/*@import 'components/sections/hero-section';
+@import 'components/sections/section-a';
+@import 'components/sections/section-b';*/
+
+//Albums
+/*@import 'components/albums/album';
+@import 'components/albums/vertical-album';
+@import 'components/albums/album-a';
+@import 'components/albums/album-b';
+@import 'components/albums/album-c';
+@import 'components/albums/album-d';
+@import 'components/albums/favorite';
+@import 'components/albums/grid-image';
+@import 'components/albums/image';*/
+
+//Features
+/*@import 'components/features/feature-a';*/
+
+//Notifications
+/*@import 'components/notifications/notifications';*/
+
+//Pagination
+/*@import 'components/pagination/pagination';*/
+
+//Buttons
+/*@import 'components/buttons/button';
+@import 'components/buttons/button-outline';*/
+
+//Shelves
+/*@import 'components/shelves/shelf';*/
+
+/*@import 'components/dropdowns/nav-dropdown';
+@import 'components/dropdowns/create-dropdown';*/
+
+
+//Staffpicks
+/*@import 'staffpicks/staffpicks';*/
+
+//Search 
+/*@import 'events/components/search-filters';*/
+/*@import 'search/components/mobile-search-nav';*/
+/*@import 'search/components/online-mobile-search-nav';*/
+/*@import 'search/components/mobile-options';*/
+
+//Home
+/*@import 'home/index';*/
+
+//Profile
+/*@import 'profile/login';*/
+
+// Layout
+
+/*@import 'events/event-show';
+@import 'events/event-search';
+@import 'events/event-maps';*/
+
+/*@import 'search/event';*/
+
+
+
+/*@import 'components/vue-list';*/
+
+/*@import 'components/grid';*/
+
+
+
+// App
+
+// Variables
+
+// Events
+/*@import 'events/event-edit';*/
+
+
+// search
+/*@import 'components/search-filter';
+@import 'search/components/mobile-search-results';*/
+
+// categories
+/*@import 'categories/category-show';*/
+
+
+// organizer
+/*@import 'organizer/show';*/
+
+// auth
+/*@import 'auth/error-pages';*/
+
+// Profile
+/*@import 'profile/profile';
+@import 'profile/account';
+@import 'profile/notifications';
+@import 'profile/favorited';*/
+
+
+//Tables
+/*@import 'components/table/table';*/
+
+//Components 
+/*@import 'components/tab';
+@import 'messages/messages-index';
+@import 'messages/messages-show';*/
+
+
+/*@import 'components/imageupload';*/
+
+

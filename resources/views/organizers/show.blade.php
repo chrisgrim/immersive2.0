@@ -32,24 +32,20 @@
 @endsection
 
 @section('nav')
-    @auth
-        <vue-nav navtype="org" :user="{{auth()->user()}}" />
-    @endauth
-    @guest
-        <vue-nav navtype="org" />
-    @endguest
+    @if (Browser::isMobile())
+        <vue-nav-mobile navtype="org" :user= "{{ auth()->user() ? auth()->user() : 'null' }}" />
+    @else
+        <vue-nav navtype="org" :user= "{{ auth()->user() ? auth()->user() : 'null' }}" />
+    @endif
 @endsection
 
 @section('content')
     <div id="bodyArea" class="org">
-        @auth
-            <modal-wrapper :user= "{{auth()->user()}}"></modal-wrapper>
-            <organizer-show :user="{{auth()->user()}}" :organizer="{{ $organizer }}"></organizer-show> 
-        @endauth
-        @guest
-            <modal-wrapper></modal-wrapper>
-            <organizer-show :organizer="{{ $organizer }}"></organizer-show> 
-        @endguest
+        <modal-wrapper :user= "{{ auth()->user() ? auth()->user() : 'null' }}"></modal-wrapper>
+        <organizer-show 
+            :user="{{ auth()->user() ? auth()->user() : 'null' }}" 
+            :mobile="{{ Browser::isMobile() ? Browser::isMobile() : 'null' }}"
+            :organizer="{{ $organizer }}">
     </div>
 @endsection
 

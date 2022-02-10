@@ -22,7 +22,8 @@
     height: calc(100% - 2rem);
     display: flex;
     flex-direction: column;
-    justify-content: space-between     
+    justify-content: space-between;
+    overflow: auto;
 }
 .modal .header {
     padding: 2rem;

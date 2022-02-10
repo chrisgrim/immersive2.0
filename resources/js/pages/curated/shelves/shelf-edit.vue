@@ -1,5 +1,5 @@
 <template>
-    <div class="shelf hover">
+    <div class="rounded-2xl mb-8 p-4 border">
         <template v-if="editName && shelf.status !== 'a'">
             <div class="field h3">
                 <input 
@@ -13,8 +13,12 @@
                 </div>
             </div>
             <div class="editor__footer borderless">
-                <button class="outline" @click="resetShelf">Cancel</button>
-                <button @click="patchShelf">Save</button>
+                <button 
+                    class="rounded-full py-2 px-4 bg-white hover:bg-black hover:text-white hover:border-black"
+                    @click="resetShelf">Cancel</button>
+                <button 
+                    class="rounded-full py-2 px-4 bg-white hover:bg-black hover:text-white hover:border-black"
+                    @click="patchShelf">Save</button>
             </div>
         </template>
         <template v-else>
@@ -22,7 +26,7 @@
                 @mouseover="hover = true"
                 @mouseleave="hover = false"
                 @click="editName=true"
-                class="name">
+                class="inline-flex">
                 <template v-if="shelf.name">
                     <h3>{{ shelf.name }}</h3>
                 </template>
@@ -30,8 +34,8 @@
                     <h3>Edit Name</h3>
                 </template>
                 <template v-if="!editName && hover && shelf.status !== 'a'">
-                    <button class="btn-icon noBox">
-                        <svg>
+                    <button class="border-none underline p-0 block w-8 h-8 rounded-full justify-center items-center">
+                        <svg class="h-8 w-8">
                             <use :xlink:href="`/storage/website-files/icons.svg#ri-pencil-line`" />
                         </svg>
                     </button>
@@ -55,7 +59,7 @@
 </template>
 
 <script>
-    import CollectionAlbum from './vue-album-collection.vue'
+    import CollectionAlbum from './Components/vue-album.vue'
     import formValidationMixin from '../../../mixins/form-validation-mixin'
     import { required, maxLength } from 'vuelidate/lib/validators';
     export default {

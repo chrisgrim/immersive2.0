@@ -1,5 +1,5 @@
 <template>
-    <div class="online search">
+    <div class="online search relative mt-36 md:mt-0 md:min-h-[calc(100vh-16rem)]">
         <template v-if="mobile">
             <MobileSearchNav
                 ref="search"
@@ -7,24 +7,25 @@
                 @update="updateEvents"
                 v-model="paginate"
                 filter="online"
+                :mobile="mobile"
                 :tags="tags" 
                 :categories="categories" />
         </template>
         <template v-else>
-            <SearchFilter
+            <SearchNav
                 @update="updateEvents"
                 type="online"
+                :mobile="mobile"
                 :tags="tags"
                 filter="online"
                 v-model="paginate"
                 :categories="categories" />
         </template>
-        <div class="search__list">
-            <div class="results">
-                <div class="title">
-                    <h3>Online Events</h3>
-                </div>
+        <div class="w-full">
+            <div class="relative px-8 md:px-32 md:py-8">
+                <h3>Online Events</h3>
                 <SearchAlbum 
+                    :user="user"
                     :items="events.data" 
                     :vertical="true" />
                 <pagination 
@@ -37,21 +38,20 @@
 </template>
 
 <script>
-    import SearchFilter  from './vue-search-filter.vue'
-    import Pagination  from '../events/components/pagination.vue'
-    import SearchAlbum from './components/album-search.vue'
-    import MobileSearchNav  from './online-mobile-search-nav.vue'
+    import SearchNav  from './Online/vue-online-desktop-search-nav.vue'
+    import Pagination  from './Online/Components/pagination.vue'
+    import SearchAlbum from './Online/vue-online-album.vue'
+    import MobileSearchNav  from './Online/vue-online-mobile-search-nav.vue'
 
     export default {
-        components: { SearchFilter, Pagination, SearchAlbum, MobileSearchNav },
+        components: { SearchNav, Pagination, SearchAlbum, MobileSearchNav },
 
-        props:['onlineevents','categories','user', 'tags'],
+        props:['onlineevents','categories','user', 'tags', 'mobile'],
 
         data() {
             return {
                 events: this.onlineevents,
                 paginate: 1,
-                mobile: window.innerWidth < 768,
             }
         },
 
@@ -62,6 +62,7 @@
 
             selectPage (page) {
                 this.paginate = page
+                window.scrollTo(0,0);
             },
         },
 

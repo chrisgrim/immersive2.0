@@ -7,33 +7,20 @@
 @endsection 
 
 @section('nav')
-    @auth
-        <vue-nav :user= "{{auth()->user()}}"></vue-nav>
-    @endauth
-    @guest
-        <vue-nav></vue-nav>
-    @endguest
+    @if (Browser::isMobile())
+        <vue-nav-mobile navtype="comshow" :user= "{{ auth()->user() ? auth()->user() : 'null' }}" />
+    @else
+        <vue-nav navtype="comshow" :user= "{{ auth()->user() ? auth()->user() : 'null' }}" />
+    @endif
 @endsection
+
 @section('content')
     <div id="bodyArea">
-        @guest
-            <vue-community-show 
-                :owner="false"
-                :shelves="{{ $shelves }}" 
-                :value="{{ $community }}"/>
-        @else
-            @can('update', $community)
-                <vue-community-show
-                    :owner="true"
-                    :shelves="{{ $shelves }}" 
-                    :value="{{ $community }}" />
-            @else
-                <vue-community-show
-                    :owner="false"
-                    :shelves="{{ $shelves }}" 
-                    :value="{{ $community }}" />
-            @endcan
-        @endauth
+        <vue-community-show
+            :mobile="{{ Browser::isMobile() ? Browser::isMobile() : 'null' }}"
+            :curator="{{ auth()->user() ? auth()->user()->can('update', $community) ? 'true' : 'false' : 'null' }}"
+            :shelves="{{ $shelves }}" 
+            :value="{{ $community }}" />
     </div>
 @endsection
 

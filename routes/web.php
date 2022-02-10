@@ -32,8 +32,8 @@ Route::POST('/vuex/search', 'SearchController@filterIndex');
 
 //Get Messages from database
 Route::GET('/messages', 'ConversationsController@index');
-Route::GET('/conversations/fetch/messages', 'ConversationsController@fetchmessages');
-Route::GET('/conversations/fetch/eventmessages', 'ConversationsController@fetcheventmessages');
+Route::POST('/conversations/fetch/messages', 'ConversationsController@fetchmessages');
+Route::POST('/conversations/fetch/eventmessages', 'ConversationsController@fetcheventmessages');
 Route::GET('/conversations/{conversation}', 'ConversationsController@show');
 Route::POST('/conversations/{conversation}', 'ConversationsController@update');
 
@@ -48,7 +48,6 @@ Route::POST('assign/organizer/{organizer}', 'OrganizerController@assign');
 Route::RESOURCE('users', 'ProfilesController');
 Route::GET('account-settings', 'ProfilesController@account');
 Route::GET('account-settings/notifications', 'ProfilesController@notifications');
-Route::GET('account-settings/favorited', 'ProfilesController@favorited');
 
 // favorites Button
 Route::GET('myFavorites/{user}', 'FavoritesController@index');

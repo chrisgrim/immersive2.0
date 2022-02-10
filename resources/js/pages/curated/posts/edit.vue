@@ -1,16 +1,15 @@
 <template>
-    <div class="post-edit lay-a">
-        <div class="breadcrumbs">
-            <p v-if="owner">
-                <a :href="`/communities/${community.slug}/edit`">{{community.name}}</a> > {{post.name}}
-            </p>
-            <p v-else>
-                <a :href="`/communities/${community.slug}`">{{community.name}}</a> > {{post.name}}
+    <div class="m-auto w-full md:px-12 md:py-8 lg:py-0 lg:px-32 max-w-screen-xl">
+        <div class="py-12">
+            <p class="text-1xl">
+                <a 
+                    class="underline" 
+                    :href="`/communities/${community.slug}/edit`">{{community.name}}</a> > {{post.name}}
             </p>
         </div>
-        <div class="wrapper">
-            <div class="content">
-                <div class="edit-post__body grid">
+        <div class="flex flex-col md:flex-row">
+            <div class="w-full inline-block md:w-8/12 md:py-8 md:pr-8">
+                <div class="mb-8">
                     <template v-if="postEdit">
                         <div class="field h3">
                             <input 
@@ -35,73 +34,84 @@
                                 <p class="error" v-if="!$v.post.blurb.maxLength">The name is too long.</p>
                             </div>
                         </div>
-                        <div class="editor__footer borderless">
-                            <button class="outline" @click="resetPost">Cancel</button>
-                            <button @click="patchPost">Save</button>
+                        <div class="flex justify-between">
+                            <button 
+                                class="px-4 py-2" 
+                                @click="resetPost">Cancel</button>
+                            <button 
+                                @click="patchPost"
+                                class="bg-black text-white px-4 py-2">Save</button>
                         </div>
                     </template>
                     <template v-else>
                         <div 
                             @click="postEdit=true"
-                            class="post-name">
+                            class="">
                             <h2>{{ post.name }}</h2>
                         </div>
                         <div 
                             @click="postEdit=true"
-                            class="post-blurb blurb">
+                            class="mt-4 relative">
                             <p>{{ post.blurb }}</p>
                         </div>
                     </template>
-                    <draggable
-                        v-model="post.cards" 
-                        @start="isDragging=true" 
-                        @end="debounce">
-                        <div 
-                            v-for="card in post.cards"
-                            :key="card.id"
-                            class="post-card">
-                            <div class="edit-block">
+                    <div class="relative">
+                        <draggable
+                            v-model="post.cards" 
+                            @start="isDragging=true" 
+                            @end="debounce">
+                            <div 
+                                v-for="card in post.cards"
+                                :key="card.id"
+                                class="mt-12">   
                                 <EditCard 
+                                    :mobile="mobile"
                                     @update="updatePost"
                                     :parent-card="card" />
                             </div>
+                        </draggable>
+                        <EventBlock 
+                            v-if="blockType==='e'"
+                            @cancel="clear"
+                            @update="patchPost"
+                            :post="post" />
+                        <ImageBlock 
+                            v-if="blockType==='i'"
+                            @update="patchPost"
+                            :post="post" />
+                        <TextBlock 
+                            v-if="blockType==='t'"
+                            @cancel="clear"
+                            @update="patchPost"
+                            :post="post" />
+                        <div class="top-0 bg-white flex-col flex w-96 mt-24 rounded-2xl p-4 border">
+                            <button 
+                                @click="showAddButtonOptions"
+                                class="border-none h-16 items-center flex px-4">
+                                Add card
+                                <svg class="w-8 ml-2">
+                                    <use v-if="!buttonOptions" :xlink:href="`/storage/website-files/icons.svg#ri-add-circle-line`" />
+                                    <use v-else :xlink:href="`/storage/website-files/icons.svg#ri-close-circle-line`" />
+                                </svg>
+                            </button>
+                            <template v-if="buttonOptions">
+                                <button 
+                                    class="w-full text-left border-none px-4 py-2 font-semibold text-3xl block rounded-xl hover:bg-gray-400 hover:text-white"
+                                    @click="selectButton('i')">
+                                    Image Block
+                                </button>
+                                <button 
+                                    class="w-full text-left border-none px-4 py-2 font-semibold text-3xl block rounded-xl hover:bg-gray-400 hover:text-white"
+                                    @click="selectButton('t')">
+                                    Text Block
+                                </button>
+                                <button 
+                                    class="w-full text-left border-none px-4 py-2 font-semibold text-3xl block rounded-xl hover:bg-gray-400 hover:text-white"
+                                    @click="selectButton('e')">
+                                    Event Block
+                                </button>
+                            </template>
                         </div>
-                    </draggable>
-                    <EventBlock 
-                        v-if="blockType==='e'"
-                        @cancel="clear"
-                        @update="patchPost"
-                        :post="post" />
-                    <ImageBlock 
-                        v-if="blockType==='i'"
-                        @update="patchPost"
-                        :post="post" />
-                    <TextBlock 
-                        v-if="blockType==='t'"
-                        @cancel="clear"
-                        @update="patchPost"
-                        :post="post" />
-                    <div class="add-new-post-card">
-                        <button 
-                            @click="showAddButtonOptions"
-                            class="main">
-                            add new card
-                            <svg class="remix">
-                                <use v-if="!buttonOptions" :xlink:href="`/storage/website-files/icons.svg#ri-add-circle-line`" />
-                                <use v-else :xlink:href="`/storage/website-files/icons.svg#ri-close-circle-line`" />
-                            </svg>
-                        </button>
-                        <template v-if="buttonOptions">
-                            <button class="sub" @click="selectButton('i')">
-                                Image Block
-                            </button>
-                            <button class="sub" @click="selectButton('t')">
-                                Text Block
-                            </button>
-                            <button class="sub" @click="selectButton('e')">
-                                Event Block
-                            </button>
-                        </template>
                     </div>
                 </div>
             </div>
@@ -137,17 +147,17 @@
 </template>
 
 <script>
-    import EditCard  from './cards/card-edit.vue'
-    import EventBlock from './cards/block-event.vue'
-    import ImageBlock from './cards/block-image.vue'
-    import TextBlock from './cards/block-text.vue'
-    import SideBar from './components/post-sidebar.vue'
+    import EditCard  from './Cards/card-edit.vue'
+    import EventBlock from './Cards/block-event.vue'
+    import ImageBlock from './Cards/block-image.vue'
+    import TextBlock from './Cards/block-text.vue'
+    import SideBar from './Components/post-sidebar.vue'
     import Draggable from "vuedraggable";
     import formValidationMixin from '../../../mixins/form-validation-mixin'
     import { required, maxLength } from 'vuelidate/lib/validators';
     export default {
         
-        props: [ 'value', 'user', 'owner', 'community', 'shelves'],
+        props: [ 'value', 'user', 'curator', 'community', 'shelves', 'mobile'],
 
         mixins: [formValidationMixin],
 

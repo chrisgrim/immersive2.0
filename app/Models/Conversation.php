@@ -9,14 +9,14 @@ class Conversation extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['opener_id', 'receiver_id', 'event_id','user_one','user_two'];
+    protected $fillable = ['opener_id', 'receiver_id', 'event_id','user_one','user_two', 'event_name'];
     
     /**
     * The relations to eager load on every query. I am adding shows here because I need to filter by dates for the search
     *
     * @var array
     */
-    protected $with = ['messages'];
+    // protected $with = ['messages'];
 
     /**
      * This Conversation has many Messages
@@ -25,6 +25,17 @@ class Conversation extends Model
      */
 
     public function messages()
+    {
+        return $this->hasMany(Message::class)->orderBy('updated_at', 'ASC');
+    }
+
+    /**
+     * This Conversation has many Messages
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     */
+
+    public function latestMessages()
     {
         return $this->hasMany(Message::class)->orderBy('updated_at', 'DESC');
     }
@@ -36,7 +47,7 @@ class Conversation extends Model
      */
     public function event()
     {
-        return $this->belongsTo(Event::class);
+        return $this->belongsTo(Event::class)->withTrashed();
     }
 
     /*

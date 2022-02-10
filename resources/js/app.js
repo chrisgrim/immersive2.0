@@ -41,14 +41,14 @@ if (token) {
 
 
 //Curated
-Vue.component('vue-community-index', () => import(/* webpackChunkName: "assets/vci" */ './pages/curated/index.vue'));
-Vue.component('vue-community-show', () => import(/* webpackChunkName: "assets/vcs" */ './pages/curated/show.vue'));
-Vue.component('vue-community-create', () => import(/* webpackChunkName: "assets/vcc" */ './pages/curated/create.vue'));
-Vue.component('vue-community-edit', () => import(/* webpackChunkName: "assets/vce" */ './pages/curated/edit.vue'));
+Vue.component('vue-community-index', () => import(/* webpackChunkName: "assets/vci" */ './pages/Curated/index.vue'));
+Vue.component('vue-community-show', () => import(/* webpackChunkName: "assets/vcs" */ './pages/Curated/show.vue'));
+Vue.component('vue-community-create', () => import(/* webpackChunkName: "assets/vcc" */ './pages/Curated/create.vue'));
+Vue.component('vue-community-edit', () => import(/* webpackChunkName: "assets/vce" */ './pages/Curated/edit.vue'));
 
-Vue.component('vue-post-show', () => import(/* webpackChunkName: "assets/vps" */ './pages/curated/posts/show.vue'));
-Vue.component('vue-post-edit', () => import(/* webpackChunkName: "assets/vpe" */ './pages/curated/posts/edit.vue'));
-Vue.component('vue-post-create', () => import(/* webpackChunkName: "assets/vpc" */ './pages/curated/posts/create.vue'));
+Vue.component('vue-post-show', () => import(/* webpackChunkName: "assets/vps" */ './pages/Curated/Posts/show.vue'));
+Vue.component('vue-post-edit', () => import(/* webpackChunkName: "assets/vpe" */ './pages/Curated/Posts/edit.vue'));
+Vue.component('vue-post-create', () => import(/* webpackChunkName: "assets/vpc" */ './pages/Curated/Posts/create.vue'));
 
 Vue.component('vue-community-admin-approval', () => import(/* webpackChunkName: "assets/vcaa" */ './pages/adminArea/approve/community-approval-list.vue'));
 Vue.component('vue-community-approval-bar', () => import(/* webpackChunkName: "assets/vcab" */ './pages/adminArea/approve/community-approval-bar.vue'));
@@ -58,22 +58,22 @@ Vue.component('vue-community-approval-bar', () => import(/* webpackChunkName: "a
 Vue.component('dock-index', () => import(/* webpackChunkName: "assets/ds" */ './pages/featured/index.vue'));
 
 //Nav
-Vue.component('vue-nav', () => import(/* webpackChunkName: "assets/ls" */ './pages/navigation/nav.vue'));
+Vue.component('vue-nav', () => import(/* webpackChunkName: "assets/vnd" */ './pages/Header/header-desktop.vue'));
+Vue.component('vue-nav-mobile', () => import(/* webpackChunkName: "assets/vnm" */ './pages/Header/header-mobile.vue'));
 
 //Footer
-Vue.component('vue-footer', () => import(/* webpackChunkName: "assets/lfo" */ './pages/navigation/footer.vue'));
+Vue.component('vue-footer', () => import(/* webpackChunkName: "assets/lfo" */ './pages/Footer/footer.vue'));
+
+
+
+
 
 //Home
-Vue.component('index', () => import(/* webpackChunkName: "assets/ei" */ './pages/home/index.vue'));
+Vue.component('index', () => import(/* webpackChunkName: "assets/ei" */ './pages/Home/index.vue'));
 
 //Components
-Vue.component('favorite', () => import(/* webpackChunkName: "assets/lf" */ './pages/profile/favorite-button.vue'));
 Vue.component('modal-wrapper', () => import(/* webpackChunkName: "assets/mw" */ './components/modals/modal-wrapper.vue'));
-Vue.component('tabs', () => import(/* webpackChunkName: "assets/lts" */ './pages/layouts/tabs.vue'));
-Vue.component('tab', () => import(/* webpackChunkName: "assets/lt" */ './pages/layouts/tab.vue'));
-// Vue.component('image-upload', () => import(/* webpackChunkName: "assets/liu" */ './pages/layouts/image-upload.vue'));
-// Vue.component('vue-alert', () => import(/* webpackChunkName: "assets/la" */ './pages/layouts/alert.vue'));
-Vue.component('vue-email-verify', () => import(/* webpackChunkName: "assets/lev" */ './pages/profile/components/email-verification-modal.vue'));
+Vue.component('vue-email-verify', () => import(/* webpackChunkName: "assets/lev" */ './components/modals/Components/email-verify-modal.vue'));
 
 //Create Events
 Vue.component('vue-create-nav', () => import(/* webpackChunkName: "assets/cn" */ './pages/create/nav.vue'));
@@ -81,7 +81,6 @@ Vue.component('vue-create-organizer-nav', () => import(/* webpackChunkName: "ass
 Vue.component('vue-create-nav-bottom-bar', () => import(/* webpackChunkName: "assets/cbn" */ './pages/create/nav-bottom-bar.vue'));
 Vue.component('create-location-google', () => import(/* webpackChunkName: "assets/cl" */ './pages/create/location-google.vue'));
 Vue.component('create-category', () => import(/* webpackChunkName: "assets/cc" */ './pages/create/category.vue'));
-Vue.component('create-organizer', () => import(/* webpackChunkName: "assets/co" */ './pages/create/organizer.vue'));
 Vue.component('create-title', () => import(/* webpackChunkName: "assets/ct" */ './pages/create/title.vue'));
 Vue.component('create-image', () => import(/* webpackChunkName: "assets/ci" */ './pages/create/image.vue'));
 Vue.component('create-shows', () => import(/* webpackChunkName: "assets/cs" */ './pages/create/shows.vue'));
@@ -118,33 +117,29 @@ Vue.component('vue-admin-event-requests', () => import(/* webpackChunkName: "ass
 
 
 //Profile
-Vue.component('user-profile', () => import(/* webpackChunkName: "assets/up" */  './pages/profile/profile-index.vue'));
-Vue.component('vue-user-notifications', () => import(/* webpackChunkName: "assets/un" */  './pages/profile/notifications.vue'));
-Vue.component('vue-user-account', () => import(/* webpackChunkName: "assets/ua" */  './pages/profile/account.vue'));
-Vue.component('vue-user-favorited', () => import(/* webpackChunkName: "assets/uf" */  './pages/profile/favorited.vue'));
+Vue.component('user-profile', () => import(/* webpackChunkName: "assets/up" */  './pages/Profile/profile-show.vue'));
+Vue.component('vue-user-notifications', () => import(/* webpackChunkName: "assets/un" */  './pages/Profile/notifications.vue'));
+Vue.component('vue-user-account', () => import(/* webpackChunkName: "assets/ua" */  './pages/Profile/account.vue'));
 
 // Messages
-Vue.component('message-index', () => import(/* webpackChunkName: "assets/mi" */  './pages/messages/message-index.vue'));
-Vue.component('message-show', () => import(/* webpackChunkName: "assets/ms" */  './pages/messages/message-show.vue'));
-
+Vue.component('message-index', () => import(/* webpackChunkName: "assets/mi" */  './pages/Messages/message-index.vue'));
 //Organizers
-Vue.component('organizer-show', () => import(/* webpackChunkName: "assets/os" */  './pages/organizers/organizer-show.vue'));
-
+Vue.component('organizer-show', () => import(/* webpackChunkName: "assets/os" */  './pages/Organizers/organizer-show.vue'));
+Vue.component('organizer-create', () => import(/* webpackChunkName: "assets/oc" */ './pages/Organizers/organizer-create.vue'));
 //Events
-Vue.component('event-show', () => import(/* webpackChunkName: "assets/es" */ './pages/events/event-show.vue'));
-Vue.component('vue-event-edit', () => import(/* webpackChunkName: "assets/ee" */ './pages/events/event-edit.vue'));
-Vue.component('vue-event-edit-listing-item', () => import(/* webpackChunkName: "assets/edi" */ './pages/events/components/event-edit-item.vue'));
-Vue.component('vue-search-online', () => import(/* webpackChunkName: "assets/eos" */ './pages/search/vue-search-online.vue'));
-Vue.component('vue-search-location', () => import(/* webpackChunkName: "assets/esl" */ './pages/search/vue-search-location.vue'));
-Vue.component('vue-search-all', () => import(/* webpackChunkName: "assets/esa" */ './pages/search/vue-search-all.vue'));
+Vue.component('event-show', () => import(/* webpackChunkName: "assets/es" */ './pages/Events/event-show.vue'));
+Vue.component('vue-event-edit', () => import(/* webpackChunkName: "assets/ee" */ './pages/Events/event-edit.vue'));
+Vue.component('vue-search-online', () => import(/* webpackChunkName: "assets/eos" */ './pages/Search/vue-search-online.vue'));
+Vue.component('vue-search-location', () => import(/* webpackChunkName: "assets/esl" */ './pages/Search/vue-search-location.vue'));
+Vue.component('vue-search-all', () => import(/* webpackChunkName: "assets/esa" */ './pages/Search/vue-search-all.vue'));
 
 //Staffpicks
 Vue.component('vue-staffpicks-show', () => import(/* webpackChunkName: "assets/ssp" */ './pages/staffpicks/staffpicks-show.vue'));
 
 
 //Login 
-Vue.component('vue-register', () => import(/* webpackChunkName: "assets/lr" */ './pages/profile/login.vue'));
-Vue.component('vue-reset-password', () => import(/* webpackChunkName: "assets/lrp" */ './pages/layouts/reset-password.vue'));
+Vue.component('vue-register', () => import(/* webpackChunkName: "assets/lr" */ './pages/Auth/register.vue'));
+Vue.component('vue-login', () => import(/* webpackChunkName: "assets/lr" */ './pages/Auth/login.vue'));
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

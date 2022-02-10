@@ -8,16 +8,18 @@
 @endsection 
 
 @section('nav')
-    @auth
-        <vue-nav :user= "{{auth()->user()}}"></vue-nav>
-    @endauth
-    @guest
-        <vue-nav></vue-nav>
-    @endguest
+    @if (Browser::isMobile())
+        <vue-nav-mobile navtype="comcreate" :user= "{{ auth()->user() ? auth()->user() : 'null' }}" />
+    @else
+        <vue-nav navtype="comcreate" :user= "{{ auth()->user() ? auth()->user() : 'null' }}" />
+    @endif
 @endsection
+
 @section('content')
     <div id="bodyArea">   
-        <vue-community-create :user="{{auth()->user()}}"/>
+        <vue-community-create 
+            :mobile="{{ Browser::isMobile() ? Browser::isMobile() : 'null' }}"
+            :user="{{ auth()->user() ? auth()->user() : 'null' }}"/>
     </div>
 @endsection
 

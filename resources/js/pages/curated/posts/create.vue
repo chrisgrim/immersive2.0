@@ -1,8 +1,8 @@
 <template>
     <div>
-        <div class="post-create lay-a">
-            <div class="wrapper">
-                <div class="content">
+        <div class="mx-auto my-32 w-full md:px-12 md:py-8 lg:py-0 lg:px-32 max-w-screen-xl">
+            <div class="flex flex-col md:flex-row">
+                <div class="inline-block w-full md:w-4/6">
                     <div class="field h3">
                         <input 
                             type="text" 
@@ -42,10 +42,12 @@
                         </div>
                     </div>
                     <br>
-                    <button @click="submitPost">Submit</button>
+                    <button 
+                        class="rounded-full py-2 px-4 bg-white hover:bg-black hover:text-white hover:border-black"
+                        @click="submitPost">Submit</button>
                 </div>
-                <div class="sidebar">
-                    <div class="sticky">
+                <div class="w-full inline-block md:w-2/6 p-8">
+                    <div class="sticky top-16">
                         <h3>Create a Post</h3>
                         <ul>
                             <li>Once the post has been created you can edit it at anytime.</li>

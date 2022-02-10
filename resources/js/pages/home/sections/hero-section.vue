@@ -1,51 +1,54 @@
 <template>
-    <div class="hero-section__wrapper">
-        <div class="title">
+    <div class="my-8 md:mt-16 md:mb-24">
+        <div class="justify-between flex px-8 my-8 md:px-12 lg:px-32 lg:my-12">
             <h2>{{ name }}</h2>
-            <div class="nav-scroll">
+            <div class="inline-block invisible md:visible">
                 <button 
                     aria-label="Scroll Left"
-                    class="btn round four brd-grey" 
+                    class="rounded-full w-16 h-16 border border-gray-300 p-0" 
                     @click="scrollLeft">
-                    <svg>
+                    <svg class="w-2/4 h-full m-auto">
                         <use :xlink:href="`/storage/website-files/icons.svg#ri-arrow-left-s-line`" />
                     </svg>
                 </button>
                 <button 
                     aria-label="Scroll Right"
-                    class="btn round four brd-grey" 
+                    class="rounded-full w-16 h-16 border border-gray-300 p-0" 
                     @click="scrollRight">
-                    <svg class="remix">
+                    <svg class="w-2/4 h-full m-auto">
                         <use :xlink:href="`/storage/website-files/icons.svg#ri-arrow-right-s-line`" />
                     </svg>
                 </button>
             </div>
         </div>
-        <div class="album-c">
-            <div class="row" ref="scroll">
+        <div 
+            class="h-[calc(125vw-10rem)] overflow-y-hidden overflow-x-auto whitespace-nowrap md:h-128">
+            <div 
+                style="scroll-snap-type: x mandatory;" 
+                class="overflow-x-auto flex scroll-smooth h-[calc(125vw-6.25rem)] custom-h-1 scroll-p-10 md:h-auto lg:scroll-p-32" 
+                ref="scroll">
                 <div 
-                    v-for="(element, index) in elements"
+                    v-for="(element) in elements"
                     :key="element.id"
-                    :class="{ first : index=='0', last : index==elements.length -1}"
-                    class="col">
+                    :class="[ mobile ? 
+                        'flex-[1_0_calc(100%-8rem)] last:pr-8 first:pl-8' : 
+                        'first:pl-32 last:pr-32 flex-[1_0_calc(47%-1rem)] first:ml-0' ]"
+                    class="ml-6 first:ml-0 snap-start snap-always md:min-w-[48rem] md:max-w-[68rem] lg:flex-[1_0_calc(47%-9rem)]">
                     <a 
                         :href="url(element)" 
-                        class="card-url">
-                        <div class="card">
-                            <ImageArray 
-                                :community="element.community"
-                                quality="large"
-                                :element="element" />
-                            <div class="card-body">
-                                <div class="wrapper">
-                                    <div class="blurb">
+                        class="relative block w-full">
+                        <div class="relative h-[calc(125vw-10rem)] rounded-2xl overflow-hidden md:h-[32rem]">
+                            <SingleImage :element="element" />
+                            <div class="relative content-start flex h-full p-10 flex-col w-96">
+                                <div class="flex-1 md:w-[30rem] lg:w-96">
+                                    <div class="overflow-hidden text-ellipsis text-white text-lg">
                                         {{ element.blurb }}
                                     </div>
-                                    <div class="name">
+                                    <div class="text-white mt-4 whitespace-normal text-5xl font-medium">
                                         {{ element.name }}
                                     </div>
                                 </div>
-                                <button>
+                                <button class="border-none rounded-2xl p-4 text-black bg-white w-40 font-bold text-xl">
                                     Show me
                                 </button>
                             </div>
@@ -58,12 +61,12 @@
 </template>
 
 <script>
-    import ImageArray from '../../curated/shelves/vue-album-images.vue'
+    import SingleImage from './Components/vue-hero-image.vue'
     export default {
         
-        props: [ 'dock'],
+        props: [ 'dock', 'mobile'],
 
-        components: { ImageArray },
+        components: { SingleImage },
 
         computed: {
             elements() {

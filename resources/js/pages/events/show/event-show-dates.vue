@@ -24,7 +24,7 @@
                 </svg>
             </button>
             <template v-if="datesVisible">
-                <div class="relative m-0 border border-black p-4 rounded-2xl shadow-hidden">
+                <div class="relative m-0 border border-black p-4 rounded-2xl graydates shadow-hidden lockedcalendar">
                     <flat-pickr
                         v-model="dates"
                         :config="config"                                  

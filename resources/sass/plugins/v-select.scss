@@ -165,3 +165,12 @@
     width: 100%;
     white-space: nowrap;
 }
+
+
+/* Hide Dropdown*/
+.hide-dropdown .vs__dropdown-menu {
+    display: none;
+}
+.hide-dropdown .vs--open .vs__dropdown-toggle {
+    border: 0;
+}

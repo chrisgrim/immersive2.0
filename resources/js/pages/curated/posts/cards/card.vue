@@ -70,7 +70,7 @@
 
         methods: {
             getImage() {
-                return this.mobile ? this.card.thumbImagePath : this.card.largeImagePath
+                return this.mobile ? this.card.thumbImagePath : this.card.largeImagePath ? this.card.largeImagePath : this.card.thumbImagePath
             },
             getEventImage() {
                 return this.mobile ? this.card.event.thumbImagePath : this.card.event.largeImagePath

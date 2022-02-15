@@ -6,14 +6,14 @@
         <div class="whitespace-nowrap overflow-y-hidden overflow-x-auto m-auto w-full">
             <div 
                 style="scroll-snap-type: x mandatory;" 
-                class="flex w-full scroll-p-7 overflow-auto mt-8 scroll-smooth">
+                class="flex w-full scroll-p-7 overflow-auto mt-8 scroll-smooth gap-8">
                 <div 
                     v-for="element in elements.slice(0, count)"
                     :key="element.id"
                     :class="[ number === 'three' 
                         ? 'md:flex-[0_1_50%] md:w-6/12 lg:flex-[0_1_33.3333333333%] lg:w-4/12' 
                         : 'md:flex-[0_1_33.3333333333%] md:w-4/12 lg:flex-[0_1_25%] lg:w-3/12' ]"
-                    class="relative w-full flex flex-[1_0_calc(100%-6rem)] snap-start snap-always px-4 first:ml-[-1rem] last:mr-[-1rem]">
+                    class="relative w-full flex flex-[1_0_calc(100%-6rem)] snap-start snap-always">
                     <div class="flex w-full flex-col overflow-hidden relative">
                         <a 
                             :href="url(element)" 

@@ -11,7 +11,7 @@
                 :key="dock.id"
                 v-for="dock in docks">
                 <template v-if="dock.type === 'h'">
-                    <div class="max-w-screen-2xl relative">
+                    <div class="max-w-screen-2xl relative m-auto">
                         <Hero 
                             :mobile="mobile"
                             :dock="dock" />

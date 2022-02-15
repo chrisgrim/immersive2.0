@@ -5,29 +5,17 @@
 .shadow-hidden .flatpickr-calendar {
     box-shadow: none !important;
 }
-
-
-/*other*/
-
-.lockedcalendar .flatpickr-calendar {
-    box-shadow: none;
-}
 .lockedcalendar .flatpickr-day {
     pointer-events: none;
-    &.selected:hover {
-        background-color: red;
-    }
+}
+.flatpickr-day.hidden {
+    display: inherit;
+}
+.graydates .flatpickr-day.flatpickr-disabled {
+    background: #cecece;
+    color: rgba(8,8,8,.79);
 }
 
-.lockedcalendar .flatpickr-calendar.inline {
-    margin: inherit;
-}
-
-@media (max-width: 768px) {
-    .lockedcalendar .flatpickr-calendar.inline {
-        margin: auto;
-    }
-}
 
 .flatpickr-calendar.inline {
     margin: auto;

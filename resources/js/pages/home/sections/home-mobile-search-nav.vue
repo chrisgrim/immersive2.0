@@ -27,7 +27,7 @@
                                 <use :xlink:href="`/storage/website-files/icons.svg#ri-arrow-left-s-line`" />
                             </svg>
                         </button>
-                        <div class="relative w-full border-none">
+                        <div class="relative w-full border-none hide-dropdown">
                             <v-select
                                 auto-focus="true"
                                 v-model="searchInput"

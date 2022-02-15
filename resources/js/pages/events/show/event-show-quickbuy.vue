@@ -72,7 +72,7 @@
                         </svg>
                     </button>
                     <template v-if="datesVisible">
-                        <div class="absolute border shadow-custom-1 bg-white px-8 pt-36 pb-8 max-h-[calc(100vh-20rem)] overflow-y-scroll overflow-x-hidden rounded-2xl top-[-2rem] right-[-2rem] shadow-hidden">
+                        <div class="absolute border shadow-custom-1 bg-white px-8 pt-36 pb-8 max-h-[calc(100vh-20rem)] overflow-y-scroll overflow-x-hidden rounded-2xl top-[-2rem] right-[-2rem] graydates shadow-hidden lockedcalendar">
                             <flat-pickr
                                 v-model="dates"
                                 :config="config"                                  
@@ -116,7 +116,7 @@
                         </svg>
                     </button>
                     <template v-if="datesVisible">
-                        <div class="absolute border shadow-custom-1 bg-white px-8 pt-36 pb-8 max-h-[calc(100vh-20rem)] overflow-y-scroll overflow-x-hidden rounded-2xl top-[-2rem] right-[-2rem] shadow-hidden">
+                        <div class="absolute border shadow-custom-1 bg-white px-8 pt-36 pb-8 max-h-[calc(100vh-20rem)] overflow-y-scroll overflow-x-hidden rounded-2xl top-[-2rem] right-[-2rem] graydates shadow-hidden lockedcalendar">
                             <flat-pickr
                                 v-model="dates"
                                 :config="config"                                  

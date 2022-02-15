@@ -59,5 +59,9 @@ export default {
         },
     },
 
+    mounted() {
+        this.generateSearchList()
+    }
+
 };
 </script>

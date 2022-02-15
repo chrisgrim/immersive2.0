@@ -29,7 +29,7 @@ class CardActions
         ]);
 
         if ($request->thumbImagePath) { $card->update(['thumbImagePath' => $request->thumbImagePath]); }
-        if ($request->image) { ImageFile::saveCardImage($request, $card, 800, 450, 'card'); }
+        if ($request->image) { ImageFile::saveImage($request, $card, 800, 450, 'card'); }
 
         return $post->load('cards', 'user');
     }

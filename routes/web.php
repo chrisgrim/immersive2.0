@@ -32,10 +32,10 @@ Route::POST('/vuex/search', 'SearchController@filterIndex');
 
 //Get Messages from database
 Route::GET('/messages', 'ConversationsController@index');
-Route::POST('/conversations/fetch/messages', 'ConversationsController@fetchmessages');
-Route::POST('/conversations/fetch/eventmessages', 'ConversationsController@fetcheventmessages');
 Route::GET('/conversations/{conversation}', 'ConversationsController@show');
 Route::POST('/conversations/{conversation}', 'ConversationsController@update');
+Route::POST('/convo/fetch/messages', 'ConversationsController@fetchmessages');
+Route::POST('/convo/fetch/eventmessages', 'ConversationsController@fetcheventmessages');
 
 //Organizer 
 Route::RESOURCE('organizer', 'OrganizerController');

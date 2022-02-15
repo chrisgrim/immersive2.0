@@ -151,7 +151,9 @@
                             :center="map.center" 
                             :options="{ scrollWheelZoom: false, zoomControl: true }">
                             <l-tile-layer :url="map.url" />
-                            <l-marker :lat-lng="map.center">
+                            <l-marker 
+                                :icon="icon"
+                                :lat-lng="map.center">
                                 <l-icon
                                     :iconSize="[25, 40]"
                                     :iconAnchor="[0,40]">
@@ -186,15 +188,8 @@
     import _ from 'lodash'
     import Submit  from './components/submit-buttons.vue'
     
-    import { Icon }  from 'leaflet';
     import 'leaflet/dist/leaflet.css';
-    delete Icon.Default.prototype._getIconUrl;
-    Icon.Default.mergeOptions({
-      iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
-      iconUrl: require('leaflet/dist/images/marker-icon.png'),
-      shadowUrl: require('leaflet/dist/images/marker-shadow.png')
-    });
-
+    import L from 'leaflet';
     export default {
         props: ['event', 'remote'],
 
@@ -241,6 +236,11 @@
                 loading: false,
                 updated: false,
                 creationPage: 2,
+                icon: L.icon({
+                    iconUrl: '/images/vendor/leaflet/dist/marker-icon.png',
+                    iconSize: [32, 37],
+                    iconAnchor: [16, 37]
+                }),
             }
         },
         methods: {

@@ -22,6 +22,15 @@ class ImageFile extends Model
         ImageFile::updateThumbImagePath($collection, $name, $type);
     }
 
+    public static function saveCardImage($request, $collection, $width, $height, $type)
+    {
+        $name = ImageFile::generateName($collection);
+        $fileName = ImageFile::generateFileName($request, $name);
+        ImageFile::storeSmallImage($request, $collection, $name, $fileName, $width, $height, $type);
+        ImageFile::updateThumbImagePath($collection, $name, $type);
+        ImageFile::removeLargeImage($collection, $name, $fileName, $type);
+    }
+
     public static function replaceImage($request, $collection, $width, $height, $type)
     {
         ImageFile::deletePreviousImages($collection);
@@ -33,15 +42,6 @@ class ImageFile extends Model
         ImageFile::updateThumbImagePath($collection, $name, $type);
     }
 
-    public static function saveCardImage($request, $collection, $width, $height, $type)
-    {
-        $name = ImageFile::generateName($collection);
-        $fileName = ImageFile::generateFileName($request, $name);
-        ImageFile::storeSmallImage($request, $collection, $name, $fileName, $width, $height, $type);
-        ImageFile::updateThumbImagePath($collection, $name, $type);
-        ImageFile::removeLargeImage($collection, $name, $fileName, $type);
-    }
-
     public static function replaceCardImage($request, $collection, $width, $height, $type)
     {
         if ($collection->thumbImagePath) {
@@ -49,9 +49,10 @@ class ImageFile extends Model
         }
         $name = ImageFile::generateName($collection);
         $fileName = ImageFile::generateFileName($request, $name);
-        ImageFile::storeSmallImage($request, $collection, $name, $fileName, $width, $height, $type);
+        ImageFile::storeSmallImage($request, $collection, $name, $fileName, $width/2, $height/2, $type);
+        ImageFile::storeLargeImage($request, $collection, $name, $fileName, $width, $height, $type);
+        ImageFile::updateLargeImagePath($collection, $name, $type);
         ImageFile::updateThumbImagePath($collection, $name, $type);
-        ImageFile::removeLargeImage($collection, $name, $fileName, $type);
     }
 
     public static function generateName($collection)

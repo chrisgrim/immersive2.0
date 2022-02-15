@@ -33,7 +33,7 @@
                         </div>
                         <template v-if="card.tag_line">
                             <div class="mt-4 overflow-hidden text-ellipsis m-h-16">
-                                <p>
+                                <p class="text-1xl leading-7">
                                     {{ card.tag_line }} 
                                 </p>
                             </div>

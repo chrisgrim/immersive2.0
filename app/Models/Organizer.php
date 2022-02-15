@@ -213,7 +213,7 @@ class Organizer extends Model
         $organizers = auth()->user()->allOrganizers();
 
         foreach ($organizers as $organizer) {
-            $organizer->load('listedEvents', 'archivedEvents');
+            $organizer->load('listedEvents.shows', 'archivedEvents.shows');
         }
 
         return $organizers;

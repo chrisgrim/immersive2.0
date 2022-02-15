@@ -1,6 +1,8 @@
 <template>
     <div class="w-full grid grid-cols-5 md:h-[calc(100vh-8rem)]">
-        <div class="bg-slate-700 overflow-auto">
+        <div 
+            v-if="!messageShow || !mobile"
+            class="bg-slate-700 overflow-auto h-screen md:h-full">
             <div class="my-8">
                 <div 
                     @click="eventsOpen =! eventsOpen"
@@ -40,11 +42,14 @@
                 </div>
             </div>
         </div>
-        <div class="flex flex-col col-span-4 relative h-full">
+        <div 
+            v-if="messageShow || !mobile"
+            class="flex flex-col col-span-4 relative h-full">
             <Conversation 
                 v-if="conversation"
                 :user="user"
                 :mobile="mobile"
+                @back="goBack"
                 v-model="conversation" />
         </div>
     </div>
@@ -70,12 +75,14 @@
                 eventsOpen: true,
                 eventSearch: null,
                 messageSearch: null,
-                url: new URL(window.location.href).searchParams.get("event")
+                url: new URL(window.location.href).searchParams.get("event"),
+                messageShow: this.mobile ? false : true
             }
         },
 
         methods: {
             async fetchConversation(convo) {
+                if (this.mobile) { this.messageShow = true }
                 this.url = convo
                 await axios.get(`/conversations/${convo}`)
                 .then( res => {
@@ -99,7 +106,7 @@
                 }, 300); // delay
             },
             async fetchEvents() {
-                await axios.post(`/conversations/fetch/eventmessages`, {search: this.eventSearch})
+                await axios.post(`/convo/fetch/eventmessages`, {search: this.eventSearch})
                 .then( res => {
                     this.eventList = res.data
                 })
@@ -110,6 +117,10 @@
                     this.messageList = res.data
                 })
             },
+            goBack() {
+                this.messageShow = false
+                history.pushState(null, null,'/messages')
+            }
 
         },
 

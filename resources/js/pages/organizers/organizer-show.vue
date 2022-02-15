@@ -1,16 +1,16 @@
 <template>
-    <section class="m-auto w-full px-8 md:py-8 md:px-12 lg:py-0 lg:px-32 lg:max-w-screen-xl lg:pt-24">
+    <section class="m-auto w-full md:px-8 md:py-8 md:px-12 lg:py-0 lg:px-32 lg:max-w-screen-xl lg:pt-24">
         <div class="flex flex-col md:flex-row">
             <template v-if="mobile">
-                <nav class="es__mobile-nav">
-                    <button 
-                        @click="onBack"
-                        class="arrow svg">
-                        <svg>
-                            <use :xlink:href="`/storage/website-files/icons.svg#ri-arrow-left-s-line`" />
-                        </svg>
-                    </button>
-                </nav>
+                <button 
+                    aria-label="back button"
+                    type="button"
+                    @click="onBack"
+                    class="absolute flex top-8 left-8 z-10 p-1 rounded-full shadow-lg bg-white">
+                    <svg class="h-12 w-12">
+                        <use :xlink:href="`/storage/website-files/icons.svg#ri-arrow-left-s-line`" />
+                    </svg>
+                </button>
             </template>
             <template v-else>
                 <div class="w-full inline-block md:w-2/6 md:px-8 lg:p-8">
@@ -33,7 +33,7 @@
                 </div>
             </template>
             <div class="w-full inline-block md:w-4/6">
-                <div class="w-3/4 inline-block p-8 md:w-full md:px-0">
+                <div class="w-3/4 inline-block p-8 float-right md:float-left md:w-full md:px-0">
                     <div class="name">
                         <h2>{{ organizer.name }}</h2>
                     </div>
@@ -49,6 +49,7 @@
                                     type="image/webp" 
                                     :srcset="`/storage/${organizer.thumbImagePath}`"> 
                                 <img 
+                                    class="w-full h-full"
                                     :src="`/storage/${organizer.thumbImagePath.slice(0, -4)}jpg`" 
                                     :alt="`${organizer.name} organizer`">
                             </picture>

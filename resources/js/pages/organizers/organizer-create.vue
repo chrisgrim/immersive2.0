@@ -70,7 +70,7 @@
                     </div>
                 </section>
             </div>
-            <div class="w-full inline-block md:w-4/6">
+            <div class="w-full inline-block md:w-4/6 mb-8">
                 <div class="title">
                     <h2>Create Organizer</h2>
                 </div>
@@ -217,7 +217,6 @@ export default {
             window.location.href = `/create/events/edit`
         },
         addImage(image) {
-            this.$v.organizer.$touch()
             this.disabled = false
             this.formData.append('image', image);
         },

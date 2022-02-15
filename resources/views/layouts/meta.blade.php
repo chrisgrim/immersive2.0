@@ -27,7 +27,7 @@
                 type="text/css"
             />
         </noscript>
-        <script async src="https://www.googletagmanager.com/gtag/js?id={{Config::get('services.analytics.id')}}"></script>
+        <script async rel="preconnect" src="https://www.googletagmanager.com/gtag/js?id={{Config::get('services.analytics.id')}}"></script>
         <script>
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}

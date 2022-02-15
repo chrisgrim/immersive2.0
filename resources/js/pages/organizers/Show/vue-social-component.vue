@@ -1,8 +1,8 @@
 <template>
-    <div>
-        <div class="flex flex-col mb-8 p-4">
+    <div class="w-full p-4 md:p-0">
+        <div class="flex flex-col items-start mb-8 w-full truncate">
             <a 
-                class="flex items-center mb-2" 
+                class="flex items-center mb-2 truncate w-full" 
                 rel="noreferrer noopener" 
                 target="_blank"
                 :href="`https://www.twitter.com/${organizer.twitterHandle}`" 
@@ -10,7 +10,7 @@
                 <svg class="m-2 w-10 h-10">
                     <use :xlink:href="`/storage/website-files/icons.svg#ri-twitter-line`" />
                 </svg>
-                <p>{{ organizer.twitterHandle }}</p>
+                <p class="text-xl">{{ organizer.twitterHandle }}</p>
             </a>
             <a 
                 class="flex items-center mb-2" 
@@ -21,7 +21,7 @@
                 <svg class="m-2 w-10 h-10">
                     <use :xlink:href="`/storage/website-files/icons.svg#ri-facebook-line`" />
                 </svg>
-                <p>{{ organizer.facebookHandle }}</p>
+                <p class="text-xl">{{ organizer.facebookHandle }}</p>
             </a>
             <a 
                 class="flex items-center mb-2" 
@@ -32,7 +32,7 @@
                 <svg class="m-2 w-10 h-10">
                     <use :xlink:href="`/storage/website-files/icons.svg#ri-instagram-line`" />
                 </svg>
-                <p>{{ organizer.instagramHandle }}</p>
+                <p class="text-xl">{{ organizer.instagramHandle }}</p>
             </a>
             <a 
                 class="flex items-center mb-2" 
@@ -43,7 +43,7 @@
                 <svg class="m-2 w-10 h-10">
                     <use :xlink:href="`/storage/website-files/icons.svg#ri-global-line`" />
                 </svg>
-                <p>{{ organizer.name }}</p>
+                <p class="text-xl">{{ organizer.name }}</p>
             </a>
         </div>
         <template v-if="organizer.patreon">

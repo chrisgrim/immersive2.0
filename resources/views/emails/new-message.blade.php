@@ -29,7 +29,7 @@
             width: 100%;
             ">
             <div style="text-align: center;max-width: 550px;margin: auto;padding: 0rem 1rem;">
-                <span style="font-family: 'Sen', sans-serif;color: white;"><p style="white-space: pre-line;">"{{$attributes['body']}}"</p></span>
+                <span style="font-family: 'Sen', sans-serif;color: white;"><p style="white-space: pre-line;">{!! $attributes['body'] !!}</p></span>
             </div>
         </div>
         <div style="text-align: center;max-width: 550px;margin: auto;padding: 2rem 1rem;">

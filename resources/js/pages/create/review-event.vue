@@ -38,16 +38,8 @@
 </template>
 
 <script>
-    import { Icon }  from 'leaflet';
-    import 'leaflet/dist/leaflet.css';
-    delete Icon.Default.prototype._getIconUrl;
-    Icon.Default.mergeOptions({
-      iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
-      iconUrl: require('leaflet/dist/images/marker-icon.png'),
-      shadowUrl: require('leaflet/dist/images/marker-shadow.png')
-    });
+
     import formValidationMixin from '../../mixins/form-validation-mixin'
-    import {LMap, LTileLayer, LMarker, LPopup} from 'vue2-leaflet'
     import ShowMore  from '../../components/ShowMore.vue'
     import EventHeader  from '../Events/Show/event-show-header.vue'
     import EventDetails  from '../Events/Show/event-show-details.vue'
@@ -65,17 +57,10 @@
 
         mixins: [ formValidationMixin ],
 
-        components: { LMap, LTileLayer, LMarker, LPopup, ShowMore, EventHeader, EventAbout, EventDetails, EventDates, EventOrganizer, EventLocation, EventStaffpick, EventReviews, EventQuickBuy },
+        components: { ShowMore, EventHeader, EventAbout, EventDetails, EventDates, EventOrganizer, EventLocation, EventStaffpick, EventReviews, EventQuickBuy },
 
         computed: {
-            locationPlaceholder() {
-                return this.event.location.postal_code || this.event.location.city ? (this.event.location.home ? this.event.location.home + ' ' : '') 
-                + (this.event.location.street ? this.event.location.street + ' | ' : '') 
-                + (this.event.location.city ? this.event.location.city + ' | ' : '') 
-                + (this.event.location.region ? this.event.location.region + ' | ' : '') 
-                + (this.event.location.country ? this.event.location.country : '') 
-                : '';
-            },
+
 
             eventUrl() {
                 if (this.loadevent.ticketUrl) {return this.loadevent.ticketUrl}
@@ -88,10 +73,6 @@
         data() {
             return {
                 event: this.loadevent ? this.loadevent : '',
-                zoom:13,
-                center: this.loadevent.location_latlon,
-                url:'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
-                attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
                 week: this.loadevent ? this.loadevent.show_on_going : '',
                 showEventClass: 'show-heart-location',
                 showEventMobileClass: 'show-heart-mobile-location',

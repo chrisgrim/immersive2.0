@@ -6,7 +6,7 @@
                     <CardImage
                         v-if="user.isUser || user.thumbImagePath"
                         :loading="disabled"
-                        :locked="!user.isUser"
+                        :locked="!user.isUser || !user.email_verified_at"
                         text="The image must be at least 400px x 400px"
                         :image="image"
                         @addImage="addImage" />
@@ -59,12 +59,11 @@
                         <button 
                             :disabled="disabled" 
                             @click.prevent="resend" 
-                            class="border-none bg-orange-500 text-white my-4" 
+                            class="border-none bg-orange-500 text-white my-4 hover:bg-black" 
                             v-if="user.isUser && !user.email_verified_at && !onSent">
                             Please verify your account.
                         </button>
-                        <div 
-                            @mouseover="onSent=false"
+                        <div
                             class="border w-96 p-4 rounded-2xl my-4" 
                             v-if="user.isUser && !user.email_verified_at && onSent">
                             Please check your email.
@@ -162,8 +161,9 @@
                 setTimeout(() => this.updated = false, 3000);
             },
             async resend() {
-                await axios.post(`/email/verification-notification`);
-                this.onSent = true;
+                await axios.post(`/email/verification-notification`)
+                this.onSent = true
+                setTimeout(() => this.onSent = false, 10000);
             },
             cleanDate(data) {
                 return this.$dayjs(data).format("YYYY");

@@ -63,6 +63,7 @@
                         <l-marker 
                             v-for="event in events"
                             :key="event.id" 
+                            :icon="icon"
                             :lat-lng="event.location_latlon">
                             <l-icon
                                 :iconSize="[100, 30]"
@@ -85,14 +86,8 @@
 
 <script>
 
-    import { Icon }  from 'leaflet';
     import 'leaflet/dist/leaflet.css';
-    delete Icon.Default.prototype._getIconUrl;
-    Icon.Default.mergeOptions({
-      iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
-      iconUrl: require('leaflet/dist/images/marker-icon.png'),
-      shadowUrl: require('leaflet/dist/images/marker-shadow.png')
-    });
+    import L from 'leaflet';
     import {LMap, LTileLayer, LMarker, LPopup, LIcon} from 'vue2-leaflet'
     import Vue2LeafletMarkerCluster from 'vue2-leaflet-markercluster'
     import PopupContent from "./Components/map-popup-content"
@@ -115,6 +110,11 @@
         data() {
             return {
                 map: this.initializeMapObject(),
+                icon: L.icon({
+                    iconUrl: '/images/vendor/leaflet/dist/marker-icon.png',
+                    iconSize: [32, 37],
+                    iconAnchor: [16, 37]
+                }),
                 toggle: new URL(window.location.href).searchParams.get("live") ? new URL(window.location.href).searchParams.get("live") : false,
                 wideMap: false,
             }

@@ -74,7 +74,7 @@ class EventController extends Controller
     public function review(Event $event)
     {
         $this->authorize('finalize', $event);
-        $event->load('category', 'location', 'contentAdvisories', 'contactLevels', 'mobilityAdvisories', 'advisories', 'showOnGoing', 'remotelocations', 'timezone', 'genres');
+        $event->load('category', 'location', 'contentAdvisories', 'contactLevels', 'mobilityAdvisories', 'advisories', 'showOnGoing', 'remotelocations', 'timezone', 'genres', 'organizer', 'shows');
         $tickets = $event->shows()->first()->tickets()->orderBy('ticket_price')->get();
         return view('create.review', compact('event', 'tickets'));
     }

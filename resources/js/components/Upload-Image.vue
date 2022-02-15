@@ -96,8 +96,12 @@
             },
             backgroundImage() {
                 if (!this.hasImage) { return }
-                if (this.imageFile.src && !this.$v.imageFile.$error) { return `backgroundImage: url('${this.imageFile.src}')` }
-                return `backgroundImage: url('${this.image.slice(0, -4)}jpg?timestamp=${new Date().getTime()}')`
+                if (this.imageFile.src && !this.$v.imageFile.$error) { 
+                    return `backgroundImage: url('${this.imageFile.src}')` }
+                if (this.image) {
+                    return `backgroundImage: url('${this.image.slice(0, -4)}jpg?timestamp=${new Date().getTime()}')`
+                }
+                return ''
             },
         },
 

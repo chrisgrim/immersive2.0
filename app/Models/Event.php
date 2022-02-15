@@ -43,14 +43,14 @@ class Event extends Model
     *
     * @var array
     */
-    protected $with = ['favorites', 'priceranges', 'shows','age_limits', 'organizer'];
+    // protected $with = ['favorites', 'priceranges', 'shows','age_limits', 'organizer'];
 
     /**
     * The accessors to append to the model's array form.
     *
     * @var array
     */
-    protected $appends = ['isFavorited', 'isShowing', 'averageRating', 'ratingAmount', 'hasRated'];
+    protected $appends = ['isFavorited', 'isShowing'];
 
         /**
      * The "booted" method of the model.

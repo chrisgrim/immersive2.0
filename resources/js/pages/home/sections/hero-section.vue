@@ -32,8 +32,8 @@
                     :key="element.id"
                     :class="[ mobile ? 
                         'flex-[1_0_calc(100%-8rem)] last:pr-8 first:pl-8' : 
-                        'first:pl-32 last:pr-32 flex-[1_0_calc(47%-1rem)] first:ml-0' ]"
-                    class="ml-6 first:ml-0 snap-start snap-always md:min-w-[48rem] md:max-w-[68rem] lg:flex-[1_0_calc(47%-9rem)]">
+                        'first:pl-32 last:pr-32 flex-[1_0_calc(50%-1rem)] first:ml-0' ]"
+                    class="ml-6 first:ml-0 snap-start snap-always md:min-w-[48rem] md:max-w-[68rem] lg:flex-[1_0_calc(50%-9rem)]">
                     <a 
                         :href="url(element)" 
                         class="relative block w-full">

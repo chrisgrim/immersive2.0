@@ -1,18 +1,31 @@
 <template>
-    <div class="h-full flex flex-col justify-between md:h-[calc(100vh-8rem)]">
+    <div class="h-full flex flex-col justify-between h-[calc(100vh-8rem)]">
+        <div 
+            v-if="mobile"
+            class="w-full h-32 p-4 border-b px-8 flex relative">
+            <button 
+                aria-label="back button"
+                type="button"
+                @click="onBack"
+                class="flex left-8 z-10 p-1 rounded-full shadow-lg bg-white">
+                <svg class="h-12 w-12">
+                    <use :xlink:href="`/storage/website-files/icons.svg#ri-arrow-left-s-line`" />
+                </svg>
+            </button>
+        </div>
         <div 
             v-if="event"
-            class="w-full h-52 p-4 border-b px-8 flex relative">
+            class="w-full p-4 border-b px-8 flex relative">
             <picture>
                 <source 
                     type="image/webp" 
                     :srcset="`/storage/${mobile ? event.thumbImagePath : event.largeImagePath}`"> 
                 <img 
-                    class="h-44 object-cover md:rounded-xl"
+                    class="h-20 md:h-44 object-cover rounded-xl"
                     :src="`/storage/${mobile ? event.thumbImagePath.slice(0, -4) : event.largeImagePath.slice(0, -4)}jpg`" 
                     :alt="`${event.name} Immersive Event`">
             </picture>
-            <h2 class="ml-4">{{ event.name}} </h2>
+            <h2 class="ml-4 text-2xl leading-6 md:text-3xl md:leading-8">{{ event.name}} </h2>
         </div>
         
 
@@ -129,6 +142,9 @@
                     this.reset()
                     this.scrollToEnd()
                 })
+            },
+            onBack() {
+                this.$emit('back');
             },
             cleanDate(data) {
                 return this.$dayjs(data).format("MMM DD YYYY");

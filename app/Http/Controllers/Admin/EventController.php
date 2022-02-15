@@ -48,7 +48,7 @@ class EventController extends Controller
      */
     public function show(Event $event)
     {
-        $event->load('category', 'location', 'contentAdvisories', 'contactLevels', 'mobilityAdvisories', 'eventreviews', 'staffpick', 'advisories', 'showOnGoing','interactive_level', 'remotelocations', 'timezone','genres','ratings.user');
+        $event->load('category', 'location', 'contentAdvisories', 'contactLevels', 'mobilityAdvisories', 'eventreviews', 'staffpick', 'advisories', 'showOnGoing','interactive_level', 'remotelocations', 'timezone','genres','ratings.user', 'shows', 'organizer');
         $tickets = $event->shows()->first()->tickets()->orderBy('ticket_price')->get();
         return view('adminArea.show', compact('event', 'tickets'));
     }
@@ -62,7 +62,7 @@ class EventController extends Controller
     {
         return Event::where('status','p')
             ->orWhere('status','e')
-            ->with('user','clicks','category', 'location', 'remotelocations')
+            ->with('user','clicks','category', 'location', 'remotelocations', 'organizer', 'shows')
             ->when(request('date') === 'published', function ($q) {
                 return $q->orderByDesc('published_at');
             })
@@ -101,7 +101,7 @@ class EventController extends Controller
      */
     public function finalize(Event $event)
     {
-        $event->load('category', 'location', 'contentAdvisories', 'contactLevels', 'mobilityAdvisories', 'eventreviews', 'staffpick', 'advisories', 'showOnGoing','interactive_level', 'remotelocations', 'timezone', 'genres');
+        $event->load('category', 'location', 'contentAdvisories', 'contactLevels', 'mobilityAdvisories', 'eventreviews', 'staffpick', 'advisories', 'showOnGoing','interactive_level', 'remotelocations', 'timezone', 'genres', 'organizer', 'shows');
         $tickets = $event->shows()->first()->tickets()->orderBy('ticket_price')->get();
         $eventExists = Event::where('slug', Str::slug($event->name))->where('id', '!=', $event->id)->first();
         return view('adminArea.showapproval',compact('event', 'tickets', 'eventExists'));

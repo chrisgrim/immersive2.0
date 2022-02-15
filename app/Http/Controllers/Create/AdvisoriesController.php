@@ -31,7 +31,7 @@ class AdvisoriesController extends Controller
     public function create(Event $event)
     {
         if ($event->checkEventStatus(6)) return back();
-        $event->load('contentAdvisories', 'contactLevels', 'mobilityAdvisories', 'advisories', 'interactive_level');
+        $event->load('contentAdvisories', 'contactLevels', 'mobilityAdvisories', 'advisories', 'interactive_level', 'age_limits');
         $contactAdvisories = ContactLevel::all();
         $contentAdvisories = ContentAdvisory::where('admin', true)->orWhere('user_id', auth()->user()->id)->get();
         $mobilityAdvisories = MobilityAdvisory::where('admin', true)->orWhere('user_id', auth()->user()->id)->get();

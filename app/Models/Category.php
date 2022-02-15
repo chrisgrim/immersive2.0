@@ -28,7 +28,7 @@ class Category extends Model
      *
      * @var array
      */
-    protected $appends = ['hasEvent'];
+    // protected $appends = ['hasEvent'];
 
     /**
      * The "booted" method of the model.

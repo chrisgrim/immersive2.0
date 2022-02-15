@@ -10,7 +10,7 @@
             <!-- If user is logged in -->
             <template v-if="user">
                 <div 
-                    class="rounded-full bg-default-red w-4 h-4 absolute top-0 right-0"
+                    class="rounded-full bg-default-red w-4 h-4 absolute top-0 right-0 border border-white"
                     v-if="user.unread" />
                 <template v-if="user.largeImagePath">
                     <picture>
@@ -19,7 +19,7 @@
                             :srcset="`/storage/${user.thumbImagePath}`"> 
                         <img 
                             class="w-12 h-12"
-                            :src="`/storage/${user.thumbImagePath.slice(0, -4)}jpg`" 
+                            :src="`/storage/${user.thumbImagePath.slice(0, -4)}jpg?timestamp=${new Date().getTime()}`" 
                             :alt="user.name + `'s account`">
                     </picture>
                 </template>
@@ -30,7 +30,7 @@
                         :alt="user.name + `'s account`">
                 </template>
                 <template v-else>
-                    <h2>
+                    <h2 class="text-white text-2xl uppercase">
                         {{ user.name.charAt(0) }}
                     </h2>
                 </template>

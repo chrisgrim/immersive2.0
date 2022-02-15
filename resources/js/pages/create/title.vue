@@ -161,28 +161,23 @@
                     this.serverErrors = error.response.data;
                 })
             },
-
             async changeTitle(value) {
                 await axios.patch( `/create/${this.event.slug}/change-title`, value );
                 this.modal = '';
                 this.titleUpdated = true;
                 setTimeout(() => this.titleUpdated = false, 3000);
             },
-
             clearInput() {
                 this.serverErrors = {};
                 this.$v.title.name.$touch();
             },
-
             acceptNewEvent() {
                 this.newEvent = false;
             },
-
             acceptDuplicateName() {
                 this.title.accept_duplicate_name = true;
                 this.clearInput()
             },
-
             initializeTitleObject() {
                 return {
                     name: this.event.name ? this.event.name : '',
@@ -194,7 +189,6 @@
 
         created() {
             this.onLoad();
-            this.disabled = false;
         },
 
         watch: {

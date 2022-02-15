@@ -35,8 +35,14 @@
                             :center="center" 
                             :options="{ scrollWheelZoom: false, zoomControl: true }">
                             <l-tile-layer :url="url" />
-                            <l-marker :lat-lng="center">
+                            <l-marker 
+                                :icon="icon"
+                                :lat-lng="center">
                                 <l-icon
+                                    icon-url="'leaflet/dist/images/marker-icon.png'"
+                                    icon-retina-url="'leaflet/dist/images/marker-icon-2x.png'"
+                                    shadow-url="'leaflet/dist/images/marker-shadow.png'"
+                                    shadow-retina-url="'leaflet/dist/images/marker-shadow.png'"
                                     :iconSize="[25, 40]"
                                     :iconAnchor="[0,40]">
                                     <a 
@@ -74,14 +80,8 @@
 </template>
 
 <script>
-    import { Icon }  from 'leaflet';
     import 'leaflet/dist/leaflet.css';
-    delete Icon.Default.prototype._getIconUrl;
-    Icon.Default.mergeOptions({
-      iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
-      iconUrl: require('leaflet/dist/images/marker-icon.png'),
-      shadowUrl: require('leaflet/dist/images/marker-shadow.png')
-    });
+    import L from 'leaflet';
     import {LMap, LTileLayer, LMarker, LIcon} from 'vue2-leaflet'
     export default {
 
@@ -93,6 +93,11 @@
             return {
                 zoom:13,
                 center: this.event.location_latlon,
+                icon: L.icon({
+                    iconUrl: '/images/vendor/leaflet/dist/marker-icon.png',
+                    iconSize: [32, 37],
+                    iconAnchor: [16, 37]
+                }),
                 url: "https://{s}.tile.jawg.io/jawg-sunny/{z}/{x}/{y}{r}.png?access-token=5Pwt4rF8iefMU4hIcRqZJ0GXPqWi5l4NVjEn4owEBKOdGyuJVARXbYTBDO2or3cU",
                 attribution:
                 '<a href="http://jawg.io" title="Tiles Courtesy of Jawg Maps" target="_blank">&copy; <b>Jawg</b>Maps</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',

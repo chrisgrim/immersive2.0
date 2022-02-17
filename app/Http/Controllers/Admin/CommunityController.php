@@ -33,6 +33,17 @@ class CommunityController extends Controller
      */
     public function index()
     {
+        $communities = Community::with('curators', 'owner')->paginate(10);
+        return view('adminArea.Communities.index', compact('communities'));
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function queue()
+    {
         $communities = Community::where('status', 'r')->paginate(20);
         return view('adminArea.communities', compact('communities'));
     }

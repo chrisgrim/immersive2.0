@@ -55,7 +55,7 @@
                 <div 
                     style="display:flex;" 
                     @click="onEdit=true">
-                    <p>Closing Date: {{ cleanDate(card.event.closingDate) }}</p>
+                    <p class="mt-4 text-1xl">Closing Date: {{ cleanDate(card.event.closingDate) }}</p>
                     <template v-if="onEdit">
                         <a target="_blank" :href="`/create/${card.event.slug}/shows`"><button>Edit dates</button></a>
                         <a target="_blank" :href="`${card.event.ticketUrl}`"><button>Check Event</button></a>
@@ -63,7 +63,9 @@
                 </div>
             </template>
 
-            <template v-if="card.blurb">
+            <div 
+                class="mt-4" 
+                v-if="card.blurb">
                 <template v-if="onEdit">
                     <tiptap 
                         @cancel="resetCard"
@@ -82,7 +84,7 @@
                         <p v-html="card.blurb" />
                     </div>
                 </template>
-            </template>
+            </div>
 
             <template v-if="hover && !onEdit">
                 <div class="absolute top-[-1rem] right-[-1rem]">

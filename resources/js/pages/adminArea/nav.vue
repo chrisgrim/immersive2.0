@@ -81,6 +81,16 @@
 
             <a 
                 v-if="admin" 
+                href="/admin/communities/index">
+                <button 
+                    :class="{active: active == 'communities'}" 
+                    class="admin-menu__item">
+                    Edit Communities
+                </button>
+            </a>
+
+            <a 
+                v-if="admin" 
                 href="/admin/docks">
                 <button 
                     :class="{active: active == 'docks'}" 
@@ -267,6 +277,7 @@
                 path == '/interactivelevels/create' ? this.active = 'interactive' : '';
                 path == '/admin/users' ? this.active = 'users' : '';
                 path == '/admin/events' ? this.active = 'events' : '';
+                path == '/admin/communities' ? this.active = 'communities' : '';
                 path == '/admin/boneyard' ? this.active = 'boneyard' : '';
                 path == '/admin/events/purgatory' ? this.active = 'purgatory' : '';
                 path == '/admin/organizer' ? this.active = 'organizers' : '';

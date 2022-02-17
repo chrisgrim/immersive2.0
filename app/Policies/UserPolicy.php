@@ -18,6 +18,6 @@ class UserPolicy
      */
     public function update(User $user, User $model)
     {
-        return $user->id === auth()->user()->id || auth()->user()->type === 'a' || auth()->user()->type === 'm';
+        return $model->id === $user->id || auth()->user()->type === 'a' || auth()->user()->type === 'm';
     }
 }

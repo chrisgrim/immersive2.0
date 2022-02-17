@@ -4,7 +4,7 @@
         @mouseleave="overImage = false"
         class="relative w-96 h-96">
         <label 
-            :class="[ locked ? 'cursor-default' : 'cursor-pointer', overImage ? 'before:bg-[#aeaeae5c] before:absolute before:w-full before:h-full before:rounded-full' : '' ]"
+            :class="[ locked ? 'cursor-default' : 'cursor-pointer', overImage && !locked ? 'before:bg-[#aeaeae5c] before:absolute before:w-full before:h-full before:rounded-full' : '' ]"
             class="justify-center items-center flex mb-8 rounded-full border w-full h-full bg-cover bg-center bg-no-repeat flex-col" 
             :style="backgroundImage">  
             <div v-if="!hasImage || overImage && !locked">

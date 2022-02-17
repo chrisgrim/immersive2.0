@@ -37,5 +37,6 @@ Route::GET('admin/genres/search', 'Admin\SearchController@genres');
 Route::GET('admin/events/search', 'Admin\SearchController@events');
 Route::GET('admin/purgatory/search', 'Admin\SearchController@purgatory');
 Route::GET('admin/users/search', 'Admin\SearchController@users');
+Route::GET('admin/communities/search', 'Admin\SearchController@communities');
 
 

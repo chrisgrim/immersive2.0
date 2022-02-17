@@ -1,6 +1,6 @@
 <template>
     <div class="w-full inline-block md:w-4/12 md:py-8 md:pr-8">
-        <div class="sticky top-16">
+        <div class="sticky top-16 overflow-auto h-[calc(100vh-20rem)]">
             <template>
                 <div class="">
                     <a :href="`/communities/${community.slug}/${value.slug}`">
@@ -121,16 +121,16 @@
                             <div 
                                 v-for="card in inputVal.cards"
                                 :key="`list${card.id}`"
-                                class="border mb-2 p-2 w-full truncate cursor-pointer">
+                                class="border mb-2 p-2 w-full truncate cursor-pointer inline-block">
                                 <span 
-                                    v-if="card.type==='e'"
-                                    class="text-xl"><b>event block </b> ({{ card.event.name}})</span>
+                                    v-if="card.type==='e' && card.event"
+                                    class="text-xl inline"><b class="mr-2">event block </b> ({{ card.event.name  }})</span>
                                 <span 
                                     v-else-if="card.type==='i'"
                                     class="text-xl">image block</span>
                                 <span 
                                     v-else
-                                    class="text-xl"><b>text block</b> (<span v-html="card.blurb"></span>)</span>
+                                    class="text-xl inline"><b class="mr-2">text block</b> (<span v-html="card.blurb.slice(0,50)" class="text-force__medium" />)</span>
                             </div>
                         </draggable>
                     </div>

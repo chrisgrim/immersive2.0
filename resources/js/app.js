@@ -52,6 +52,7 @@ Vue.component('vue-post-create', () => import(/* webpackChunkName: "assets/vpc" 
 
 Vue.component('vue-community-admin-approval', () => import(/* webpackChunkName: "assets/vcaa" */ './pages/adminArea/approve/community-approval-list.vue'));
 Vue.component('vue-community-approval-bar', () => import(/* webpackChunkName: "assets/vcab" */ './pages/adminArea/approve/community-approval-bar.vue'));
+Vue.component('vue-admin-communities-index', () => import(/* webpackChunkName: "assets/vcae" */ './pages/adminArea/Communities/admin-communities-index.vue'));
 
 
 //Docks

@@ -4,9 +4,9 @@
             <div class="w-full inline-block md:w-2/6 md:px-8 lg:p-8">
                 <div class="sticky top-16 items-center flex flex-col">
                     <CardImage
-                        v-if="user.isUser || user.thumbImagePath"
+                        v-if="owner || user.thumbImagePath"
                         :loading="disabled"
-                        :locked="!user.isUser || !user.email_verified_at"
+                        :locked="!owner || !user.email_verified_at"
                         text="The image must be at least 400px x 400px"
                         :image="image"
                         @addImage="addImage" />
@@ -21,12 +21,12 @@
                                 <input 
                                     type="text" 
                                     v-model="user.name"
-                                    :readonly="!user.isUser"
-                                    :disabled="!user.isUser"
+                                    :readonly="!owner"
+                                    :disabled="!owner"
                                     class="my-4"
                                     :class="[ 
                                         $v.user.name.$error ? 'error' : '', 
-                                        user.isUser ? 'h-16 border rounded-2xl p-4 w-full' : 'text-4xl bg-white' ]"
+                                        owner ? 'h-16 border rounded-2xl p-4 w-full' : 'text-4xl bg-white' ]"
                                     @input="$v.user.name.$touch">
                                 <div v-if="$v.user.name.$error" class="validation-error">
                                     <p class="error" v-if="!$v.user.name.required">Must have a name</p>
@@ -41,16 +41,16 @@
                         <div class="flex items-center gap-4">
                             <p 
                                 class="mt-[0.4rem]"
-                                v-if="!user.isUser && location.latitude">Lives near</p>
+                                v-if="!owner && location.latitude">Lives near</p>
                             <input 
                                 @input="$v.user.location.$touch"
                                 ref="autocomplete" 
-                                :readonly="!user.isUser"
-                                :disabled="!user.isUser"
+                                :readonly="!owner"
+                                :disabled="!owner"
                                 class="my-4"
                                 :class="[ 
                                     $v.user.name.$error ? 'error' : '', 
-                                    user.isUser ? 'h-16 border rounded-2xl p-4 w-full' : 'text-4xl bg-white' ]"
+                                    owner ? 'h-16 border rounded-2xl p-4 w-full' : 'text-4xl bg-white' ]"
                                 :placeholder="locationPlaceholder"
                                 autocomplete="false"
                                 onfocus="value = ''" 
@@ -60,12 +60,12 @@
                             :disabled="disabled" 
                             @click.prevent="resend" 
                             class="border-none bg-orange-500 text-white my-4 hover:bg-black" 
-                            v-if="user.isUser && !user.email_verified_at && !onSent">
+                            v-if="owner && !user.email_verified_at && !onSent">
                             Please verify your account.
                         </button>
                         <div
                             class="border w-96 p-4 rounded-2xl my-4" 
-                            v-if="user.isUser && !user.email_verified_at && onSent">
+                            v-if="owner && !user.email_verified_at && onSent">
                             Please check your email.
                         </div>
                         <div class="">
@@ -98,7 +98,7 @@
     import _ from 'lodash'
     export default {
 
-        props: ['loaduser'],
+        props: ['loaduser', 'owner'],
 
         mixins: [ profileLocationMixin, formValidationMixin ],
 

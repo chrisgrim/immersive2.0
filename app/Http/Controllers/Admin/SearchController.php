@@ -7,6 +7,7 @@ use App\Models\Organizer;
 use App\Models\Event;
 use App\Models\Genre;
 use App\Models\User;
+use App\Models\Curated\Community;
 use Illuminate\Support\Arr;
 
 use Illuminate\Http\Request;
@@ -75,7 +76,7 @@ class SearchController extends Controller
             ->query($request->keywords)
             ->type('bool_prefix')
             ->sort('rank', 'desc')
-            ->load(['user','clicks','category', 'location', 'remotelocations'])
+            ->load(['user','clicks','category', 'location', 'remotelocations', 'organizer'])
             ->paginate(10);
 
         $filter = tap($events->toArray(), function (array &$content) {
@@ -106,6 +107,18 @@ class SearchController extends Controller
         });
 
         return json_encode($filter);
+    }
+
+    /**
+     * Return User.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function communities(Request $request)
+    {
+        if (! $request->keywords) return Community::with('curators', 'owner')->paginate(10);
+        return Community::where('name', 'LIKE', "%$request->keywords%")->with('curators', 'owner')->paginate(10);
     }
 
      /**

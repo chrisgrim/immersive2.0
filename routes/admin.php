@@ -28,10 +28,12 @@ Route::POST('/admin/events/purgatory/fetch', 'Admin\PurgatoryController@fetch');
 Route::GET('/admin/nav/fetch', 'Admin\AdminAreaController@nav');
 
 // ----------   Admin Curated Pages -------
-Route::GET('admin/communities/finalize', 'Admin\CommunityController@index');
+Route::GET('admin/communities/index', 'Admin\CommunityController@index');
+Route::GET('admin/communities/finalize', 'Admin\CommunityController@queue');
 Route::GET('admin/communities/{community}/show', 'Admin\CommunityController@show');
 Route::POST('admin/communities/{community}/approve', 'Admin\CommunityController@approve');
 Route::POST('admin/communities/{community}/reject', 'Admin\CommunityController@reject');
+
 
 // ----------   Docks -------
 Route::GET('/admin/docks', 'Admin\Featured\DockController@index');

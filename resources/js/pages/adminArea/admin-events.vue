@@ -189,7 +189,7 @@
                     clearTimeout(this.timeout); 
                 this.timeout = setTimeout(() => {
                     this.onSearch(query)
-                }, 200); // delay
+                }, 500); // delay
             },
         },
 

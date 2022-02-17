@@ -19,6 +19,7 @@
     <div id="bodyArea">
         <user-profile 
             :mobile="{{ Browser::isMobile() ? Browser::isMobile() : 'null' }}"
+            :owner="{{ auth()->user() ? auth()->user()->can('update', $user) ? 'true' : 'false' : 'null' }}"
             :loaduser="{{ $user }}" 
             v-cloak>   
     </div>

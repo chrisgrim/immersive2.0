@@ -8,7 +8,8 @@
                 class="flex underline text-xl font-semibold"
                 href="#location">
                 <span v-if="event.location.city"> {{ event.location.city }}</span>
-                <span v-if="event.location.region">, {{ event.location.region }} </span>
+                <span v-if="event.location.city && event.location.region">, &nbsp;</span>
+                <span v-if="event.location.region"> {{ event.location.region }} </span>
             </a>
             <p v-else> Available anywhere </p>
         </div>

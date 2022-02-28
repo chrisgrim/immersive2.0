@@ -22,6 +22,7 @@ class ImageController extends Controller
     public function create(Event $event)
     {
         if ($event->checkEventStatus(7)) return back();
+        $event->load('shows');
         return view('create.image', compact('event'));
     }
 

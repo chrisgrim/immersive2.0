@@ -30,6 +30,7 @@ class TitleController extends Controller
      */
     public function create(Event $event)
     {
+        $event->load('shows');
         return view('create.title', compact('event'));
     }
 

@@ -24,6 +24,7 @@ class DescriptionController extends Controller
     public function create(Event $event)
     {
         if ($event->checkEventStatus(5)) return back();
+        $event->load('shows');
         return view('create.description', compact('event'));
     }
 
@@ -35,7 +36,7 @@ class DescriptionController extends Controller
      */
     public function fetch(Event $event)
     {
-        return $event;
+        return $event->load('shows');
     }
 
     /**

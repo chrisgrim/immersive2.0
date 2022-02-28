@@ -48,7 +48,7 @@ class EventController extends Controller
      */
     public function show(Event $event)
     {
-        $event->load('category', 'location', 'contentAdvisories', 'contactLevels', 'mobilityAdvisories', 'eventreviews', 'staffpick', 'advisories', 'showOnGoing','interactive_level', 'remotelocations', 'timezone','genres','ratings.user', 'shows', 'organizer');
+        $event->load('category', 'location', 'age_limits', 'contentAdvisories', 'contactLevels', 'mobilityAdvisories', 'eventreviews', 'staffpick', 'advisories', 'showOnGoing','interactive_level', 'remotelocations', 'timezone','genres','ratings.user', 'shows', 'organizer');
         $tickets = $event->shows()->first()->tickets()->orderBy('ticket_price')->get();
         return view('adminArea.show', compact('event', 'tickets'));
     }

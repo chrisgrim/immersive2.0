@@ -12,7 +12,7 @@
 
         <div class="not-prose relative bg-slate-50 rounded-xl overflow-hidden dark:bg-slate-800/25">
             <div class="relative rounded-xl overflow-auto border">
-                <div class="shadow-sm overflow-hidden my-8">
+                <div class="shadow-sm overflow-hidden my-4">
                     <table class="table-auto border-collapse w-full">
                         <thead>
                             <tr>

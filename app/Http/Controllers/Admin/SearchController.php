@@ -47,18 +47,11 @@ class SearchController extends Controller
     {
         if (! $request->keywords) return Genre::orderBy('name')->paginate(40);
 
-        $genre = Genre::multiMatchSearch()
-            ->fields(['name'])
-            ->query($request->keywords)
-            ->type('bool_prefix')
-            ->sort('rank', 'desc')
+        $genre = Genre::where('name', 'like', '%' . $request->keywords . '%')
+            ->orderBy('rank', 'desc')
             ->paginate(10);
 
-        $filter = tap($genre->toArray(), function (array &$content) {
-            $content['data'] = Arr::pluck($content['data'], 'model');
-        });
-
-        return  json_encode($filter);
+        return  json_encode($genre);
     }
 
      /**
@@ -69,14 +62,14 @@ class SearchController extends Controller
      */
     public function events(Request $request)
     {
-        if (! $request->keywords) return Event::where('status','p')->with('user','clicks','category', 'location', 'remotelocations')->paginate(10);
+        if (! $request->keywords) return Event::where('status','p')->with('user','clicks','category', 'location', 'remotelocations', 'shows')->paginate(10);
 
         $events = Event::multiMatchSearch()
             ->fields(['name', 'name._2gram','name._3gram'])
             ->query($request->keywords)
             ->type('bool_prefix')
             ->sort('rank', 'desc')
-            ->load(['user','clicks','category', 'location', 'remotelocations', 'organizer'])
+            ->load(['user','clicks','category', 'location', 'remotelocations', 'organizer', 'shows'])
             ->paginate(10);
 
         $filter = tap($events->toArray(), function (array &$content) {

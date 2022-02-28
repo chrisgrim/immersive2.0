@@ -13,8 +13,10 @@
             @search:focus="debounce" 
             @input="onSelect">
             <template #option="{ model }">
-                <div class="option__title">
-                    <svg><use :xlink:href="`/storage/website-files/icons.svg#ri-price-tag-3-line`" /></svg>
+                <div class="flex p-3">
+                    <svg class="w-8 h-8 mr-4">
+                        <use :xlink:href="`/storage/website-files/icons.svg#ri-price-tag-3-line`" />
+                    </svg>
                     <p> {{ model.name }} </p>
                 </div>
             </template>
@@ -41,7 +43,20 @@ export default {
     },
 
     methods: {
-
+        async generateSearchList (query) {
+            await axios.get('/api/search/navbar/tags', { params: { keywords: query } })
+            .then( res => {
+                this.searchOptions = res.data;
+            })
+        },
+        onSelect() {
+            this.saveSearchData();
+            if (this.searchInput.type == 'c') window.location.href = `/index/search-all?category=${this.searchInput.id}`
+            if (this.searchInput.type == 't') window.location.href = `/index/search-all?tag=${this.searchInput.name}`
+        },
+        saveSearchData() {
+            axios.post('/search/storedata', {type: 'category', name: this.searchInput.name});
+        },
         debounce(query) {
             if (this.timeout) 
                 clearTimeout(this.timeout); 
@@ -49,25 +64,11 @@ export default {
                 this.generateSearchList(query);
             }, 200); // delay
         },
-
-        async generateSearchList (query) {
-            await axios.get('/api/search/navbar/tags', { params: { keywords: query } })
-            .then( res => {
-                this.searchOptions = res.data;
-            })
-        },
-
-        onSelect() {
-            this.saveSearchData();
-            if (this.searchInput.type == 'c') window.location.href = `/index/search-all?category=${this.searchInput.id}`
-            // if (this.searchInput.type == 'r')  window.location.href = `/index/search-all?remote=${this.searchInput.name}&id=${this.searchInput.id}`
-            if (this.searchInput.type == 't') window.location.href = `/index/search-all?tag=${this.searchInput.name}`
-        },
-
-        saveSearchData() {
-            axios.post('/search/storedata', {type: 'category', name: this.searchInput.name});
-        },
     },
+    
+    mounted() {
+        this.generateSearchList()
+    }
 
 };
 </script>

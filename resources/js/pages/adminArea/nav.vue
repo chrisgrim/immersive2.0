@@ -1,234 +1,148 @@
 <template>
     <nav 
-        class="admin-nav" 
+        class="bg-slate-700 overflow-auto h-screen md:h-full"
         :class="navtype">
-        <a href="/">
-            <button class="admin-home-icon">Home</button>
-        </a>
-        <div class="admin-nav-title">
-            <h3>Admin Area</h3>
-        </div>
-        <div class="admin-menu">
-            <a href="/admin/events/finalize">
-                <button 
-                    :class="{active: active == 'approve'}" 
-                    class="admin-menu__item">
-                    <div 
-                        v-if="eventApproval" 
-                        class="admin-menu__notification">
-                        <p>
-                            {{ eventApproval }}
-                        </p>
-                    </div>
+        <div class="p-4">
+            <a href="/"> 
+                <svg class="h-12 w-12 fill-white my-8 border border-white rounded-full hover:bg-black">
+                    <use :xlink:href="`/storage/website-files/icons.svg#ri-arrow-left-s-line`" />
+                </svg>
+            </a>
+            <a 
+                href="/admin/dashboard"
+                class="text-white mb-12 text-4xl ml-4">Admin Area</a>
+            <div class="flex flex-col">
+                <a
+                    class="text-gray-400 flex items-center text-1xl px-4 py-2 rounded-2xl hover:bg-slate-800 hover:text-white" 
+                    href="/admin/events/finalize">
                     Approve Events
-                </button>
-            </a>
-
-            <a href="/admin/organizers/finalize">
-                <button 
-                    :class="{active: active == 'orgApprove'}" 
-                    class="admin-menu__item">
-                    <div 
-                        v-if="orgApproval" 
-                        class="admin-menu__notification">
-                        <p>
-                            {{ orgApproval }}
-                        </p>
-                    </div>
+                    <p class="bg-red-500 w-6 h-6 flex items-center justify-center text-white text-sm font-semibold rounded-full" v-if="eventApproval"> {{ eventApproval }}</p>
+                </a>
+                <a
+                    class="text-gray-400 flex items-center text-1xl px-4 py-2 rounded-2xl hover:bg-slate-800 hover:text-white" 
+                    href="/admin/organizers/finalize">
                     Approve Organizers
-                </button>
-            </a>
-
-            <a href="/admin/communities/finalize">
-                <button 
-                    :class="{active: active == 'comApprove'}" 
-                    class="admin-menu__item">
-                    <div 
-                        v-if="comApproval" 
-                        class="admin-menu__notification">
-                        <p>
-                            {{ comApproval }}
-                        </p>
-                    </div>
+                    <p class="bg-red-500 w-6 h-6 flex items-center justify-center text-white text-sm font-semibold rounded-full" v-if="orgApproval"> {{ orgApproval }} </p>
+                </a>
+                <a
+                    class="text-gray-400 flex items-center text-1xl px-4 py-2 rounded-2xl hover:bg-slate-800 hover:text-white" 
+                    href="/admin/communities/finalize">
                     Approve Communities
-                </button>
-            </a>
-
-            <a href="/admin/event-requests">
-                <button 
-                    :class="{active: active == 'requestApprove'}" 
-                    class="admin-menu__item">
-                    <div 
-                        v-if="requestApproval" 
-                        class="admin-menu__notification">
-                        <p>
-                            {{ requestApproval }}
-                        </p>
-                    </div>
+                    <p class="bg-red-500 w-6 h-6 flex items-center justify-center text-white text-sm font-semibold rounded-full" v-if="comApproval"> {{ comApproval }} </p>
+                </a>
+                <a 
+                    class="text-gray-400 flex items-center text-1xl px-4 py-2 rounded-2xl hover:bg-slate-800 hover:text-white"
+                    href="/admin/event-requests">
                     Approve Requests
-                </button>
-            </a>
-
-            <a 
-                v-if="admin" 
-                href="/admin/events">
-                <button 
-                    :class="{active: active == 'events'}" 
-                    class="admin-menu__item">
-                    Edit Events
-                </button>
-            </a>
-
-            <a 
-                v-if="admin" 
-                href="/admin/communities/index">
-                <button 
-                    :class="{active: active == 'communities'}" 
-                    class="admin-menu__item">
-                    Edit Communities
-                </button>
-            </a>
-
-            <a 
-                v-if="admin" 
-                href="/admin/docks">
-                <button 
-                    :class="{active: active == 'docks'}" 
-                    class="admin-menu__item">
-                    Docks
-                </button>
-            </a>
-
-            <a 
-                v-if="admin" 
-                href="/admin/boneyard">
-                <button 
-                    :class="{active: active == 'boneyard'}" 
-                    class="admin-menu__item">
-                    Boneyard
-                </button>
-            </a>
-
-            <a 
-                v-if="admin" 
-                href="/admin/events/purgatory">
-                <button 
-                    :class="{active: active == 'purgatory'}" 
-                    class="admin-menu__item">
-                    Purgatory
-                </button>
-            </a>
-
-            <a 
-                v-if="admin" 
-                href="/admin/users">
-                <button 
-                    :class="{active: active == 'users'}" 
-                    class="admin-menu__item">
-                    Edit Users
-                </button>
-            </a>
-
-            <a href="/admin/organizer">
-                <button 
-                    :class="{active: active == 'organizers'}" 
-                    class="admin-menu__item">
-                    Edit Organizers
-                </button>
-            </a>
-
-            <a 
-                v-if="admin" 
-                href="/categories/create">
-                <button 
-                    :class="{active: active == 'categories'}" 
-                    class="admin-menu__item">
-                    Categories
-                </button>
-            </a>
-            
-            <a 
-                v-if="admin" 
-                href="/genres/create">
-                <button 
-                    :class="{active: active == 'tags'}" 
-                    class="admin-menu__item">
-                    Tags
-                </button>
-            </a>
-
-            <div 
-                v-if="admin"
-                class="admin-top-menu">
-                <button 
-                    @click="advisories = !advisories" 
-                    class="admin-menu__item">
-                    Advisories
-                </button>
-                <div class="menu__sub-menu--arrow">
-                    &#9660;
-                </div>
-            </div>
-
-            <div 
-                v-if="advisories" 
-                class="admin-submenu">
-                <a href="/contactlevels/create">
-                    <button 
-                        :class="{active: active == 'contact'}" 
-                        class="admin-menu__item">
-                        Contact Levels
-                    </button>
+                    <p class="bg-red-500 w-6 h-6 flex items-center justify-center text-white text-sm font-semibold rounded-full" v-if="requestApproval"> {{ requestApproval }} </p>
                 </a>
 
-                <a href="/remotelocations/create">
-                    <button 
-                        :class="{active: active == 'remote'}" 
-                        class="admin-menu__item">
-                        Remote Locations
-                    </button>
-                </a>
+                <template v-if="user.isAdmin">
+                    <a 
+                        class="text-gray-400 flex items-center text-1xl px-4 py-2 rounded-2xl hover:bg-slate-800 hover:text-white"
+                        href="/admin/events">
+                        Edit Events
+                    </a>
+                    <a 
+                        class="text-gray-400 flex items-center text-1xl px-4 py-2 rounded-2xl hover:bg-slate-800 hover:text-white"
+                        href="/admin/communities/index">
+                        Edit Communities
+                    </a>
+                    <a
+                        class="text-gray-400 flex items-center text-1xl px-4 py-2 rounded-2xl hover:bg-slate-800 hover:text-white"
+                        href="/admin/organizer">
+                        Edit Organizers
+                    </a>
+                    <a 
+                        class="text-gray-400 flex items-center text-1xl px-4 py-2 rounded-2xl hover:bg-slate-800 hover:text-white"
+                        href="/admin/docks">
+                        Docks
+                    </a>
+                    <a 
+                        class="text-gray-400 flex items-center text-1xl px-4 py-2 rounded-2xl hover:bg-slate-800 hover:text-white"
+                        href="/admin/boneyard">
+                        Boneyard
+                    </a>
+                    <a 
+                        class="text-gray-400 flex items-center text-1xl px-4 py-2 rounded-2xl hover:bg-slate-800 hover:text-white"
+                        href="/admin/events/purgatory">
+                        Purgatory
+                    </a>
+                    <a 
+                        class="text-gray-400 flex items-center text-1xl px-4 py-2 rounded-2xl hover:bg-slate-800 hover:text-white"
+                        href="/admin/users">
+                        Edit Users
+                    </a>
+                    <a
+                        class="text-gray-400 flex items-center text-1xl px-4 py-2 rounded-2xl hover:bg-slate-800 hover:text-white"
+                        href="/categories/create">
+                        Categories
+                    </a>
+                    <a
+                        class="text-gray-400 flex items-center text-1xl px-4 py-2 rounded-2xl hover:bg-slate-800 hover:text-white"
+                        href="/genres/create">
+                        Tags
+                    </a>
+                    <div 
+                        @click="advisories =! advisories"
+                        class="text-gray-400 flex items-center text-1xl px-4 py-2 rounded-2xl hover:bg-slate-800 hover:text-white">
+                        Advisories
+                        <svg 
+                            :class="{'rotate-90': advisories}"
+                            class="w-8 h-8 fill-gray-400">
+                            <use :xlink:href="`/storage/website-files/icons.svg#ri-arrow-right-s-line`" />
+                        </svg>
+                    </div>
+                    <div 
+                        class="ml-4" 
+                        v-if="advisories">
+                        <a 
+                            class="text-gray-400 flex items-center text-1xl px-4 py-2 rounded-2xl hover:bg-slate-800 hover:text-white"
+                            href="/contactlevels/create">
+                            Contact Levels
+                        </a>
+                        <a
+                            class="text-gray-400 flex items-center text-1xl px-4 py-2 rounded-2xl hover:bg-slate-800 hover:text-white"
+                            href="/remotelocations/create">
+                            Remote Locations
+                        </a>
+                        <a
+                            class="text-gray-400 flex items-center text-1xl px-4 py-2 rounded-2xl hover:bg-slate-800 hover:text-white"
+                            href="/contentadvisories/create">
+                            Content Advisories
+                        </a>
+                        <a 
+                            class="text-gray-400 flex items-center text-1xl px-4 py-2 rounded-2xl hover:bg-slate-800 hover:text-white"
+                            href="/mobilities/create">
+                            Mobility Advisories
+                        </a>
+                        <a 
+                            class="text-gray-400 flex items-center text-1xl px-4 py-2 rounded-2xl hover:bg-slate-800 hover:text-white"
+                            href="/interactivelevels/create">
+                            Interactive Levels
+                        </a>
+                    </div>
+                </template>
 
-                <a href="/contentadvisories/create">
-                    <button 
-                        :class="{active: active == 'content'}" 
-                        class="admin-menu__item">
-                        Content Advisories
-                    </button>
-                </a>
+                <template v-else>
+                    <a
+                        class="text-gray-400 flex items-center text-1xl px-4 py-2 rounded-2xl hover:bg-slate-800 hover:text-white"
+                        href="/admin/organizer">
+                        Edit Organizers
+                    </a>
+                </template>
 
-                <a href="/mobilities/create">
-                    <button 
-                        :class="{active: active == 'mobilities'}" 
-                        class="admin-menu__item">
-                        Mobility Advisories
-                    </button>
-                </a>
-
-                <a href="/interactivelevels/create">
-                    <button 
-                        :class="{active: active == 'interactive'}" 
-                        class="admin-menu__item">
-                        Interactive Levels
-                    </button>
-                </a>
-            </div>
-
-            <a href="/reviewevents/create">
-                <button 
-                    :class="{active: active == 'reviews'}" 
-                    class="admin-menu__item">
+                <a
+                    class="text-gray-400 flex items-center text-1xl px-4 py-2 rounded-2xl hover:bg-slate-800 hover:text-white"
+                    href="/reviewevents/create">
                     Event Reviews
-                </button>
-            </a>
-
-            <a href="/staffpicks/create">
-                <button 
-                    :class="{active: active == 'picks'}" 
-                    class="admin-menu__item">
+                </a>
+                <a 
+                    class="text-gray-400 flex items-center text-1xl px-4 py-2 rounded-2xl hover:bg-slate-800 hover:text-white"
+                    href="/staffpicks/create">
                     Picks Of The Week
-                </button>
-            </a>
+                </a>
+            </div>
         </div>
     </nav>
 </template>
@@ -242,8 +156,6 @@
         data() {
             return {
                 user: this.loaduser ? this.loaduser : '',
-                admin: this.loaduser.type == 'a' ? true : false,
-                mod: this.loaduser.type == 'm' ? true : false,
                 active: '',
                 advisories: false,
                 eventApproval: '',

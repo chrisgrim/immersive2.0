@@ -30,7 +30,7 @@ class LocationController extends Controller
     public function create(Event $event)
     {
         if ($event->checkEventStatus(1)) return back();
-        $event->load('location', 'remotelocations');
+        $event->load('location', 'remotelocations', 'shows');
         $remote = RemoteLocation::where('admin', true)->orWhere('user_id', auth()->user()->id)->get();
         return view('create.location', compact('event', 'remote'));
     }

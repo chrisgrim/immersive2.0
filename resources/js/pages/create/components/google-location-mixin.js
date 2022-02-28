@@ -7,6 +7,7 @@ export default {
                 this.map.center = L.latLng(place.geometry.location.lat(), place.geometry.location.lng());
                 this.updateLats(place);
                 this.getAddressObject(place.address_components);
+                console.log(place);
             }
         },
 
@@ -33,7 +34,8 @@ export default {
                     "sublocality_level_1",
                     "sublocality_level_2",
                     "sublocality_level_3",
-                    "sublocality_level_4"
+                    "sublocality_level_4",
+                    "postal_town"
                 ],
                 country: ["country"]
             };

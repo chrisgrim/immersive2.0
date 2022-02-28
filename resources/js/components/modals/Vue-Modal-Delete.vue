@@ -22,6 +22,7 @@
                 <div class="input">
                     <input
                         v-model="toDelete"
+                        class="border rounded-l-2xl pl-4"
                         type="text">
                     <button
                         class="border-none bg-gradient-to-r from-button-red-1 via-button-red-2 to-button-red-3 text-white"

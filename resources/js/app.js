@@ -8,7 +8,6 @@ import Vuelidate from "vuelidate";
 import store from './store/index'
 import Dayjs from 'vue-dayjs';
 import vSelect from 'vue-select'
-// import 'remixicon/fonts/remixicon.css'
 
 Vue.component('v-select', vSelect)
 window.axios = require('axios');
@@ -22,22 +21,12 @@ window.Vue = Vue;
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 
-/**
- * Next we will register the CSRF Token as a common header with Axios so that
- * all outgoing HTTP requests automatically have it attached. This is just
- * a simple convenience so we don't have to attach every token manually.
- */
-
 let token = document.head.querySelector('meta[name="csrf-token"]');
-
 if (token) {
     window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
 } else {
     console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
-
-
-// this part resolve an issue where the markers would not appear
 
 
 //Curated
@@ -50,8 +39,8 @@ Vue.component('vue-post-show', () => import(/* webpackChunkName: "assets/vps" */
 Vue.component('vue-post-edit', () => import(/* webpackChunkName: "assets/vpe" */ './pages/Curated/Posts/edit.vue'));
 Vue.component('vue-post-create', () => import(/* webpackChunkName: "assets/vpc" */ './pages/Curated/Posts/create.vue'));
 
-Vue.component('vue-community-admin-approval', () => import(/* webpackChunkName: "assets/vcaa" */ './pages/adminArea/approve/community-approval-list.vue'));
-Vue.component('vue-community-approval-bar', () => import(/* webpackChunkName: "assets/vcab" */ './pages/adminArea/approve/community-approval-bar.vue'));
+Vue.component('vue-community-admin-approval', () => import(/* webpackChunkName: "assets/vcaa" */ './pages/adminArea/Communities/admin-communities-queue.vue'));
+Vue.component('vue-community-approval-bar', () => import(/* webpackChunkName: "assets/vcab" */ './pages/adminArea/Communities/admin-communities-approval.vue'));
 Vue.component('vue-admin-communities-index', () => import(/* webpackChunkName: "assets/vcae" */ './pages/adminArea/Communities/admin-communities-index.vue'));
 
 
@@ -94,28 +83,16 @@ Vue.component('vue-create-first-event', () => import(/* webpackChunkName: "asset
 
 //Admin Area
 Vue.component('admin-nav', () => import(/* webpackChunkName: "assets/an" */ './pages/adminArea/nav.vue'));
-Vue.component('approval-bar', () => import(/* webpackChunkName: "assets/aab" */ './pages/adminArea/approve/approval-bar.vue'));
-Vue.component('approval-list', () => import(/* webpackChunkName: "assets/al" */ './pages/adminArea/approve/approval-list.vue'));
-Vue.component('vue-org-approval-bar', () => import(/* webpackChunkName: "assets/aab" */ './pages/adminArea/approve/org-approval-bar.vue'));
-Vue.component('vue-org-approval-list', () => import(/* webpackChunkName: "assets/al" */ './pages/adminArea/approve/org-approval-list.vue'));
 Vue.component('admin-categories', () => import(/* webpackChunkName: "assets/ac" */ './pages/adminArea/admin-categories.vue'));
-Vue.component('admin-contact-level', () => import(/* webpackChunkName: "assets/acl" */ './pages/adminArea/admin-contact-level.vue'));
-Vue.component('admin-genres', () => import(/* webpackChunkName: "assets/ag" */ './pages/adminArea/admin-genres.vue'));
-Vue.component('vue-admin-events', () => import(/* webpackChunkName: "assets/ae" */ './pages/adminArea/admin-events.vue'));
-Vue.component('vue-admin-boneyard', () => import(/* webpackChunkName: "assets/ab" */ './pages/adminArea/admin-boneyard.vue'));
-Vue.component('vue-admin-purgatory', () => import(/* webpackChunkName: "assets/apg" */ './pages/adminArea/admin-purgatory.vue'));
-Vue.component('vue-admin-stats', () => import(/* webpackChunkName: "assets/as" */ './pages/adminArea/admin-stats.vue'));
-Vue.component('admin-event-reviews', () => import(/* webpackChunkName: "assets/aer" */ './pages/adminArea/admin-event-reviews.vue'));
+Vue.component('admin-contact-level', () => import(/* webpackChunkName: "assets/acl" */ './pages/adminArea/Creation/admin-contact-levels-index.vue'));
+Vue.component('admin-genres', () => import(/* webpackChunkName: "assets/ag" */ './pages/adminArea/Creation/admin-genres-index.vue'));
+Vue.component('vue-admin-stats', () => import(/* webpackChunkName: "assets/as" */ './pages/adminArea/admin-dashboard.vue'));
 Vue.component('admin-staff-picks', () => import(/* webpackChunkName: "assets/ap" */ './pages/adminArea/admin-staff-picks.vue'));
-Vue.component('admin-mobility', () => import(/* webpackChunkName: "assets/am" */ './pages/adminArea/admin-mobility.vue'));
-Vue.component('admin-user', () => import(/* webpackChunkName: "assets/au" */ './pages/adminArea/admin-user.vue'));
-Vue.component('admin-organizer', () => import(/* webpackChunkName: "assets/ao" */ './pages/adminArea/admin-organizer.vue'));
-Vue.component('admin-content-advisories', () => import(/* webpackChunkName: "assets/aca" */ './pages/adminArea/admin-content-advisories.vue'));
-Vue.component('vue-admin-remote-locations', () => import(/* webpackChunkName: "assets/arl" */ './pages/adminArea/admin-remote-locations.vue'));
-Vue.component('vue-admin-interactive-levels', () => import(/* webpackChunkName: "assets/ail" */ './pages/adminArea/admin-interactive-levels.vue'));
-Vue.component('vue-admin-event-show', () => import(/* webpackChunkName: "assets/aes" */ './pages/adminArea/admin-event-show.vue'));
-Vue.component('vue-admin-event-requests', () => import(/* webpackChunkName: "assets/aers" */ './pages/adminArea/admin-event-requests.vue'));
-
+Vue.component('admin-mobility', () => import(/* webpackChunkName: "assets/am" */ './pages/adminArea/Creation/admin-mobility-index.vue'));
+Vue.component('admin-user', () => import(/* webpackChunkName: "assets/au" */ './pages/adminArea/Users/admin-users-index.vue'));
+Vue.component('admin-content-advisories', () => import(/* webpackChunkName: "assets/aca" */ './pages/adminArea/Creation/admin-content-advisories-index.vue'));
+Vue.component('vue-admin-remote-locations', () => import(/* webpackChunkName: "assets/arl" */ './pages/adminArea/Creation/admin-remote-locations-index.vue'));
+Vue.component('vue-admin-interactive-levels', () => import(/* webpackChunkName: "assets/ail" */ './pages/adminArea/Creation/admin-interactive-levels-index.vue'));
 
 //Profile
 Vue.component('user-profile', () => import(/* webpackChunkName: "assets/up" */  './pages/Profile/profile-show.vue'));
@@ -124,15 +101,29 @@ Vue.component('vue-user-account', () => import(/* webpackChunkName: "assets/ua" 
 
 // Messages
 Vue.component('message-index', () => import(/* webpackChunkName: "assets/mi" */  './pages/Messages/message-index.vue'));
+
 //Organizers
 Vue.component('organizer-show', () => import(/* webpackChunkName: "assets/os" */  './pages/Organizers/organizer-show.vue'));
 Vue.component('organizer-create', () => import(/* webpackChunkName: "assets/oc" */ './pages/Organizers/organizer-create.vue'));
+Vue.component('vue-org-approval-bar', () => import(/* webpackChunkName: "assets/aab" */ './pages/adminArea/Organizers/admin-organizers-approval.vue'));
+Vue.component('vue-org-approval-list', () => import(/* webpackChunkName: "assets/al" */ './pages/adminArea/Organizers/admin-organizers-queue.vue'));
+Vue.component('admin-organizer', () => import(/* webpackChunkName: "assets/ao" */ './pages/adminArea/Organizers/admin-organizers-index.vue'));
+
 //Events
 Vue.component('event-show', () => import(/* webpackChunkName: "assets/es" */ './pages/Events/event-show.vue'));
 Vue.component('vue-event-edit', () => import(/* webpackChunkName: "assets/ee" */ './pages/Events/event-edit.vue'));
 Vue.component('vue-search-online', () => import(/* webpackChunkName: "assets/eos" */ './pages/Search/vue-search-online.vue'));
 Vue.component('vue-search-location', () => import(/* webpackChunkName: "assets/esl" */ './pages/Search/vue-search-location.vue'));
 Vue.component('vue-search-all', () => import(/* webpackChunkName: "assets/esa" */ './pages/Search/vue-search-all.vue'));
+
+Vue.component('vue-admin-events', () => import(/* webpackChunkName: "assets/ae" */ './pages/adminArea/Events/admin-events-index.vue'));
+Vue.component('vue-admin-boneyard', () => import(/* webpackChunkName: "assets/ab" */ './pages/adminArea/Events/admin-events-boneyard.vue'));
+Vue.component('vue-admin-purgatory', () => import(/* webpackChunkName: "assets/apg" */ './pages/adminArea/Events/admin-events-purgatory.vue'));
+Vue.component('vue-admin-event-requests', () => import(/* webpackChunkName: "assets/aers" */ './pages/adminArea/Events/admin-events-requests.vue'));
+Vue.component('admin-event-reviews', () => import(/* webpackChunkName: "assets/aer" */ './pages/adminArea/Events/admin-events-reviews.vue'));
+Vue.component('vue-admin-event-show', () => import(/* webpackChunkName: "assets/aes" */ './pages/adminArea/Events/Components/event-show-component.vue'));
+Vue.component('approval-bar', () => import(/* webpackChunkName: "assets/aab" */ './pages/adminArea/Events/admin-events-approval.vue'));
+Vue.component('approval-list', () => import(/* webpackChunkName: "assets/al" */ './pages/adminArea/Events/admin-events-queue.vue'));
 
 //Staffpicks
 Vue.component('vue-staffpicks-show', () => import(/* webpackChunkName: "assets/ssp" */ './pages/staffpicks/staffpicks-show.vue'));

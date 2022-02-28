@@ -1,116 +1,101 @@
 <template>
-    <div class="categories">
-        <div class="">
-            <div class="title">
-                <h1>Categories</h1>
-                <div class="add-button">
-                    <button 
-                        @click="onAdd=!onAdd"
-                        class="add__icon" 
-                        :class="{active: onAdd}">
-                        <svg>
-                            <use :xlink:href="`/storage/website-files/icons.svg#ri-add-fill`" />
-                        </svg>
-                    </button>
+    <div>
+        <div class="flex justify-between mb-8 items-center">
+            <h2>Staff Picks</h2>
+            <button 
+                @click="onAdd=!onAdd"
+                class="border-none w-20 h-20 flex p-0 rounded-full justify-center items-center hover:bg-slate-300">
+                <svg class="w-16 h-16">
+                    <use :xlink:href="`/storage/website-files/icons.svg#ri-add-fill`" />
+                </svg>
+            </button>
+        </div>
+
+        <div class="w-96 mb-4">
+            <v-select 
+                v-model="inputType"
+                :options="options"
+                label="name"
+                placeholder="Filter by type"
+                @input="onLoad" />
+        </div>
+
+        <div class="not-prose relative bg-slate-50 rounded-xl overflow-hidden dark:bg-slate-800/25">
+            <div class="relative rounded-xl overflow-auto border">
+                <div class="shadow-sm overflow-hidden my-4">
+                    <table class="table-auto border-collapse w-full">
+                        <thead>
+                            <tr>
+                                <th 
+                                    :key="col.id"
+                                    v-for="col in cols"
+                                    class="border-b dark:border-slate-600 font-medium p-4 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
+                                    <p 
+                                        class="text-xl" 
+                                        :class="col.class">{{ col.field }}</p>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white dark:bg-slate-800">
+                            <tr
+                                :key="category.id"
+                                v-for="category in categories">
+                                <td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
+                                    <CardImage
+                                        :image="`/storage/${category.thumbImagePath}`"
+                                        :height="800"
+                                        :width="800"
+                                        @addImage="addImage($event, category)" />
+                                </td>
+                                <td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
+                                    <input 
+                                        type="text" 
+                                        v-model="category.name" 
+                                        class="w-full p-2" 
+                                        placeholder="Category"
+                                        @blur="onEdit(category)">
+                                </td>
+                                <td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
+                                    <textarea 
+                                        v-model="category.description"
+                                        rows="2"
+                                        placeholder=" "
+                                        @blur="onEdit(category)"
+                                        required 
+                                        autofocus />
+                                </td>
+                                <td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
+                                    <input 
+                                        type="text" 
+                                        v-model="category.credit" 
+                                        class="p-2" 
+                                        placeholder="Image Credit"
+                                        @blur="onEdit(category)">
+                                </td>
+                                <td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
+                                    <input 
+                                        type="text" 
+                                        v-model="category.rank" 
+                                        class="max-w-[5rem] p-2" 
+                                        placeholder="Rank"
+                                        @blur="onEdit(category)">
+                                </td>
+                                <td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
+                                    <button 
+                                        @click.prevent="modalDelete=category" 
+                                        class="rounded-full p-2 hover:bg-black hover:border-black">
+                                        <svg class="w-8 h-8 hover:fill-white">
+                                            <use :xlink:href="`/storage/website-files/icons.svg#ri-close-line`" />
+                                        </svg>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
-        <tabs>
-            <!-- location based category tab -->
-            <tab 
-                title="Location Based Events" 
-                :active="true" 
-                class="tab-events">
-                <div class="data-grid">
-                    <div 
-                        class="data-grid__row"
-                        :key="category.id"
-                        v-for="(category) in categories.location">
-                        <CardImage
-                            :image="`/storage/${category.thumbImagePath}`"
-                            :height="800"
-                            :width="800"
-                            @addImage="addImage($event, category)" />
-                        <input 
-                            type="text" 
-                            v-model="category.name" 
-                            placeholder="Category Name"
-                            @blur="onEdit(category)">
-                        <textarea
-                            type="text" 
-                            v-model="category.description" 
-                            placeholder="Category Name"
-                            @blur="onEdit(category)" />
-                        <input 
-                            type="text" 
-                            v-model="category.credit" 
-                            placeholder="image credit"
-                            @blur="onEdit(category)">
-                        <div>
-                            <input 
-                                type="text" 
-                                v-model="category.rank" 
-                                placeholder="Category Rank"
-                                @blur="onEdit(category)">
-                        </div>
-                        <button 
-                            @click.prevent="modalDelete=category" 
-                            class="delete">
-                            <svg>
-                                <use :xlink:href="`/storage/website-files/icons.svg#ri-close-line`" />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </tab>
 
-            <!-- remote based category tab -->
-            <tab 
-                title="Online Events" 
-                class="tab-events">
-                <div class="data-grid">
-                    <div 
-                        class="data-grid__row"
-                        :key="category.id"
-                        v-for="(category) in categories.remote">
-                        <CardImage
-                            :image="`/storage/${category.thumbImagePath}`"
-                            :height="800"
-                            :width="800"
-                            @addImage="addImage($event, category)" />
-                        <input 
-                            type="text" 
-                            v-model="category.name" 
-                            placeholder="Category Name"
-                            @blur="onEdit(category)">
-                        <textarea
-                            type="text" 
-                            v-model="category.description" 
-                            placeholder="Category Name"
-                            @blur="onEdit(category)" />
-                        <input 
-                            type="text" 
-                            v-model="category.credit" 
-                            placeholder="image credit"
-                            @blur="onEdit(category)">
-                        <div>
-                            <input 
-                                type="text" 
-                                v-model="category.rank" 
-                                placeholder="Category Rank"
-                                @blur="onEdit(category)">
-                        </div>
-                        <button 
-                            @click.prevent="modalDelete=category" 
-                            class="delete">
-                            <svg>
-                                <use :xlink:href="`/storage/website-files/icons.svg#ri-close-line`" />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </tab>
-        </tabs>
         <VueDeleteModal 
             v-if="modalDelete"
             :item="modalDelete"
@@ -133,12 +118,34 @@
     export default {
         components: { AddCategory, CardImage, VueDeleteModal },
 
+        computed: {
+            categories: {
+                get() {
+                    return this.inputType === 'location based' ? this.location : this.remote
+                },
+                set() {
+
+                }
+            }
+        },
+
         data() {
             return {
-                categories: '',
                 onAdd: false,
                 modalDelete: null,
                 formData: new FormData(),
+                location: '',
+                remote: '',
+                inputType: 'location based',
+                options: [ 'location based', 'remote based'],
+                cols: [
+                    { id:0, field: '', class:''},
+                    { id:1, field: 'Category', class:''},
+                    { id:2, field: 'Description', class:''},
+                    { id:3, field: 'Image Credit', class:'' },
+                    { id:4, field: 'Rank', class:''},
+                    { id:5, field: '',class:'' },
+                ],
             }
         },
 
@@ -146,7 +153,8 @@
             async onDelete() {
                 await axios.delete(`/categories/${this.modalDelete.slug}`)
                 .then( res => { 
-                    this.categories = res.data;
+                    this.location = res.data.location 
+                    this.remote = res.data.remote 
                     this.modalDelete = null
                 })
             },
@@ -168,7 +176,10 @@
             },
             async onLoad() {
                 await axios.get(`/categories?timestamp=${new Date().getTime()}`)
-                .then(res => { this.categories = res.data })
+                .then(res => { 
+                    this.location = res.data.location 
+                    this.remote = res.data.remote 
+                })
             },
             update(value) {
                 this.categories = value

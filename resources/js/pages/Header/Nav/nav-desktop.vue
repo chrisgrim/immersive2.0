@@ -35,6 +35,12 @@
                             Locations
                         </button>
                         <button 
+                            @click="searchType='t'"
+                            :class="{ active : searchType==='t'}"
+                            class="tab relative border-none p-4 text-1xl hover:text-black hover:font-medium">
+                            Categories/Tags
+                        </button>
+                        <button 
                             @click="searchType='e'"
                             :class="{ active : searchType==='e'}"
                             class="tab relative border-none p-4 text-1xl hover:text-black hover:font-medium">

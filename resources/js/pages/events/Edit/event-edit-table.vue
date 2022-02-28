@@ -151,7 +151,7 @@
                 if (event.status === '4') return { progress: 'add pricing', url: `/create/${event.slug}/tickets` }
                 if (event.status === '5') return { progress: 'add show description', url: `/create/${event.slug}/description` }
                 if (event.status === '6') return { progress: 'add advisories', url: `/create/${event.slug}/advisories` }
-                if (event.status === '7') return { progress: 'add image', url: `/create/${event.slug}images` }
+                if (event.status === '7') return { progress: 'add image', url: `/create/${event.slug}/images` }
                 if (event.status === '8') return { progress: 'submit event', url: `/create/${event.slug}/review` }
                 if (event.status === 'p') return { progress: 'approved', url: `/events/${event.slug}` }
                 if (event.status === 'r') return { progress: 'under moderator review', url: null }

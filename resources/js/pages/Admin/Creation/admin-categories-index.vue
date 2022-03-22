@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="flex justify-between mb-8 items-center">
-            <h2>Staff Picks</h2>
+            <h2>Categories</h2>
             <button 
                 @click="onAdd=!onAdd"
                 class="border-none w-20 h-20 flex p-0 rounded-full justify-center items-center hover:bg-slate-300">
@@ -10,6 +10,10 @@
                 </svg>
             </button>
         </div>
+
+        <AddCategory 
+            @update="update"
+            v-if="onAdd" />
 
         <div class="w-96 mb-4">
             <v-select 
@@ -103,17 +107,13 @@
             body="You are deleting the category. Please be sure you know what you are doing."
             @close="modalDelete=null"
             @ondelete="onDelete" />
-        <AddCategory 
-            @update="update"
-            @close="onAdd=false"
-            v-if="onAdd" />
     </div>
 </template>
 
 <script>
-    import AddCategory  from './components/add-category.vue'
-    import CardImage from '../../components/Upload-Image.vue'
-    import VueDeleteModal from '../../components/modals/Vue-Modal-Delete'
+    import AddCategory  from './Components/category-component.vue'
+    import CardImage from '../../../components/Upload-Image.vue'
+    import VueDeleteModal from '../../../components/modals/Vue-Modal-Delete'
 
     export default {
         components: { AddCategory, CardImage, VueDeleteModal },
@@ -161,7 +161,8 @@
             async onEdit(category) {
                 await axios.patch(`/categories/${category.slug}`, category)
                 .then( res=> { 
-                    this.categories = res.data 
+                    this.location = res.data.location
+                    this.remote = res.data.remote 
                 })
                 .catch( err => {
                     err.response.data.errors.name ? alert(err.response.data.errors.name) : ''
@@ -182,7 +183,8 @@
                 })
             },
             update(value) {
-                this.categories = value
+                this.location = value.location 
+                this.remote = value.remote 
                 this.onAdd = false
             },
         },

@@ -3,7 +3,6 @@
 @section('meta')
     <link href="{{ mix('/assets/app.css') }}" rel="stylesheet">
     <link href="{{ mix('/assets/app-lite.css') }}" rel="stylesheet">
-    <link href="{{ mix('/assets/app-admin.css') }}" rel="stylesheet">
 @endsection
 
 

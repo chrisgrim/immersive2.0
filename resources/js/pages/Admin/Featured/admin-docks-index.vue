@@ -1,36 +1,32 @@
 <template>
     <div class="admin-docks">
-        <div class="">
-            <div class="title">
-                <h1>Docks</h1>
-                <div class="add-button">
-                    <button 
-                        @click="onCreate"
-                        class="add__icon">
-                        <svg>
-                            <use :xlink:href="`/storage/website-files/icons.svg#ri-add-fill`" />
-                        </svg>
-                    </button>
-                </div>
-            </div>
+        <div class="flex justify-between mb-8 items-center">
+            <h2>Docks</h2>
+            <button 
+                @click="onCreate"
+                class="border-none w-20 h-20 flex p-0 rounded-full justify-center items-center hover:bg-slate-300">
+                <svg class="w-16 h-16">
+                    <use :xlink:href="`/storage/website-files/icons.svg#ri-add-fill`" />
+                </svg>
+            </button>
         </div>
 
         <div 
+            class="mb-20" 
             :key="location.name"
             v-for="location in locations">
             <template v-if="hasDocks(location)">
-                <h3>{{location.name}}</h3>
+                <h3 class="mb-4">{{location.name}}</h3>
                 <DockGrid 
                     @update="update"
                     :docks="filteredDocks(location)" />
-                <br>
             </template>
         </div>
     </div>
 </template>
 
 <script>
-    import DockGrid from './components/dock-grid'
+    import DockGrid from './Components/dock-component'
     export default {
 
         components: { DockGrid },

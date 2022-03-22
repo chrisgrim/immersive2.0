@@ -294,7 +294,7 @@ class User extends Authenticatable implements MustVerifyEmail
     */
     public function getHasCreatedOrganizersAttribute()
     {
-        return $this->organizers()->count() ? true : false;    
+        return $this->organizers()->count() || $this->teams()->count() ? true : false;    
     }
 
     /**

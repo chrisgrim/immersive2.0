@@ -657,17 +657,22 @@
 	[
 		"/Users/chrisgrim/code/ei",
 		"/Users/chrisgrim/code/ei/app",
+		"/Users/chrisgrim/code/ei/app/Http",
+		"/Users/chrisgrim/code/ei/app/Models",
 		"/Users/chrisgrim/code/ei/CustomSearch",
 		"/Users/chrisgrim/code/ei/resources",
 		"/Users/chrisgrim/code/ei/resources/js",
+		"/Users/chrisgrim/code/ei/resources/js/mixins",
 		"/Users/chrisgrim/code/ei/resources/js/pages",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Events",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Events/Show",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Organizers",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Organizers/Create",
 		"/Users/chrisgrim/code/ei/resources/views",
 		"/Users/chrisgrim/code/ei/resources/views/layouts"
 	],
 	"file_history":
 	[
+		"/Users/chrisgrim/code/ei/resources/js/pages/Organizers/organizer-create.vue",
+		"/Users/chrisgrim/code/ei/app/Models/User.php",
 		"/Users/chrisgrim/code/ei/app/Http/Controllers/EventController.php",
 		"/Users/chrisgrim/code/ei/resources/js/app.js",
 		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/Featured/admin-docks-index.vue",
@@ -793,9 +798,7 @@
 		"/Users/chrisgrim/code/ei/app/Models/ImageFile.php",
 		"/Users/chrisgrim/code/ei/resources/sass/plugins/tiptap.scss",
 		"/Users/chrisgrim/code/ei/app/Models/Message.php",
-		"/Users/chrisgrim/code/ei/resources/views/emails/new-message.blade.php",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Messages/message-index.vue",
-		"/Users/chrisgrim/code/ei/sftp-config.json"
+		"/Users/chrisgrim/code/ei/resources/views/emails/new-message.blade.php"
 	],
 	"find":
 	{
@@ -941,6 +944,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"addImage",
+			"ownsOrganization",
+			"hascreated",
 			"adminArea",
 			"dock",
 			"app-admin",
@@ -1065,10 +1071,7 @@
 			"event",
 			"event->load",
 			"event->load(",
-			"age_limits",
-			"show",
-			"isShowing",
-			"isFavorited"
+			"age_limits"
 		],
 		"highlight": false,
 		"in_selection": false,

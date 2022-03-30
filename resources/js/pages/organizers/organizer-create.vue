@@ -128,11 +128,11 @@
                             v-model="organizer.website" 
                             name="website"
                             :class="{ 'error': $v.organizer.$error && $v.organizer.website.$error }"
-                            @input="$v.organizer.website.$touch"
+                            @input="checkWebsite"
                             @click="toggle()"
                             placeholder=" ">
                         <div v-if="$v.organizer.$error && $v.organizer.website.$error" class="validation-error">
-                            <p class="error" v-if="!$v.organizer.website.url">Must be a url (Needs http://)</p>
+                            <p class="error" v-if="!$v.organizer.website.url">Must be a working url</p>
                             <p class="error" v-if="!$v.organizer.website.notWorking">The url doesn't seem to be working</p>
                         </div>
                     </div>
@@ -153,7 +153,6 @@
                 <div>
                     <button 
                         v-if="$v.organizer.$anyDirty"
-                        :disabled="disabled || $v.organizer.$anyError" 
                         class="border-none bg-gradient-to-r from-button-red-1 via-button-red-2 to-button-red-3 text-white disabled:bg-slate-50" 
                         @click.prevent="submitOrganizer"> 
                         Save Organizer 
@@ -217,8 +216,9 @@ export default {
             window.location.href = `/create/events/edit`
         },
         addImage(image) {
+            this.$v.$touch()
             this.disabled = false
-            this.formData.append('image', image);
+            this.formData.append('image', image)
         },
         appendData() {
             this.disabled = true
@@ -241,6 +241,19 @@ export default {
             errors.response.data.errors ? this.serverErrors = errors.response.data.errors : '';
             this.isLoading = false;
             this.disabled = false;
+        },
+        checkWebsite() {
+            this.$v.organizer.website.$touch()
+        
+            let newUrl = window.decodeURIComponent(this.organizer.website);
+            newUrl = newUrl.trim().replace(/\s/g, "");
+            if (newUrl === `https://`) { return this.organizer.website = '' }
+            if(/^(:\/\/)/.test(newUrl)){
+                this.organizer.website = `https${newUrl}`
+            }
+            if(!/^(f|ht)tps?:\/\//i.test(newUrl)){
+                this.organizer.website = `https://${newUrl}`
+            }
         },
         validateText(str) {
             return str && str.startsWith("http") || str && str.startsWith("@") || str && str.startsWith("www.") ? true : false

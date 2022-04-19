@@ -48,8 +48,13 @@
                         </button>
                         <a 
                             class="border-none text-1xl p-4 hover:text-black hover:font-medium"
-                            href="/index/search-online">
-                            Online Listings 
+                            href="/index/search-online?&category=6,12,21,18,3">
+                            Remote 
+                        </a>
+                        <a 
+                            class="border-none text-1xl p-4 hover:text-black hover:font-medium"
+                            href="/index/search-online?&category=23">
+                            VR 
                         </a>
                     </div>
                     <SearchBar :searchType="searchType" />

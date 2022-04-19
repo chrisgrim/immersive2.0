@@ -17,7 +17,7 @@ class OnlineSearchController extends Controller
     {
         $request = Search::convertUrl($request);
 
-        $categories = Category::all();
+        $categories = Category::where('remote', 1)->get();
         $tags = Genre::where('admin', 1)->orderBy('rank', 'desc')->get();
 
         $searchRequest = Event::boolSearch()

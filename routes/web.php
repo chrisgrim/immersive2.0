@@ -79,4 +79,5 @@ Route::GET('/citylist/generate', 'CityListsController@generate');
 require __DIR__.'/auth.php';
 require __DIR__.'/admin.php';
 require __DIR__.'/create.php';
+require __DIR__.'/creation.php';
 require __DIR__.'/curated.php';

@@ -23,7 +23,7 @@
         </template>
         <div class="w-full">
             <div class="relative px-8 md:px-32 md:py-8">
-                <h3>Online Events</h3>
+                <h3>Remote Events</h3>
                 <SearchAlbum 
                     :user="user"
                     :items="events.data" 

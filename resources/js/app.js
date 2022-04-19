@@ -65,6 +65,10 @@ Vue.component('index', () => import(/* webpackChunkName: "assets/ei" */ './pages
 Vue.component('modal-wrapper', () => import(/* webpackChunkName: "assets/mw" */ './components/modals/modal-wrapper.vue'));
 Vue.component('vue-email-verify', () => import(/* webpackChunkName: "assets/lev" */ './components/modals/Components/email-verify-modal.vue'));
 
+//Creation 
+Vue.component('vue-creation-idea', () => import(/* webpackChunkName: "assets/cvci" */ './pages/Creation/index.vue'));
+
+
 //Create Events
 Vue.component('vue-create-nav', () => import(/* webpackChunkName: "assets/cn" */ './pages/create/nav.vue'));
 Vue.component('vue-create-organizer-nav', () => import(/* webpackChunkName: "assets/con" */ './pages/create/organizer-nav.vue'));
@@ -80,6 +84,8 @@ Vue.component('create-description', () => import(/* webpackChunkName: "assets/cd
 Vue.component('create-advisories', () => import(/* webpackChunkName: "assets/ca" */ './pages/create/advisories.vue'));
 Vue.component('vue-create-review-event', () => import(/* webpackChunkName: "assets/cre" */ './pages/create/review-event.vue'));
 Vue.component('vue-create-first-event', () => import(/* webpackChunkName: "assets/cs" */ './pages/create/start-event-creation.vue'));
+
+
 
 //Admin Area
 Vue.component('admin-nav', () => import(/* webpackChunkName: "assets/an" */ './pages/Admin/nav.vue'));

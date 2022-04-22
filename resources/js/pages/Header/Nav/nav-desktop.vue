@@ -48,7 +48,7 @@
                         </button>
                         <a 
                             class="border-none text-1xl p-4 hover:text-black hover:font-medium"
-                            href="/index/search-online?&category=6,12,21,18,3">
+                            href="/index/search-online?&category=6,12,21,18,3,10,19">
                             Remote 
                         </a>
                         <a 

@@ -27,7 +27,8 @@ class EventController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('moderator');
+        $this->middleware('moderator')->except('index', 'show', 'fetch');
+        $this->middleware('curator');
     }
 
      /**

@@ -1,5 +1,5 @@
 @extends('adminArea.index')
 
 @section('adminarea')
-    <vue-admin-events></vue-admin-events>
+    <vue-admin-events :user="{{auth()->user()}}" />
 @endsection

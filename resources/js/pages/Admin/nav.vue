@@ -13,131 +13,144 @@
                 class="text-white mb-12 text-4xl ml-4">Admin Area</a>
             <div class="flex flex-col">
                 <a
+                    v-if="user.isModerator"
                     class="text-gray-400 flex items-center text-1xl px-4 py-2 rounded-2xl hover:bg-slate-800 hover:text-white" 
                     href="/admin/events/finalize">
                     Approve Events
                     <p class="bg-red-500 w-6 h-6 flex items-center justify-center text-white text-sm font-semibold rounded-full" v-if="eventApproval"> {{ eventApproval }}</p>
                 </a>
                 <a
+                    v-if="user.isModerator"
                     class="text-gray-400 flex items-center text-1xl px-4 py-2 rounded-2xl hover:bg-slate-800 hover:text-white" 
                     href="/admin/organizers/finalize">
                     Approve Organizers
                     <p class="bg-red-500 w-6 h-6 flex items-center justify-center text-white text-sm font-semibold rounded-full" v-if="orgApproval"> {{ orgApproval }} </p>
                 </a>
                 <a
+                    v-if="user.isModerator"
                     class="text-gray-400 flex items-center text-1xl px-4 py-2 rounded-2xl hover:bg-slate-800 hover:text-white" 
                     href="/admin/communities/finalize">
                     Approve Communities
                     <p class="bg-red-500 w-6 h-6 flex items-center justify-center text-white text-sm font-semibold rounded-full" v-if="comApproval"> {{ comApproval }} </p>
                 </a>
                 <a 
+                    v-if="user.isModerator"
                     class="text-gray-400 flex items-center text-1xl px-4 py-2 rounded-2xl hover:bg-slate-800 hover:text-white"
                     href="/admin/event-requests">
                     Approve Requests
                     <p class="bg-red-500 w-6 h-6 flex items-center justify-center text-white text-sm font-semibold rounded-full" v-if="requestApproval"> {{ requestApproval }} </p>
                 </a>
 
-                <template v-if="user.isAdmin">
+                <a 
+                    v-if="user.isCurator"
+                    class="text-gray-400 flex items-center text-1xl px-4 py-2 rounded-2xl hover:bg-slate-800 hover:text-white"
+                    href="/admin/events">
+                    Edit Events
+                </a>
+                <a 
+                    v-if="user.isAdmin"
+                    class="text-gray-400 flex items-center text-1xl px-4 py-2 rounded-2xl hover:bg-slate-800 hover:text-white"
+                    href="/admin/communities/index">
+                    Edit Communities
+                </a>
+                <a
+                    v-if="user.isAdmin"
+                    class="text-gray-400 flex items-center text-1xl px-4 py-2 rounded-2xl hover:bg-slate-800 hover:text-white"
+                    href="/admin/organizer">
+                    Edit Organizers
+                </a>
+                <a 
+                    v-if="user.isAdmin"
+                    class="text-gray-400 flex items-center text-1xl px-4 py-2 rounded-2xl hover:bg-slate-800 hover:text-white"
+                    href="/admin/docks">
+                    Docks
+                </a>
+                <a 
+                    v-if="user.isAdmin"
+                    class="text-gray-400 flex items-center text-1xl px-4 py-2 rounded-2xl hover:bg-slate-800 hover:text-white"
+                    href="/admin/boneyard">
+                    Boneyard
+                </a>
+                <a 
+                    v-if="user.isAdmin"
+                    class="text-gray-400 flex items-center text-1xl px-4 py-2 rounded-2xl hover:bg-slate-800 hover:text-white"
+                    href="/admin/events/purgatory">
+                    Purgatory
+                </a>
+                <a 
+                    v-if="user.isAdmin"
+                    class="text-gray-400 flex items-center text-1xl px-4 py-2 rounded-2xl hover:bg-slate-800 hover:text-white"
+                    href="/admin/users">
+                    Edit Users
+                </a>
+                <a
+                    v-if="user.isAdmin"
+                    class="text-gray-400 flex items-center text-1xl px-4 py-2 rounded-2xl hover:bg-slate-800 hover:text-white"
+                    href="/categories/create">
+                    Categories
+                </a>
+                <a
+                    v-if="user.isAdmin"
+                    class="text-gray-400 flex items-center text-1xl px-4 py-2 rounded-2xl hover:bg-slate-800 hover:text-white"
+                    href="/genres/create">
+                    Tags
+                </a>
+                <div 
+                    v-if="user.isAdmin"
+                    @click="advisories =! advisories"
+                    class="text-gray-400 flex items-center text-1xl px-4 py-2 rounded-2xl hover:bg-slate-800 hover:text-white">
+                    Advisories
+                    <svg 
+                        :class="{'rotate-90': advisories}"
+                        class="w-8 h-8 fill-gray-400">
+                        <use :xlink:href="`/storage/website-files/icons.svg#ri-arrow-right-s-line`" />
+                    </svg>
+                </div>
+                <div 
+                    class="ml-4" 
+                    v-if="advisories && user.isAdmin">
                     <a 
                         class="text-gray-400 flex items-center text-1xl px-4 py-2 rounded-2xl hover:bg-slate-800 hover:text-white"
-                        href="/admin/events">
-                        Edit Events
-                    </a>
-                    <a 
-                        class="text-gray-400 flex items-center text-1xl px-4 py-2 rounded-2xl hover:bg-slate-800 hover:text-white"
-                        href="/admin/communities/index">
-                        Edit Communities
+                        href="/contactlevels/create">
+                        Contact Levels
                     </a>
                     <a
                         class="text-gray-400 flex items-center text-1xl px-4 py-2 rounded-2xl hover:bg-slate-800 hover:text-white"
-                        href="/admin/organizer">
-                        Edit Organizers
-                    </a>
-                    <a 
-                        class="text-gray-400 flex items-center text-1xl px-4 py-2 rounded-2xl hover:bg-slate-800 hover:text-white"
-                        href="/admin/docks">
-                        Docks
-                    </a>
-                    <a 
-                        class="text-gray-400 flex items-center text-1xl px-4 py-2 rounded-2xl hover:bg-slate-800 hover:text-white"
-                        href="/admin/boneyard">
-                        Boneyard
-                    </a>
-                    <a 
-                        class="text-gray-400 flex items-center text-1xl px-4 py-2 rounded-2xl hover:bg-slate-800 hover:text-white"
-                        href="/admin/events/purgatory">
-                        Purgatory
-                    </a>
-                    <a 
-                        class="text-gray-400 flex items-center text-1xl px-4 py-2 rounded-2xl hover:bg-slate-800 hover:text-white"
-                        href="/admin/users">
-                        Edit Users
+                        href="/remotelocations/create">
+                        Remote Locations
                     </a>
                     <a
                         class="text-gray-400 flex items-center text-1xl px-4 py-2 rounded-2xl hover:bg-slate-800 hover:text-white"
-                        href="/categories/create">
-                        Categories
+                        href="/contentadvisories/create">
+                        Content Advisories
                     </a>
-                    <a
+                    <a 
                         class="text-gray-400 flex items-center text-1xl px-4 py-2 rounded-2xl hover:bg-slate-800 hover:text-white"
-                        href="/genres/create">
-                        Tags
+                        href="/mobilities/create">
+                        Mobility Advisories
                     </a>
-                    <div 
-                        @click="advisories =! advisories"
-                        class="text-gray-400 flex items-center text-1xl px-4 py-2 rounded-2xl hover:bg-slate-800 hover:text-white">
-                        Advisories
-                        <svg 
-                            :class="{'rotate-90': advisories}"
-                            class="w-8 h-8 fill-gray-400">
-                            <use :xlink:href="`/storage/website-files/icons.svg#ri-arrow-right-s-line`" />
-                        </svg>
-                    </div>
-                    <div 
-                        class="ml-4" 
-                        v-if="advisories">
-                        <a 
-                            class="text-gray-400 flex items-center text-1xl px-4 py-2 rounded-2xl hover:bg-slate-800 hover:text-white"
-                            href="/contactlevels/create">
-                            Contact Levels
-                        </a>
-                        <a
-                            class="text-gray-400 flex items-center text-1xl px-4 py-2 rounded-2xl hover:bg-slate-800 hover:text-white"
-                            href="/remotelocations/create">
-                            Remote Locations
-                        </a>
-                        <a
-                            class="text-gray-400 flex items-center text-1xl px-4 py-2 rounded-2xl hover:bg-slate-800 hover:text-white"
-                            href="/contentadvisories/create">
-                            Content Advisories
-                        </a>
-                        <a 
-                            class="text-gray-400 flex items-center text-1xl px-4 py-2 rounded-2xl hover:bg-slate-800 hover:text-white"
-                            href="/mobilities/create">
-                            Mobility Advisories
-                        </a>
-                        <a 
-                            class="text-gray-400 flex items-center text-1xl px-4 py-2 rounded-2xl hover:bg-slate-800 hover:text-white"
-                            href="/interactivelevels/create">
-                            Interactive Levels
-                        </a>
-                    </div>
-                </template>
-
-                <template v-else>
-                    <a
+                    <a 
                         class="text-gray-400 flex items-center text-1xl px-4 py-2 rounded-2xl hover:bg-slate-800 hover:text-white"
-                        href="/admin/organizer">
-                        Edit Organizers
+                        href="/interactivelevels/create">
+                        Interactive Levels
                     </a>
-                </template>
+                </div>
 
                 <a
+                    v-if="user.isModerator"
+                    class="text-gray-400 flex items-center text-1xl px-4 py-2 rounded-2xl hover:bg-slate-800 hover:text-white"
+                    href="/admin/organizer">
+                    Edit Organizers
+                </a>
+
+                <a
+                    v-if="user.isModerator"
                     class="text-gray-400 flex items-center text-1xl px-4 py-2 rounded-2xl hover:bg-slate-800 hover:text-white"
                     href="/reviewevents/create">
                     Event Reviews
                 </a>
                 <a 
+                    v-if="user.isModerator"
                     class="text-gray-400 flex items-center text-1xl px-4 py-2 rounded-2xl hover:bg-slate-800 hover:text-white"
                     href="/staffpicks/create">
                     Picks Of The Week
@@ -151,11 +164,10 @@
 
     export default {
 
-        props: ['loaduser', 'navtype'],
+        props: ['user', 'navtype'],
 
         data() {
             return {
-                user: this.loaduser ? this.loaduser : '',
                 active: '',
                 advisories: false,
                 eventApproval: '',

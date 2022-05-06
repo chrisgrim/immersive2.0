@@ -73,7 +73,7 @@
                     Account
                 </a>
                 <a 
-                    v-if="user.isModerator"
+                    v-if="user.isCurator"
                     class="font-semibold p-6 cursor-pointer flex whitespace-nowrap w-full items-center hover:bg-slate-100"
                     href="/admin/dashboard">
                     Admin Dashboard

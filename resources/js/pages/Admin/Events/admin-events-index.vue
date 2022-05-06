@@ -38,6 +38,7 @@
                                 v-for="event in events.data">
                                 <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">
                                     <a 
+                                        v-if="user.isModerator"
                                         target="_blank"
                                         class="rounded-full w-12 h-12 block flex items-center justify-center hover:bg-black" 
                                         :href="`/create/${event.slug}/title`">
@@ -60,6 +61,7 @@
                                 </td>
                                 <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">
                                     <p 
+                                        v-if="user.isModerator"
                                         class="underline text-xl"
                                         @click.prevent="showModal(event, 'changeOrganizer')">
                                         {{ event.organizer.name }}
@@ -128,6 +130,7 @@
     import VueDataModal from '../../../components/modals/Vue-Data-Modal'
 
     export default {
+        props: ['user'],
 
         components: { Pagination, VueDataModal },
 

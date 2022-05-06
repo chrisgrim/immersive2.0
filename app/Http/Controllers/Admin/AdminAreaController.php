@@ -18,7 +18,7 @@ class AdminAreaController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('moderator');
+        $this->middleware('curator');
     }
     /**
      * Display a listing of the resource.

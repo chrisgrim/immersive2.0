@@ -66,7 +66,7 @@ Vue.component('modal-wrapper', () => import(/* webpackChunkName: "assets/mw" */ 
 Vue.component('vue-email-verify', () => import(/* webpackChunkName: "assets/lev" */ './components/modals/Components/email-verify-modal.vue'));
 
 //Creation 
-Vue.component('vue-creation-idea', () => import(/* webpackChunkName: "assets/cvci" */ './pages/Creation/index.vue'));
+Vue.component('vue-creation-index', () => import(/* webpackChunkName: "assets/ivci" */ './pages/Creation/index.vue'));
 
 
 //Create Events

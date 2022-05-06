@@ -1,9 +1,9 @@
 @extends('creation.main')
 
 @section('created')
-    <vue-creation-idea 
+    <vue-creation-index 
         :tags="{{$tags}}" 
-        :type="{{true}}"
+        type="I-T"
         :event="{{$event}}" 
         :remote="{{$remote}}"
         :categories="{{$categories}}" />

@@ -520,10 +520,10 @@
 	"buffers":
 	[
 		{
-			"file": "resources/js/pages/Creation/Idea/experience-type.vue",
+			"file": "resources/js/pages/Creation/index.vue",
 			"settings":
 			{
-				"buffer_size": 2515,
+				"buffer_size": 612,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -533,29 +533,25 @@
 			"settings":
 			{
 				"buffer_size": 1380,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "resources/views/creation/experience/type.blade.php",
+			"settings":
+			{
+				"buffer_size": 229,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"contents": "<template>\n    <div class=\"h-screen relative overflow-hidden text-1xl font-medium\">\n        <Nav \n            :event=\"event\"/>\n        <ExperienceType \n            v-if=\"type\"\n            :event=\"event\"/>\n    </div>\n</template>\n\n<script>\n    import Nav  from './nav.vue'\n    import ExperienceType from './Idea/experience-type.vue'\n\n    export default {\n\n        components: { Nav, ExperienceType },\n\n        props: ['event', 'tags', 'remote', 'categories'],\n\n\n\n    };\n\n</script>",
-			"file": "resources/js/pages/Creation/index.vue",
-			"file_size": 454,
-			"file_write_time": 132937754413205292,
+			"file": "resources/js/app.js",
 			"settings":
 			{
-				"buffer_size": 478,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "resources/js/pages/Creation/Idea/nav-idea.vue",
-			"settings":
-			{
-				"buffer_size": 3654,
+				"buffer_size": 10579,
 				"encoding": "UTF-8",
-				"line_ending": "Unix",
-				"name": "nav-idea.vue"
+				"line_ending": "Unix"
 			}
 		}
 	],
@@ -697,27 +693,29 @@
 		"/Users/chrisgrim/code/ei",
 		"/Users/chrisgrim/code/ei/app",
 		"/Users/chrisgrim/code/ei/app/Http",
-		"/Users/chrisgrim/code/ei/app/Http/Controllers",
-		"/Users/chrisgrim/code/ei/app/Http/Controllers/Creation",
-		"/Users/chrisgrim/code/ei/CustomSearch",
 		"/Users/chrisgrim/code/ei/resources",
 		"/Users/chrisgrim/code/ei/resources/js",
 		"/Users/chrisgrim/code/ei/resources/js/pages",
-		"/Users/chrisgrim/code/ei/resources/js/pages/create",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Creation",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Creation/Idea",
 		"/Users/chrisgrim/code/ei/resources/views",
-		"/Users/chrisgrim/code/ei/resources/views/create",
 		"/Users/chrisgrim/code/ei/resources/views/creation",
 		"/Users/chrisgrim/code/ei/resources/views/creation/experience",
 		"/Users/chrisgrim/code/ei/routes"
 	],
 	"file_history":
 	[
+		"/Users/chrisgrim/code/ei/resources/js/pages/Header/Nav/nav-desktop.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Search/vue-search-online.vue",
+		"/Users/chrisgrim/code/ei/app/Http/Controllers/Search/OnlineSearchController.php",
+		"/Users/chrisgrim/code/ei/app/Models/Category.php",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Creation/Idea/experience-type.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Creation/Idea/nav-idea.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Creation/nav.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Creation/index.vue",
 		"/Users/chrisgrim/code/ei/resources/views/creation/experience/type.blade.php",
 		"/Users/chrisgrim/code/ei/routes/creation.php",
 		"/Users/chrisgrim/code/ei/app/Http/Controllers/Creation/IdeaController.php",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Creation/index.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Creation/Idea/index.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Creation/Idea/nav.vue",
 		"/Users/chrisgrim/code/ei/resources/js/app.js",
@@ -726,7 +724,6 @@
 		"/Users/chrisgrim/code/ei/public/fonts/vendor/remixicon/remixicon.svg",
 		"/Users/chrisgrim/code/ei/node_modules/remixicon/fonts/remixicon.symbol.svg",
 		"/Users/chrisgrim/code/ei/node_modules/remixicon/fonts/remixicon.svg",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Creation/Idea/experience-type.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Admin/nav.vue",
 		"/Users/chrisgrim/code/ei/app/Http/Controllers/Creation/ExperienceController.php",
 		"/Users/chrisgrim/code/ei/resources/views/creation/main.blade.php",
@@ -786,7 +783,6 @@
 		"/Users/chrisgrim/code/ei/resources/js/components/modals/Vue-Modal-Delete.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/Events/Components/event-review-component.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Header/Nav/Nav-Desktop/Components/tags.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Header/Nav/nav-desktop.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Header/Nav/Nav-Desktop/Components/location.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Header/header-desktop.vue",
 		"/Users/chrisgrim/code/ei/tailwind.js",
@@ -836,12 +832,7 @@
 		"/Users/chrisgrim/code/ei/resources/js/pages/Header/Nav/Nav-Desktop/nav-desktop-search.vue",
 		"/Users/chrisgrim/code/ei/resources/views/layouts/footer.blade.php",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Header/Nav/Nav-Desktop/Components/location-google.vue",
-		"/Users/chrisgrim/code/ei/resources/sass/Plugins/autocomplete.scss",
-		"/Users/chrisgrim/code/ei/resources/sass/app-lite.scss",
-		"/Users/chrisgrim/code/ei/app/Http/Controllers/ConversationsController.php",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Home/Sections/home-mobile-search-nav.vue",
-		"/Users/chrisgrim/code/ei/resources/sass/Plugins/v-select.scss",
-		"/Users/chrisgrim/code/ei/resources/sass/components/map/leaflet.scss"
+		"/Users/chrisgrim/code/ei/resources/sass/Plugins/autocomplete.scss"
 	],
 	"find":
 	{
@@ -987,6 +978,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"ivci",
+			"vci",
+			"search",
 			"eventUrl",
 			"href",
 			"urlClick",
@@ -1111,10 +1105,7 @@
 			"emit",
 			"onBack",
 			"fetchConversation",
-			"eventsOpen",
-			"isReady",
-			"disabled",
-			"resend"
+			"eventsOpen"
 		],
 		"highlight": false,
 		"in_selection": false,
@@ -1132,86 +1123,24 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "resources/js/pages/Creation/Idea/experience-type.vue",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2515,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								630,
-								638
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Vuejs Complete Package/vue.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "resources/js/pages/Creation/nav.vue",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1380,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								994,
-								994
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Vuejs Complete Package/vue.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
 					"file": "resources/js/pages/Creation/index.vue",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 478,
+						"buffer_size": 612,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								174,
-								174
+								204,
+								204
 							]
 						],
 						"settings":
@@ -1229,32 +1158,93 @@
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "resources/js/pages/Creation/Idea/nav-idea.vue",
-					"semi_transient": false,
+					"buffer": 1,
+					"file": "resources/js/pages/Creation/nav.vue",
+					"semi_transient": true,
 					"settings":
 					{
-						"buffer_size": 3654,
+						"buffer_size": 1380,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								68,
-								68
+								1291,
+								1363
 							]
 						],
 						"settings":
 						{
-							"auto_name": "nav-idea.vue",
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
 							"syntax": "Packages/Vuejs Complete Package/vue.tmLanguage"
 						},
 						"translation.x": 0.0,
+						"translation.y": 430.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "resources/views/creation/experience/type.blade.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 229,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								115,
+								115
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Laravel Blade Highlighter/blade.sublime-syntax"
+						},
+						"translation.x": 0.0,
 						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "resources/js/app.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 10579,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3161,
+								3165
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 1133.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 3,

@@ -1,8 +1,10 @@
 <template>
     <div class="h-screen relative overflow-hidden text-1xl font-medium">
         <Nav 
+            :page="page"
             :event="event"/>
         <ExperienceType 
+            v-if="page='I-T'"
             :event="event"/>
     </div>
 </template>
@@ -15,9 +17,13 @@
 
         components: { Nav, ExperienceType },
 
-        props: ['event', 'tags', 'remote', 'categories'],
+        props: ['event', 'tags', 'remote', 'categories', 'type'],
 
-
+        data() {
+            return {
+                page: this.type
+            };
+        },
 
     };
 

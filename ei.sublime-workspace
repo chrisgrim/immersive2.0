@@ -520,36 +520,10 @@
 	"buffers":
 	[
 		{
-			"file": "resources/js/pages/Creation/index.vue",
+			"file": "app/Http/Controllers/Admin/EventController.php",
 			"settings":
 			{
-				"buffer_size": 612,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "resources/js/pages/Creation/nav.vue",
-			"settings":
-			{
-				"buffer_size": 1380,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "resources/views/creation/experience/type.blade.php",
-			"settings":
-			{
-				"buffer_size": 229,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "resources/js/app.js",
-			"settings":
-			{
-				"buffer_size": 10579,
+				"buffer_size": 7021,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -693,18 +667,34 @@
 		"/Users/chrisgrim/code/ei",
 		"/Users/chrisgrim/code/ei/app",
 		"/Users/chrisgrim/code/ei/app/Http",
+		"/Users/chrisgrim/code/ei/app/Http/Controllers",
+		"/Users/chrisgrim/code/ei/app/Http/Controllers/Admin",
 		"/Users/chrisgrim/code/ei/resources",
 		"/Users/chrisgrim/code/ei/resources/js",
 		"/Users/chrisgrim/code/ei/resources/js/pages",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Creation",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Creation/Idea",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Admin",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Admin/Events",
 		"/Users/chrisgrim/code/ei/resources/views",
+		"/Users/chrisgrim/code/ei/resources/views/adminArea",
 		"/Users/chrisgrim/code/ei/resources/views/creation",
 		"/Users/chrisgrim/code/ei/resources/views/creation/experience",
 		"/Users/chrisgrim/code/ei/routes"
 	],
 	"file_history":
 	[
+		"/Users/chrisgrim/code/ei/resources/js/pages/Admin/Events/admin-events-index.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Admin/nav.vue",
+		"/Users/chrisgrim/code/ei/resources/views/adminArea/events.blade.php",
+		"/Users/chrisgrim/code/ei/resources/views/adminArea/index.blade.php",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Header/Nav/Nav-Desktop/nav-desktop-profile.vue",
+		"/Users/chrisgrim/code/ei/app/Http/Controllers/Admin/EventController.php",
+		"/Users/chrisgrim/code/ei/app/Http/Controllers/Admin/Featured/DockController.php",
+		"/Users/chrisgrim/code/ei/app/Http/Controllers/Admin/AdminAreaController.php",
+		"/Users/chrisgrim/code/ei/app/Models/User.php",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Admin/Featured/Components/dock-component.vue",
+		"/Users/chrisgrim/code/ei/resources/js/app.js",
+		"/Users/chrisgrim/code/ei/resources/views/creation/experience/type.blade.php",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Creation/index.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Header/Nav/nav-desktop.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Search/vue-search-online.vue",
 		"/Users/chrisgrim/code/ei/app/Http/Controllers/Search/OnlineSearchController.php",
@@ -712,19 +702,15 @@
 		"/Users/chrisgrim/code/ei/resources/js/pages/Creation/Idea/experience-type.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Creation/Idea/nav-idea.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Creation/nav.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Creation/index.vue",
-		"/Users/chrisgrim/code/ei/resources/views/creation/experience/type.blade.php",
 		"/Users/chrisgrim/code/ei/routes/creation.php",
 		"/Users/chrisgrim/code/ei/app/Http/Controllers/Creation/IdeaController.php",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Creation/Idea/index.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Creation/Idea/nav.vue",
-		"/Users/chrisgrim/code/ei/resources/js/app.js",
 		"/Users/chrisgrim/code/ei/public/fonts/vendor/remixicon/remixicon.symbol.svg",
 		"/Users/chrisgrim/code/ei/storage/app/public/website-files/icons.svg",
 		"/Users/chrisgrim/code/ei/public/fonts/vendor/remixicon/remixicon.svg",
 		"/Users/chrisgrim/code/ei/node_modules/remixicon/fonts/remixicon.symbol.svg",
 		"/Users/chrisgrim/code/ei/node_modules/remixicon/fonts/remixicon.svg",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Admin/nav.vue",
 		"/Users/chrisgrim/code/ei/app/Http/Controllers/Creation/ExperienceController.php",
 		"/Users/chrisgrim/code/ei/resources/views/creation/main.blade.php",
 		"/Users/chrisgrim/code/ei/resources/views/creation/nav.blade.php",
@@ -733,12 +719,10 @@
 		"/Users/chrisgrim/code/ei/resources/js/pages/create/image.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Organizers/organizer-create.vue",
 		"/Users/chrisgrim/code/ei/app/Models/Event.php",
-		"/Users/chrisgrim/code/ei/app/Models/User.php",
 		"/Users/chrisgrim/code/ei/app/Http/Controllers/EventController.php",
 		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/Featured/admin-docks-index.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/Featured/Components/dock-component.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/Featured/Components/dock-modal.vue",
-		"/Users/chrisgrim/code/ei/resources/views/adminArea/index.blade.php",
 		"/Users/chrisgrim/code/ei/webpack.mix.js",
 		"/Users/chrisgrim/code/ei/resources/views/adminArea/show.blade.php",
 		"/Users/chrisgrim/code/ei/resources/views/adminArea/showapproval.blade.php",
@@ -755,7 +739,6 @@
 		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/nav.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/components/staff-pick-component.vue",
 		"/Users/chrisgrim/code/ei/app/Http/Controllers/Admin/SearchController.php",
-		"/Users/chrisgrim/code/ei/app/Http/Controllers/Admin/EventController.php",
 		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/Events/Components/event-show-component.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/Creation/admin-mobility-index.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/Creation/Components/mobility-component.vue",
@@ -826,13 +809,7 @@
 		"/Users/chrisgrim/code/ei/resources/js/pages/Profile/profile-show.vue",
 		"/Users/chrisgrim/code/ei/app/Policies/UserPolicy.php",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Profile/Components/vue-add-image.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Home/index.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Home/Sections/hero-section.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Search/Location/Components/location-search.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Header/Nav/Nav-Desktop/nav-desktop-search.vue",
-		"/Users/chrisgrim/code/ei/resources/views/layouts/footer.blade.php",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Header/Nav/Nav-Desktop/Components/location-google.vue",
-		"/Users/chrisgrim/code/ei/resources/sass/Plugins/autocomplete.scss"
+		"/Users/chrisgrim/code/ei/resources/js/pages/Home/index.vue"
 	],
 	"find":
 	{
@@ -978,6 +955,10 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"user",
+			"ismod",
+			"isModerator",
+			"admin",
 			"ivci",
 			"vci",
 			"search",
@@ -1101,11 +1082,7 @@
 			"<p>",
 			"eventList",
 			"messageList",
-			"conver",
-			"emit",
-			"onBack",
-			"fetchConversation",
-			"eventsOpen"
+			"conver"
 		],
 		"highlight": false,
 		"in_selection": false,
@@ -1128,19 +1105,19 @@
 			[
 				{
 					"buffer": 0,
-					"file": "resources/js/pages/Creation/index.vue",
+					"file": "app/Http/Controllers/Admin/EventController.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 612,
+						"buffer_size": 7021,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								204,
-								204
+								782,
+								782
 							]
 						],
 						"settings":
@@ -1148,106 +1125,13 @@
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
-							"syntax": "Packages/Vuejs Complete Package/vue.tmLanguage"
+							"syntax": "Packages/PHP/PHP.sublime-syntax"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 407.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "resources/js/pages/Creation/nav.vue",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 1380,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1291,
-								1363
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Vuejs Complete Package/vue.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 430.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "resources/views/creation/experience/type.blade.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 229,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								115,
-								115
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Laravel Blade Highlighter/blade.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "resources/js/app.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 10579,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3161,
-								3165
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 1133.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
 					"type": "text"
 				}
 			]
@@ -1325,6 +1209,10 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"user",
+				"app/Models/User.php"
+			],
 			[
 				"icons",
 				"storage/app/public/website-files/icons.svg"
@@ -1832,10 +1720,6 @@
 			[
 				"auths",
 				"app/Providers/AuthServiceProvider.php"
-			],
-			[
-				"route",
-				"vendor/symfony/routing/Route.php"
 			]
 		],
 		"width": 0.0

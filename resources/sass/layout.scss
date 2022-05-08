@@ -227,7 +227,14 @@ button.default-border {
         color:white;
     }
 }
-
+.card-blurb a {
+    color: #0074cc;
+    text-decoration: underline;
+    font-weight: 500;
+}
+.card-blurb p:empty::after {
+    content: "\00A0";
+}
 button.patreon {
     text-transform: uppercase;
     font-size: 1.2rem;

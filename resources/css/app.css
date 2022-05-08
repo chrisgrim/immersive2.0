@@ -23,4 +23,9 @@
   h5 {
     @apply text-xl;
   }
+  ul, ol {
+    list-style: revert;
+    margin:revert;
+    padding: revert;
+  }
 }

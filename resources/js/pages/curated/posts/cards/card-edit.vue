@@ -154,6 +154,7 @@
             async updateCard() {
                 if ( this.checkVuelidate()) { return }
                 this.appendCardData();
+                console.log(this.card.blurb);
                 await axios.post(`/cards/${this.card.id}`, this.formData)
                 .then( res => { 
                     this.card = res.data;

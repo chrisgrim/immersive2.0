@@ -29,7 +29,7 @@
         </template>
         <template v-if="card.blurb">
             <p 
-                class="mt-4" 
+                class="mt-4 card-blurb" 
                 v-html="card.blurb" />
         </template>
         <template v-if="hasUrl">

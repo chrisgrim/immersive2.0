@@ -2,10 +2,10 @@
     <div class="h-screen relative overflow-hidden text-1xl font-medium">
         <Nav 
             :page="page"
-            :event="event"/>
+            :event="event" />
         <ExperienceType 
             v-if="page='I-T'"
-            :event="event"/>
+            :event="event" />
     </div>
 </template>
 

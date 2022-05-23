@@ -3,7 +3,7 @@
         <div>
             <nav class="w-[26rem] z-[3001]">
                 <div class="w-[26rem] absolute top-0 h-full bg-[#f7f7f7]">
-                    <div class="h-full overflow-hidden px-12 py-8">
+                    <div class="h-full overflow-auto px-12 py-8 shadow-[inset_-4px_0px_20px_rgb(0,0,0,0.05)]">
                         <!-- Nav top bar -->
                         <div class="flex justify-between items-center flex-wrap">
                             <div>
@@ -18,6 +18,16 @@
                         <!-- Nav menu -->
                         <div class="relative">
                             <NavIdea
+                                v-model="page"
+                                :event="event" />
+                            <NavGuidelines
+                                v-model="page"
+                                :event="event" />
+                            <NavEventPage
+                                v-model="page" 
+                                :event="event" />
+                            <NavSettings
+                                v-model="page"
                                 :event="event" />
                         </div>
                     </div>
@@ -28,11 +38,15 @@
 </template>
 <script>
     import NavIdea  from './Idea/nav-idea.vue'
+    import NavGuidelines  from './Guidelines/nav-guidelines.vue'
+    import NavEventPage from './Eventpage/nav-eventpage.vue'
+    import NavSettings from './Settings/nav-settings.vue'
     export default {
 
-        props: [ 'event' ],
+        props: [ 'event', 'page' ],
 
-        components: { NavIdea },
+        components: { NavIdea, NavGuidelines, NavEventPage, NavSettings },
+
 
         data() {
             return {

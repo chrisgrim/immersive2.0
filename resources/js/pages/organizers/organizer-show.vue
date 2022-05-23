@@ -57,7 +57,7 @@
                     </template>
                     <Social :organizer="organizer" />
                 </template>
-                <div class="whitespace-preline mb-8 px-8 md:px-0">
+                <div class="whitespace-pre-wrap mb-8 px-8 md:px-0">
                     <p>{{ organizer.description }}</p>
                 </div>
                 <template v-if="events">

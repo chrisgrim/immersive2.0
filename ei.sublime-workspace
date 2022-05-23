@@ -519,15 +519,6 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "app/Http/Controllers/Admin/EventController.php",
-			"settings":
-			{
-				"buffer_size": 7021,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -665,29 +656,24 @@
 	"expanded_folders":
 	[
 		"/Users/chrisgrim/code/ei",
-		"/Users/chrisgrim/code/ei/app",
-		"/Users/chrisgrim/code/ei/app/Http",
-		"/Users/chrisgrim/code/ei/app/Http/Controllers",
-		"/Users/chrisgrim/code/ei/app/Http/Controllers/Admin",
 		"/Users/chrisgrim/code/ei/resources",
 		"/Users/chrisgrim/code/ei/resources/js",
 		"/Users/chrisgrim/code/ei/resources/js/pages",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Admin",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Admin/Events",
-		"/Users/chrisgrim/code/ei/resources/views",
-		"/Users/chrisgrim/code/ei/resources/views/adminArea",
-		"/Users/chrisgrim/code/ei/resources/views/creation",
-		"/Users/chrisgrim/code/ei/resources/views/creation/experience",
+		"/Users/chrisgrim/code/ei/resources/sass",
 		"/Users/chrisgrim/code/ei/routes"
 	],
 	"file_history":
 	[
+		"/Users/chrisgrim/code/ei/app/Http/Controllers/Admin/EventController.php",
+		"/Users/chrisgrim/code/ei/resources/sass/layout.scss",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Curated/Posts/Cards/card.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Curated/Posts/Cards/card-edit.vue",
+		"/Users/chrisgrim/code/ei/resources/css/app.css",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Admin/Events/admin-events-index.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Admin/nav.vue",
 		"/Users/chrisgrim/code/ei/resources/views/adminArea/events.blade.php",
 		"/Users/chrisgrim/code/ei/resources/views/adminArea/index.blade.php",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Header/Nav/Nav-Desktop/nav-desktop-profile.vue",
-		"/Users/chrisgrim/code/ei/app/Http/Controllers/Admin/EventController.php",
 		"/Users/chrisgrim/code/ei/app/Http/Controllers/Admin/Featured/DockController.php",
 		"/Users/chrisgrim/code/ei/app/Http/Controllers/Admin/AdminAreaController.php",
 		"/Users/chrisgrim/code/ei/app/Models/User.php",
@@ -801,15 +787,11 @@
 		"/Users/chrisgrim/code/ei/resources/views/adminArea/Communities/queue.blade.php",
 		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/admin-events.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Curated/Posts/Components/post-sidebar.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Curated/Posts/Cards/card-edit.vue",
-		"/Users/chrisgrim/code/ei/resources/sass/layout.scss",
 		"/Users/chrisgrim/code/ei/resources/js/pages/adminArea/admin-user.vue",
 		"/Users/chrisgrim/code/ei/resources/views/profiles/show.blade.php",
 		"/Users/chrisgrim/code/ei/app/Http/Controllers/ProfilesController.php",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Profile/profile-show.vue",
-		"/Users/chrisgrim/code/ei/app/Policies/UserPolicy.php",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Profile/Components/vue-add-image.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Home/index.vue"
+		"/Users/chrisgrim/code/ei/app/Policies/UserPolicy.php"
 	],
 	"find":
 	{
@@ -820,6 +802,7 @@
 		"height": 164.0,
 		"where_history":
 		[
+			"/Users/chrisgrim/code/ei/resources/sass",
 			"/Users/chrisgrim/code/ei/resources/js/pages",
 			"/Users/chrisgrim/code/ei/resources",
 			"/Users/chrisgrim/code/ei",
@@ -946,8 +929,7 @@
 			"/Users/chrisgrim/code/ei/resources/js",
 			"/Users/chrisgrim/code/ei/resources/js/pages",
 			"/Users/chrisgrim/code/ei/resources/js",
-			"/Users/chrisgrim/code/ei/resources/js/pages",
-			"/Users/chrisgrim/code/ei/resources/js/pages/curated"
+			"/Users/chrisgrim/code/ei/resources/js/pages"
 		]
 	},
 	"find_state":
@@ -955,6 +937,16 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"appendCardData",
+			"updateCard",
+			"appropriate elements",
+			"ol,\nul,\nmenu",
+			"ol ul",
+			"ol, ul,",
+			"ul",
+			"ol",
+			"card-blurb",
+			"blurb",
 			"user",
 			"ismod",
 			"isModerator",
@@ -1072,17 +1064,7 @@
 			"plugins",
 			"disabled",
 			"pointer",
-			"47",
-			"saveCardImage",
-			"removeLargeImage",
-			"updateThumbImagePath",
-			"storeSmallImage",
-			"getImage",
-			"hasImage",
-			"<p>",
-			"eventList",
-			"messageList",
-			"conver"
+			"47"
 		],
 		"highlight": false,
 		"in_selection": false,
@@ -1100,40 +1082,8 @@
 	"groups":
 	[
 		{
-			"selected": 0,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "app/Http/Controllers/Admin/EventController.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 7021,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								782,
-								782
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/PHP/PHP.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 407.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				}
 			]
 		}
 	],

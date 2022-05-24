@@ -18,16 +18,16 @@
                         <!-- Nav menu -->
                         <div class="relative">
                             <NavIdea
-                                v-model="page"
+                                v-model="inputVal"
                                 :event="event" />
                             <NavGuidelines
-                                v-model="page"
+                                v-model="inputVal"
                                 :event="event" />
                             <NavEventPage
-                                v-model="page" 
+                                v-model="inputVal" 
                                 :event="event" />
                             <NavSettings
-                                v-model="page"
+                                v-model="inputVal"
                                 :event="event" />
                         </div>
                     </div>
@@ -43,10 +43,16 @@
     import NavSettings from './Settings/nav-settings.vue'
     export default {
 
-        props: [ 'event', 'page' ],
+        props: [ 'event', 'value' ],
 
         components: { NavIdea, NavGuidelines, NavEventPage, NavSettings },
 
+        computed: {
+            inputVal: {
+                get() { return this.value },
+                set(val) { this.$emit('input', val) }
+            },
+        },
 
         data() {
             return {

@@ -28,29 +28,15 @@
         </div>
         <div v-if="guidelines">
             <ul class="list-none mr-[-9px]">
-                <li>
-                    <a :href="`/experience-hosting/listing/${event.slug}/experience-type`">
-                        <div class="flex justify-between items-center p-3 rounded-full cursor-pointer hover:bg-gray-200">
-                            <div class="text-lg"> Overview </div>
-                            <div>
-                                <svg 
-                                    :class="[{ 'fill-orange-400': guidelines }, { 'fill-gray-400': !guidelines }]"
-                                    class="w-8 h-8">
-                                    <use v-if="guidelines" :xlink:href="`/storage/website-files/icons.svg#ri-question-fill`" />
-                                    <use v-else :xlink:href="`/storage/website-files/icons.svg#ri-checkbox-circle-fill`" />
-                                </svg>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li>
+                <li @click="inputVal='O'">
                     <div class="flex justify-between items-center p-3 rounded-full cursor-pointer hover:bg-gray-200">
-                        <div class="text-lg"> Immersive</div>
+                        <div class="text-lg"> Overview </div>
                         <div>
                             <svg 
-                                :class="[{ 'fill-black-400': guidelines }, { 'fill-gray-400': !guidelines }]"
+                                :class="[{ 'fill-orange-400': guidelines }, { 'fill-gray-400': !guidelines }]"
                                 class="w-8 h-8">
-                                <use :xlink:href="`/storage/website-files/icons.svg#ri-checkbox-circle-fill`" />
+                                <use v-if="guidelines" :xlink:href="`/storage/website-files/icons.svg#ri-question-fill`" />
+                                <use v-else :xlink:href="`/storage/website-files/icons.svg#ri-checkbox-circle-fill`" />
                             </svg>
                         </div>
                     </div>
@@ -63,13 +49,18 @@
 <script>
     export default {
 
-        props: [ 'event' ],
+        props: [ 'event', 'value' ],
+
+        computed: {
+            inputVal: {
+                get() { return this.value },
+                set(val) { this.$emit('input', val) }
+            },
+        },
 
         data() {
             return {
-                guidelines: false,
-                overview: this.$parent.$parent.$attrs['overview'],
-                immersive: this.$parent.$parent.$attrs['immersive'],
+                guidelines: this.value === 'O',
             };
         },
     }

@@ -177,7 +177,7 @@ export default {
             websiteActive: false,
             serverErrors: [],
             isLoading: false,
-
+            envImageUrl: process.env.MIX_IMAGE_URL,
         };
     },
 
@@ -212,7 +212,7 @@ export default {
             if ((organizer !== null) && (typeof organizer === "object") && (organizer.id !== null)) {
                 this.showFormFields = true;
                 this.organizer = _.pick(organizer, _.intersection( _.keys(this.organizer), _.keys(organizer) ));
-                this.organizationImageModel = this.organizer.imagePath ? `/storage/${this.organizer.imagePath}` : '';
+                this.organizationImageModel = this.organizer.imagePath ? `${envImageUrl}${this.organizer.imagePath}` : '';
                 if(organizer.id === '') { this.organizer.name = '' }
             }
         },

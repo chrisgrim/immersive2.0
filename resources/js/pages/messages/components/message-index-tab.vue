@@ -8,8 +8,8 @@
                 <div class="message-index__image" :style="`background:${user.hexColor}`">
                     <label v-if="user.largeImagePath">
                         <picture>
-                            <source type="image/webp" :srcset="`/storage/${user.thumbImagePath}`"> 
-                            <img :src="`/storage/${user.thumbImagePath.slice(0, -4)}jpg`" :alt="user.name + `'s account`">
+                            <source type="image/webp" :srcset="`${envImageUrl}${user.thumbImagePath}`"> 
+                            <img :src="`${envImageUrl}${user.thumbImagePath.slice(0, -4)}jpg`" :alt="user.name + `'s account`">
                         </picture>
                     </label>
                     <div v-else-if="user.gravatar">
@@ -63,7 +63,8 @@
 
         data() {
             return {
-                userConversation: this.conversation ? this.conversation.users.filter( user => { return user.id !== this.loaduser.id }) : ''
+                userConversation: this.conversation ? this.conversation.users.filter( user => { return user.id !== this.loaduser.id }) : '',
+                envImageUrl: process.env.MIX_IMAGE_URL,
             }
         },
 

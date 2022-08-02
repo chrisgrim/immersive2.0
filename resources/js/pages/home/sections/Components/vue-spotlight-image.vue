@@ -7,11 +7,11 @@
                 <picture>
                     <source 
                         type="image/webp" 
-                        :srcset="`/storage/${hasFeatured}`"> 
+                        :srcset="`${envImageUrl}${hasFeatured}`"> 
                     <img 
                         class="h-full w-full absolute object-cover align-bottom inset-0"
                         loading="lazy" 
-                        :src="`/storage/${hasFeatured.slice(0, -4)}jpg`" 
+                        :src="`${envImageUrl}${hasFeatured.slice(0, -4)}jpg`" 
                         :alt="`${element.name}`">
                 </picture>
             </div>
@@ -24,11 +24,11 @@
                 <picture>
                     <source 
                         type="image/webp" 
-                        :srcset="`/storage/${cardImages[2]}`"> 
+                        :srcset="`${envImageUrl}${cardImages[2]}`"> 
                     <img 
                         style="object-fit:cover" 
                         loading="lazy" 
-                        :src="`/storage/${cardImages[2].slice(2, -4)}jpg`" 
+                        :src="`${envImageUrl}${cardImages[2].slice(2, -4)}jpg`" 
                         :alt="`${element.name}`">
                 </picture>
             </div>
@@ -39,11 +39,11 @@
                 <picture>
                     <source 
                         type="image/webp" 
-                        :srcset="`/storage/${cardImages[1]}`"> 
+                        :srcset="`${envImageUrl}${cardImages[1]}`"> 
                     <img 
                         style="object-fit:cover" 
                         loading="lazy" 
-                        :src="`/storage/${cardImages[1].slice(0, -4)}jpg`" 
+                        :src="`${envImageUrl}${cardImages[1].slice(0, -4)}jpg`" 
                         :alt="`${element.name}`">
                 </picture>
             </div>
@@ -54,11 +54,11 @@
                 <picture v-if="cardImages && cardImages[0]">
                     <source 
                         type="image/webp" 
-                        :srcset="`/storage/${cardImages[0]}`"> 
+                        :srcset="`${envImageUrl}${cardImages[0]}`"> 
                     <img 
                         style="object-fit:cover" 
                         loading="lazy" 
-                        :src="`/storage/${cardImages[0].slice(0, -4)}jpg`" 
+                        :src="`${envImageUrl}${cardImages[0].slice(0, -4)}jpg`" 
                         :alt="`${element.name}`">
                 </picture>
             </div>
@@ -95,6 +95,12 @@
                 if (this.cardImages && this.cardImages[0]) {return 'one'}
                 return null
             }
+        },
+
+        data() {
+            return {
+                envImageUrl: process.env.MIX_IMAGE_URL,
+            };
         },
     }
 </script>

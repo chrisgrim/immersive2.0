@@ -29,11 +29,11 @@
                     <picture>
                         <source 
                             type="image/webp" 
-                            :srcset="`/storage/${headerImage}`"> 
+                            :srcset="`${envImageUrl}${headerImage}`"> 
                         <img 
                             loading="lazy"
                             class="object-cover w-full h-full" 
-                            :src="`/storage/${headerImage.slice(0, -4)}`" 
+                            :src="`${envImageUrl}${headerImage.slice(0, -4)}`" 
                             :alt="`${post.name} Post`">
                     </picture>
                 </div>
@@ -94,6 +94,7 @@
             return {
                 post: this.value,
                 headerImage: this.mobile ? this.value.thumbImagePath : this.value.largeImagePath,
+                envImageUrl: process.env.MIX_IMAGE_URL,
             }
         },
 

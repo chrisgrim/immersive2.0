@@ -2,7 +2,7 @@
     <div>
         <img 
             style="width:20rem"
-            :src="`/storage/${loadevent.largeImagePath.slice(0, -4)}jpg`" alt="">
+            :src="`${envImageUrl}${loadevent.largeImagePath.slice(0, -4)}jpg`" alt="">
         <p>{{loadevent.name}}</p>
         <p><i>{{loadevent.tag_line}}</i></p>
         <p>{{showDates}}</p>
@@ -44,7 +44,8 @@
 
         data() {
             return {
-                visible: false
+                visible: false,
+                envImageUrl: process.env.MIX_IMAGE_URL,
             }
         },
 

@@ -84,7 +84,7 @@
                 titleFontSize: '',
                 hover: null,
                 disabled: false,
-
+                envImageUrl: process.env.MIX_IMAGE_URL,
             }
         },
 
@@ -114,10 +114,10 @@
             canUseWebP() {
                 let webp = (document.createElement('canvas').toDataURL('image/webp').indexOf('data:image/webp') == 0);
                 if (this.loadevent.organizer.thumbImagePath && webp) {
-                    return this.organizerImage = `background-image:url('/storage/${this.loadevent.organizer.thumbImagePath}')`;
+                    return this.organizerImage = `background-image:url('${this.envImageUrl}${this.loadevent.organizer.thumbImagePath}')`;
                 }
                 if (this.loadevent.organizer.thumbImagePath) {
-                    return this.organizerImage = `background-image:url('/storage/${this.loadevent.organizer.thumbImagePath.slice(0, -4)}jpg')`;
+                    return this.organizerImage = `background-image:url('${this.envImageUrl}${this.loadevent.organizer.thumbImagePath.slice(0, -4)}jpg')`;
                 }
             },
 

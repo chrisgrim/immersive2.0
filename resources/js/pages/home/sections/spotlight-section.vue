@@ -21,11 +21,11 @@
                 <picture>
                     <source 
                         type="image/webp" 
-                        :srcset="`/storage/${element.largeImagePath}`"> 
+                        :srcset="`${envImageUrl}${element.largeImagePath}`"> 
                     <img 
                         loading="lazy" 
                         class=" object-cover align-bottom w-full h-full"
-                        :src="`/storage/${element.largeImagePath.slice(0, -4)}jpg`" 
+                        :src="`${envImageUrl}${element.largeImagePath.slice(0, -4)}jpg`" 
                         :alt="`${element.name} Community`">
                 </picture>
             </div>
@@ -59,6 +59,7 @@
                 shelf: this.dock.shelves.length,
                 community: this.dock.communities.length,
                 post: this.dock.posts.length,
+                envImageUrl: process.env.MIX_IMAGE_URL,
             }
         },
 

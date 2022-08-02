@@ -38,15 +38,15 @@ class MakeImage extends Model
         // create directory: event-images/new-titles-54fwd3g
         $directory= $type . '-images/' . $title . '-' . $rand;
 
-        $request->file('image')->storeAs('/public/' . $directory, $inputFile);
-        Image::make(storage_path()."/app/public/$directory/$inputFile")
-        ->orientate()
-        ->fit($width, $height )
-        ->save(storage_path("/app/public/$directory/$fileName.webp"))
-        ->save(storage_path("/app/public/$directory/$fileName.jpg"))
-        ->fit( $width / 2, $height / 2 )
-        ->save(storage_path("/app/public/$directory/$fileName-thumb.webp"))
-        ->save(storage_path("/app/public/$directory/$fileName-thumb.jpg"));
+        $jpg = Image::make($request->file('image'))->orientate()->fit( $width, $height )->encode('jpg');
+        $webp = Image::make($jpg)->encode('webp');
+        Storage::disk('digitalocean')->put( "/public/$directory/$fileName.jpg", $jpg);
+        Storage::disk('digitalocean')->put( "/public/$directory/$fileName.webp", $webp);
+
+        $jpg = Image::make($jpg)->fit( $width / 2, $height / 2 );
+        $webp = Image::make($jpg)->encode('webp');
+        Storage::disk('digitalocean')->put( "/public/$directory/$fileName-thumb.jpg", $jpg);
+        Storage::disk('digitalocean')->put( "/public/$directory/$fileName-thumb.webp", $webp);
 
         $item->update([ 'thumbImagePath' => $directory . '/' . $fileName. '-thumb.webp' ]);
     }
@@ -80,15 +80,15 @@ class MakeImage extends Model
         // create directory: event-images/new-titles-54fwd3g
         $directory= $type . '-images/' . $title . '-' . $rand;
 
-        $request->file('image')->storeAs('/public/' . $directory, $inputFile);
-        Image::make(storage_path()."/app/public/$directory/$inputFile")
-        ->orientate()
-        ->fit($width, $height)
-        ->save(storage_path("/app/public/$directory/$fileName.webp"))
-        ->save(storage_path("/app/public/$directory/$fileName.jpg"))
-        ->fit( $width / 2, $height / 2)
-        ->save(storage_path("/app/public/$directory/$fileName-thumb.webp"))
-        ->save(storage_path("/app/public/$directory/$fileName-thumb.jpg"));
+        $jpg = Image::make($request->file('image'))->orientate()->fit( $width, $height )->encode('jpg');
+        $webp = Image::make($jpg)->encode('webp');
+        Storage::disk('digitalocean')->put( "/public/$directory/$fileName.jpg", $jpg);
+        Storage::disk('digitalocean')->put( "/public/$directory/$fileName.webp", $webp);
+
+        $jpg = Image::make($jpg)->fit( $width / 2, $height / 2 );
+        $webp = Image::make($jpg)->encode('webp');
+        Storage::disk('digitalocean')->put( "/public/$directory/$fileName-thumb.jpg", $jpg);
+        Storage::disk('digitalocean')->put( "/public/$directory/$fileName-thumb.webp", $webp);
 
         $value->update([ 
             'largeImagePath' => $directory . '/' . $fileName. '.webp',
@@ -121,15 +121,15 @@ class MakeImage extends Model
         // Create directory name: event-images/myevent-54fwd3g-temp
         $directory = $type .'-images/' . $imageName . '-' . $rand . '-' . 'final';
 
-        $request->file('image')->storeAs('/public/' . $directory, $inputFile);
-        Image::make(storage_path() . "/app/public/$directory/$inputFile")
-        ->orientate()
-        ->fit($width, $height)
-        ->save(storage_path("/app/public/$directory/$fileName.webp"))
-        ->save(storage_path("/app/public/$directory/$fileName.jpg"))
-        ->fit( $width / 2, $height / 2)
-        ->save(storage_path("/app/public/$directory/$fileName-thumb.webp"))
-        ->save(storage_path("/app/public/$directory/$fileName-thumb.jpg"));
+        $jpg = Image::make($request->file('image'))->orientate()->fit( $width, $height )->encode('jpg');
+        $webp = Image::make($jpg)->encode('webp');
+        Storage::disk('digitalocean')->put( "/public/$directory/$fileName.jpg", $jpg);
+        Storage::disk('digitalocean')->put( "/public/$directory/$fileName.webp", $webp);
+
+        $jpg = Image::make($jpg)->fit( $width / 2, $height / 2 );
+        $webp = Image::make($jpg)->encode('webp');
+        Storage::disk('digitalocean')->put( "/public/$directory/$fileName-thumb.jpg", $jpg);
+        Storage::disk('digitalocean')->put( "/public/$directory/$fileName-thumb.webp", $webp);
 
         $value->update([ 
             'largeImagePath' => $directory . '/' . $fileName . '.webp',
@@ -148,21 +148,20 @@ class MakeImage extends Model
         $name = $slug ? $slug : $request->slug;
 
         // Get the directory from the original imagepath: event-images/myevent-e2e9agg
-        $dir = pathinfo($value->largeImagePath, PATHINFO_DIRNAME);
+        $directory = pathinfo($value->largeImagePath, PATHINFO_DIRNAME);
 
         // Get the filename from the original imagepath: myevent
-        $filename = pathinfo($value->largeImagePath, PATHINFO_FILENAME);
+        $fileName = pathinfo($value->largeImagePath, PATHINFO_FILENAME);
 
         // Generate a random number: 546dsee
         $rand = substr(md5(microtime()),rand(0,26),7);
         // Create a new imagepath: event-images/myevent-546dsee-final/mynewevent
         $newImagePath = $type . '-images/' . $name . '-' . $rand . '-'. 'final' . '-' . '1' . '/' . $name;
 
-        Storage::copy('public/' . $dir . '/' . $filename . '.webp', 'public/' . $newImagePath . '.webp' );
-        Storage::copy('public/' . $dir . '/' . $filename . '.jpg', 'public/' . $newImagePath . '.jpg' );
-        Storage::copy('public/' . $dir . '/' . $filename . '-thumb.webp', 'public/' . $newImagePath . '-thumb.webp' );
-        Storage::copy('public/' . $dir . '/' . $filename . '-thumb.jpg', 'public/' . $newImagePath . '-thumb.jpg' );
-
+        Storage::disk('digitalocean')->copy('public/' . $directory . '/' . $fileName . '.webp', 'public/' . $newImagePath . '.webp' );
+        Storage::disk('digitalocean')->copy('public/' . $directory . '/' . $fileName . '.jpg', 'public/' . $newImagePath . '.jpg' );
+        Storage::disk('digitalocean')->copy('public/' . $directory . '/' . $fileName . '-thumb.webp', 'public/' . $newImagePath . '-thumb.webp' );
+        Storage::disk('digitalocean')->copy('public/' . $directory . '/' . $fileName . '-thumb.jpg', 'public/' . $newImagePath . '-thumb.jpg' );
 
         $value->update([
             'largeImagePath' => $newImagePath . '.webp',
@@ -180,39 +179,39 @@ class MakeImage extends Model
         // Check if pathinfo for the largeimage path exists and is over 7 in length
         if (strlen(pathinfo($value->largeImagePath, PATHINFO_DIRNAME)) > 7) {
             // Get the pathinfo: event-images/myevent-e2e9agg
-            $dir = pathinfo($value->largeImagePath, PATHINFO_DIRNAME);
+            $directory = pathinfo($value->largeImagePath, PATHINFO_DIRNAME);
             // Get the filename: myevent
-            $filename = pathinfo($value->largeImagePath, PATHINFO_FILENAME);
+            $fileName = pathinfo($value->largeImagePath, PATHINFO_FILENAME);
             //Delete the original folder
-            Storage::deleteDirectory('public/' . $dir);
+            Storage::disk('digitalocean')->deleteDirectory('public/' . $directory);
 
         } else {
             // Generate random number: 546ds3g
             $rand = substr(md5(microtime()),rand(0,26),7);
             // Generate random filename: fd45cz3
-            $filename = substr(md5(microtime()),rand(0,26),7);
+            $fileName = substr(md5(microtime()),rand(0,26),7);
             // Create dirctory name:  event-images/new-titles-54fwd3g-temp
-            $dir = $type . '-images/' . $filename . '-' . $rand . '-' . 'draft';
+            $directory = $type . '-images/' . $fileName . '-' . $rand . '-' . 'draft';
         }
 
         // Get extension: jpg
         $extension = $request->file('image')->getClientOriginalExtension();
         // Create title: new-titles.jpg
-        $inputFile = $filename . '.' . $extension;
+        $inputFile = $fileName . '.' . $extension;
 
-        $request->file('image')->storeAs('/public/' . $dir, $inputFile);
-        Image::make(storage_path()."/app/public/$dir/$inputFile")
-        ->orientate()
-        ->fit($width, $height)
-        ->save(storage_path("/app/public/$dir/$filename.webp"))
-        ->save(storage_path("/app/public/$dir/$filename.jpg"))
-        ->fit( $width / 2, $height / 2)
-        ->save(storage_path("/app/public/$dir/$filename-thumb.webp"))
-        ->save(storage_path("/app/public/$dir/$filename-thumb.jpg"));
+        $jpg = Image::make($request->file('image'))->orientate()->fit( $width, $height )->encode('jpg');
+        $webp = Image::make($jpg)->encode('webp');
+        Storage::disk('digitalocean')->put( "/public/$directory/$fileName.jpg", $jpg);
+        Storage::disk('digitalocean')->put( "/public/$directory/$fileName.webp", $webp);
+
+        $jpg = Image::make($jpg)->fit( $width / 2, $height / 2 );
+        $webp = Image::make($jpg)->encode('webp');
+        Storage::disk('digitalocean')->put( "/public/$directory/$fileName-thumb.jpg", $jpg);
+        Storage::disk('digitalocean')->put( "/public/$directory/$fileName-thumb.webp", $webp);
 
         $value->update([ 
-            'largeImagePath' => $dir . '/' . $filename. '.webp',
-            'thumbImagePath' => $dir . '/' . $filename. '-thumb.webp',
+            'largeImagePath' => $directory . '/' . $fileName. '.webp',
+            'thumbImagePath' => $directory . '/' . $fileName. '-thumb.webp',
         ]);
     }
 
@@ -224,10 +223,10 @@ class MakeImage extends Model
     public static function finalize($value, $slug, $type, $request)
     {   
         // Get the pathinfo: event-images/myevent-e2e9agg
-        $dir = pathinfo($value->largeImagePath, PATHINFO_DIRNAME);
+        $directory = pathinfo($value->largeImagePath, PATHINFO_DIRNAME);
 
         // Get the filename: myevent
-        $filename = pathinfo($value->largeImagePath, PATHINFO_FILENAME);
+        $fileName = pathinfo($value->largeImagePath, PATHINFO_FILENAME);
 
         // Name is = tp slug or the request slug
         $name = $slug ? $slug : $request->slug;
@@ -237,11 +236,10 @@ class MakeImage extends Model
         // Create a new imagepath: event-images/myevent-546dsee-final/mynewevent
         $newImagePath = $type . '-images/' . $name . '-' . $rand . '-'. 'final'  . '/' . $name;
 
-        Storage::copy('public/' . $dir . '/' . $filename . '.webp', 'public/' . $newImagePath . '.webp' );
-        Storage::copy('public/' . $dir . '/' . $filename . '.jpg', 'public/' . $newImagePath . '.jpg' );
-        Storage::copy('public/' . $dir . '/' . $filename . '-thumb.webp', 'public/' . $newImagePath . '-thumb.webp' );
-        Storage::copy('public/' . $dir . '/' . $filename . '-thumb.jpg', 'public/' . $newImagePath . '-thumb.jpg' );
-
+        Storage::disk('digitalocean')->copy('public/' . $directory . '/' . $fileName . '.webp', 'public/' . $newImagePath . '.webp' );
+        Storage::disk('digitalocean')->copy('public/' . $directory . '/' . $fileName . '.jpg', 'public/' . $newImagePath . '.jpg' );
+        Storage::disk('digitalocean')->copy('public/' . $directory . '/' . $fileName . '-thumb.webp', 'public/' . $newImagePath . '-thumb.webp' );
+        Storage::disk('digitalocean')->copy('public/' . $directory . '/' . $fileName . '-thumb.jpg', 'public/' . $newImagePath . '-thumb.jpg' );
 
         $value->update([
             'largeImagePath' => $newImagePath . '.webp',
@@ -249,7 +247,7 @@ class MakeImage extends Model
         ]);
 
         //Delete the original folder
-        Storage::deleteDirectory('public/' . $dir);
+        Storage::disk('digitalocean')->deleteDirectory('public/' . $directory);
     }
 
     /**
@@ -262,38 +260,40 @@ class MakeImage extends Model
         // Check if pathinfo for the largeimage path exists and is over 7 in length
         if (strlen(pathinfo($value->largeImagePath, PATHINFO_DIRNAME)) > 7) {
             // Get the pathinfo: event-images/myevent-e2e9agg
-            $dir = pathinfo($value->largeImagePath, PATHINFO_DIRNAME);
+            $directory = pathinfo($value->largeImagePath, PATHINFO_DIRNAME);
             // Get the filename: myevent
-            $filename = pathinfo($value->largeImagePath, PATHINFO_FILENAME);
+            $fileName = pathinfo($value->largeImagePath, PATHINFO_FILENAME);
             //Delete the original folder
-            Storage::deleteDirectory('public/' . $dir);
+            Storage::disk('digitalocean')->deleteDirectory('public/' . $directory);
 
         } else {
             // Generate random number: 546ds3g
             $id = auth()->user()->id;
             // Generate random filename: fd45cz3
-            $filename = auth()->user()->name;
+            $fileName = auth()->user()->name;
             // Create dirctory name:  event-images/new-titles-54fwd3g-temp
-            $dir = $type . '-images/' . $filename . '-' . $id;
+            $directory = $type . '-images/' . $fileName . '-' . $id;
         }
 
         // Get extension: jpg
         $extension = $request->file('image')->getClientOriginalExtension();
         // Create title: new-titles.jpg
-        $inputFile = $filename . '.' . $extension;
+        $inputFile = $fileName . '.' . $extension;
 
-        $request->file('image')->storeAs('/public/' . $dir, $inputFile);
-        Image::make(storage_path()."/app/public/$dir/$inputFile")
-        ->fit($width, $height)
-        ->save(storage_path("/app/public/$dir/$filename.webp"))
-        ->save(storage_path("/app/public/$dir/$filename.jpg"))
-        ->fit( $width / 2, $height / 2)
-        ->save(storage_path("/app/public/$dir/$filename-thumb.webp"))
-        ->save(storage_path("/app/public/$dir/$filename-thumb.jpg"));
+        $jpg = Image::make($request->file('image'))->orientate()->fit( $width, $height )->encode('jpg');
+        $webp = Image::make($jpg)->encode('webp');
+        Storage::disk('digitalocean')->put( "/public/$directory/$fileName.jpg", $jpg);
+        Storage::disk('digitalocean')->put( "/public/$directory/$fileName.webp", $webp);
 
+        $jpg = Image::make($jpg)->fit( $width / 2, $height / 2 );
+        $webp = Image::make($jpg)->encode('webp');
+        Storage::disk('digitalocean')->put( "/public/$directory/$fileName-thumb.jpg", $jpg);
+        Storage::disk('digitalocean')->put( "/public/$directory/$fileName-thumb.webp", $webp);
+
+        
         $value->update([ 
-            'largeImagePath' => $dir . '/' . $filename. '.webp',
-            'thumbImagePath' => $dir . '/' . $filename. '-thumb.webp',
+            'largeImagePath' => $directory . '/' . $fileName. '.webp',
+            'thumbImagePath' => $directory . '/' . $fileName. '-thumb.webp',
         ]);
     }
 

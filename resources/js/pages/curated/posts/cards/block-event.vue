@@ -73,7 +73,7 @@
                 return this.searchInput ? this.searchInput.name : `Event name`
             },
             thumbImagePath() {
-                return this.searchInput ? `/storage/${this.searchInput.thumbImagePath}` : null
+                return this.searchInput ? `${this.envImageUrl}${this.searchInput.thumbImagePath}` : null
             }
 
         },
@@ -85,6 +85,7 @@
                 searchInput: null,
                 searchOptions: [],
                 disabled: false,
+                envImageUrl: process.env.MIX_IMAGE_URL,
             }
         },
 

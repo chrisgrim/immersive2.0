@@ -76,7 +76,7 @@
                                     :locked="inputVal.thumbImagePath ? true :false"
                                     @onDelete="deleteImage"
                                     :loading="disabled"
-                                    :image="value.thumbImagePath ? `/storage/${inputVal.thumbImagePath}` : null"
+                                    :image="value.thumbImagePath ? `${envImageUrl}${inputVal.thumbImagePath}` : null"
                                     @addImage="addImage" />
                             </template>
                         </div>
@@ -181,6 +181,7 @@
                 showShelf: false,
                 updated: false,
                 disabled: false,
+                envImageUrl: process.env.MIX_IMAGE_URL,
             }
         },
 

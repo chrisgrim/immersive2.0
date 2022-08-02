@@ -19,10 +19,10 @@
             <picture>
                 <source 
                     type="image/webp" 
-                    :srcset="`/storage/${mobile ? event.thumbImagePath : event.largeImagePath}`"> 
+                    :srcset="`${envImageUrl}${mobile ? event.thumbImagePath : event.largeImagePath}`"> 
                 <img 
                     class="h-20 md:h-44 object-cover rounded-xl"
-                    :src="`/storage/${mobile ? event.thumbImagePath.slice(0, -4) : event.largeImagePath.slice(0, -4)}jpg`" 
+                    :src="`${envImageUrl}${mobile ? event.thumbImagePath.slice(0, -4) : event.largeImagePath.slice(0, -4)}jpg`" 
                     :alt="`${event.name} Immersive Event`">
             </picture>
             <h2 class="ml-4 text-2xl leading-6 md:text-3xl md:leading-8">{{ event.name}} </h2>
@@ -46,10 +46,10 @@
                                 <picture>
                                     <source 
                                         type="image/webp" 
-                                        :srcset="`/storage/${message.user.thumbImagePath}`"> 
+                                        :srcset="`${envImageUrl}${message.user.thumbImagePath}`"> 
                                     <img 
                                         class="w-14 h-14"
-                                        :src="`/storage/${message.user.thumbImagePath.slice(0, -4)}jpg`" >
+                                        :src="`${envImageUrl}${message.user.thumbImagePath.slice(0, -4)}jpg`" >
                                 </picture>
                             </template>
                             <template v-else-if="message.user.gravatar">
@@ -129,6 +129,7 @@
                 conversation: this.value,
                 newMessage: null,
                 disabled: false,
+                envImageUrl: process.env.MIX_IMAGE_URL,
             }
         },
 

@@ -4,8 +4,8 @@
             <div class="message-index__card grid">
                 <div class="message-index__image">
                     <picture>
-                        <source type="image/webp" :srcset="`/storage/${conversation.event.thumbImagePath}`"> 
-                        <img :src="`/storage/${conversation.event.thumbImagePath.slice(0, -4)}jpg`" alt="message image">
+                        <source type="image/webp" :srcset="`${envImageUrl}${conversation.event.thumbImagePath}`"> 
+                        <img :src="`${envImageUrl}${conversation.event.thumbImagePath.slice(0, -4)}jpg`" alt="message image">
                     </picture>
                 </div>
                 <div class="message-index__name">
@@ -54,7 +54,8 @@
 
         data() {
             return {
-                userConversation: this.conversation ? this.conversation.users : ''
+                userConversation: this.conversation ? this.conversation.users : '',
+                envImageUrl: process.env.MIX_IMAGE_URL,
             }
         },
 

@@ -196,7 +196,7 @@ export default {
             modal: false,
             reSubmit: false,
             endPoint: this.loadorganizer ? `/organizer/${this.loadorganizer.slug}/patch` : '/organizer',
-            image: this.loadorganizer && this.loadorganizer.largeImagePath ? `/storage/${this.loadorganizer.largeImagePath}` : null,
+            image: this.loadorganizer && this.loadorganizer.largeImagePath ? `${process.env.MIX_IMAGE_URL}${this.loadorganizer.largeImagePath}` : null,
         };
     },
 

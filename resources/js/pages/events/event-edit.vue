@@ -32,7 +32,7 @@
                     <div class="flex items-center">
                         <div 
                             class="mr-8 w-20 h-20 bg-cover bg-no-repeat rounded-full flex items-end justify-center mr-8" 
-                            :style="organizer.thumbImagePath ? `background-image:url('/storage/${organizer.thumbImagePath.slice(0, -4)}jpg')` : `background:${organizer.hexColor}`">
+                            :style="organizer.thumbImagePath ? `background-image:url('${envImageUrl}${organizer.thumbImagePath.slice(0, -4)}jpg')` : `background:${organizer.hexColor}`">
                             <p 
                                 class="text-5xl text-white font-extrabold m-auto" 
                                 v-if="!organizer.thumbImagePath">{{ organizer.name.charAt(0) }}
@@ -138,6 +138,7 @@
                 selectedModal: null,
                 archived: false,
                 hover: false,
+                envImageUrl: process.env.MIX_IMAGE_URL,
             }
         },
 

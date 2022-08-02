@@ -29,10 +29,10 @@
                                     <picture>
                                         <source 
                                             type="image/webp" 
-                                            :srcset="`/storage/${item.thumbImagePath}`"> 
+                                            :srcset="`${envImageUrl}${item.thumbImagePath}`"> 
                                         <img
                                             loading="lazy" 
-                                            :src="`/storage/${item.thumbImagePath.slice(0, -4)}jpg`" 
+                                            :src="`${envImageUrl}${item.thumbImagePath.slice(0, -4)}jpg`" 
                                             :alt="`${item.name} Immersive Event`">
                                     </picture>
                                 </div>
@@ -116,6 +116,7 @@
                 isDisabled: false,
                 width: '',
                 isReady: this.items && this.items.length,
+                envImageUrl: process.env.MIX_IMAGE_URL
             }
         },
 

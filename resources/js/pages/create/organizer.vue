@@ -230,7 +230,7 @@ export default {
                     return `backgroundImage: url('${this.imageFile.src}')`
                 }
             } else {
-                return `backgroundImage: url('${(this.loadorganizer ? '/storage/' + this.loadorganizer.largeImagePath : '')}')`
+                return `backgroundImage: url('${(this.loadorganizer ? this.envImageUrl + this.loadorganizer.largeImagePath : '')}')`
             }
         },
 
@@ -253,6 +253,7 @@ export default {
             modal: false,
             reSubmit: false,
             formData: new FormData(),
+            envImageUrl: process.env.MIX_IMAGE_URL,
         };
     },
 

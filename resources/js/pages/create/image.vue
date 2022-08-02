@@ -49,7 +49,7 @@
                     :height="450"
                     :width="1200"
                     :loading="disabled"
-                    :image="event.largeImagePath ? `/storage/${event.largeImagePath}` : null"
+                    :image="event.largeImagePath ? `${envImageUrl}${event.largeImagePath}` : null"
                     :external-submit="checkImage"
                     @addImage="addImage" />
             </div>
@@ -106,6 +106,7 @@
                 hasVideo: this.loadevent.video ? true : false,
                 video: this.loadevent.video ? `https://youtu.be/${this.loadevent.video}` : null,
                 youtubeId: this.loadevent.video ? this.loadevent.video : null,
+                envImageUrl: process.env.MIX_IMAGE_URL,
             };
         },
 

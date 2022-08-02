@@ -3,11 +3,11 @@
         <picture>
             <source 
                 type="image/webp" 
-                :srcset="`/storage/${element.largeImagePath }`"> 
+                :srcset="`${envImageUrl}${element.largeImagePath }`"> 
             <img 
                 class="h-full w-full absolute object-cover align-bottom"
                 loading="lazy" 
-                :src="`/storage/${element.largeImagePath.slice(0, -4)}jpg`" 
+                :src="`${envImageUrl}${element.largeImagePath.slice(0, -4)}jpg`" 
                 :alt="`${element.name}`">
         </picture>
     </div>
@@ -21,6 +21,12 @@
             hasFeatured() {
                 return this.element.thumbImagePath 
             },
+        },
+
+        data() {
+            return {
+                envImageUrl: process.env.MIX_IMAGE_URL,
+            };
         },
     }
 </script>

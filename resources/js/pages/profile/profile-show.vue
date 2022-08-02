@@ -122,7 +122,7 @@
                 serverErrors: [],
                 onSent: false,
                 disabled: false,
-                image: this.loaduser && this.loaduser.largeImagePath ? `/storage/${this.loaduser.largeImagePath}` : null,
+                image: this.loaduser && this.loaduser.largeImagePath ? `${process.env.MIX_IMAGE_URL}${this.loaduser.largeImagePath}` : null,
                 locationPlaceholder: this.initializeLocationPlaceholder(),
                 updated: false,
             }

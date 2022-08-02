@@ -38,7 +38,7 @@
                         <img 
                             class="h-12 mr-4" 
                             v-if="event.thumbImagePath"
-                            :src="`/storage/${event.thumbImagePath}`">
+                            :src="`${envImageUrl}${event.thumbImagePath}`">
                         <p class="text-xl">
                             {{ event.name ? event.name : 'New Event' }}
                             <a  
@@ -115,6 +115,7 @@
         data() {
             return {
                 active: true,
+                envImageUrl: process.env.MIX_IMAGE_URL,
             }
         },
 

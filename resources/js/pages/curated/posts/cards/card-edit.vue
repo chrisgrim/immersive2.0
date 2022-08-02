@@ -126,9 +126,9 @@
                 return this.card.type === 'i' || this.card.type === 'e' || this.card.type === 'h'
             },
             image() {
-                if (this.card.type === 'i') { return `/storage/${this.card.thumbImagePath}` }
+                if (this.card.type === 'i') { return `${this.envImageUrl}${this.card.thumbImagePath}` }
                 if (this.card.type === 'h' || this.card.type === 't') { return }
-                return this.card.type === 'e' && !this.card.thumbImagePath ? `/storage/${this.card.event.thumbImagePath}` : `/storage/${this.card.thumbImagePath}`
+                return this.card.type === 'e' && !this.card.thumbImagePath ? `${this.envImageUrl}${this.card.event.thumbImagePath}` : `${this.envImageUrl}${this.card.thumbImagePath}`
             },
             hasName() {
                 return this.card.event && !this.card.name ? this.card.event.name : this.card.name
@@ -147,6 +147,7 @@
                 formData: new FormData(),
                 hover: false,
                 updated: false,
+                envImageUrl: process.env.MIX_IMAGE_URL,
             }
         },
 

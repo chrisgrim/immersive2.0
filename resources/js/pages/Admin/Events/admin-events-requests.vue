@@ -33,7 +33,7 @@
                                         <img 
                                             class="w-32 rounded-2xl" 
                                             v-if="request.event.thumbImagePath"
-                                            :src="`/storage/${request.event.thumbImagePath}`">
+                                            :src="`${envImageUrl}${request.event.thumbImagePath}`">
                                         <p class="text-xl text-center">{{ request.event.name }}</p>
                                     </a>
                                 </td>
@@ -113,6 +113,7 @@
                     { id:3, field: 'Change Name', class:'' },
                     { id:4, field: 'Respond', class:''},
                 ],
+                envImageUrl: process.env.MIX_IMAGE_URL,
             }
         },
 

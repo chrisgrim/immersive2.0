@@ -33,7 +33,7 @@
 
         data() {
             return {
-                image: this.event.organizer.thumbImagePath ? `background-image:url('/storage/${this.event.organizer.thumbImagePath.slice(0, -4)}jpg')` : `background:${this.event.organizer.hexColor}`
+                image: this.event.organizer.thumbImagePath ? `background-image:url('${process.env.MIX_IMAGE_URL}${this.event.organizer.thumbImagePath.slice(0, -4)}jpg')` : `background:${this.event.organizer.hexColor}`,
             }
         },
 

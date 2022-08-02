@@ -56,7 +56,7 @@
                                         <img 
                                             class="w-32 rounded-2xl" 
                                             v-if="pick.event.thumbImagePath"
-                                            :src="`/storage/${pick.event.thumbImagePath}`">
+                                            :src="`${envImageUrl}${pick.event.thumbImagePath}`">
                                         <p class="text-xl text-center max-w-xs">{{ pick.event.name }}</p>
                                     </a>
                                 </td>
@@ -158,6 +158,7 @@
                     { id:4, field: 'Dates', class:''},
                     { id:5, field: '',class:'' },
                 ],
+                envImageUrl: process.env.MIX_IMAGE_URL
             }
         },
 

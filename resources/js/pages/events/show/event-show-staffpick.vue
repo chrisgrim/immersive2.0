@@ -4,10 +4,10 @@
             <picture>
                 <source 
                     type="image/webp" 
-                    :srcset="`/storage/${event.staffpick.user.thumbImagePath}`"> 
+                    :srcset="`${envImageUrl}${event.staffpick.user.thumbImagePath}`"> 
                 <img 
                     class="w-20 h-20 rounded-full mr-4" 
-                    :src="`/storage/${event.staffpick.user.thumbImagePath.slice(0, -4)}jpg`" 
+                    :src="`${envImageUrl}${event.staffpick.user.thumbImagePath.slice(0, -4)}jpg`" 
                     :alt="`${event.staffpick.user.name} Immersive Event`">
             </picture>
             <div>
@@ -35,6 +35,7 @@
         data() {
             return {
                 titleFontSize: '',
+                envImageUrl: process.env.MIX_IMAGE_URL,
             }
         },
 

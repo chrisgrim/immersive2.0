@@ -16,10 +16,10 @@
                     <picture>
                         <source 
                             type="image/webp" 
-                            :srcset="`/storage/${user.thumbImagePath}`"> 
+                            :srcset="`${envImageUrl}${user.thumbImagePath}`"> 
                         <img 
                             class="w-12 h-12"
-                            :src="`/storage/${user.thumbImagePath.slice(0, -4)}jpg?timestamp=${new Date().getTime()}`" 
+                            :src="`${envImageUrl}${user.thumbImagePath.slice(0, -4)}jpg?timestamp=${new Date().getTime()}`" 
                             :alt="user.name + `'s account`">
                     </picture>
                 </template>
@@ -118,6 +118,7 @@
                 onToggle:false,
                 loginType: null,
                 hex: this.user ? this.user.hexColor : `#717171`,
+                envImageUrl: process.env.MIX_IMAGE_URL,
             };
         },
 

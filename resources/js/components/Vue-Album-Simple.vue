@@ -11,11 +11,11 @@
                             <picture>
                                 <source 
                                     type="image/webp" 
-                                    :srcset="`/storage/${element.thumbImagePath}`"> 
+                                    :srcset="`${envImageUrl}${element.thumbImagePath}`"> 
                                 <img 
                                     style="object-fit:cover" 
                                     loading="lazy" 
-                                    :src="`/storage/${element.thumbImagePath.slice(0, -4)}jpg`" 
+                                    :src="`${envImageUrl}${element.thumbImagePath.slice(0, -4)}jpg`" 
                                     :alt="`${element.name}`">
                             </picture>
                         </div>
@@ -46,6 +46,7 @@
         data() {
             return {
                 isDisabled: false,
+                envImageUrl: process.env.MIX_IMAGE_URL
             }
         },
 

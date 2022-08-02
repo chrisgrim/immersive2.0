@@ -69,8 +69,8 @@
             <picture>       
                 <source 
                     type="image/webp" 
-                    :srcset="`/storage/${category.largeImagePath}`"> 
-                <img :src="`/storage/${category.largeImagePath.slice(0, -4)}jpg`">
+                    :srcset="`${envImageUrl}${category.largeImagePath}`"> 
+                <img :src="`${envImageUrl}${category.largeImagePath.slice(0, -4)}jpg`">
             </picture>
         </section>
         <Submit 
@@ -119,6 +119,7 @@
                 disabled: false,
                 updated: false,
                 creationPage: 3,
+                envImageUrl: process.env.MIX_IMAGE_URL,
 			}
 		},
 

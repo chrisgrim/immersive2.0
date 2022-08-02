@@ -55,7 +55,7 @@
                                         <img 
                                             class="w-32 rounded-2xl" 
                                             v-if="event.thumbImagePath"
-                                            :src="`/storage/${event.thumbImagePath}`">
+                                            :src="`${envImageUrl}${event.thumbImagePath}`">
                                         <p class="text-xl text-center">{{ event.name }}</p>
                                     </a>
                                 </td>
@@ -154,6 +154,7 @@
                     { id:6, field: 'Status', class:'' },
                     { id:7, field: 'Clicks', class:'' },
                 ],
+                envImageUrl: process.env.MIX_IMAGE_URL,
             }
         },
 

@@ -16,12 +16,12 @@
                             <picture>
                                 <source 
                                     type="image/webp" 
-                                    :srcset="`/storage/${card.thumbImagePath}`"> 
+                                    :srcset="`${envImageUrl}${card.thumbImagePath}`"> 
                                 <img
                                     v-if="card.thumbImagePath"
                                     class="h-full w-full inset-0 absolute object-cover"
                                     loading="lazy" 
-                                    :src="`/storage/${card.thumbImagePath.slice(0, -4)}jpg`" 
+                                    :src="`${envImageUrl}${card.thumbImagePath.slice(0, -4)}jpg`" 
                                     :alt="`${card.name} Immersive Event`">
                             </picture>
                         </div>
@@ -58,6 +58,7 @@
 
         data() {
             return {
+                envImageUrl: process.env.MIX_IMAGE_URL
             }
         },
 

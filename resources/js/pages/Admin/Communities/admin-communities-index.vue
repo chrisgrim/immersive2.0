@@ -48,7 +48,7 @@
                                         <img 
                                             class="w-32 rounded-2xl" 
                                             v-if="community.thumbImagePath"
-                                            :src="`/storage/${community.thumbImagePath}`">
+                                            :src="`${envImageUrl}${community.thumbImagePath}`">
                                         <p class="text-xl text-center">{{ community.name }}</p>
                                     </a>
                                 </td>
@@ -99,6 +99,7 @@
                     { id:2, field: 'Owner', class:''},
                     { id:3, field: 'Curators', class:'' },
                 ],
+                envImageUrl: process.env.MIX_IMAGE_URL
             }
         },
 

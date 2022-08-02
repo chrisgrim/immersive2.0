@@ -33,10 +33,10 @@
         <picture>
             <source 
                 type="image/webp" 
-                :srcset="`/storage/${mobile ? event.thumbImagePath : event.largeImagePath}`"> 
+                :srcset="`${envImageUrl}${mobile ? event.thumbImagePath : event.largeImagePath}`"> 
             <img 
                 class="min-h-[200px] h-[43vh] w-full object-cover md:rounded-xl md:h-[40rem]"
-                :src="`/storage/${mobile ? event.thumbImagePath.slice(0, -4) : event.largeImagePath.slice(0, -4)}jpg`" 
+                :src="`${envImageUrl}${mobile ? event.thumbImagePath.slice(0, -4) : event.largeImagePath.slice(0, -4)}jpg`" 
                 :alt="`${event.name} Immersive Event`">
         </picture>
     </header>
@@ -52,7 +52,8 @@
 
         data() {
             return {
-                userCanEdit:  true
+                userCanEdit:  true,
+                envImageUrl: process.env.MIX_IMAGE_URL,
             }
         },
 

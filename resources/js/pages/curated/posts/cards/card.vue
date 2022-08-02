@@ -12,11 +12,11 @@
                 <picture>
                     <source 
                         type="image/webp" 
-                        :srcset="`/storage/${hasImage}`"> 
+                        :srcset="`${envImageUrl}${hasImage}`"> 
                     <img 
                         loading="lazy"
                         class="w-full rounded-2xl align-bottom object-cover h-full"
-                        :src="`/storage/${hasImage.slice(0, -4)}`" 
+                        :src="`${envImageUrl}${hasImage.slice(0, -4)}jpg`" 
                         :alt="`${card.name}`">
                 </picture>
             </div>
@@ -65,6 +65,7 @@
 
         data() {
             return {
+                envImageUrl: process.env.MIX_IMAGE_URL,
             }
         },
 

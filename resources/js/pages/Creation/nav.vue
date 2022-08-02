@@ -17,18 +17,13 @@
                         <h2 class="my-12 text-4xl">Submit your event</h2>
                         <!-- Nav menu -->
                         <div class="relative">
-                            <NavIdea
-                                v-model="inputVal"
-                                :event="event" />
-                            <NavGuidelines
-                                v-model="inputVal"
-                                :event="event" />
+                            <NavIdea v-model="inputVal" />
+                            <NavGuidelines v-model="inputVal" />
                             <NavEventPage
-                                v-model="inputVal" 
-                                :event="event" />
+                                @submit="onSubmit"
+                                v-model="inputVal" />
                             <NavSettings
-                                v-model="inputVal"
-                                :event="event" />
+                                v-model="inputVal" />
                         </div>
                     </div>
                 </div>
@@ -43,7 +38,7 @@
     import NavSettings from './Settings/nav-settings.vue'
     export default {
 
-        props: [ 'event', 'value' ],
+        props: [ 'value' ],
 
         components: { NavIdea, NavGuidelines, NavEventPage, NavSettings },
 
@@ -59,6 +54,12 @@
                 
             };
         },
+
+        methods: {
+            onSubmit() {
+                this.$emit('submit')
+            }
+        }
 
     }
 </script>

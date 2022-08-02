@@ -82,12 +82,25 @@ class ImageFile extends Model
 
     public static function storeSmallImage($request, $collection, $name, $fileName, $width, $height, $type)
     {
-        $request->file('image')->storeAs("/public/$type-images/$name-$collection->id", $fileName);
-        Image::make(storage_path()."/app/public/$type-images/$name-$collection->id/$fileName")
-        ->orientate()
-        ->fit( $width, $height )
-        ->save(storage_path("/app/public/$type-images/$name-$collection->id/$name-thumb.webp"))
-        ->save(storage_path("/app/public/$type-images/$name-$collection->id/$name-thumb.jpg"));
+
+        // $request->file('image')->storeAs("/public/$type-images/$name-$collection->id", $fileName);
+        // Image::make(storage_path()."/app/public/$type-images/$name-$collection->id/$fileName")
+        // ->orientate()
+        // ->fit( $width, $height )
+        // ->save(storage_path("/app/public/$type-images/$name-$collection->id/$name-thumb.webp"))
+        // ->save(storage_path("/app/public/$type-images/$name-$collection->id/$name-thumb.jpg"));
+
+        $photo = Image::make($request->file('image'))
+            ->orientate()
+            ->fit( $width, $height )
+            ->encode('jpg');
+        Storage::disk('digitalocean')->put( 'photo.jpg', $photo);
+
+        // Image::make(storage_path()."/app/public/$type-images/$name-$collection->id/$fileName")
+        // ->orientate()
+        // ->fit( $width, $height )
+        // ->save(storage_path("/app/public/$type-images/$name-$collection->id/$name-thumb.webp"))
+        // ->save(storage_path("/app/public/$type-images/$name-$collection->id/$name-thumb.jpg"));
     }
 
     public static function removeLargeImage($collection, $name, $fileName, $type)

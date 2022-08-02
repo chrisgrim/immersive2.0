@@ -12,7 +12,7 @@ class IdeaController extends Controller
 {
     public function experienceType(Event $event)
     {
-        $event->load('location', 'remotelocations', 'shows');
+        $event->load('location', 'remotelocations', 'shows','organizer.users','category');
         $tags = Genre::where('admin', true)->orWhere('user_id', auth()->user()->id)->get();
         $categories = Category::all();
         $remote = RemoteLocation::where('admin', true)->orWhere('user_id', auth()->user()->id)->get();

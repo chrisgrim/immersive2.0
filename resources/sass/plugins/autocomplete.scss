@@ -1,15 +1,17 @@
 .pac-container {
-    background-color: #fff;
+    background-color: white;
     position: absolute!important;
     z-index: 1000;
     border-radius: 2px;
-    border-top: 1px solid #d9d9d9;
-    font-family: Arial, sans-serif;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    border: 2px solid black;
+    border-top: none;
+    font-family: "Montserrat", sans-serif;
+    box-shadow: rgb(0 0 0 / 12%) 0px 10px 16px;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
-    overflow: hidden
+    overflow: hidden;
+    margin-top: -0.3rem;
 }
 
 .pac-logo:after {
@@ -18,13 +20,13 @@
     height: 16px;
     text-align: right;
     display: block;
-    background-image: url(https://maps.gstatic.com/mapfiles/api-3/images/powered-by-google-on-white3.png);
+    background-image: none;
     background-position: right;
     background-repeat: no-repeat;
     background-size: 120px 14px
 }
 .hdpi.pac-logo:after {
-    background-image: url(https://maps.gstatic.com/mapfiles/api-3/images/powered-by-google-on-white3_hdpi.png)
+    background-image: none;
 }
 .pac-item {
     cursor: default;
@@ -32,9 +34,9 @@
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
-    line-height: 30px;
+    line-height: 50px;
     text-align: left;
-    border-top: 1px solid #e6e6e6;
+    border-top: none;
     font-size: 11px;
     color: #999
 }
@@ -49,19 +51,20 @@
     font-weight: 700
 }
 .pac-item-query {
-    font-size: 13px;
+    font-size: 1.5rem;
     padding-right: 3px;
     color: #000
 }
 .pac-icon {
-    width: 15px;
-    height: 20px;
-    margin-right: 7px;
-    margin-top: 6px;
+    width: 2rem;
+    height: 2rem;
+    margin-right: 1.3rem;
+    margin-top: 15px;
     display: inline-block;
     vertical-align: top;
     background-image: url(https://maps.gstatic.com/mapfiles/api-3/images/autocomplete-icons.png);
-    background-size: 34px
+    background-size: 3.4rem;
+    margin-left: 1rem;
 }
 .hdpi .pac-icon {
     background-image: url(https://maps.gstatic.com/mapfiles/api-3/images/autocomplete-icons_hdpi.png)

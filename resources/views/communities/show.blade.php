@@ -19,7 +19,7 @@
         <vue-community-show
             :mobile="{{ Browser::isMobile() ? Browser::isMobile() : 'null' }}"
             :curator="{{ auth()->user() ? auth()->user()->can('update', $community) ? 'true' : 'false' : 'null' }}"
-            :shelves="{{ $shelves }}" 
+            :loadshelves="{{ json_encode($shelves) }}" 
             :value="{{ $community }}" />
     </div>
 @endsection

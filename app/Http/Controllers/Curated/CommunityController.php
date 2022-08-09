@@ -62,9 +62,25 @@ class CommunityController extends Controller
      */
     public function show(Community $community)
     {
-        $shelves = $community->publishedShelves()->with(['publishedPosts.limitedCards'])->limit(3)->get();
+        $shelves = $community->publishedShelves()->paginate(4)->through(function ($shelf, $key){
+            return $shelf->setRelation('published_posts', $shelf->publishedPosts()->with('limitedCards')->paginate(8));
+        });
         $community->load('curators');
         return view('communities.show', compact('community', 'shelves'));
+    }
+
+    /**
+     * Paginate the specified resource.
+     *
+     * @param  \App\Curated\Community  $community
+     * @return \Illuminate\Http\Response
+     */
+    public function paginate(Request $request, Community $community)
+    {
+        $shelves = $community->publishedShelves()->paginate(4)->through(function ($shelf, $key){
+            return $shelf->setRelation('published_posts', $shelf->publishedPosts()->with('limitedCards')->paginate(8));
+        });
+        return $shelves;
     }
 
     /**
@@ -76,7 +92,7 @@ class CommunityController extends Controller
     public function edit(Community $community)
     {
         $shelves = $community->shelves()->orderBy('status', 'DESC')->orderBy('order', 'DESC')->get()->map(function ($shelf, $key) {
-            return $shelf->setRelation('posts', $shelf->posts()->with('limitedCards')->paginate(4));
+            return $shelf->setRelation('posts', $shelf->posts()->with('limitedCards')->paginate(8));
         });
         return view('communities.edit', compact('community', 'shelves'));
     }

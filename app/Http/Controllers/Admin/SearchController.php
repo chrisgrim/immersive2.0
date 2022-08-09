@@ -9,6 +9,7 @@ use App\Models\Genre;
 use App\Models\User;
 use App\Models\Curated\Community;
 use Illuminate\Support\Arr;
+use ElasticScoutDriverPlus\Support\Query;
 
 use Illuminate\Http\Request;
 

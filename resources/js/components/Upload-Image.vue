@@ -130,18 +130,18 @@
                 this.inProcess = !this.inProcess;
                 this.disabled = !this.disabled;
             },
-            reset() {
-                this.imageFile = '';
-            }
+            // reset() {
+            //     this.imageFile = '';
+            // }
         },
 
         watch: {
             externalSubmit() {
                 this.$v.$touch(); 
             },
-            image() {
-                if (this.image === `/storage/null`) {this.reset()}
-            }
+            // image() {
+            //     if (this.image === `/storage/null`) {this.reset()}
+            // }
         },
 
         validations: {

@@ -3,15 +3,12 @@
         <div class="flex">
             <h3 class="text-4xl font-semibold">{{ shelf.name }}</h3>
         </div>
-        <div 
-            v-if="posts && posts.length"
-            class="relative w-full inline-block">
+        <div class="relative w-full inline-block">
             <PostAlbum
                 :title="true"
                 :text="true"
-                :shelf="shelf"
-                :community="community"
-                v-model="posts" />
+                :loadshelf="shelf"
+                :community="community" />
         </div>
     </div>
 </template>
@@ -30,7 +27,6 @@
 
         data() {
             return {
-                posts:this.shelf.published_posts,
             }
         },
 

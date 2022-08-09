@@ -66,12 +66,6 @@
             },
         },
 
-        watch: {
-            image() {
-                if (this.image === `/storage/null`) {this.reset()}
-            }
-        },
-
         validations: {
             imageFile: {
                 fileSize() { 

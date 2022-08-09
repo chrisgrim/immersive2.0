@@ -52,7 +52,8 @@ class ShelfController extends Controller
      */
     public function paginate(Request $request, Shelf $shelf, ShelfActions $shelfActions)
     {
-        return $shelf->posts()->paginate(4);
+        if ($request->type==='published') { return $shelf->publishedPosts()->paginate(8); }
+        return $shelf->posts()->paginate(8);
     }
 
     /**

@@ -10,6 +10,7 @@ Route::RESOURCE('cards', 'Curated\CardController');
 
 // ----------   Communities -------
 Route::GET('/communities/{community}', 'Curated\CommunityController@show')->middleware('can:preview,community');
+Route::GET('/communities/{community}/shelves/paginate', 'Curated\CommunityController@paginate')->middleware('can:preview,community');
 Route::GET('/communities/{community}/edit', 'Curated\CommunityController@edit')->middleware('can:locked,community');
 Route::PUT('/communities/{community}', 'Curated\CommunityController@update')->middleware('can:update,community');
 Route::DELETE('/communities/{community}', 'Curated\CommunityController@destroy')->middleware('can:destroy,community');

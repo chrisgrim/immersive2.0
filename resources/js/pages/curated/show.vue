@@ -86,11 +86,20 @@
                 <div class="inline-block w-full px-8 md:w-9/12">
                     <div 
                         class="relative" 
-                        v-for="shelf in shelvesWithPosts"
+                        v-for="shelf in shelves"
                         :key="shelf.id">
                         <Shelf 
                             :community="community"
                             :shelf="shelf" />
+                    </div>
+                    <div 
+                        v-if="shelfContainer && shelfContainer.next_page_url"
+                        class="loadmore">
+                        <button 
+                            class="rounded-full py-2 px-4 bg-white hover:bg-black hover:text-white hover:border-black"
+                            @click="fetchShelves">
+                            Load More
+                        </button>
                     </div>
                 </div>
             </div>
@@ -103,20 +112,15 @@
     import ShowMore from '../../components/ShowMore.vue'
     export default {
         
-        props: [ 'value', 'shelves', 'curator', 'mobile' ],
+        props: [ 'value', 'loadshelves', 'curator', 'mobile' ],
 
         components: { Shelf, ShowMore },
-
-        computed: {
-            shelvesWithPosts() {
-                if (!this.shelves[0].published_posts) { return }
-                return this.shelves.filter( shelf => shelf.published_posts.length)
-            }
-        },
 
         data() {
             return {
                 community: this.value,
+                shelfContainer: this.loadshelves,
+                shelves:this.loadshelves.data,
                 headerImage: this.mobile ? this.value.thumbImagePath : this.value.largeImagePath,
                 envImageUrl: process.env.MIX_IMAGE_URL,
             }
@@ -125,7 +129,14 @@
         methods: {
             onBack() {
                 document.referrer == "" ? window.location.href = '/' : window.history.back()
-            }
+            },
+            async fetchShelves() {
+                await axios.get(`/communities/${this.community.slug}/shelves/paginate?page=${this.shelfContainer.next_page_url.slice(-1)}`)
+                .then( res => {
+                    this.shelfContainer = res.data
+                    this.shelves = this.shelves.concat(res.data.data);
+                })
+            },
         },
 
     }

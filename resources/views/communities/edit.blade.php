@@ -23,7 +23,7 @@
         <vue-community-edit
             :mobile="{{ Browser::isMobile() ? Browser::isMobile() : 'null' }}"
             :loadowner="{{$community->owner()->first()}}"
-            :loadshelves="{{ $shelves }}" 
+            :loadshelves="{{ json_encode($shelves) }}" 
             :loadcommunity="{{ $community }}" 
             :user="{{ auth()->user() ? auth()->user() : 'null' }}"/>
     </div>

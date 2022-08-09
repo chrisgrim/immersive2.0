@@ -80,16 +80,16 @@
                 this.inProcess = !this.inProcess;
                 this.disabled = !this.disabled;
             },
-            reset() {
-                this.imageFile = '';
-            }
+            // reset() {
+            //     this.imageFile = '';
+            // }
         },
 
-        watch: {
-            image() {
-                if (this.image === `/storage/null`) { this.reset() }
-            },
-        },
+        // watch: {
+        //     image() {
+        //         if (this.image === `/storage/null`) { this.reset() }
+        //     },
+        // },
 
         validations: {
             imageFile: {

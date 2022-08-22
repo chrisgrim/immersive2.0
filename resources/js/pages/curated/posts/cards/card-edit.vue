@@ -10,7 +10,7 @@
                     :loading="disabled"
                     :image="image"
                     :can-delete="card.type==='e'"
-                    @onDelete="hideImage"
+                    @onDelete="removeImage"
                     @addImage="addImageSubmit" />
             </template>
 
@@ -155,11 +155,9 @@
             async updateCard() {
                 if ( this.checkVuelidate()) { return }
                 this.appendCardData();
-                console.log(this.card.blurb);
                 await axios.post(`/cards/${this.card.id}`, this.formData)
                 .then( res => { 
-                    this.card = res.data;
-                    this.cardBeforeEdit = res.data ;
+                    this.card = this.cardBeforeEdit = res.data;
                 })
                 this.onUpdated();
                 this.clear();
@@ -171,15 +169,8 @@
             async deleteCard() {
                 await axios.delete(`/cards/${this.card.id}`)
                 .then( res => { 
-                    console.log(res.data);
                     this.$emit('update', res.data)
                 })
-            },
-            hideImage() {
-                if (this.card.type === 'e') {
-                    this.formData.append('type', 'h')
-                    this.updateCard()
-                }
             },
             appendCardData() {
                 this.formData.append('_method', 'PUT');
@@ -187,11 +178,16 @@
                 this.card.url ? this.formData.append('url', this.card.url) : null;
                 this.card.blurb ? this.formData.append('blurb', this.card.blurb) : null
             },
-            addImageSubmit(image, src) {
+            addImageSubmit(image) {
                 this.disabled = true
                 this.formData.append('image', image);
                 this.card.type === 'h' ? this.formData.append('type', 'e') : null
                 this.updateCard();
+            },
+            removeImage() {
+                this.disabled = true
+                this.formData.append('type', 'h')
+                this.updateCard()
             },
             clear() {
                 this.onEdit = false

@@ -27,7 +27,7 @@ p    {margin:1rem 0rem;font-family: 'Helvetica', sans-serif;color:#060606;font-s
         @foreach ($events as $event)
             <div class="event-body">
                 <div class="event-body__image">
-                    <img src="https://everythingimmersive.com/storage/{{substr_replace($event->thumbImagePath, "", -4)}}jpg" alt="LA: Welcome Home">
+                    <img src="{{ env('MIX_IMAGE_URL') }}{{ substr_replace($event->thumbImagePath, "", -4) }}jpg" alt="LA: Welcome Home">
                 </div>
                 <div class="event-body__title">
                     <a href="https://everythingimmersive.com/events/{{$event->slug}}"><h3>{{$event->name}}</h3></a>

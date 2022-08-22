@@ -28,7 +28,6 @@ class CardActions
             'order' => $post->cards()->exists() ? $post->cards->last()->order + 1 : 0
         ]);
 
-        if ($request->thumbImagePath) { $card->update(['thumbImagePath' => $request->thumbImagePath]); }
         if ($request->image) { ImageFile::saveImage($request, $card, 800, 450, 'card'); }
 
         return $post->load('cards', 'user');
@@ -45,6 +44,11 @@ class CardActions
         $card->update($request->except(['image']));
         if ($request->image) { 
             ImageFile::replaceCardImage($request, $card, 800, 450, 'card'); 
+            $card->touch();
+        }
+        if ($request->type === 'h') { 
+            ImageFile::deletePreviousImages($card); 
+            ImageFile::clearImagePaths($card); 
             $card->touch();
         }
         return $card;

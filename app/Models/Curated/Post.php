@@ -4,6 +4,7 @@ namespace App\Models\Curated;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\User;
+use App\Models\Event;
 use App\Models\Featured\Feature;
 use App\Models\Featured\Section;
 use Illuminate\Database\Eloquent\Model;
@@ -13,9 +14,9 @@ class Post extends Model
     use \Staudenmeir\EloquentEagerLimit\HasEagerLimit;
     use HasFactory;
 
-    protected $fillable = [ 'name', 'slug', 'blurb', 'thumbImagePath', 'shelf_id', 'largeImagePath', 'user_id', 'community_id', 'section_id', 'status', 'type', 'image_type', 'order' ];
+    protected $fillable = [ 'name', 'slug', 'blurb', 'thumbImagePath', 'shelf_id', 'largeImagePath', 'user_id', 'community_id', 'event_id', 'section_id', 'status', 'type', 'image_type', 'order' ];
 
-    protected $with = ['community'];
+    protected $with = ['community', 'featuredEventImage'];
 
     /**
     * Sets the Route Key to slug instead of ID
@@ -74,6 +75,14 @@ class Post extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Get the user that owns the post.
+     */
+    public function featuredEventImage()
+    {
+        return $this->belongsTo(Event::class, 'event_id', 'id');
     }
 
     /**

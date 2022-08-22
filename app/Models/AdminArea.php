@@ -56,7 +56,7 @@ class AdminArea extends Model
                 'Event Link' => $event->websiteUrl,
                 'Production Company' => $event->organizer->name,
                 'Company Website' => $event->organizer->website,
-                'Image Link' => 'https://everythingimmersive.com/storage/' . $event->largeImagePath,
+                'Image Link' => env('MIX_IMAGE_URL') . $event->largeImagePath,
                 'Primary Contact Name' => $event->organizer->user->name,
                 'Email for Contact' => $event->organizer->user->email,
                 'Instagram handle' => $event->organizer->instagramHandle,

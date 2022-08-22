@@ -68,17 +68,12 @@
                 <template v-if="showFeatured">
                     <div class="w-full h-full p-8">
                         <div class="h-64 relative rounded-2xl">
-                            <template v-if="imageType === 'e'">
-                                event
-                            </template>
-                            <template v-else>
-                                <CardImage
-                                    :locked="inputVal.thumbImagePath ? true :false"
-                                    @onDelete="deleteImage"
-                                    :loading="disabled"
-                                    :image="value.thumbImagePath ? `${envImageUrl}${inputVal.thumbImagePath}` : null"
-                                    @addImage="addImage" />
-                            </template>
+                            <CardImage
+                                :locked="hasImage ? true :false"
+                                @onDelete="deleteImage"
+                                :loading="loading"
+                                :image="hasImage ? `${envImageUrl}${hasImage}` : null"
+                                @addImage="addImage" />
                         </div>
                         <div class="flex justify-between items-center">
                             <p>Featured visible:</p>
@@ -145,7 +140,7 @@
     import formValidationMixin from '../../../../mixins/form-validation-mixin'
     export default {
         
-        props: [ 'value', 'user', 'community', 'shelves', 'mobile'],
+        props: [ 'value', 'user', 'community', 'shelves', 'mobile', 'loading'],
 
         mixins: [formValidationMixin],
 
@@ -164,23 +159,22 @@
                 if (this.inputVal.type === 'h') { return 'Hidden'}
                 return 'Visible'
             },
-            imageType() {
-                if (this.inputVal.image_type === 'e') { return 'Event'}
-                return 'Upload'
-            }
+            hasImage() {
+                if (this.inputVal.event_id) { return this.inputVal.featured_event_image.thumbImagePath}
+                return this.inputVal.thumbImagePath
+            },
 
         },
 
         data() {
             return {
-                searchInput: null,
+                searchInput: this.value.event_id ? this.value.event : null,
                 options: [],
                 showStatus: false,
                 showFeatured: false,
                 showOrder: false,
                 showShelf: false,
                 updated: false,
-                disabled: false,
                 envImageUrl: process.env.MIX_IMAGE_URL,
             }
         },
@@ -203,12 +197,14 @@
                 this.$emit('addEventFeaturedImage', this.searchInput);
             },
             update() {
-                this.$emit('update');
+                this.$emit('update')
             },
             addImage(image) {
-                this.$emit('addImage', image);
+                this.searchInput=null
+                this.$emit('addImage', image)
             },
             deleteImage() {
+                this.searchInput=null
                 this.$emit('deleteImage');
             },
             reOrder() {

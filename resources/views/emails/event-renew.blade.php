@@ -22,7 +22,7 @@
             margin: auto;
             ">
             <div style="text-align: center;max-width: 650px;margin: auto;padding: 0rem 1rem;">
-                <img style="width:100%;border-radius:.3rem;" src="https://secretchickens.com/storage/{{$event->thumbImagePath}}" alt="">
+                <img style="width:100%;border-radius:.3rem;" src="{{ env('MIX_IMAGE_URL') }}{{ $event->thumbImagePath }}" alt="">
             </div>
         </div>
         <div style="text-align: center;max-width: 550px;margin: auto;padding: 2rem 1rem;">

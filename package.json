@@ -40,6 +40,7 @@
         "apexcharts": "^3.23.1",
         "leaflet": "^1.7.1",
         "leaflet-geosearch": "^3.2.1",
+        "mix-env-file": "^0.1.1",
         "postcss-nested": "^5.0.6",
         "postcss-nested-ancestors": "^2.0.0",
         "remixicon": "^2.5.0",

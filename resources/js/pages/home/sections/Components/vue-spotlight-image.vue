@@ -82,6 +82,7 @@
 
         computed: {
             hasFeatured() {
+                if (this.element.event_id) { return this.element.featured_event_image.thumbImagePath}
                 return this.element.largeImagePath
             },
             cardImages() {

@@ -72,7 +72,8 @@
 
         computed: {
             hasFeatured() {
-                return this.element.largeImagePath
+                if (this.element.event_id) { return this.element.featured_event_image.thumbImagePath}
+                return this.element.thumbImagePath
             },
             cardImages() {
                 return this.element.limited_cards.map( e => e.event && !e.thumbImagePath ? e.event.thumbImagePath : e.thumbImagePath ).filter(n => n)

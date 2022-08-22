@@ -45,18 +45,21 @@ class PostActions
         $post->update($request->except(['image']));
         $post->update(['slug' => Str::slug($request->name) . '-' . $post->community->id]);
 
-        if ($request->image) { ImageFile::replaceImage($request, $post, 900, 500, 'post'); }
+        if ($request->image) { 
+            $post->update(['event_id' => NULL ]);
+            ImageFile::replaceImage($request, $post, 900, 500, 'post'); 
+        }
 
         if ($request->deleteImage) { 
-            if ($post->image_type === 'u') {
-                if (!Str::contains($post->thumbImagePath, 'event-images')) { 
-                    ImageFile::deletePreviousImages($post); 
-                }
+            if ($post->thumbImagePath) {
+                ImageFile::deletePreviousImages($post); 
+                ImageFile::clearImagePaths($post); 
+            } else {
+                $post->update(['event_id' => NULL ]);
             }
-            ImageFile::clearImagePaths($post); 
         }
         
-        return $post->load('cards', 'user');
+        return $post->load('cards', 'user','featuredEventImage');
     }
 
     /**

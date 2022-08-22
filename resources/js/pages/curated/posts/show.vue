@@ -87,13 +87,19 @@
         components: { Card },
 
         computed: {
-
+            headerImage() {
+                if (this.mobile) {
+                    if (this.value.event_id) { return this.value.featured_event_image.thumbImagePath}
+                    return this.value.thumbImagePath
+                }
+                if (this.value.event_id) { return this.value.featured_event_image.largeImagePath}
+                return this.value.largeImagePath
+            }
         },
 
         data() {
             return {
                 post: this.value,
-                headerImage: this.mobile ? this.value.thumbImagePath : this.value.largeImagePath,
                 envImageUrl: process.env.MIX_IMAGE_URL,
             }
         },

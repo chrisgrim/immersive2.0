@@ -45,10 +45,8 @@ class Card extends Model
     */
     public function destroyCard($card) 
     {
-        if ($card->thumbImagePath) {
-            if (!Str::contains($card->thumbImagePath, 'event-images')) { 
-                ImageFile::deletePreviousImages($card);
-            }
+        if ($card->thumbImagePath) { 
+            ImageFile::deletePreviousImages($card); 
         }
         $card->delete();
     }

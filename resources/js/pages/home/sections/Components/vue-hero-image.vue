@@ -3,11 +3,11 @@
         <picture>
             <source 
                 type="image/webp" 
-                :srcset="`${envImageUrl}${element.largeImagePath }`"> 
+                :srcset="`${envImageUrl}${ hasFeatured }`"> 
             <img 
                 class="h-full w-full absolute object-cover align-bottom"
                 loading="lazy" 
-                :src="`${envImageUrl}${element.largeImagePath.slice(0, -4)}jpg`" 
+                :src="`${envImageUrl}${hasFeatured.slice(0, -4)}jpg`" 
                 :alt="`${element.name}`">
         </picture>
     </div>
@@ -19,7 +19,8 @@
 
         computed: {
             hasFeatured() {
-                return this.element.thumbImagePath 
+                if (this.element.event_id) { return this.element.featured_event_image.thumbImagePath}
+                return this.element.largeImagePath
             },
         },
 

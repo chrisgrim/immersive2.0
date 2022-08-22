@@ -123,6 +123,7 @@
                 @reOrder="debounce"
                 :community="community"
                 :shelves="shelves"
+                :loading="loading"
                 v-model="post" />
         </div>
         <transition name="slide-fade">
@@ -174,6 +175,7 @@
                 serverErrors: null,
                 updated: false,
                 postEdit: false,
+                loading:false,
             }
         },
 
@@ -213,14 +215,12 @@
                 }, 500); // delay
             },
             addImage(image) {
-                this.formData.append('image', image);
-                this.post.image_type = 'u'
-                this.patchPost();
+                this.formData.append('image', image)
+                this.loading=true
+                this.patchPost()
             },
             addEventFeaturedImage(event) {
-                this.formData.append('largeImagePath', event.largeImagePath);
-                this.formData.append('thumbImagePath', event.thumbImagePath);
-                this.post.image_type = 'e'
+                this.formData.append('event_id', event.id);
                 this.patchPost();
             },
             deleteImage() {
@@ -235,7 +235,6 @@
                 this.formData.append('shelf_id', this.post.shelf_id);
                 this.formData.append('status', this.post.status);
                 this.formData.append('type', this.post.type);
-                this.formData.append('image_type', this.post.image_type);
             },
             updatePost(value) {
                 this.clear()
@@ -259,6 +258,7 @@
                 this.onEdit = false;
                 this.blockType = null;
                 this.postEdit = false;
+                this.loading = false
                 this.formData = new FormData()
             },
             clearErrors() {

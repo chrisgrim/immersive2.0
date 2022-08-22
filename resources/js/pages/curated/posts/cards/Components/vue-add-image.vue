@@ -32,7 +32,6 @@
             <p class="text-red-600" v-if="!$v.imageFile.fileSize">The image file size is over 10mb</p>
             <p class="text-red-600" v-if="!$v.imageFile.fileType">The image needs to be a JPG, PNG or GIF</p>
             <p class="text-red-600" v-if="!$v.imageFile.imageRatio">The image needs to be at least {{ width }} x {{ height }}</p>
-            <p class="text-red-600" v-if="!$v.imageFile.imageRequired">An Image is required</p>
         </div>
     </div>
 </template>
@@ -109,9 +108,6 @@
                 imageRatio() {
                     return this.imageFile ? this.imageFile.width >= this.width && this.imageFile.height >= this.height : true 
                 },
-                imageRequired() {
-                    return this.imageFile
-                }
             },
         },
     };

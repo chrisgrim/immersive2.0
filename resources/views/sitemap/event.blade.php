@@ -8,7 +8,7 @@
                 {{ asset('/events/' . $event->slug)}}
             </loc>
             <image:image>
-                <image:loc>{{ asset('/storage/' . $event->largeImagePath)}}</image:loc>
+                <image:loc>{{ env('MIX_IMAGE_URL') }}{{ $event->largeImagePath }}</image:loc>
                 <image:title> {{$event->name}} </image:title>
                 <image:caption> {{$event->tag_line ? \Illuminate\Support\Str::limit($event->tag_line, 80) : \Illuminate\Support\Str::limit($event->description, 80)}} </image:caption>
             </image:image>

@@ -4,7 +4,7 @@
 <body style="margin:0!important">
     <div style="border: 1px solid #dddddd; border-radius: 12px;overflow: hidden;max-width: 1000px;margin:40px auto">
         <div style="height:375px;">
-            <img style="width:100%;height:100%;object-fit:cover;" src="{{URL::to('/')}}/storage/{{substr($image, 0,-4)}}jpg" alt="Image of the {{$name}} community">
+            <img style="width:100%;height:100%;object-fit:cover;" src="{{ env('MIX_IMAGE_URL') }}{{substr($image, 0,-4)}}jpg" alt="Image of the {{$name}} community">
         </div>
         <div style="margin: auto;padding:40px 20px;">
             <div style="margin-bottom: 10px;">

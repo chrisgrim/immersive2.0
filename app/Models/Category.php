@@ -2,8 +2,7 @@
 
 namespace App\Models;
 
-use Laravel\Scout\Searchable;
-use ElasticScoutDriverPlus\QueryDsl;
+use Elastic\ScoutDriverPlus\Searchable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use App\Scopes\RankScope;
@@ -13,7 +12,6 @@ use Intervention\Image\ImageManagerStatic as Image;
 class Category extends Model
 {
     use Searchable;
-    use QueryDsl;
     
     /**
     * What protected variables are allowed to be passed to the database

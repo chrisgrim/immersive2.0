@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-use ElasticAdapter\Indices\Mapping;
-use ElasticAdapter\Indices\Settings;
-use ElasticMigrations\Facades\Index;
-use ElasticMigrations\MigrationInterface;
+use Elastic\Adapter\Indices\Mapping;
+use Elastic\Adapter\Indices\Settings;
+use Elastic\Migrations\Facades\Index;
+use Elastic\Migrations\MigrationInterface;
 
 final class CreateOrganizersIndex implements MigrationInterface
 {
@@ -14,34 +14,15 @@ final class CreateOrganizersIndex implements MigrationInterface
     public function up(): void
     {
         Index::create('organizers', function (Mapping $mapping, Settings $settings) {
-            $mapping->text('name', ['analyzer' => 'rebuilt_english']);
+            $mapping->search_as_you_type('name');
             $mapping->keyword('email');
             $mapping->integer('rank');
             $settings->analysis([
-                'filter' => [
-                    'english_stop' => [
-                        'type' => 'stop',
-                        'stopwords' => '_english_' 
-                    ],
-                    'english_stemmer' => [
-                        'type' => 'stemmer',
-                        'language' => 'english'
-                    ],
-                    'english_possessive_stemmer' => [
-                        'type' => 'stemmer',
-                        'languange' => 'possessive_english'
-                    ]
-                ], 
                 'analyzer' => [
-                    'rebuilt_english' => [
+                    'standard_asciifolding' => [
                         'type' => 'custom',
                         'tokenizer' => 'standard',
-                        'filter' => [
-                            'english_stop',
-                            'lowercase',
-                            'english_stemmer',
-                            'english_possessive_stemmer'
-                        ]
+                        'filter' => [ 'asciifolding' ]   
                     ]
                 ]
             ]);

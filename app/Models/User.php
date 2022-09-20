@@ -2,8 +2,7 @@
 
 namespace App\Models;
 
-use Laravel\Scout\Searchable;
-use ElasticScoutDriverPlus\QueryDsl;
+use Elastic\ScoutDriverPlus\Searchable;
 use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -25,7 +24,6 @@ class User extends Authenticatable implements MustVerifyEmail
     use Notifiable;
     use Billable;
     use Searchable;
-    use QueryDsl;
 
     /**
      * The attributes that are mass assignable.

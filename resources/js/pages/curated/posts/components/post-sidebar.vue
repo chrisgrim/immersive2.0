@@ -87,12 +87,23 @@
                             Use Event Image
                             <v-select
                                 v-model="searchInput"
+                                :get-option-label="searchInput => searchInput.model.name"
+                                :reduce="searchInput => searchInput.model"
                                 :options="options"
                                 placeholder="Select event"
                                 label="name"
                                 @search="debounce" 
                                 @input="eventImage"
-                                @search:focus="debounce" />
+                                @search:focus="debounce">
+                                <template #option="{ model }">
+                                    <div class="flex p-3">
+                                        <svg class="w-8 h-8 mr-4">
+                                            <use :xlink:href="`/storage/website-files/icons.svg#ri-map-pin-line`" />
+                                        </svg>
+                                        <p>{{ model.name }}</p>
+                                    </div>
+                                </template>
+                            </v-select>
                         </div>
                     </div>
                 </template>
@@ -190,7 +201,7 @@
             async generateSearchList (query) {
                 await axios.get('/api/search/events', { params: { keywords: query } })
                 .then( res => {
-                    this.options = res.data.data;
+                    this.options = res.data;
                 })
             },
             eventImage() {

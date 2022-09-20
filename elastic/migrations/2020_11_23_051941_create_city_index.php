@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-use ElasticAdapter\Indices\Mapping;
-use ElasticAdapter\Indices\Settings;
-use ElasticMigrations\Facades\Index;
-use ElasticMigrations\MigrationInterface;
+use Elastic\Adapter\Indices\Mapping;
+use Elastic\Adapter\Indices\Settings;
+use Elastic\Migrations\Facades\Index;
+use Elastic\Migrations\MigrationInterface;
 
 final class CreateCityIndex implements MigrationInterface
 {
@@ -14,38 +14,9 @@ final class CreateCityIndex implements MigrationInterface
     public function up(): void
     {
         Index::create('city_lists', function (Mapping $mapping, Settings $settings) {
-            $mapping->text('name', ['analyzer' => 'rebuilt_english']);
             $mapping->integer('population');
             $mapping->integer('rank');
             $mapping->integer('priority');
-            $settings->analysis([
-                'filter' => [
-                    'english_stop' => [
-                        'type' => 'stop',
-                        'stopwords' => '_english_' 
-                    ],
-                    'english_stemmer' => [
-                        'type' => 'stemmer',
-                        'language' => 'english'
-                    ],
-                    'english_possessive_stemmer' => [
-                        'type' => 'stemmer',
-                        'languange' => 'possessive_english'
-                    ]
-                ], 
-                'analyzer' => [
-                    'rebuilt_english' => [
-                        'type' => 'custom',
-                        'tokenizer' => 'standard',
-                        'filter' => [
-                            'english_stop',
-                            'lowercase',
-                            'english_stemmer',
-                            'english_possessive_stemmer'
-                        ]
-                    ]
-                ]
-            ]);
         });
     }
 

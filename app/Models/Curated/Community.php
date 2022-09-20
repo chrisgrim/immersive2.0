@@ -6,15 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\ImageFile;
 use App\Models\User;
 use App\Models\Featured\Feature;
-use Laravel\Scout\Searchable;
-use ElasticScoutDriverPlus\QueryDsl;
+use Elastic\ScoutDriverPlus\Searchable;
 use App\Models\Featured\Section;
 use Illuminate\Database\Eloquent\Model;
 
 class Community extends Model
 {
     use HasFactory;
-    use QueryDsl;
     use Searchable;
 
     protected $fillable = [ 'name', 'user_id', 'slug', 'blurb', 'description', 'thumbImagePath', 'largeImagePath', 'instagramHandle', 'twitterHandle', 'facebookHandle', 'patreon', 'status' ];

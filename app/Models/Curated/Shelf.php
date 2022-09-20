@@ -5,15 +5,13 @@ namespace App\Models\Curated;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Featured\Feature;
-use Laravel\Scout\Searchable;
-use ElasticScoutDriverPlus\QueryDsl;
+use Elastic\ScoutDriverPlus\Searchable;
 
 
 class Shelf extends Model
 {
     use \Staudenmeir\EloquentEagerLimit\HasEagerLimit;
     use HasFactory;
-    use QueryDsl;
     use Searchable;
 
     protected $fillable = [ 'name', 'order', 'user_id', 'community_id', 'parent_id', 'status'];

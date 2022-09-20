@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import SearchLocation from './Components/location.vue'
+import SearchLocation from './Components/location-google.vue'
 import SearchEvents from './Components/events.vue'
 import SearchTags from './Components/tags.vue'
 export default {

@@ -83,7 +83,6 @@
                     },
                     tag_line: {
                         required,
-                        // minLength: minLength(10),
                         maxLength: maxLength(200),
                     },
                 }

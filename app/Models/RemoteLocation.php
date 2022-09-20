@@ -3,14 +3,12 @@
 namespace App\Models;
 
 use App\Scopes\RankScope;
-use Laravel\Scout\Searchable;
-use ElasticScoutDriverPlus\QueryDsl;
+use Elastic\ScoutDriverPlus\Searchable;
 use Illuminate\Database\Eloquent\Model;
 
 class RemoteLocation extends Model
 {
     use Searchable;
-    use QueryDsl;
 
     /**
     * What protected variables are allowed to be passed to the database

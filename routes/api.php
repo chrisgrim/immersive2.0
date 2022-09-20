@@ -18,12 +18,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::GET('search/events', 'Search\EventController@list');
 Route::GET('search/community', 'Search\SearchController@community');
 Route::GET('search/shelf', 'Search\SearchController@shelf');
-Route::GET('search/navbar', 'Search\SearchController@nav');
 Route::GET('search/navbar/location', 'Search\SearchController@location');
-Route::GET('search/navbar/events', 'Search\SearchController@events');
+Route::GET('search/navbar/eventorganizer', 'Search\SearchController@eventorganizer');
+Route::GET('search/events', 'Search\SearchController@events');
 Route::GET('search/navbar/tags', 'Search\SearchController@tags');
 Route::POST('search/mapboundary', 'Search\EventController@mapBoundary');
 Route::POST('search/online', 'Search\EventController@online');

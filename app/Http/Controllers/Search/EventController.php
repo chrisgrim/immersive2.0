@@ -18,71 +18,65 @@ use DB;
 use Carbon\Carbon;
 use Session;
 use Illuminate\Support\Arr;
-
+use Elastic\ScoutDriverPlus\Support\Query;
 use Illuminate\Http\Request;
 
 class EventController extends Controller
 {
     public function index(Request $request)
     {
-        if ($request->category) { $request->request->add(['category' => explode(",",$request->category)]); }
-        if ($request->tag) { $request->request->add(['tag' => explode(",",$request->tag)]); }
-        if ($request->price0) { $request->request->add(['price' => [$request->price0,$request->price1 ]]); }
-        if ($request->start) { $request->request->add(['dates' => [$request->start, $request->end]]); }
-        if ($request->live) {$request->request->add([
-            'mapboundary' => [
-                '_northEast' => [ 'lat' => $request->NElat,'lng' => $request->NElng ],
-                '_southWest' => [ 'lat' => $request->SWlat,'lng' => $request->SWlng ],
-            ]
-        ]);}
+        $datesFilter = [];
+        $pricesFilter = [];
+        $categoriesFilter = [];
+        $tagsFilter = [];
+        $latFilter = [];
+        if ($request->category) { 
+            $request->request->add(['category' => explode(",",$request->category)]); 
+            $categoriesFilter = Query::terms()->field('category_id')->values($request->category);
+        }
+        if ($request->tag) { 
+            $request->request->add(['tag' => explode(",",$request->tag)]); 
+            $tagsFilter = Query::terms()->field('genres.name')->values($request->tag);
+        }
+        if ($request->price0) { 
+            $request->request->add(['price' => [$request->price0,$request->price1 ]]); 
+            $pricesFilter = Query::range()->field('priceranges.price')->gte($request->price[0])->lte($request->price[1]);
+        }
+        if ($request->start) { 
+            $request->request->add(['dates' => [$request->start, $request->end]]); 
+            $datesFilter = Query::bool()
+                ->should(Query::range()->field('shows.date')->gte($request->dates[0])->lte($request->dates[1]))
+                ->should(Query::term()->field('showtype')->value('a'))
+                ->minimumShouldMatch(1);
+        }
+        if ($request->live) {
+            $request->request->add([
+                'mapboundary' => [
+                    '_northEast' => [ 'lat' => $request->NElat,'lng' => $request->NElng ],
+                    '_southWest' => [ 'lat' => $request->SWlat,'lng' => $request->SWlng ],
+                    ]
+                ]);
+        }
 
         $maxprice = ceil(Event::getMostExpensive());
         $categories = Category::all();
         $tags = Genre::where('admin', 1)->orderBy('rank', 'desc')->get();
+        $latFilter = Query::geoDistance()->field('location_latlon')->distance('40km')->lat($request->lat)->lon($request->lng);
+        
+        $query = Query::bool()
+            ->must( Query::range()->field('closingDate')->gte('now/d'))
+            ->must( Query::term()->field('hasLocation')->value(true))
+            ->when($request->price, function ($builder) use ($pricesFilter) { return $builder->must($pricesFilter); })
+            ->when($request->category, function ($builder) use ($categoriesFilter) { return $builder->filter($categoriesFilter); })
+            ->when($request->tag, function ($builder) use ($tagsFilter) { return $builder->filter($tagsFilter); })
+            ->when($request->lat, function ($builder) use ($latFilter) { return $builder->filter($latFilter); });
 
-        $eventFilter = Event::boolSearch()
-        ->must('range', ['closingDate' => [ 'gte' => 'now/d']])
-        ->must('match', ['hasLocation' => true])
-        ->when($request->price, function ($builder) use ($request) {
-            return $builder->must('range', ['priceranges.price' => [ 'gte' => $request->price[0],'lte' => $request->price[1]]]);
-        })
-        ->when($request->category, function ($builder) use ($request) {
-            return $builder->filter('terms', ['category_id' => $request->category]);
-        })
-        ->when($request->tag, function ($builder) use ($request) {
-            return $builder->filter('terms', ['genres.name' => $request->tag]);
-        })
-        ->when($request->dates, function ($builder) use ($request) {
-            return $builder->should('range', ['shows.date' => [ 'gte' => $request->dates[0],'lte' => $request->dates[1]]])
-                ->should('term', ['showtype' => 'a'])
-                ->minimumShouldMatch(1);
-        })
-        ->when($request->mapboundary, function ($builder) use ($request) {
-            return $builder->filter('geo_bounding_box', ['location_latlon' => [
-                'top_right' => 
-                    [
-                        'lat' => $request->mapboundary['_northEast']['lat'],
-                        'lon' => $request->mapboundary['_northEast']['lng'],
-                    ],
-                'bottom_left' =>
-                    [
-                        'lat' => $request->mapboundary['_southWest']['lat'],
-                        'lon' => $request->mapboundary['_southWest']['lng'],
-                    ]
-                ]
-            ]);
-        })
-        ->when($request->lat, function ($builder) use ($request) {
-            return $builder->filter('geo_distance', ['distance' => '40km', 'location_latlon' => [
-                'lat' => $request->lat,
-                'lon' => $request->lng,
-            ]]);
-        })
-        ->load(['genres', 'category'])
-        ->sortRaw(['published_at' => 'desc'])
-        ->paginate(20);
+        $builder = Event::searchQuery($query)
+            ->load(['genres', 'category'])
+            ->sortRaw(['published_at' => 'desc'])
+            ->paginate(20);
 
-        $eventContent = tap($eventFilter->toArray(), function (array &$content) {
+        $eventContent = tap($builder->toArray(), function (array &$content) {
             $content['data'] = Arr::pluck($content['data'], 'model');
         });
 
@@ -95,49 +89,53 @@ class EventController extends Controller
 
     public function mapBoundary(Request $request)
     {
-        $eventFilter = Event::boolSearch()
-        ->must('range', ['closingDate' => [ 'gte' => 'now/d']])
-        ->must('match', ['hasLocation' => true])
-        ->when($request->price, function ($builder) use ($request) {
-            return $builder->must('range', ['priceranges.price' => [ 'gte' => $request->price[0],'lte' => $request->price[1]]]);
-        })
-        ->when($request->category, function ($builder) use ($request) {
-            return $builder->filter('terms', ['category_id' => $request->category]);
-        })
-        ->when($request->tag, function ($builder) use ($request) {
-            return $builder->filter('terms', ['genres.name' => $request->tag]);
-        })
-        ->when($request->dates, function ($builder) use ($request) {
-            return $builder->should('range', ['shows.date' => [ 'gte' => $request->dates[0],'lte' => $request->dates[1]]])
-                ->should('term', ['showtype' => 'a'])
-                ->minimumShouldMatch(1);
-        })
-        ->when($request->mapboundary, function ($builder) use ($request) {
-            return $builder->filter('geo_bounding_box', ['location_latlon' => [
-                'top_right' => 
-                    [
-                        'lat' => $request->mapboundary['_northEast']['lat'],
-                        'lon' => $request->mapboundary['_northEast']['lng'],
-                    ],
-                'bottom_left' =>
-                    [
-                        'lat' => $request->mapboundary['_southWest']['lat'],
-                        'lon' => $request->mapboundary['_southWest']['lng'],
+        $prices = Query::range()->field('priceranges.price')->gte($request->price[0])->lte($request->price[1]);
+        $categories = Query::terms()->field('category_id')->values($request->category);
+        $lat = Query::geoDistance()->field('location_latlon')->distance('40km')->lat($request->lat)->lon($request->lng);
+        $tags = Query::terms()->field('genres.name')->values($request->tag);
+        if ($request->mapboundary) {
+            $boundary = Query::bool()->filterRaw([
+                'geo_bounding_box' => [
+                    'location_latlon' => [
+                        'top_right' => [
+                            'lat' => $request->mapboundary['_northEast']['lat'],
+                            'lon' => $request->mapboundary['_northEast']['lng'],
+                        ],
+                        'bottom_left' => [
+                            'lat' => $request->mapboundary['_southWest']['lat'],
+                            'lon' => $request->mapboundary['_southWest']['lng'],
+                        ]
                     ]
                 ]
             ]);
-        })
-        ->when($request->lat, function ($builder) use ($request) {
-            return $builder->filter('geo_distance', ['distance' => '40km', 'location_latlon' => [
-                'lat' => $request->lat,
-                'lon' => $request->lng,
-            ]]);
-        })
-        ->load(['genres', 'category'])
-        ->sortRaw(['published_at' => 'desc'])
-        ->paginate(20);
+        } else {
+            $boundary = [];
+        }
+        if ($request->dates) {
+            $dates = Query::bool()
+                ->should(Query::range()->field('shows.date')->gte($request->dates[0])->lte($request->dates[1]))
+                ->should(Query::term()->field('showtype')->value('a'))
+                ->minimumShouldMatch(1);
+        } else {
+            $dates = [];
+        }
 
-        $eventContent = tap($eventFilter->toArray(), function (array &$content) {
+        $query = Query::bool()
+            ->must( Query::range()->field('closingDate')->gte('now/d'))
+            ->must( Query::term()->field('hasLocation')->value(true))
+            ->when($request->price, function ($builder) use ($prices) { return $builder->must($prices); })
+            ->when($request->category, function ($builder) use ($categories) { return $builder->filter($categories); })
+            ->when($request->tag, function ($builder) use ($tags) { return $builder->filter($tags); })
+            ->when($request->dates, function ($builder) use ($dates) { return $builder->filter($dates); })
+            ->when($request->live, function ($builder) use ($boundary) { return $builder->filter($boundary); })
+            ->when(!$request->live, function ($builder) use ($lat) { return $builder->filter($lat); });
+
+        $builder = Event::searchQuery($query)
+            ->load(['genres', 'category'])
+            ->sortRaw(['published_at' => 'desc'])
+            ->paginate(20);
+
+        $eventContent = tap($builder->toArray(), function (array &$content) {
             $content['data'] = Arr::pluck($content['data'], 'model');
         });
 
@@ -147,31 +145,45 @@ class EventController extends Controller
     public function allSearch(Request $request)
     {
         $request = Search::convertUrl($request);
-
         $categories = Category::all();
         $tags = Genre::where('admin', 1)->orderBy('rank', 'desc')->get();
-
-        $searchRequest = Event::boolSearch()
-        ->must('range', ['closingDate' => [ 'gte' => 'now/d']])
-        ->when($request->price, function ($builder) use ($request) {
-            return $builder->must('range', ['priceranges.price' => [ 'gte' => $request->price[0],'lte' => $request->price[1]]]);
-        })
-        ->when($request->category, function ($builder) use ($request) {
-            return $builder->filter('terms', ['category_id' => $request->category]);
-        })
-        ->when($request->tag, function ($builder) use ($request) {
-            return $builder->filter('terms', ['genres.name' => $request->tag]);
-        })
-        ->when($request->dates, function ($builder) use ($request) {
-            return $builder->should('range', ['shows.date' => [ 'gte' => $request->dates[0],'lte' => $request->dates[1]]])
-                ->should('term', ['showtype' => 'a'])
+         if ($request->price) {
+            $priceQuery = Query::range()->field('priceranges.price')->gte($request->price[0])->lte($request->price[1]);
+        } else {
+            $priceQuery = [];
+        }
+        if ($request->tag) {
+            $tagQuery = Query::terms()->field('genres.name')->values($request->tag);
+        } else {
+            $tagQuery = [];
+        }
+        if ($request->category) {
+            $categoryQuery = Query::terms()->field('category_id')->values($request->category);
+        } else {
+            $categoryQuery = null;
+        }
+        if ($request->dates) {
+            $datesQuery = Query::bool()
+                ->should(Query::range()->field('shows.date')->gte($request->dates[0])->lte($request->dates[1]))
+                ->should(Query::term()->field('showtype')->value('a'))
                 ->minimumShouldMatch(1);
-        })
-        ->sortRaw(['published_at' => 'desc'])
-        ->load(['genres', 'category'])
-        ->paginate(12);
+        } else {
+            $datesQuery = [];
+        }
 
-        $content = tap($searchRequest->toArray(), function (array &$content) {
+        $query = Query::bool()
+            ->must( Query::range()->field('closingDate')->gte('now/d'))
+            ->when($request->price, function ($builder) use ($priceQuery) { return $builder->must($priceQuery); })
+            ->when($request->category, function ($builder) use ($categoryQuery) { return $builder->filter($categoryQuery); })
+            ->when($request->tag, function ($builder) use ($tagQuery) { return $builder->filter($tagQuery); })
+            ->when($request->dates, function ($builder) use ($datesQuery) { return $builder->filter($datesQuery); });
+
+        $builder = Event::searchQuery($query)
+            ->load(['genres', 'category'])
+            ->sortRaw(['published_at' => 'desc'])
+            ->paginate(12);
+
+        $content = tap($builder->toArray(), function (array &$content) {
             $content['data'] = Arr::pluck($content['data'], 'model');
         });
 
@@ -183,28 +195,43 @@ class EventController extends Controller
     public function fetch(Request $request)
     {
         $request = Search::convertUrl($request);
-
-        $events = Event::boolSearch()
-        ->must('range', ['closingDate' => [ 'gte' => 'now/d']])
-        ->when($request->price, function ($builder) use ($request) {
-            return $builder->must('range', ['priceranges.price' => [ 'gte' => $request->price[0],'lte' => $request->price[1]]]);
-        })
-        ->when($request->category, function ($builder) use ($request) {
-            return $builder->filter('terms', ['category_id' => $request->category]);
-        })
-        ->when($request->tag, function ($builder) use ($request) {
-            return $builder->filter('terms', ['genres.name' => $request->tag]);
-        })
-        ->when($request->dates, function ($builder) use ($request) {
-            return $builder->should('range', ['shows.date' => [ 'gte' => $request->dates[0],'lte' => $request->dates[1]]])
-                ->should('term', ['showtype' => 'a'])
+         if ($request->price) {
+            $priceQuery = Query::range()->field('priceranges.price')->gte($request->price[0])->lte($request->price[1]);
+        } else {
+            $priceQuery = [];
+        }
+        if ($request->tag) {
+            $tagQuery = Query::terms()->field('genres.name')->values($request->tag);
+        } else {
+            $tagQuery = [];
+        }
+        if ($request->category) {
+            $categoryQuery = Query::terms()->field('category_id')->values($request->category);
+        } else {
+            $categoryQuery = null;
+        }
+        if ($request->dates) {
+            $datesQuery = Query::bool()
+                ->should(Query::range()->field('shows.date')->gte($request->dates[0])->lte($request->dates[1]))
+                ->should(Query::term()->field('showtype')->value('a'))
                 ->minimumShouldMatch(1);
-        })
-        ->sortRaw(['published_at' => 'desc'])
-        ->load(['genres', 'category'])
-        ->paginate(12);
+        } else {
+            $datesQuery = [];
+        }
 
-        $content = tap($events->toArray(), function (array &$content) {
+        $query = Query::bool()
+            ->must( Query::range()->field('closingDate')->gte('now/d'))
+            ->when($request->price, function ($builder) use ($priceQuery) { return $builder->must($priceQuery); })
+            ->when($request->category, function ($builder) use ($categoryQuery) { return $builder->filter($categoryQuery); })
+            ->when($request->tag, function ($builder) use ($tagQuery) { return $builder->filter($tagQuery); })
+            ->when($request->dates, function ($builder) use ($datesQuery) { return $builder->filter($datesQuery); });
+
+        $builder = Event::searchQuery($query)
+            ->load(['genres', 'category'])
+            ->sortRaw(['published_at' => 'desc'])
+            ->paginate(12);
+     
+        $content = tap($builder->toArray(), function (array &$content) {
             $content['data'] = Arr::pluck($content['data'], 'model');
         });
 
@@ -214,101 +241,49 @@ class EventController extends Controller
     public function online(Request $request)
     {
         $request = Search::convertUrl($request);
-
-        $events = Event::boolSearch()
-        ->must('range', ['closingDate' => [ 'gte' => 'now/d']])
-        ->must('match', ['hasLocation' => false])
-        ->when($request->price, function ($builder) use ($request) {
-            return $builder->must('range', ['priceranges.price' => [ 'gte' => $request->price[0],'lte' => $request->price[1]]]);
-        })
-        ->when($request->category, function ($builder) use ($request) {
-            return $builder->filter('terms', ['category_id' => $request->category]);
-        })
-        ->when($request->tag, function ($builder) use ($request) {
-            return $builder->filter('terms', ['genres.name' => $request->tag]);
-        })
-        ->when($request->dates, function ($builder) use ($request) {
-            return $builder->should('range', ['shows.date' => [ 'gte' => $request->dates[0],'lte' => $request->dates[1]]])
-                ->should('term', ['showtype' => 'a'])
+         if ($request->price) {
+            $priceQuery = Query::range()->field('priceranges.price')->gte($request->price[0])->lte($request->price[1]);
+        } else {
+            $priceQuery = [];
+        }
+        if ($request->tag) {
+            $tagQuery = Query::terms()->field('genres.name')->values($request->tag);
+        } else {
+            $tagQuery = [];
+        }
+        if ($request->category) {
+            $categoryQuery = Query::terms()->field('category_id')->values($request->category);
+        } else {
+            $categoryQuery = null;
+        }
+        if ($request->dates) {
+            $datesQuery = Query::bool()
+                ->should(Query::range()->field('shows.date')->gte($request->dates[0])->lte($request->dates[1]))
+                ->should(Query::term()->field('showtype')->value('a'))
                 ->minimumShouldMatch(1);
-        })
-        ->sortRaw(['published_at' => 'desc'])
-        ->load(['genres', 'category'])
-        ->paginate(12);
+        } else {
+            $datesQuery = [];
+        }
 
-        $content = tap($events->toArray(), function (array &$content) {
+        $query = Query::bool()
+            ->must( Query::range()->field('closingDate')->gte('now/d'))
+            ->must( Query::term()->field('hasLocation')->value(false))
+            ->when($request->price, function ($builder) use ($priceQuery) { return $builder->must($priceQuery); })
+            ->when($request->category, function ($builder) use ($categoryQuery) { return $builder->filter($categoryQuery); })
+            ->when($request->tag, function ($builder) use ($tagQuery) { return $builder->filter($tagQuery); })
+            ->when($request->dates, function ($builder) use ($datesQuery) { return $builder->filter($datesQuery); });
+
+        $builder = Event::searchQuery($query)
+            ->load(['genres', 'category'])
+            ->sortRaw(['published_at' => 'desc'])
+            ->paginate(12);
+
+        $content = tap($builder->toArray(), function (array &$content) {
             $content['data'] = Arr::pluck($content['data'], 'model');
         });
 
         return json_encode($content);
     }
 
-    public function searchLocation(Request $request)
-    {
-        if ($request->keywords) {
-            $city = CityList::search($request->keywords)
-            ->rule(CityListSearchRule::class)
-            ->orderBy('rank', 'desc')
-            ->orderBy('population', 'desc')
-            ->get();
-        } else {
-            $city = CityList::search('*')
-            ->orderBy('rank', 'desc')
-            ->orderBy('population', 'desc')
-            ->take(10)
-            ->get();
-        }
-
-        if ($city->count()) {
-            return [
-                'data' => $city,
-            ];
-        }
-    }
-
-    public function list(Request $request)
-    {
-        if (! $request->keywords) return Event::where('status','p')->paginate(10);
-        
-        $events = Event::multiMatchSearch()
-            ->fields(['name', 'name._2gram','name._3gram'])
-            ->query($request->keywords)
-            ->type('bool_prefix')
-            ->sort('rank', 'desc')
-            ->paginate(10);
-
-        if ( $events->count() !== 0 ) {
-            $filter = tap($events->toArray(), function (array &$content) {
-                $content['data'] = Arr::pluck($content['data'], 'model');
-            });
-            return json_encode($filter);
-        } else {
-            return Event::Where('name', 'like', '%' . $request->keywords . '%')->paginate(10);
-        }
-
-    }
-
-    public function searchEvents(Request $request)
-    {
-        if ($request->keywords) {
-            $events = Event::search($request->keywords)
-                ->rule(EventSearchRule::class)
-                ->get();
-             if ($events->count()) {
-                return $events;  
-            }
-        }
-        return Event::where('status','p')->take(10)->get();
-    }
-
-    public function searchOrganizer(Request $request)
-    {
-        if($request->keywords) {
-            $organizers = Organizer::search($request->keywords)
-            ->rule(OrganizerSearchRule::class)
-            ->with(['user'])
-            ->get();
-            return $organizers;
-        };
-    }    
+  
 }

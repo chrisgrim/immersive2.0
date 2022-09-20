@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-use ElasticAdapter\Indices\Mapping;
-use ElasticAdapter\Indices\Settings;
-use ElasticMigrations\Facades\Index;
-use ElasticMigrations\MigrationInterface;
+use Elastic\Adapter\Indices\Mapping;
+use Elastic\Adapter\Indices\Settings;
+use Elastic\Migrations\Facades\Index;
+use Elastic\Migrations\MigrationInterface;
 
 final class CreateEventsIndex implements MigrationInterface
 {
@@ -14,7 +14,7 @@ final class CreateEventsIndex implements MigrationInterface
     public function up(): void
     {
         Index::create('events', function (Mapping $mapping, Settings $settings) {
-            $mapping->text('name', ['analyzer' => 'rebuilt_english']);
+            $mapping->search_as_you_type('name');
             $mapping->keyword('showtype');
             $mapping->keyword('status');
             $mapping->integer('rank');
@@ -27,34 +27,6 @@ final class CreateEventsIndex implements MigrationInterface
             $mapping->object('genres', ['properties' => ['name' => ['type' => 'keyword']]]);
             $mapping->date('closingDate', ['format' => 'yyyy-MM-dd HH:mm:ss']);
             $mapping->date('published_at', ['format' => 'yyyy-MM-dd HH:mm:ss']);
-            $settings->analysis([
-                'filter' => [
-                    'english_stop' => [
-                        'type' => 'stop',
-                        'stopwords' => '_english_' 
-                    ],
-                    'english_stemmer' => [
-                        'type' => 'stemmer',
-                        'language' => 'english'
-                    ],
-                    'english_possessive_stemmer' => [
-                        'type' => 'stemmer',
-                        'languange' => 'possessive_english'
-                    ]
-                ], 
-                'analyzer' => [
-                    'rebuilt_english' => [
-                        'type' => 'custom',
-                        'tokenizer' => 'standard',
-                        'filter' => [
-                            'english_stop',
-                            'lowercase',
-                            'english_stemmer',
-                            'english_possessive_stemmer'
-                        ]
-                    ]
-                ]
-            ]);
         });
     }
 

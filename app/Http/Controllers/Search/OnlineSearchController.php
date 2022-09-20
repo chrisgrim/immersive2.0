@@ -9,6 +9,7 @@ use App\Models\Genre;
 use App\Models\Category;
 use App\Models\EventRemoteSearchRule;
 use Illuminate\Http\Request;
+use Elastic\ScoutDriverPlus\Support\Query;
 use Illuminate\Support\Arr;
 
 class OnlineSearchController extends Controller
@@ -16,34 +17,46 @@ class OnlineSearchController extends Controller
     public function index(Request $request)
     {
         $request = Search::convertUrl($request);
-
+        if ($request->dates) {
+            $datesQuery = Query::bool()
+                ->should(Query::range()->field('shows.date')->gte($request->dates[0])->lte($request->dates[1]))
+                ->should(Query::term()->field('showtype')->value('a'))
+                ->minimumShouldMatch(1);
+        } else {
+            $datesQuery = [];
+        }
+        if ($request->price) {
+            $priceQuery = Query::range()->field('priceranges.price')->gte($request->price[0])->lte($request->price[1]);
+        } else {
+            $priceQuery = [];
+        }
+        if ($request->tag) {
+            $tagQuery = Query::terms()->field('genres.name')->values($request->tag);
+        } else {
+            $tagQuery = [];
+        }
+        if ($request->category) {
+            $categoryQuery = Query::terms()->field('category_id')->values($request->category);
+        } else {
+            $categoryQuery = null;
+        }
         $categories = Category::where('remote', 1)->get();
         $tags = Genre::where('admin', 1)->orderBy('rank', 'desc')->get();
 
-        $searchRequest = Event::boolSearch()
-        ->must('range', ['closingDate' => [ 'gte' => 'now/d']])
-        ->must('match', ['hasLocation' => false])
-        ->when($request->price, function ($builder) use ($request) {
-            return $builder->must('range', ['priceranges.price' => [ 'gte' => $request->price[0],'lte' => $request->price[1]]]);
-        })
-        ->when($request->category, function ($builder) use ($request) {
-            return $builder->filter('terms', ['category_id' => $request->category]);
-        })
-        ->when($request->tag, function ($builder) use ($request) {
-            return $builder->filter('terms', ['genres.name' => $request->tag]);
-        })
-        ->when($request->dates, function ($builder) use ($request) {
-            return $builder->should('range', ['shows.date' => [ 'gte' => $request->dates[0],'lte' => $request->dates[1]]])
-                ->should('term', ['showtype' => 'a'])
-                ->minimumShouldMatch(1);
-        })
-        ->sortRaw(['published_at' => 'desc'])
-        ->load(['genres', 'category'])
-        ->paginate(12);
+        $query = Query::bool()
+            ->must( Query::range()->field('closingDate')->gte('now/d'))
+            ->must( Query::term()->field('hasLocation')->value(false))
+            ->when($request->price, function ($builder) use ($priceQuery) { return $builder->must($priceQuery); })
+            ->when($request->category, function ($builder) use ($categoryQuery) { return $builder->filter($categoryQuery); })
+            ->when($request->tag, function ($builder) use ($tagQuery) { return $builder->filter($tagQuery); })
+            ->when($request->dates, function ($builder) use ($datesQuery) { return $builder->filter($datesQuery); });
 
+        $builder = Event::searchQuery($query)
+            ->load(['genres', 'category'])
+            ->sortRaw(['published_at' => 'desc'])
+            ->paginate(12);
 
-
-        $content = tap($searchRequest->toArray(), function (array &$content) {
+        $content = tap($builder->toArray(), function (array &$content) {
             $content['data'] = Arr::pluck($content['data'], 'model');
         });
 
@@ -55,29 +68,44 @@ class OnlineSearchController extends Controller
     public function fetch(Request $request)
     {
         $request = Search::convertUrl($request);
-
-        $events = Event::boolSearch()
-        ->must('range', ['closingDate' => [ 'gte' => 'now/d']])
-        ->must('match', ['hasLocation' => false])
-        ->when($request->price, function ($builder) use ($request) {
-            return $builder->must('range', ['priceranges.price' => [ 'gte' => $request->price[0],'lte' => $request->price[1]]]);
-        })
-        ->when($request->category, function ($builder) use ($request) {
-            return $builder->filter('terms', ['category_id' => $request->category]);
-        })
-        ->when($request->tag, function ($builder) use ($request) {
-            return $builder->filter('terms', ['genres.name' => $request->tag]);
-        })
-        ->when($request->dates, function ($builder) use ($request) {
-            return $builder->should('range', ['shows.date' => [ 'gte' => $request->dates[0],'lte' => $request->dates[1]]])
-                ->should('term', ['showtype' => 'a'])
+         if ($request->price) {
+            $priceQuery = Query::range()->field('priceranges.price')->gte($request->price[0])->lte($request->price[1]);
+        } else {
+            $priceQuery = [];
+        }
+        if ($request->tag) {
+            $tagQuery = Query::terms()->field('genres.name')->values($request->tag);
+        } else {
+            $tagQuery = [];
+        }
+        if ($request->category) {
+            $categoryQuery = Query::terms()->field('category_id')->values($request->category);
+        } else {
+            $categoryQuery = null;
+        }
+        if ($request->dates) {
+            $datesQuery = Query::bool()
+                ->should(Query::range()->field('shows.date')->gte($request->dates[0])->lte($request->dates[1]))
+                ->should(Query::term()->field('showtype')->value('a'))
                 ->minimumShouldMatch(1);
-        })
-        ->sortRaw(['published_at' => 'desc'])
-        ->load(['genres', 'category'])
-        ->paginate(12);
+        } else {
+            $datesQuery = [];
+        }
 
-        $content = tap($events->toArray(), function (array &$content) {
+        $query = Query::bool()
+            ->must( Query::range()->field('closingDate')->gte('now/d'))
+            ->must( Query::term()->field('hasLocation')->value(false))
+            ->when($request->price, function ($builder) use ($priceQuery) { return $builder->must($priceQuery); })
+            ->when($request->category, function ($builder) use ($categoryQuery) { return $builder->filter($categoryQuery); })
+            ->when($request->tag, function ($builder) use ($tagQuery) { return $builder->filter($tagQuery); })
+            ->when($request->dates, function ($builder) use ($datesQuery) { return $builder->filter($datesQuery); });
+
+        $builder = Event::searchQuery($query)
+            ->load(['genres', 'category'])
+            ->sortRaw(['published_at' => 'desc'])
+            ->paginate(12);
+
+        $content = tap($builder->toArray(), function (array &$content) {
             $content['data'] = Arr::pluck($content['data'], 'model');
         });
 

@@ -10,11 +10,22 @@
                     <v-select
                         v-model="searchInput"
                         :options="searchOptions"
+                        :get-option-label="searchInput => searchInput.model.name"
+                        :reduce="searchInput => searchInput.model"
                         placeholder="Select event"
                         label="name"
                         @search="debounce" 
                         @input="selectEvent"
-                        @search:focus="debounce" />
+                        @search:focus="debounce">
+                        <template #option="{ model }">
+                            <div class="flex p-3">
+                                <svg class="w-8 h-8 mr-4">
+                                    <use :xlink:href="`/storage/website-files/icons.svg#ri-map-pin-line`" />
+                                </svg>
+                                <p>{{ model.name }}</p>
+                            </div>
+                        </template>
+                    </v-select>
                 </div>
                 <div class="field">
                     <input 
@@ -132,9 +143,9 @@
                 }, 300); // delay
             },
             async generateSearchList (query) {
-                await axios.get('/api/search/events', { params: { keywords: query } })
+                await axios.get('/api/search/navbar/events', { params: { keywords: query } })
                 .then( res => {
-                    this.searchOptions = res.data.data;
+                    this.searchOptions = res.data;
                 })
             },
             selectEvent() {

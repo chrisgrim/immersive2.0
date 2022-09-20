@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-use ElasticAdapter\Indices\Mapping;
-use ElasticAdapter\Indices\Settings;
-use ElasticMigrations\Facades\Index;
-use ElasticMigrations\MigrationInterface;
+use Elastic\Adapter\Indices\Mapping;
+use Elastic\Adapter\Indices\Settings;
+use Elastic\Migrations\Facades\Index;
+use Elastic\Migrations\MigrationInterface;
 
 final class CreateShelvesIndex implements MigrationInterface
 {
@@ -14,36 +14,8 @@ final class CreateShelvesIndex implements MigrationInterface
     public function up(): void
     {
         Index::create('shelves', function (Mapping $mapping, Settings $settings) {
-            $mapping->text('name', ['analyzer' => 'rebuilt_english']);
+            $mapping->search_as_you_type('name');
             $mapping->integer('order');
-            $settings->analysis([
-                'filter' => [
-                    'english_stop' => [
-                        'type' => 'stop',
-                        'stopwords' => '_english_' 
-                    ],
-                    'english_stemmer' => [
-                        'type' => 'stemmer',
-                        'language' => 'english'
-                    ],
-                    'english_possessive_stemmer' => [
-                        'type' => 'stemmer',
-                        'languange' => 'possessive_english'
-                    ]
-                ], 
-                'analyzer' => [
-                    'rebuilt_english' => [
-                        'type' => 'custom',
-                        'tokenizer' => 'standard',
-                        'filter' => [
-                            'english_stop',
-                            'lowercase',
-                            'english_stemmer',
-                            'english_possessive_stemmer'
-                        ]
-                    ]
-                ]
-            ]);
         });
     }
 

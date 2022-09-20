@@ -35,5 +35,6 @@
 
           gtag('config', '{{Config::get('services.analytics.id')}}');
         </script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxpUKfSJMC4_3xwLU73AmH-jszjexoriw&libraries=places"></script>
 
 

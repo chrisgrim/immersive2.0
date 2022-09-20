@@ -9,7 +9,8 @@ use App\Models\Genre;
 use App\Models\User;
 use App\Models\Curated\Community;
 use Illuminate\Support\Arr;
-use ElasticScoutDriverPlus\Support\Query;
+use Elastic\ScoutDriverPlus\Support\Query;
+use App\Actions\Search\SearchActions;
 
 use Illuminate\Http\Request;
 
@@ -20,22 +21,17 @@ class SearchController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function organizers(Request $request)
+    public function organizers(Request $request, SearchActions $searchActions)
     {
-        if (! $request->keywords) return Organizer::with('user')->paginate(30);
+        $builder = Organizer::searchQuery($searchActions->nameSearch($request))
+            ->load(['user', 'users'])
+            ->paginate(30);
 
-        $organizer = Organizer::multiMatchSearch()
-        ->fields(['name', 'name._2gram','name._3gram'])
-        ->query($request->keywords)
-        ->type('bool_prefix')
-        ->load(['user', 'users'])
-        ->paginate(30);
-
-        $filter = tap($organizer->toArray(), function (array &$content) {
+        $filter = tap($builder->toArray(), function (array &$content) {
             $content['data'] = Arr::pluck($content['data'], 'model');
         });
 
-        return  json_encode($filter);
+        return json_encode($filter);
     }
 
     /**
@@ -44,7 +40,7 @@ class SearchController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function genres(Request $request)
+    public function genres(Request $request, SearchActions $searchActions)
     {
         if (! $request->keywords) return Genre::orderBy('name')->paginate(40);
 
@@ -61,19 +57,14 @@ class SearchController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function events(Request $request)
+    public function events(Request $request, SearchActions $searchActions)
     {
-        if (! $request->keywords) return Event::where('status','p')->with('user','clicks','category', 'location', 'remotelocations', 'shows')->paginate(10);
-
-        $events = Event::multiMatchSearch()
-            ->fields(['name', 'name._2gram','name._3gram'])
-            ->query($request->keywords)
-            ->type('bool_prefix')
+        $builder = Event::searchQuery($searchActions->nameSearch($request))
             ->sort('rank', 'desc')
             ->load(['user','clicks','category', 'location', 'remotelocations', 'organizer', 'shows'])
             ->paginate(10);
 
-        $filter = tap($events->toArray(), function (array &$content) {
+        $filter = tap($builder->toArray(), function (array &$content) {
             $content['data'] = Arr::pluck($content['data'], 'model');
         });
 
@@ -90,13 +81,15 @@ class SearchController extends Controller
     {
         if (! $request->keywords) return User::paginate(10);
 
-        $users = User::multiMatchSearch()
-            ->fields(['name', 'email'])
-            ->query($request->keywords)
+        $query = Query::multiMatch()
+            ->fields(['name', 'name._2gram','name._3gram', 'email', 'email._2gram', 'email._3gram'])
             ->type('bool_prefix')
+            ->query($request->keywords);
+
+        $builder = User::searchQuery($query)
             ->paginate(10);
 
-        $filter = tap($users->toArray(), function (array &$content) {
+        $filter = tap($builder->toArray(), function (array &$content) {
             $content['data'] = Arr::pluck($content['data'], 'model');
         });
 
@@ -109,7 +102,7 @@ class SearchController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function communities(Request $request)
+    public function communities(Request $request, SearchActions $searchActions)
     {
         if (! $request->keywords) return Community::with('curators', 'owner')->paginate(10);
         return Community::where('name', 'LIKE', "%$request->keywords%")->with('curators', 'owner')->paginate(10);

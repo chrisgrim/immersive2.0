@@ -5,8 +5,7 @@ namespace App\Models;
 use App\Models\Conversation;
 use App\Models\Genre;
 use App\Traits\Rateable;
-use Laravel\Scout\Searchable;
-use ElasticScoutDriverPlus\QueryDsl;
+use Elastic\ScoutDriverPlus\Searchable;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Events\EventRequest;
@@ -18,7 +17,6 @@ use App\Scopes\PublishedScope;
 
 class Event extends Model
 {
-    use QueryDsl;
     use Favoritable;
     use Rateable;
     use SoftDeletes;

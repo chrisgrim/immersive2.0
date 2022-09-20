@@ -131,7 +131,10 @@
             },
             onSearch(query) {
                 axios.get('/api/admin/users/search', { params: { keywords: query } })
-                .then( res => { this.users = res.data })
+                .then( res => { 
+                    console.log(res.data);
+                    this.users = res.data 
+                })
             },
             createList() {
                 this.searchUserOptions = this.userlist;

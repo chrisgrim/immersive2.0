@@ -340,7 +340,7 @@ export default {
                 return this.imageFile ? this.imageFile.file.size < 20971520 : true 
             },
             fileType() {
-                return this.imageFile ? ['image/jpeg','image/png','image/gif'].includes(this.imageFile.file.type) : true
+                return this.imageFile ? ['image/jpeg','image/png','image/gif', 'image/webp'].includes(this.imageFile.file.type) : true
             },
             imageSize() {
                 return this.imageFile ? this.imageFile.width > 400 && this.imageFile.height > 400 :  true

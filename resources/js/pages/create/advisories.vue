@@ -280,15 +280,16 @@
 			},
 
             updateAdvisoryFields(input) {
+                console.log(input);
                 if ((input !== null) && (typeof input === "object") && (input.id !== null)) {
                     this.advisories = _.pick(input, _.intersection( _.keys(this.advisories), _.keys(input) ));
                 }
                 if (this.advisories.wheelchairReady != null) {
                     this.advisories.wheelchairReady ? this.advisories.wheelchairReady = { name: 'Yes', type: true } : this.advisories.wheelchairReady = { name: 'No', type: false };
+                } else {
+                    this.advisories.wheelchairReady = { name: 'Yes', type: true }
                 }
-                if (this.advisories.sexual != null) {
-                    this.advisories.sexual ? this.advisories.sexual = { name: 'Yes', type: true } : this.advisories.sexual = { name: 'No', type: false };
-                }
+                this.advisories.sexual ? this.advisories.sexual = { name: 'Yes', type: true } : this.advisories.sexual = { name: 'No', type: false }
             },
 
             onLoad() {

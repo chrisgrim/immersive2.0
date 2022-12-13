@@ -228,7 +228,7 @@
                     embargoDate : this.event.embargo_date,
                     showtimes: true,
                     limited: true,
-                    timezone: this.event.timezone,
+                    timezone: this.event.timezone ? this.event.timezone : this.timezones[3],
                     resubmit: this.resubmit,
                     week: this.event.show_on_going ? this.event.show_on_going : this.initializeWeekObject(),
                     endDate: this.event.shows.map(a => a.date)[0],
@@ -298,7 +298,6 @@
         validations: {
             datesObject: {
                 showTimes: {
-                    required,
                     maxLength: maxLength(1000)
                 },
                 week: {

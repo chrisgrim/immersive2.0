@@ -30,8 +30,8 @@ class CategoryController extends Controller
     {
         if ($event->checkEventStatus(2)) return back();
         $event->load('shows');
-        $tags = Genre::where('admin', true)->orWhere('user_id', auth()->user()->id)->get();
-        $categories = Category::all();
+        $tags = Genre::where('admin', true)->orWhere('user_id', auth()->user()->id)->orderBy('name')->get();
+        $categories = Category::orderBy('name')->get(); 
         return view('create.category', compact('event','categories', 'tags'));
     }
 

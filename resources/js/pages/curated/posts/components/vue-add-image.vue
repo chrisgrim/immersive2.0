@@ -107,7 +107,7 @@
                     return this.imageFile ? this.imageFile.file.size < this.size : true 
                 },
                 fileType() {
-                    return this.imageFile ? ['image/jpeg','image/png','image/gif'].includes(this.imageFile.file.type) : true
+                    return this.imageFile ? ['image/jpeg','image/png','image/gif', 'image/webp'].includes(this.imageFile.file.type) : true
                 },
                 imageRatio() {
                     return this.imageFile ? this.imageFile.width >= this.width && this.imageFile.height >= this.height : true 

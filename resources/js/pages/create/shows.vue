@@ -171,6 +171,7 @@ export default {
 
     mounted() {
         this.onLoad();
+        console.log(Intl.DateTimeFormat().resolvedOptions().timeZone)
         this.disabled = false;
     },
 }  

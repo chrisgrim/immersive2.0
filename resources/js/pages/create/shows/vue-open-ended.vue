@@ -228,7 +228,7 @@
                     week:  this.event.show_on_going ? this.event.show_on_going : this.initializeWeekObject(),
                     onGoing: true,
                     startDate: this.event.shows.map(a => a.date)[this.event.shows.map(a => a.date).length - 1],
-                    timezone: this.event.timezone,
+                    timezone: this.event.timezone ? this.event.timezone : this.timezones[3],
                     resubmit: this.resubmit,
                 }
             },
@@ -283,7 +283,6 @@
         validations: {
             datesObject: {
                 showTimes: {
-                    required,
                     maxLength: maxLength(1000)
                 },
                 week: {

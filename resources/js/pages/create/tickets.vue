@@ -6,7 +6,7 @@
                     <h2>Pricing & Access</h2>
                 </div>
                 <section 
-                    v-if="event.show_times" 
+                    v-if="event.timezone_id" 
                     class="event-enter-tickets">
                     <div class="field cost">
                         <div class="event-tickets__add">

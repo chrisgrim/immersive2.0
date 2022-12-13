@@ -181,7 +181,7 @@
                     showTimes: this.event.show_times,
                     embargoDate : this.event.embargo_date,
                     shows: true,
-                    timezone: this.event.timezone,
+                    timezone: this.event.timezone ? this.event.timezone : this.timezones[3],
                     resubmit: this.resubmit,
                 }
             },
@@ -229,7 +229,6 @@
         validations: {
             datesObject: {
                 showTimes: {
-                    required,
                     maxLength: maxLength(1000)
                 },
                 dates: {

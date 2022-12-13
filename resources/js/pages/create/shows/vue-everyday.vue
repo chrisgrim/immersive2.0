@@ -169,7 +169,6 @@
         validations: {
             datesObject: {
                 showTimes: {
-                    required,
                     maxLength: maxLength(1000)
                 },
             },

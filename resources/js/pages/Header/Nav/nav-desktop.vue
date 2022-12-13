@@ -1,10 +1,10 @@
 <template>
     <nav 
         ref="navdrop"
-        :class="[ searchType ? 'open' : '', fullwidth ? 'fixed max-w-none px-8' : 'relative']"
+        :class="[ search.searchType ? 'open' : '', fullwidth ? 'fixed max-w-none px-8' : 'relative']"
         class="nav w-full m-auto h-32 z-[1001]">
         <div 
-            :class="{ 'open' : searchType, 'md:px-0 lg:px-0' : fullwidth, 'max-w-screen-xl px-32' : narrow, }"
+            :class="{ 'open' : search.searchType, 'md:px-0 lg:px-0' : fullwidth, 'max-w-screen-xl px-32' : narrow, }"
             class="nav_bar m-auto relative h-full grid gap-0 items-center grid-cols-3 md:px-12 lg:px-32">
             <!--  -->
             <!-- Home Button Section -->
@@ -26,23 +26,23 @@
             <div class="w-full inline-block relative min-w-[22rem]">
                 <!--  -->
                 <!-- If user clicks search bar -->
-                <template v-if="searchType">
+                <template v-if="search.searchType">
                     <div class="w-full flex justify-center items-center">
                         <button 
-                            @click="searchType='l'"
-                            :class="{ active : searchType==='l'}"
+                            @click="search.searchType='l'"
+                            :class="{ active : search.searchType==='l'}"
                             class="tab relative border-none p-4 text-1xl hover:text-black hover:font-medium">
                             Locations
                         </button>
                         <button 
-                            @click="searchType='t'"
-                            :class="{ active : searchType==='t'}"
+                            @click="search.searchType='t'"
+                            :class="{ active : search.searchType==='t'}"
                             class="tab relative border-none p-4 text-1xl hover:text-black hover:font-medium">
                             Categories/Tags
                         </button>
                         <button 
-                            @click="searchType='e'"
-                            :class="{ active : searchType==='e'}"
+                            @click="search.searchType='e'"
+                            :class="{ active : search.searchType==='e'}"
                             class="tab relative border-none p-4 text-1xl hover:text-black hover:font-medium">
                             Listings
                         </button>
@@ -57,7 +57,7 @@
                             VR 
                         </a>
                     </div>
-                    <SearchBar :searchType="searchType" />
+                    <SearchBar v-model="search" />
                 </template>
                 <template v-else>
                     <div
@@ -77,6 +77,9 @@
             <!-- Menu Section -->
             <NavMenu :user="user" />
         </div>
+        <div 
+            v-if="search.dropdown"
+            class="fixed top-0 left-0 w-full h-full bg-[#00000026] z-[-10]" />
     </nav>
 </template>
 
@@ -92,22 +95,25 @@
 
         data() {
             return {
-                searchType: null,
-                city: new URL(window.location.href).searchParams.get("city")
+                search: {
+                    searchType: null,
+                    dropdown: false,
+                },
+                city: new URL(window.location.href).searchParams.get("city"),
             };
         },
 
         methods: {
             openSearch() {
-                this.searchType = 'l'
+                this.search.searchType = 'l'
             },
             onClickOutside(event) {
                 let arr =  this.$refs.navdrop;
                 if (!arr || arr.contains(event.target)) return;
-                this.searchType = null;
+                this.search.searchType = null;
             },
             handleScroll () {
-                this.searchType = null;
+                this.search.searchType = null;
             },
         },
 

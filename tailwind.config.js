@@ -32,6 +32,7 @@ module.exports = {
                 'custom-4': '0 2px 0 0 rgb(0 0 0 / 10%), 0 0 0 0.5px rgb(0 0 0 / 4%)',
                 'custom-5': '2px 3px 5px #f3f3f3',
                 'custom-6': '0px 6px 16px rgb(0 0 0 / 12%)',
+                'custom-7':' 0px 5px 16px 2px rgb(0 0 0 / 18%)',
             },
             colors: {
                 'button-red-1': '#e61e4d',

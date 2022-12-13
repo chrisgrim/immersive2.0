@@ -6,9 +6,15 @@
                     <use :xlink:href="`/storage/website-files/icons.svg#ri-search-line`" />
                 </svg>
             </div>
-            <SearchLocation v-if="searchType==='l'" />
-            <SearchEvents v-if="searchType==='e'" />
-            <SearchTags v-if="searchType==='t'" />
+            <SearchLocation 
+                v-if="value.searchType==='l'" 
+                v-model="value" />
+            <SearchEvents 
+                v-if="value.searchType==='e'" 
+                v-model="value" />
+            <SearchTags 
+                v-if="value.searchType==='t'" 
+                v-model="value" />
         </div>
     </div>
 </template>
@@ -19,7 +25,7 @@ import SearchEvents from './Components/events.vue'
 import SearchTags from './Components/tags.vue'
 export default {
 
-    props: ['searchType'],
+    props: ['value'],
 
     components: { SearchLocation, SearchEvents, SearchTags },
 

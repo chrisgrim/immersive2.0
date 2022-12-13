@@ -342,6 +342,9 @@ export default {
                         errors: this.initializeErrorObject()
                     })
                 }
+                if (!this.tickets.length) {
+                    this.pushTicket({ name: 'General', ticket_price: '', description: '', type:this.initializeTypeObject()})
+                }
                 res.data.ticketUrl ? this.ticketUrl = res.data.ticketUrl : '';
             });
         },
@@ -488,36 +491,5 @@ export default {
             }
         }
     },
-
-    // validations: {
-    //     callAction: {
-    //         required
-    //     },
-    //     ticketUrl: {
-    //        url,
-    //        required,
-    //     },
-    //     tickets: {
-    //         required,
-    //         $each: {
-    //             name: {
-    //                 required,
-    //                 maxLength: maxLength(30),
-    //             },
-    //             type: {
-    //                 type: {
-    //                     required
-    //                 }
-    //             },
-    //             ticket_price: {
-    //                 required,
-    //                 maxLength: maxLength(7),
-    //             },
-    //             description: {
-    //                maxLength: maxLength(60),
-    //             },
-    //         }
-    //     },
-    // }
 }  
 </script>

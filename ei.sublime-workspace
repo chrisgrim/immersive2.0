@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"cl",
+				"clickOutsideEvent"
+			],
+			[
+				"on",
+				"onClickAway"
+			],
+			[
+				"bg",
+				"bg-gray-300"
+			],
+			[
 				"sea",
 				"searchInput"
 			],
@@ -500,20 +512,8 @@
 				"community"
 			],
 			[
-				"on",
-				"onAdd"
-			],
-			[
 				"Sh",
 				"ShowMore"
-			],
-			[
-				"space",
-				"space-between\tjustify-content"
-			],
-			[
-				"desc",
-				"description"
 			]
 		]
 	},
@@ -529,31 +529,41 @@
 			}
 		},
 		{
-			"contents": "Searching 415 files for \"search/events\" (regex)\n\n/Users/chrisgrim/code/ei/resources/js/pages/Curated/Posts/Cards/block-event.vue:\n  135:                 await axios.get('/api/search/events', { params: { keywords: query } })\n\n/Users/chrisgrim/code/ei/resources/js/pages/Curated/Posts/Components/post-sidebar.vue:\n  191:                 await axios.get('/api/search/events', { params: { keywords: query } })\n\n2 matches across 2 files\n",
+			"file": "resources/js/pages/Header/Nav/nav-desktop.vue",
 			"settings":
 			{
-				"buffer_size": 432,
+				"buffer_size": 5430,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "resources/js/pages/Header/Nav/Nav-Desktop/nav-desktop-search.vue",
+			"settings":
+			{
+				"buffer_size": 1139,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "resources/js/pages/Header/Nav/Nav-Desktop/Components/location-google.vue",
+			"settings":
+			{
+				"buffer_size": 3745,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "Package Control Messages\n========================\n\nSublimeLinter\n-------------\n\n                ^ ^\n  SublimeLinter 4.20.0\n\n\n  Holy, finally, I mean: f i n a l l y, we have annotation and inline phantoms[*].\n\n  -- By default, nothing changes, you have to opt-in.\n\n  Here's how it goes as it is a bit tricky and also sophisticated:\n\n  ++ Everything is configured within the `styles` section in the global\n     SublimeLinter settings. For that to work, the style definitions accept two\n     new keys, namely `annotation` and `phantom`.\n\n     These are template strings, therefore e.g. \"{code}\", \"{msg}\", \"{linter}\"\n     are typical values used here.\n     Use \"\" (the default) to turn this feature off.\n\n\n  Because this is implemented as \"style\" of an error, you can adjust and\n  fine-tune the feature for each linter separately. (°°)\n\n  This is extremely important to reduce clutter and noise where possible.\n  Because, believe me, this can lead to clutter and noise.\n\n  For example, while writing, you often produce intermittent syntax errors.\n  But that is natural for writing and shouldn't produce too much visual\n  distraction. You can for example define\n\n      \"mypy\": {\n          \"styles\": [\n              {\n                  \"codes\": [\"syntax\"],  # mypy's rule/code for syntax errors\n                  \"icon\": \"cog\",\n                  \"phantom\": \"\",        # no inline phantoms\n                  \"annotation\": \"💣\",   # an icon on the right side\n              },\n              {\n                  \"phantom\": \"{msg}\",   # for all other reported problems\n              }\n          ],\n      },\n\n  to mitigate this effect.\n\n  E.g. for \"annotations\", everything is already pretty much in the code. You\n  could try:\n\n      \"annotations\": {\n          \"styles\": [\n              {\n                  \"types\": [\"error\"],\n                  \"scope\": \"region.redish\",\n                  \"annotation\": \"!\"\n              },\n              {\n                  \"annotation\": \"\",\n                  \"phantom\": \"\"\n              },\n          ]\n      },\n\n\n  Especially phantoms are both annoying and the best thing since sliced bread.\n  So we only show them for \"errors\" (not for \"warnings\" etc) as long as there\n  are any errors and only then also for warnings and other types.  Yeah, that\n  should probably be pluggable but then I would never release anything.\n\n  To quickly toggle the phantoms you can use our `sublime_linter_toggle_highlights`\n  command.  By default it toggles both the squiggles and the inline phantoms but: --\n\n      { \"keys\": [\"ctrl+k\", \"ctrl+k\"],\n        \"command\": \"sublime_linter_toggle_highlights\",\n        \"args\": {\"what\": [\"phantoms\"]}  // or \"squiggles\"\n      },\n\n  -- this is already pluggable.\n\n\n  Sincerely,\n  ❤️\n\n\n  And yes, I do drink coffee:  https://paypal.me/herrkaste\n\n  [*] Annotations are small text fields on the right hand side of the view at\n      the same line of an error.  Because of that they usually have not much\n      space to show anything.\n      Phantoms appear right below the error and use the full width of the view.\n      They make clear what an error is about, have lots of space but - if you\n      have lots of them in a small section - the actual code might get too\n      interspersed.",
+			"settings":
+			{
+				"buffer_size": 3225,
 				"line_ending": "Unix",
-				"name": "Find Results",
+				"name": "Package Control Messages",
+				"read_only": true,
 				"scratch": true
-			}
-		},
-		{
-			"file": "resources/js/pages/Curated/Posts/Components/post-sidebar.vue",
-			"settings":
-			{
-				"buffer_size": 10623,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "resources/js/pages/Curated/Posts/Cards/block-event.vue",
-			"settings":
-			{
-				"buffer_size": 6454,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
 			}
 		}
 	],
@@ -693,26 +703,32 @@
 	"expanded_folders":
 	[
 		"/Users/chrisgrim/code/ei",
-		"/Users/chrisgrim/code/ei/app",
-		"/Users/chrisgrim/code/ei/app/Http",
-		"/Users/chrisgrim/code/ei/app/Http/Controllers",
-		"/Users/chrisgrim/code/ei/app/Http/Controllers/Search",
 		"/Users/chrisgrim/code/ei/resources",
 		"/Users/chrisgrim/code/ei/resources/js",
+		"/Users/chrisgrim/code/ei/resources/js/Directives",
 		"/Users/chrisgrim/code/ei/resources/js/pages",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Admin",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Admin/Events",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Header",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Header/Nav",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Header/Nav/Nav-Desktop",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Header/Nav/Nav-Desktop/Components",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Search",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Search/Location",
 		"/Users/chrisgrim/code/ei/resources/views"
 	],
 	"file_history":
 	[
+		"/Users/chrisgrim/code/ei/tailwind.js",
+		"/Users/chrisgrim/code/ei/tailwind.config.js",
+		"/Users/chrisgrim/code/ei/public/assets/app.css",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Search/Location/vue-location-mobile-nav.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Search/Online/vue-mobile-search-options.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Admin/admin-dashboard.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Admin/Creation/Components/remote-location-component.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Admin/Events/admin-events-index.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Curated/Posts/Components/post-sidebar.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Curated/Posts/Cards/block-event.vue",
 		"/Users/chrisgrim/code/ei/app/Http/Controllers/Search/SearchController.php",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Header/Nav/Nav-Desktop/Components/events.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Curated/Posts/Cards/block-event.vue",
 		"/Users/chrisgrim/code/ei/app/Http/Controllers/Admin/SearchController.php",
 		"/Users/chrisgrim/code/ei/elastic/migrations/2020_11_23_233052_create_organizers_index.php",
 		"/Users/chrisgrim/code/ei/elastic/migrations/2020_11_23_051941_create_city_index.php",
@@ -759,7 +775,6 @@
 		"/Users/chrisgrim/code/ei/sftp-config.json",
 		"/Users/chrisgrim/code/ei/resources/js/pages/create/location-google.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Curated/Posts/edit.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Curated/Posts/Components/post-sidebar.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Home/Sections/hero-section.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Curated/Posts/Components/vue-add-image.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Home/Sections/Components/vue-album-image.vue",
@@ -829,15 +844,7 @@
 		"/Users/chrisgrim/code/ei/resources/js/pages/Organizers/organizer-show.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Messages/message-show.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Messages/Components/modmessage-index-tab.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Messages/Components/message-index-tab.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Home/Sections/staffpicks.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Home/Sections/spotlight-section.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Header/Nav/Nav-Mobile/nav-mobile-profile.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Header/Nav/Nav-Desktop/nav-desktop-profile.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Events/Show/event-show-staffpick.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Events/Show/event-show-header.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Events/Show/event-show-about.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Events/event-edit.vue"
+		"/Users/chrisgrim/code/ei/resources/js/pages/Messages/Components/message-index-tab.vue"
 	],
 	"find":
 	{
@@ -848,6 +855,8 @@
 		"height": 164.0,
 		"where_history":
 		[
+			"/Users/chrisgrim/code/ei",
+			"/Users/chrisgrim/code/ei/resources/js/pages",
 			"/Users/chrisgrim/code/ei/resources",
 			"/Users/chrisgrim/code/ei/routes",
 			"/Users/chrisgrim/code/ei/app/Http",
@@ -973,9 +982,7 @@
 			"/Users/chrisgrim/code/ei",
 			"/Users/chrisgrim/code/ei/app",
 			"/Users/chrisgrim/code/ei/node_modules/leaflet",
-			"/Users/chrisgrim/code/ei",
-			"/Users/chrisgrim/code/ei/resources/sass",
-			"/Users/chrisgrim/code/ei/resources/js/pages"
+			"/Users/chrisgrim/code/ei"
 		]
 	},
 	"find_state":
@@ -983,6 +990,19 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"custom-2",
+			"shadow-custom-2",
+			"slate",
+			"dropdown",
+			"computed",
+			"val",
+			"setval",
+			"searchType",
+			"absolute",
+			"dropdown",
+			"minimist",
+			"minin",
+			"min",
 			"search/events",
 			"list",
 			"fetch",
@@ -1097,20 +1117,7 @@
 			"deleteCard",
 			"can",
 			"imageRequired",
-			"required",
-			"src",
-			"hideImage",
-			"deletePreviousImages",
-			"replace",
-			"hideImage",
-			"addImageSubmit",
-			"card",
-			"onEdit",
-			"hasImage",
-			"shelfContainter",
-			"fetchShelves",
-			"shelf",
-			"shelvesWithPosts"
+			"required"
 		],
 		"highlight": false,
 		"in_selection": false,
@@ -1128,7 +1135,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 4,
 			"sheets":
 			[
 				{
@@ -1144,8 +1151,8 @@
 						"selection":
 						[
 							[
-								839,
-								853
+								797,
+								811
 							]
 						],
 						"settings":
@@ -1154,62 +1161,84 @@
 							"remote_loading": false,
 							"synced": false,
 							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"tabs_extra_last_activated": 1662508784.33,
+							"tabs_extra_last_activated": 1664304511.66,
 							"tabs_extra_last_activated_sheet_index": 0
 						},
 						"translation.x": 0.0,
-						"translation.y": 333.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "resources/js/pages/Header/Nav/nav-desktop.vue",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5430,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4517,
+								4522
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Vuejs Complete Package/vue.tmLanguage",
+							"tabs_extra_last_activated": 1666760707.84,
+							"tabs_extra_last_activated_sheet_index": 1,
+							"tabs_extra_moving":
+							[
+								3,
+								0
+							]
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 3,
 					"type": "text"
 				},
 				{
-					"buffer": 1,
+					"buffer": 2,
+					"file": "resources/js/pages/Header/Nav/Nav-Desktop/nav-desktop-search.vue",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 432,
+						"buffer_size": 1139,
 						"regions":
 						{
-							"match":
-							{
-								"flags": 112,
-								"regions":
-								[
-									[
-										175,
-										188
-									],
-									[
-										357,
-										370
-									]
-								],
-								"scope": ""
-							}
 						},
 						"selection":
 						[
 							[
-								269,
-								269
+								748,
+								748
 							]
 						],
 						"settings":
 						{
-							"detect_indentation": false,
 							"incomplete_sync": null,
-							"line_numbers": false,
-							"output_tag": 1,
-							"result_base_dir": "",
-							"result_file_regex": "^([^ \t].*):$",
-							"result_line_regex": "^ +([0-9]+):",
-							"scroll_past_end": true,
-							"syntax": "Packages/Default/Find Results.hidden-tmLanguage",
-							"tabs_extra_last_activated": 1662508915.06,
-							"tabs_extra_last_activated_sheet_index": 1,
-							"translate_tabs_to_spaces": false
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Vuejs Complete Package/vue.tmLanguage",
+							"tabs_extra_last_activated": 1666760754.56,
+							"tabs_extra_last_activated_sheet_index": 2,
+							"tabs_extra_moving":
+							[
+								3,
+								0
+							]
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -1219,53 +1248,20 @@
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "resources/js/pages/Curated/Posts/Components/post-sidebar.vue",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 10623,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								9517,
-								9517
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Vuejs Complete Package/vue.tmLanguage",
-							"tabs_extra_last_activated": 1663388910.49,
-							"tabs_extra_last_activated_sheet_index": 2
-						},
-						"translation.x": 0.0,
-						"translation.y": 4398.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
 					"buffer": 3,
-					"file": "resources/js/pages/Curated/Posts/Cards/block-event.vue",
+					"file": "resources/js/pages/Header/Nav/Nav-Desktop/Components/location-google.vue",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 6454,
+						"buffer_size": 3745,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5785,
-								5785
+								2107,
+								2107
 							]
 						],
 						"settings":
@@ -1274,14 +1270,47 @@
 							"remote_loading": false,
 							"synced": false,
 							"syntax": "Packages/Vuejs Complete Package/vue.tmLanguage",
-							"tabs_extra_last_activated": 1662508984.88,
+							"tabs_extra_last_activated": 1666932053.59,
 							"tabs_extra_last_activated_sheet_index": 3
 						},
 						"translation.x": 0.0,
-						"translation.y": 2977.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3225,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3225,
+								3225
+							]
+						],
+						"settings":
+						{
+							"auto_indent": false,
+							"incomplete_sync": null,
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_width": 2,
+							"tabs_extra_last_activated": 1666935328.17,
+							"tabs_extra_last_activated_sheet_index": 4,
+							"word_wrap": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
 					"type": "text"
 				}
 			]
@@ -1900,7 +1929,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 401.0,
+	"side_bar_width": 325.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

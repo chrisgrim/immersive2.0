@@ -3,8 +3,8 @@
 @section('meta')
     <title>{{config('app.name')}}</title>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxpUKfSJMC4_3xwLU73AmH-jszjexoriw&libraries=places"></script>
-    <link href="{{ mix('/assets/app.css') }}" rel="stylesheet">
-    <link href="{{ mix('/assets/app-lite.css') }}" rel="stylesheet">
+    <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
+    <link href="{{ mix('/css/app-lite.css') }}" rel="stylesheet">
 @endsection
 
 @section('nav')

@@ -49,7 +49,7 @@
                                         rel="noreferrer" 
                                         target="_blank" 
                                         :href="`http://maps.google.com/maps?q=${location.home?location.home:''}+${location.street?location.street:''},+${location.city?location.city:''},+${location.region?location.region:''}`">
-                                        <img src="/images/vendor/leaflet/dist/marker-icon-2x.png" alt="location marker">
+                                        <img src="/storage/images/vendor/leaflet/dist/marker-icon-2x.png" alt="location marker">
                                     </a>
                                 </l-icon>
                             </l-marker>
@@ -94,7 +94,7 @@
                 zoom:13,
                 center: this.event.location_latlon,
                 icon: L.icon({
-                    iconUrl: '/images/vendor/leaflet/dist/marker-icon.png',
+                    iconUrl: '/storage/images/vendor/leaflet/dist/marker-icon.png',
                     iconSize: [32, 37],
                     iconAnchor: [16, 37]
                 }),

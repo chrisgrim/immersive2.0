@@ -111,7 +111,7 @@
             return {
                 map: this.initializeMapObject(),
                 icon: L.icon({
-                    iconUrl: '/images/vendor/leaflet/dist/marker-icon.png',
+                    iconUrl: '/storage/images/vendor/leaflet/dist/marker-icon.png',
                     iconSize: [32, 37],
                     iconAnchor: [16, 37]
                 }),

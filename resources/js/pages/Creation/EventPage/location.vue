@@ -16,7 +16,7 @@
                     <div class="max-w-3xl w-full m-auto">
                         <img 
                             class="absolute z-[1002] w-8 mt-7 ml-8" 
-                            src="/images/vendor/leaflet/dist/marker-icon-2x.png">
+                            src="/storage/images/vendor/leaflet/dist/marker-icon-2x.png">
                         <input 
                             class="relative rounded-full p-10 pl-24 shadow-custom-6 w-full font-medium z-[1001] focus:rounded-3xl focus:shadow-none"
                             v-model="userInput"
@@ -37,7 +37,7 @@
                             @click="selectLocation(place)">
                             <img 
                                 class="w-8" 
-                                src="/images/vendor/leaflet/dist/marker-icon-2x.png">
+                                src="/storage/images/vendor/leaflet/dist/marker-icon-2x.png">
                             {{place.description}}
                         </li>
                     </ul>
@@ -93,7 +93,7 @@
                         <l-icon
                             :iconSize="[25, 40]"
                             :iconAnchor="[0,40]">
-                            <img src="/images/vendor/leaflet/dist/marker-icon-2x.png" alt="">
+                            <img src="/storage/images/vendor/leaflet/dist/marker-icon-2x.png" alt="">
                         </l-icon>
                     </l-marker>
                 </l-map> 
@@ -128,7 +128,7 @@
             return {
                 map: this.initializeMapObject(),
                 icon: L.icon({
-                    iconUrl: '/images/vendor/leaflet/dist/marker-icon.png',
+                    iconUrl: '/storage/images/vendor/leaflet/dist/marker-icon.png',
                     iconSize: [32, 37],
                     iconAnchor: [16, 37]
                 }),

@@ -34,7 +34,7 @@
 <script>
     import NavIdea  from './Idea/nav-idea.vue'
     import NavGuidelines  from './Guidelines/nav-guidelines.vue'
-    import NavEventPage from './Eventpage/nav-eventpage.vue'
+    import NavEventPage from './EventPage/nav-eventpage.vue'
     import NavSettings from './Settings/nav-settings.vue'
     export default {
 

@@ -1,8 +1,8 @@
 @extends('layouts.master')
 
 @section('meta')
-    <link href="{{ mix('/assets/app.css') }}" rel="stylesheet" onload="this.media='all'; this.onload=null;">
-    <link href="{{ mix('/assets/app-lite.css') }}" rel="stylesheet" onload="this.media='all'; this.onload=null;">
+    <link href="{{ mix('/css/app.css') }}" rel="stylesheet" onload="this.media='all'; this.onload=null;">
+    <link href="{{ mix('/css/app-lite.css') }}" rel="stylesheet" onload="this.media='all'; this.onload=null;">
 @endsection
 
 @section('nav')

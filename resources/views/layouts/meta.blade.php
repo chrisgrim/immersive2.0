@@ -10,9 +10,9 @@
         <meta name="msapplication-TileColor" content="#da532c">
         <meta name="theme-color" content="#f7653b">
         @yield('head')
-        <script src="{{ mix('/assets/manifest.js') }}" defer></script>
-        <script src="{{ mix('/assets/vendor.js') }}" defer></script>
-        <script src="{{ mix('/assets/app.js') }}" defer></script>
+        <script src="{{ mix('/js/manifest.js') }}" defer></script>
+        <script src="{{ mix('/js/vendor.js') }}" defer></script>
+        <script src="{{ mix('/js/app.js') }}" defer></script>
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link
             rel="preload"

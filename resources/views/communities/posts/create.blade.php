@@ -2,9 +2,9 @@
 
 @section('meta')
     <title>{{config('app.name')}}</title>
-    <link href="{{ mix('/assets/app-create.css') }}" rel="stylesheet">
-    <link href="{{ mix('/assets/app-lite.css') }}" rel="stylesheet">
-    <link href="{{ mix('/assets/app.css') }}" rel="stylesheet">
+    <link href="{{ mix('/css/app-create.css') }}" rel="stylesheet">
+    <link href="{{ mix('/css/app-lite.css') }}" rel="stylesheet">
+    <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
 @endsection 
 
 @section('nav')

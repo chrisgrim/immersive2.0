@@ -4,7 +4,7 @@
             <div class="w-full m-auto">
                 <img 
                     class="absolute z-[1002] w-6 mt-5 ml-8" 
-                    src="/images/vendor/leaflet/dist/marker-icon-2x.png">
+                    src="/storage/images/vendor/leaflet/dist/marker-icon-2x.png">
                 <input 
                     ref="loc"
                     class="relative rounded-full p-7 pl-24 border border-neutral-300 w-full font-normal z-[1001] focus:border-none focus:rounded-full focus:shadow-custom-7"
@@ -27,7 +27,7 @@
                     @click="selectLocation(place)">
                     <img 
                         class="w-8" 
-                        src="/images/vendor/leaflet/dist/marker-icon-2x.png">
+                        src="/storage/images/vendor/leaflet/dist/marker-icon-2x.png">
                     {{place.description}}
                 </li>
             </ul>

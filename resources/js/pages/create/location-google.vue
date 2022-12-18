@@ -157,7 +157,7 @@
                                 <l-icon
                                     :iconSize="[25, 40]"
                                     :iconAnchor="[0,40]">
-                                    <img src="/images/vendor/leaflet/dist/marker-icon-2x.png" alt="">
+                                    <img src="/storage/images/vendor/leaflet/dist/marker-icon-2x.png" alt="">
                                 </l-icon>
                             </l-marker>
                         </l-map>
@@ -237,7 +237,7 @@
                 updated: false,
                 creationPage: 2,
                 icon: L.icon({
-                    iconUrl: '/images/vendor/leaflet/dist/marker-icon.png',
+                    iconUrl: '/storage/images/vendor/leaflet/dist/marker-icon.png',
                     iconSize: [32, 37],
                     iconAnchor: [16, 37]
                 }),

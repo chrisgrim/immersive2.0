@@ -5,10 +5,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>Laravel</title>
-            <link href="{{ mix('/assets/app.css') }}" rel="stylesheet" media="print" onload="this.media='all'; this.onload=null;">
-        <script src="{{ mix('assets/testapp.js') }}" defer></script>
-        <script src="{{ mix('/assets/manifest.js') }}" defer></script>
-        <script src="{{ mix('/assets/vendor.js') }}" defer></script>
+            <link href="{{ mix('/css/app.css') }}" rel="stylesheet" media="print" onload="this.media='all'; this.onload=null;">
+        <script src="{{ mix('/js/testapp.js') }}" defer></script>
+        <script src="{{ mix('/js/manifest.js') }}" defer></script>
+        <script src="{{ mix('/js/vendor.js') }}" defer></script>
 
     </head>
     <body class="antialiased">

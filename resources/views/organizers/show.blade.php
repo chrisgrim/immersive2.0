@@ -27,8 +27,8 @@
     <title>{{$organizer->name}}</title>
     <script type="application/ld+json">{"@context":"http://schema.org", "@type":"Organization", "description": "{{$organizer->description}}", "name": "{{$organizer->name}}{{'- ' . \Illuminate\Support\Str::limit($organizer->description, 80)}}", "sameAs": @json($organizer->getHandles()), @if ($organizer->website) "url":"{{$organizer->website}}", @else "url":"{{url('/')}}/organizer/{{$organizer->slug}}", @endif @if ($organizer->largeImagePath) "logo":"{{ env('MIX_IMAGE_URL') }}{{$organizer->largeImagePath}}"}@else "logo":"{{url('/')}}/storage/website-files/schema-organizer.png"}@endif </script>
     <script> window.myToken =  <?php echo json_encode(['csrfToken' => csrf_token()]); ?></script>
-    <link href="{{ mix('/assets/app.css') }}" rel="stylesheet" onload="this.media='all'; this.onload=null;">
-    <link href="{{ mix('/assets/app-lite.css') }}" rel="stylesheet" onload="this.media='all'; this.onload=null;">
+    <link href="{{ mix('/css/app.css') }}" rel="stylesheet" onload="this.media='all'; this.onload=null;">
+    <link href="{{ mix('/css/app-lite.css') }}" rel="stylesheet" onload="this.media='all'; this.onload=null;">
 @endsection
 
 @section('nav')

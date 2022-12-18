@@ -33,6 +33,11 @@
     @endif
     <link href="{{ mix('/css/app-lite.css') }}" rel="stylesheet" media="print" onload="this.media='all'; this.onload=null;">
     <link href="{{ mix('/css/app.css') }}" rel="stylesheet" media="print" onload="this.media='all'; this.onload=null;">
+    @if (Browser::isMobile())
+        <link rel="preload" as="image" type="image/webp" imagesrcset="{{ env('MIX_IMAGE_URL') }}{{$event->thumbImagePath}}">
+    @else
+        <link rel="preload" as="image" type="image/webp" imagesrcset="{{ env('MIX_IMAGE_URL') }}{{$event->largeImagePath}}">
+    @endif
 @endsection
 
 @section('nav')

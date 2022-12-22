@@ -143,7 +143,7 @@
                 }, 300); // delay
             },
             async generateSearchList (query) {
-                await axios.get('/api/search/navbar/events', { params: { keywords: query } })
+                await axios.get('/api/search/events', { params: { keywords: query } })
                 .then( res => {
                     this.searchOptions = res.data;
                 })

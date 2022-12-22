@@ -77,7 +77,7 @@
 
         data() {
             return {
-                dropdown: ['DatesTimes', 'GuestPricing'].includes(this.value.page),
+                dropdown: ['DatesTimes', 'Pricing'].includes(this.value.page),
             };
         },
 
@@ -92,7 +92,7 @@
             },
             showGuestPricing() {
                 this.inputVal.category = ''
-                this.inputVal.page = 'GuestPricing'
+                this.inputVal.page = 'Pricing'
             },
         }
     }

@@ -34,6 +34,9 @@
         <Photo 
             v-if="info.page==='Photo'"
             v-model="info" />
+        <Pricing 
+            v-if="info.page==='Pricing'"
+            v-model="info" />
         <Footer v-model="info" />
     </div>
 </template>
@@ -50,17 +53,18 @@
     import GuestRequirements from './EventPage/guestrequirements.vue'
     import Title from './EventPage/title.vue'
     import Photo from './EventPage/photo.vue'
+    import Pricing from './Settings/pricing.vue'
 
     export default {
 
-        components: { Nav, ExperienceType, Category, Overview, Description, EventHost, Location, GuestRequirements, Title, Photo, Footer },
+        components: { Nav, ExperienceType, Category, Overview, Description, EventHost, Location, GuestRequirements, Title, Photo, Pricing, Footer },
 
         props: ['event', 'tags', 'remote', 'categories', 'type'],
 
         data() {
             return {
                 info: { 
-                    page: 'Category', 
+                    page: 'Pricing', 
                     category: '',
                     pages: this.initalizePages(),
                     event: this.event, 
@@ -79,13 +83,13 @@
             },
             checkList() {
                 this.info.pages = this.info.event.hasLocation ? 
-                ['EventType','Category','Overview','Description','EventHost','Location','GuestRequirements','Title','Photo','EventType','EventType'] : 
-                ['EventType','Category','Overview','Description','EventHost','GuestRequirements','Title','Photo','EventType','EventType']
+                ['EventType','Category','Overview','Description','EventHost','Location','GuestRequirements','Title','Photo','EventType','EventType', 'Pricing'] : 
+                ['EventType','Category','Overview','Description','EventHost','GuestRequirements','Title','Photo','EventType','EventType', 'Pricing']
             },
             initalizePages() {
                 return this.event.hasLocation ? 
-                ['EventType','Category','Overview','Description','EventHost','Location','GuestRequirements','Title','Photo','EventType','EventType'] : 
-                ['EventType','Category','Overview','Description','EventHost','GuestRequirements','Title','Photo','EventType','EventType']
+                ['EventType','Category','Overview','Description','EventHost','Location','GuestRequirements','Title','Photo','EventType','EventType', 'Pricing'] : 
+                ['EventType','Category','Overview','Description','EventHost','GuestRequirements','Title','Photo','EventType','EventType', 'Pricing']
             }
         },
 

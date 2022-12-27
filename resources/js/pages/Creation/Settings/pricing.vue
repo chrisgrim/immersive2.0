@@ -10,24 +10,19 @@
                     <div>
                         <p class="font-light mt-4">Let our users know your ticket pricing Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsa fuga unde, quam autem vol</p>
                     </div>
-                    <div class="grid grid-cols-3 gap-8 mt-8 border-b-[1px] border-blue-900">
+                    <div class="flex gap-8 py-8 mt-8 border-b-[1px] border-blue-900">
                         <div 
-                            class="w-full relative"
+                            class="w-48 relative"
                             ref="ticketTypeDrop">
-                            <div class="w-full relative">
-                                <svg 
-                                    :class="{'rotate-90': dropdown}"
-                                    class="w-10 h-10 fill-black absolute z-10 right-4 top-8">
-                                    <use :xlink:href="`/storage/website-files/icons.svg#ri-arrow-right-s-line`" />
-                                </svg>
+                            <div class="w-full relative mt-10">
                                 <input 
-                                    class="text-2xl relative p-8 w-full border mb-12 rounded-3xl focus:rounded-3xl"
+                                    class="text-2xl font-semibold relative w-full rounded-3xl focus:border-none"
                                     v-model="ticket.name"
                                     @focus="onDropdown"
                                     type="text">
                             </div>
                             <ul 
-                                class="h-[40rem] overflow-auto bg-white relative w-full list-none rounded-b-3xl" 
+                                class="overflow-auto bg-white list-none rounded-3xl border m-0 absolute" 
                                 v-if="dropdown">
                                 <li 
                                     class="py-6 px-6 flex items-center gap-8 hover:bg-gray-300" 
@@ -38,17 +33,22 @@
                                 </li>
                             </ul>
                         </div>
-                        <div>
-                            <input 
+                        <div class="">
+                            <textarea
                                 v-model="description"
+                                rows="1"
+                                class="p-6 mt-3"
                                 placeholder="Ticket description" 
                                 type="text">
+                            </textarea>
                         </div>
-                        <div>
+                        <div class="w-40 mt-3">
                             <input 
-                                class="bg-red-100" 
                                 v-model="price"
-                                type="text">
+                                v-money="money"
+                                class="p-6 border border-blue-900 rounded-lg w-40" 
+                                placeholder="$0.00"
+                                v-bind="money">
                         </div>
                     </div>
                 </div>
@@ -58,20 +58,22 @@
 </template>
 
 <script>
+    import { Money } from 'v-money'
     export default {
 
         props: [],
 
-        components: {  },
+        components: { Money },
 
         data() {
             return {
                 active: '',
+                money: this.initializeMoneyObject(),
                 dropdown: false,
-                ticket: { id:1, name:'general'},
+                ticket: { id:1, name:'General'},
                 price: 0,
                 description: '',
-                ticketTypes: [{ id:1, name:'general'}, {id:2, name:'free'}]
+                ticketTypes: [{ id:1, name:'General'}, {id:2, name:'Free'}]
             };
         },
 
@@ -84,6 +86,20 @@
                 if (!arr || arr.contains(event.target)) return;
                 this.dropdown = false;
             },
+            selectTicketType(item) {
+                this.ticket = item
+                this.dropdown = false
+            },
+            initializeMoneyObject() {
+            return {
+                decimal: '.',
+                thousands: '',
+                prefix: '',
+                suffix: '',
+                precision: 2,
+                masked: false  
+            }
+        },
         },
 
         mounted() {

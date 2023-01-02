@@ -19,49 +19,51 @@
             </div>
             <div 
                 v-else
-                class="m-8 p-8 rounded-3xl bg-white shadow-custom-1">
+                class="m-8 py-8 rounded-3xl bg-white shadow-custom-1">
                 <div 
                     @click="toggleLocation"
-                    class="font-semibold text-4xl flex justify-between items-center">
+                    class="font-semibold text-4xl flex justify-between items-center px-8">
                     <span>Location</span>
                     <svg class="w-8 h-8">
                         <use :xlink:href="`/storage/website-files/icons.svg#ri-arrow-up-s-line`" />
                     </svg>
                 </div>
                 <!-- search -->
-                <div class="flex justify-between w-full items-center border border-neutral-300 rounded-2xl mt-4">
-                    <button class="border-none w-20 h-20 items-center justify-center flex py-4">
-                        <div class="fill-default-red">
-                            <svg class="w-8 h-8">
-                                <use :xlink:href="`/storage/website-files/icons.svg#ri-search-line`" />
-                            </svg>
+                <div class="w-full mt-4 px-8">
+                    <div class="flex justify-between w-full items-center border border-neutral-300 rounded-2xl">
+                        <button class="border-none w-20 h-20 items-center justify-center flex py-4">
+                            <div class="fill-default-red">
+                                <svg class="w-8 h-8">
+                                    <use :xlink:href="`/storage/website-files/icons.svg#ri-search-line`" />
+                                </svg>
+                            </div>
+                        </button>
+                        <div class="relative w-full border-none hide-dropdown">
+                            <input 
+                                ref="location"
+                                class="relative border-none focus:border-none p-8 pl-6 w-full bg-transparent"
+                                v-model="searchInput"
+                                placeholder="Search by City"
+                                @input="updateLocations"
+                                @focus="dropdown=true"
+                                autocomplete="false"
+                                onfocus="value = ''" 
+                                type="text">
                         </div>
-                    </button>
-                    <div class="relative w-full border-none hide-dropdown">
-                        <input 
-                            ref="location"
-                            class="relative border-none focus:border-none p-8 pl-6 w-full bg-transparent"
-                            v-model="searchInput"
-                            placeholder="Search by City"
-                            @input="updateLocations"
-                            @focus="dropdown=true"
-                            autocomplete="false"
-                            onfocus="value = ''" 
-                            type="text">
+                        <button 
+                            v-if="searchInput"
+                            class="border-none w-20 h-20 absolute right-16" 
+                            @click="clearLocation">
+                            <svg class="w-10 h-10">
+                                <use :xlink:href="`/storage/website-files/icons.svg#ri-close-circle-line`" />
+                            </svg>
+                        </button>
                     </div>
-                    <button 
-                        v-if="searchInput"
-                        class="border-none w-20 h-20 absolute right-16" 
-                        @click="clearLocation">
-                        <svg class="w-10 h-10">
-                            <use :xlink:href="`/storage/website-files/icons.svg#ri-close-circle-line`" />
-                        </svg>
-                    </button>
                 </div>
                 <!-- list -->
                 <div 
                     v-if="!inputVal.place_id"
-                    class="mt-8 overflow-y-hidden overflow-x-auto">
+                    class="mt-8 pl-8 overflow-y-hidden overflow-x-auto">
                     <div 
                         class="flex scroll-smooth overflow-x-auto" 
                         style="scroll-snap-type: x mandatory;">
@@ -69,7 +71,7 @@
                             @click="selectLocation(place)"
                             v-for="place in places"
                             :key="place.place_id">
-                            <div class="w-48 h-48 mr-4 border-neutral-300 border rounded-2xl">
+                            <div class="w-48 h-48 mr-4 border-neutral-300 border rounded-2xl flex">
                                 <img 
                                     class=" w-6 m-auto" 
                                     src="/storage/images/vendor/leaflet/dist/marker-icon-2x.png">
@@ -155,17 +157,20 @@
             toggleLocation() {
                 this.hasLocation=!this.hasLocation
                 this.dropdown=false
+                this.searchInput=this.inputVal.location.name
             },
             onClickOutside(event) {
                 let arr =  this.$refs.location;
                 let arr1 = this.$refs.location1;
                 if (!arr || arr.contains(event.target) || !arr1 || arr1.contains(event.target)) return;
                 this.dropdown = false;
+                this.searchInput=this.inputVal.location.name
             },
             initializePlaces() {
                 return [
                     {place_id: 'ChIJOwg_06VPwokRYv534QaPC8g', description: 'New York, NY'},
                     {place_id: 'ChIJE9on3F3HwoAR9AhGJW_fL-I', description: 'Los Angeles, CA'},
+                    {place_id: 'ChIJdd4hrwug2EcRmSrV3Vo6llI', description: 'London, UK'},
                     {place_id: 'ChIJIQBpAG2ahYAR_6128GcTUEo', description: 'San Francisco, CA'}
                 ]
             },

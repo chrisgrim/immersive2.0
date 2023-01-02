@@ -2,7 +2,7 @@
     <div>
         <div
             :class="[ open ? 'open' : null, scroll ? 'scroll' : null ]"
-            class="search-nav fixed w-full bg-transparent h-[7rem] m-auto z-[2002] top-0 mt-2">
+            class="search-nav fixed w-full bg-transparent h-[7rem] m-auto z-[2002] top-0">
             <template v-if="!open">
                 <div 
                     :class="[ scroll ? 'my-4' : 'shadow-custom-1 my-8' ]"
@@ -114,14 +114,11 @@
                 searchData: this.initializeSearchData(),
                 open: false,
                 scroll: false,
-                page:'listing',
+                page:'location',
             }
         },
 
         methods: {
-            searchLocation() {
-                window.location.href = `/index/search?city=${this.searchData.location.name}&lat=${this.searchData.location.geometry.location.lat()}&lng=${this.searchData.location.geometry.location.lng()}&start=${this.searchData.searchDates.length ? this.searchData.searchDates[0] : ''}&end=${this.searchData.searchDates.length ? this.searchData.searchDates[1] : ''}`;
-            },
             search(type) {
                 let content = '';
                 if (this.searchData.location.name) {
@@ -140,7 +137,7 @@
                     content = content.concat(`&start=${this.searchData.searchDates[0]}&end=${this.searchData.searchDates[1]}`)
                 }
                 if (type === 'listing') {
-                    window.location.href = `/index/search-online?${content}`
+                    window.location.href = `/index/search-all?${content}`
                 } else {
                     window.location.href = `/index/search?${content}`
                 }

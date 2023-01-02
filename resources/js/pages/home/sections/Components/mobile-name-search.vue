@@ -112,10 +112,12 @@
                 })
             },
             selectEvent(item) {
+                this.dropdown=false
                 window.location.href = `${item.index_name==='events' ? 'events' : 'organizer'}/${item.model.slug}`;
             },
             toggleName() {
                 this.hasName=!this.hasName
+                this.dropdown=false
             },
             onClickOutside(event) {
                 let arr =  this.$refs.list;

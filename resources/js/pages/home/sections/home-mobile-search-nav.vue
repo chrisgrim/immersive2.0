@@ -12,34 +12,50 @@
                             <use :xlink:href="`/storage/website-files/icons.svg#ri-search-line`" />
                         </svg>
                     </div>
-                    <div @click="showSearch">
+                    <div @click="toggleSearch">
                         <p class="font-medium text-2xl">Start your search</p>
                     </div>
                 </div>
             </template>
 
             <template v-else>
-                <div class="fixed w-full inset-0 z-[2003] bg-slate-100 overflow-auto">
+                <div class="fixed w-full inset-0 z-[2003] bg-slate-100">
                     <!-- nav section -->
-                    <div class="px-8 pt-8 pb-4 h-20 flex justify-center w-full items-center">
+                    <div class="px-8 my-8 h-20 flex justify-center w-full items-center">
                         <button 
                             class="ml-[-1rem] border-none w-20 h-20 items-center justify-center flex py-4 absolute left-8" 
-                            @click="hideSearch">
+                            @click="toggleSearch">
                             <svg class="w-10 h-10">
                                 <use :xlink:href="`/storage/website-files/icons.svg#ri-close-circle-line`" />
                             </svg>
                         </button>
-                        <div class="mx-4 font-semibold border-b-2 border-black">
+                        <div 
+                            @click="showPage('location')"
+                            :class="{ 'border-b-2 text-black' : page ==='location' }"
+                            class="mx-4 font-semibold border-black text-slate-400">
                             Location
                         </div>
-                        <div class="mx-4 font-semibold border-black text-slate-400">
+                        <div 
+                            @click="showPage('listing')"
+                            :class="{ 'border-b-2 text-black' : page ==='listing' }"
+                            class="mx-4 font-semibold border-black text-slate-400">
                             Listings
                         </div>
                     </div>
 
                     <!-- content -->
-                    <Location v-model="searchData" />
-                    <Dates v-model="searchData" />
+                    <div class="overflow-auto h-full">
+                        <template v-if="page==='location'">
+                            <Location v-model="searchData" />
+                            <Dates v-model="searchData" />
+                        </template>
+                        <template v-if="page==='listing'">
+                            <Genre v-model="searchData" />
+                            <Price v-model="searchData" />
+                            <Dates v-model="searchData" />
+                            <NameSearch v-model="searchData" />
+                        </template>
+                    </div>
 
                     <!-- footer -->
                     <div class="w-full bg-white h-28 fixed bottom-0">
@@ -50,8 +66,16 @@
                                 Clear All
                             </button>
                             <button 
-                                :disabled="!searchData.lat"
-                                @click="search"
+                                v-if="this.page==='location'"
+                                :disabled="!searchData.location.name"
+                                @click="search('location')"
+                                class="bg-default-red text-white font-semibold text-2xl px-8 py-4 border-none cursor-not-allowed disabled:opacity-50">
+                                Search
+                            </button>
+                            <button 
+                                v-if="this.page==='listing'"
+                                :disabled="!canSearchListing"
+                                @click="search('listing')"
                                 class="bg-default-red text-white font-semibold text-2xl px-8 py-4 border-none cursor-not-allowed disabled:opacity-50">
                                 Search
                             </button>
@@ -67,24 +91,63 @@
 <script>
     import Location from './Components/mobile-location.vue'
     import Dates from './Components/mobile-dates.vue'
+    import Genre from './Components/mobile-genre.vue'
+    import Price from './Components/mobile-price.vue'
+    import NameSearch from './Components/mobile-name-search.vue'
     export default {
 
         props:[ 'filter', 'categories', 'tags'],
 
-        components: { Location, Dates },
+        components: { Location, Dates, NameSearch, Genre, Price },
 
+        computed: {
+            canSearchListing() {
+                return this.searchData.searchDates.length || this.searchData.genre.id || this.hasPrice 
+            },
+            hasPrice() {
+                return this.searchData.price[0] === 0 && this.searchData.price[1] === 100 ? false : true;
+            },
+        },
 
         data() {
             return {
                 searchData: this.initializeSearchData(),
                 open: false,
                 scroll: false,
+                page:'listing',
             }
         },
 
         methods: {
-            search() {
-                window.location.href = `/index/search?city=${this.searchData.place_name}&lat=${this.searchData.lat}&lng=${this.searchData.lng}&start=${this.searchData.searchDates.length ? this.searchData.searchDates[0] : ''}&end=${this.searchData.searchDates.length ? this.searchData.searchDates[1] : ''}`;
+            searchLocation() {
+                window.location.href = `/index/search?city=${this.searchData.location.name}&lat=${this.searchData.location.geometry.location.lat()}&lng=${this.searchData.location.geometry.location.lng()}&start=${this.searchData.searchDates.length ? this.searchData.searchDates[0] : ''}&end=${this.searchData.searchDates.length ? this.searchData.searchDates[1] : ''}`;
+            },
+            search(type) {
+                let content = '';
+                if (this.searchData.location.name) {
+                    content = content.concat(`&city=${this.searchData.location.name}&lat=${this.searchData.location.geometry.location.lat()}&lng=${this.searchData.location.geometry.location.lng()}`)
+                }
+                if (this.searchData.genre && this.searchData.genre.type === 't') {
+                    content = content.concat(`&tag=${this.searchData.genre.slug}`)
+                }
+                if (this.hasPrice) {
+                    content = content.concat(`&price0=${this.searchData.price[0]}&price1=${this.searchData.price[1]}`)
+                }
+                if (this.searchData.genre && this.searchData.genre.type === 'c') {
+                    content = content.concat(`&category=${this.searchData.genre.id}`)
+                }
+                if (this.searchData.searchDates.length) {
+                    content = content.concat(`&start=${this.searchData.searchDates[0]}&end=${this.searchData.searchDates[1]}`)
+                }
+                if (type === 'listing') {
+                    window.location.href = `/index/search-online?${content}`
+                } else {
+                    window.location.href = `/index/search?${content}`
+                }
+            },
+            showPage(type) {
+                this.page=type
+                this.clear()
             },
             clear() {
                 this.searchData = this.initializeSearchData()
@@ -92,33 +155,25 @@
             handleScroll () {
                 this.scroll = window.pageYOffset > 10
             },
-            showSearch() {
-                this.open = true
-                document.body.classList.add('noscroll')
-            },
-            hideSearch() {
-                this.open = false
-                document.body.classList.remove('noscroll')
+            toggleSearch() {
+                this.open=!this.open
+                this.open ? document.body.classList.add('noscroll') : document.body.classList.remove('noscroll')
             },
             initializeSearchData() {
                 return {
-                    place_id:'',
-                    lat:null,
-                    lng:null,
-                    place_name: '',
-                    dates: [],
+                    location:{},
                     searchDates: [],
                     naturalDate: [],
+                    genre: {},
+                    price:[0,100],
                 }
             }
         },
         mounted() {
-            document.addEventListener('click', this.close)
             window.addEventListener('scroll', this.handleScroll);
         },
 
         unmounted() {
-            document.removeEventListener('click',this.close)
             window.removeEventListener('scroll', this.handleScroll);
         },
 

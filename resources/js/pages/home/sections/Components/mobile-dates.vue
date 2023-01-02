@@ -1,11 +1,13 @@
 <template>
     <div>
         <!-- content -->
-        <div class="relative">
+        <div 
+            :class="{'mb-72' : hasCalendar}"
+            class="relative">
             <div class="m-8 p-8 rounded-3xl bg-white shadow-custom-1">
                 <div 
                     v-if="!hasCalendar"
-                    @click="showCalendar"
+                    @click="toggleCalendar"
                     class="flex justify-between cursor-pointer">
                     <div class="text-2xl">
                         When
@@ -16,8 +18,13 @@
                     </div>
                 </div>
                 <div v-else>
-                    <div class="font-semibold text-4xl">
-                        Calendar
+                    <div 
+                        @click="toggleCalendar"
+                        class="font-semibold text-4xl flex justify-between items-center">
+                        <span>Choose Dates</span>
+                        <svg class="w-8 h-8">
+                            <use :xlink:href="`/storage/website-files/icons.svg#ri-arrow-up-s-line`" />
+                        </svg>
                     </div>
                     <div class="z-50">
                         <div class="m-auto text-center bg-white rounded-2xl top-6 overflow-hidden">
@@ -37,13 +44,13 @@
                                 </button>
                                 <button 
                                     v-if="!inputVal.naturalDate.length" 
-                                    @click="active = false" 
+                                    @click="hasCalendar=false" 
                                     class="border-none flex items-center">
                                     Cancel
                                 </button>
                                 <button 
                                     class="px-8 h-14 rounded-full w-auto bg-white whitespace-nowrap text-white bg-default-red border-default-red" 
-                                    @click="updateDates">
+                                    @click="toggleCalendar">
                                     Save
                                 </button>
                             </div>
@@ -75,26 +82,25 @@
             return {
                 calendarConfig: this.initializeCalendarObject(),
                 hasCalendar: false,
+                dates:[],
             }
         },
 
         methods: {
-            updateDates() {
-                this.hasCalendar=false
-            },
             clear() {
                 this.inputVal.dates=[]
                 this.inputVal.naturalDate=[]
+                this.inputVal.searchDates=[]
             },
-            showCalendar() {
-                this.hasCalendar=true
+            toggleCalendar() {
+                this.hasCalendar=!this.hasCalendar
             },
             dateFunc() {
                 const that = this;
                 return function(value) {
-                    that.inputVal.searchDates = value.map(date => 
+                    that.dates = value.map(date => 
                         this.formatDate(date, 'Y-m-d H:i:S'));
-                    that.inputVal.dates = value.map(date => 
+                    that.inputVal.searchDates = value.map(date => 
                         this.formatDate(date, 'Y-m-d H:i:S'));
                     that.inputVal.naturalDate = value.map(date => 
                         this.formatDate(date, 'M j'));
@@ -111,10 +117,7 @@
                     onClose: [this.dateFunc()], 
                 }
             },
-            
-            
         },
-
 }
     
 </script>

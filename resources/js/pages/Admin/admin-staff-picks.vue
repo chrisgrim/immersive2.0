@@ -157,9 +157,7 @@
                     { id:3, field: 'Rank', class:'' },
                     { id:4, field: 'Dates', class:''},
                     { id:5, field: '',class:'' },
-                ],
-                envImageUrl: process.env.MIX_IMAGE_URL
-            }
+                ],            }
         },
 
         methods: {

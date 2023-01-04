@@ -55,7 +55,6 @@
         data() {
             return {
                 userConversation: this.conversation ? this.conversation.users : '',
-                envImageUrl: process.env.MIX_IMAGE_URL,
             }
         },
 

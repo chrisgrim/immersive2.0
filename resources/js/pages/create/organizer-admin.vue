@@ -177,7 +177,6 @@ export default {
             websiteActive: false,
             serverErrors: [],
             isLoading: false,
-            envImageUrl: process.env.MIX_IMAGE_URL,
         };
     },
 

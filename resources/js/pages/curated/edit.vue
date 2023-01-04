@@ -213,7 +213,6 @@
                 onAdd: false,
                 loading: false,
                 showDelete: null,
-                envImageUrl: process.env.MIX_IMAGE_URL,
             }
         },
 

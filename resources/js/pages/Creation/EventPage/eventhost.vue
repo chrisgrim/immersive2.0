@@ -133,7 +133,6 @@
                 addMember: true,
                 user:'',
                 serverErrors:{},
-                envImageUrl: process.env.MIX_IMAGE_URL,
             };
         },
 

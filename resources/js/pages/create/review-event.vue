@@ -84,7 +84,6 @@
                 titleFontSize: '',
                 hover: null,
                 disabled: false,
-                envImageUrl: process.env.MIX_IMAGE_URL,
             }
         },
 

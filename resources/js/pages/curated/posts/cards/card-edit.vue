@@ -147,7 +147,6 @@
                 formData: new FormData(),
                 hover: false,
                 updated: false,
-                envImageUrl: process.env.MIX_IMAGE_URL,
             }
         },
 

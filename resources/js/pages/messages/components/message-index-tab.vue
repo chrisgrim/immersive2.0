@@ -64,7 +64,6 @@
         data() {
             return {
                 userConversation: this.conversation ? this.conversation.users.filter( user => { return user.id !== this.loaduser.id }) : '',
-                envImageUrl: process.env.MIX_IMAGE_URL,
             }
         },
 

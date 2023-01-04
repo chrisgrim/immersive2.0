@@ -129,7 +129,6 @@
                 conversation: this.value,
                 newMessage: null,
                 disabled: false,
-                envImageUrl: process.env.MIX_IMAGE_URL,
             }
         },
 

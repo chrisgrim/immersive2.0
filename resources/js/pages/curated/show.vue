@@ -122,7 +122,6 @@
                 shelfContainer: this.loadshelves,
                 shelves:this.loadshelves.data,
                 headerImage: this.mobile ? this.value.thumbImagePath : this.value.largeImagePath,
-                envImageUrl: process.env.MIX_IMAGE_URL,
             }
         },
 

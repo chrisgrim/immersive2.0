@@ -86,7 +86,6 @@
                 list: [],
                 price: '',
                 eventName: '',
-                envImageUrl: process.env.MIX_IMAGE_URL,
             }
         },
 

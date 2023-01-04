@@ -115,7 +115,6 @@
         data() {
             return {
                 active: true,
-                envImageUrl: process.env.MIX_IMAGE_URL,
             }
         },
 

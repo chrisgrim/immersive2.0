@@ -113,7 +113,6 @@
                     { id:3, field: 'Change Name', class:'' },
                     { id:4, field: 'Respond', class:''},
                 ],
-                envImageUrl: process.env.MIX_IMAGE_URL,
             }
         },
 

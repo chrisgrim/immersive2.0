@@ -119,7 +119,6 @@
                 disabled: false,
                 updated: false,
                 creationPage: 3,
-                envImageUrl: process.env.MIX_IMAGE_URL,
 			}
 		},
 

@@ -253,7 +253,6 @@ export default {
             modal: false,
             reSubmit: false,
             formData: new FormData(),
-            envImageUrl: process.env.MIX_IMAGE_URL,
         };
     },
 

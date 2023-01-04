@@ -85,7 +85,6 @@
             return {
                 communities: this.value,
                 active: null,
-                envImageUrl: process.env.MIX_IMAGE_URL,
             }
         },
 

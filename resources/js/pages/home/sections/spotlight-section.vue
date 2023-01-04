@@ -59,7 +59,6 @@
                 shelf: this.dock.shelves.length,
                 community: this.dock.communities.length,
                 post: this.dock.posts.length,
-                envImageUrl: process.env.MIX_IMAGE_URL,
             }
         },
 

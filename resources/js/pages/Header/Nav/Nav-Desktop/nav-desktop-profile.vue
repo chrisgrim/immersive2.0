@@ -118,7 +118,6 @@
                 onToggle:false,
                 loginType: null,
                 hex: this.user ? this.user.hexColor : `#717171`,
-                envImageUrl: process.env.MIX_IMAGE_URL,
             };
         },
 

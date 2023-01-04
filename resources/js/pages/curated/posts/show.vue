@@ -100,7 +100,6 @@
         data() {
             return {
                 post: this.value,
-                envImageUrl: process.env.MIX_IMAGE_URL,
             }
         },
 

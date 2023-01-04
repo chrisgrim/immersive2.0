@@ -45,9 +45,7 @@
 
         data() {
             return {
-                isDisabled: false,
-                envImageUrl: process.env.MIX_IMAGE_URL
-            }
+                isDisabled: false,            }
         },
 
         methods: {

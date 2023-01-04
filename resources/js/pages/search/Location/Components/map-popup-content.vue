@@ -22,7 +22,6 @@ export default {
             name: new URL(window.location.href).searchParams.get("name"),
             lat: new URL(window.location.href).searchParams.get("lat"),
             lng: new URL(window.location.href).searchParams.get("lng"),
-            envImageUrl: process.env.MIX_IMAGE_URL,
         }
     },
     methods: {

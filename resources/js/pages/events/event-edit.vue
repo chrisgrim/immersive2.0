@@ -138,7 +138,6 @@
                 selectedModal: null,
                 archived: false,
                 hover: false,
-                envImageUrl: process.env.MIX_IMAGE_URL,
             }
         },
 

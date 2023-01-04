@@ -146,7 +146,6 @@
                     { id:4, field: 'Rank', class:''},
                     { id:5, field: '',class:'' },
                 ],
-                envImageUrl: process.env.MIX_IMAGE_URL,
             }
         },
 

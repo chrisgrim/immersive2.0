@@ -79,7 +79,6 @@
                 storeCategory: null,
                 categoryList: this.categories,
                 genres: '',
-                envImageUrl: process.env.MIX_IMAGE_URL,
             };
         },
 

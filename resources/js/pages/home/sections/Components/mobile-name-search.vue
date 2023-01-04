@@ -100,7 +100,6 @@
                 searchOptions: [],
                 hasName: true,
                 dropdown: false,
-                envImageUrl: process.env.MIX_IMAGE_URL,
             }
         },
 

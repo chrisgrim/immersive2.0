@@ -71,7 +71,6 @@
         data() {
             return {
                 isReady: this.items.data && this.items.data.length,
-                envImageUrl: process.env.MIX_IMAGE_URL,
             }
         },
 

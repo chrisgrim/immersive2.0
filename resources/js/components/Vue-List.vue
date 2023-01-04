@@ -115,9 +115,7 @@
             return {
                 isDisabled: false,
                 width: '',
-                isReady: this.items && this.items.length,
-                envImageUrl: process.env.MIX_IMAGE_URL
-            }
+                isReady: this.items && this.items.length            }
         },
 
         methods: {

@@ -106,7 +106,6 @@
                 hasVideo: this.loadevent.video ? true : false,
                 video: this.loadevent.video ? `https://youtu.be/${this.loadevent.video}` : null,
                 youtubeId: this.loadevent.video ? this.loadevent.video : null,
-                envImageUrl: process.env.MIX_IMAGE_URL,
             };
         },
 

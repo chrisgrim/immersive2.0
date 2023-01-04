@@ -96,7 +96,6 @@
                 searchInput: null,
                 searchOptions: [],
                 disabled: false,
-                envImageUrl: process.env.MIX_IMAGE_URL,
             }
         },
 

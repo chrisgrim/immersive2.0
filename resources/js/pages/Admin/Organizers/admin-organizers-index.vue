@@ -143,7 +143,6 @@
                     { id:5, field: 'Members', class:'' },
                     { id:6, field: '', class:'' },
                 ],
-                envImageUrl: process.env.MIX_IMAGE_URL,
             }
         },
 

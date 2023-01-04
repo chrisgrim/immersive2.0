@@ -35,7 +35,6 @@
         data() {
             return {
                 titleFontSize: '',
-                envImageUrl: process.env.MIX_IMAGE_URL,
             }
         },
 

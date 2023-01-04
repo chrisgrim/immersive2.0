@@ -17,6 +17,7 @@ Vue.use(Vuelidate);
 Vue.use(require('vue-cookies'));
 window.Vue = Vue;
 
+Vue.prototype.envImageUrl = process.env.MIX_IMAGE_URL,
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 

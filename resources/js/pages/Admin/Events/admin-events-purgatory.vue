@@ -71,7 +71,6 @@
             return {
                 events: this.loadedevents ? this.loadedevents : [],
                 eventList: '',
-                envImageUrl: process.env.MIX_IMAGE_URL,
             }
         },
 

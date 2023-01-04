@@ -154,7 +154,6 @@
                     { id:6, field: 'Status', class:'' },
                     { id:7, field: 'Clicks', class:'' },
                 ],
-                envImageUrl: process.env.MIX_IMAGE_URL,
             }
         },
 

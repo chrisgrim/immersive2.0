@@ -137,7 +137,6 @@
                 hasGenre: false,
                 dropdown: false,
                 defaultGenres: this.initializeGenres(),
-                envImageUrl: process.env.MIX_IMAGE_URL,
             }
         },
 

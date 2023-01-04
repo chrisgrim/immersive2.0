@@ -53,7 +53,6 @@
         data() {
             return {
                 userCanEdit:  true,
-                envImageUrl: process.env.MIX_IMAGE_URL,
             }
         },
 

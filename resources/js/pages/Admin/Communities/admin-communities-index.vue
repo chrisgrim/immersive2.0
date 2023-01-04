@@ -99,7 +99,6 @@
                     { id:2, field: 'Owner', class:''},
                     { id:3, field: 'Curators', class:'' },
                 ],
-                envImageUrl: process.env.MIX_IMAGE_URL
             }
         },
 

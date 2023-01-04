@@ -60,6 +60,7 @@ Vue.component('vue-footer', () => import(/* webpackChunkName: "js/lfo" */ './pag
 
 //Home
 Vue.component('index', () => import(/* webpackChunkName: "js/ei" */ './pages/Home/index.vue'));
+Vue.component('index-mobile', () => import(/* webpackChunkName: "js/eim" */ './pages/Home/index-mobile.vue'));
 
 //Components
 Vue.component('modal-wrapper', () => import(/* webpackChunkName: "js/mw" */ './components/modals/modal-wrapper.vue'));

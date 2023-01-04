@@ -1,5 +1,9 @@
 <template>
     <div>
+        <MobileSearchNav
+            :tags="tags" 
+            :categories="categories" />
+        <div style="height:8rem;" />
         <template v-if="docks && docks.length">
             <div 
                 :key="dock.id"
@@ -7,11 +11,11 @@
                 <template v-if="dock.type === 'h'">
                     <div class="max-w-screen-2xl relative m-auto">
                         <Hero 
-                            :mobile="mobile"
+                            :mobile="true"
                             :dock="dock" />
                     </div>
                 </template>
-                <div class="max-w-screen-2xl relative h-full m-auto px-8 md:px-12 lg:px-32">
+                <div class="max-w-screen-2xl relative h-full m-auto px-8 md:px-12">
                     <Icons 
                         v-if="dock.type === 'i'"
                         :dock="dock" />
@@ -33,19 +37,19 @@
             <section 
                 v-if="staffpicks.length"
                 id="staffpicks" 
-                class="max-w-screen-2xl relative h-full m-auto px-8 md:px-12 lg:px-32">
+                class="max-w-screen-2xl relative h-full m-auto px-8 md:px-12">
                 <StaffPicks :staffpicks="staffpicks" />
             </section>
 
             <section 
                 id="partners" 
-                class="max-w-screen-2xl relative h-full m-auto px-8 md:px-12 lg:px-32">
+                class="max-w-screen-2xl relative h-full m-auto px-8 md:px-12">
                 <div class="my-8 md:mt-16 md:mb-24">
                     <Partners />
                 </div>
             </section>
 
-            <section class="max-w-screen-2xl relative h-full m-auto px-8 md:px-12 lg:px-32">
+            <section class="max-w-screen-2xl relative h-full m-auto px-8 md:px-12">
                 <div class="my-8 md:mt-16 md:mb-24">
                     <div class="flex flex-col items-center min-h-[26rem] justify-center">
                         <h3>Read The 2020 Immersive Entertainment Industry Annual Report</h3>
@@ -66,12 +70,13 @@
     import Spotlight from './Sections/spotlight-section.vue'
     import Partners from './Sections/partners.vue'
     import StaffPicks from './Sections/staffpicks.vue'
+    import MobileSearchNav  from './Sections/home-mobile-search-nav.vue'
 
     export default {
 
         props:['categories', 'staffpicks', 'docks', 'tags', 'mobile'],
 
-        components: { Album, Partners, StaffPicks, Icons, Hero, Spotlight },
+        components: { Album, Partners, StaffPicks, MobileSearchNav, Icons, Hero, Spotlight },
 
     };
 </script>

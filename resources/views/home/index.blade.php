@@ -39,20 +39,19 @@
         @if ( session()->exists( 'verifiy' )) 
             <vue-email-verify :user="{{auth()->user()}}" message="verify"></vue-email-verify>
         @endif
-        @if($staffpicks)
-            <index 
-                :mobile="{{ Browser::isMobile() ? Browser::isMobile() : 'null' }}"
-                :categories="{{$categories}}" 
-                :docks="{{$docks}}"
-                :tags="{{$tags}}" 
-                :staffpicks="{{$staffpicks}}"/>
-        @else
-            <index 
-                :mobile="{{ Browser::isMobile() ? Browser::isMobile() : 'null' }}"
-                :docks="{{$docks}}"
-                :tags="{{$tags}}" 
-                :categories="{{$categories}}"/>
-        @endif
+            @if (Browser::isMobile())
+                <index-mobile
+                    :categories="{{$categories}}" 
+                    :docks="{{$docks}}"
+                    :tags="{{$tags}}" 
+                    :staffpicks="{{$staffpicks}}"/>
+            @else
+                <index
+                    :categories="{{$categories}}" 
+                    :docks="{{$docks}}"
+                    :tags="{{$tags}}" 
+                    :staffpicks="{{$staffpicks}}"/>
+            @endif
     </div>
 @endsection
 

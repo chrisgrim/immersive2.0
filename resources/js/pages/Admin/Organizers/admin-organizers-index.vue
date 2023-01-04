@@ -45,7 +45,7 @@
                                     <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">
                                         <div class="flex flex-col items-center">
                                             <img 
-                                                :src="`${envImageUrl}${org.thumbImagePath}`"
+                                                :src="`${$envImageUrl}${org.thumbImagePath}`"
                                                 class="w-12 rounded-full">
                                             <p class="text-xl">{{ org.name }}</p>
                                         </div>

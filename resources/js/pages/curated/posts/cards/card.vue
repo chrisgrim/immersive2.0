@@ -12,11 +12,11 @@
                 <picture>
                     <source 
                         type="image/webp" 
-                        :srcset="`${envImageUrl}${hasImage}`"> 
+                        :srcset="`${$envImageUrl}${hasImage}`"> 
                     <img 
                         loading="lazy"
                         class="w-full rounded-2xl align-bottom object-cover h-full"
-                        :src="`${envImageUrl}${hasImage.slice(0, -4)}jpg`" 
+                        :src="`${$envImageUrl}${hasImage.slice(0, -4)}jpg`" 
                         :alt="`${card.name}`">
                 </picture>
             </div>

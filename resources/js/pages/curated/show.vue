@@ -41,11 +41,11 @@
                     <picture>
                         <source 
                             type="image/webp" 
-                            :srcset="`${envImageUrl}${headerImage}?timestamp=${community.updated_at}`"> 
+                            :srcset="`${$envImageUrl}${headerImage}?timestamp=${community.updated_at}`"> 
                         <img 
                             loading="lazy" 
                             class=" object-cover align-bottom w-full h-full"
-                            :src="`${envImageUrl}${headerImage.slice(0, -4)}jpg?timestamp=${community.updated_at}`" 
+                            :src="`${$envImageUrl}${headerImage.slice(0, -4)}jpg?timestamp=${community.updated_at}`" 
                             :alt="`${community.name} Community`">
                     </picture>
                 </div>
@@ -65,10 +65,10 @@
                                     <picture>
                                         <source 
                                             type="image/webp" 
-                                            :srcset="`${envImageUrl}${curator.thumbImagePath}`"> 
+                                            :srcset="`${$envImageUrl}${curator.thumbImagePath}`"> 
                                         <img 
                                             class="w-12 rounded-full mr-4"
-                                            :src="`${envImageUrl}${curator.thumbImagePath.slice(0, -4)}`" 
+                                            :src="`${$envImageUrl}${curator.thumbImagePath.slice(0, -4)}`" 
                                             :alt="`${curator.name} Community`">
                                     </picture>
                                 </template>

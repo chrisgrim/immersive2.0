@@ -28,10 +28,10 @@
                     <picture>
                         <source 
                             type="image/webp" 
-                            :srcset="`${envImageUrl}${event.organizer.thumbImagePath}`"> 
+                            :srcset="`${$envImageUrl}${event.organizer.thumbImagePath}`"> 
                         <img 
                             class="w-20 h-20 rounded-full float-right"
-                            :src="`${envImageUrl}${event.organizer.thumbImagePath.slice(0, -4)}jpg`" 
+                            :src="`${$envImageUrl}${event.organizer.thumbImagePath.slice(0, -4)}jpg`" 
                             :alt="`Logo of ${event.organizer.name}`">
                     </picture>
                 </a>

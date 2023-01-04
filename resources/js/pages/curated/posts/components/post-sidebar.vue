@@ -72,7 +72,7 @@
                                 :locked="hasImage ? true :false"
                                 @onDelete="deleteImage"
                                 :loading="loading"
-                                :image="hasImage ? `${envImageUrl}${hasImage}` : null"
+                                :image="hasImage ? `${$envImageUrl}${hasImage}` : null"
                                 @addImage="addImage" />
                         </div>
                         <div class="flex justify-between items-center">

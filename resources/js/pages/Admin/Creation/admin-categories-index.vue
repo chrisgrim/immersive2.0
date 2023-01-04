@@ -46,7 +46,7 @@
                                 v-for="category in categories">
                                 <td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
                                     <CardImage
-                                        :image="`${envImageUrl}${category.thumbImagePath}`"
+                                        :image="`${$envImageUrl}${category.thumbImagePath}`"
                                         :height="800"
                                         :width="800"
                                         @addImage="addImage($event, category)" />

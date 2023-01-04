@@ -48,7 +48,7 @@
                                         <img 
                                             class="w-32 rounded-2xl" 
                                             v-if="community.thumbImagePath"
-                                            :src="`${envImageUrl}${community.thumbImagePath}`">
+                                            :src="`${$envImageUrl}${community.thumbImagePath}`">
                                         <p class="text-xl text-center">{{ community.name }}</p>
                                     </a>
                                 </td>

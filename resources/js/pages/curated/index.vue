@@ -59,11 +59,11 @@
                                 <picture>
                                     <source 
                                         type="image/webp" 
-                                        :srcset="`${envImageUrl}${community.largeImagePath}?timestamp=${community.updated_at}`"> 
+                                        :srcset="`${$envImageUrl}${community.largeImagePath}?timestamp=${community.updated_at}`"> 
                                     <img 
                                         loading="lazy" 
                                         class=" object-cover align-bottom w-full h-full"
-                                        :src="`${envImageUrl}${community.largeImagePath.slice(0, -4)}jpg?timestamp=${community.updated_at}`" 
+                                        :src="`${$envImageUrl}${community.largeImagePath.slice(0, -4)}jpg?timestamp=${community.updated_at}`" 
                                         :alt="`${community.name} Community`">
                                 </picture>
                             </div>

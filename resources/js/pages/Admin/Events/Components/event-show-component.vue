@@ -2,7 +2,7 @@
     <div>
         <img 
             style="width:20rem"
-            :src="`${envImageUrl}${loadevent.largeImagePath.slice(0, -4)}jpg`" alt="">
+            :src="`${$envImageUrl}${loadevent.largeImagePath.slice(0, -4)}jpg`" alt="">
         <p>{{loadevent.name}}</p>
         <p><i>{{loadevent.tag_line}}</i></p>
         <p>{{showDates}}</p>

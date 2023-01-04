@@ -76,8 +76,8 @@
                                 <picture>       
                                     <source 
                                         type="image/webp" 
-                                        :srcset="`${envImageUrl}${genre.model.thumbImagePath}`"> 
-                                    <img :src="`${envImageUrl}${genre.model.thumbImagePath.slice(0, -4)}jpg`">
+                                        :srcset="`${$envImageUrl}${genre.model.thumbImagePath}`"> 
+                                    <img :src="`${$envImageUrl}${genre.model.thumbImagePath.slice(0, -4)}jpg`">
                                 </picture>
                             </div>
                             <p class="text-lg leading-6 mt-2">
@@ -102,8 +102,8 @@
                                 v-if="genre.model.thumbImagePath">       
                                 <source 
                                     type="image/webp" 
-                                    :srcset="`${envImageUrl}${genre.model.thumbImagePath}`"> 
-                                <img :src="`${envImageUrl}${genre.model.thumbImagePath.slice(0, -4)}jpg`">
+                                    :srcset="`${$envImageUrl}${genre.model.thumbImagePath}`"> 
+                                <img :src="`${$envImageUrl}${genre.model.thumbImagePath.slice(0, -4)}jpg`">
                             </picture>
                             <p v-else>o</p>
                         </span>

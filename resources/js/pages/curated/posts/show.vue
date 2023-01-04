@@ -29,11 +29,11 @@
                     <picture>
                         <source 
                             type="image/webp" 
-                            :srcset="`${envImageUrl}${headerImage}`"> 
+                            :srcset="`${$envImageUrl}${headerImage}`"> 
                         <img 
                             loading="lazy"
                             class="object-cover w-full h-full" 
-                            :src="`${envImageUrl}${headerImage.slice(0, -4)}`" 
+                            :src="`${$envImageUrl}${headerImage.slice(0, -4)}`" 
                             :alt="`${post.name} Post`">
                     </picture>
                 </div>

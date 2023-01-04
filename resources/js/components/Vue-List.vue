@@ -29,10 +29,10 @@
                                     <picture>
                                         <source 
                                             type="image/webp" 
-                                            :srcset="`${envImageUrl}${item.thumbImagePath}`"> 
+                                            :srcset="`${$envImageUrl}${item.thumbImagePath}`"> 
                                         <img
                                             loading="lazy" 
-                                            :src="`${envImageUrl}${item.thumbImagePath.slice(0, -4)}jpg`" 
+                                            :src="`${$envImageUrl}${item.thumbImagePath.slice(0, -4)}jpg`" 
                                             :alt="`${item.name} Immersive Event`">
                                     </picture>
                                 </div>

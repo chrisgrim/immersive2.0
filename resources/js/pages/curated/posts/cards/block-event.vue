@@ -84,7 +84,7 @@
                 return this.searchInput ? this.searchInput.name : `Event name`
             },
             thumbImagePath() {
-                return this.searchInput ? `${this.envImageUrl}${this.searchInput.thumbImagePath}` : null
+                return this.searchInput ? `${this.$envImageUrl}${this.searchInput.thumbImagePath}` : null
             }
 
         },

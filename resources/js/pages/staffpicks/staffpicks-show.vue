@@ -17,10 +17,10 @@
                                     <picture>
                                         <source 
                                             type="image/webp" 
-                                            :srcset="`${envImageUrl}${card.event.thumbImagePath}`"> 
+                                            :srcset="`${$envImageUrl}${card.event.thumbImagePath}`"> 
                                         <img 
                                             loading="lazy" 
-                                            :src="`${envImageUrl}${card.event.thumbImagePath.slice(0, -4)}jpg`" 
+                                            :src="`${$envImageUrl}${card.event.thumbImagePath.slice(0, -4)}jpg`" 
                                             :alt="`${card.event.name} Immersive Event`">
                                     </picture>
                                 </div>
@@ -51,9 +51,9 @@
                                             <picture v-if="card.user.thumbImagePath">
                                                 <source 
                                                     type="image/webp" 
-                                                    :srcset="`${envImageUrl}${card.user.thumbImagePath}`"> 
+                                                    :srcset="`${$envImageUrl}${card.user.thumbImagePath}`"> 
                                                 <img 
-                                                    :src="`${envImageUrl}${card.user.thumbImagePath.slice(0, -4)}jpg`" 
+                                                    :src="`${$envImageUrl}${card.user.thumbImagePath.slice(0, -4)}jpg`" 
                                                     :alt="`${card.user.name} Immersive Event`">
                                             </picture>
                                         </div>

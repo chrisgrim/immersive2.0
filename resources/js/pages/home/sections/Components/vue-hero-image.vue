@@ -3,11 +3,11 @@
         <picture>
             <source 
                 type="image/webp" 
-                :srcset="`${envImageUrl}${ hasFeatured }`"> 
+                :srcset="`${$envImageUrl}${ hasFeatured }`"> 
             <img 
                 class="h-full w-full absolute object-cover align-bottom"
                 loading="lazy" 
-                :src="`${envImageUrl}${hasFeatured.slice(0, -4)}jpg`" 
+                :src="`${$envImageUrl}${hasFeatured.slice(0, -4)}jpg`" 
                 :alt="`${element.name}`">
         </picture>
     </div>

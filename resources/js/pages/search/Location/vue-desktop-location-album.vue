@@ -12,11 +12,11 @@
                         <picture v-if="card.thumbImagePath">
                             <source 
                                 type="image/webp" 
-                                :srcset="`${envImageUrl}${card.thumbImagePath}`"> 
+                                :srcset="`${$envImageUrl}${card.thumbImagePath}`"> 
                             <img 
                                 loading="lazy" 
                                 class="h-full w-full absolute left-0 right-0 top-0 bottom-0 object-cover"
-                                :src="`${envImageUrl}${card.thumbImagePath.slice(0, -4)}jpg`" 
+                                :src="`${$envImageUrl}${card.thumbImagePath.slice(0, -4)}jpg`" 
                                 :alt="`${card.name} Immersive Event`">
                         </picture>
                     </div>

@@ -44,7 +44,7 @@
                 </div>
                 <div class="relative inline-block bg-slate-400 md:h-[45rem] md:w-7/12">
                     <CardImage
-                        :image="`${envImageUrl}${headerImage}`"
+                        :image="`${$envImageUrl}${headerImage}`"
                         :loading="loading"
                         @addImage="addImage" />
                 </div>

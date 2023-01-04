@@ -23,11 +23,11 @@
                             <picture v-if="card && card.event.thumbImagePath">
                                 <source 
                                     type="image/webp" 
-                                    :srcset="`${envImageUrl}${card.event.thumbImagePath}`"> 
+                                    :srcset="`${$envImageUrl}${card.event.thumbImagePath}`"> 
                                 <img 
                                     class="h-full w-full absolute object-cover align-bottom inset-0"
                                     loading="lazy" 
-                                    :src="`${envImageUrl}${card.event.thumbImagePath.slice(0, -4)}jpg`" 
+                                    :src="`${$envImageUrl}${card.event.thumbImagePath.slice(0, -4)}jpg`" 
                                     :alt="`${card.event.name}`">
                             </picture>
                         </div>

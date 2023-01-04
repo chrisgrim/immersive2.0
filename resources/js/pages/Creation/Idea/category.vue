@@ -30,7 +30,7 @@
                         <div v-if="inputVal.event.category && !dropdown">
                             <img 
                                 class="h-[30rem] w-full object-cover rounded-3xl" 
-                                :src="`${envImageUrl}${inputVal.event.category.largeImagePath}`" 
+                                :src="`${$envImageUrl}${inputVal.event.category.largeImagePath}`" 
                                 alt="">
                             <p class="text-xl mt-8">
                                 {{inputVal.event.category.description}}</p>
@@ -46,7 +46,7 @@
                             @click="selectCategory(item)">
                             <img 
                                 class="w-16" 
-                                :src="`${envImageUrl}${item.thumbImagePath}`" 
+                                :src="`${$envImageUrl}${item.thumbImagePath}`" 
                                 alt="">
                             {{item.name}}
                         </li>

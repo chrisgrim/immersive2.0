@@ -69,8 +69,8 @@
             <picture>       
                 <source 
                     type="image/webp" 
-                    :srcset="`${envImageUrl}${category.largeImagePath}`"> 
-                <img :src="`${envImageUrl}${category.largeImagePath.slice(0, -4)}jpg`">
+                    :srcset="`${$envImageUrl}${category.largeImagePath}`"> 
+                <img :src="`${$envImageUrl}${category.largeImagePath.slice(0, -4)}jpg`">
             </picture>
         </section>
         <Submit 

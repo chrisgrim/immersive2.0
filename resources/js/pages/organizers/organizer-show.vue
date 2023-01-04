@@ -21,10 +21,10 @@
                             <picture>
                                 <source 
                                     type="image/webp" 
-                                    :srcset="`${envImageUrl}${organizer.thumbImagePath}`"> 
+                                    :srcset="`${$envImageUrl}${organizer.thumbImagePath}`"> 
                                 <img
                                     class="w-full h-full rounded-full md:h-80 md:w-80"
-                                    :src="`${envImageUrl}${organizer.thumbImagePath.slice(0, -4)}jpg`" 
+                                    :src="`${$envImageUrl}${organizer.thumbImagePath.slice(0, -4)}jpg`" 
                                     :alt="`${organizer.name} organizer`">
                             </picture>
                         </div>
@@ -47,10 +47,10 @@
                             <picture>
                                 <source 
                                     type="image/webp" 
-                                    :srcset="`${envImageUrl}${organizer.thumbImagePath}`"> 
+                                    :srcset="`${$envImageUrl}${organizer.thumbImagePath}`"> 
                                 <img 
                                     class="w-full h-full"
-                                    :src="`${envImageUrl}${organizer.thumbImagePath.slice(0, -4)}jpg`" 
+                                    :src="`${$envImageUrl}${organizer.thumbImagePath.slice(0, -4)}jpg`" 
                                     :alt="`${organizer.name} organizer`">
                             </picture>
                         </div>

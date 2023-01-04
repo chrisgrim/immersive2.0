@@ -33,7 +33,7 @@
                                         <img 
                                             class="w-32 rounded-2xl" 
                                             v-if="request.event.thumbImagePath"
-                                            :src="`${envImageUrl}${request.event.thumbImagePath}`">
+                                            :src="`${$envImageUrl}${request.event.thumbImagePath}`">
                                         <p class="text-xl text-center">{{ request.event.name }}</p>
                                     </a>
                                 </td>

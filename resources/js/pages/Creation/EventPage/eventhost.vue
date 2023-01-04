@@ -16,7 +16,7 @@
                             class="relative w-24 h-24 min-w-[6rem] py-4 min-h-[8rem]"
                             :loading="false"
                             text="The image must be at least 400px x 400px"
-                            :image="`${envImageUrl}${value.event.organizer.thumbImagePath}`"
+                            :image="`${$envImageUrl}${value.event.organizer.thumbImagePath}`"
                             @addImage="addImage" />
                         <div>
                             <h4 class="font-medium text-black mb-4 text-2xl">{{value.event.organizer.name}}</h4>
@@ -91,7 +91,7 @@
                                 class="flex items-center">
                                 <img 
                                     v-if="member.thumbImagePath"
-                                    :src="`${envImageUrl}${member.thumbImagePath}`"
+                                    :src="`${$envImageUrl}${member.thumbImagePath}`"
                                     class="w-16 h-16 object-cover rounded-full mr-8" 
                                     alt="">
                                 <div class="w-full flex justify-between">

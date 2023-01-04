@@ -66,8 +66,8 @@
                                 v-if="item.model.thumbImagePath">       
                                 <source 
                                     type="image/webp" 
-                                    :srcset="`${envImageUrl}${item.model.thumbImagePath}`"> 
-                                <img :src="`${envImageUrl}${item.model.thumbImagePath.slice(0, -4)}jpg`">
+                                    :srcset="`${$envImageUrl}${item.model.thumbImagePath}`"> 
+                                <img :src="`${$envImageUrl}${item.model.thumbImagePath.slice(0, -4)}jpg`">
                             </picture>
                             <p v-else>o</p>
                         </span>

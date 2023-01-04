@@ -230,7 +230,7 @@ export default {
                     return `backgroundImage: url('${this.imageFile.src}')`
                 }
             } else {
-                return `backgroundImage: url('${(this.loadorganizer ? this.envImageUrl + this.loadorganizer.largeImagePath : '')}')`
+                return `backgroundImage: url('${(this.loadorganizer ? this.$envImageUrl + this.loadorganizer.largeImagePath : '')}')`
             }
         },
 

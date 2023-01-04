@@ -11,11 +11,11 @@
                             <picture>
                                 <source 
                                     type="image/webp" 
-                                    :srcset="`${envImageUrl}${element.thumbImagePath}`"> 
+                                    :srcset="`${$envImageUrl}${element.thumbImagePath}`"> 
                                 <img 
                                     style="object-fit:cover" 
                                     loading="lazy" 
-                                    :src="`${envImageUrl}${element.thumbImagePath.slice(0, -4)}jpg`" 
+                                    :src="`${$envImageUrl}${element.thumbImagePath.slice(0, -4)}jpg`" 
                                     :alt="`${element.name}`">
                             </picture>
                         </div>

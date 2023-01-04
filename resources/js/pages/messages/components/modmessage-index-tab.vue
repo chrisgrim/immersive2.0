@@ -4,8 +4,8 @@
             <div class="message-index__card grid">
                 <div class="message-index__image">
                     <picture>
-                        <source type="image/webp" :srcset="`${envImageUrl}${conversation.event.thumbImagePath}`"> 
-                        <img :src="`${envImageUrl}${conversation.event.thumbImagePath.slice(0, -4)}jpg`" alt="message image">
+                        <source type="image/webp" :srcset="`${$envImageUrl}${conversation.event.thumbImagePath}`"> 
+                        <img :src="`${$envImageUrl}${conversation.event.thumbImagePath.slice(0, -4)}jpg`" alt="message image">
                     </picture>
                 </div>
                 <div class="message-index__name">

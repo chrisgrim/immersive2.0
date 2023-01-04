@@ -16,10 +16,10 @@
                     <picture>
                         <source 
                             type="image/webp" 
-                            :srcset="`${envImageUrl}${user.thumbImagePath}`"> 
+                            :srcset="`${$envImageUrl}${user.thumbImagePath}`"> 
                         <img 
                             class="w-12 h-12"
-                            :src="`${envImageUrl}${user.thumbImagePath.slice(0, -4)}jpg?timestamp=${new Date().getTime()}`" 
+                            :src="`${$envImageUrl}${user.thumbImagePath.slice(0, -4)}jpg?timestamp=${new Date().getTime()}`" 
                             :alt="user.name + `'s account`">
                     </picture>
                 </template>

@@ -56,7 +56,7 @@
                                         <img 
                                             class="w-32 rounded-2xl" 
                                             v-if="pick.event.thumbImagePath"
-                                            :src="`${envImageUrl}${pick.event.thumbImagePath}`">
+                                            :src="`${$envImageUrl}${pick.event.thumbImagePath}`">
                                         <p class="text-xl text-center max-w-xs">{{ pick.event.name }}</p>
                                     </a>
                                 </td>

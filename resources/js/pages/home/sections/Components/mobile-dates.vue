@@ -1,9 +1,7 @@
 <template>
     <div>
         <!-- content -->
-        <div 
-            :class="{'mb-72' : hasCalendar}"
-            class="relative">
+        <div class="relative">
             <div class="m-8 p-8 rounded-3xl bg-white shadow-custom-1">
                 <div 
                     v-if="!hasCalendar"

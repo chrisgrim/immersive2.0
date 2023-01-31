@@ -36,21 +36,23 @@
                             Location
                         </div>
                         <div 
-                            @click="showPage('listing')"
-                            :class="{ 'border-b-2 text-black' : page ==='listing' }"
+                            @click="showPage('atHome')"
+                            :class="{ 'border-b-2 text-black' : page ==='atHome' }"
                             class="mx-4 font-semibold border-black text-slate-400">
-                            Listings
+                            At Home
                         </div>
                     </div>
 
                     <!-- content -->
-                    <div class="overflow-auto h-full">
+                    <div class="overflow-auto h-[76%]">
                         <template v-if="page==='location'">
                             <Location v-model="searchData" />
                             <Dates v-model="searchData" />
+                            <Genre v-model="searchData" :loadOpen="true"/>
+                            <Price v-model="searchData" />
                         </template>
-                        <template v-if="page==='listing'">
-                            <Genre v-model="searchData" />
+                        <template v-if="page==='atHome'">
+                            <Genre v-model="searchData" :loadOpen="false"/>
                             <Price v-model="searchData" />
                             <Dates v-model="searchData" />
                             <NameSearch v-model="searchData" />
@@ -67,15 +69,15 @@
                             </button>
                             <button 
                                 v-if="this.page==='location'"
-                                :disabled="!searchData.location.name"
+                                :disabled="!canSearchLocation"
                                 @click="search('location')"
                                 class="bg-default-red text-white font-semibold text-2xl px-8 py-4 border-none cursor-not-allowed disabled:opacity-50">
                                 Search
                             </button>
                             <button 
-                                v-if="this.page==='listing'"
-                                :disabled="!canSearchListing"
-                                @click="search('listing')"
+                                v-if="this.page==='atHome'"
+                                :disabled="!canSearchAtHome"
+                                @click="search('atHome')"
                                 class="bg-default-red text-white font-semibold text-2xl px-8 py-4 border-none cursor-not-allowed disabled:opacity-50">
                                 Search
                             </button>
@@ -101,8 +103,11 @@
         components: { Location, Dates, NameSearch, Genre, Price },
 
         computed: {
-            canSearchListing() {
+            canSearchAtHome() {
                 return this.searchData.searchDates.length || this.searchData.genre.id || this.hasPrice 
+            },
+            canSearchLocation() {
+                return this.searchData.location.name || this.searchData.genre.id 
             },
             hasPrice() {
                 return this.searchData.price[0] === 0 && this.searchData.price[1] === 100 ? false : true;
@@ -136,8 +141,8 @@
                 if (this.searchData.searchDates.length) {
                     content = content.concat(`&start=${this.searchData.searchDates[0]}&end=${this.searchData.searchDates[1]}`)
                 }
-                if (type === 'listing') {
-                    window.location.href = `/index/search-all?${content}`
+                if (type === 'atHome') {
+                    window.location.href = `/index/search-online?${content}`
                 } else {
                     window.location.href = `/index/search?${content}`
                 }

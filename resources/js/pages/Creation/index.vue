@@ -64,7 +64,7 @@
         data() {
             return {
                 info: { 
-                    page: 'Pricing', 
+                    page: 'Photo', 
                     category: '',
                     pages: this.initalizePages(),
                     event: this.event, 

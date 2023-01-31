@@ -69,9 +69,15 @@
 
     export default {
 
-        props:['categories', 'staffpicks', 'docks', 'tags', 'mobile'],
+        props:['categories', 'staffpicks', 'docks', 'tags'],
 
         components: { Album, Partners, StaffPicks, Icons, Hero, Spotlight },
+
+        data() {
+            return {
+                mobile:false
+            };
+        },
 
     };
 </script>

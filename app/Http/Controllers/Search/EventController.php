@@ -30,6 +30,14 @@ class EventController extends Controller
         $categoriesFilter = [];
         $tagsFilter = [];
         $latFilter = [];
+        $maxprice = ceil(Event::getMostExpensive());
+        $categories = Category::all();
+        $tags = Genre::where('admin', 1)->orderBy('rank', 'desc')->get();
+        
+
+        if ($request->lat) {
+            $latFilter = Query::geoDistance()->field('location_latlon')->distance('40km')->lat($request->lat)->lon($request->lng);
+        }
         if ($request->category) { 
             $request->request->add(['category' => explode(",",$request->category)]); 
             $categoriesFilter = Query::terms()->field('category_id')->values($request->category);
@@ -58,10 +66,6 @@ class EventController extends Controller
                 ]);
         }
 
-        $maxprice = ceil(Event::getMostExpensive());
-        $categories = Category::all();
-        $tags = Genre::where('admin', 1)->orderBy('rank', 'desc')->get();
-        $latFilter = Query::geoDistance()->field('location_latlon')->distance('40km')->lat($request->lat)->lon($request->lng);
         
         $query = Query::bool()
             ->must( Query::range()->field('closingDate')->gte('now/d'))

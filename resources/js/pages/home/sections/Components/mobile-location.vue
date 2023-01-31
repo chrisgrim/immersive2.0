@@ -69,7 +69,7 @@
                         style="scroll-snap-type: x mandatory;">
                         <div 
                             @click="selectLocation(place)"
-                            v-for="place in places"
+                            v-for="place in defaultPlaces"
                             :key="place.place_id">
                             <div class="w-48 h-48 mr-4 border-neutral-300 border rounded-2xl flex">
                                 <img 
@@ -126,6 +126,7 @@
                 searchInput: null,
                 searchOptions: [],
                 places:this.initializePlaces(),
+                defaultPlaces: this.initializePlaces(),
                 dropdown: false,
                 hasLocation:false,
             }
@@ -152,7 +153,7 @@
             },
             clearLocation() {
                 this.searchInput=''
-                this.inputVal.location=null
+                this.inputVal.location={}
             },
             toggleLocation() {
                 this.hasLocation=!this.hasLocation

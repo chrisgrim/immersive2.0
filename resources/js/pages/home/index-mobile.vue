@@ -74,9 +74,15 @@
 
     export default {
 
-        props:['categories', 'staffpicks', 'docks', 'tags', 'mobile'],
+        props:['categories', 'staffpicks', 'docks', 'tags'],
 
         components: { Album, Partners, StaffPicks, MobileSearchNav, Icons, Hero, Spotlight },
+
+        data() {
+            return {
+                mobile:true
+            };
+        },
 
     };
 </script>

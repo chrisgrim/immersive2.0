@@ -1,7 +1,7 @@
 <template>
     <div>
         <!-- content -->
-        <div class="relative mb-96 mt-16">
+        <div class="relative mb-16 mt-16">
             <div class="px-8">
                 or search by name
             </div>

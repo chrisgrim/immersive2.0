@@ -9,11 +9,11 @@
                     @click="toggleGenre"
                     class="flex justify-between cursor-pointer">
                     <div class="text-2xl">
-                        Genre
+                        Type
                     </div>
                     <div class="font-semibold text-2xl text-right">
                         <p v-if="inputVal.genre && inputVal.genre.name">{{ inputVal.genre.name}}</p>
-                        <p v-else>Add Genre</p>
+                        <p v-else>Search by Event Type</p>
                     </div>
                 </div>
             </div>
@@ -23,7 +23,7 @@
                 <div 
                     @click="toggleGenre"
                     class="font-semibold text-4xl flex justify-between items-center px-8">
-                    <span>Event Genre</span>
+                    <span>Event Type</span>
                     <svg class="w-8 h-8">
                         <use :xlink:href="`/storage/website-files/icons.svg#ri-arrow-up-s-line`" />
                     </svg>
@@ -43,7 +43,7 @@
                                 ref="genre"
                                 class="relative border-none focus:border-none p-8 pl-6 w-full bg-transparent"
                                 v-model="searchInput"
-                                placeholder="Search by Genre"
+                                placeholder="Search by Type"
                                 @input="searchGenre"
                                 @focus="dropdown=true"
                                 autocomplete="false"
@@ -119,7 +119,7 @@
     
     export default {
 
-        props: ['value'],
+        props: ['value', 'loadOpen'],
 
         components: {  },
 
@@ -134,7 +134,7 @@
             return {
                 searchInput: null,
                 searchOptions: [],
-                hasGenre: false,
+                hasGenre: this.loadOpen,
                 dropdown: false,
                 defaultGenres: this.initializeGenres(),
             }

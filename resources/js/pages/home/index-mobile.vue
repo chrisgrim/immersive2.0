@@ -1,8 +1,9 @@
 <template>
     <div>
-        <MobileSearchNav
+        <Nav
             :tags="tags" 
-            :categories="categories" />
+            :at-home-categories="atHomeCategories"
+            :in-person-categories="inPersonCategories" />
         <div style="height:8rem;" />
         <template v-if="docks && docks.length">
             <div 
@@ -70,13 +71,13 @@
     import Spotlight from './Sections/spotlight-section.vue'
     import Partners from './Sections/partners.vue'
     import StaffPicks from './Sections/staffpicks.vue'
-    import MobileSearchNav  from './Sections/home-mobile-search-nav.vue'
+    import Nav  from './Sections/nav-mobile.vue'
 
     export default {
 
-        props:['categories', 'staffpicks', 'docks', 'tags'],
+        props:['atHomeCategories', 'inPersonCategories', 'staffpicks', 'docks', 'tags'],
 
-        components: { Album, Partners, StaffPicks, MobileSearchNav, Icons, Hero, Spotlight },
+        components: { Album, Partners, StaffPicks, Nav, Icons, Hero, Spotlight },
 
         data() {
             return {

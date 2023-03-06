@@ -1,26 +1,47 @@
 <template>
     <div style="width:100%">
-        <v-select
-            v-model="searchInput"
-            label="searchInput.model"
-            :data-hide-options="!searchInput && !searchOptions.length"
-            :placeholder="placeholder"
-            :options="searchOptions"
-            :filterable="false"
-            :get-option-label="searchInput => searchInput.model.name"
-            :reduce="searchInput => searchInput.model"
-            @search="debounce" 
-            @search:focus="debounce" 
-            @input="onSelect">
-            <template #option="{ model }">
-                <div class="flex p-3">
-                    <svg class="w-8 h-8 mr-4">
-                        <use :xlink:href="`/storage/website-files/icons.svg#ri-price-tag-3-line`" />
-                    </svg>
-                    <p> {{ model.name }} </p>
-                </div>
-            </template>
-        </v-select>
+        <div 
+            ref="search"
+            class="w-full z-[10000]">
+            <div class="w-full m-auto">
+                <svg class="absolute top-8 left-8 w-8 h-8 fill-black z-[1002]">
+                    <use xlink:href="/storage/website-files/icons.svg#ri-search-line"></use>
+                </svg>
+                <input 
+                    class="relative rounded-full p-7 pl-24 border border-neutral-300 w-full font-normal z-[1001] focus:border-none focus:rounded-full focus:shadow-custom-7"
+                    v-model="searchInput"
+                    placeholder="Category and Tag Search"
+                    @input="debounce"
+                    @focus="inputVal.dropdown=true"
+                    autocomplete="false"
+                    onfocus="value = ''" 
+                    type="text">
+            </div>
+            <ul 
+                class="bg-white relative w-full m-auto overflow-hidden mt-8 p-8 list-none rounded-5xl shadow-custom-7" 
+                ref="dropdown"
+                v-if="inputVal.dropdown">
+                <li 
+                    class="flex items-center gap-8 hover:bg-neutral-100" 
+                    v-for="genre in searchOptions"
+                    :key="genre.id + genre.type"
+                    @click="selectGenre(genre)">
+                    <div class="w-20 h-20 m-2 rounded-2xl overflow-hidden flex justify-center items-center">
+                        <picture
+                            v-if="genre.thumbImagePath">       
+                            <source 
+                                type="image/webp" 
+                                :srcset="`${$envImageUrl}${genre.thumbImagePath}`"> 
+                            <img :src="`${$envImageUrl}${genre.thumbImagePath.slice(0, -4)}jpg`">
+                        </picture>
+                        <p v-else>o</p>
+                    </div>
+                    <p class="text-xl leading-6 mt-2">
+                        {{genre.name}}
+                    </p>
+                </li>
+            </ul>
+        </div>
     </div>
 </template>
 
@@ -28,46 +49,61 @@
 
 export default {
 
-    props: ['page'],
+    props: ['value'],
 
     computed: {
+        inputVal: {
+            get() { return this.value },
+            set(val) { this.$emit('input', val) }
+        },
     },
 
     data() {
         return {
-            searchInput: null,
+            searchInput: '',
             searchOptions: [ ],
-            isLoading: false,
-            placeholder: 'Category and Tag Search',
         }
     },
 
     methods: {
-        async generateSearchList (query) {
-            await axios.get('/api/search/navbar/tags', { params: { keywords: query } })
+        async searchGenre() {
+            await axios.get('/api/search/navbar/tags', { params: { keywords: this.searchInput } })
             .then( res => {
                 this.searchOptions = res.data;
             })
         },
-        onSelect() {
+        selectGenre(genre) {
             this.saveSearchData();
-            if (this.searchInput.type == 'c') window.location.href = `/index/search-all?category=${this.searchInput.id}`
-            if (this.searchInput.type == 't') window.location.href = `/index/search-all?tag=${this.searchInput.name}`
+            if (genre.type === 'c') { 
+                 window.location.href = `/index/search?category=${genre.id}&searchType=allEvents`
+            }
+            if (genre.type === 't') { 
+                window.location.href = `/index/search?tag=${genre.id}&searchType=allEvents`}
         },
         saveSearchData() {
             axios.post('/search/storedata', {type: 'category', name: this.searchInput.name});
         },
-        debounce(query) {
+        onClickOutside(event) {
+            let arr = this.$refs.search;
+            if (!arr || arr.contains(event.target)) return;
+            this.inputVal.dropdown = false
+        },
+        debounce() {
             if (this.timeout) 
                 clearTimeout(this.timeout); 
             this.timeout = setTimeout(() => {
-                this.generateSearchList(query);
+                this.searchGenre();
             }, 200); // delay
         },
     },
     
     mounted() {
-        this.generateSearchList()
+        document.addEventListener('click', this.onClickOutside)
+        this.searchGenre()
+    },
+
+    unmounted() {
+        document.removeEventListener('click',this.onClickOutside)
     }
 
 };

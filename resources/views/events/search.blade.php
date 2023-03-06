@@ -17,13 +17,28 @@
 @section('content')
     <div id="bodyArea">
         <modal-wrapper :user= "{{ auth()->user() ? auth()->user() : 'null' }}"></modal-wrapper>
-        <vue-search-location 
-            :user="{{ auth()->user() ? auth()->user() : 'null' }}" 
-            :mobile="{{ Browser::isMobile() ? Browser::isMobile() : 'null' }}"
-            :tags="{{ $tags }}" 
-            :searchedevents="{{ $searchedevents }}" 
-            :docks="{{ $docks }}" 
-            :categories="{{ $categories }}">
+        @if (Browser::isMobile())
+            <vue-search-location-mobile 
+                :user="{{ auth()->user() ? auth()->user() : 'null' }}" 
+                :tags="{{ $tags }}" 
+                :searched-Events="{{ $searchedevents }}" 
+                :docks="{{ $docks }}" 
+                :in-Person-Categories="{{ $inPersonCategories }}"
+                :searched-Categories="{{ json_encode($searchedCategories) }}"
+                :searched-Tags="{{ json_encode($searchedTags) }}"
+                :categories="{{ $categories }}">
+        @else
+            <vue-search-location 
+                :user="{{ auth()->user() ? auth()->user() : 'null' }}" 
+                :mobile="{{ Browser::isMobile() ? Browser::isMobile() : 'null' }}"
+                :tags="{{ $tags }}" 
+                :searched-Events="{{ $searchedevents }}" 
+                :docks="{{ $docks }}" 
+                :in-Person-Categories="{{ $inPersonCategories }}"
+                :searched-Categories="{{ json_encode($searchedCategories) }}"
+                :searched-Tags="{{ json_encode($searchedTags) }}"
+                :categories="{{ $categories }}">
+        @endif
     </div>
 @endsection
 

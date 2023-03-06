@@ -120,9 +120,12 @@ Vue.component('admin-organizer', () => import(/* webpackChunkName: "js/ao" */ '.
 //Events
 Vue.component('event-show', () => import(/* webpackChunkName: "js/es" */ './pages/Events/event-show.vue'));
 Vue.component('vue-event-edit', () => import(/* webpackChunkName: "js/ee" */ './pages/Events/event-edit.vue'));
-Vue.component('vue-search-online', () => import(/* webpackChunkName: "js/eos" */ './pages/Search/vue-search-online.vue'));
-Vue.component('vue-search-location', () => import(/* webpackChunkName: "js/esl" */ './pages/Search/vue-search-location.vue'));
+Vue.component('vue-search-online', () => import(/* webpackChunkName: "js/eos" */ './pages/Search/search-at-home.vue'));
+Vue.component('vue-search-online-mobile', () => import(/* webpackChunkName: "js/eosm" */ './pages/Search/search-at-home-mobile.vue'));
+Vue.component('vue-search-location', () => import(/* webpackChunkName: "js/esl" */ './pages/Search/search-in-person.vue'));
+Vue.component('vue-search-location-mobile', () => import(/* webpackChunkName: "js/eslm" */ './pages/Search/search-in-person-mobile.vue'));
 Vue.component('vue-search-all', () => import(/* webpackChunkName: "js/esa" */ './pages/Search/vue-search-all.vue'));
+Vue.component('vue-search-all-mobile', () => import(/* webpackChunkName: "js/esam" */ './pages/Search/vue-search-all-mobile.vue'));
 
 Vue.component('vue-admin-events', () => import(/* webpackChunkName: "js/ae" */ './pages/Admin/Events/admin-events-index.vue'));
 Vue.component('vue-admin-boneyard', () => import(/* webpackChunkName: "js/ab" */ './pages/Admin/Events/admin-events-boneyard.vue'));

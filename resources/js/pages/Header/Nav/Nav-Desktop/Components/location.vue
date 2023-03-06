@@ -45,7 +45,7 @@ export default {
         },
         onSelect() {
             this.saveSearchData();
-            window.location.href = `/index/search?city=${this.searchInput.name}&lat=${this.searchInput.latitude}&lng=${this.searchInput.longitude}`;
+            window.location.href = `/index/search?city=${this.searchInput.name}&lat=${this.searchInput.latitude}&lng=${this.searchInput.longitude}&searchType=inPerson`;
         },
         saveSearchData() {
             axios.post('/search/storedata', {type: 'location', name: this.searchInput.name});

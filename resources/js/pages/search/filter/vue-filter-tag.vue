@@ -1,113 +1,122 @@
 <template>
-    <div v-click-outside="hide">
+    <div>
         <button 
-            @click="show" 
-            :class="{ 'text-white bg-default-red border-default-red' : value.length }" 
-            class="absolute right-0 top-0 px-8 h-14 rounded-full w-auto bg-white whitespace-nowrap hover:text-white hover:bg-default-red hover:border-default-red md:relative">
-            <template v-if="value.length && !mobile">
-                <span> {{ tagList[0].name }} </span>
-                <span v-if="value.length > 1">
-                    +{{ value.length - 1 }}
+            ref="tagButton"
+            @click="toggleTag" 
+            :class="{ 'text-white bg-default-red border-default-red' : hasTags }" 
+            class="relative px-8 h-14 rounded-full w-auto bg-white whitespace-nowrap hover:text-white hover:bg-default-red hover:border-default-red text-xl">
+            <template v-if="value.tag.length">
+                <span> {{ value.tag[0].name }} </span>
+                <span v-if="value.tag.length > 1">
+                    +{{ value.tag.length - 1 }}
                 </span>
-            </template>
-            <template v-else-if="mobile">
-                Show all tags
             </template>
             <template v-else>
                 Tags
             </template>
         </button>
         <div 
-            v-if="active"
-            class="relative mt-8 left-0 w-full md:left-32 md:max-w-5xl md:absolute">
-            <div class="m-auto text-center bg-white top-6 overflow-hidden md:shadow-custom-1 md:rounded-5xl">
-                <div class="w-full overflow-y-auto overflow-x-hidden md:max-h-[calc(100vh-24rem)]">
-                    <div class="grid bg-white gap-8 md:p-12 md:grid-cols-2">
+            v-if="isShowing"
+            ref="tagPopUp"
+            class="mt-8 w-full max-w-5xl absolute">
+            <div class="m-auto text-center bg-white top-6 overflow-hidden shadow-custom-1 rounded-2xl">
+                <div class="w-full overflow-y-auto overflow-x-hidden max-h-[calc(80vh-24rem)]">
+                    <div class="grid bg-white gap-8 p-12 grid-cols-2">
                         <div 
                             v-for="(item) in tags" 
                             :key="item.id" 
                             @click="push(item)">
                             <button class="border-none flex items-center">
                                 <div 
-                                    :class="{ 'border-8' : value.includes(item.name) }"
+                                    :class="{ 'border-8' : tagList.includes(item.id) }"
                                     class="border-2 border-black h-10 w-10 bg-white overflow-hidden rounded-full mr-4" />
                                 <p class="text-xl">{{ item.name }}</p>
                             </button>
                         </div>
                     </div>
                 </div>
-                <template v-if="!mobile">
-                    <div class="py-4 px-12 w-full border-t justify-between flex">
-                        <button 
-                            v-if="value.length" 
-                            @click="clear" 
-                            class="border-none flex items-center">
-                            Clear
-                        </button>
-                        <button 
-                            v-else
-                            @click="active = false;" 
-                            class="border-none flex items-center">
-                            Cancel
-                        </button>
-                        <button 
-                            @click="submit()"
-                            class="px-8 h-14 rounded-full w-auto bg-white whitespace-nowrap text-white bg-default-red border-default-red">
-                            Submit
-                        </button>
-                    </div>
-                </template>
+                <div class="py-4 px-12 w-full border-t justify-between flex">
+                    <button 
+                        v-if="hasTags" 
+                        @click="clear" 
+                        class="border-none flex items-center">
+                        Clear
+                    </button>
+                    <button 
+                        v-else
+                        @click="hideTag" 
+                        class="border-none flex items-center">
+                        Cancel
+                    </button>
+                    <button 
+                        @click="submit()"
+                        class="px-8 h-14 rounded-full w-auto bg-white whitespace-nowrap text-white bg-default-red border-default-red">
+                        Submit
+                    </button>
+                </div>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-    import clickOutside from '../../../Directives/clickOutside' 
     export default {
 
-        props: ['value', 'tags', 'mobile'],
+        props: ['value', 'tags'],
 
         computed: {
             inputVal: {
                 get() { return this.value },
                 set(val) { this.$emit('input', val) }
             },
+            isShowing() {
+                return this.value.currentTab==='tag'
+            },
+            hasTags() {
+                return this.inputVal.tag.length;
+            },
             tagList() {
-                return this.tags.filter( tag => this.value.includes(tag.name))
+                return this.inputVal.tag.map( tag => tag.id)
             }
         },
 
-        data() {
-            return {
-                active: false,
-            }
-        },
 
         methods: {
             submit() {
                 this.$emit('submit', true);
-                this.active = false;
+                this.hideTag()
             },
             push(tag) {
-                if (!tag) return;
-                if (this.value.includes(tag.name)) {
-                    let removeIndex = this.value.indexOf(tag.name);
-                    this.inputVal.splice(removeIndex, 1);
+                if (this.tagList.includes(tag.id)) {
+                    this.inputVal.tag = this.inputVal.tag.filter( tag => tag.id !== tag.id)
                 } else {
-                    this.inputVal.push(tag.name);
+                    this.inputVal.tag.push(tag)
                 }
             },
             clear() {
-                this.inputVal = [];
+                this.inputVal.tag = [];
                 this.submit();
             },
-            show() {
-                this.active =! this.active;
+            toggleTag() {
+                this.inputVal.currentTab==='tag' ? this.inputVal.currentTab='' : this.inputVal.currentTab='tag'
             },
-            hide() {
-                this.active = false;
+            hideTag() {
+                this.inputVal.currentTab=''
             },
+            onClickOutside(event) {
+                let arr = this.$refs.tagButton;
+                let arr1 = this.$refs.tagPopUp;
+                if (!arr || arr.contains(event.target) || !arr1 || arr1.contains(event.target)) return;
+                this.hideTag()
+            },
+        },
+
+        mounted() {
+            document.addEventListener("click", this.onClickOutside);
+        },
+
+        beforeUnmount() {
+            document.removeEventListener("click", this.onClickOutside);
         },
     }
 </script>

@@ -41,13 +41,15 @@
         @endif
             @if (Browser::isMobile())
                 <index-mobile
-                    :categories="{{$categories}}" 
+                    :at-home-categories="{{$atHomeCategories}}"
+                    :in-person-categories="{{$inPersonCategories}}" 
                     :docks="{{$docks}}"
                     :tags="{{$tags}}" 
                     :staffpicks="{{$staffpicks}}"/>
             @else
                 <index
-                    :categories="{{$categories}}" 
+                    :at-home-categories="{{$atHomeCategories}}"
+                    :in-person-categories="{{$inPersonCategories}}" 
                     :docks="{{$docks}}"
                     :tags="{{$tags}}" 
                     :staffpicks="{{$staffpicks}}"/>

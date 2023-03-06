@@ -17,12 +17,25 @@
 @section('content')
     <div id="bodyArea">
         <modal-wrapper :user= "{{ auth()->user() ? auth()->user() : 'null' }}"></modal-wrapper>
-        <vue-search-online 
-            :user="{{ auth()->user() ? auth()->user() : 'null' }}" 
-            :tags="{{ $tags }}" 
-            :onlineevents="{{ $onlineevents }}" 
-            :mobile="{{ Browser::isMobile() ? Browser::isMobile() : 'null' }}"
-            :categories="{{ $categories }}">
+        @if (Browser::isMobile())
+            <vue-search-online-mobile 
+                :user="{{ auth()->user() ? auth()->user() : 'null' }}" 
+                :tags="{{ $tags }}" 
+                :searched-events="{{ $searchedevents }}" 
+                :at-home-categories="{{ $atHomeCategories }}"
+                :searched-Categories="{{ json_encode($searchedCategories) }}"
+                :searched-Tags="{{ json_encode($searchedTags) }}"
+                :categories="{{ $categories }}">
+        @else
+            <vue-search-online 
+                :user="{{ auth()->user() ? auth()->user() : 'null' }}" 
+                :tags="{{ $tags }}" 
+                :searched-events="{{ $searchedevents }}" 
+                :at-home-categories="{{ $atHomeCategories }}"
+                :searched-Categories="{{ json_encode($searchedCategories) }}"
+                :searched-Tags="{{ json_encode($searchedTags) }}"
+                :categories="{{ $categories }}">
+        @endif
     </div>
 @endsection
 

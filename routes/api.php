@@ -24,9 +24,10 @@ Route::GET('search/navbar/location', 'Search\SearchController@location');
 Route::GET('search/navbar/eventorganizer', 'Search\SearchController@eventorganizer');
 Route::GET('search/events', 'Search\SearchController@events');
 Route::GET('search/navbar/tags', 'Search\SearchController@tags');
-Route::POST('search/mapboundary', 'Search\EventController@mapBoundary');
+Route::GET('search/navbar/categories', 'Search\SearchController@categories');
+Route::POST('search/fetch', 'Search\EventController@fetch');
 Route::POST('search/online', 'Search\EventController@online');
-Route::POST('search/all', 'Search\EventController@fetch');
+Route::POST('search/all', 'Search\EventController@fetchAll');
 
 
 // IS USED Admin get list of events

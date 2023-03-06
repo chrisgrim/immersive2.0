@@ -16,6 +16,7 @@ Route::GET('/admin/events/show/{event}', 'Admin\EventController@show');
 Route::POST('/admin/event/{event}/approve', 'Admin\EventController@approve');
 Route::POST('/admin/event/{event}/fail', 'Admin\EventController@fail');
 Route::POST('/admin/event/{event}/reject', 'Admin\EventController@reject');
+Route::POST('/admin/event-check/{curatedEventCheck}/update', 'Admin\EventController@updateCheck');
 Route::GET('/admin/events/finalize', 'Admin\EventController@queues');
 Route::GET('/admin/events/finalize/fetch', 'Admin\EventController@fetchQue');
 Route::GET('/admin/events/{event}/finalize', 'Admin\EventController@finalize');

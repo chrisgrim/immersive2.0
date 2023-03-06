@@ -2,22 +2,10 @@
     <div>
         <!-- content -->
         <div class="relative">
-            <div class="m-8 p-8 rounded-3xl bg-white shadow-custom-1">
-                <div 
-                    v-if="!hasCalendar"
-                    @click="toggleCalendar"
-                    class="flex justify-between cursor-pointer">
-                    <div class="text-2xl">
-                        When
-                    </div>
-                    <div class="font-semibold text-2xl">
-                        <p v-if="inputVal.naturalDate.length">{{ inputVal.naturalDate[0] }}{{ inputVal.naturalDate[1] ? ' — ' + inputVal.naturalDate[1] : '' }}</p>
-                        <p v-else>Add Dates</p>
-                    </div>
-                </div>
-                <div v-else>
+            <div class="mx-8 mb-8 p-8 rounded-3xl bg-white shadow-custom-1">
+                <div v-if="inputVal.currentTab==='dates'">
                     <div 
-                        @click="toggleCalendar"
+                        @click="hideCalendar"
                         class="font-semibold text-4xl flex justify-between items-center">
                         <span>Choose Dates</span>
                         <svg class="w-8 h-8">
@@ -42,17 +30,29 @@
                                 </button>
                                 <button 
                                     v-if="!inputVal.naturalDate.length" 
-                                    @click="hasCalendar=false" 
+                                    @click="hideCalendar" 
                                     class="border-none flex items-center">
                                     Cancel
                                 </button>
                                 <button 
                                     class="px-8 h-14 rounded-full w-auto bg-white whitespace-nowrap text-white bg-default-red border-default-red" 
-                                    @click="toggleCalendar">
+                                    @click="hideCalendar">
                                     Save
                                 </button>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div 
+                    v-else
+                    @click="showCalendar"
+                    class="flex justify-between cursor-pointer">
+                    <div class="text-2xl">
+                        When
+                    </div>
+                    <div class="font-semibold text-2xl">
+                        <p v-if="inputVal.naturalDate.length">{{ inputVal.naturalDate[0] }}{{ inputVal.naturalDate[1] ? ' — ' + inputVal.naturalDate[1] : '' }}</p>
+                        <p v-else>Add Dates</p>
                     </div>
                 </div>
                 <!-- search -->
@@ -79,8 +79,6 @@
         data() {
             return {
                 calendarConfig: this.initializeCalendarObject(),
-                hasCalendar: false,
-                dates:[],
             }
         },
 
@@ -90,13 +88,16 @@
                 this.inputVal.naturalDate=[]
                 this.inputVal.searchDates=[]
             },
-            toggleCalendar() {
-                this.hasCalendar=!this.hasCalendar
+            showCalendar() {
+                this.inputVal.currentTab='dates'
+            },
+            hideCalendar() {
+                this.inputVal.currentTab=''
             },
             dateFunc() {
                 const that = this;
                 return function(value) {
-                    that.dates = value.map(date => 
+                    that.inputVal.dates = value.map(date => 
                         this.formatDate(date, 'Y-m-d H:i:S'));
                     that.inputVal.searchDates = value.map(date => 
                         this.formatDate(date, 'Y-m-d H:i:S'));

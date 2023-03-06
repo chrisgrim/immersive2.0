@@ -27,22 +27,20 @@
                         </div>
                         <div class="mb-8 mt-2">
                             <div class="mt-4 overflow-hidden text-ellipsis max-h-16">
-                                <p class="font-medium">
+                                <p class="font-medium text-black">
                                     {{ card.name }}
                                 </p>
                             </div>
                             <template v-if="card.tag_line">
-                                <div class="mt-1 overflow-hidden text-ellipsis max-h-16 md:mt-4">
-                                    <p>
-                                        {{ card.tag_line }} 
-                                    </p>
+                                <div class="mt-1 block text-ellipsis line-clamp-2 w-full max-h-16 text-xl">
+                                    {{ card.tag_line }} 
                                 </div>
                             </template>
                             <template>
-                                <ul class="flex">
+                                <ul class="flex m-0 p-0">
                                     <li 
                                         v-for="(itemTag) in eventTags(card)" 
-                                        class="text-gray-500 list-disc mr-4 ml-4 first:list-none first:ml-0"
+                                        class="text-gray-500 text-xl list-disc mr-4 ml-4 first:list-none first:ml-0"
                                         :key="itemTag.id">
                                         {{ itemTag.name }}
                                     </li>
@@ -71,11 +69,12 @@
 
         components: { Favorite },
 
-        data() {
-            return {
-                isReady: this.items && this.items.length,
-            }
+        computed: {
+            isReady() {
+                return this.items.length
+            },
         },
+
 
         methods: {
             eventTags(card) {

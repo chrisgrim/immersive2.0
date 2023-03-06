@@ -2,22 +2,10 @@
     <div>
         <!-- content -->
         <div class="relative">
-            <div class="m-8 p-8 rounded-3xl bg-white shadow-custom-1">
-                <div 
-                    v-if="!showPrice"
-                    @click="togglePrice"
-                    class="flex justify-between cursor-pointer">
-                    <div class="text-2xl">
-                        Cost
-                    </div>
-                    <div class="font-semibold text-2xl">
-                        <p v-if="!hasPrice">Add Price</p>
-                        <p v-else>${{ inputVal.price[0] }} - ${{ inputVal.price[1] }}</p>
-                    </div>
-                </div>
-                <div v-else>
+            <div class="mx-8 mb-8 p-8 rounded-3xl bg-white shadow-custom-1">
+                <div v-if="inputVal.currentTab==='price'">
                     <div 
-                        @click="togglePrice"
+                        @click="hidePrice"
                         class="font-semibold text-4xl flex justify-between items-center">
                         <span>Choose Price Range</span>
                         <svg class="w-8 h-8">
@@ -36,24 +24,36 @@
                             </div>
                             <div class="py-4 px-12 w-full justify-between flex mt-4">
                                 <button 
-                                    v-if="inputVal.naturalDate.length" 
+                                    v-if="inputVal.price.length" 
                                     @click="clear" 
                                     class="border-none flex items-center">
                                     Clear
                                 </button>
                                 <button 
-                                    v-if="!inputVal.naturalDate.length" 
-                                    @click="showPrice=false" 
+                                    v-if="!inputVal.price.length" 
+                                    @click="hidePrice" 
                                     class="border-none flex items-center">
                                     Cancel
                                 </button>
                                 <button 
                                     class="px-8 h-14 rounded-full w-auto bg-white whitespace-nowrap text-white bg-default-red border-default-red" 
-                                    @click="togglePrice">
+                                    @click="hidePrice">
                                     Save
                                 </button>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div 
+                    v-else
+                    @click="showPrice"
+                    class="flex justify-between cursor-pointer">
+                    <div class="text-2xl">
+                        Cost
+                    </div>
+                    <div class="font-semibold text-2xl">
+                        <p v-if="!hasPrice">Add Price</p>
+                        <p v-else>${{ inputVal.price[0] }} - ${{ inputVal.price[1] }}</p>
                     </div>
                 </div>
                 <!-- search -->
@@ -85,7 +85,6 @@
             return {
                 priceOptions: { min: 0, max: 100 },
                 sliderFormat: v => `$${('' + v).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`,
-                showPrice: false,
             }
         },
 
@@ -93,9 +92,12 @@
             clear() {
                 this.inputVal.price = [0,100];
             },
-            togglePrice() {
-                this.showPrice=!this.showPrice
+            showPrice() {
+                this.inputVal.currentTab='price'
             },
+            hidePrice() {
+                this.inputVal.currentTab=''
+            }
         },
 }
     

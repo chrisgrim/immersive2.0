@@ -1,12 +1,6 @@
 <template>
     <div>
         <h2 class="mb-8">Events</h2>
-        <select 
-            v-model="dateFilter"
-            id="dates">
-            <option value="published">Published At</option>
-            <option value="updated">Updated At</option>
-        </select>
         <div class="field">
             <input 
                 v-model="eventList"
@@ -14,11 +8,19 @@
                 class="general"
                 @keyup="debounce(eventList)"
                 type="text">
+            <select 
+                class="border border-black my-4 p-4 rounded-full" 
+                v-model="dateFilter"
+                id="dates">
+                <option value="published">Published At</option>
+                <option value="updated">Updated At</option>
+                <option value="twoweeks">Two Weeks Left</option>
+            </select>
         </div>
 
-        <div class="not-prose relative bg-slate-50 rounded-xl overflow-hidden dark:bg-slate-800/25">
+        <div class="not-prose relative bg-slate-50 rounded-xl dark:bg-slate-800/25">
             <div class="relative rounded-xl overflow-auto border">
-                <div class="shadow-sm overflow-hidden my-4">
+                <div class="shadow-sm my-4">
                     <table class="table-auto border-collapse w-full">
                         <thead>
                             <tr>
@@ -47,27 +49,41 @@
                                         </svg>
                                     </a>
                                 </td>
-                                <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">
+                                <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400 max-w-lg">
                                     <a 
-                                        class="flex flex-col items-center" 
+                                        class="flex items-center gap-2" 
                                         target="_blank"
                                         :href="`/events/${event.slug}`">
                                         <img 
-                                            class="w-32 rounded-2xl" 
+                                            class="w-20 h-20 object-cover rounded-2xl" 
                                             v-if="event.thumbImagePath"
                                             :src="`${$envImageUrl}${event.thumbImagePath}`">
-                                        <p class="text-xl text-center">{{ event.name }}</p>
+                                        <p class="w-full line-clamp-2 text-xl block text-ellipsis">{{ event.name }}</p>
                                     </a>
                                 </td>
-                                <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">
+                                <td 
+                                    class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">
+                                    <input 
+                                        @change="updatedCuratedCheck(event.curated_check)"
+                                        type="checkbox" 
+                                        v-model="event.curated_check.curated">
+                                </td>
+                                <td 
+                                    class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">
+                                    <input 
+                                        @change="updatedCuratedCheck(event.curated_check)"
+                                        type="checkbox"
+                                        v-model="event.curated_check.social">
+                                </td>
+                                <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400 max-w-xs">
                                     <p 
                                         v-if="user.isModerator"
-                                        class="underline text-xl"
+                                        class="underline text-xl line-clamp-2 text-ellipsis"
                                         @click.prevent="showModal(event, 'changeOrganizer')">
                                         {{ event.organizer.name }}
                                     </p>
                                 </td>
-                                <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">
+                                <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400 max-w-[10rem]">
                                     <p 
                                         class="text-xl" 
                                         v-if="event.hasLocation">{{ event.location.city ? event.location.city : event.location.region }}, {{ event.location.country }}</p>
@@ -87,6 +103,14 @@
                                             <use :xlink:href="`/storage/website-files/icons.svg#ri-book-open-line`" />
                                         </svg>
                                     </a>
+                                </td>
+                                <td 
+                                    class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">
+                                    <div 
+                                        :class="closingSoon(event.closingDate) ? 'bg-red-500 font-bold text-white' : ''"
+                                        class="rounded-full w-12 h-12 flex text-xl items-center justify-center">
+                                        {{ remainingDays(event.closingDate) }}
+                                    </div>
                                 </td>
                                 <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">
                                     <a 
@@ -146,22 +170,32 @@
                 dateFilter: 'published',
                 cols: [
                     { id:0, field: '', class:''},
-                    { id:1, field: 'Name', class:'text-center'},
-                    { id:2, field: 'Organization', class:''},
-                    { id:3, field: 'Location', class:'' },
-                    { id:4, field: 'Category', class:''},
-                    { id:5, field: 'Sum.',class:'' },
-                    { id:6, field: 'Status', class:'' },
-                    { id:7, field: 'Clicks', class:'' },
+                    { id:1, field: 'Name', class:''},
+                    { id:3, field: 'Cur.', class:''},
+                    { id:4, field: 'Soc.', class:''},
+                    { id:5, field: 'Organization', class:''},
+                    { id:6, field: 'Location', class:'' },
+                    { id:7, field: 'Category', class:''},
+                    { id:8, field: 'Sum.',class:'' },
+                    { id:9, field: 'Rem. Days',class:'' },
+                    { id:10, field: 'Status', class:'' },
+                    { id:11, field: 'Clicks', class:'' },
                 ],
             }
         },
 
         methods: {
             async onLoad(page) {
+                console.log('test');
                 await axios.get(`/admin/events/fetch?page=${page}&date=${this.dateFilter}`)
                 .then( res => { 
                     this.events = res.data 
+                })
+            },
+            async updatedCuratedCheck(check) {
+                await axios.post(`/admin/event-check/${check.id}/update`, check)
+                .then( res => { 
+                    console.log(res.data);
                 })
             },
             async onSearch(events) {
@@ -175,6 +209,12 @@
             async changeEventOrganization(value) {
                 await axios.post(`/admin/event/${this.modalData.slug}/change-organizer`, value)
                 this.reset();
+            },
+            remainingDays(date) {
+                return this.$dayjs(date).diff(new Date(), 'day')
+            },
+            closingSoon(date) {
+                return this.$dayjs(date).diff(new Date(), 'day') < 12
             },
             showModal(event, arr) {
                 this.modalData = event;

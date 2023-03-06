@@ -48,6 +48,7 @@ class Category extends Model
         return [
             "name" => $this->name,
             "rank" => $this->rank,
+            "remote" => $this->remote,
             'priority' => 3,
         ];
     }

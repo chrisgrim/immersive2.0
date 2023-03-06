@@ -1,10 +1,9 @@
 <template>
     <div>
-        <div
-            :class="[ open ? 'open' : null, scroll ? 'scroll' : null ]"
-            class="search-nav fixed w-full bg-transparent h-[7rem] m-auto z-[2002] top-0">
+        <div class="search-nav fixed w-full bg-transparent h-[7rem] m-auto z-[2002] top-0">
             <template v-if="!open">
                 <div 
+                    @click="toggleSearch"
                     :class="[ scroll ? 'my-4' : 'shadow-custom-1 my-8' ]"
                     class="rounded-full w-11/12 h-[5.5rem] mx-auto g-white flex justify-center items-center transition-all">
                     <div class="flex mr-4 fill-default-red">
@@ -12,7 +11,7 @@
                             <use :xlink:href="`/storage/website-files/icons.svg#ri-search-line`" />
                         </svg>
                     </div>
-                    <div @click="toggleSearch">
+                    <div>
                         <p class="font-medium text-2xl">Start your search</p>
                     </div>
                 </div>
@@ -30,14 +29,14 @@
                             </svg>
                         </button>
                         <div 
-                            @click="showPage('location')"
-                            :class="{ 'border-b-2 text-black' : page ==='location' }"
+                            @click="showPage('inPerson')"
+                            :class="{ 'border-b-2 text-black' : searchData.searchType ==='inPerson' }"
                             class="mx-4 font-semibold border-black text-slate-400">
-                            Location
+                            In Person
                         </div>
                         <div 
                             @click="showPage('atHome')"
-                            :class="{ 'border-b-2 text-black' : page ==='atHome' }"
+                            :class="{ 'border-b-2 text-black' : searchData.searchType ==='atHome' }"
                             class="mx-4 font-semibold border-black text-slate-400">
                             At Home
                         </div>
@@ -45,14 +44,22 @@
 
                     <!-- content -->
                     <div class="overflow-auto h-[76%]">
-                        <template v-if="page==='location'">
+                        <template v-if="searchData.searchType==='inPerson'">
                             <Location v-model="searchData" />
                             <Dates v-model="searchData" />
-                            <Genre v-model="searchData" :loadOpen="true"/>
+                            <Genre 
+                                :key="pageKey"
+                                :categories="inPersonCategories"
+                                v-model="searchData" 
+                                :loadOpen="true"/>
                             <Price v-model="searchData" />
                         </template>
-                        <template v-if="page==='atHome'">
-                            <Genre v-model="searchData" :loadOpen="false"/>
+                        <template v-if="searchData.searchType==='atHome'">
+                            <Genre 
+                                :key="pageKey"
+                                v-model="searchData" 
+                                :categories="atHomeCategories"
+                                :loadOpen="false"/>
                             <Price v-model="searchData" />
                             <Dates v-model="searchData" />
                             <NameSearch v-model="searchData" />
@@ -68,15 +75,14 @@
                                 Clear All
                             </button>
                             <button 
-                                v-if="this.page==='location'"
-                                :disabled="!canSearchLocation"
-                                @click="search('location')"
+                                v-if="searchData.searchType==='inPerson'"
+                                :disabled="!canSearchInPerson"
+                                @click="search('inPerson')"
                                 class="bg-default-red text-white font-semibold text-2xl px-8 py-4 border-none cursor-not-allowed disabled:opacity-50">
                                 Search
                             </button>
                             <button 
-                                v-if="this.page==='atHome'"
-                                :disabled="!canSearchAtHome"
+                                v-if="searchData.searchType==='atHome'"
                                 @click="search('atHome')"
                                 class="bg-default-red text-white font-semibold text-2xl px-8 py-4 border-none cursor-not-allowed disabled:opacity-50">
                                 Search
@@ -98,19 +104,13 @@
     import NameSearch from './Components/mobile-name-search.vue'
     export default {
 
-        props:[ 'filter', 'categories', 'tags'],
+        props:[ 'filter', 'atHomeCategories', 'inPersonCategories', 'tags'],
 
         components: { Location, Dates, NameSearch, Genre, Price },
 
         computed: {
-            canSearchAtHome() {
-                return this.searchData.searchDates.length || this.searchData.genre.id || this.hasPrice 
-            },
-            canSearchLocation() {
-                return this.searchData.location.name || this.searchData.genre.id 
-            },
-            hasPrice() {
-                return this.searchData.price[0] === 0 && this.searchData.price[1] === 100 ? false : true;
+            canSearchInPerson() {
+                return this.searchData.location.name 
             },
         },
 
@@ -119,43 +119,37 @@
                 searchData: this.initializeSearchData(),
                 open: false,
                 scroll: false,
-                page:'location',
+                pageKey: 0,
             }
         },
 
         methods: {
             search(type) {
-                let content = '';
+                let content = `searchType=${type}&live=false`;
                 if (this.searchData.location.name) {
-                    content = content.concat(`&city=${this.searchData.location.name}&lat=${this.searchData.location.geometry.location.lat()}&lng=${this.searchData.location.geometry.location.lng()}`)
+                    content = content.concat(`&city=${this.searchData.location.name}&lat=${this.searchData.location.center.lat}&lng=${this.searchData.location.center.lng}`)
                 }
-                if (this.searchData.genre && this.searchData.genre.type === 't') {
-                    content = content.concat(`&tag=${this.searchData.genre.slug}`)
+                if (this.searchData.category.length) {
+                    content = content.concat(`&category=${this.searchData.category[0].id}`)
+                }
+                if (this.searchData.tag.length) {
+                    content = content.concat(`&tag=${this.searchData.tag[0].id}`)
                 }
                 if (this.hasPrice) {
                     content = content.concat(`&price0=${this.searchData.price[0]}&price1=${this.searchData.price[1]}`)
                 }
-                if (this.searchData.genre && this.searchData.genre.type === 'c') {
-                    content = content.concat(`&category=${this.searchData.genre.id}`)
-                }
                 if (this.searchData.searchDates.length) {
                     content = content.concat(`&start=${this.searchData.searchDates[0]}&end=${this.searchData.searchDates[1]}`)
                 }
-                if (type === 'atHome') {
-                    window.location.href = `/index/search-online?${content}`
-                } else {
-                    window.location.href = `/index/search?${content}`
-                }
+                window.location.href = `/index/search?${content}`
             },
             showPage(type) {
-                this.page=type
                 this.clear()
+                this.searchData.searchType = type
+                this.pageKey += 1;
             },
             clear() {
                 this.searchData = this.initializeSearchData()
-            },
-            handleScroll () {
-                this.scroll = window.pageYOffset > 10
             },
             toggleSearch() {
                 this.open=!this.open
@@ -163,20 +157,21 @@
             },
             initializeSearchData() {
                 return {
-                    location:{},
+                    location:{
+                        center: {
+                            lat: null,
+                            lng: null
+                        }
+                    },
+                    currentTab:'location',
+                    searchType: 'inPerson',
                     searchDates: [],
                     naturalDate: [],
-                    genre: {},
+                    tag: [],
+                    category: [],
                     price:[0,100],
                 }
             }
-        },
-        mounted() {
-            window.addEventListener('scroll', this.handleScroll);
-        },
-
-        unmounted() {
-            window.removeEventListener('scroll', this.handleScroll);
         },
 
 }

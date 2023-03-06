@@ -76,11 +76,33 @@ class SearchController extends Controller
 
     public function tags(Request $request, SearchActions $searchActions)
     {
-        $results = Category::searchQuery($searchActions->nameSearch($request))
+        $inPersonFilter = [];
+        $atHomeFilter = [];
+        if ($request->searchType === 'inPerson') { $inPersonFilter = Query::term()->field('remote')->value(false); }
+        if ($request->searchType === 'atHome') {  $atHomeFilter = Query::term()->field('remote')->value(true); }
+        if ($request->keywords) {
+            $query = Query::bool()
+                ->must(
+                    Query::multiMatch()
+                        ->fields(['name', 'name._2gram','name._3gram'])
+                        ->type('bool_prefix')
+                        ->query($request->keywords))
+                ->when( $request->searchType === 'atHome', function ($builder) use ($atHomeFilter) { return $builder->filter($atHomeFilter); })
+                ->when( $request->searchType === 'inPerson', function ($builder) use ($inPersonFilter) { return $builder->filter($inPersonFilter); });
+        } else {
+            $query = Query::matchAll();
+        }
+        $results = Category::searchQuery($query)
                 ->join(Genre::class)
                 ->size(6)
                 ->execute();
-        return $results->hits();
+        return $results->models();
+    }
+
+    public function categories(Request $request)
+    {
+        $searchResult = Category::searchQuery(Query::matchAll())->size(100)->execute();
+        return $hits = $searchResult->hits();
     }
 
     public function searchBoneyard(Request $request)

@@ -1,7 +1,12 @@
 <template>
-    <div class="min-h-[64vh] relative shadow-custom-1 px-8 bg-white w-full rounded-t-5xl z-[1002] trans">
-        <div class="flex justify-center items-center h-32">
-            <p v-if="items.data && items.data.length" >{{ items.total }} events</p>
+    <div class="min-h-[64vh] relative shadow-custom-6 px-8 bg-white w-full rounded-t-5xl z-[1002] transition-all">
+        <div 
+            @click="toggleMap"
+            class="w-full gap-4 pt-4">
+            <div class="w-16 h-2 bg-gray-300 rounded-full m-auto mb-8" />
+            <p
+                class="text-center"
+                v-if="items.data && items.data.length" >{{ items.total }} events</p>
             <p v-else>There are no events in for this search.</p>
         </div>
         <div class="whitespace-nowrap overflow-y-hidden overflow-x-auto mt-8 gap-x-6 scrolling-touch md:w-full md:overflow-visible md:mt-12">
@@ -50,7 +55,7 @@
                                 </div>
                             </div>
                             <Favorite 
-                                :mobile="mobile"
+                                :mobile="true"
                                 :user="user"
                                 :event="card" />
                         </div>
@@ -64,13 +69,13 @@
 <script>
     import Favorite  from './Components/event-favorite.vue'
     export default {
-        props: ['items', 'user', 'mobile'],
+        props: ['items', 'user'],
 
         components: { Favorite },
 
-        data() {
-            return {
-                isReady: this.items.data && this.items.data.length,
+        computed: {
+            isReady() {
+                return this.items.data && this.items.data.length
             }
         },
 
@@ -78,6 +83,9 @@
             eventTags(card) {
                 return card.genres.slice(0, 3);
             },
+            toggleMap() {
+                this.$emit('toggleMap') 
+            }
         }
 
 

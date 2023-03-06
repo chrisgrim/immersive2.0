@@ -15,7 +15,7 @@
             <div>
                 <h3 class="font-semibold md:font-medium">Content Advisories</h3>
             </div>
-            <ul class="my-8 ml-16 list-disc">
+            <ul class="my-8 list-disc">
                 <li 
                     v-for="item in event.content_advisories"
                     :key="item.id">
@@ -31,7 +31,7 @@
             <div>
                 <h3 class="font-semibold md:font-medium">Interaction Advisories</h3>
             </div>
-            <ul class="my-8 ml-16 list-disc">
+            <ul class="my-8 list-disc">
                 <li 
                     v-for="item in event.contact_levels"
                     :key="item.id">
@@ -44,7 +44,7 @@
             <div>
                 <h3 class="font-semibold md:font-medium">Mobility Advisories</h3>
             </div>
-            <ul class="my-8 ml-16 list-disc">
+            <ul class="my-8 list-disc">
                 <li 
                     v-for="item in event.mobility_advisories"
                     :key="item.id">

@@ -1,27 +1,43 @@
 <template>
-    <div class="" style="width:100%">
-        <v-select
-            v-model="searchInput"
-            label="searchInput.model"
-            :data-hide-options="!searchInput && !searchOptions.length"
-            placeholder="Event and Organizer Search"
-            :options="searchOptions"
-            :filterable="false"
-            :get-option-label="searchInput => searchInput.model.name"
-            :reduce="searchInput => searchInput.model"
-            @search="debounce" 
-            @search:focus="debounce" 
-            @input="onSelect">
-            <template #option="{ model }">
-                <div class="flex p-3">
-                    <svg class="w-8 h-8 mr-4">
-                        <use v-if="model.type == 'o'" :xlink:href="`/storage/website-files/icons.svg#ri-user-4-line`" />
-                        <use v-if="model.call_to_action" :xlink:href="`/storage/website-files/icons.svg#ri-calendar-line`" />
-                    </svg>
-                    <p>{{ model.name }}</p>
-                </div>
-            </template>
-        </v-select>
+    <div style="width:100%">
+        <div 
+            ref="search"
+            class="w-full z-[10000]">
+            <div class="w-full m-auto">
+                <svg class="absolute top-8 left-8 w-8 h-8 fill-black z-[1002]">
+                    <use xlink:href="/storage/website-files/icons.svg#ri-search-line"></use>
+                </svg>
+                <input 
+                    class="relative rounded-full p-7 pl-24 border border-neutral-300 w-full font-normal z-[1001] focus:border-none focus:rounded-full focus:shadow-custom-7"
+                    v-model="searchInput"
+                    placeholder="Event and Organizer Search"
+                    @input="debounce"
+                    @focus="inputVal.dropdown=true"
+                    autocomplete="false"
+                    onfocus="value = ''" 
+                    type="text">
+            </div>
+            <ul 
+                class="bg-white relative w-full m-auto overflow-hidden mt-8 p-8 list-none rounded-5xl shadow-custom-7" 
+                ref="dropdown"
+                v-if="inputVal.dropdown">
+                <li 
+                    class="flex items-center gap-8 hover:bg-neutral-100" 
+                    v-for="item in searchOptions"
+                    :key="item.model.id + item.index_name"
+                    @click="onSelect(item)">
+                    <div class="w-20 h-20 rounded-2xl overflow-hidden flex justify-center items-center">
+                        <svg class="w-8 h-8 mr-4">
+                            <use v-if="item.index_name === 'organizers'" :xlink:href="`/storage/website-files/icons.svg#ri-user-4-line`" />
+                            <use v-if="item.index_name === 'events'" :xlink:href="`/storage/website-files/icons.svg#ri-calendar-line`" />
+                        </svg>
+                    </div>
+                    <p class="text-xl leading-6 mt-2">
+                        {{item.model.name}}
+                    </p>
+                </li>
+            </ul>
+        </div>
     </div>
 </template>
 
@@ -29,41 +45,60 @@
 
 export default {
 
-    props: ['page'],
+    props: ['value'],
 
     computed: {
+        inputVal: {
+            get() { return this.value },
+            set(val) { this.$emit('input', val) }
+        },
     },
 
     data() {
         return {
-            searchInput: null,
+            searchInput: '',
             searchOptions: [ ],
         }
     },
 
     methods: {
-        async generateSearchList (query) {
-            await axios.get('/api/search/navbar/eventorganizer', { params: { keywords: query } })
-            .then( res => { this.searchOptions = res.data })
+        async generateSearchList () {
+            await axios.get('/api/search/navbar/eventorganizer', { params: { keywords:  this.searchInput } })
+            .then( res => { 
+                this.searchOptions = res.data })
         },
-        debounce(query) {
+        onSelect(item) {
+            this.saveSearchData(item);
+            if (item.index_name == 'organizers') window.location.href = `/organizer/${item.model.slug}`
+            if (item.index_name == 'events') window.location.href = `/events/${item.model.slug}`
+        },
+        saveSearchData(item) {
+            if (item.index_name == 'organizers') { var data = 'organizer'}
+            if (item.index_name == 'events') { var data = 'event'}
+            axios.post('/search/storedata', {type: data, name: item.model.name});
+        },
+        onClickOutside(event) {
+            let arr = this.$refs.search;
+            if (!arr || arr.contains(event.target)) return;
+            this.inputVal.dropdown = false
+        },
+        debounce() {
             if (this.timeout) 
                 clearTimeout(this.timeout); 
             this.timeout = setTimeout(() => {
-                this.generateSearchList(query);
+                this.generateSearchList();
             }, 200); // delay
         },
-        onSelect() {
-            this.saveSearchData();
-            if (this.searchInput.type == 'o') window.location.href = `/organizer/${this.searchInput.slug}`
-            if (this.searchInput.call_to_action) window.location.href = `/events/${this.searchInput.slug}`
-        },
-        saveSearchData() {
-            if (this.searchInput.type == 'o') { var data = 'organizer'}
-            if (this.searchInput.call_to_action) { var data = 'event'}
-            axios.post('/search/storedata', {type: data, name: this.searchInput.name});
-        },
     },
+
+    mounted() {
+        document.addEventListener('click', this.onClickOutside)
+        this.generateSearchList()
+    },
+
+    unmounted() {
+        document.removeEventListener('click',this.onClickOutside)
+    }
 
 };
 </script>

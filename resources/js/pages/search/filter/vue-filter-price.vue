@@ -1,60 +1,48 @@
 <template>
-    <div class="col"> 
+    <div>
+        <button 
+            ref="priceButton"
+            @click="togglePrice" 
+            :class="{ 'text-white bg-default-red border-default-red' : hasPrice }" 
+            class="relative px-8 h-14 rounded-full w-auto bg-white whitespace-nowrap hover:text-white hover:bg-default-red hover:border-default-red text-xl">
+            <template v-if="hasPrice">
+                ${{ value.price[0] }} - ${{ value.price[1] }}
+            </template>
+            <template v-else>
+                Price
+            </template>
+        </button>
         <div 
-            v-if="mobile"
-            class="relative h-24 w-2/4 mx-auto mt-28"> 
-            <vue-slider
-                v-model="inputVal"
-                tooltip="always"
-                v-bind="priceOptions"
-                :tooltip-formatter="sliderFormat"
-                :enable-cross="false" />
-        </div>
-        <div 
-            v-else 
-            v-click-outside="hide">
-            <button 
-                @click="show" 
-                :class="{ 'text-white bg-default-red border-default-red' : hasPrice }" 
-                class="px-8 h-14 rounded-full w-auto bg-white whitespace-nowrap hover:text-white hover:bg-default-red hover:border-default-red">
-                <template v-if="hasPrice">
-                    ${{ value[0] }} - ${{ value[1] }}
-                </template>
-                <template v-else>
-                    Price
-                </template>
-            </button>
-            <div 
-                v-if="active"
-                class="absolute mt-8 h-24 w-full left-0 md:left-32 md:max-w-xl z-50"> 
-                <div class="m-auto text-center bg-white shadow-custom-1 rounded-5xl top-6 overflow-hidden">
-                    <div class="w-full h-32 py-12 px-24 mt-12 items-end justify-center">
-                        <vue-slider
-                            v-model="inputVal"
-                            tooltip="always"
-                            v-bind="priceOptions"
-                            :tooltip-formatter="sliderFormat"
-                            :enable-cross="false" />
-                    </div>
-                    <div class="py-4 px-12 w-full border-t justify-between flex">
-                        <button 
-                            v-if="hasPrice" 
-                            @click="clear" 
-                            class="border-none flex items-center">
-                            clear
-                        </button>
-                        <button 
-                            v-else
-                            @click="active = false;" 
-                            class="border-none flex items-center">
-                            Cancel
-                        </button>
-                        <button 
-                            @click="submit" 
-                            class="px-8 h-14 rounded-full w-auto bg-white whitespace-nowrap text-white bg-default-red border-default-red">
-                            Submit
-                        </button>
-                    </div>
+            v-if="isShowing"
+            ref="pricePopUp"
+            class="absolute mt-8 h-24 w-full max-w-xl z-50"> 
+            <div class="m-auto text-center bg-white shadow-custom-1 rounded-2xl top-6 overflow-hidden">
+                <div class="w-full h-32 py-12 px-24 mt-12 items-end justify-center">
+                    <vue-slider
+                        v-model="inputVal.price"
+                        tooltip="always"
+                        v-bind="priceOptions"
+                        :tooltip-formatter="sliderFormat"
+                        :enable-cross="false" />
+                </div>
+                <div class="py-4 px-12 w-full border-t justify-between flex">
+                    <button 
+                        v-if="hasPrice" 
+                        @click="clear" 
+                        class="border-none flex items-center">
+                        clear
+                    </button>
+                    <button 
+                        v-else
+                        @click="hidePrice" 
+                        class="border-none flex items-center">
+                        Cancel
+                    </button>
+                    <button 
+                        @click="submit" 
+                        class="px-8 h-14 rounded-full w-auto bg-white whitespace-nowrap text-white bg-default-red border-default-red">
+                        Submit
+                    </button>
                 </div>
             </div>
         </div>
@@ -64,10 +52,9 @@
 <script>
     import VueSlider from 'vue-slider-component'
     import 'vue-slider-component/theme/antd.css'
-    import clickOutside from '../../../Directives/clickOutside'
     export default {
 
-        props: ['value', 'mobile'],
+        props: ['value'],
 
         components: { VueSlider },
 
@@ -77,13 +64,15 @@
                 set(val) { this.$emit('input', val) }
             },
             hasPrice() {
-                return this.value[0] === 0 && this.value[1] === 100 ? false : true;
+                return this.value.price[0] === 0 && this.value.price[1] === 100 ? false : true;
+            },
+            isShowing() {
+                return this.inputVal.currentTab==='price'
             },
         },
 
         data() {
             return {
-                active: false,
                 priceOptions: { min: 0, max: 100 },
                 sliderFormat: v => `$${('' + v).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`,
             }
@@ -92,17 +81,31 @@
         methods: {
             submit() {
                 this.$emit('submit', true);
-                this.active = false;
+                this.hidePrice()
             },
             clear() {
-                this.inputVal = [0,100];
+                this.inputVal.price = [0,100];
             },
-            show() {
-                this.active =! this.active;
+            togglePrice() {
+                this.inputVal.currentTab==='price' ? this.inputVal.currentTab='' : this.inputVal.currentTab='price'
             },
-            hide() {
-                this.active = false;
+            hidePrice() {
+                this.inputVal.currentTab=''
             },
+            onClickOutside(event) {
+                let arr = this.$refs.priceButton;
+                let arr1 = this.$refs.pricePopUp;
+                if (!arr || arr.contains(event.target) || !arr1 || arr1.contains(event.target)) return;
+                this.hidePrice()
+            },
+        },
+
+        mounted() {
+            document.addEventListener("click", this.onClickOutside);
+        },
+
+        beforeUnmount() {
+            document.removeEventListener("click", this.onClickOutside);
         },
 
     }

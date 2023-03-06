@@ -2,9 +2,9 @@
     <div style="width:100%">
         <div ref="search" class="w-full z-[10000]">
             <div class="w-full m-auto">
-                <img 
-                    class="absolute z-[1002] w-6 mt-5 ml-8" 
-                    src="/storage/images/vendor/leaflet/dist/marker-icon-2x.png">
+                <svg class="absolute top-8 left-8 w-8 h-8 fill-black z-[1002]">
+                    <use xlink:href="/storage/website-files/icons.svg#ri-search-line"></use>
+                </svg>
                 <input 
                     ref="loc"
                     class="relative rounded-full p-7 pl-24 border border-neutral-300 w-full font-normal z-[1001] focus:border-none focus:rounded-full focus:shadow-custom-7"
@@ -39,7 +39,7 @@
 <script>
 export default {
 
-    props: ['page', 'value'],
+    props: ['value'],
 
     computed: {
         inputVal: {
@@ -72,12 +72,12 @@ export default {
         },
         setPlace(place) {
             this.saveSearchData(place);
-            window.location.href = `/index/search?city=${place.name}&lat=${place.geometry.location.lat()}&lng=${place.geometry.location.lng()}`;
+            window.location.href = `/index/search?city=${place.name}&searchType=inPerson&live=false&lat=${place.geometry.location.lat()}&lng=${place.geometry.location.lng()}`;
         },
-        close (e) {
-            if (!this.$refs.search.contains(e.target)) {
-                this.inputVal.dropdown = false
-            }
+        onClickOutside(event) {
+            let arr = this.$refs.search;
+            if (!arr || arr.contains(event.target)) return;
+            this.inputVal.dropdown = false
         },
         saveSearchData(place) {
             axios.post('/search/storedata', {type: 'location', name: place.name.name});
@@ -95,12 +95,11 @@ export default {
     mounted() {
         this.autoComplete = new google.maps.places.AutocompleteService();
         this.service = new google.maps.places.PlacesService(document.getElementById("places"));
-        this.$refs.loc.focus()
-        document.addEventListener('click', this.close)
+        document.addEventListener('click', this.onClickOutside)
     },
 
     unmounted() {
-        document.removeEventListener('click',this.close)
+        document.removeEventListener('click',this.onClickOutside)
     }
 
 };

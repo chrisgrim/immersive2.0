@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Organizer;
+use App\Models\CuratedEventCheck;
 use App\Models\Event;
 use App\Models\MakeImage;
 use App\Models\Message;
@@ -61,14 +62,18 @@ class EventController extends Controller
      */
     public function fetch(Request $request)
     {
-        return Event::where('status','p')
-            ->orWhere('status','e')
-            ->with('user','clicks','category', 'location', 'remotelocations', 'organizer', 'shows')
+        return Event::whereIn('status',['p', 'e'])
+            ->with('user','clicks','category', 'location', 'remotelocations', 'organizer', 'shows', 'curatedCheck')
             ->when(request('date') === 'published', function ($q) {
-                return $q->orderByDesc('published_at');
+                $q->orderByDesc('published_at');
             })
             ->when(request('date') === 'updated', function ($q) {
-                return $q->orderByDesc('updated_at');
+                $q->orderByDesc('updated_at');
+            })
+            ->when(request('date') === 'twoweeks', function ($q) {
+                $q->whereDate(
+                    'closingDate','<', today()->addDays(14)
+                );
             })
             ->paginate(15);
     }
@@ -133,6 +138,7 @@ class EventController extends Controller
         if ($event->organizer->status != 'p') {
             $event->organizer->update(['status' => 'p']);
         }
+        $event->curatedCheck()->create();
         $slug = Event::finalSlug($event);
         MakeImage::finalize($event, $slug, 'event', null);
         if ($event->embargo_date && $event->embargo_date > Carbon::now()) {
@@ -220,4 +226,13 @@ class EventController extends Controller
             'name' => $request->input
         ]);
     }
+
+    /**
+     * Updated Curated Event Check
+     */
+    public function updateCheck(Request $request, CuratedEventCheck $curatedEventCheck)
+    {
+        $curatedEventCheck->update($request->all());
+    }
+
 }

@@ -111,7 +111,7 @@ class Event extends Model
 
     public function genreSelect()
     {
-        return $this->belongsToMany(Genre::class)->select('name');
+        return $this->belongsToMany(Genre::class)->select('genre_id');
     }
 
     public function pricerangesSelect()
@@ -225,6 +225,16 @@ class Event extends Model
     public function staffpick() 
     {
         return $this->hasOne(StaffPick::class);
+    }
+
+    /**
+    * Each event hasOne curanted check
+    *
+    * @return \Illuminate\Database\Eloquent\Relations\belongsTo
+    */
+    public function curatedCheck() 
+    {
+        return $this->hasOne(CuratedEventCheck::class);
     }
 
     /**

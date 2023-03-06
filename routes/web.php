@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EventController;
 
-
 Route::GET('/', 'EventController@index')->name('home');
 
 // Route::GET('/login/{provider}', 'Auth\LoginController@redirectToProvider');

@@ -31,23 +31,25 @@
                             </button>
                         </a>
                     </div>
-
                     <favorite 
                         :user="user"
                         :event="card" />
-
                     <a  
                         v-if="card.name"
                         :href="url(card)">
-                        <p class="font-medium">{{ card.name }}</p>
+                        <p class="font-medium text-black">{{ card.name }}</p>
                     </a>
-
-                    <ul class="m-0">
+                    <template v-if="card.tag_line">
+                        <div class="mb-4 block text-ellipsis line-clamp-2 w-full max-h-16 text-xl">
+                            {{ card.tag_line }} 
+                        </div>
+                    </template>
+                    <ul class="m-0 p-0 flex">
                         <li 
-                            class="inline-block mt-2" 
-                            v-for="(itemTag, index) in eventTags(card)" 
+                            class="text-xl list-disc mr-4 ml-4 first:list-none first:ml-0" 
+                            v-for="itemTag in eventTags(card)" 
                             :key="itemTag.id">
-                            {{ itemTag.name }}<span v-if="index != '2'">•</span>
+                            {{ itemTag.name }}
                         </li>
                     </ul>
                     <div class="absolute right-0 bottom-0 text-right font-extrabold">

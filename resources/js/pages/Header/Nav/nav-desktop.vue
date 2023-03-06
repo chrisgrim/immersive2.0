@@ -5,10 +5,10 @@
         class="nav w-full m-auto h-32 z-[1001]">
         <div 
             :class="{ 'open' : search.searchType, 'md:px-0 lg:px-0' : fullwidth, 'max-w-screen-xl px-32' : narrow, }"
-            class="nav_bar m-auto relative h-full grid gap-0 items-center grid-cols-3 md:px-12 lg:px-32">
+            class="nav_bar m-auto relative h-full items-center grid gap-0 grid-cols-5 md:px-12 lg:px-32">
             <!--  -->
             <!-- Home Button Section -->
-            <div class="inline-block relative leading-none">
+            <div class="inline-block relative leading-none col-span-1">
                 <a 
                     aria-label="Home Button"
                     href="/">
@@ -23,37 +23,39 @@
             </div>
 
             <!-- Search Section -->
-            <div class="w-full inline-block relative min-w-[22rem]">
+            <div class="w-full inline-block relative min-w-[30rem] col-span-3">
                 <!--  -->
                 <!-- If user clicks search bar -->
                 <template v-if="search.searchType">
                     <div class="w-full flex justify-center items-center">
+                        <p class="text-xl font-semibold">Search By:</p>
                         <button 
                             @click="search.searchType='l'"
                             :class="{ active : search.searchType==='l'}"
                             class="tab relative border-none p-4 text-1xl hover:text-black hover:font-medium">
-                            Locations
+                            Location
                         </button>
                         <button 
                             @click="search.searchType='t'"
                             :class="{ active : search.searchType==='t'}"
                             class="tab relative border-none p-4 text-1xl hover:text-black hover:font-medium">
-                            Categories/Tags
+                            Genre
                         </button>
                         <button 
                             @click="search.searchType='e'"
                             :class="{ active : search.searchType==='e'}"
                             class="tab relative border-none p-4 text-1xl hover:text-black hover:font-medium">
-                            Listings
+                            Name
                         </button>
+                        <div class="bg-black w-[.15rem] h-8"/>
                         <a 
-                            class="border-none text-1xl p-4 hover:text-black hover:font-medium"
-                            href="/index/search-online?&category=6,12,21,18,3,10,19">
-                            Remote 
+                            class="border-none text-1xl p-4 hover:text-black hover:font-medium hover:border-b-black"
+                            href="/index/search?&searchType=atHome">
+                            At Home 
                         </a>
                         <a 
                             class="border-none text-1xl p-4 hover:text-black hover:font-medium"
-                            href="/index/search-online?&category=23">
+                            href="/index/search?&category=23&searchType=atHome">
                             VR 
                         </a>
                     </div>
@@ -63,8 +65,8 @@
                     <div
                         class="w-full absolute top-0 bottom-0 z-[500] cursor-pointer" 
                         @click="openSearch" />
-                    <div class="p-4 border rounded-full flex justify-between items-center shadow-custom-3">
-                        <p class="text-gray-300">{{ city ? city : 'Start your search'}}</p>
+                    <div class="p-4 border rounded-full flex justify-between items-center shadow-custom-3 w-3/4 m-auto">
+                        <p class="text-gray-300 ml-4">{{ city ? city : 'Start your search'}}</p>
                         <div class="w-12 h-12 flex items-center justify-center rounded-full bg-default-red">
                             <svg class="w-8 h-8 fill-white">
                                 <use :xlink:href="`/storage/website-files/icons.svg#ri-search-line`" />
@@ -75,7 +77,9 @@
             </div>
 
             <!-- Menu Section -->
-            <NavMenu :user="user" />
+            <NavMenu 
+                class="col-span-1"
+                :user="user" />
         </div>
         <div 
             v-if="search.dropdown"

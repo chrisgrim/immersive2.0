@@ -3,25 +3,10 @@
         <!-- content -->
         <div class="relative">
             <div 
-                v-if="hasGenre"
-                class="m-8 p-8 rounded-3xl bg-white shadow-custom-1">
+                v-if="inputVal.currentTab==='genre'"
+                class="mx-8 mb-8 py-8 rounded-3xl bg-white shadow-custom-1">
                 <div 
-                    @click="toggleGenre"
-                    class="flex justify-between cursor-pointer">
-                    <div class="text-2xl">
-                        Type
-                    </div>
-                    <div class="font-semibold text-2xl text-right">
-                        <p v-if="inputVal.genre && inputVal.genre.name">{{ inputVal.genre.name}}</p>
-                        <p v-else>Search by Event Type</p>
-                    </div>
-                </div>
-            </div>
-            <div 
-                v-else
-                class="m-8 py-8 rounded-3xl bg-white shadow-custom-1">
-                <div 
-                    @click="toggleGenre"
+                    @click="hideGenre"
                     class="font-semibold text-4xl flex justify-between items-center px-8">
                     <span>Event Type</span>
                     <svg class="w-8 h-8">
@@ -62,28 +47,43 @@
                 </div>
                 <!-- list -->
                 <div 
-                    v-if="!inputVal.genre.name"
+                    v-if="!hasGenre"
                     class="mt-8 pl-8 overflow-y-hidden overflow-x-auto">
                     <div 
                         class="flex scroll-smooth overflow-x-auto" 
                         style="scroll-snap-type: x mandatory;">
                         <div 
-                            @click="selectGenre(genre.model)"
+                            @click="selectGenre(genre)"
                             v-for="genre in defaultGenres"
                             class="w-36 mr-4"
-                            :key="genre.model.id + genre.model.type">
+                            :key="genre.id + genre.type">
                             <div class="w-36 h-36 rounded-2xl overflow-hidden">
                                 <picture>       
                                     <source 
                                         type="image/webp" 
-                                        :srcset="`${$envImageUrl}${genre.model.thumbImagePath}`"> 
-                                    <img :src="`${$envImageUrl}${genre.model.thumbImagePath.slice(0, -4)}jpg`">
+                                        :srcset="`${$envImageUrl}${genre.thumbImagePath}`"> 
+                                    <img :src="`${$envImageUrl}${genre.thumbImagePath.slice(0, -4)}jpg`">
                                 </picture>
                             </div>
                             <p class="text-lg leading-6 mt-2">
-                                {{genre.model.name}}
+                                {{genre.name}}
                             </p>
                         </div>
+                    </div>
+                </div>
+            </div>
+            <div 
+                v-else
+                class="mx-8 mb-8 p-8 rounded-3xl bg-white shadow-custom-1">
+                <div 
+                    @click="showGenre"
+                    class="flex justify-between cursor-pointer">
+                    <div class="text-2xl">
+                        Type
+                    </div>
+                    <div class="font-semibold text-2xl text-right">
+                        <p v-if="hasGenre && hasGenre.name">{{ hasGenre.name}}</p>
+                        <p v-else>Search by Event Type</p>
                     </div>
                 </div>
             </div>
@@ -93,21 +93,21 @@
                 class="absolute w-full z-50 top-[13rem]">
                 <ul class="bg-white mx-8 px-8 pb-8 rounded-b-2xl min-h-[16rem]">
                     <li
-                        @click="selectGenre(genre.model)"
+                        @click="selectGenre(genre)"
                         class="flex items-center border-none cursor-pointer mt-4"
-                        :key="genre.model.id + genre.model.type"
-                        v-for="genre in searchOptions">
+                        :key="genre.id + genre.type"
+                        v-for="genre in limitedSearchOptions">
                         <span class="border rounded-xl mr-8 flex h-16 w-16 items-center justify-center overflow-hidden">
                             <picture
-                                v-if="genre.model.thumbImagePath">       
+                                v-if="genre.thumbImagePath">       
                                 <source 
                                     type="image/webp" 
-                                    :srcset="`${$envImageUrl}${genre.model.thumbImagePath}`"> 
-                                <img :src="`${$envImageUrl}${genre.model.thumbImagePath.slice(0, -4)}jpg`">
+                                    :srcset="`${$envImageUrl}${genre.thumbImagePath}`"> 
+                                <img :src="`${$envImageUrl}${genre.thumbImagePath.slice(0, -4)}jpg`">
                             </picture>
                             <p v-else>o</p>
                         </span>
-                        <p>{{genre.model.name}}</p>
+                        <p>{{genre.name}}</p>
                     </li>
                 </ul>
             </div>
@@ -116,10 +116,9 @@
 </template>
 
 <script>
-    
     export default {
 
-        props: ['value', 'loadOpen'],
+        props: ['value', 'categories'],
 
         components: {  },
 
@@ -128,51 +127,71 @@
                 get() { return this.value },
                 set(val) { this.$emit('input', val) }
             },
+            limitedSearchOptions() {
+                return this.searchOptions.slice(0,5)
+            },
+            hasGenre() {
+                if (this.inputVal.category && this.inputVal.category.length) {
+                    return this.inputVal.category[0]
+                }
+                if (this.inputVal.tag && this.inputVal.tag.length) {
+                    return this.inputVal.tag[0]
+                }
+                return null;
+            }
         },
 
         data() {
             return {
-                searchInput: null,
-                searchOptions: [],
-                hasGenre: this.loadOpen,
+                searchInput: this.assignType(),
+                searchOptions: this.categories ? this.categories : [],
                 dropdown: false,
-                defaultGenres: this.initializeGenres(),
+                defaultGenres: this.categories ? this.categories : [],
             }
         },
 
         methods: {
             async searchGenre() {
-                await axios.get('/api/search/navbar/tags', { params: { keywords: this.searchInput } })
+                await axios.get('/api/search/navbar/tags', { params: { keywords: this.searchInput, searchType:this.value.searchType } })
                 .then( res => {
+                    console.log(res.data);
                     this.searchOptions = res.data;
                 })
             },
             selectGenre(genre) {
-                this.inputVal.genre=genre
+                if (genre.type === 'c') { this.inputVal.category=[genre]}
+                if (genre.type === 't') { this.inputVal.tag=[genre]}
                 this.searchInput=genre.name
-                this.toggleGenre()
+                this.hideGenre()
             },
-            toggleGenre() {
-                this.hasGenre=!this.hasGenre
+            showGenre() {
+                this.inputVal.currentTab='genre'
                 this.dropdown=false
-                this.searchInput=this.inputVal.genre.name
+                this.assignType();
+            },
+            assignType() {
+                if (this.value.category && this.value.category.length) {
+                    this.searchInput=this.value.category[0].name
+                }
+                if (this.value.tag && this.value.tag.length) {
+                    this.searchInput=this.value.tag[0].name
+                }
+            },
+            hideGenre() {
+                this.inputVal.currentTab=''
+                this.dropdown=false
+                this.assignType();
             },
             clear() {
+                this.inputVal.category=this.inputVal.tag=[]
                 this.searchInput=null
-                this.inputVal.genre={}
             },
             onClickOutside(event) {
                 let arr =  this.$refs.genre;
                 let arr1 = this.$refs.genre1;
                 if (!arr || arr.contains(event.target) || !arr1 || arr1.contains(event.target)) return;
                 this.dropdown = false;
-                this.searchInput=this.inputVal.genre.name
-            },
-            async initializeGenres() {
-                await axios.get('/api/search/navbar/tags', { params: { keywords: this.searchInput } })
-                .then( res => {
-                    this.defaultGenres = this.searchOptions = res.data;
-                })
+                this.assignType();
             },
         },
         mounted() {

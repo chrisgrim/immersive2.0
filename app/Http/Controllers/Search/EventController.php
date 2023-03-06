@@ -25,30 +25,45 @@ class EventController extends Controller
 {
     public function index(Request $request)
     {
+        $hasLocationFilter = [];
         $datesFilter = [];
         $pricesFilter = [];
         $categoriesFilter = [];
         $tagsFilter = [];
         $latFilter = [];
+        $boundaryFilter = [];
+        $searchedCategories = [];
         $maxprice = ceil(Event::getMostExpensive());
+        $searchedCategories = [];
+        $searchedTags = [];
         $categories = Category::all();
         $tags = Genre::where('admin', 1)->orderBy('rank', 'desc')->get();
-        
 
+        if ($request->searchType === 'inPerson') { 
+            $inPersonCategories = Category::where('remote', false)->get();
+            $hasLocationFilter = Query::term()->field('hasLocation')->value(true);
+        }
+        if ($request->searchType === 'atHome') { 
+            $atHomeCategories = Category::where('remote', true)->get();
+            $hasLocationFilter = Query::term()->field('hasLocation')->value(false);
+        }
         if ($request->lat) {
             $latFilter = Query::geoDistance()->field('location_latlon')->distance('40km')->lat($request->lat)->lon($request->lng);
         }
         if ($request->category) { 
             $request->request->add(['category' => explode(",",$request->category)]); 
+            $searchedCategories = Category::find($request->category);
             $categoriesFilter = Query::terms()->field('category_id')->values($request->category);
         }
         if ($request->tag) { 
             $request->request->add(['tag' => explode(",",$request->tag)]); 
-            $tagsFilter = Query::terms()->field('genres.name')->values($request->tag);
+            $searchedTags = Genre::find($request->tag);
+            $tagsFilter = Query::terms()->field('genres.genre_id')->values($request->tag);
         }
         if ($request->price0) { 
             $request->request->add(['price' => [$request->price0,$request->price1 ]]); 
-            $pricesFilter = Query::range()->field('priceranges.price')->gte($request->price[0])->lte($request->price[1]);
+            if ($request->price[1] === 100) { $top=9999 ;} else { $top=$request->price[1];}
+            $pricesFilter = Query::range()->field('priceranges.price')->gte($request->price[0])->lte($top);
         }
         if ($request->start) { 
             $request->request->add(['dates' => [$request->start, $request->end]]); 
@@ -57,23 +72,32 @@ class EventController extends Controller
                 ->should(Query::term()->field('showtype')->value('a'))
                 ->minimumShouldMatch(1);
         }
-        if ($request->live) {
-            $request->request->add([
-                'mapboundary' => [
-                    '_northEast' => [ 'lat' => $request->NElat,'lng' => $request->NElng ],
-                    '_southWest' => [ 'lat' => $request->SWlat,'lng' => $request->SWlng ],
+         if ($request->live) {
+            $boundaryFilter = Query::bool()->filterRaw([
+                'geo_bounding_box' => [
+                    'location_latlon' => [
+                        'top_right' => [
+                            'lat' => $request->NElat,
+                            'lon' => $request->NElng,
+                        ],
+                        'bottom_left' => [
+                            'lat' => $request->SWlat,
+                            'lon' => $request->SWlng,
+                        ]
                     ]
-                ]);
+                ]
+            ]);
         }
-
         
         $query = Query::bool()
-            ->must( Query::range()->field('closingDate')->gte('now/d'))
-            ->must( Query::term()->field('hasLocation')->value(true))
-            ->when($request->price, function ($builder) use ($pricesFilter) { return $builder->must($pricesFilter); })
+            ->filter( Query::range()->field('closingDate')->gte('now/d'))
+            ->when( $request->searchType !== 'allEvents', function ($builder) use ($hasLocationFilter) { return $builder->filter($hasLocationFilter); })
+            ->when($request->price, function ($builder) use ($pricesFilter) { return $builder->filter($pricesFilter); })
             ->when($request->category, function ($builder) use ($categoriesFilter) { return $builder->filter($categoriesFilter); })
+            ->when($request->start, function ($builder) use ($datesFilter) { return $builder->filter($datesFilter); })
             ->when($request->tag, function ($builder) use ($tagsFilter) { return $builder->filter($tagsFilter); })
-            ->when($request->lat, function ($builder) use ($latFilter) { return $builder->filter($latFilter); });
+            ->when($request->searchType === 'inPerson' && isset($request->live) && $request->live === 'false', function ($builder) use ($latFilter) { return $builder->filter($latFilter); })
+            ->when($request->searchType === 'inPerson' && isset($request->live) && $request->live === 'true', function ($builder) use ($boundaryFilter) { return $builder->filter($boundaryFilter); });
 
         $builder = Event::searchQuery($query)
             ->load(['genres', 'category'])
@@ -88,51 +112,76 @@ class EventController extends Controller
 
         $docks = Dock::where('location', 'search')->with(['posts.limitedCards', 'shelves.publishedPosts.limitedCards', 'communities'])->orderBy('order', 'ASC')->get();
 
-        return view('events.search',compact('searchedevents', 'docks', 'categories', 'maxprice', 'tags'));
+        if ($request->searchType === 'inPerson' && isset($request->live)) {
+            return view('events.search',compact('searchedevents', 'docks', 'categories', 'maxprice', 'tags', 'inPersonCategories', 'searchedCategories', 'searchedTags'));
+        }
+        if ($request->searchType === 'atHome') {
+            return view('events.searchonline',compact('searchedevents', 'categories', 'tags', 'atHomeCategories', 'searchedCategories', 'searchedTags'));
+        }
+        return view('events.searchall',compact('searchedevents', 'docks', 'categories', 'maxprice', 'tags', 'searchedCategories', 'searchedTags'));
     }
 
-    public function mapBoundary(Request $request)
+    public function fetch(Request $request)
     {
-        $prices = Query::range()->field('priceranges.price')->gte($request->price[0])->lte($request->price[1]);
-        $categories = Query::terms()->field('category_id')->values($request->category);
-        $lat = Query::geoDistance()->field('location_latlon')->distance('40km')->lat($request->lat)->lon($request->lng);
-        $tags = Query::terms()->field('genres.name')->values($request->tag);
-        if ($request->mapboundary) {
-            $boundary = Query::bool()->filterRaw([
+        $hasLocationFilter = [];
+        $datesFilter = [];
+        $pricesFilter = [];
+        $categoriesFilter = [];
+        $tagsFilter = [];
+        $latFilter = [];
+        $boundaryFilter = [];
+
+        if ($request->searchType === 'inPerson') { 
+            $hasLocationFilter = Query::term()->field('hasLocation')->value(true);
+        }
+        if ($request->searchType === 'atHome') { 
+            $hasLocationFilter = Query::term()->field('hasLocation')->value(false);
+        }
+        if ($request->price) {
+            if ($request->price[1] === 100) { $top=9999 ;} else { $top=$request->price[1];}
+            $pricesFilter = Query::range()->field('priceranges.price')->gte($request->price[0])->lte($top);
+        }
+        if ($request->category) { 
+            $categoriesFilter = Query::terms()->field('category_id')->values(array_column($request->category, 'id'));
+        }
+        if ($request->tag) { 
+            $tagsFilter = Query::terms()->field('genres.genre_id')->values(array_column($request->tag, 'id'));
+        }
+        if ($request->location && $request->location['center']['lat']) {
+            $latFilter = Query::geoDistance()->field('location_latlon')->distance('40km')->lat($request->location['center']['lat'])->lon($request->location['center']['lng']);
+        }
+        if ($request->location && $request->location['mapboundary']) {
+            $boundaryFilter = Query::bool()->filterRaw([
                 'geo_bounding_box' => [
                     'location_latlon' => [
                         'top_right' => [
-                            'lat' => $request->mapboundary['_northEast']['lat'],
-                            'lon' => $request->mapboundary['_northEast']['lng'],
+                            'lat' => $request->location['mapboundary']['_northEast']['lat'],
+                            'lon' => $request->location['mapboundary']['_northEast']['lng'],
                         ],
                         'bottom_left' => [
-                            'lat' => $request->mapboundary['_southWest']['lat'],
-                            'lon' => $request->mapboundary['_southWest']['lng'],
+                            'lat' => $request->location['mapboundary']['_southWest']['lat'],
+                            'lon' => $request->location['mapboundary']['_southWest']['lng'],
                         ]
                     ]
                 ]
             ]);
-        } else {
-            $boundary = [];
         }
-        if ($request->dates) {
-            $dates = Query::bool()
-                ->should(Query::range()->field('shows.date')->gte($request->dates[0])->lte($request->dates[1]))
+        if ($request->searchDates) {
+            $datesFilter = Query::bool()
+                ->should(Query::range()->field('shows.date')->gte($request->searchDates[0])->lte($request->searchDates[1]))
                 ->should(Query::term()->field('showtype')->value('a'))
                 ->minimumShouldMatch(1);
-        } else {
-            $dates = [];
-        }
+        } 
 
         $query = Query::bool()
-            ->must( Query::range()->field('closingDate')->gte('now/d'))
-            ->must( Query::term()->field('hasLocation')->value(true))
-            ->when($request->price, function ($builder) use ($prices) { return $builder->must($prices); })
-            ->when($request->category, function ($builder) use ($categories) { return $builder->filter($categories); })
-            ->when($request->tag, function ($builder) use ($tags) { return $builder->filter($tags); })
-            ->when($request->dates, function ($builder) use ($dates) { return $builder->filter($dates); })
-            ->when($request->live, function ($builder) use ($boundary) { return $builder->filter($boundary); })
-            ->when(!$request->live, function ($builder) use ($lat) { return $builder->filter($lat); });
+            ->filter( Query::range()->field('closingDate')->gte('now/d'))
+            ->when( $request->searchType !== 'allEvents', function ($builder) use ($hasLocationFilter) { return $builder->filter($hasLocationFilter); })
+            ->when($request->price, function ($builder) use ($pricesFilter) { return $builder->filter($pricesFilter); })
+            ->when($request->category, function ($builder) use ($categoriesFilter) { return $builder->filter($categoriesFilter); })
+            ->when($request->tag, function ($builder) use ($tagsFilter) { return $builder->filter($tagsFilter); })
+            ->when($request->searchDates, function ($builder) use ($datesFilter) { return $builder->filter($datesFilter); })
+            ->when($request->location && isset($request->location['live']) && $request->location['live'], function ($builder) use ($boundaryFilter) { return $builder->filter($boundaryFilter); })
+            ->when($request->location && isset($request->location['live']) && !$request->location['live'], function ($builder) use ($latFilter) { return $builder->filter($latFilter); });
 
         $builder = Event::searchQuery($query)
             ->load(['genres', 'category'])
@@ -196,7 +245,7 @@ class EventController extends Controller
         return view('events.searchall',compact('allevents', 'categories', 'tags'));
     }
 
-    public function fetch(Request $request)
+    public function fetchAll(Request $request)
     {
         $request = Search::convertUrl($request);
          if ($request->price) {

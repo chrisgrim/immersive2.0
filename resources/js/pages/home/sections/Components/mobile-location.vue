@@ -3,25 +3,10 @@
         <!-- content -->
         <div class="relative">
             <div 
-                v-if="hasLocation"
-                class="m-8 p-8 rounded-3xl bg-white shadow-custom-1">
+                v-if="inputVal.currentTab==='location'"
+                class="mx-8 mb-8 py-8 rounded-3xl bg-white shadow-custom-1">
                 <div 
-                    @click="toggleLocation"
-                    class="flex justify-between cursor-pointer">
-                    <div class="text-2xl">
-                        Location
-                    </div>
-                    <div class="font-semibold text-2xl">
-                        <p v-if="inputVal.location && inputVal.location.name">{{ inputVal.location.name}}</p>
-                        <p v-else>Add Location</p>
-                    </div>
-                </div>
-            </div>
-            <div 
-                v-else
-                class="m-8 py-8 rounded-3xl bg-white shadow-custom-1">
-                <div 
-                    @click="toggleLocation"
+                    @click="hideLocation"
                     class="font-semibold text-4xl flex justify-between items-center px-8">
                     <span>Location</span>
                     <svg class="w-8 h-8">
@@ -53,7 +38,7 @@
                         <button 
                             v-if="searchInput"
                             class="border-none w-20 h-20 absolute right-16" 
-                            @click="clearLocation">
+                            @click="clear">
                             <svg class="w-10 h-10">
                                 <use :xlink:href="`/storage/website-files/icons.svg#ri-close-circle-line`" />
                             </svg>
@@ -80,6 +65,21 @@
                                 {{place.description}}
                             </p>
                         </div>
+                    </div>
+                </div>
+            </div>
+            <div 
+                v-else
+                class="mx-8 mb-8 p-8 rounded-3xl bg-white shadow-custom-1">
+                <div 
+                    @click="showLocation"
+                    class="flex justify-between cursor-pointer">
+                    <div class="text-2xl">
+                        Location
+                    </div>
+                    <div class="font-semibold text-2xl">
+                        <p v-if="inputVal.location && inputVal.location.name">{{ inputVal.location.name}}</p>
+                        <p v-else>Add Location</p>
                     </div>
                 </div>
             </div>
@@ -123,12 +123,11 @@
 
         data() {
             return {
-                searchInput: null,
+                searchInput: this.value.location.name,
                 searchOptions: [],
                 places:this.initializePlaces(),
                 defaultPlaces: this.initializePlaces(),
                 dropdown: false,
-                hasLocation:false,
             }
         },
 
@@ -148,15 +147,23 @@
             setPlace(place) {
                 this.dropdown=false
                 this.searchInput=place.name
-                this.inputVal.location=place
-                this.hasLocation=true
+                this.inputVal.location = {...this.inputVal.location, ...place}
+                this.inputVal.location.center.lat=place.geometry.location.lat()
+                this.inputVal.location.center.lng=place.geometry.location.lng()
+                this.inputVal.location.live=false
+                this.inputVal.currentTab=''
             },
-            clearLocation() {
+            clear() {
                 this.searchInput=''
-                this.inputVal.location={}
+                this.inputVal.location.name = null
             },
-            toggleLocation() {
-                this.hasLocation=!this.hasLocation
+            showLocation() {
+                this.inputVal.currentTab='location'
+                this.dropdown=false
+                this.searchInput=this.inputVal.location.name
+            },
+            hideLocation() {
+                this.inputVal.currentTab=''
                 this.dropdown=false
                 this.searchInput=this.inputVal.location.name
             },

@@ -7,14 +7,14 @@
                 class="relative ml-8" 
                 v-if="!user.hasCreatedOrganizers">
                 <a href="/events/create">
-                    <div class="text-1xl font-medium hover:text-black hover:font-semibold">Submit Your Experience (Free)</div>
+                    <div class="text-xl font-medium hover:text-black hover:font-semibold">Submit Your Experience (Free)</div>
                 </a>
             </div>
             <div 
                 class="relative ml-8" 
                 v-if="user.hasCreatedOrganizers">
                 <a href="/create/events/edit">
-                    <div class="text-1xl font-medium hover:text-black hover:font-semibold">Your Events</div>
+                    <div class="text-xl font-medium hover:text-black hover:font-semibold">Your Events</div>
                 </a>
             </div>
             <div class="relative ml-8">
@@ -26,7 +26,7 @@
         <template v-else>
             <div class="relative ml-8">
                 <a href="/register?create=true">
-                    <div class="text-1xl font-medium hover:text-black hover:font-semibold">Submit Your Experience (Free)</div>
+                    <div class="text-xl font-medium hover:text-black hover:font-semibold">Submit Your Experience (Free)</div>
                 </a>
             </div>
             <div class="relative ml-8">

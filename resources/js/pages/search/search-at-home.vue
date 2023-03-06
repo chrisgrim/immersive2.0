@@ -8,11 +8,11 @@
             :tags="tags"
             filter="online"
             :searched-categories="searchedCategories"
-            :at-home-categories="categories"
+            :at-home-categories="atHomeCategories"
             :categories="categories" />
         <div class="w-full">
             <div class="relative px-8 md:px-32 md:py-8">
-                <h3>All Events</h3>
+                <h3>{{title}}</h3>
                 <EventList 
                     :user="user"
                     :items="events.data" 
@@ -34,12 +34,13 @@
     export default {
         components: { Nav, Pagination, EventList, },
 
-        props:['searchedEvents','searchedCategories', 'user', 'tags', 'categories'],
+        props:['searchedEvents','atHomeCategories','searchedCategories', 'user', 'tags', 'categories'],
 
         data() {
             return {
                 events: this.searchedEvents,
                 searchData: this.initializeSearchData(),
+                title: 'At Home Events',
             }
         },
 
@@ -60,7 +61,7 @@
                 return {
                     paginate: 1,
                     currentTab: '',
-                    searchType:'allEvents',
+                    searchType:'atHome',
                     searchDates: this.initializeDates(),
                     dates: this.initializeDates(),
                     naturalDate: this.initializeNaturalDates(),

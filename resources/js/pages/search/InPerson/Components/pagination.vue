@@ -1,5 +1,5 @@
 <template>
-    <div class="relative w-full md:w-[inherit] md:absolute md:right-40 md:top-[-1rem]">
+    <div class="z-[2000] relative">
         <ul 
             v-if="total > perPage"
             class="text-center flex pb-8 justify-center items-center list-none">
@@ -29,7 +29,7 @@
                 </button>
             </li>
 
-            <li>
+            <li class="inline p-2 mt-2">
                 <button
                     :disabled="!nextPageUrl"
                     class="border-none shadow-custom-1 rounded-full p-2 inline-flex items-center justify-center font-medium"

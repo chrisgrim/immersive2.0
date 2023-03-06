@@ -8,8 +8,8 @@
                     :options="events"
                     label="name"
                     placeholder="Select the event"
-                    @search="onSearch"
-                    @search:focus="onSearch"
+                    @search="debounce"
+                    @search:focus="debounce"
                     @input="$v.event.$touch"
                     class="bg-white"
                     :class="{ 'error': $v.event.$error}" />
@@ -134,6 +134,13 @@
                 }
                 this.image_path = '/storage/reviews/default.png'
                 return this.url = '';
+            },
+            debounce(query) {
+                if (this.timeout) 
+                    clearTimeout(this.timeout); 
+                this.timeout = setTimeout(() => {
+                    this.onSearch(query)
+                }, 500); // delay
             },
         },
 

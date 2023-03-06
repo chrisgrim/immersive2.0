@@ -60,8 +60,7 @@ class SearchController extends Controller
     public function events(Request $request, SearchActions $searchActions)
     {
         $builder = Event::searchQuery($searchActions->nameSearch($request))
-            ->sort('rank', 'desc')
-            ->load(['user','clicks','category', 'location', 'remotelocations', 'organizer', 'shows'])
+            ->load(['user','clicks','category', 'location', 'remotelocations', 'organizer', 'curatedCheck', 'shows'])
             ->paginate(10);
 
         $filter = tap($builder->toArray(), function (array &$content) {

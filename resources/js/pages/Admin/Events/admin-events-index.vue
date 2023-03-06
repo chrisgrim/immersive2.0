@@ -186,7 +186,6 @@
 
         methods: {
             async onLoad(page) {
-                console.log('test');
                 await axios.get(`/admin/events/fetch?page=${page}&date=${this.dateFilter}`)
                 .then( res => { 
                     this.events = res.data 
@@ -194,9 +193,7 @@
             },
             async updatedCuratedCheck(check) {
                 await axios.post(`/admin/event-check/${check.id}/update`, check)
-                .then( res => { 
-                    console.log(res.data);
-                })
+                .then( res => { })
             },
             async onSearch(events) {
                 await axios.get('/api/admin/events/search', { params: { keywords: events } })

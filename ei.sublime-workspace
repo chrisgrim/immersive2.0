@@ -4,6 +4,130 @@
 		"selected_items":
 		[
 			[
+				"rel",
+				"reloadMap"
+			],
+			[
+				"live",
+				"liveSearch"
+			],
+			[
+				"sear",
+				"searchData"
+			],
+			[
+				"inPer",
+				"inPersonFilter"
+			],
+			[
+				"atH",
+				"atHomeFilter"
+			],
+			[
+				"se",
+				"searchType"
+			],
+			[
+				"rounded",
+				"rounded-full"
+			],
+			[
+				"upda",
+				"updatedCuratedCheck"
+			],
+			[
+				"cura",
+				"curated_check"
+			],
+			[
+				"curate",
+				"curatedEventCheck"
+			],
+			[
+				"Cura",
+				"CuratedEventCheck"
+			],
+			[
+				"item",
+				"items-center"
+			],
+			[
+				"clos",
+				"closingSoon"
+			],
+			[
+				"in",
+				"inputVal"
+			],
+			[
+				"organ",
+				"organizers"
+			],
+			[
+				"int",
+				"initializePlaces"
+			],
+			[
+				"rou",
+				"rounded-full"
+			],
+			[
+				"whi",
+				"whitespace-nowrap"
+			],
+			[
+				"searc",
+				"searchInput"
+			],
+			[
+				"sea",
+				"searchedCategories"
+			],
+			[
+				"search",
+				"searchedTags"
+			],
+			[
+				"cate",
+				"category"
+			],
+			[
+				"cat",
+				"category"
+			],
+			[
+				"ca",
+				"category"
+			],
+			[
+				"hide",
+				"hideDates"
+			],
+			[
+				"evet",
+				"eventContent"
+			],
+			[
+				"inP",
+				"inPersonCategories"
+			],
+			[
+				"at",
+				"atHomeCategories"
+			],
+			[
+				"inper",
+				"inPersonCategories"
+			],
+			[
+				"page",
+				"pageKey"
+			],
+			[
+				"rem",
+				"remoteFilter"
+			],
+			[
 				"hid",
 				"hideFullMap"
 			],
@@ -44,14 +168,6 @@
 				"pricesFilter"
 			],
 			[
-				"cate",
-				"categoriesFilter"
-			],
-			[
-				"in",
-				"initilizePrice"
-			],
-			[
 				"Im",
 				"ImageUpload"
 			],
@@ -62,18 +178,6 @@
 			[
 				"fon",
 				"font-semibold"
-			],
-			[
-				"sea",
-				"searchData"
-			],
-			[
-				"sear",
-				"searchData"
-			],
-			[
-				"search",
-				"searchDates"
 			],
 			[
 				"srs",
@@ -100,10 +204,6 @@
 				"defaultGenres"
 			],
 			[
-				"searc",
-				"searchGenre"
-			],
-			[
 				"Nam",
 				"NameSearch"
 			],
@@ -126,10 +226,6 @@
 			[
 				"place",
 				"place_id"
-			],
-			[
-				"rou",
-				"rounded-2xl"
 			],
 			[
 				"round",
@@ -188,10 +284,6 @@
 				"storeCategory"
 			],
 			[
-				"cat",
-				"categoryList"
-			],
-			[
 				"ser",
 				"searchInput"
 			],
@@ -218,10 +310,6 @@
 			[
 				"load",
 				"loadshelf"
-			],
-			[
-				"rounded",
-				"rounded-3xl"
 			],
 			[
 				"lat",
@@ -254,10 +342,6 @@
 			[
 				"font",
 				"font-light"
-			],
-			[
-				"ca",
-				"category_id"
 			],
 			[
 				"categ",
@@ -326,10 +410,6 @@
 			[
 				"location",
 				"locationInput"
-			],
-			[
-				"se",
-				"setPlace"
 			],
 			[
 				"h",
@@ -434,128 +514,11 @@
 			[
 				"us",
 				"userOpen"
-			],
-			[
-				"op",
-				"text-opacity-50"
-			],
-			[
-				"bg-s",
-				"bg-slate-700"
-			],
-			[
-				"fetc",
-				"fetchEvents"
-			],
-			[
-				"scro",
-				"scrollToEnd"
-			],
-			[
-				"con",
-				"container"
-			],
-			[
-				"fet",
-				"fetchConversation"
-			],
-			[
-				"event",
-				"eventconversations"
-			],
-			[
-				"messa",
-				"messagesOpen"
-			],
-			[
-				"inl",
-				"inline-flex"
-			],
-			[
-				"justi",
-				"justify-between"
-			],
-			[
-				"th",
-				"thumbImagePath"
-			],
-			[
-				"tp",
-				"top-4"
-			],
-			[
-				"Sear",
-				"SearchNav"
-			],
-			[
-				"str",
-				"stroke-black"
-			],
-			[
-				"is",
-				"isFavorited"
-			],
-			[
-				"arch",
-				"archived_events"
-			],
-			[
-				"ar",
-				"archived_events"
-			],
-			[
-				"item",
-				"items-center"
-			],
-			[
-				"it",
-				"items-center"
-			],
-			[
-				"bg-slate",
-				"bg-slate-200"
 			]
 		]
 	},
 	"buffers":
 	[
-		{
-			"file": "resources/js/pages/Search/vue-search-location-mobile.vue",
-			"settings":
-			{
-				"buffer_size": 6469,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "resources/js/mixins/search-basics-mixin.js",
-			"settings":
-			{
-				"buffer_size": 2461,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"contents": "<?php\n\nnamespace App\\Http\\Controllers\\Search;\n\nuse App\\Http\\Controllers\\Controller;\nuse App\\Models\\Event;\nuse App\\Models\\Search;\nuse App\\Models\\Genre;\nuse App\\Models\\Category;\nuse App\\Models\\EventRemoteSearchRule;\nuse Illuminate\\Http\\Request;\nuse Elastic\\ScoutDriverPlus\\Support\\Query;\nuse Illuminate\\Support\\Arr;\n\nclass OnlineSearchController extends Controller\n{\n    public function index(Request $request)\n    {\n        // $request = Search::convertUrl($request);\n        $datesFilter = [];\n        $pricesFilter = [];\n        $categoriesFilter = [];\n        $tagsFilter = [];\n        $latFilter = [];\n        $maxprice = ceil(Event::getMostExpensive());\n        $categories = Category::all();\n        $tags = Genre::where('admin', 1)->orderBy('rank', 'desc')->get();\n        \n        if ($request->dates) {\n            $datesQuery = Query::bool()\n                ->should(Query::range()->field('shows.date')->gte($request->dates[0])->lte($request->dates[1]))\n                ->should(Query::term()->field('showtype')->value('a'))\n                ->minimumShouldMatch(1);\n        } else {\n            $datesQuery = [];\n        }\n        if ($request->price) {\n            $priceQuery = Query::range()->field('priceranges.price')->gte($request->price[0])->lte($request->price[1]);\n        } else {\n            $priceQuery = [];\n        }\n        if ($request->tag) {\n            $tagQuery = Query::terms()->field('genres.name')->values($request->tag);\n        } else {\n            $tagQuery = [];\n        }\n        if ($request->category) {\n            $categoryQuery = Query::terms()->field('category_id')->values($request->category);\n        } else {\n            $categoryQuery = null;\n        }\n        $categories = Category::where('remote', 1)->get();\n        $tags = Genre::where('admin', 1)->orderBy('rank', 'desc')->get();\n\n        $query = Query::bool()\n            ->must( Query::range()->field('closingDate')->gte('now/d'))\n            ->must( Query::term()->field('hasLocation')->value(false))\n            ->when($request->price, function ($builder) use ($priceQuery) { return $builder->must($priceQuery); })\n            ->when($request->category, function ($builder) use ($categoryQuery) { return $builder->filter($categoryQuery); })\n            ->when($request->tag, function ($builder) use ($tagQuery) { return $builder->filter($tagQuery); })\n            ->when($request->dates, function ($builder) use ($datesQuery) { return $builder->filter($datesQuery); });\n\n        $builder = Event::searchQuery($query)\n            ->load(['genres', 'category'])\n            ->sortRaw(['published_at' => 'desc'])\n            ->paginate(12);\n\n        $content = tap($builder->toArray(), function (array &$content) {\n            $content['data'] = Arr::pluck($content['data'], 'model');\n        });\n\n        $onlineevents = json_encode($content);\n\n        return view('events.searchonline',compact('onlineevents', 'categories', 'tags'));\n    }\n\n    public function fetch(Request $request)\n    {\n        $request = Search::convertUrl($request);\n         if ($request->price) {\n            $priceQuery = Query::range()->field('priceranges.price')->gte($request->price[0])->lte($request->price[1]);\n        } else {\n            $priceQuery = [];\n        }\n        if ($request->tag) {\n            $tagQuery = Query::terms()->field('genres.name')->values($request->tag);\n        } else {\n            $tagQuery = [];\n        }\n        if ($request->category) {\n            $categoryQuery = Query::terms()->field('category_id')->values($request->category);\n        } else {\n            $categoryQuery = null;\n        }\n        if ($request->dates) {\n            $datesQuery = Query::bool()\n                ->should(Query::range()->field('shows.date')->gte($request->dates[0])->lte($request->dates[1]))\n                ->should(Query::term()->field('showtype')->value('a'))\n                ->minimumShouldMatch(1);\n        } else {\n            $datesQuery = [];\n        }\n\n        $query = Query::bool()\n            ->must( Query::range()->field('closingDate')->gte('now/d'))\n            ->must( Query::term()->field('hasLocation')->value(false))\n            ->when($request->price, function ($builder) use ($priceQuery) { return $builder->must($priceQuery); })\n            ->when($request->category, function ($builder) use ($categoryQuery) { return $builder->filter($categoryQuery); })\n            ->when($request->tag, function ($builder) use ($tagQuery) { return $builder->filter($tagQuery); })\n            ->when($request->dates, function ($builder) use ($datesQuery) { return $builder->filter($datesQuery); });\n\n        $builder = Event::searchQuery($query)\n            ->load(['genres', 'category'])\n            ->sortRaw(['published_at' => 'desc'])\n            ->paginate(12);\n\n        $content = tap($builder->toArray(), function (array &$content) {\n            $content['data'] = Arr::pluck($content['data'], 'model');\n        });\n\n        return json_encode($content);\n    }\n}\n",
-			"file": "app/Http/Controllers/Search/OnlineSearchController.php",
-			"file_size": 4668,
-			"file_write_time": 133069585645444394,
-			"settings":
-			{
-				"buffer_size": 4984,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "app/Http/Controllers/Search/EventController.php",
-			"settings":
-			{
-				"buffer_size": 13422,
-				"line_ending": "Unix"
-			}
-		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -693,42 +656,92 @@
 	"expanded_folders":
 	[
 		"/Users/chrisgrim/code/ei",
-		"/Users/chrisgrim/code/ei/app",
-		"/Users/chrisgrim/code/ei/app/Http",
-		"/Users/chrisgrim/code/ei/app/Http/Controllers",
-		"/Users/chrisgrim/code/ei/app/Http/Controllers/Search",
-		"/Users/chrisgrim/code/ei/resources",
-		"/Users/chrisgrim/code/ei/resources/js",
-		"/Users/chrisgrim/code/ei/resources/js/mixins",
-		"/Users/chrisgrim/code/ei/resources/js/pages",
-		"/Users/chrisgrim/code/ei/resources/sass",
-		"/Users/chrisgrim/code/ei/resources/views",
-		"/Users/chrisgrim/code/ei/routes"
+		"/Users/chrisgrim/code/ei/app"
 	],
 	"file_history":
 	[
-		"/Users/chrisgrim/code/ei/resources/js/pages/Search/Location/vue-mobile-location-album.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Search/Location/vue-location-mobile-nav.vue",
-		"/Users/chrisgrim/code/ei/app/Http/Controllers/Search/EventController.php",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Header/Nav/Nav-Desktop/Components/events.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Admin/Events/Components/event-review-component.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Admin/Events/admin-events-index.vue",
+		"/Users/chrisgrim/code/ei/app/Http/Controllers/Admin/SearchController.php",
 		"/Users/chrisgrim/code/ei/app/Http/Controllers/Search/SearchController.php",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Search/Location/Components/pagination.vue",
-		"/Users/chrisgrim/code/ei/routes/api.php",
-		"/Users/chrisgrim/code/ei/resources/views/layouts/meta.blade.php",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Home/Sections/home-mobile-search-nav.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Home/Sections/Components/mobile-price.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Home/Sections/Components/mobile-genre.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Home/Sections/Components/mobile-dates.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Events/event-show.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/create/tickets.vue",
+		"/Users/chrisgrim/code/ei/routes/web.php",
+		"/Users/chrisgrim/code/ei/app/Http/Controllers/Admin/EventController.php",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Search/search-in-person.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Search/search-in-person-mobile.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Search/InPerson/map-in-person-mobile.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Search/InPerson/nav-in-person-mobile.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Search/search-at-home.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Search/vue-search-all.vue",
+		"/Users/chrisgrim/code/ei/app/Http/Controllers/Search/EventController.php",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Home/Sections/Components/mobile-location.vue",
-		"/Users/chrisgrim/code/ei/resources/sass/app-lite.scss",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Home/Sections/Components/mobile-genre.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Home/Sections/nav-mobile.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Search/InPerson/album-in-person-mobile.vue",
+		"/Users/chrisgrim/code/ei/app/Models/Category.php",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Search/AtHome/Components/pagination.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Search/InPerson/nav-in-person.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Search/InPerson/Components/pagination.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Search/vue-search-all-mobile.vue",
+		"/Users/chrisgrim/code/ei/resources/views/events/searchall.blade.php",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Header/Nav/Nav-Desktop/Components/location-google.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Header/Nav/nav-desktop.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Search/AtHome/nav-at-home-mobile.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Search/AtHome/nav-at-home.vue",
+		"/Users/chrisgrim/code/ei/resources/js/app.js",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Search/search-at-home-mobile.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Header/Nav/Nav-Desktop/Components/tags.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Header/Nav/Nav-Desktop/nav-desktop-search.vue",
+		"/Users/chrisgrim/code/ei/routes/admin.php",
+		"/Users/chrisgrim/code/ei/app/Models/Event.php",
+		"/Users/chrisgrim/code/ei/app/Models/CuratedEventCheck.php",
+		"/Users/chrisgrim/code/ei/database/migrations/2019_08_21_172519_create_events_table.php",
+		"/Users/chrisgrim/code/ei/database/migrations/2023_02_22_005554_create_curated_event_checks_table.php",
+		"/Users/chrisgrim/code/ei/resources/js/components/pagination.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Search/InPerson/map-in-person.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Events/Show/event-show-details.vue",
 		"/Users/chrisgrim/code/ei/resources/js/mixins/search-basics-mixin.js",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Header/Nav/Nav-Desktop/Components/location.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Header/Nav/Nav-Desktop/nav-desktop-menu.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Header/Nav/Nav-Desktop/nav-desktop-profile.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Search/Filter/vue-filter-category.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Search/Filter/vue-filter-dates.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Search/Filter/vue-filter-price.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Search/Filter/vue-filter-tag.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Search/AtHome/album-at-home.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Search/InPerson/album-in-person.vue",
+		"/Users/chrisgrim/code/ei/tailwind.config.js",
+		"/Users/chrisgrim/code/ei/resources/views/events/search.blade.php",
+		"/Users/chrisgrim/code/ei/resources/views/events/searchonline.blade.php",
+		"/Users/chrisgrim/code/ei/app/Models/Genre.php",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Home/Sections/Components/mobile-price.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Home/Sections/Components/mobile-dates.vue",
+		"/Users/chrisgrim/code/ei/node_modules/async/dist/async.js",
+		"/Users/chrisgrim/code/ei/sftp-config.json",
+		"/Users/chrisgrim/code/ei/resources/views/home/index.blade.php",
+		"/Users/chrisgrim/code/ei/app/Http/Controllers/EventController.php",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Home/index-mobile.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Search/vue-search-online.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Search/vue-search-location-mobile.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Search/Location/vue-location-mobile-nav.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Search/vue-search-online-mobile.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Search/Online/vue-online-nav-mobile.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Search/Online/vue-online-nav.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Search/Online/vue-online-mobile-nav.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Home/Sections/home-mobile-search-nav.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Search/Online/vue-online-desktop-search-nav.vue",
+		"/Users/chrisgrim/code/ei/routes/api.php",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Search/Location/vue-location-desktop-nav.vue",
+		"/Users/chrisgrim/code/ei/app/Http/Controllers/Search/OnlineSearchController.php",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Search/Location/vue-mobile-location-album.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Search/Location/Components/pagination.vue",
+		"/Users/chrisgrim/code/ei/resources/views/layouts/meta.blade.php",
+		"/Users/chrisgrim/code/ei/resources/sass/app-lite.scss",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Search/Location/vue-location-map-mobile.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Search/Location/Components/location-search.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Search/Filter/vue-filter-dates.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Search/Location/vue-location-desktop-nav.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Search/Location/vue-location-map.vue",
-		"/Users/chrisgrim/code/ei/resources/views/events/search.blade.php",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Search/vue-search-location-mobile.vue",
-		"/Users/chrisgrim/code/ei/resources/js/app.js",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Home/Sections/Components/mobile-name-search.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Creation/EventPage/photo.vue",
 		"/Users/chrisgrim/code/ei/resources/js/components/image-upload.vue",
@@ -737,7 +750,6 @@
 		"/Users/chrisgrim/code/ei/resources/js/pages/Creation/Settings/tickets.vue",
 		"/Users/chrisgrim/code/ei/app/Console/Commands/ForgotFinishEventsCommand.php",
 		"/Users/chrisgrim/code/ei/app/Http/Controllers/Creation/IdeaController.php",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Home/index-mobile.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Home/index.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/staffpicks/staffpicks-show.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Search/Online/vue-online-album.vue",
@@ -754,7 +766,6 @@
 		"/Users/chrisgrim/code/ei/resources/js/pages/Home/Sections/Components/vue-hero-image.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Home/Sections/Components/vue-album-image.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Header/Nav/Nav-Mobile/nav-mobile-profile.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Header/Nav/Nav-Desktop/nav-desktop-profile.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Events/Show/event-show-staffpick.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Events/Show/event-show-header.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Events/Show/event-show-about.vue",
@@ -776,65 +787,7 @@
 		"/Users/chrisgrim/code/ei/resources/js/pages/create/organizer-admin.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/create/image.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/create/category.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Admin/Organizers/admin-organizers-index.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Admin/Events/Components/event-show-component.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Admin/Events/admin-events-requests.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Admin/Events/admin-events-purgatory.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Admin/Events/admin-events-index.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Admin/Events/admin-events-boneyard.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Admin/Creation/admin-categories-index.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Admin/components/albums.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Admin/Communities/admin-communities-index.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Admin/admin-staff-picks.vue",
-		"/Users/chrisgrim/code/ei/resources/js/components/Vue-List.vue",
-		"/Users/chrisgrim/code/ei/resources/js/components/Vue-Album-Simple.vue",
-		"/Users/chrisgrim/code/ei/resources/views/home/index.blade.php",
-		"/Users/chrisgrim/code/ei/sftp-config.json",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Home/Sections/Components/mobile.price.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Home/Sections/Components/mobile-categories.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Header/Nav/Nav-Desktop/nav-desktop-menu.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Header/Nav/Nav-Desktop/Components/location-google.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Creation/Settings/nav-settings.vue",
-		"/Users/chrisgrim/code/ei/resources/views/creation/main.blade.php",
-		"/Users/chrisgrim/code/ei/resources/views/events/show.blade.php",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Events/Show/event-show-location.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Creation/EventPage/location.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/create/location-google.vue",
-		"/Users/chrisgrim/code/ei/resources/views/welcome.blade.php",
-		"/Users/chrisgrim/code/ei/resources/views/communities/create.blade.php",
-		"/Users/chrisgrim/code/ei/resources/views/communities/edit.blade.php",
-		"/Users/chrisgrim/code/ei/resources/views/communities/posts/create.blade.php",
-		"/Users/chrisgrim/code/ei/resources/views/communities/posts/edit.blade.php",
-		"/Users/chrisgrim/code/ei/resources/views/create/index.blade.php",
-		"/Users/chrisgrim/code/ei/resources/views/create/initial.blade.php",
-		"/Users/chrisgrim/code/ei/resources/views/adminArea/index.blade.php",
-		"/Users/chrisgrim/code/ei/resources/views/adminArea/show.blade.php",
-		"/Users/chrisgrim/code/ei/resources/views/adminArea/showapproval.blade.php",
-		"/Users/chrisgrim/code/ei/resources/views/adminArea/showcommunityapproval.blade.php",
-		"/Users/chrisgrim/code/ei/resources/views/adminArea/showorgapproval.blade.php",
-		"/Users/chrisgrim/code/ei/resources/views/auth/login.blade.php",
-		"/Users/chrisgrim/code/ei/resources/views/auth/register.blade.php",
-		"/Users/chrisgrim/code/ei/resources/views/categories/show.blade.php",
-		"/Users/chrisgrim/code/ei/resources/views/communities/index.blade.php",
-		"/Users/chrisgrim/code/ei/resources/views/communities/posts/show.blade.php",
-		"/Users/chrisgrim/code/ei/resources/views/communities/show.blade.php",
-		"/Users/chrisgrim/code/ei/resources/views/errors/403.blade.php",
-		"/Users/chrisgrim/code/ei/resources/views/errors/404.blade.php",
-		"/Users/chrisgrim/code/ei/resources/views/errors/503.blade.php",
-		"/Users/chrisgrim/code/ei/resources/views/events/edit.blade.php",
-		"/Users/chrisgrim/code/ei/resources/views/events/searchall.blade.php",
-		"/Users/chrisgrim/code/ei/resources/views/events/searchonline.blade.php",
-		"/Users/chrisgrim/code/ei/resources/views/legal/disclaimer.blade.php",
-		"/Users/chrisgrim/code/ei/resources/views/legal/privacy.blade.php",
-		"/Users/chrisgrim/code/ei/resources/views/legal/terms.blade.php",
-		"/Users/chrisgrim/code/ei/resources/views/messages/index.blade.php",
-		"/Users/chrisgrim/code/ei/resources/views/organizers/create.blade.php",
-		"/Users/chrisgrim/code/ei/resources/views/organizers/show.blade.php",
-		"/Users/chrisgrim/code/ei/resources/views/profiles/account.blade.php",
-		"/Users/chrisgrim/code/ei/resources/views/profiles/notifications.blade.php",
-		"/Users/chrisgrim/code/ei/resources/views/profiles/show.blade.php",
-		"/Users/chrisgrim/code/ei/resources/views/staffpicks/show.blade.php",
-		"/Users/chrisgrim/code/ei/webpack.mix.js"
+		"/Users/chrisgrim/code/ei/resources/js/pages/Admin/Organizers/admin-organizers-index.vue"
 	],
 	"find":
 	{
@@ -845,6 +798,14 @@
 		"height": 164.0,
 		"where_history":
 		[
+			"/Users/chrisgrim/code/ei/resources/js/pages/Header",
+			"/Users/chrisgrim/code/ei/resources/js/pages/Header/Nav",
+			"/Users/chrisgrim/code/ei/resources/js",
+			"/Users/chrisgrim/code/ei/app",
+			"/Users/chrisgrim/code/ei/resources/js/pages/Home",
+			"/Users/chrisgrim/code/ei/resources",
+			"/Users/chrisgrim/code/ei",
+			"/Users/chrisgrim/code/ei/routes",
 			"/Users/chrisgrim/code/ei/resources/js/pages/Search",
 			"/Users/chrisgrim/code/ei/resources",
 			"/Users/chrisgrim/code/ei/resources/js/pages/Search",
@@ -964,14 +925,6 @@
 			"/Users/chrisgrim/code/ei/resources/js/pages/home",
 			"/Users/chrisgrim/code/ei/resources",
 			"/Users/chrisgrim/code/ei/resources/js",
-			"/Users/chrisgrim/code/ei/resources",
-			"/Users/chrisgrim/code/ei/resources/js",
-			"/Users/chrisgrim/code/ei/resources/js/pages/Search",
-			"/Users/chrisgrim/code/ei/app/Http",
-			"/Users/chrisgrim/code/ei/resources/js",
-			"/Users/chrisgrim/code/ei/resources/sass",
-			"/Users/chrisgrim/code/ei/app/Http",
-			"/Users/chrisgrim/code/ei/resources/js/pages",
 			"/Users/chrisgrim/code/ei/resources"
 		]
 	},
@@ -980,134 +933,134 @@
 		"case_sensitive": false,
 		"find_history":
 		[
-			"convertUrl",
-			"isReady",
-			"tags",
-			"page",
-			"toggleFullMap",
-			"page",
-			"toggleSearch",
-			"toggle",
-			"selectPage",
-			"selectpage",
-			"updateMap",
-			"next",
-			"value",
-			"next",
-			"toggle",
-			"showOptions",
-			"toggleSearch",
-			"open",
-			"showPrice",
-			"toggle",
-			"hasGenre",
-			"hasCalendar",
-			"hasLocation",
-			"selectLocation",
-			"toggle",
-			"togge",
-			"toggle",
-			"toggke",
-			"togge",
-			"initializeSearchData",
-			"hideLocation",
-			"showLocation",
-			"toggleLocation",
-			"hasLocation",
-			"hasPrice",
-			"showPrice",
-			"isReady",
-			"hideFullMap",
+			"onSearch",
+			"eventList",
 			"fullMap",
-			"searchData",
-			"MobileSearchResults",
-			"min",
-			"MobileSearchResults",
-			"geometry",
-			"fullMap",
-			"FullMap",
-			"fullMap",
-			"toggleFullMap",
-			"city",
-			"refresh",
+			"updateEvents",
 			"debounce",
 			"Update",
 			"update",
-			"Map",
-			"map",
-			"refresh",
-			"inputval",
-			"mapobject",
-			"invalidateSize",
-			"mapObject",
-			"mapupdate",
-			"map",
-			"mapUpdate",
-			"updateEvents",
-			"lat",
-			"initializeCenter",
-			"hideFullMap",
-			"showFullMap",
-			"                    @click=\"showFullMap\"\n",
-			"showFullMap",
-			"showWideMap",
-			"fixedprice",
-			"eventsWithLoc",
-			"widenMap",
-			"map",
+			"onSubmit",
+			"onSearch",
 			"onMapSearch",
-			"initilize",
-			"initializeCenter",
-			"Update",
-			"update",
-			"boundsUpdate",
-			"update",
-			"Update",
-			"update",
-			"updateMap",
-			"centerUpdate",
-			"currentCenter",
-			"refresh",
-			"toggle",
-			"value",
-			"next",
-			"tag",
-			"category",
-			"searchData",
-			"dates",
-			"data",
-			"addPushState",
-			"initializeSearchData",
-			"clear",
-			"searchData",
-			"data",
-			"onlinePaginate",
-			"paginate",
-			"addPushState",
+			"onSearch",
 			"updateEvents",
-			"MobileSearchNav",
-			"mapSearch",
-			"search",
-			"updateEvents",
-			"filter",
-			"initilizeLatitude",
-			"boundaryFilter",
-			"lat",
-			"request-",
-			"boundary",
-			"maxprice",
-			"dates",
-			"getdetails",
-			"page",
-			"initializeSearchData",
-			"clear",
+			"->paginate(5);",
+			"selectLocation",
+			"mobile",
+			"endLoading",
+			"atHomeFilter",
+			"type",
+			"Type",
+			"type",
+			"Type",
+			"type",
+			"20",
+			"$request->live",
+			" && isset($request->live)",
+			"atHomeCategories",
+			"esam",
+			"mapKey",
+			"/storage/website-files/icons.svg#ri-search-line",
+			"nav_bar",
+			"','<',",
+			"(\n",
+			"dateFilter",
+			"onLoad",
+			"updatedCuratedCheck",
+			"updatedSocialCheck",
+			"updatedCuratedCheck",
+			"check",
+			"Number(1)",
+			".curated",
+			"curated",
+			"social",
+			"variation.primary",
+			"16",
+			"remainingDays",
+			"remaining",
+			"24",
+			"update",
+			"childNav",
+			"[calc(100vh-9rem)]",
+			"md",
+			"md:",
+			"debounce",
 			"Clear",
 			"clear",
-			"inputVal",
+			"clearLocation",
 			"initializeSearchData",
-			"City",
-			"city",
-			"City"
+			"16",
+			"20",
+			"selectGenre",
+			"genre",
+			"ml-16",
+			"disc",
+			"80km",
+			"20",
+			"inPerson",
+			"childNav",
+			"debounce",
+			"(5)",
+			"40km",
+			"20",
+			"max",
+			"value",
+			"loc",
+			"close",
+			"24",
+			"36",
+			"loc",
+			"searchedevents",
+			"isReady",
+			"remote",
+			"isReady",
+			"SearchAlbum",
+			"SearchNav",
+			"searchData",
+			"initializeNaturalDates",
+			"input",
+			"natura",
+			"searchedEvents",
+			"paginate",
+			"md",
+			"slice",
+			"list",
+			"generateSearchList",
+			"tag",
+			"generateSearchList",
+			"debounce",
+			"value",
+			"page",
+			"dropdown",
+			"input",
+			"update",
+			"onSelect",
+			"placeholder",
+			"VueList",
+			"close",
+			"contains",
+			"xl",
+			"tagButton",
+			"tagPopUp",
+			"tagButton",
+			"hasTags",
+			"tag",
+			"name",
+			"genreSelect",
+			"onSelect",
+			"hasLocationFilter",
+			"category_id",
+			"searchedCategories",
+			"category",
+			"catPopUp",
+			"category",
+			"push",
+			"isShowing",
+			"toggleCategory",
+			"datesButton",
+			"Category",
+			"dates"
 		],
 		"highlight": false,
 		"in_selection": false,
@@ -1129,145 +1082,8 @@
 	"groups":
 	[
 		{
-			"selected": 3,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "resources/js/pages/Search/vue-search-location-mobile.vue",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 6469,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								799,
-								799
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Vuejs Complete Package/vue.tmLanguage",
-							"tabs_extra_last_activated": 1676396830.23,
-							"tabs_extra_last_activated_sheet_index": 0
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "resources/js/mixins/search-basics-mixin.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2461,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1957,
-								1957
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"tabs_extra_last_activated": 1676397124.38,
-							"tabs_extra_last_activated_sheet_index": 1
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "app/Http/Controllers/Search/OnlineSearchController.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4984,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								445,
-								455
-							],
-							[
-								3025,
-								3035
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"tabs_extra_last_activated": 1676417475.8,
-							"tabs_extra_last_activated_sheet_index": 2
-						},
-						"translation.x": 0.0,
-						"translation.y": 1147.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "app/Http/Controllers/Search/EventController.php",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 13422,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"tabs_extra_last_activated": 1676434256.65,
-							"tabs_extra_last_activated_sheet_index": 3
-						},
-						"translation.x": 0.0,
-						"translation.y": 1632.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				}
 			]
 		}
 	],
@@ -1334,7 +1150,7 @@
 	"project": "ei.sublime-project",
 	"replace":
 	{
-		"height": 58.0
+		"height": 114.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1884,7 +1700,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 276.0,
+	"side_bar_width": 392.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

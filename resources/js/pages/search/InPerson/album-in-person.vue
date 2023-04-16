@@ -25,7 +25,7 @@
                     <div 
                         v-if="card.category"
                         class="category">
-                        <a :href="`/index/search-all?&category=${card.category.id}`">
+                        <a :href="`/index/search?category=${card.category.id}&searchType=allEvents`">
                             <button class="py-3 px-4 mb-4 rounded-full uppercase text-lg">
                                 {{ card.category.name }}
                             </button>

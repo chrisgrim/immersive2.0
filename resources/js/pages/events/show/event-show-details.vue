@@ -76,7 +76,7 @@
                 v-for="item in event.genres">
                 <a 
                     v-if="item.admin == 1" 
-                    :href="`/index/search-all?tag=${item.name}`"><b><span> {{ item.name }} </span></b></a>
+                    :href="`/index/search?tag=${item.id}&searchType=allEvents`"><b><span> {{ item.name }} </span></b></a>
                 <span v-else> 
                     {{ item.name }} 
                 </span>

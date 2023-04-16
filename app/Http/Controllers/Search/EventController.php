@@ -33,6 +33,7 @@ class EventController extends Controller
         $latFilter = [];
         $boundaryFilter = [];
         $searchedCategories = [];
+        $searchedevents = [];
         $maxprice = ceil(Event::getMostExpensive());
         $searchedCategories = [];
         $searchedTags = [];
@@ -199,6 +200,7 @@ class EventController extends Controller
     {
         $request = Search::convertUrl($request);
         $categories = Category::all();
+        $searchedevents = [];
         $tags = Genre::where('admin', 1)->orderBy('rank', 'desc')->get();
          if ($request->price) {
             $priceQuery = Query::range()->field('priceranges.price')->gte($request->price[0])->lte($request->price[1]);

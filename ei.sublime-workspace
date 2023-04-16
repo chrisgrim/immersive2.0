@@ -656,10 +656,13 @@
 	"expanded_folders":
 	[
 		"/Users/chrisgrim/code/ei",
-		"/Users/chrisgrim/code/ei/app"
+		"/Users/chrisgrim/code/ei/app",
+		"/Users/chrisgrim/code/ei/app/Console",
+		"/Users/chrisgrim/code/ei/app/Console/Commands"
 	],
 	"file_history":
 	[
+		"/Users/chrisgrim/code/ei/app/Console/Commands/RenewEvents.php",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Header/Nav/Nav-Desktop/Components/events.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Admin/Events/Components/event-review-component.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Admin/Events/admin-events-index.vue",
@@ -786,8 +789,7 @@
 		"/Users/chrisgrim/code/ei/resources/js/pages/create/organizer.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/create/organizer-admin.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/create/image.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/create/category.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Admin/Organizers/admin-organizers-index.vue"
+		"/Users/chrisgrim/code/ei/resources/js/pages/create/category.vue"
 	],
 	"find":
 	{
@@ -1700,7 +1702,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 392.0,
+	"side_bar_width": 340.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

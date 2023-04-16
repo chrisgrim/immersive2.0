@@ -48,6 +48,9 @@ class RenewEvents extends Command
         foreach ($events as $event) {
             // $user = User::find($event->organizer->user_id)->email;
             // Mail::to($user)->send(new EventRenew($event));
+            if ($event->showtype === 'o' || $event->showtype === 'a') {
+                Mail::to('kester.corinna@gmail.com')->send(new EventRenew($event));
+            }
             Mail::to('chgrim@gmail.com')->send(new EventRenew($event));
         }
     }

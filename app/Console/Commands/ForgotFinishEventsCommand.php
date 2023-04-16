@@ -79,7 +79,7 @@ class ForgotFinishEventsCommand extends Command
                             'event' => $event->name ? $event->name : 'Your event',
                             'name' => $event->user->name,
                         ];
-                        Mail::to(['chgrim@gmail.com', 'kester.corinna@gmail.com'])->send(new EventReminder($attributes));
+                        Mail::to('chgrim@gmail.com')->send(new EventReminder($attributes));
                         // Mail::to($event->user->email)->send(new EventReminder($attributes));
                         // $event->user->update(['reminder' => 2]);
                     }

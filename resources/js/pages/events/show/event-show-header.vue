@@ -22,7 +22,7 @@
         <nav v-else>
             <div class="py-6 flex items-center justify-between">
                 <p class="text-xl">
-                    <a :href="`/`" class="underline">Everything Immersive</a> > <a :href="`/index/search-all?&category=${event.category.id}`" class="underline">{{event.category.name}}</a> > {{event.name}}
+                    <a :href="`/`" class="underline">Everything Immersive</a> > <a :href="`/index/search?category=${event.category.id}&searchType=allEvents`" class="underline">{{event.category.name}}</a> > {{event.name}}
                 </p>
                 <favorite 
                     :mobile="mobile"

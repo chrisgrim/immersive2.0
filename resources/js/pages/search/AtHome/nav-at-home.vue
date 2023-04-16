@@ -30,7 +30,7 @@
     
     export default {
 
-        props:['value', 'filter', 'atHomeCategories', 'searchedCategories', 'tags'],
+        props:['value', 'filter', 'atHomeCategories', 'tags'],
 
         components: { VueFilterDates, VueFilterPrice, VueFilterCategory, VueFilterTag },
 

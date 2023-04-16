@@ -34,7 +34,7 @@
     export default {
         components: { Nav, Pagination, EventList, },
 
-        props:['searchedEvents','atHomeCategories','searchedCategories', 'user', 'tags', 'categories'],
+        props:['searchedEvents','atHomeCategories','searchedCategories', 'searchedTags', 'user', 'tags', 'categories'],
 
         data() {
             return {

@@ -7,9 +7,7 @@
             v-model="searchData"
             :tags="tags"
             filter="online"
-            :searched-categories="searchedCategories"
-            :at-home-categories="categories"
-            :categories="categories" />
+            :at-home-categories="categories" />
         <div class="w-full">
             <div class="relative px-8 md:px-32 md:py-8">
                 <h3>All Events</h3>
@@ -34,7 +32,7 @@
     export default {
         components: { Nav, Pagination, EventList, },
 
-        props:['searchedEvents','searchedCategories', 'user', 'tags', 'categories'],
+        props:['searchedEvents','searchedCategories','searchedTags', 'user', 'tags', 'categories'],
 
         data() {
             return {

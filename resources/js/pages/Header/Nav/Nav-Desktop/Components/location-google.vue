@@ -80,7 +80,7 @@ export default {
             this.inputVal.dropdown = false
         },
         saveSearchData(place) {
-            axios.post('/search/storedata', {type: 'location', name: place.name.name});
+            axios.post('/search/storedata', {type: 'location', name: place.name});
         },
         initializePlaces() {
             return [

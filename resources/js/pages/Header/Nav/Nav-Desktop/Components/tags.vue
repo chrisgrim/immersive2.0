@@ -73,15 +73,17 @@ export default {
             })
         },
         selectGenre(genre) {
-            this.saveSearchData();
+            this.saveSearchData(genre);
             if (genre.type === 'c') { 
                  window.location.href = `/index/search?category=${genre.id}&searchType=allEvents`
             }
             if (genre.type === 't') { 
                 window.location.href = `/index/search?tag=${genre.id}&searchType=allEvents`}
         },
-        saveSearchData() {
-            axios.post('/search/storedata', {type: 'category', name: this.searchInput.name});
+        saveSearchData(genre) {
+            if (genre.type === 'c') { 
+                axios.post('/search/storedata', {type: 'category', name: genre.name});
+            }
         },
         onClickOutside(event) {
             let arr = this.$refs.search;

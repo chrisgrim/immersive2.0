@@ -90,9 +90,11 @@ class EventController extends Controller
             ]);
         }
         
+
         $query = Query::bool()
             ->filter( Query::range()->field('closingDate')->gte('now/d'))
-            ->when( $request->searchType !== 'allEvents', function ($builder) use ($hasLocationFilter) { return $builder->filter($hasLocationFilter); })
+            ->when( $request->searchType === 'atHome', function ($builder) use ($hasLocationFilter) { return $builder->filter($hasLocationFilter); })
+            ->when( $request->searchType === 'inPerson', function ($builder) use ($hasLocationFilter) { return $builder->filter($hasLocationFilter); })
             ->when($request->price, function ($builder) use ($pricesFilter) { return $builder->filter($pricesFilter); })
             ->when($request->category, function ($builder) use ($categoriesFilter) { return $builder->filter($categoriesFilter); })
             ->when($request->start, function ($builder) use ($datesFilter) { return $builder->filter($datesFilter); })
@@ -176,7 +178,8 @@ class EventController extends Controller
 
         $query = Query::bool()
             ->filter( Query::range()->field('closingDate')->gte('now/d'))
-            ->when( $request->searchType !== 'allEvents', function ($builder) use ($hasLocationFilter) { return $builder->filter($hasLocationFilter); })
+            ->when( $request->searchType === 'atHome', function ($builder) use ($hasLocationFilter) { return $builder->filter($hasLocationFilter); })
+            ->when( $request->searchType === 'inPerson', function ($builder) use ($hasLocationFilter) { return $builder->filter($hasLocationFilter); })
             ->when($request->price, function ($builder) use ($pricesFilter) { return $builder->filter($pricesFilter); })
             ->when($request->category, function ($builder) use ($categoriesFilter) { return $builder->filter($categoriesFilter); })
             ->when($request->tag, function ($builder) use ($tagsFilter) { return $builder->filter($tagsFilter); })
@@ -200,7 +203,6 @@ class EventController extends Controller
     {
         $request = Search::convertUrl($request);
         $categories = Category::all();
-        $searchedevents = [];
         $tags = Genre::where('admin', 1)->orderBy('rank', 'desc')->get();
          if ($request->price) {
             $priceQuery = Query::range()->field('priceranges.price')->gte($request->price[0])->lte($request->price[1]);

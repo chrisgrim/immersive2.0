@@ -21,7 +21,7 @@
             <vue-search-all-mobile 
                 :user="{{ auth()->user() ? auth()->user() : 'null' }}" 
                 :tags="{{ $tags }}" 
-                :searched-events="{{ $searchedevents }}" 
+                :searched-events="{{ json_encode($searchedEvents) }}" 
                 :searched-Categories="{{ json_encode($searchedCategories) }}"
                 :searched-Tags="{{ json_encode($searchedTags) }}"
                 :categories="{{ $categories }}">
@@ -29,7 +29,7 @@
             <vue-search-all 
                 :user="{{ auth()->user() ? auth()->user() : 'null' }}" 
                 :tags="{{ $tags }}" 
-                :searched-events="{{ $searchedevents }}" 
+                :searched-events="{{ json_encode($searchedEvents) }}" 
                 :searched-Categories="{{ json_encode($searchedCategories) }}"
                 :searched-Tags="{{ json_encode($searchedTags) }}"
                 :categories="{{ $categories }}">

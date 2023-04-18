@@ -25,18 +25,10 @@ class EventController extends Controller
 {
     public function index(Request $request)
     {
-        $hasLocationFilter = [];
-        $datesFilter = [];
-        $pricesFilter = [];
-        $categoriesFilter = [];
-        $tagsFilter = [];
-        $latFilter = [];
-        $boundaryFilter = [];
-        $searchedCategories = [];
-        $searchedevents = [];
+        $hasLocationFilter = $datesFilter = $pricesFilter = $categoriesFilter = $tagsFilter = $latFilter = $boundaryFilter = [];
+        $searchedCategories = $searchedTags = [];
+        $searchedEvents = '';
         $maxprice = ceil(Event::getMostExpensive());
-        $searchedCategories = [];
-        $searchedTags = [];
         $categories = Category::all();
         $tags = Genre::where('admin', 1)->orderBy('rank', 'desc')->get();
 
@@ -107,21 +99,22 @@ class EventController extends Controller
             ->sortRaw(['published_at' => 'desc'])
             ->paginate(20);
 
-        $eventContent = tap($builder->toArray(), function (array &$content) {
+        $searchedEvents = tap($builder->toArray(), function (array &$content) {
             $content['data'] = Arr::pluck($content['data'], 'model');
         });
 
-        $searchedevents = json_encode($eventContent);
-
-        $docks = Dock::where('location', 'search')->with(['posts.limitedCards', 'shelves.publishedPosts.limitedCards', 'communities'])->orderBy('order', 'ASC')->get();
+        $docks = Dock::where('location', 'search')
+            ->with(['posts.limitedCards', 'shelves.publishedPosts.limitedCards', 'communities'])
+            ->orderBy('order', 'ASC')
+            ->get();
 
         if ($request->searchType === 'inPerson' && isset($request->live)) {
-            return view('events.search',compact('searchedevents', 'docks', 'categories', 'maxprice', 'tags', 'inPersonCategories', 'searchedCategories', 'searchedTags'));
+            return view('events.search',compact('searchedEvents', 'docks', 'categories', 'maxprice', 'tags', 'inPersonCategories', 'searchedCategories', 'searchedTags'));
         }
         if ($request->searchType === 'atHome') {
-            return view('events.searchonline',compact('searchedevents', 'categories', 'tags', 'atHomeCategories', 'searchedCategories', 'searchedTags'));
+            return view('events.searchonline',compact('searchedEvents', 'categories', 'tags', 'atHomeCategories', 'searchedCategories', 'searchedTags'));
         }
-        return view('events.searchall',compact('searchedevents', 'docks', 'categories', 'maxprice', 'tags', 'searchedCategories', 'searchedTags'));
+        return view('events.searchall',compact('searchedEvents', 'docks', 'categories', 'maxprice', 'tags', 'searchedCategories', 'searchedTags'));
     }
 
     public function fetch(Request $request)
@@ -197,56 +190,6 @@ class EventController extends Controller
         });
 
         return json_encode($eventContent);
-    }
-
-    public function allSearch(Request $request)
-    {
-        $request = Search::convertUrl($request);
-        $categories = Category::all();
-        $tags = Genre::where('admin', 1)->orderBy('rank', 'desc')->get();
-         if ($request->price) {
-            $priceQuery = Query::range()->field('priceranges.price')->gte($request->price[0])->lte($request->price[1]);
-        } else {
-            $priceQuery = [];
-        }
-        if ($request->tag) {
-            $tagQuery = Query::terms()->field('genres.name')->values($request->tag);
-        } else {
-            $tagQuery = [];
-        }
-        if ($request->category) {
-            $categoryQuery = Query::terms()->field('category_id')->values($request->category);
-        } else {
-            $categoryQuery = null;
-        }
-        if ($request->dates) {
-            $datesQuery = Query::bool()
-                ->should(Query::range()->field('shows.date')->gte($request->dates[0])->lte($request->dates[1]))
-                ->should(Query::term()->field('showtype')->value('a'))
-                ->minimumShouldMatch(1);
-        } else {
-            $datesQuery = [];
-        }
-
-        $query = Query::bool()
-            ->must( Query::range()->field('closingDate')->gte('now/d'))
-            ->when($request->price, function ($builder) use ($priceQuery) { return $builder->must($priceQuery); })
-            ->when($request->category, function ($builder) use ($categoryQuery) { return $builder->filter($categoryQuery); })
-            ->when($request->tag, function ($builder) use ($tagQuery) { return $builder->filter($tagQuery); })
-            ->when($request->dates, function ($builder) use ($datesQuery) { return $builder->filter($datesQuery); });
-
-        $builder = Event::searchQuery($query)
-            ->load(['genres', 'category'])
-            ->sortRaw(['published_at' => 'desc'])
-            ->paginate(12);
-
-        $content = tap($builder->toArray(), function (array &$content) {
-            $content['data'] = Arr::pluck($content['data'], 'model');
-        });
-
-        $allevents = json_encode($content);
-        
-        return view('events.searchall',compact('allevents', 'categories', 'tags'));
     }
 
     public function fetchAll(Request $request)

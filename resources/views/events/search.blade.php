@@ -21,7 +21,7 @@
             <vue-search-location-mobile 
                 :user="{{ auth()->user() ? auth()->user() : 'null' }}" 
                 :tags="{{ $tags }}" 
-                :searched-Events="{{ $searchedevents }}" 
+                :searched-events="{{ json_encode($searchedEvents) }}" 
                 :docks="{{ $docks }}" 
                 :in-Person-Categories="{{ $inPersonCategories }}"
                 :searched-Categories="{{ json_encode($searchedCategories) }}"
@@ -32,7 +32,7 @@
                 :user="{{ auth()->user() ? auth()->user() : 'null' }}" 
                 :mobile="{{ Browser::isMobile() ? Browser::isMobile() : 'null' }}"
                 :tags="{{ $tags }}" 
-                :searched-Events="{{ $searchedevents }}" 
+                :searched-events="{{ json_encode($searchedEvents) }}" 
                 :docks="{{ $docks }}" 
                 :in-Person-Categories="{{ $inPersonCategories }}"
                 :searched-Categories="{{ json_encode($searchedCategories) }}"

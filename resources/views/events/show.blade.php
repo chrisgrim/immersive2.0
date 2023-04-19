@@ -56,6 +56,7 @@
             :tickets="{{$tickets}}" 
             :mobile="{{ Browser::isMobile() ? Browser::isMobile() : 'null' }}"
             :user="{{ auth()->user() ? auth()->user() : 'null' }}" />  
+        
     </div>
 @endsection
 

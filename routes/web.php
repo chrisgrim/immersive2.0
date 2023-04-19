@@ -23,7 +23,6 @@ Route::RESOURCE('interactivelevels', 'Admin\InteractiveLevelController');
 // ----------   Search Page -------
 Route::POST('/search/storedata', 'Search\SearchDataController@store');
 Route::GET('/index/search', 'Search\EventController@index');
-Route::GET('/index/search-online', 'Search\OnlineSearchController@index');
 Route::POST('/admin/search/data', 'Search\SearchDataController@create');
 
 // This is the search for vuex

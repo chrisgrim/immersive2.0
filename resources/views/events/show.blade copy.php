@@ -31,8 +31,8 @@
     @else
         <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Event", "name": "{{$event->name}}{{$event->tag_line ? '- ' . \Illuminate\Support\Str::limit($event->tag_line, 80) : '- ' . \Illuminate\Support\Str::limit($event->description, 80)}}", @if($event->shows->isEmpty()) "startDate":{{\Carbon\Carbon::parse($event->created_at)->toIso8601String()}}, @else "startDate":"{{\Carbon\Carbon::parse($event->shows[0]->date)->toIso8601String()}}", @endif "endDate": "{{\Carbon\Carbon::parse($event->closingDate)->toIso8601String()}}", "eventStatus": "https://schema.org/EventScheduled", "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode", "location":{"@type": "VirtualLocation", "url": "{{$event->websiteUrl ? $event->websiteUrl : ($event->ticketUrl ? $event->ticketUrl : Request::url())}}"}, "image":"{{ env('MIX_IMAGE_URL') }}{{$event->largeImagePath}}", "description": "{{$event->tag_line ? $event->tag_line : $event->description}}", "offers":{"@type": "Offer", "url": "{{$event->ticketUrl ? $event->ticketUrl : ($event->websiteUrl ? $event->websiteUrl : Request::url())}}", "price": "{{$event->priceranges[0]->price}}", "priceCurrency": "USD", "availability": "https://schema.org/InStock", "validFrom": "{{$event->priceranges[0]->created_at}}"}, "organizer":{"@type": "Organization", "name": "{{$event->organizer->name}}", "url": "{{$event->organizer->website ? $event->organizer->website : Request::root() .'/organizer/' . $event->organizer->slug}}"}}</script>
     @endif
-    <link href="{{ mix('/css/app-lite.css') }}" rel="stylesheet">
-    <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
+    <link href="{{ mix('/css/app-lite.css') }}" rel="stylesheet" media="print" onload="this.media='all'; this.onload=null;">
+    <link href="{{ mix('/css/app.css') }}" rel="stylesheet" media="print" onload="this.media='all'; this.onload=null;">
     @if (Browser::isMobile())
         <link rel="preload" as="image" type="image/webp" imagesrcset="{{ env('MIX_IMAGE_URL') }}{{$event->thumbImagePath}}">
     @else
@@ -41,60 +41,23 @@
 @endsection
 
 @section('nav')
-        @if (Browser::isMobile())
-            <vue-nav-mobile navtype="show" :user= "{{ auth()->user() ? auth()->user() : 'null' }}" />
-        @else
-            <vue-nav navtype="show" :user= "{{ auth()->user() ? auth()->user() : 'null' }}" />
-        @endif
+    @if (Browser::isMobile())
+        <vue-nav-mobile navtype="show" :user= "{{ auth()->user() ? auth()->user() : 'null' }}" />
+    @else
+        <vue-nav navtype="show" :user= "{{ auth()->user() ? auth()->user() : 'null' }}" />
+    @endif
 @endsection
 
 @section('content')
     <div id="bodyArea" class="show">
         <modal-wrapper :user= "{{ auth()->user() ? auth()->user() : 'null' }}"></modal-wrapper>
-        <div class="show-content">
-            @include('events.components.header')
+        <event-show 
+            :loadevent="{{$event}}" 
+            :tickets="{{$tickets}}" 
+            :mobile="{{ Browser::isMobile() ? Browser::isMobile() : 'null' }}"
+            :user="{{ auth()->user() ? auth()->user() : 'null' }}">
+        </event-show>  
+        <vue-footer></vue-footer>
 
-            <div class="relative w-full m-auto p-0 md:px-12 lg:px-32 lg:max-w-screen-xl">
-                <div class="md:flex md:gap-36 border-b">
-                    <div class="relative inline-block">
-                        @include('events.components.about')
-
-                        @if (Browser::isMobile())
-                            <div class="min-h-[18rem]">
-                                <event-show-dates :event="{{ $event }}"></event-show-dates>
-                            </div>
-                        @endif
-
-                        @if ($event->staffpick)
-                            @include('events.components.staffpick')
-                        @endif
-
-                        @include('events.components.details')
-                    </div>
-
-                    <div class="w-full relative inline-block md:w-[37rem] md:min-w-[37rem]">
-                        <event-show-quickbuy
-                          :mobile="{{ Browser::isMobile() ? 'true' : 'false' }}"
-                          :tickets="{{ $tickets }}"
-                          :event="{{ $event }}"
-                          ></event-show-quickbuy>
-                    </div>
-                </div>
-            </div>
-
-            <div class="relative w-full m-auto p-0 md:px-12 lg:px-32 lg:max-w-screen-xl">
-                @if ($event->eventreviews && count($event->eventreviews) > 0)
-                    @include('events.components.reviews')
-                @endif
-
-                <event-show-map :event="{{ $event }}"></event-show-map>
-                
-                @include('events.components.organizer')
-            </div>
-        </div>
     </div>
 @endsection
-
-@section('footer')
-    <vue-footer></vue-footer>
-@endsection 

@@ -168,11 +168,8 @@
     import flatPickr from 'vue-flatpickr-component'
     import clickOutside from '../../../Directives/clickOutside'
     export default {
-
         props: [ 'event', 'tickets', 'mobile' ],
-
         components: { ShowMore, flatPickr },
-
         computed: {
             eventUrl() {
                 if (this.event.ticketUrl) {return this.event.ticketUrl}
@@ -186,7 +183,6 @@
                 return this.cleanDate(this.event.shows[0].date)
             }
         },
-
         data() {
             return {
                 hover: null,
@@ -199,7 +195,6 @@
                 datesVisible: false,
             }
         },
-
         methods: {
             showDates() {
                 this.ticketsVisible = false;
@@ -239,7 +234,6 @@
         mounted() {
             this.getDates();
         },
-
         watch: {
             datesVisible() {
                 this.datesVisible ? this.$nextTick(() => { this.$refs.datePicker.fp.jumpToDate(new Date()) }) : '';

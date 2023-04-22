@@ -56,9 +56,6 @@ Vue.component('vue-nav-mobile', () => import(/* webpackChunkName: "js/vnm" */ '.
 Vue.component('vue-footer', () => import(/* webpackChunkName: "js/lfo" */ './pages/Footer/footer.vue'));
 
 
-
-
-
 //Home
 Vue.component('index', () => import(/* webpackChunkName: "js/ei" */ './pages/Home/index.vue'));
 Vue.component('index-mobile', () => import(/* webpackChunkName: "js/eim" */ './pages/Home/index-mobile.vue'));
@@ -143,6 +140,14 @@ Vue.component('vue-staffpicks-show', () => import(/* webpackChunkName: "js/ssp" 
 //Login 
 Vue.component('vue-register', () => import(/* webpackChunkName: "js/lr" */ './pages/Auth/register.vue'));
 Vue.component('vue-login', () => import(/* webpackChunkName: "js/lr" */ './pages/Auth/login.vue'));
+
+// Components 
+Vue.component('show-more', () => import(/* webpackChunkName: "js/smo" */ './components/ShowMoreBlade.vue'));
+Vue.component('video-player', () => import(/* webpackChunkName: "js/vpo" */ './pages/Events/Show/VideoPlayer.vue'));
+Vue.component('event-show-quickbuy', () => import(/* webpackChunkName: "js/esqb" */ './pages/Events/Show/event-show-quickbuy.vue'));
+Vue.component('event-show-map', () => import(/* webpackChunkName: "js/eslc" */ './pages/Events/Show/event-show-location.vue'));
+Vue.component('event-show-dates', () => import(/* webpackChunkName: "js/esdc" */ './pages/Events/Show/event-show-dates.vue'));
+Vue.component('event-show-favorite', () => import(/* webpackChunkName: "js/esfc" */ './pages/Events/Show/Components/event-favorite.vue'));
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

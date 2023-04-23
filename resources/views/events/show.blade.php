@@ -55,7 +55,7 @@
             @include('events.components.header')
 
             <div class="relative w-full m-auto p-0 md:px-12 lg:px-32 lg:max-w-screen-xl">
-                <div class="md:flex md:gap-36 border-b">
+                <div class="md:flex md:gap-20 lg:gap-36 border-b">
                     <div class="relative inline-block">
                         @include('events.components.about')
 
@@ -72,7 +72,7 @@
                         @include('events.components.details')
                     </div>
 
-                    <div class="w-full relative inline-block md:w-[37rem] md:min-w-[37rem]">
+                    <div class="w-full relative inline-block md:min-w-[30rem] lg:min-w-[37rem]">
                         <event-show-quickbuy
                           :mobile="{{ Browser::isMobile() ? 'true' : 'false' }}"
                           :tickets="{{ $tickets }}"

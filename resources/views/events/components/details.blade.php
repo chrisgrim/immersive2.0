@@ -4,7 +4,7 @@
             <h3 class="font-semibold md:font-medium">Audience Role</h3>
         </div>     
         <div class="my-8">
-            <p class="relative pb-12" style="white-space: pre-line;">
+            <p class="relative pb-12 overflow-auto" style="white-space: pre-line;">
                 {{ implode(' ', array_slice(explode(' ', $event->advisories['audience']), 0, 30)) }} <show-more text="{{ $event->advisories['audience']}}" :limit="30" />
             </p>
         </div> 

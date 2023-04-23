@@ -73,7 +73,7 @@
                 class="w-full border border-slate-200 rounded-xl bg-[#f5f5f5] p-8 max-w-[45rem]"
                 v-if="event.remote_description">
                 <h3>Additional Instructions</h3>
-                <p style="white-space: pre-wrap;">{{ event.remote_description }}</p>
+                <p style="white-space: pre-wrap;overflow: auto;">{{ event.remote_description }}</p>
             </div>
         </template>
     </section>

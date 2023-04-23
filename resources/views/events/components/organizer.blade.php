@@ -16,6 +16,6 @@
             </div>
         </div>
     </a>
-    <p class="relative" style="white-space: pre-wrap;">{{ implode(' ', array_slice(explode(' ', $event->organizer->description), 0, 100)) }} <show-more text="{{ $event->organizer->description }}" :limit="100" />
+    <p class="relative overflow-auto" style="white-space: pre-wrap;">{{ implode(' ', array_slice(explode(' ', $event->organizer->description), 0, 100)) }} <show-more text="{{ $event->organizer->description }}" :limit="100" />
     </p>
 </section> 

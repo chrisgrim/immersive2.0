@@ -34,7 +34,7 @@
                 </a>
             @endif
         </div>
-        <p class="relative" style="white-space: pre-wrap;">{{ implode(' ', array_slice(explode(' ', $event['description']), 0, 100)) }} <show-more text="{{ $event['description']}}" :limit="100" />
+        <p class="relative overflow-auto" style="white-space: pre-wrap;">{{ implode(' ', array_slice(explode(' ', $event['description']), 0, 100)) }} <show-more text="{{ $event['description']}}" :limit="100" />
         </p>
         
     </div>
@@ -42,7 +42,7 @@
         <div class="w-full p-8 md:py-16 md:px-0">
             <video-player
                 alt="{{$event->name . ' Immersive Event'}}"
-                src="{{'https://www.youtube.com/embed/' . $event->video}}"/>
+                src="{{$event->video}}"/>
         </div>
     @endif
 </section>

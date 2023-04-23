@@ -41,7 +41,7 @@
                         v-if="youtubeId && hasVideo">
                         <VideoPlayer
                             :alt="`${event.name} Immersive Event`"
-                            :src="`https://www.youtube.com/embed/${youtubeId}`" />
+                            :src="youtubeId" />
                     </div>
                 </div>
                 <CardImage

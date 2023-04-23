@@ -45,7 +45,7 @@
             <div class="w-full p-8 md:py-16 md:px-0">
                 <VideoPlayer
                     :alt="`${event.name} Immersive Event`"
-                    :src="`https://www.youtube.com/embed/${event.video}`" />
+                    :src="event.video" />
             </div>
         </template>
     </section>

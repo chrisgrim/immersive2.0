@@ -15,7 +15,7 @@
         </div>
     </div>
     <div class="">
-        <p class="relative" style="white-space: pre-wrap;font-style: italic;">{{ implode(' ', array_slice(explode(' ', $event->staffpick->comments ), 0, 100)) }} <show-more text="{{ $event->staffpick->comments }}" :limit="100" :italic="true"/>
+        <p class="relative overflow-auto" style="white-space: pre-wrap;font-style: italic;">{{ implode(' ', array_slice(explode(' ', $event->staffpick->comments ), 0, 100)) }} <show-more text="{{ $event->staffpick->comments }}" :limit="100" :italic="true"/>
         </p>
     </div>
 </section>

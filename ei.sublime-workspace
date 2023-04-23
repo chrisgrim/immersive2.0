@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"load",
+				"loadYoutube"
+			],
+			[
 				"com",
 				"components"
 			],
@@ -312,10 +316,6 @@
 				"communities"
 			],
 			[
-				"load",
-				"loadshelf"
-			],
-			[
 				"lat",
 				"latitude"
 			],
@@ -520,28 +520,10 @@
 	"buffers":
 	[
 		{
-			"file": "resources/views/events/show.blade.php",
+			"file": "resources/js/pages/Events/Show/VideoPlayer.vue",
 			"settings":
 			{
-				"buffer_size": 7874,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "resources/views/events/components/about.blade.php",
-			"settings":
-			{
-				"buffer_size": 2262,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "resources/js/components/ShowMoreBlade.vue",
-			"settings":
-			{
-				"buffer_size": 1136,
+				"buffer_size": 2789,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -685,32 +667,37 @@
 		"/Users/chrisgrim/code/ei",
 		"/Users/chrisgrim/code/ei/resources",
 		"/Users/chrisgrim/code/ei/resources/js",
-		"/Users/chrisgrim/code/ei/resources/js/components",
 		"/Users/chrisgrim/code/ei/resources/js/pages",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Events",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Events/Show",
-		"/Users/chrisgrim/code/ei/resources/sass",
-		"/Users/chrisgrim/code/ei/routes"
+		"/Users/chrisgrim/code/ei/resources/views",
+		"/Users/chrisgrim/code/ei/resources/views/events",
+		"/Users/chrisgrim/code/ei/resources/views/events/components",
+		"/Users/chrisgrim/code/ei/resources/views/layouts"
 	],
 	"file_history":
 	[
+		"/Users/chrisgrim/code/ei/resources/js/pages/Events/Show/event-show-about.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/create/image.vue",
+		"/Users/chrisgrim/code/ei/resources/views/events/show.blade.php",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Events/Show/event-show-location.vue",
 		"/Users/chrisgrim/code/ei/resources/views/events/components/organizer.blade.php",
 		"/Users/chrisgrim/code/ei/resources/views/events/components/details.blade.php",
-		"/Users/chrisgrim/code/ei/resources/js/app.js",
+		"/Users/chrisgrim/code/ei/resources/views/events/components/about.blade.php",
+		"/Users/chrisgrim/code/ei/resources/views/events/components/staffpick.blade.php",
+		"/Users/chrisgrim/code/ei/resources/views/events/components/reviews.blade.php",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Events/event-show.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Events/Show/VideoPlayer.vue",
 		"/Users/chrisgrim/code/ei/resources/js/components/ShowMoreBlade.vue",
+		"/Users/chrisgrim/code/ei/resources/js/app.js",
 		"/Users/chrisgrim/code/ei/resources/sass/layout.scss",
 		"/Users/chrisgrim/code/ei/resources/views/layouts/footer.blade.php",
-		"/Users/chrisgrim/code/ei/resources/views/events/components/reviews.blade.php",
 		"/Users/chrisgrim/code/ei/resources/views/events/components/header.blade.php",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Events/Show/event-show-header.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Events/Show/event-show-organizer.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Events/event-show.vue",
-		"/Users/chrisgrim/code/ei/resources/views/events/components/about.blade.php",
-		"/Users/chrisgrim/code/ei/resources/views/events/components/staffpick.blade.php",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Events/Show/event-show-quickbuy.vue",
 		"/Users/chrisgrim/code/ei/.env",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Events/Show/event-show-details.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Events/Show/event-show-about.vue",
 		"/Users/chrisgrim/code/ei/resources/js/components/ShowMore.vue",
 		"/Users/chrisgrim/code/ei/config/app.php",
 		"/Users/chrisgrim/code/ei/routes/web.php",
@@ -817,11 +804,7 @@
 		"/Users/chrisgrim/code/ei/resources/js/pages/Messages/message-show.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Messages/Components/modmessage-index-tab.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Messages/Components/message-index-tab.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Home/Sections/staffpicks.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Home/Sections/spotlight-section.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Home/Sections/Components/vue-spotlight-image.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Home/Sections/Components/vue-hero-image.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Home/Sections/Components/vue-album-image.vue"
+		"/Users/chrisgrim/code/ei/resources/js/pages/Home/Sections/staffpicks.vue"
 	],
 	"find":
 	{
@@ -832,6 +815,7 @@
 		"height": 164.0,
 		"where_history":
 		[
+			"/Users/chrisgrim/code/ei",
 			"/Users/chrisgrim/code/ei/resources",
 			"/Users/chrisgrim/code/ei",
 			"/Users/chrisgrim/code/ei/resources",
@@ -958,8 +942,7 @@
 			"/Users/chrisgrim/code/ei/resources",
 			"/Users/chrisgrim/code/ei/app/Http",
 			"/Users/chrisgrim/code/ei/resources",
-			"/Users/chrisgrim/code/ei/app/Http",
-			"/Users/chrisgrim/code/ei"
+			"/Users/chrisgrim/code/ei/app/Http"
 		]
 	},
 	"find_state":
@@ -967,6 +950,15 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"VideoPlayer",
+			"VideoPLayer",
+			"VideoPlayer",
+			"url",
+			"20",
+			">\n",
+			"10",
+			"100",
+			"lessButton",
 			"100",
 			"show-text",
 			"showtext",
@@ -1085,16 +1077,7 @@
 			"clear",
 			"clearLocation",
 			"initializeSearchData",
-			"16",
-			"20",
-			"selectGenre",
-			"genre",
-			"ml-16",
-			"disc",
-			"80km",
-			"20",
-			"inPerson",
-			"childNav"
+			"16"
 		],
 		"highlight": false,
 		"in_selection": false,
@@ -1116,90 +1099,24 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "resources/views/events/show.blade.php",
+					"file": "resources/js/pages/Events/Show/VideoPlayer.vue",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 7874,
+						"buffer_size": 2789,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								7626,
-								7626
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Laravel Blade Highlighter/blade.sublime-syntax",
-							"tabs_extra_last_activated": 1682101003.52,
-							"tabs_extra_last_activated_sheet_index": 0
-						},
-						"translation.x": 0.0,
-						"translation.y": 1950.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "resources/views/events/components/about.blade.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2262,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1749,
-								1969
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Laravel Blade Highlighter/blade.sublime-syntax",
-							"tabs_extra_last_activated": 1682101512.74,
-							"tabs_extra_last_activated_sheet_index": 1
-						},
-						"translation.x": 0.0,
-						"translation.y": 500.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "resources/js/components/ShowMoreBlade.vue",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1136,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								305,
-								305
+								361,
+								361
 							]
 						],
 						"settings":
@@ -1208,14 +1125,14 @@
 							"remote_loading": false,
 							"synced": false,
 							"syntax": "Packages/Vuejs Complete Package/vue.tmLanguage",
-							"tabs_extra_last_activated": 1682101298.27,
-							"tabs_extra_last_activated_sheet_index": 3
+							"tabs_extra_last_activated": 1682229144.61,
+							"tabs_extra_last_activated_sheet_index": 0
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 0,
 					"type": "text"
 				}
 			]
@@ -1834,7 +1751,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 340.0,
+	"side_bar_width": 404.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

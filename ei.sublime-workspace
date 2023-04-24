@@ -523,7 +523,7 @@
 			"file": "resources/js/pages/Events/Show/VideoPlayer.vue",
 			"settings":
 			{
-				"buffer_size": 2789,
+				"buffer_size": 829,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -1108,15 +1108,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2789,
+						"buffer_size": 829,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								361,
-								361
+								649,
+								649
 							]
 						],
 						"settings":
@@ -1125,11 +1125,11 @@
 							"remote_loading": false,
 							"synced": false,
 							"syntax": "Packages/Vuejs Complete Package/vue.tmLanguage",
-							"tabs_extra_last_activated": 1682229144.61,
+							"tabs_extra_last_activated": 1682300553.12,
 							"tabs_extra_last_activated_sheet_index": 0
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 19.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,

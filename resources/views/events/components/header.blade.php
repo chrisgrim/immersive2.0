@@ -1,4 +1,4 @@
-<header class="min-h-[200px] relative w-full m-auto mt-[-8rem] md:mt-0 p-0 md:px-12 lg:px-32 lg:max-w-screen-xl">
+<header class="min-h-[200px] relative w-full m-auto p-0 md:px-12 lg:px-32 lg:max-w-screen-xl">
         <nav>
             @if (Browser::isMobile())
                 <a href="javascript:history.back()">

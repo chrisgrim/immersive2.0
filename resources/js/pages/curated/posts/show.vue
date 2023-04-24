@@ -41,7 +41,7 @@
         </div>
         <div 
             :class="{ 'mt-24' : !headerImage}"
-            class="m-auto w-full px-8 md:px-12 md:py-8 lg:py-0 lg:px-32 max-w-screen-xl">
+            class="m-auto w-full px-8 md:px-12 pt-32 md:pt-0 md:py-8 lg:py-0 lg:px-32 max-w-screen-xl">
             <div class="flex flex-col md:flex-row">
                 <div class="w-full inline-block md:w-4/12 md:py-8 md:pr-8">
                     <div class="sticky top-16">

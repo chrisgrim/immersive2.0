@@ -1,6 +1,8 @@
 <template>
     <div>
-        <div class="search-nav fixed w-full bg-transparent h-[7rem] m-auto z-[2002] top-0">
+        <div 
+            :class="[ scroll ? 'scroll' : null ]"
+            class="search-nav fixed w-full bg-transparent h-[7rem] m-auto z-[2002] top-0">
             <template v-if="!open">
                 <div 
                     @click="toggleSearch"
@@ -151,6 +153,9 @@
             clear() {
                 this.searchData = this.initializeSearchData()
             },
+            handleScroll () {
+                this.scroll = window.pageYOffset > 10
+            },
             toggleSearch() {
                 this.open=!this.open
                 this.open ? document.body.classList.add('noscroll') : document.body.classList.remove('noscroll')
@@ -173,6 +178,13 @@
                 }
             }
         },
+
+        created () {
+            window.addEventListener('scroll', this.handleScroll);
+        },
+        destroyed () {
+            window.removeEventListener('scroll', this.handleScroll);
+        }
 
 }
     

@@ -9,7 +9,7 @@
         <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5LHWVRN"
         height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <!-- End Google Tag Manager (noscript) -->
-        <header style="height:8rem;" id="header">
+        <header class="md:h-32" id="header">
             @yield('nav')
         </header>
 		<main>

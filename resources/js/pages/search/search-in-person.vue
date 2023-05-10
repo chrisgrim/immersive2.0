@@ -3,7 +3,7 @@
         <div class="w-full flex">
             <section 
                 :class="{ 'w-0 hidden' : searchData.location.fullMap }"
-                class="z-10 relative inline-block w-[59%] mt-32 min-h-[calc(100vh-8rem)]">
+                class="z-10 relative inline-block w-[59%] min-h-[calc(100vh-8rem)]">
                 <div class="inline-block text-left pt-16 pb-4 px-8">
                     <p v-if="events.data && events.data.length">{{ events.total }} immersive events.</p>
                     <p v-else>There are no location based events in {{ searchData.location.name }} with these filters.</p>
@@ -126,7 +126,7 @@
                         center: this.initializeCenter(),
                         mapboundary: this.initializeBoundaries(),
                         fullMap:false,
-                        live: new URL(window.location.href).searchParams.get("live") ? new URL(window.location.href).searchParams.get("live") : false,
+                        live: new URL(window.location.href).searchParams.get("live") ? JSON.parse(new URL(window.location.href).searchParams.get("live")) : false
                     },
                     searchDates: this.initializeDates(),
                     dates: this.initializeDates(),

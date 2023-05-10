@@ -100,7 +100,7 @@
                         center: this.initializeCenter(),
                         mapboundary: this.initializeBoundaries(),
                         fullMap:false,
-                        live: new URL(window.location.href).searchParams.get("live") ? new URL(window.location.href).searchParams.get("live") : false,
+                        live: new URL(window.location.href).searchParams.get("live") ? JSON.parse(new URL(window.location.href).searchParams.get("live")) : false
                     },
                     searchDates: this.initializeDates(),
                     naturalDate: this.initializeNaturalDates(),

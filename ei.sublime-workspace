@@ -523,7 +523,25 @@
 			"file": "resources/js/pages/Events/Show/VideoPlayer.vue",
 			"settings":
 			{
-				"buffer_size": 829,
+				"buffer_size": 1452,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "resources/views/adminArea/index.blade.php",
+			"settings":
+			{
+				"buffer_size": 490,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "resources/views/events/show.blade.php",
+			"settings":
+			{
+				"buffer_size": 7905,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -666,33 +684,34 @@
 	[
 		"/Users/chrisgrim/code/ei",
 		"/Users/chrisgrim/code/ei/resources",
-		"/Users/chrisgrim/code/ei/resources/js",
-		"/Users/chrisgrim/code/ei/resources/js/pages",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Events",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Events/Show",
 		"/Users/chrisgrim/code/ei/resources/views",
+		"/Users/chrisgrim/code/ei/resources/views/adminArea",
 		"/Users/chrisgrim/code/ei/resources/views/events",
-		"/Users/chrisgrim/code/ei/resources/views/events/components",
-		"/Users/chrisgrim/code/ei/resources/views/layouts"
+		"/Users/chrisgrim/code/ei/resources/views/events/components"
 	],
 	"file_history":
 	[
+		"/Users/chrisgrim/code/ei/resources/views/events/components/about.blade.php",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Curated/Posts/show.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Home/Sections/nav-mobile.vue",
+		"/Users/chrisgrim/code/ei/app/Console/Commands/RenewEvents.php",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Events/Show/VideoPlayer.vue",
+		"/Users/chrisgrim/code/ei/resources/views/layouts/master.blade.php",
+		"/Users/chrisgrim/code/ei/resources/views/events/components/header.blade.php",
+		"/Users/chrisgrim/code/ei/resources/sass/Nav/navbar.scss",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Events/Show/event-show-about.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/create/image.vue",
 		"/Users/chrisgrim/code/ei/resources/views/events/show.blade.php",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Events/Show/event-show-location.vue",
 		"/Users/chrisgrim/code/ei/resources/views/events/components/organizer.blade.php",
 		"/Users/chrisgrim/code/ei/resources/views/events/components/details.blade.php",
-		"/Users/chrisgrim/code/ei/resources/views/events/components/about.blade.php",
 		"/Users/chrisgrim/code/ei/resources/views/events/components/staffpick.blade.php",
 		"/Users/chrisgrim/code/ei/resources/views/events/components/reviews.blade.php",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Events/event-show.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Events/Show/VideoPlayer.vue",
 		"/Users/chrisgrim/code/ei/resources/js/components/ShowMoreBlade.vue",
 		"/Users/chrisgrim/code/ei/resources/js/app.js",
 		"/Users/chrisgrim/code/ei/resources/sass/layout.scss",
 		"/Users/chrisgrim/code/ei/resources/views/layouts/footer.blade.php",
-		"/Users/chrisgrim/code/ei/resources/views/events/components/header.blade.php",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Events/Show/event-show-header.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Events/Show/event-show-organizer.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Events/Show/event-show-quickbuy.vue",
@@ -701,7 +720,6 @@
 		"/Users/chrisgrim/code/ei/resources/js/components/ShowMore.vue",
 		"/Users/chrisgrim/code/ei/config/app.php",
 		"/Users/chrisgrim/code/ei/routes/web.php",
-		"/Users/chrisgrim/code/ei/resources/views/layouts/master.blade.php",
 		"/Users/chrisgrim/code/ei/app/Http/Controllers/Search/EventController.php",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Footer/footer.vue",
 		"/Users/chrisgrim/code/ei/app/Http/Controllers/Search/OnlineSearchController.php",
@@ -711,7 +729,6 @@
 		"/Users/chrisgrim/code/ei/resources/views/events/search.blade.php",
 		"/Users/chrisgrim/code/ei/resources/views/events/searchonline.blade.php",
 		"/Users/chrisgrim/code/ei/resources/js/mixins/search-basics-mixin.js",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Home/Sections/nav-mobile.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Search/InPerson/Components/location-search(test).vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Header/Nav/nav-desktop.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Header/Nav/Nav-Desktop/Components/events.vue",
@@ -722,7 +739,6 @@
 		"/Users/chrisgrim/code/ei/resources/js/pages/Search/AtHome/nav-at-home.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Search/search-at-home.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Search/InPerson/album-in-person.vue",
-		"/Users/chrisgrim/code/ei/app/Console/Commands/RenewEvents.php",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Admin/Events/Components/event-review-component.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Admin/Events/admin-events-index.vue",
 		"/Users/chrisgrim/code/ei/app/Http/Controllers/Admin/SearchController.php",
@@ -802,9 +818,7 @@
 		"/Users/chrisgrim/code/ei/resources/js/pages/Organizers/Show/vue-events-album.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Organizers/organizer-show.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Messages/message-show.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Messages/Components/modmessage-index-tab.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Messages/Components/message-index-tab.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Home/Sections/staffpicks.vue"
+		"/Users/chrisgrim/code/ei/resources/js/pages/Messages/Components/modmessage-index-tab.vue"
 	],
 	"find":
 	{
@@ -815,6 +829,8 @@
 		"height": 164.0,
 		"where_history":
 		[
+			"/Users/chrisgrim/code/ei/resources/js/pages",
+			"/Users/chrisgrim/code/ei/resources",
 			"/Users/chrisgrim/code/ei",
 			"/Users/chrisgrim/code/ei/resources",
 			"/Users/chrisgrim/code/ei",
@@ -940,8 +956,6 @@
 			"/Users/chrisgrim/code/ei/app/Http",
 			"/Users/chrisgrim/code/ei/app",
 			"/Users/chrisgrim/code/ei/resources",
-			"/Users/chrisgrim/code/ei/app/Http",
-			"/Users/chrisgrim/code/ei/resources",
 			"/Users/chrisgrim/code/ei/app/Http"
 		]
 	},
@@ -950,6 +964,12 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"hideSearch",
+			"search-nav",
+			"onBack",
+			"sticky",
+			"scroll",
+			"search-nav",
 			"VideoPlayer",
 			"VideoPLayer",
 			"VideoPlayer",
@@ -1071,13 +1091,7 @@
 			"childNav",
 			"[calc(100vh-9rem)]",
 			"md",
-			"md:",
-			"debounce",
-			"Clear",
-			"clear",
-			"clearLocation",
-			"initializeSearchData",
-			"16"
+			"md:"
 		],
 		"highlight": false,
 		"in_selection": false,
@@ -1099,7 +1113,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -1108,15 +1122,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 829,
+						"buffer_size": 1452,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								649,
-								649
+								15,
+								791
 							]
 						],
 						"settings":
@@ -1125,14 +1139,80 @@
 							"remote_loading": false,
 							"synced": false,
 							"syntax": "Packages/Vuejs Complete Package/vue.tmLanguage",
-							"tabs_extra_last_activated": 1682300553.12,
+							"tabs_extra_last_activated": 1683327139.98,
 							"tabs_extra_last_activated_sheet_index": 0
 						},
 						"translation.x": 0.0,
-						"translation.y": 19.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "resources/views/adminArea/index.blade.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 490,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								275,
+								275
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Laravel Blade Highlighter/blade.sublime-syntax",
+							"tabs_extra_last_activated": 1683327187.65,
+							"tabs_extra_last_activated_sheet_index": 1
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "resources/views/events/show.blade.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7905,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								7389,
+								7389
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Laravel Blade Highlighter/blade.sublime-syntax",
+							"tabs_extra_last_activated": 1682379910.82,
+							"tabs_extra_last_activated_sheet_index": 1
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
 					"type": "text"
 				}
 			]

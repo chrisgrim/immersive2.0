@@ -52,7 +52,7 @@
                     this.$emit('update', res.data) 
                     this.timeout = setTimeout(() => {  this.loading() }, 600)
                 })
-                this.addPushState()
+                this.addPushState(this.inputVal)
             },
             async onNext() {
                 this.loading()
@@ -62,7 +62,7 @@
                     this.$emit('update', res.data) 
                     this.timeout = setTimeout(() => {  this.loading() }, 600)
                 })
-                this.addPushState()
+                this.addPushState(this.inputVal)
             },
             loading() {
                 this.inputVal.loading =! this.inputVal.loading

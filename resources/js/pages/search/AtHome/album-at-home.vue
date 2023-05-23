@@ -32,12 +32,12 @@
                                 </p>
                             </div>
                             <template v-if="card.tag_line">
-                                <div class="mt-1 block text-ellipsis line-clamp-2 w-full max-h-16 text-xl">
+                                <div class="mt-1 block whitespace-normal text-ellipsis line-clamp-2 w-full max-h-16 text-xl">
                                     {{ card.tag_line }} 
                                 </div>
                             </template>
                             <template>
-                                <ul class="flex m-0 p-0">
+                                <ul class="flex m-0 mt-5 p-0">
                                     <li 
                                         v-for="(itemTag) in eventTags(card)" 
                                         class="text-gray-500 text-xl list-disc mr-4 ml-4 first:list-none first:ml-0"

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="z-[2002]">
         <div class="search-nav fixed w-full bg-white m-auto z-[2002] top-0">
             <template v-if="!open">
                 <div class="bg-white flex mx-8 my-6 p-4 justify-between items-center rounded-full bg-gray-100">
@@ -58,7 +58,7 @@
                     <div class="overflow-auto h-[79%]">
                         <Location 
                             clear="clear"
-                            v-model="inputVal" />
+                            v-model="locData" />
                         <Dates v-model="inputVal" />
                         <Genre
                             :categories="inPersonCategories"
@@ -99,7 +99,7 @@
     
     export default {
 
-        props:['value', 'categories', 'tags', 'map', 'searchedCategories', 'inPersonCategories'],
+        props:['value', 'categories', 'tags', 'searchedCategories', 'inPersonCategories', 'loadedSearch'],
 
         components: { Location, Dates, Genre, Price },
 
@@ -120,31 +120,29 @@
 
         data() {
             return {
+                locData:{
+                    currentTab:'',
+                    location: {
+                        name: this.value.location.name,
+                        center: { 
+                            lat: this.value.location.center.lat,
+                            lng: this.value.location.center.lng,
+                        },
+                    }
+                },
+                originalData: { ...this.value },
                 open: false,
-                options: false,
                 scroll: false,
             }
         },
 
         methods: {
-            async onSearch() {
-                this.inputVal.paginate = 1
-                this.startLoading()
-                await axios.post(`/api/search/fetch?page=${this.value.paginate}`, this.inputVal)
-                .then( res => { 
-                    this.$emit('update', res.data) 
-                    this.timeout = setTimeout(() => {  this.endLoading() }, 600)
-                })
-                this.hideSearch()
-                this.addPushState()
-            },
-            async onNext() {
-                await axios.post(`/api/search/fetch?page=${this.value.paginate}`, this.inputVal)
-                .then( res => { 
-                    this.$emit('update', res.data) 
-                })
-                this.hideSearch()
-                this.addPushState()
+            onSearch() {
+                if (this.inputVal.location.name !== this.locData.location.name) {
+                    return this.locationSearch();
+                }
+                this.$emit('search') 
+                this.open=false
             },
             onBack() {
                 return window.location.href = '/'
@@ -152,21 +150,34 @@
             },
             showSearch() {
                 this.open=true
+                this.originalData = { ...this.value }
                 document.body.classList.add('noscroll')
             },
             hideSearch() {
+                this.inputVal = this.originalData
                 this.open=false
                 document.body.classList.remove('noscroll')
             },
             clear() {
                 this.$emit('clear') 
             },
-            startLoading() {
-                this.inputVal.loading = true
+            locationSearch() {
+                let content = `searchType=inPerson&live=false`;
+                content = content.concat(`&city=${this.locData.location.name}&lat=${this.locData.location.center.lat}&lng=${this.locData.location.center.lng}`)
+                if (this.inputVal.category.length) {
+                    content = content.concat(`&category=${this.inputVal.category[0].id}`)
+                }
+                if (this.inputVal.tag.length) {
+                    content = content.concat(`&tag=${this.inputVal.tag[0].id}`)
+                }
+                if (this.hasPrice) {
+                    content = content.concat(`&price0=${this.inputVal.price[0]}&price1=${this.inputVal.price[1]}`)
+                }
+                if (this.inputVal.searchDates.length) {
+                    content = content.concat(`&start=${this.inputVal.searchDates[0]}&end=${this.inputVal.searchDates[1]}`)
+                }
+                window.location.href = `/index/search?${content}`
             },
-            endLoading() {
-                this.inputVal.loading = false
-            }
         },
 }
     

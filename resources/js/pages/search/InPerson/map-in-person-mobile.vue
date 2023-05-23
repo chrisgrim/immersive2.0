@@ -34,7 +34,7 @@
                         :icon="icon"
                         :lat-lng="event.location_latlon">
                         <l-icon
-                            :iconSize="[auto, 30]"
+                            :iconSize="['auto', 30]"
                             :iconAnchor="[50,4]"
                             class-name="icons">
                             <p class="m-4">
@@ -57,12 +57,11 @@
     import 'leaflet/dist/leaflet.css';
     import L from 'leaflet';
     import {LMap, LTileLayer, LMarker, LPopup, LIcon} from 'vue2-leaflet'
-    import Vue2LeafletMarkerCluster from 'vue2-leaflet-markercluster'
     import PopupContent from "./Components/map-popup-content"
 
     export default {
 
-        components: { LPopup, LMap, LTileLayer, LMarker, 'l-marker-cluster': Vue2LeafletMarkerCluster, PopupContent, LIcon },
+        components: { LPopup, LMap, LTileLayer, LMarker, PopupContent, LIcon },
 
         props: [ 'value', 'events',],
 

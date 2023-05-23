@@ -90,7 +90,9 @@ class SearchController extends Controller
                 ->when( $request->searchType === 'atHome', function ($builder) use ($atHomeFilter) { return $builder->filter($atHomeFilter); })
                 ->when( $request->searchType === 'inPerson', function ($builder) use ($inPersonFilter) { return $builder->filter($inPersonFilter); });
         } else {
-            $query = Query::matchAll();
+            $query = Query::bool()
+                ->when( $request->searchType === 'atHome', function ($builder) use ($atHomeFilter) { return $builder->filter($atHomeFilter); })
+                ->when( $request->searchType === 'inPerson', function ($builder) use ($inPersonFilter) { return $builder->filter($inPersonFilter); });
         }
         $results = Category::searchQuery($query)
                 ->join(Genre::class)

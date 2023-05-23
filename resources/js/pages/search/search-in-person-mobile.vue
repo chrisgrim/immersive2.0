@@ -3,7 +3,7 @@
         <div class="w-full md:flex">
             <Nav
                 ref="childNav"
-                @update="updateEvents"
+                @search="onSearch"
                 @clear="clear"
                 v-model="searchData"
                 :tags="tags" 
@@ -53,20 +53,37 @@
                 shiftDown: `transform: translate3d(0px, 0px, 0px);`,
                 mapKey: 0,
                 searchData: this.initializeSearchData(),
-                reloadMap: true,
             }
         },
 
         methods: {
+            async onSearch() {
+                this.searchData.paginate = 1
+                this.searchData.loading = true
+                await axios.post(`/api/search/fetch?page=${this.searchData.paginate}`, this.searchData)
+                .then( res => { 
+                    this.updateEvents(res.data)
+                    this.timeout = setTimeout(() => {  this.searchData.loading = false }, 600)
+                })
+                window.scrollTo(0, 0);
+                this.addPushState(this.searchData)
+            },
+            async onNext() {
+                await axios.post(`/api/search/fetch?page=${this.searchData.paginate}`, this.searchData)
+                .then( res => { 
+                    this.updateEvents(res.data)
+                })
+                window.scrollTo(0, 0);
+                this.addPushState(this.searchData)
+            },
+            //bandaid fix for the error where user can click through the nav and hit the map beneath which fires a search
             onSubmit() {
-                this.reloadMap = false
-                this.$refs.childNav.onSearch();
+                if (!this.$refs.childNav.open) { this.onSearch() }
             },
             updateEvents(value) {
                 this.events = value;
                 this.searchData.pagination = value.current_page;
-                if (this.reloadMap) {this.mapKey += 1;}
-                this.liveSearch = true
+                if (!this.searchData.location.live) {this.mapKey += 1;}
             },
             showFullMap() {
                 this.searchData.location.fullMap = true
@@ -82,11 +99,12 @@
             },
             selectPage (page) {
                 this.searchData.paginate = page
-                this.$refs.childNav.onNext();
+                this.onNext();
                 window.scrollTo(0,0);
             },
             clear() {
-                this.searchData = this.initializeSearchData()
+                console.log('test');
+                this.searchData = this.clearSearchData()
             },
             initializeSearchData() {
                 return {
@@ -109,6 +127,27 @@
                     price:this.initializePrice(),
                 }
             },
+            clearSearchData() {
+                return {
+                    paginate: 1,
+                    currentTab: 'location',
+                    searchType:'inPerson',
+                    loading: false,
+                    location:{
+                        name: new URL(window.location.href).searchParams.get("city") ? new URL(window.location.href).searchParams.get("city") : 'Search by City',
+                        zoom: this.initializeZoom(),
+                        center: this.initializeCenter(),
+                        mapboundary: this.initializeBoundaries(),
+                        fullMap:false,
+                        live: new URL(window.location.href).searchParams.get("live") ? JSON.parse(new URL(window.location.href).searchParams.get("live")) : false
+                    },
+                    searchDates: [],
+                    naturalDate: [],
+                    tag: [],
+                    category: [],
+                    price: [0,100],
+                }
+            },
             initializePrice() {
                 return new URL(window.location.href).searchParams.get("price0") ? [Number(new URL(window.location.href).searchParams.get("price0")), Number(new URL(window.location.href).searchParams.get("price1"))] : [0,100]
             },
@@ -122,7 +161,7 @@
                 return []
             },
             initializeZoom() {
-                return new URL(window.location.href).searchParams.get("zoom") ? Number(new URL(window.location.href).searchParams.get("zoom")) : 11
+                return new URL(window.location.href).searchParams.get("zoom") ? Number(new URL(window.location.href).searchParams.get("zoom")) : 10
             },
             initializeCenter() {
                 if (new URL(window.location.href).searchParams.get("Clat")) {

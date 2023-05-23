@@ -1,38 +1,38 @@
 export default {
     methods: {
-        addPushState() {
-
-            let content = `searchType=${this.inputVal.searchType}`;
-            if (this.inputVal && this.inputVal.location) {
-                if (this.inputVal.location.live) {
-                    content = content.concat(`&live=${this.inputVal.location.live}`)
+        addPushState(value) {
+            console.log(value);
+            let content = `searchType=${value.searchType}`;
+            if (value && value.location) {
+                if (typeof value.location.live !== 'undefined') {
+                    content = content.concat(`&live=${value.location.live}`)
                 }
-                if (this.inputVal.location.name) {
-                    content = content.concat(`&city=${this.inputVal.location.name}`)
+                if (value.location.name) {
+                    content = content.concat(`&city=${value.location.name}`)
                 }
-                if (this.inputVal.location.center.lat && !this.inputVal.location.live) {
-                    content = content.concat(`&lat=${this.inputVal.location.center.lat}`)
+                if (value.location.center.lat && !value.location.live) {
+                    content = content.concat(`&lat=${value.location.center.lat}`)
                 }
-                if (this.inputVal.location.center.lng && !this.inputVal.location.live) {
-                    content = content.concat(`&lng=${this.inputVal.location.center.lng}`)
+                if (value.location.center.lng && !value.location.live) {
+                    content = content.concat(`&lng=${value.location.center.lng}`)
                 }
-                if (this.inputVal.location.mapboundary && this.inputVal.location.live) {
-                    content = content.concat(`&NElat=${this.inputVal.location.mapboundary._northEast.lat}&NElng=${this.inputVal.location.mapboundary._northEast.lng}&SWlat=${this.inputVal.location.mapboundary._southWest.lat}&SWlng=${this.inputVal.location.mapboundary._southWest.lng}&Clat=${this.inputVal.location.center.lat}&Clng=${this.inputVal.location.center.lng}&zoom=${this.inputVal.location.zoom}`)
+                if (value.location.mapboundary && value.location.live) {
+                    content = content.concat(`&NElat=${value.location.mapboundary._northEast.lat}&NElng=${value.location.mapboundary._northEast.lng}&SWlat=${value.location.mapboundary._southWest.lat}&SWlng=${value.location.mapboundary._southWest.lng}&Clat=${value.location.center.lat}&Clng=${value.location.center.lng}&zoom=${value.location.zoom}`)
                 }
             }
-            if (this.inputVal.category.length) {
-                content = content.concat(`&category=${this.inputVal.category.map( cat => cat.id)}`)
+            if (value.category.length) {
+                content = content.concat(`&category=${value.category.map( cat => cat.id)}`)
             }
-            if (this.inputVal.tag.length) {
-                content = content.concat(`&tag=${this.inputVal.tag.map( tag => tag.id)}`)
+            if (value.tag.length) {
+                content = content.concat(`&tag=${value.tag.map( tag => tag.id)}`)
             }
-            if (this.inputVal.searchDates.length) {
-                content = content.concat(`&start=${this.inputVal.searchDates[0]}&end=${this.inputVal.searchDates[1]}`)
+            if (value.searchDates.length) {
+                content = content.concat(`&start=${value.searchDates[0]}&end=${value.searchDates[1]}`)
             }
-            if (this.inputVal.price.length) {
-                content = content.concat(`&price0=${this.inputVal.price[0]}&price1=${this.inputVal.price[1]}`)
+            if (value.price.length) {
+                content = content.concat(`&price0=${value.price[0]}&price1=${value.price[1]}`)
             }
-            content = content.concat(`&page=${this.inputVal.paginate}`)
+            content = content.concat(`&page=${value.paginate}`)
 
             return history.pushState(null, null,`/index/search?${content}`)
 

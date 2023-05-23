@@ -50,14 +50,14 @@
                 .then( res => { 
                     this.$emit('update', res.data) 
                 })
-                this.addPushState()
+                this.addPushState(this.inputVal)
             },
             async onNext() {
                 await axios.post(`/api/search/fetch?page=${this.value.paginate}`, this.inputVal)
                 .then( res => { 
                     this.$emit('update', res.data) 
                 })
-                this.addPushState()
+                this.addPushState(this.inputVal)
             },
         },
     }

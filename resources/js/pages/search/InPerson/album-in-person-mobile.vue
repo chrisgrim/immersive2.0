@@ -42,7 +42,7 @@
                                     </p>
                                 </div>
                                 <template v-if="card.tag_line">
-                                    <div class="mt-4 overflow-hidden text-ellipsis m-h-16">
+                                    <div class="mt-4 whitespace-normal m-h-16">
                                         <p>
                                             {{ card.tag_line }} 
                                         </p>

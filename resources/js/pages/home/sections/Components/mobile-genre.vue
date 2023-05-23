@@ -154,7 +154,6 @@
             async searchGenre() {
                 await axios.get('/api/search/navbar/tags', { params: { keywords: this.searchInput, searchType:this.value.searchType } })
                 .then( res => {
-                    console.log(res.data);
                     this.searchOptions = res.data;
                 })
             },

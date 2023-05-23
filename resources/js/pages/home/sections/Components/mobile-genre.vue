@@ -170,10 +170,10 @@
             },
             assignType() {
                 if (this.value.category && this.value.category.length) {
-                    this.searchInput=this.value.category[0].name
+                    return this.searchInput=this.value.category[0].name
                 }
                 if (this.value.tag && this.value.tag.length) {
-                    this.searchInput=this.value.tag[0].name
+                    return this.searchInput=this.value.tag[0].name
                 }
             },
             hideGenre() {

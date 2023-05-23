@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"sea",
+				"searchInput"
+			],
+			[
 				"whi",
 				"whitespace-normal"
 			],
@@ -98,10 +102,6 @@
 			[
 				"rou",
 				"rounded-full"
-			],
-			[
-				"sea",
-				"searchedCategories"
 			],
 			[
 				"search",
@@ -519,24 +519,6 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "resources/js/pages/Search/search-in-person-mobile.vue",
-			"settings":
-			{
-				"buffer_size": 7835,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "resources/js/pages/Search/InPerson/nav-in-person-mobile.vue",
-			"settings":
-			{
-				"buffer_size": 7894,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -674,6 +656,10 @@
 	"expanded_folders":
 	[
 		"/Users/chrisgrim/code/ei",
+		"/Users/chrisgrim/code/ei/app",
+		"/Users/chrisgrim/code/ei/app/Http",
+		"/Users/chrisgrim/code/ei/app/Http/Controllers",
+		"/Users/chrisgrim/code/ei/app/Http/Controllers/Search",
 		"/Users/chrisgrim/code/ei/resources",
 		"/Users/chrisgrim/code/ei/resources/css",
 		"/Users/chrisgrim/code/ei/resources/js",
@@ -681,24 +667,30 @@
 		"/Users/chrisgrim/code/ei/resources/js/pages",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Home",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Home/Sections",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Home/Sections/Components",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Search",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Search/AtHome",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Search/InPerson",
 		"/Users/chrisgrim/code/ei/routes"
 	],
 	"file_history":
 	[
+		"/Users/chrisgrim/code/ei/sftp-config.json",
+		"/Users/chrisgrim/code/ei/app/Http/Controllers/Search/SearchController.php",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Search/AtHome/nav-at-home-mobile.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Search/InPerson/nav-in-person-mobile.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Home/Sections/Components/mobile-genre.vue",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Search/search-in-person-mobile.vue",
+		"/Users/chrisgrim/code/ei/resources/js/mixins/search-basics-mixin.js",
+		"/Users/chrisgrim/code/ei/app/Http/Controllers/Search/EventController.php",
+		"/Users/chrisgrim/code/ei/resources/js/pages/Home/Sections/Components/mobile-location.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Search/InPerson/album-in-person-mobile.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Search/AtHome/album-at-home.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Search/AtHome/album-at-home-mobile.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Search/InPerson/map-in-person-mobile.vue",
-		"/Users/chrisgrim/code/ei/resources/js/mixins/search-basics-mixin.js",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Search/AtHome/nav-at-home-mobile.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Search/InPerson/nav-in-person.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Search/AtHome/nav-at-home.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Search/search-in-person-mobile.vue",
-		"/Users/chrisgrim/code/ei/sftp-config.json",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Search/search-in-person.vue",
-		"/Users/chrisgrim/code/ei/app/Http/Controllers/Search/EventController.php",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Events/Show/VideoPlayer.vue",
 		"/Users/chrisgrim/code/ei/resources/views/events/show.blade.php",
 		"/Users/chrisgrim/code/ei/resources/views/adminArea/index.blade.php",
@@ -748,12 +740,8 @@
 		"/Users/chrisgrim/code/ei/resources/js/pages/Admin/Events/Components/event-review-component.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Admin/Events/admin-events-index.vue",
 		"/Users/chrisgrim/code/ei/app/Http/Controllers/Admin/SearchController.php",
-		"/Users/chrisgrim/code/ei/app/Http/Controllers/Search/SearchController.php",
 		"/Users/chrisgrim/code/ei/resources/js/pages/create/tickets.vue",
 		"/Users/chrisgrim/code/ei/app/Http/Controllers/Admin/EventController.php",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Search/InPerson/nav-in-person-mobile.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Home/Sections/Components/mobile-location.vue",
-		"/Users/chrisgrim/code/ei/resources/js/pages/Home/Sections/Components/mobile-genre.vue",
 		"/Users/chrisgrim/code/ei/app/Models/Category.php",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Search/AtHome/Components/pagination.vue",
 		"/Users/chrisgrim/code/ei/resources/js/pages/Search/InPerson/Components/pagination.vue",
@@ -960,6 +948,20 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"tags",
+			"tagfs",
+			"initializeDates",
+			"inputVal",
+			"showLocation",
+			"Location",
+			"addPushState",
+			"isset",
+			"locationSearch",
+			"clear",
+			"onSubmit",
+			"updateEvents",
+			"selectPage",
+			"onSubmit",
 			"search",
 			"searchData",
 			"onSubmit",
@@ -1073,21 +1075,7 @@
 			"for",
 			"fore",
 			"smo",
-			"ShowMore",
-			"showMore",
-			"show",
-			"url",
-			"visible",
-			"/index/search-online",
-			"search-all",
-			"/index/search-all",
-			"allSearch",
-			"searchall",
-			"searchedEvents",
-			"hasLocationFilter",
-			"/index/search",
-			"events.searchall",
-			"search"
+			"ShowMore"
 		],
 		"highlight": false,
 		"in_selection": false,
@@ -1109,85 +1097,8 @@
 	"groups":
 	[
 		{
-			"selected": 1,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "resources/js/pages/Search/search-in-person-mobile.vue",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 7835,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2967,
-								2967
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Vuejs Complete Package/vue.tmLanguage",
-							"tabs_extra_last_activated": 1684274643.14,
-							"tabs_extra_last_activated_sheet_index": 0,
-							"tabs_extra_moving":
-							[
-								2,
-								0
-							]
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "resources/js/pages/Search/InPerson/nav-in-person-mobile.vue",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 7894,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								6853,
-								6853
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Vuejs Complete Package/vue.tmLanguage",
-							"tabs_extra_last_activated": 1684529563.01,
-							"tabs_extra_last_activated_sheet_index": 1,
-							"tabs_extra_moving":
-							[
-								2,
-								0
-							]
-						},
-						"translation.x": 0.0,
-						"translation.y": 3538.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				}
 			]
 		}
 	],

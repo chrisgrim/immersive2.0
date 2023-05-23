@@ -14,10 +14,12 @@ class CuratedEventCheck extends Model
     *
     * @var array
     */
-    protected $fillable = ['curated', 'social'];
+    protected $fillable = ['curated', 'social', 'newsletter'];
 
     protected $casts = [
-        'curated' => 'boolean', 'social' => 'boolean'
+        'curated' => 'boolean', 
+        'newsletter' => 'boolean',
+        'social' => 'boolean'
     ];
 
     /**

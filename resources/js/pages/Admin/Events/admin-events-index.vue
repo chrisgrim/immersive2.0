@@ -75,6 +75,13 @@
                                         type="checkbox"
                                         v-model="event.curated_check.social">
                                 </td>
+                                <td 
+                                    class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">
+                                    <input 
+                                        @change="updatedCuratedCheck(event.curated_check)"
+                                        type="checkbox"
+                                        v-model="event.curated_check.newsletter">
+                                </td>
                                 <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400 max-w-xs">
                                     <p 
                                         v-if="user.isModerator"
@@ -173,13 +180,14 @@
                     { id:1, field: 'Name', class:''},
                     { id:3, field: 'Cur.', class:''},
                     { id:4, field: 'Soc.', class:''},
-                    { id:5, field: 'Organization', class:''},
-                    { id:6, field: 'Location', class:'' },
-                    { id:7, field: 'Category', class:''},
-                    { id:8, field: 'Sum.',class:'' },
-                    { id:9, field: 'Rem. Days',class:'' },
-                    { id:10, field: 'Status', class:'' },
-                    { id:11, field: 'Clicks', class:'' },
+                    { id:5, field: 'News.', class:''},
+                    { id:6, field: 'Organization', class:''},
+                    { id:7, field: 'Location', class:'' },
+                    { id:8, field: 'Category', class:''},
+                    { id:9, field: 'Sum.',class:'' },
+                    { id:10, field: 'Rem. Days',class:'' },
+                    { id:11, field: 'Status', class:'' },
+                    { id:12, field: 'Clicks', class:'' },
                 ],
             }
         },

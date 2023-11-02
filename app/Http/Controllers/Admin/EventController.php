@@ -164,7 +164,7 @@ class EventController extends Controller
         if(auth()->id() != $event->user->id ) {
             Mail::to($event->user)->send(new EventApproved($event));
         }
-        AdminArea::storeAirtable($event);
+        // AdminArea::storeAirtable($event);
     }
 
     /**

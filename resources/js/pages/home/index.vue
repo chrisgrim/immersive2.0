@@ -1,5 +1,7 @@
 <template>
     <div>
+        <!--<Search />
+        <CategoryBar /> -->
         <template v-if="docks && docks.length">
             <div 
                 :key="dock.id"
@@ -66,12 +68,14 @@
     import Spotlight from './Sections/spotlight-section.vue'
     import Partners from './Sections/partners.vue'
     import StaffPicks from './Sections/staffpicks.vue'
+    import Search from './Sections/search.vue'
+    import CategoryBar from './Sections/category-bar.vue'
 
     export default {
 
         props:['categories', 'staffpicks', 'docks', 'tags'],
 
-        components: { Album, Partners, StaffPicks, Icons, Hero, Spotlight },
+        components: { Album, Partners, StaffPicks, Icons, Hero, Spotlight, Search, CategoryBar },
 
         data() {
             return {

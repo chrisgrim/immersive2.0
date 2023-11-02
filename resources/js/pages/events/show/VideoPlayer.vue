@@ -11,7 +11,6 @@
             allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
             allowfullscreen />
         <div
-            @click="loadYoutube"
             class="w-full absolute top-0 left-0 h-full rounded-lg cursor-pointer" 
             v-else>
             <img 

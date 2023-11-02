@@ -6,15 +6,19 @@
             <div 
                 class="relative ml-8" 
                 v-if="!user.hasCreatedOrganizers">
-                <a href="/events/create">
-                    <div class="text-xl font-medium hover:text-black hover:font-semibold">Submit Your Experience (Free)</div>
+                <a 
+                    :class="onClass.links"
+                    href="/events/create">
+                    <span>Submit Your Experience (Free)</span>
                 </a>
             </div>
             <div 
                 class="relative ml-8" 
                 v-if="user.hasCreatedOrganizers">
-                <a href="/create/events/edit">
-                    <div class="text-xl font-medium hover:text-black hover:font-semibold">Your Events</div>
+                <a 
+                    :class="onClass.links"
+                    href="/create/events/edit">
+                    <span>Your Events</span>
                 </a>
             </div>
             <div class="relative ml-8">
@@ -25,8 +29,10 @@
         <!-- If user is guest -->
         <template v-else>
             <div class="relative ml-8">
-                <a href="/register?create=true">
-                    <div class="text-xl font-medium hover:text-black hover:font-semibold">Submit Your Experience (Free)</div>
+                <a 
+                    :class="onClass.links"
+                    href="/register?create=true">
+                    <span>Submit Your Experience (Free)</span>
                 </a>
             </div>
             <div class="relative ml-8">
@@ -40,7 +46,7 @@
     import ProfileButton from './nav-desktop-profile.vue'
     export default {
 
-        props:[ 'user' ],
+        props:[ 'user', 'onClass' ],
 
         components: { ProfileButton },
 

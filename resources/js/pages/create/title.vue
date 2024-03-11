@@ -1,5 +1,34 @@
 <template>
     <div class="event-create__title">
+        <div>
+            <div 
+                id="chatArea" 
+                class="overflow-y-auto p-4 bg-white rounded-lg shadow mb-4">
+                <div 
+                    v-for="(message, index) in conversation" 
+                    :key="index" 
+                    :class="{'text-right': message.role === 'assistant'}">
+                    <div class="text-sm text-gray-600">{{ message.role }}</div>
+                    <div :class="{'bg-blue-100': message.role === 'user', 'bg-green-100': message.role === 'assistant'}" class="p-2 rounded">
+                        {{ message.content }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input Area -->
+            <div class="mb-4">
+                <textarea 
+                    v-model="hiddenPrompt"
+                    class="w-full p-2 border rounded focus:outline-none focus:shadow-outline" 
+                    rows="3" 
+                    placeholder="Write your message here...">
+                    
+                </textarea>
+                <button @click="doAI" class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2">
+                    Send
+                </button>
+            </div>
+        </div>
         <template v-if="newEvent">
             <vue-new-beginner />
         </template>
@@ -137,10 +166,24 @@
                 titleUpdated: false,
                 newEvent: this.newsubmission,
                 creationPage: 1,
+                ai: '',
+                response: '',
+                hiddenPrompt:'',
+                conversation: '',
             }
         },
 
         methods: {
+
+            doAI() {
+                axios.post('/openai', {prompt: this.hiddenPrompt, conversation: this.conversation})
+                .then(res => {
+                    console.log(res.data);
+                    this.response = res.data
+                    this.conversation = res.data.full_conversation
+                });
+            },
+
             onLoad() {
                 axios.get(this.onFetch('title'))
                 .then(res => {

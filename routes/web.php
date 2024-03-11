@@ -78,3 +78,8 @@ require __DIR__.'/admin.php';
 require __DIR__.'/create.php';
 require __DIR__.'/creation.php';
 require __DIR__.'/curated.php';
+
+
+Route::POST('/openai', 'Creation\AutofillController@chat');
+
+
